@@ -1,0 +1,111 @@
+@extends('layouts.admin')
+
+@section('action')
+   <a href="{{ route('anunciantes.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Crear Anunciante</a>
+@endsection
+
+@section('breadcrumbs')
+    {!!  Breadcrumbs::render('advertisers') !!}
+@endsection
+
+@section('extra-css')
+    <link href="/assets/css/prueba.css" rel="stylesheet">
+@endsection
+
+@section('content')
+    <div class="col-md-12 list-advertiser" id="urlSearch">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12" id="table-intro">
+                        <div class="col-sm-2">
+                            <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable"></span></p>  
+                        </div>
+                        <div class="col-sm-10 timeline">
+                            <div class="linea"></div>
+                            <div class="states-table">
+                                <div class="state text-center">
+                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-child"></i></button>
+                                    <p class="steps-name">Registro inicial</p>
+                                </div>
+                                <div class="state text-center">
+                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-envelope"></i></button>
+                                    <p class="steps-name">Validación de email</p>
+                                </div><div class="state text-center">
+                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-edit"></i></button>
+                                    <p class="steps-name">Complementario</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group" id="data_created_at">
+                            <label class="control-label">Fecha de registro</label>
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" class="input-sm form-control" id="created_at_start" name="created_at_start"/>
+                                <span class="input-group-addon">a</span>
+                                <input type="text" class="input-sm form-control" id="created_at_end" name="created_at_end"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        {!! Field::select('registration_states', $registrationStates, ['empty' => 'Todos']) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! Field::select('cities', $cities, ['empty' => 'Todas las ciudades']) !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Field::select('economic_activities', $economicActivities, ['empty' => 'Todas las Actividades']) !!}
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="advertisers-datatable" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
+                        <thead>
+                        <tr class="info">
+                            <th></th>
+                            <th>Empresa</th>
+                            <th>Ciudad</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Celular</th>
+                            <th>Estado</th>
+                            <th>Inten.</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Empresa</th>
+                            <th>Ciudad</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Celular</th>
+                            <th>Estado</th>
+                            <th>Inten.</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @include('admin.advertisers.modal')
+@endsection
+
+@section('extra-js')
+
+    <script src="/assets/js/services/userService.js"></script>
+    <script src="/assets/js/services/advertiserService.js"></script>
+    <script>
+        $(document).ready(function() {
+            AdvertiserService.init('/anunciantes/search');
+        });
+    </script>
+@endsection

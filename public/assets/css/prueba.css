@@ -1,0 +1,62 @@
+.timeline .states {
+  position: absolute;
+  width: 100%;
+}
+
+.timeline .state button {
+  z-index:11;
+}
+
+.linea {
+  border-top: 1.8px solid #ADADAD;
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+}
+
+.state {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.table-state {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+#table-intro {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.timeline .states-table {
+  position: absolute;
+  width: 100%;
+}
+
+.states-table .state {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20%;
+}
+
+.list-medium .state {
+  width: 19.5%;
+}
+
+.list-advertiser .state {
+  width: 33%;
+}
+
+.list-advertiser .linea {
+  margin-left: 15%;
+  margin-right: 17%;
+  width: 68%;
+}
