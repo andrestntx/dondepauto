@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-12" id="table-intro">
                         <div class="col-sm-2">
-                            <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable"></span></p>  
+                            <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable">0</span></p>  
                         </div>
                         <div class="col-sm-10 timeline">
                             <div class="linea"></div>
@@ -52,6 +52,16 @@
                     </div>
                     <div class="col-md-4">
                         {!! Field::select('registration_states', $registrationStates, ['empty' => 'Todos']) !!}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" id="intention_created_at">
+                            <label class="control-label">Fecha de Leads</label>
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" class="input-sm form-control" id="intention_at_start" name="intention_at_start"/>
+                                <span class="input-group-addon">a</span>
+                                <input type="text" class="input-sm form-control" id="intention_at_end" name="intention_at_end"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

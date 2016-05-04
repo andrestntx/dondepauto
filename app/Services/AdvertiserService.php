@@ -57,11 +57,13 @@ class AdvertiserService extends ResourceService
 
     /**
      * @param User $user
+     * @param null $intentionsInit
+     * @param null $intentionsFinish
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search(User $user = null) 
+    public function search(User $user = null, $intentionsInit = null, $intentionsFinish = null) 
     {   
-        return $this->viewRepository->search($user);
+        return $this->viewRepository->search($user, $intentionsInit, $intentionsFinish);
     }
 
     /**

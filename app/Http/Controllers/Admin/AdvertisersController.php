@@ -67,7 +67,7 @@ class AdvertisersController extends ResourceController
      */
     public function search(Request $request)
     {
-        return ['data' => $this->facade->search()];
+        return ['data' => $this->facade->search(null, $request->get('init'), $request->get('finish'))];
     }
     
     /**

@@ -100,6 +100,9 @@ var UserService = function() {
 	        $('#' + inputId +' #company_role').text(user.company_role);
 	        $('#' + inputId +' #company_area').text(user.company_area);
 
+	        /** Comments **/
+	        $('#' + inputId +' #comments').text(user.comments);
+
 	        /** State **/
 	        $('#' + inputId +' #state')
 	            .removeClass()

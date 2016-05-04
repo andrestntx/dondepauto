@@ -18,6 +18,7 @@ class AddColumnsPlatformUsers extends Migration
             $table->double('retencion_fuente_us_LI')->nullable();
             $table->date('fecha_firma_acuerdo_us_LI')->nullable();
             $table->string('mailchimp_id')->nullable();
+            $table->text('comentarios_us_LI')->nullable();
         });
     }
 
@@ -34,6 +35,7 @@ class AddColumnsPlatformUsers extends Migration
             $table->dropColumn('retencion_fuente_us_LI');
             $table->dropColumn('fecha_firma_acuerdo_us_LI');
             $table->dropColumn('mailchimp_id');
+            $table->dropColumn('comentarios_us_LI');
         });
     }
 }
