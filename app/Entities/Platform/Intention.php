@@ -18,6 +18,30 @@ class Intention extends Entity
      */
     protected $table = 'bd_intenciones_compra_espacios_ofrecidos_LIST';
 
-    protected $attr = ['id' => 'id_intencion_LI', 'state' => 'estado_intencion_LI'];
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_intencion_LI';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at'];
+
+    protected $attr = ['state' => 'estado_intencion_LI', 'interest_at' => 'url_fecha_intencion_LI',
+        'created_at' => 'fecha_envio_intencion_LI'];
+
+    public function getStateAttribute()
+    {
+        if($this->estado_intencion_LI == 'Pend_envio') {
+            return 'interest';
+        }
+
+        return $this->commercial_state;
+    }
 
 }

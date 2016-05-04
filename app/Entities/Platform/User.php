@@ -33,7 +33,7 @@ class User extends Entity
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'role', 'user_id',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
-        'phone', 'cel', 'economic_activity_id', 'signed_agreement'
+        'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments'
     ];
 
     /**
@@ -74,7 +74,8 @@ class User extends Entity
         'company_area' => 'area_cargo_us_LI', 'city_id' => 'id_ciudad_LI', 'address' => 'direccion_us_LI', 'phone' => 'telefono_fijo_us_LI',
         'cel' => 'celular_us_LI', 'password' => 'clave_us_LI', 'economic_activity_id' => 'id_actividadEconomica_LI',
         'signed_agreement' => 'firmo_acuerdo_LI', 'signed_at' => 'fecha_firma_acuerdo_us_LI', 'commission_rate' => 'porc_comision_us_LI',
-        'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI'
+        'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
+        'comments' => 'comentarios_us_LI'
     ];
 
     /**

@@ -42,6 +42,9 @@
                                 <div class="col-md-6">
                                     {!! Field::text('discount') !!}
                                 </div>
+
+                                @include('admin.users.comments')
+
                             @endif
 
                             <div class="form-group">

@@ -154,7 +154,8 @@ return [
         'company_area'          => 'Área',
         'company'               => 'empresa',
         'company_nit'           => 'nit',
-        'economic_activity_id'  => 'actividad económica'
+        'economic_activity_id'  => 'actividad económica',
+        'comments'              => 'comentarios'
     ],
 
     'empty_option'         => [

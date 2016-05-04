@@ -45,11 +45,13 @@ class AdvertiserFacade
 
     /**
      * @param User $user
+     * @param null $intentionsInit
+     * @param null $intentionsFinish
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search(User $user = null)
+    public function search(User $user = null, $intentionsInit = null, $intentionsFinish = null)
     {
-        return $this->advertiserService->search($user);
+        return $this->advertiserService->search($user, $intentionsInit, $intentionsFinish);
     }
 
     /**

@@ -9,8 +9,10 @@
 
 namespace App\Repositories\Views;
 
+use App\Entities\Platform\Intention;
 use App\Entities\User;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class AdvertiserRepository extends BaseRepository
@@ -24,16 +26,58 @@ class AdvertiserRepository extends BaseRepository
     {
         return 'App\Entities\Views\Advertiser';
     }
-    
-    public function search(User $user = null)
+
+    /**
+     * @param User|null $user
+     * @param null $intentionsInit
+     * @param null $intentionsFinish
+     * @return Collection|static[]
+     */
+    public function search(User $user = null, $intentionsInit = null, $intentionsFinish = null)
     {
-        $advertisers = $this->model->with(['intentions', 'logs']);
+        if(!is_null($intentionsInit) && !empty($intentionsInit)) {
+            $intentionsInit = Carbon::createFromFormat('d/m/Y', $intentionsInit)->toDateString();
+        }
+        if(!is_null($intentionsFinish) && !empty($intentionsFinish)) {
+            $intentionsFinish = Carbon::createFromFormat('d/m/Y', $intentionsFinish)->toDateString();
+        }
+
+        $advertisers = $this->model->with([
+            'intentions' => function($query) use($intentionsInit, $intentionsFinish) {
+                $query->where(function($q) use ($intentionsInit, $intentionsFinish){
+                    if(! empty($intentionsInit)) {
+                        $q->whereDate('url_fecha_intencion_LI', '>=', $intentionsInit);
+                    }
+                    if(! empty($intentionsFinish)) {
+                        $q->whereDate('url_fecha_intencion_LI', '<=', $intentionsFinish)
+                            ->whereDate('url_fecha_intencion_LI', '!=', '0000-00-00');
+                    }
+                })
+                ->orWhere(function($q) use ($intentionsInit, $intentionsFinish){
+                    if(! empty($intentionsFinish)) {
+                        $q->whereDate('fecha_envio_intencion_LI', '>=', $intentionsInit);
+                    }
+                    if(! empty($intentionsFinish)) {
+                        $q->whereDate('fecha_envio_intencion_LI', '<=', $intentionsFinish)
+                            ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
+                    }
+                });
+            },
+            'logs']);
 
         if(!is_null($user)) {
             $advertisers->whereUserId($user->id);
         }
 
-        return $advertisers->get();
+        $advertisers = $advertisers->get();
+
+        if(!empty($intentionsInit) || !empty($intentionsFinish)) {
+           $advertisers = $advertisers->filter(function ($advertiser) {
+                return $advertiser->intentions->count() > 0;
+           });
+        }
+
+        return array_values($advertisers->toArray());
     }
 
     /**

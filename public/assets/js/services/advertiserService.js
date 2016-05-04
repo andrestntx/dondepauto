@@ -5,8 +5,11 @@
 var AdvertiserService = function() {
 
     var table;
+    var urlSearch;
 
     function initTable(urlSearch) {
+        urlSearch = urlSearch;
+
         table = $('#advertisers-datatable').DataTable({
             "order": [[6, "desc"]],
             "ajax": urlSearch,
@@ -69,13 +72,14 @@ var AdvertiserService = function() {
                 $('td:eq(5)', nRow).html(
                     UserService.getHtmlTableStates(aData.states)
                 );
-                if(aData.count_by_contact_intentions > 0){
+                if(aData.count_intentions > 0){
                     $('td:eq(6)', nRow).html(
-                        '<span class="badge badge-warning">' + aData.count_by_contact_intentions + '</span>'
+                        getHtmlIntentionStates(aData)
                     );
                 }
             },
             "drawCallback": function(settings, json) {
+                $("#countDatatable").html(settings.fnRecordsDisplay());
                 $('[data-toggle="tooltip"]').tooltip();
             }
         });
@@ -93,12 +97,65 @@ var AdvertiserService = function() {
         });
     }
 
+    function getHtmlIntentionStates(aData) {
+        var html        = $('<div style="width:70px;"></div>').addClass('text-center');
+        var interest    = $('<span style="margin: 0 1px;"></span>')
+                            .addClass('badge badge-default')
+                            .text(aData.count_interest_intentions)
+                            .attr('data-toggle', 'tooltip')
+                            .attr('data-placement', 'top')
+                            .attr('title', 'Intereses');
+
+        var by_contact  = $('<span style="margin: 0 1px;"></span>')
+                            .addClass('badge badge-warning')
+                            .text(aData.count_by_contact_intentions)
+                            .attr('data-toggle', 'tooltip')
+                            .attr('data-placement', 'top')
+                            .attr('title', 'Leads por contactar');
+
+        var management  = $('<span style="margin: 0 1px;"></span>')
+                            .addClass('badge badge-info')
+                            .text(aData.count_management_intentions)
+                            .attr('data-toggle', 'tooltip')
+                            .attr('data-placement', 'top')
+                            .attr('title', 'Leads en gestión');
+
+        html.append(interest)
+            .append(by_contact)
+            .append(management);        
+
+        return html;
+    }
+
     function drawModal(advertiser) {
         UserService.drawModalUser("advertiserModal", advertiser, "anunciantes");
         /** Commercial state **/
+        $('#advertiserModal #count_intentions').text(advertiser.count_intentions);
+        $('#advertiserModal #count_leads').text(advertiser.count_leads);
+        $('#advertiserModal #interest').text(advertiser.count_interest_intentions);
         $('#advertiserModal #by_contact').text(advertiser.count_by_contact_intentions);
+        $('#advertiserModal #management').text(advertiser.count_management_intentions);
         $('#advertiserModal #sold').text(advertiser.count_sold_intentions);
         $('#advertiserModal #discarded').text(advertiser.count_discarded_intentions);
+
+        var intention_at_start = $('#intention_at_start').val();
+        var intention_at_end = $('#intention_at_end').val();
+
+        if(intention_at_start || intention_at_end) {
+            $('#advertiserModal #lead_dates').text(' | De ' + intention_at_start + ' a ' + intention_at_end);  
+        }
+        else {
+            $('#advertiserModal #lead_dates').text(' ');  
+        }
+    }
+
+    function initReloadAjaxDate(inputInit, inputFinish, parameterInit, parameterFinish) {
+        $(inputInit + ', ' + inputFinish).on('change', function() {
+            console.log('/anunciantes/search?' + parameterInit + '=' + $(inputInit).val() + '&' + parameterFinish + '=' + $(inputFinish).val());
+            table.ajax
+                .url('/anunciantes/search?' + parameterInit + '=' + $(inputInit).val() + '&' + parameterFinish + '=' + $(inputFinish).val())
+                .load();
+        } );               
     }
 
     return {
@@ -107,6 +164,7 @@ var AdvertiserService = function() {
             UserService.initInputsDateRange();
             UserService.initSearchDateRanges(13,14,15);
             initModalEvent();
+            initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
         }
     };
 }();
