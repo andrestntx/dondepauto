@@ -2,30 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: Desarrollador 1
- * Date: 26/04/2016
- * Time: 5:48 PM
+ * Date: 19/04/2016
+ * Time: 9:14 AM
  */
 
 namespace App\Entities\Platform;
 
 
-class Space extends Entity
+class Locality extends Entity
 {
     /**
      * The primary key for the model.
      *
      * @var string
      */
-    protected $primaryKey = 'id_espacio_LI';
+    protected $primaryKey = 'id_localidad_li';
 
-    protected $attr = [];
+    protected $attr = ['name' => 'nombre_localidad_LI', 'city_id' => 'id_ciudad_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_espacios_ofrecidos_LIST';
+    protected $table = 'bd_localidades_LITS';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -34,13 +34,12 @@ class Space extends Entity
     {
         return $this->belongsTo(City::class, 'id_ciudad_LI');
     }
-    
-    public function getCityNameAttribute()
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function neighborhoods()
     {
-        if($this->city){
-            return $this->city->name;
-        }
-        
-        return 'Sin ciudad';
+        return $this->hasMany(Neighborhood::class, 'id_ciudad_LI', 'id_ciudad_LI');
     }
 }

@@ -86,3 +86,19 @@ Breadcrumbs::register('mediums.medium', function ($breadcrumbs, $medium) {
         $breadcrumbs->push('Nuevo Medio', route('medios.create'));
     }
 });
+
+// Home > spaces
+Breadcrumbs::register('spaces', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Espacios', url('espacios'));
+});
+
+// Home > spaces > {{ $space }}
+Breadcrumbs::register('spaces.space', function ($breadcrumbs, $space) {
+    $breadcrumbs->parent('spaces');
+    if ($space->exists) {
+        $breadcrumbs->push($space->name, route('espacios.show', $space));
+    } else {
+        $breadcrumbs->push('Nuevo Espacio', route('espacios.create'));
+    }
+});

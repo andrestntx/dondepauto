@@ -9,21 +9,21 @@
 namespace App\Entities\Platform;
 
 
-class City extends Entity
+class Country extends Entity
 {
     /**
      * The primary key for the model.
      *
      * @var string
      */
-    protected $primaryKey = 'id_ciudad';
+    protected $primaryKey = 'id_pais_LI';
 
-    protected $attr = ['name' => 'ciudad', 'id' => 'id_ciudad'];
+    protected $attr = ['name' => 'nombre_pais_LI', 'code' => 'codigo_pais_LI', 'lang' => 'idioma_pais_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'ciudades';
+    protected $table = 'bd_paises_LIST';
 }

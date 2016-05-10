@@ -53,21 +53,34 @@ class Medium extends PUser
         ]);
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function getSignedAgreementAttribute($value)
     {
         return $value == 'Si_fir_ac';
     }
 
+    /**
+     * @return mixed
+     */
     public function getCountSpacesAttribute()
     {
         return $this->spaces->count();
     }
 
+    /**
+     * @return mixed
+     */
     public function getLastOfferAttribute()
     {
         return $this->spaces->max('fecha_creacion_LI');
     }
 
+    /**
+     * @return bool
+     */
     public function getHasOffersAttribute()
     {
         if($this->last_offer){
@@ -77,6 +90,9 @@ class Medium extends PUser
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getLastOfferAtDatatableAttribute()
     {
         if($this->last_offer)
@@ -97,6 +113,9 @@ class Medium extends PUser
         return 'No';
     }
 
+    /**
+     * @return string
+     */
     public function getSignedAtDatatableAttribute()
     {
         if($this->signed_at) {
@@ -105,7 +124,10 @@ class Medium extends PUser
 
         return '';
     }
-    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function spaces()
     {
         return $this->hasMany('App\Entities\Platform\Space', 'id_us_reg_LI', 'id');

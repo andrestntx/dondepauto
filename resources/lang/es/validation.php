@@ -155,7 +155,12 @@ return [
         'company'               => 'empresa',
         'company_nit'           => 'nit',
         'economic_activity_id'  => 'actividad económica',
-        'comments'              => 'comentarios'
+        'comments'              => 'comentarios',
+        'mediums'               => 'medios',
+        'categories'            => 'categorías',
+        'sub_categories'        => 'sub categorías',
+        'categories_and_sub'    => 'categorías y sub-categorías',
+        'formats'               => 'formatos'
     ],
 
     'empty_option'         => [

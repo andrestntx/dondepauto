@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: Desarrollador 1
- * Date: 21/04/2016
- * Time: 1:22 PM
+ * Date: 19/04/2016
+ * Time: 9:21 AM
  */
 
-namespace App\Repositories\Views;
-
+namespace App\Repositories\Platform\Space;
 
 use App\Repositories\BaseRepository;
 
-class MediumRepository extends BaseRepository
+class SpaceCityRepository extends BaseRepository
 {
+
     /**
      * Specify Model class name
      *
@@ -20,32 +20,24 @@ class MediumRepository extends BaseRepository
      */
     function model()
     {
-        return 'App\Entities\Views\Medium';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function search()
-    {
-        return $this->model->with(['logs', 'spaces.city'])->get();
+        return 'App\Entities\Platform\Space\SpaceCity';
     }
 
     /**
      * @param null $category_id
      * @param null $subCategory_id
      * @param null $format_id
-     * @param null $city_id
      * @param string $column
      * @param string $id
      * @return mixed
      */
-    public function mediumsWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null, $column = "company", $id = "id")
+    public function citiesWithSpaces($category_id = null, $subCategory_id = null, $format_id = null,
+                                     $column = "nombre_ciudad_LI", $id = "bd_ciudades_LIST.id_ciudad_LI")
     {
         $query = $this->model
-            ->join('bd_espacios_ofrecidos_LIST', 'id_us_reg_LI', '=', 'id')
-            ->groupBy('id')
-            ->orderBy('company', 'asc');
+            ->join('bd_espacios_ofrecidos_LIST', 'bd_espacios_ofrecidos_LIST.id_ciudad_LI', '=', 'bd_ciudades_LIST.id_ciudad_LI')
+            ->groupBy('bd_ciudades_LIST.id_ciudad_LI')
+            ->orderBy('nombre_ciudad_LI', 'asc');
 
         if(! is_null($format_id) && ! empty($format_id)) {
             $query->where("id_formato_LI", $format_id);
@@ -57,10 +49,7 @@ class MediumRepository extends BaseRepository
             $query->where("id_cat_LI", $category_id);
         }
 
-        if(! is_null($city_id) && ! empty($city_id)) {
-            $query->where("id_ciudad_LI", $city_id);
-        }
-        
         return $query->lists($column, $id)->all();
     }
+
 }

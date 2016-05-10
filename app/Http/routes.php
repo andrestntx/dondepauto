@@ -84,6 +84,22 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('medios', 'Admin\MediumsController', ['parameters' => [
             'medios' => 'mediums'
         ]]);
+
+        Route::get('espacios/ajax', [
+            'as'    => 'espacios.ajax',
+            'uses' => 'Admin\SpacesController@ajax'
+        ]);
+
+        Route::get('espacios/search', [
+            'as'    => 'espacios.search',
+            'uses' => 'Admin\SpacesController@search'
+        ]);
+
+        Route::resource('espacios', 'Admin\SpacesController', ['parameters' => [
+            'espacios' => 'spaces'
+        ]]);
+
+
     });
 });
 

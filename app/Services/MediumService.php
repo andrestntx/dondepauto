@@ -43,4 +43,16 @@ class MediumService extends ResourceService
         $data['role'] = 'medium';
         return $this->repository->create($data);
     }
+
+    /**
+     * @param null $category_id
+     * @param null $subCategory_id
+     * @param null $format_id
+     * @param null $city_id
+     * @return mixed
+     */
+    public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null)
+    {
+        return $this->viewRepository->mediumsWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
+    }
 }
