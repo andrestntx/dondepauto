@@ -37,7 +37,10 @@
                         {!! Field::select('cities', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
                     <div class="col-md-4">
-                        {!! Field::select('mediums', $mediums, ['empty' => 'Todos los Medios']) !!}
+                        {!! Field::select('publishers', $publishers, ['empty' => 'Todos los Medios']) !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Field::select('scenes', $scenes, ['empty' => 'Todas los escenarios']) !!}
                     </div>
                 </div>
                 <div class="row">
@@ -48,25 +51,31 @@
                         <thead>
                         <tr class="info">
                             <th></th>
-                            <th>Empresa</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Telefono</th>
-                            <th>Celular</th>
-                            <th>Estado</th>
-                            <th>Ofertas</th>
+                            <th>Medio</th>
+                            <th>Espacio</th>
+                            <th>Categoría</th>
+                            <th>Sub_categoría</th>
+                            <th>Formato</th>
+                            <th title="Comisión"> % </th>
+                            <th>$_Mínimo</th>
+                            <th>Markup</th>
+                            <th>$_Markup</th>
+                            <th>$_Público</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th></th>
-                            <th>Empresa</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                            <th>Celular</th>
-                            <th>Estado</th>
-                            <th>Ofertas</th>
+                            <th>Medio</th>
+                            <th>Espacio</th>
+                            <th>Categoría</th>
+                            <th>Sub categoría</th>
+                            <th>Formato</th>
+                            <th title="Comisión">.%.</th>
+                            <th>$ Mínimo</th>
+                            <th>Markup</th>
+                            <th>$ Markup</th>
+                            <th>$ Público</th>
                         </tr>
                         </tfoot>
                     </table>
@@ -79,6 +88,16 @@
 @endsection
 
 @section('extra-js')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+
+    <script src="/assets/js/services/userService.js"></script>
+    <script src="/assets/js/services/spaceService.js"></script>
+    <script>
+        $(document).ready(function() {
+            SpaceService.init('/espacios/search');
+        });
+    </script>
+
     <script type="text/javascript">
 
         function changeSelects(inputs) {
@@ -88,25 +107,28 @@
                     $('#sub_categories').append(
                         $("<option></option>").attr("value", value).text(text)
                     );
-                });  
+                }); 
+                UserService.cleanColumnSearch(12);
             }
 
-            if(inputs.mediums) {
-                $('#mediums option:gt(0)').remove();
-                $.each(inputs.mediums, function(value,text) {
-                    $('#mediums').append(
+            if(inputs.publishers) {
+                $('#publishers option:gt(0)').remove();
+                $.each(inputs.publishers, function(value,text) {
+                    $('#publishers').append(
                         $("<option></option>").attr("value", value).text(text)
                     );
                 });  
+                UserService.cleanColumnSearch(14);
             }
 
-            if(inputs.cities) {
+            if(inputs.cities) {                
                 $('#cities option:gt(0)').remove();
                 $.each(inputs.cities, function(value,text) {
                     $('#cities').append(
                         $("<option></option>").attr("value", value).text(text)
                     );
-                });  
+                }); 
+                UserService.cleanColumnSearch(15);
             }
 
             if(inputs.formats) {
@@ -116,7 +138,8 @@
                     $('#formats').append(
                         $("<option></option>").attr("value", value).text(text)
                     );
-                });  
+                }); 
+                UserService.cleanColumnSearch(13); 
             }
             else if(! $("#sub_categories").val()) { 
                 $('#formats').attr('disabled','disabled');

@@ -11,7 +11,7 @@ namespace App\Entities\Views;
 
 use Carbon\Carbon;
 
-class Medium extends PUser
+class Publisher extends PUser
 {
     /**
      * The attributes that should be mutated to dates.
@@ -25,7 +25,7 @@ class Medium extends PUser
      *
      * @var string
      */
-    protected $table = 'view_mediums';
+    protected $table = 'view_publishers';
 
     /**
      * The accessors to append to the model's array form.
@@ -130,9 +130,12 @@ class Medium extends PUser
      */
     public function spaces()
     {
-        return $this->hasMany('App\Entities\Platform\Space', 'id_us_reg_LI', 'id');
+        return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
     }
 
+    /**
+     * @return mixed
+     */
     public function getSpaceCityNamesAttribute()
     {
         return $this->spaces->lists('city_name');

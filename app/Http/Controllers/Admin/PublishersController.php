@@ -9,14 +9,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entities\Platform\User;
-use App\Facades\MediumFacade;
+use App\Facades\PublisherFacade;
 use App\Http\Controllers\ResourceController;
-use App\Http\Requests\RUser\Medium\StoreRequest;
-use App\Http\Requests\RUser\Medium\UpdateRequest;
-use App\Services\MediumService;
+use App\Http\Requests\RUser\Publisher\StoreRequest;
+use App\Http\Requests\RUser\Publisher\UpdateRequest;
+use App\Services\PublisherService;
 use Illuminate\Http\Request;
 
-class MediumsController extends ResourceController
+class PublishersController extends ResourceController
 {
     protected $facade;
 
@@ -29,20 +29,20 @@ class MediumsController extends ResourceController
      * [$viewPath folder views Controller]
      * @var string
      */
-    protected $viewPath = 'admin.mediums';
+    protected $viewPath = 'admin.publishers';
 
     /**
      * [$modelName used in views]
      * @var string
      */
-    protected $modelName = "medium";
+    protected $modelName = "publisher";
 
     /**
      * AdvertisersController constructor.
-     * @param MediumFacade $facade
-     * @param MediumService $service
+     * @param PublisherFacade $facade
+     * @param PublisherService $service
      */
-    function __construct(MediumFacade $facade, MediumService $service)
+    function __construct(PublisherFacade $facade, PublisherService $service)
     {
         $this->facade = $facade;
         $this->service = $service;
@@ -111,7 +111,7 @@ class MediumsController extends ResourceController
     public function edit(User $user)
     {
         return $this->view('form', [
-            'medium' => $user,
+            'publisher' => $user,
             'formData' => $this->getFormDataUpdate($user->id)
         ]);
     }

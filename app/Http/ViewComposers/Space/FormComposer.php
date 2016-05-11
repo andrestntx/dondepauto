@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ViewComposers\Medium;
+namespace App\Http\ViewComposers\Publisher;
 
 use App\Repositories\Platform\CityRepository;
 use Illuminate\Contracts\View\View;

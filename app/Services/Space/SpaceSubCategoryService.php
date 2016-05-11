@@ -23,9 +23,9 @@ class SpaceSubCategoryService extends ResourceService
         $this->repository = $repository;
     }
 
-    public function searchWithSpaces($category_id = null, $medium_id = null)
+    public function searchWithSpaces($category_id = null, $publisher_id = null)
     {
-        return $this->repository->subCategoriesWithSpaces($category_id, $medium_id);
+        return $this->repository->subCategoriesWithSpaces($category_id, $publisher_id);
     }
 
     /**

@@ -1,5 +1,5 @@
-<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-lg list-medium">
+<div class="modal fade" id="publisherModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg list-publisher">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>

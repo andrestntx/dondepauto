@@ -78,11 +78,11 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::get('medios/search', [
             'as'    => 'medios.search',
-            'uses' => 'Admin\MediumsController@search'
+            'uses' => 'Admin\PublishersController@search'
         ]);
 
-        Route::resource('medios', 'Admin\MediumsController', ['parameters' => [
-            'medios' => 'mediums'
+        Route::resource('medios', 'Admin\PublishersController', ['parameters' => [
+            'medios' => 'publishers'
         ]]);
 
         Route::get('espacios/ajax', [

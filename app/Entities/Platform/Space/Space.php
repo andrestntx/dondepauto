@@ -37,7 +37,15 @@ class Space extends Entity
      */
     public function zone()
     {
-        return $this->belongsTo(SpaceCity::class, 'id_zona_ciudad_LI');
+        return $this->belongsTo(SpaceCityZone::class, 'id_zona_ciudad_LI');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(SpaceCity::class, 'id_ciudad_LI');
     }
 
     /**
@@ -77,7 +85,11 @@ class Space extends Entity
      */
     public function getCity()
     {
-        return $this->zone->city;
+        if($this->zone){
+            return $this->zone->city;
+        }
+
+        return $this->city;
     }
 
     /**

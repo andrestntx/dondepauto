@@ -17,8 +17,8 @@ class ComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Adviser\ListComposer' => 'admin.advisers.lists',
             'App\Http\ViewComposers\Advertiser\ListComposer' => 'admin.advertisers.lists',
             'App\Http\ViewComposers\Advertiser\FormComposer' => 'admin.advertisers.form',
-            'App\Http\ViewComposers\Medium\FormComposer' => 'admin.mediums.form',
-            'App\Http\ViewComposers\Medium\ListComposer' => 'admin.mediums.lists',
+            'App\Http\ViewComposers\Publisher\FormComposer' => 'admin.publishers.form',
+            'App\Http\ViewComposers\Publisher\ListComposer' => 'admin.publishers.lists',
             'App\Http\ViewComposers\Space\ListComposer' => 'admin.spaces.lists',
         ]);
     }

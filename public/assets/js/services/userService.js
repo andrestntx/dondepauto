@@ -29,6 +29,15 @@ var UserService = function() {
 	        } );
 		},
 
+		cleanColumnSearch: function (column) 
+		{
+			console.log('busco');
+            dataTable
+                .column(column)
+                .search(' ')
+                .draw();
+		},
+
 		initExactSearchSelect: function(input, column) 
 		{
 			$(input).on( 'change', function () {

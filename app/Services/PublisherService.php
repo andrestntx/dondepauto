@@ -9,18 +9,18 @@
 namespace App\Services;
 
 use App\Repositories\Platform\UserRepository;
-use App\Repositories\Views\MediumRepository;
+use App\Repositories\Views\PublisherRepository;
 
-class MediumService extends ResourceService
+class PublisherService extends ResourceService
 {
     protected $viewRepository;
 
     /**
      * UserService constructor.
-     * @param MediumRepository $viewRepository
+     * @param PublisherRepository $viewRepository
      * @param UserRepository $repository
      */
-    function __construct(MediumRepository $viewRepository, UserRepository $repository)
+    function __construct(PublisherRepository $viewRepository, UserRepository $repository)
     {
         $this->viewRepository = $viewRepository;
         $this->repository = $repository;
@@ -40,7 +40,7 @@ class MediumService extends ResourceService
      */
     public function createModel(array $data)
     {
-        $data['role'] = 'medium';
+        $data['role'] = 'publisher';
         return $this->repository->create($data);
     }
 
@@ -53,6 +53,6 @@ class MediumService extends ResourceService
      */
     public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null)
     {
-        return $this->viewRepository->mediumsWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
+        return $this->viewRepository->publishersWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
     }
 }

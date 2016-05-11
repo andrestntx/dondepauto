@@ -28,9 +28,9 @@ class EmailService
         });
     }
 
-    public function sendMediumInvitation(User $medium, $code)
+    public function sendPublisherInvitation(User $publisher, $code)
     {
-        $this->sendInvitation($medium, 'confirm_medium', $code);
+        $this->sendInvitation($publisher, 'confirm_publisher', $code);
     }
 
     public function sendAdvertiserInvitation(User $advertiser, $code)

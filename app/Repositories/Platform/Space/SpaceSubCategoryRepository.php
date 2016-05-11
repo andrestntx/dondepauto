@@ -24,12 +24,12 @@ class SpaceSubCategoryRepository extends BaseRepository
 
     /**
      * @param null $category_id
-     * @param null $medium_id
+     * @param null $publisher_id
      * @param string $column
      * @param string $id
      * @return mixed
      */
-    public function subCategoriesWithSpaces($category_id = null, $medium_id = null, $column = "name_category_name", $id = "id")
+    public function subCategoriesWithSpaces($category_id = null, $publisher_id = null, $column = "name_category_name", $id = "id")
     {
         $query = $this->model->with('category')
             ->join('bd_espacios_ofrecidos_LIST', 'bd_espacios_ofrecidos_LIST.id_subcat_LI', '=', 'bd_subcat_espacios_ofrecidos_LIST.id_subcat_LI')
@@ -38,8 +38,8 @@ class SpaceSubCategoryRepository extends BaseRepository
         if(! is_null($category_id) && !empty($category_id) ){
             $query->where('bd_subcat_espacios_ofrecidos_LIST.id_cat_LI', $category_id);
         }
-        if(! is_null($medium_id) && !empty($medium_id) ){
-            $query->where('id_us_reg_LI', $medium_id);
+        if(! is_null($publisher_id) && !empty($publisher_id) ){
+            $query->where('id_us_reg_LI', $publisher_id);
         }
 
         return $query->get()

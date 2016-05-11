@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Requests\RUser\Medium;
+namespace App\Http\Requests\RUser\Publisher;
 
 use App\Http\Requests\Request;
 use Illuminate\Routing\Route;
@@ -39,10 +39,10 @@ class UpdateRequest extends Request
      * @return array
      */
     public function rules() {
-        $medium = $this->route->getParameter('mediums');
+        $publisher = $this->route->getParameter('publishers');
         $rules = $this->storeRequest->rules();
 
-        $rules['email'] .= ',' . $medium->id . ',id_us_LI';
+        $rules['email'] .= ',' . $publisher->id . ',id_us_LI';
 
         return $rules;
     }

@@ -71,17 +71,17 @@ Breadcrumbs::register('advertisers.advertiser', function ($breadcrumbs, $adverti
     }
 });
 
-// Home > mediums
-Breadcrumbs::register('mediums', function ($breadcrumbs) {
+// Home > publishers
+Breadcrumbs::register('publishers', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Medios', url('medios'));
 });
 
-// Home > mediums > {{ $medium }}
-Breadcrumbs::register('mediums.medium', function ($breadcrumbs, $medium) {
-    $breadcrumbs->parent('mediums');
-    if ($medium->exists) {
-        $breadcrumbs->push($medium->name, route('medios.show', $medium));
+// Home > publishers > {{ $publisher }}
+Breadcrumbs::register('publishers.publisher', function ($breadcrumbs, $publisher) {
+    $breadcrumbs->parent('publishers');
+    if ($publisher->exists) {
+        $breadcrumbs->push($publisher->name, route('medios.show', $publisher));
     } else {
         $breadcrumbs->push('Nuevo Medio', route('medios.create'));
     }

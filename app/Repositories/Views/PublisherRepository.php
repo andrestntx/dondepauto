@@ -11,7 +11,7 @@ namespace App\Repositories\Views;
 
 use App\Repositories\BaseRepository;
 
-class MediumRepository extends BaseRepository
+class PublisherRepository extends BaseRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +20,7 @@ class MediumRepository extends BaseRepository
      */
     function model()
     {
-        return 'App\Entities\Views\Medium';
+        return 'App\Entities\Views\Publisher';
     }
 
     /**
@@ -40,7 +40,7 @@ class MediumRepository extends BaseRepository
      * @param string $id
      * @return mixed
      */
-    public function mediumsWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null, $column = "company", $id = "id")
+    public function publishersWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null, $column = "company", $id = "id")
     {
         $query = $this->model
             ->join('bd_espacios_ofrecidos_LIST', 'id_us_reg_LI', '=', 'id')

@@ -11,11 +11,11 @@ namespace App\Facades;
 use App\Services\ConfirmationService;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
-use App\Services\MediumService;
+use App\Services\PublisherService;
 use App\Services\MixpanelService;
 use Illuminate\Database\Eloquent\Model;
 
-class MediumFacade
+class PublisherFacade
 {
     protected $service;
     protected $emailService;
@@ -23,7 +23,7 @@ class MediumFacade
     protected $mixpanelService;
     protected $mailchimpService;
 
-    public function __construct(MediumService $service, EmailService $emailService, 
+    public function __construct(PublisherService $service, EmailService $emailService, 
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService)
     {
@@ -48,27 +48,27 @@ class MediumFacade
      */
     public function createModel(array $data)
     {
-        $medium = $this->service->createModel($data);
-        $confirmation = $this->confirmationService->generateConfirmation($medium);
-        $this->emailService->sendMediumInvitation($medium, $confirmation->code);
-        //$this->mixpanelService->registerUser($medium);
-        $this->mailchimpService->syncMedium($medium);
+        $publisher = $this->service->createModel($data);
+        $confirmation = $this->confirmationService->generateConfirmation($publisher);
+        $this->emailService->sendPublisherInvitation($publisher, $confirmation->code);
+        //$this->mixpanelService->registerUser($publisher);
+        $this->mailchimpService->syncPublisher($publisher);
         
-        return $medium;
+        return $publisher;
     }
 
     /**
      * @param array $data
-     * @param Model $medium
+     * @param Model $publisher
      * @return mixed
      */
-    public function updateModel(array $data, Model $medium)
+    public function updateModel(array $data, Model $publisher)
     {
-        $medium = $this->service->updateModel($data, $medium);
-        //$this->mixpanelService->updateMedium($medium);
-        $this->mailchimpService->syncMedium($medium);
+        $publisher = $this->service->updateModel($data, $publisher);
+        //$this->mixpanelService->updatePublisher($publisher);
+        $this->mailchimpService->syncPublisher($publisher);
 
-        return $medium;
+        return $publisher;
     }
     
 }

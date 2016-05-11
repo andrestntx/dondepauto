@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $router->model('directors', 'App\Entities\User');
         $router->model('advisers', 'App\Entities\User');
-        $router->model('mediums', 'App\Entities\Platform\User');
+        $router->model('publishers', 'App\Entities\Platform\User');
         $router->model('advertisers', 'App\Entities\Platform\User');
 
         parent::boot($router);

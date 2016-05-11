@@ -2,12 +2,12 @@
  * Created by Desarrollador 1 on 15/04/2016.
  */
 
-var MediumService = function() {
+var PublisherService = function() {
 
     var table;
 
     function initTable(urlSearch) {
-        table = $('#mediums-datatable').DataTable({
+        table = $('#publishers-datatable').DataTable({
             "order": [[6, "desc"]],
             'info': true,
             "ajax": urlSearch,
@@ -61,7 +61,7 @@ var MediumService = function() {
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 $('td:eq(0)', nRow).html(
-                    "<button class='btn btn-xs btn-success mediumModal' data-medium='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#mediumModal'><i class='fa fa-plus'></i></button>"
+                    "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-plus'></i></button>"
                 );
                 if(!aData.company || !aData.company.trim()) {
                     $('td:eq(1)', nRow).html('--');
@@ -178,25 +178,25 @@ var MediumService = function() {
     }
 
     function initModalEvent() {
-        $(document).on("click", ".mediumModal", function () {
-            var medium = $(this).data('medium');
-            drawModal(medium);
+        $(document).on("click", ".publisherModal", function () {
+            var publisher = $(this).data('publisher');
+            drawModal(publisher);
         });
     }
 
-    function drawModal(medium) {
-        UserService.drawModalUser("mediumModal", medium, "medios");
+    function drawModal(publisher) {
+        UserService.drawModalUser("publisherModal", publisher, "medios");
         /** Commercial state **/
-        $('#mediumModal #by_contact').text(medium.count_by_contact_intentions);
-        $('#mediumModal #sold').text(medium.count_sold_intentions);
-        $('#mediumModal #discarded').text(medium.count_discarded_intentions);
+        $('#publisherModal #by_contact').text(publisher.count_by_contact_intentions);
+        $('#publisherModal #sold').text(publisher.count_sold_intentions);
+        $('#publisherModal #discarded').text(publisher.count_discarded_intentions);
 
         /** Agreement **/
-        $('#mediumModal #signed_agreement').text(medium.signed_agreement_lang);
-        $('#mediumModal #commission_rate').text(medium.commission_rate);
-        $('#mediumModal #signed_at').text(medium.signed_at);
-        $('#mediumModal #discount').text(medium.discount);
-        $('#mediumModal #retention').text(medium.retention);
+        $('#publisherModal #signed_agreement').text(publisher.signed_agreement_lang);
+        $('#publisherModal #commission_rate').text(publisher.commission_rate);
+        $('#publisherModal #signed_at').text(publisher.signed_at);
+        $('#publisherModal #discount').text(publisher.discount);
+        $('#publisherModal #retention').text(publisher.retention);
     }
 
     return {

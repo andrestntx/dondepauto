@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Requests\RUser\Medium;
+namespace App\Http\Requests\RUser\Publisher;
 
 use App\Http\Requests\Request;
 use App\Http\Requests\RUser\StoreRequest as RUserStoreRequest;

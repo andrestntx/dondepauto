@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    {!!  Breadcrumbs::render('mediums') !!}
+    {!!  Breadcrumbs::render('publishers') !!}
 @endsection
 
 @section('extra-css')
@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12 list-medium" id="urlSearch">
+    <div class="col-md-12 list-publisher" id="urlSearch">
         <div class="ibox">
             <div class="ibox-content">
                 <div class="row">
@@ -96,7 +96,7 @@
                     </div> --}}
                 </div>
                 <div class="table-responsive">
-                    <table id="mediums-datatable" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
+                    <table id="publishers-datatable" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
                         <thead>
                         <tr class="info">
                             <th></th>
@@ -127,15 +127,15 @@
         </div>
     </div>
 
-    @include('admin.mediums.modal')
+    @include('admin.publishers.modal')
 @endsection
 
 @section('extra-js')
     <script src="/assets/js/services/userService.js"></script>
-    <script src="/assets/js/services/mediumService.js"></script>
+    <script src="/assets/js/services/publisherService.js"></script>
     <script>
         $(document).ready(function() {
-            MediumService.init('/medios/search');
+            PublisherService.init('/medios/search');
         });
     </script>
     <!-- iCheck -->

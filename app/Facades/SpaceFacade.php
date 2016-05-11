@@ -8,7 +8,7 @@
 
 namespace App\Facades;
 
-use App\Services\MediumService;
+use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
 use App\Services\Space\SpaceFormatService;
@@ -23,17 +23,17 @@ class SpaceFacade
     protected $formatService;
     protected $categoryService;
     protected $cityService;
-    protected $mediumService;
+    protected $publisherService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
-        SpaceCategoryService $categoryService, SpaceCityService $cityService, MediumService $mediumService)
+        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService)
     {
         $this->service = $service;
         $this->subCategoryService = $subCategoryService;
         $this->formatService = $formatService;
         $this->categoryService = $categoryService;
         $this->cityService = $cityService;
-        $this->mediumService = $mediumService;
+        $this->publisherService = $publisherService;
     }
 
     /**
@@ -66,18 +66,20 @@ class SpaceFacade
     /**
      * @param null $category_id
      * @param null $subCategory_id
-     * @param null $medium_id
+     * @param null $publisher_id
      * @param null $format_id
      * @param null $city_id
      * @return array
      */
-    public function ajax($category_id = null, $subCategory_id = null, $medium_id = null, $format_id = null, $city_id = null)
+    public function ajax($category_id = null, $subCategory_id = null, $publisher_id = null, $format_id = null, $city_id = null)
     {
         $result = [];
 
         if(is_null($format_id) || empty($format_id)) {
-            if(is_null($subCategory_id) || empty($subCategory_id)) {
-                $result['sub_categories'] = $this->subCategoryService->searchWithSpaces($category_id, $medium_id);
+            if( is_null($subCategory_id) || empty($subCategory_id)) {
+                \Log::info('consulto subcategorias: ' . $category_id . ' y sub: ' . $subCategory_id );
+
+                $result['sub_categories'] = $this->subCategoryService->searchWithSpaces($category_id, $publisher_id);
             }
             else {
                 $result['formats'] = $this->formatService->searchWithSpaces($subCategory_id);
@@ -88,7 +90,7 @@ class SpaceFacade
             $result['cities'] = $this->cityService->searchWithSpaces($category_id, $subCategory_id, $format_id);
         }
 
-        $result['mediums']        = $this->mediumService->searchWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
+        $result['publishers']        = $this->publisherService->searchWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
 
         return $result;
     }

@@ -261,7 +261,7 @@ $(function() {
         data: 20,
         color: "#d3d3d3",
     }, {
-        label: "Medium",
+        label: "Publisher",
         data: 40,
         color: "#1ab394",
     }, {

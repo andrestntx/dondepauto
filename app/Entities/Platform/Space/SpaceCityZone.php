@@ -27,7 +27,7 @@ class SpaceCityZone extends Entity
      *
      * @var string
      */
-    protected $table = 'bd_zonas_ciudades_LITS';
+    protected $table = 'bd_zonas_ciudades_LIST';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

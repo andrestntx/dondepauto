@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CraeteViewMediumsView extends Migration
+class CraeteViewPublishersView extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CraeteViewMediumsView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW view_mediums AS (
+            CREATE VIEW view_publishers AS (
             select 
                 bd_us_reg_LIST.id_us_LI as id,
                 comentarios_us_LI comments,
@@ -41,7 +41,7 @@ class CraeteViewMediumsView extends Migration
     public function down()
     {
         DB::statement("
-            DROP VIEW view_mediums
+            DROP VIEW view_publishers
         ");
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('breadcrumbs')
-    {!!  Breadcrumbs::render('mediums.medium', $medium) !!}
+    {!!  Breadcrumbs::render('publishers.publisher', $publisher) !!}
 @endsection
 
 @section('content')
@@ -13,10 +13,10 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-12">
-                        {!! Form::model($medium, $formData) !!}
+                        {!! Form::model($publisher, $formData) !!}
                             @include('admin.users.default-inputs')
 
-                            @if($medium->exists)
+                            @if($publisher->exists)
                                 @include('admin.users.password-inputs')
                                 @include('admin.users.personal-inputs')
                                 @include('admin.users.company-inputs')

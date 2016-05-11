@@ -66,7 +66,7 @@ class User extends Entity
      */
     const UPDATED_AT = null;
 
-    protected static $roles = ['admin', 'director', 'adviser', 'advertiser' => 'Co_tip_u', 'medium' => 'Ve_tip_u'];
+    protected static $roles = ['admin', 'director', 'adviser', 'advertiser' => 'Co_tip_u', 'publisher' => 'Ve_tip_u'];
 
     protected $attr  = [
         'first_name' => 'nombre_us_LI', 'last_name' => 'apellido_us_LI', 'email' => 'email_us_LI', 'role' => 'tipo_us_LI',
@@ -278,7 +278,7 @@ class User extends Entity
 
     public function spaces()
     {
-        return $this->hasMany('App\Entities\Platform\Space', 'id_us_reg_LI', 'id');
+        return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
     }
 
     public function getSpaceCityNamesAttribute()

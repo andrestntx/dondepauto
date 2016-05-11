@@ -149,7 +149,7 @@ class SpacesController extends ResourceController
     {
         return [
             'success' => true,
-            'inputs'  => $this->facade->ajax($request->get('category'), $request->get('sub_category'), $request->get('medium'),
+            'inputs'  => $this->facade->ajax($request->get('category'), $request->get('sub_category'), $request->get('publisher'),
                 $request->get('format'), $request->get('city'))
         ];
     }

@@ -156,11 +156,12 @@ return [
         'company_nit'           => 'nit',
         'economic_activity_id'  => 'actividad económica',
         'comments'              => 'comentarios',
-        'mediums'               => 'medios',
+        'publishers'               => 'medios',
         'categories'            => 'categorías',
         'sub_categories'        => 'sub categorías',
         'categories_and_sub'    => 'categorías y sub-categorías',
-        'formats'               => 'formatos'
+        'formats'               => 'formatos',
+        'scenes'                => 'escenarios de impacto',
     ],
 
     'empty_option'         => [

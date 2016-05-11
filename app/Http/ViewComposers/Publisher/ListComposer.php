@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\ViewComposers\Medium;
+namespace App\Http\ViewComposers\Publisher;
 
-use App\Repositories\Platform\CityRepository;
+use App\Repositories\Platform\Space\SpaceCityRepository as CityRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
 use App\Http\ViewComposers\BaseComposer;

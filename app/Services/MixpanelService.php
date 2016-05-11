@@ -60,22 +60,22 @@ class MixpanelService
         ]);
     }
 
-    public function updateMedium(User $medium)
+    public function updatePublisher(User $publisher)
     {
-        $this->updateUser($medium, [
-            '$first_name'                       => $medium->first_name,
-            '$last_name'                        => $medium->last_name,
-            '$email'                            => $medium->email,
-            '$created'                          => $medium->created_at_mixpanel,
-            'DP - Company name'					=> $medium->company,
-            'DP - Company city'					=> $medium->city_name,
-            'DP - Company NIT'					=> $medium->company_nit,
-            'DP - Company address'				=> $medium->address,
-            'DP - User position area'			=> $medium->company_area,
-            'DP - User position'				=> $medium->company_role,
-            'DP - User cellphone'				=> $medium->cel,
-            'DP - User phone'					=> $medium->phone,
-            'PD - User agreement'               => $medium->signed_agreement_lang
+        $this->updateUser($publisher, [
+            '$first_name'                       => $publisher->first_name,
+            '$last_name'                        => $publisher->last_name,
+            '$email'                            => $publisher->email,
+            '$created'                          => $publisher->created_at_mixpanel,
+            'DP - Company name'					=> $publisher->company,
+            'DP - Company city'					=> $publisher->city_name,
+            'DP - Company NIT'					=> $publisher->company_nit,
+            'DP - Company address'				=> $publisher->address,
+            'DP - User position area'			=> $publisher->company_area,
+            'DP - User position'				=> $publisher->company_role,
+            'DP - User cellphone'				=> $publisher->cel,
+            'DP - User phone'					=> $publisher->phone,
+            'PD - User agreement'               => $publisher->signed_agreement_lang
         ]);
     }
 }
