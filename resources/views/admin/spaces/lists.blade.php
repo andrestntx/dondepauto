@@ -143,6 +143,8 @@
             }
             else if(! $("#sub_categories").val()) { 
                 $('#formats').attr('disabled','disabled');
+                $('#formats').val('');
+                UserService.cleanColumnSearch(13);
             }
         }
 
