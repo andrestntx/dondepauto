@@ -28,7 +28,7 @@ class EconomicActivityRepository extends BaseRepository
     protected function activitiesWithUsers($role)
     {
         return $this->model
-            ->join('bd_us_reg_LIST', 'id', '=', 'id_actividadEconomica_LI')
+            ->join('us_reg_LIST', 'id', '=', 'id_actividadEconomica_LI')
             ->where('tipo_us_LI', User::getRole($role))
             ->groupBy('id')
             ->lists('nombre', 'id')

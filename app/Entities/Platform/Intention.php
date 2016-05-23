@@ -16,7 +16,7 @@ class Intention extends Entity
      *
      * @var string
      */
-    protected $table = 'bd_intenciones_compra_espacios_ofrecidos_LIST';
+    protected $table = 'intenciones_compra_espacios_ofrecidos_LIST';
 
     /**
      * The primary key for the model.
@@ -32,7 +32,7 @@ class Intention extends Entity
      */
     protected $dates = ['created_at'];
 
-    protected $attr = ['state' => 'estado_intencion_LI', 'interest_at' => 'url_fecha_intencion_LI',
+    protected $databaseTranslate = ['state' => 'estado_intencion_LI', 'interest_at' => 'url_fecha_intencion_LI',
         'created_at' => 'fecha_envio_intencion_LI'];
 
     public function getStateAttribute()

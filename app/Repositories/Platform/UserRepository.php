@@ -91,5 +91,13 @@ class UserRepository extends BaseRepository
         $advertiser->mailchimp_id = $mailchimpId;
         return $advertiser->save();
     }
+
+    public function getSpaces(\App\Entities\Platform\User $publisher)
+    {
+        return $publisher->spaces()
+            ->with(['images', 'format.subCategory.category'])
+            ->orderBy('nombre_espacio_LI')
+            ->paginate(12);
+    }
     
 }

@@ -28,9 +28,10 @@ class CityRepository extends BaseRepository
     protected function citiesWithUsers($role)
     {
         return $this->model
-            ->join('bd_us_reg_LIST', 'id_ciudad', '=', 'id_ciudad_LI')
+            ->join('us_reg_LIST', 'id_ciudad', '=', 'id_ciudad_LI')
             ->where('tipo_us_LI', User::getRole($role))
             ->groupBy('id_ciudad')
+            ->orderBy('ciudad', 'asc')
             ->lists('ciudad', 'id_ciudad')
             ->all();
     }
@@ -41,18 +42,6 @@ class CityRepository extends BaseRepository
     public function citiesWithAdvertisers()
     {
         return $this->citiesWithUsers('advertiser');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function citiesWithSpaces($colunm = "ciudad", $id = "ciudad")
-    {
-        return $this->model
-            ->join('bd_espacios_ofrecidos_LIST', 'id_ciudad', '=', 'id_ciudad_LI')
-            ->groupBy('id_ciudad')
-            ->lists($colunm, $id)
-            ->all();
     }
     
 }

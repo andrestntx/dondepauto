@@ -17,7 +17,7 @@ class MailchimpService
     protected $listId = '2139024e4d';
     protected $groups = [
         'roles' => [
-            'medium'        => 'eae14fa74e',
+            'publisher'        => 'eae14fa74e',
             'advertiser'    => '29b615296a'
         ],
         'type' => [
@@ -80,10 +80,10 @@ class MailchimpService
     /**
      * @param User $user
      */
-    function syncMedium(User $user)
+    function syncPublisher(User $user)
     {
         $this->syncMember($user,[
-            $this->groups['roles']['medium'] => true,
+            $this->groups['roles']['publisher'] => true,
             $this->groups['type']['client'] => true
         ]);
     }

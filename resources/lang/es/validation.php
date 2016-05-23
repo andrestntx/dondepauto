@@ -155,7 +155,19 @@ return [
         'company'               => 'empresa',
         'company_nit'           => 'nit',
         'economic_activity_id'  => 'actividad económica',
-        'comments'              => 'comentarios'
+        'comments'              => 'comentarios',
+        'publishers'               => 'medios',
+        'categories'            => 'categorías',
+        'sub_categories'        => 'sub categorías',
+        'categories_and_sub'    => 'categorías y sub-categorías',
+        'formats'               => 'formatos',
+        'scenes'                => 'escenarios de impacto',
+        'sub_category_id'       => 'sub categoría',
+        'format_id'             => 'formato',
+        'impact_scene_id'       => 'escenario de impacto',
+        'impact'                => 'impacto',
+        'minimal_price'         => 'precio mínimo',
+        'period'                => 'período'
     ],
 
     'empty_option'         => [

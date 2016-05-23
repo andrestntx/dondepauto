@@ -77,7 +77,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
             'strict' => false,
-            'engine' => null,
+            'engine' => 'MyISAM',
         ],
 
         'mysql' => [
@@ -89,11 +89,10 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
+            'prefix' => 'bd_',
             'strict' => false,
-            'engine' => null,
+            'engine' => 'MyISAM',
         ],
-
 
         'pgsql' => [
             'driver' => 'pgsql',
