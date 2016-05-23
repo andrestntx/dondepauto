@@ -9,6 +9,7 @@
 namespace App\Repositories\Views;
 
 
+use App\Entities\Platform\User;
 use App\Repositories\BaseRepository;
 
 class SpaceRepository extends BaseRepository
@@ -24,10 +25,17 @@ class SpaceRepository extends BaseRepository
     }
 
     /**
+     * @param User $publisher
      * @return mixed
      */
-    public function search()
+    public function search(User $publisher = null)
     {
-        return $this->model->with([])->get();
+        $query = $this->model->with(['images']);
+
+        if(!is_null($publisher)) {
+            $query->wherePublisherId($publisher->id);
+        }
+
+        return $query->orderBy('created_at', 'desc')->get();
     }
 }

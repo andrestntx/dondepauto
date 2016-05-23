@@ -20,14 +20,14 @@ class SpaceCity extends City
      */
     protected $primaryKey = 'id_ciudad_LI';
 
-    protected $attr = ['name' => 'nombre_ciudad_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_ciudad_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_ciudades_LIST';
+    protected $table = 'ciudades_LIST';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -69,6 +69,17 @@ class AdvertisersController extends ResourceController
     {
         return ['data' => $this->facade->search(null, $request->get('init'), $request->get('finish'))];
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchProposals(Request $request)
+    {
+        return ['data' => $this->facade->search(null, $request->get('init'), $request->get('finish'))];
+    }
     
     /**
      * Show the form for creating a new resource.
@@ -95,12 +106,15 @@ class AdvertisersController extends ResourceController
     /**
      * Display the specified resource.
      *
-     * @param  User  $user
+     * @param  User  $advertiser
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $advertiser)
     {
-        return $this->view('show', ['user' => $user]);
+        $advertiser->load('advertiser');
+        $proposals = $this->facade->searchProposals($advertiser);
+        
+        return $this->view('show', ['advertiser' => $advertiser, 'proposals' => $proposals]);
     }
 
     /**

@@ -20,6 +20,7 @@ class ComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Publisher\FormComposer' => 'admin.publishers.form',
             'App\Http\ViewComposers\Publisher\ListComposer' => 'admin.publishers.lists',
             'App\Http\ViewComposers\Space\ListComposer' => 'admin.spaces.lists',
+            'App\Http\ViewComposers\Space\FormComposer' => 'admin.spaces.form',
         ]);
     }
     /**

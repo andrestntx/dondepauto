@@ -159,9 +159,13 @@ var UserService = function() {
 			return html.append(line).append(htmlStates);
 	    },
 
-	    getHtmlTableStates: function (states, cols) 
+	    getHtmlTableStates: function (states, width) 
 	    {
-	    	var html 		= $('<div style="width:190px;"></div>').addClass('text-center');
+	    	if(! width) {
+	    		width = '190';
+	    	}
+
+	    	var html 		= $('<div style="width:' + width + 'px;"></div>').addClass('text-center');
 
 	    	$.each( states, function( key, state ) {
 	    		var i 		= $('<i></i>').addClass(state.icon);

@@ -18,14 +18,14 @@ class Neighborhood extends Entity
      */
     protected $primaryKey = 'id_barrio_LI';
 
-    protected $attr = ['name' => 'nombre_barrio_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_barrio_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_barrios_LIST';
+    protected $table = 'barrios_LIST';
 
 
     /**

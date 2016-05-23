@@ -8,30 +8,43 @@
 
 namespace App\Facades;
 
+use App\Entities\Platform\User;
 use App\Services\ConfirmationService;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\PublisherService;
 use App\Services\MixpanelService;
+use App\Services\Space\SpaceService;
 use Illuminate\Database\Eloquent\Model;
 
 class PublisherFacade
 {
     protected $service;
     protected $emailService;
+    protected $spaceService;
     protected $confirmationService;
     protected $mixpanelService;
     protected $mailchimpService;
 
     public function __construct(PublisherService $service, EmailService $emailService, 
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
-                                MailchimpService $mailchimpService)
+                                MailchimpService $mailchimpService, SpaceService $spaceService)
     {
         $this->service = $service;
         $this->emailService = $emailService;
         $this->confirmationService = $confirmationService;
         $this->mixpanelService = $mixpanelService;
         $this->mailchimpService = $mailchimpService;
+        $this->spaceService = $spaceService;
+    }
+
+    /**
+     * @param User $publisher
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function searchSpaces(User $publisher)
+    {
+        return $this->spaceService->search($publisher);
     }
 
     /**
@@ -69,6 +82,11 @@ class PublisherFacade
         $this->mailchimpService->syncPublisher($publisher);
 
         return $publisher;
+    }
+
+    public function getSpaces(Model $publisher)
+    {
+        return $this->service->getSpaces($publisher);
     }
     
 }

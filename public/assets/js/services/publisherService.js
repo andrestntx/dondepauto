@@ -61,7 +61,7 @@ var PublisherService = function() {
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 $('td:eq(0)', nRow).html(
-                    "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-plus'></i></button>"
+                    "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-search-plus'></i></button>"
                 );
                 if(!aData.company || !aData.company.trim()) {
                     $('td:eq(1)', nRow).html('--');
@@ -71,7 +71,7 @@ var PublisherService = function() {
                 );
                 if(aData.count_spaces > 0){
                     $('td:eq(5)', nRow).html(
-                        '<span class="badge badge-warning">' + aData.count_spaces + '</span>'
+                        '<span class="badge badge-info">' + aData.count_spaces + '</span>'
                     );
                 }
             },
@@ -192,12 +192,42 @@ var PublisherService = function() {
         $('#publisherModal #discarded').text(publisher.count_discarded_intentions);
 
         /** Agreement **/
-        $('#publisherModal #signed_agreement').text(publisher.signed_agreement_lang);
+        $('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
         $('#publisherModal #commission_rate').text(publisher.commission_rate);
-        $('#publisherModal #signed_at').text(publisher.signed_at);
+        $('#publisherModal #signed_at').text(publisher.signed_at_datatable);
         $('#publisherModal #discount').text(publisher.discount);
         $('#publisherModal #retention').text(publisher.retention);
+
+        /** Spaces **/
+        $('#publisherModal a#link-spaces').attr('href', '/medios/' + publisher.id);
+        $('#publisherModal #count-spaces').text('(' + publisher.count_spaces + ')');
+        $('#publisherModal #created_at').text(publisher.created_at_humans);
     }
+
+    function drawShowPrices() {
+        var publisher = $("#publisher").data("publisher");
+        $("#prueba").html(UserService.getHtmlModalStates(publisher.states, ''));
+
+        var minimalPrices = $(".minimal-price");
+        $.each(minimalPrices, function( index, div ) {
+          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+        });
+
+        var markupPrices = $(".markup-price");
+        $.each(markupPrices, function( index, div ) {
+          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+        });
+
+        var publicPrices = $(".public-price");
+        $.each(publicPrices, function( index, div ) {
+          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+        });
+
+        var markupPers = $(".markup-per");
+        $.each(markupPers, function( index, div ) {
+          $(this).text(numeral($(this).data('per')).format('0%'));
+        });
+    };
 
     return {
         init: function(urlSearch) {
@@ -207,6 +237,9 @@ var PublisherService = function() {
             initModalEvent();
             initSearchAgreement();
             initSearchOffers();
+        },
+        drawShowPrices: function() {
+            drawShowPrices();
         }
     };
 }();

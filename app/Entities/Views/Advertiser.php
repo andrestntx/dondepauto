@@ -24,15 +24,39 @@ class Advertiser extends PUser
      */
     protected $appends = ['name', 'state', 'state_class', 'state_icon', 'state_id', 'count_intentions',
         'count_by_contact_intentions', 'count_sold_intentions', 'count_discarded_intentions', 'count_interest_intentions',
-        'count_management_intentions', 'count_leads',
+        'count_management_intentions', 'count_leads', 'created_at_humans', 'count_proposals',
         'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function intentions()
+    {
+        return $this->hasMany('App\Entities\Platform\Intention', 'id_us_anunciante_LI', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function proposals()
+    {
+        return $this->hasMany('App\Entities\Proposal\Proposal', 'advertiser_id', 'id');
+    }
+    
     /**
      * @return mixed
      */
     public function getCountIntentionsAttribute()
     {
         return $this->intentions->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountProposalsAttribute()
+    {
+        return $this->proposals->count();
     }
 
     /**
@@ -95,11 +119,11 @@ class Advertiser extends PUser
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return mixed
      */
-    public function intentions()
+    public function getCreatedAtHumansAttribute()
     {
-        return $this->hasMany('App\Entities\Platform\Intention', 'id_us_anunciante_LI', 'id');
+        return $this->created_at->diffForHumans();
     }
 
 }

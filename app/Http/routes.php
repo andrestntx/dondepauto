@@ -11,6 +11,10 @@
 |
 */
 
+use Carbon\Carbon;
+
+Carbon::setLocale('es');
+
 Route::auth();
 
 Route::group(['middleware' => 'auth'], function(){
@@ -60,6 +64,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\AdvertisersController@unlinked'
         ]);
 
+        Route::get('anunciantes/{advertiser}/propuestas/search', [
+            'as'    => 'anunciantes.propuestas.search',
+            'uses' => 'Admin\AdvertisersController@searchProposals'
+        ]);
+
         Route::resource('anunciantes', 'Admin\AdvertisersController',  ['parameters' => [
             'anunciantes' => 'advertisers'
         ]]);
@@ -79,6 +88,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('medios/search', [
             'as'    => 'medios.search',
             'uses' => 'Admin\PublishersController@search'
+        ]);
+
+        Route::get('medios/{publisher}/espacios/search', [
+            'as'    => 'medios.espacios.search',
+            'uses' => 'Admin\PublishersController@searchSpaces'
         ]);
 
         Route::resource('medios', 'Admin\PublishersController', ['parameters' => [

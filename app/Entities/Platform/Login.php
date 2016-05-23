@@ -16,7 +16,7 @@ class Login extends Entity
      *
      * @var string
      */
-    protected $table = 'bd_users_logs_LIST';
+    protected $table = 'users_logs_LIST';
 
     /**
      * The primary key for the model.
@@ -32,7 +32,7 @@ class Login extends Entity
      */
     protected $dates = ['fecha_login_LI'];
 
-    protected $attr  = ['logit_at' => 'fecha_login_LI'];
+    protected $databaseTranslate  = ['logit_at' => 'fecha_login_LI'];
 
     public function getLoginAtDatatableAttribute()
     {

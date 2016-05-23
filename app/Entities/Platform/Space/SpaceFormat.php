@@ -21,14 +21,14 @@ class SpaceFormat extends Entity
      */
     protected $primaryKey = 'id_formato_LI';
 
-    protected $attr = ['name' => 'nombre_formato_LI', 'description' => 'descripcion_formato_LI', 'sub_category_id' => 'id_subcat_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_formato_LI', 'description' => 'descripcion_formato_LI', 'sub_category_id' => 'id_subcat_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_formatos_espacios_ofrecidos_LIST';
+    protected $table = 'formatos_espacios_ofrecidos_LIST';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -60,5 +60,13 @@ class SpaceFormat extends Entity
     public function getCategoryNameAttribute()
     {
         return $this->getCategory()->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategorySubCategoryNameAttribute()
+    {
+        return $this->subCategory->name . ' - ' . $this->category_name . ' - ' . $this->name;
     }
 }

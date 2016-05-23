@@ -19,14 +19,14 @@ class SpaceCategory extends Entity
      */
     protected $primaryKey = 'id_cat_LI';
 
-    protected $attr = ['name' => 'nombre_cat_LI', 'id' => 'id_cat_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_cat_LI', 'id' => 'id_cat_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_cat_espacios_ofrecidos_LIST';
+    protected $table = 'cat_espacios_ofrecidos_LIST';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

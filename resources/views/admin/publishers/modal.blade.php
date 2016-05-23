@@ -17,24 +17,24 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Datos de contacto
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    <span class="h5"> <span id="name"> Andres Pinzon </span> </span> <br>
-                                    <span class="h5" id="email"> <i class="fa fa-envelope-o"></i> <a href="mailto:andres@dondepauto.co"> andres@dondepauto.co </a></span> <br>
-                                        <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:567878" id="phone"> 567878 </a> -
-                                                            <i class="fa fa-mobile"></i> <a href="tel:+3142308171" id="cel"> 3142308171 </a>
+                                    <span class="h5"> <span id="name">  </span> </span> <br>
+                                    <span class="h5" id="email"> <i class="fa fa-envelope-o"></i> <a href=""> </a></span> <br>
+                                        <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:" id="phone">  </a> -
+                                                            <i class="fa fa-mobile"></i> <a href="tel:+" id="cel">  </a>
                                         </span>
                                 </p>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Detalle del medio
+                                Detalle del medio - <strong>(Registrado <span id="created_at"></span>)</strong>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -42,7 +42,7 @@
                                         <p>
                                             <span class="h5"> Actividad</span> <br>
                                             <span class="h5"> Ciudad </span> <br>
-                                            <span class="h5"> Dirección </span> <br>
+                                            <span class="h5"> Dirección </span> <br><br>
                                             <span class="h5"> NIT </span> <br>
                                             <span class="h5"> Cargo </span> <br>
                                             <span class="h5"> Área </span> <br>
@@ -50,22 +50,22 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <p>
-                                            <span class="h5" id="economic_activity"> Deportes</span> <br>
-                                            <span class="h5" id="city"> Bogotá </span> <br>
-                                            <span class="h5" id="address"> Calle 11a # 13 - 90 </span> <br>
-                                            <span class="h5" id="company_nit"> 909283455-7 </span> <br>
-                                            <span class="h5" id="company_role"> Gerente de Marketing </span> <br>
-                                            <span class="h5" id="company_area"> Marketing y Publicidad </span> <br>
+                                            <span class="h5" id="economic_activity"> </span> <br>
+                                            <span class="h5" id="city">  </span> <br>
+                                            <span class="h5" id="address"> </span> <br> <br>
+                                            <span class="h5" id="company_nit">  </span> <br>
+                                            <span class="h5" id="company_role">  </span> <br>
+                                            <span class="h5" id="company_area"> </span> <br>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Acuerdo
+                                Acuerdo <strong id="publisher_signed_agreement"></strong>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -79,21 +79,14 @@
                                     </div>
                                     <div class="col-xs-6">
                                         <p>
-                                            <span class="h5" id="commission_rate"> 12 </span> % <br>
-                                            <span class="h5" id="signed_at"> Hace 2 días, 19-04-2016 </span> <br>
-                                            <span class="h5" id="discount"> 3 </span> % <br>
-                                            <span class="h5" id="retention"> 5</span> %
+                                            <span class="h5" id="commission_rate">  </span> % <br>
+                                            <span class="h5" id="signed_at">  </span> <br>
+                                            <span class="h5" id="discount">  </span> % <br>
+                                            <span class="h5" id="retention"> </span> %
                                         </p>
                                     </div>
                                 </div>
 
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Espacios Publicitarios
-                            </div>
-                            <div class="panel-body">
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -103,6 +96,15 @@
                             <div class="panel-body" id="comments">
                             </div>
                         </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <a href="#" class="h5" id="link-spaces" style="font-size: 15px;"> 
+                                    <i class="fa fa-newspaper-o"></i> 
+                                    Espacios Publicitarios <span style="font-size:18px;" id="count-spaces">(0)</span>
+                                </a>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

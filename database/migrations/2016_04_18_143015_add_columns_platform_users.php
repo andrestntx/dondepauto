@@ -12,7 +12,7 @@ class AddColumnsPlatformUsers extends Migration
      */
     public function up()
     {
-        Schema::table('bd_us_reg_LIST', function (Blueprint $table) {
+        Schema::table('us_reg_LIST', function (Blueprint $table) {
             $table->double('descuento_pronto_pago_us_LI')->nullable();
             $table->double('porc_comision_us_LI')->nullable();
             $table->double('retencion_fuente_us_LI')->nullable();
@@ -29,7 +29,7 @@ class AddColumnsPlatformUsers extends Migration
      */
     public function down()
     {
-        Schema::table('bd_us_reg_LIST', function (Blueprint $table) {
+        Schema::table('us_reg_LIST', function (Blueprint $table) {
             $table->dropColumn('descuento_pronto_pago_us_LI');
             $table->dropColumn('porc_comision_us_LI');
             $table->dropColumn('retencion_fuente_us_LI');

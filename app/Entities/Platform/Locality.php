@@ -18,14 +18,14 @@ class Locality extends Entity
      */
     protected $primaryKey = 'id_localidad_li';
 
-    protected $attr = ['name' => 'nombre_localidad_LI', 'city_id' => 'id_ciudad_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_localidad_LI', 'city_id' => 'id_ciudad_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_localidades_LITS';
+    protected $table = 'localidades_LITS';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -55,4 +55,9 @@ class PublisherService extends ResourceService
     {
         return $this->viewRepository->publishersWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
     }
+
+    public function getSpaces($publisher)
+    {
+        return $this->repository->getSpaces($publisher);
+    }
 }

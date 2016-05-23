@@ -16,9 +16,16 @@ class EconomicActivity extends Entity
      *
      * @var string
      */
-    protected $table = 'bd_actividades_economicas_LIST';
+    protected $table = 'actividades_economicas_LIST';
 
-    protected $attr = ['name' => 'nombre'];
+    protected $databaseTranslate = ['name' => 'nombre'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['name'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -34,13 +41,5 @@ class EconomicActivity extends Entity
     public function users()
     {
         return $this->hasMany('App\Entities\Platform\User', 'id_actividadEconomica_LI', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNameAttribute()
-    {
-        return $this->nombre;
     }
 }

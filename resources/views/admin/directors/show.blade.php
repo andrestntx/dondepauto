@@ -41,7 +41,7 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Anunciantes asignados <strong id="count-advertisers">({{ $advertisers->count() }})</strong></h2>
+                        <h2>Anunciantes asignados <strong id="count-advertisers">({{ count($advertisers) }})</strong></h2>
                         <p>
                             Todos los anunciantes que han sido asignados a {{ $user->first_name }}
                         </p>

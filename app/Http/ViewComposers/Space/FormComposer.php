@@ -1,18 +1,33 @@
 <?php
 
-namespace App\Http\ViewComposers\Publisher;
+namespace App\Http\ViewComposers\Space;
 
-use App\Repositories\Platform\CityRepository;
+use App\Repositories\Platform\Space\SpaceCategoryRepository;
+use App\Repositories\Platform\Space\SpaceSubCategoryRepository;
+use App\Repositories\Platform\Space\SpaceFormatRepository;
+use App\Repositories\Platform\Space\SpaceCityRepository;
+use App\Repositories\Platform\Space\SpaceImpactSceneRepository;
+use App\Repositories\Platform\Space\SpacePeriodRepository;
+
+
 use Illuminate\Contracts\View\View;
 use App\Http\ViewComposers\BaseComposer;
 
 class FormComposer extends BaseComposer
 {
     protected $cityRepository;
+    protected $categoryRepository;
+    protected $subCategoryRepository;
+    protected $formatRepository;
+    protected $impactSceneRepository;
+    protected $periodRepository;
 
-    function __construct(CityRepository $cityRepository)
+    function __construct(SpaceFormatRepository $formatRepository, SpaceCityRepository $cityRepository, SpaceImpactSceneRepository $impactSceneRepository, SpacePeriodRepository $periodRepository)
     {
-        $this->cityRepository = $cityRepository;
+        $this->formatRepository         = $formatRepository;
+        $this->impactSceneRepository    = $impactSceneRepository;
+        $this->cityRepository           = $cityRepository;
+        $this->periodRepository         = $periodRepository;
     }
 
     /**
@@ -22,10 +37,16 @@ class FormComposer extends BaseComposer
      */
     public function compose(View $view)
     {
-        $cities = $this->cityRepository->listsSelect();
+        $formats        = $this->formatRepository->listsSelectComplete();
+        $scenes         = $this->impactSceneRepository->listsSelect();
+        $cities         = $this->cityRepository->listsSelect();
+        $periods        = $this->periodRepository->listsSelect();
 
         $view->with([
-            'cities' => $cities,
+            'formats'       => $formats,
+            'scenes'        => $scenes,
+            'cities'        => $cities,
+            'periods'       => $periods
         ]);
     }
 }

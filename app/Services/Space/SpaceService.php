@@ -8,6 +8,7 @@
 
 namespace App\Services\Space;
 
+use App\Entities\Platform\User;
 use App\Repositories\Platform\Space\SpaceRepository;
 use App\Repositories\Views\SpaceRepository as ViewSpaceRepository;
 use App\Services\ResourceService;
@@ -28,10 +29,11 @@ class SpaceService extends ResourceService
     }
 
     /**
+     * @param User $publisher
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search()
+    public function search(User $publisher = null)
     {
-        return ['data' => $this->viewRepository->search()];
+        return ['data' => $this->viewRepository->search($publisher)];
     }
 }

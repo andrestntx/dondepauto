@@ -11,11 +11,12 @@ var AdvertiserService = function() {
         urlSearch = urlSearch;
 
         table = $('#advertisers-datatable').DataTable({
-            "order": [[6, "desc"]],
+            "order": [[1, "desc"]],
             "ajax": urlSearch,
             "deferRender": true,
             "columns": [
                 { "data": null, "orderable": false },
+                { "data": "created_at"},
                 { "data": "company" },
                 { "data": "city_name" },
                 { "data": "name" },
@@ -34,13 +35,17 @@ var AdvertiserService = function() {
             ],
             "columnDefs": [
                 {
-                    "targets": [5,6,9,10,11,12,13,14,15],
+                    "targets": [6,7,10,11,12,13,14,15,16],
                     "visible": false,
                     "searchable": true
                 },
                 {
                     className: "text-center",
-                    "targets": [0,7,8]
+                    "targets": [0,8,9]
+                },
+                {
+                    className: "text-small",
+                    "targets": [1,2,3,4,5]
                 }
             ],
             "language": {
@@ -61,19 +66,22 @@ var AdvertiserService = function() {
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 $('td:eq(0)', nRow).html(
-                    "<button class='btn btn-xs btn-success advertiserModal' data-advertiser='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#advertiserModal'><i class='fa fa-plus'></i></button>"
+                    "<button class='btn btn-xs btn-success advertiserModal' data-advertiser='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#advertiserModal'><i class='fa fa-search-plus'></i></button>"
                 );
+
+                $('td:eq(1)', nRow).html(aData.created_at.substring(0,10));
+
                 if(!aData.company.trim()) {
-                    $('td:eq(1)', nRow).html('--');
-                }
-                if(!aData.city_name) {
                     $('td:eq(2)', nRow).html('--');
                 }
-                $('td:eq(5)', nRow).html(
-                    UserService.getHtmlTableStates(aData.states)
+                if(!aData.city_name) {
+                    $('td:eq(3)', nRow).html('--');
+                }
+                $('td:eq(6)', nRow).html(
+                    UserService.getHtmlTableStates(aData.states, 120)
                 );
                 if(aData.count_intentions > 0){
-                    $('td:eq(6)', nRow).html(
+                    $('td:eq(7)', nRow).html(
                         getHtmlIntentionStates(aData)
                     );
                 }
@@ -85,9 +93,9 @@ var AdvertiserService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states",9);
-        UserService.initExactSearchSelect('#cities', 10);
-        UserService.initExactSearchSelect("#economic_activities", 12);
+        UserService.initSimpleSearchSelect("#registration_states",10);
+        UserService.initExactSearchSelect('#cities', 11);
+        UserService.initExactSearchSelect("#economic_activities", 113);
     }
     
     function initModalEvent() {
@@ -147,6 +155,11 @@ var AdvertiserService = function() {
         else {
             $('#advertiserModal #lead_dates').text(' ');  
         }
+
+        /** Proposals **/
+        $('#advertiserModal a#link-proposals').attr('href', '/anunciantes/' + advertiser.id);
+        $('#advertiserModal #count-proposals').text('(' + advertiser.count_proposals + ')');
+        $('#advertiserModal #created_at').text(advertiser.created_at_humans);
     }
 
     function initReloadAjaxDate(inputInit, inputFinish, parameterInit, parameterFinish) {

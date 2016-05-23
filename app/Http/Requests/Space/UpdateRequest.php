@@ -39,10 +39,10 @@ class UpdateRequest extends Request
      * @return array
      */
     public function rules() {
-        $publisher = $this->route->getParameter('publishers');
+        /*$publisher = $this->route->getParameter('publishers');
         $rules = $this->storeRequest->rules();
 
-        $rules['email'] .= ',' . $publisher->id . ',id_us_LI';
+        $rules['email'] .= ',' . $publisher->id . ',id_us_LI';*/
 
         return [];
     }

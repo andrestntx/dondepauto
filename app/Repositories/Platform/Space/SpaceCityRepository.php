@@ -32,11 +32,11 @@ class SpaceCityRepository extends BaseRepository
      * @return mixed
      */
     public function citiesWithSpaces($category_id = null, $subCategory_id = null, $format_id = null,
-                                     $column = "nombre_ciudad_LI", $id = "bd_ciudades_LIST.id_ciudad_LI")
+                                     $column = "nombre_ciudad_LI", $id = "ciudades_LIST.id_ciudad_LI")
     {
         $query = $this->model
-            ->join('bd_espacios_ofrecidos_LIST', 'bd_espacios_ofrecidos_LIST.id_ciudad_LI', '=', 'bd_ciudades_LIST.id_ciudad_LI')
-            ->groupBy('bd_ciudades_LIST.id_ciudad_LI')
+            ->join('espacios_ofrecidos_LIST', 'espacios_ofrecidos_LIST.id_ciudad_LI', '=', 'ciudades_LIST.id_ciudad_LI')
+            ->groupBy('ciudades_LIST.id_ciudad_LI')
             ->orderBy('nombre_ciudad_LI', 'asc');
 
         if(! is_null($format_id) && ! empty($format_id)) {

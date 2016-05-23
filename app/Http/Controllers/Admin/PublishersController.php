@@ -70,6 +70,18 @@ class PublishersController extends ResourceController
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @param User $publisher
+     * @return \Illuminate\Http\Response
+     */
+    public function searchSpaces(Request $request, User $publisher)
+    {
+        return $this->facade->searchSpaces($publisher);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -94,12 +106,15 @@ class PublishersController extends ResourceController
     /**
      * Display the specified resource.
      *
-     * @param  User  $user
+     * @param  User  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $publisher)
     {
-        return $this->view('show', ['user' => $user]);
+        $publisher->load('publisher');
+        $spaces = $this->facade->getSpaces($publisher);
+
+        return $this->view('show', ['publisher' => $publisher, 'spaces' => $spaces]);
     }
 
     /**
@@ -124,9 +139,9 @@ class PublishersController extends ResourceController
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, User $user)
-    {
+    {        
         $this->facade->updateModel($request->all(), $user);
-        return $this->redirect('index');
+        return $this->redirect('show', $user);
     }
     
     /**

@@ -27,12 +27,12 @@ class SpaceCategoryRepository extends BaseRepository
      * @param string $id
      * @return mixed
      */
-    public function categoriesWithSpaces($column = "nombre_cat_LI", $id = "bd_cat_espacios_ofrecidos_LIST.id_cat_LI")
+    public function categoriesWithSpaces($column = "nombre_cat_LI", $id = "cat_espacios_ofrecidos_LIST.id_cat_LI")
     {
         return $this->model
-            ->join('bd_subcat_espacios_ofrecidos_LIST', 'bd_subcat_espacios_ofrecidos_LIST.id_cat_LI', '=', 'bd_cat_espacios_ofrecidos_LIST.id_cat_LI')
-            ->join('bd_espacios_ofrecidos_LIST', 'bd_espacios_ofrecidos_LIST.id_subcat_LI', '=', 'bd_subcat_espacios_ofrecidos_LIST.id_subcat_LI')
-            ->groupBy('bd_cat_espacios_ofrecidos_LIST.id_cat_LI')
+            ->join('subcat_espacios_ofrecidos_LIST', 'subcat_espacios_ofrecidos_LIST.id_cat_LI', '=', 'cat_espacios_ofrecidos_LIST.id_cat_LI')
+            ->join('espacios_ofrecidos_LIST', 'espacios_ofrecidos_LIST.id_subcat_LI', '=', 'subcat_espacios_ofrecidos_LIST.id_subcat_LI')
+            ->groupBy('cat_espacios_ofrecidos_LIST.id_cat_LI')
             ->lists($column, $id)
             ->all();
     }

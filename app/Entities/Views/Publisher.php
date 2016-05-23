@@ -34,7 +34,7 @@ class Publisher extends PUser
      */
     protected $appends = ['name', 'state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
         'last_log_login_at_datatable', 'signed_agreement_lang', 'space_city_names', 'activated_at_datatable',
-        'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable'
+        'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans'
     ];
 
     public function getStatesAttribute()
@@ -53,14 +53,6 @@ class Publisher extends PUser
         ]);
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
-    public function getSignedAgreementAttribute($value)
-    {
-        return $value == 'Si_fir_ac';
-    }
 
     /**
      * @return mixed
@@ -130,7 +122,7 @@ class Publisher extends PUser
      */
     public function spaces()
     {
-        return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
+        return $this->hasMany('App\Entities\Views\Space', 'publisher_id', 'id');
     }
 
     /**
@@ -140,4 +132,25 @@ class Publisher extends PUser
     {
         return $this->spaces->lists('city_name');
     }
+
+    /**
+     * @return string
+     */
+    public function getEconomicActivityNameAttribute($value)
+    {
+        if($value) {
+            return $value;
+        }
+
+        return 'Sin registrar';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAtHumansAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
 }

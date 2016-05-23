@@ -19,14 +19,14 @@ class SpaceSubCategory extends Entity
      */
     protected $primaryKey = 'id_subcat_LI';
 
-    protected $attr = ['name' => 'nombre_subcat_LI', 'description' => 'description_subcat_LI', 'category_id' => 'id_cat_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_subcat_LI', 'description' => 'description_subcat_LI', 'category_id' => 'id_cat_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_subcat_espacios_ofrecidos_LIST';
+    protected $table = 'subcat_espacios_ofrecidos_LIST';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

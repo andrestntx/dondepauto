@@ -8,12 +8,18 @@
 
 namespace App\Entities\Platform;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Entity extends Model
 {
-    protected $attr = array();
+    /**
+     * Database translate - Fix Database bad design
+     *
+     * @var array
+     */
+    protected $databaseTranslate = array();
 
     /**
      * Indicates if the model should be timestamped.
@@ -23,25 +29,59 @@ class Entity extends Model
     public $timestamps = false;
 
     /**
+     * Validate if the key exists in the $databaseTranslate
+     *
      * @param $key
      * @return mixed
      */
-    public function getFormValue($key)
+    protected function isInTranslate($key)
     {
-        return $this->getAttribute($key);
+        return array_key_exists($key, $this->databaseTranslate);
     }
 
     /**
      * @param $key
      * @return mixed
      */
-    public function getAttrKey($key)
+    protected function getTranslateKey($key)
     {
-        if(array_key_exists($key, $this->attr)) {
-            return $this->attr[$key];
+        if($this->isInTranslate($key)) {
+            return $this->databaseTranslate[$key];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public function getTranslateOrOriginalKey($key)
+    {
+        if($translateKey = $this->getTranslateKey($key)) {
+            return $translateKey;
         }
 
         return $key;
+    }
+
+    /**
+     * Get the value of an attribute using its mutator for array conversion.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function mutateAttributeForArray($key, $value)
+    {
+        if($this->isInTranslate($key) && ! $this->hasGetMutator($key)) {
+            $value = parent::getAttribute($this->getTranslateKey($key));
+        }
+        else {
+            $value = $this->mutateAttribute($key, $value);
+        }
+
+        return $value instanceof Arrayable ? $value->toArray() : $value;
     }
 
     /**
@@ -56,7 +96,7 @@ class Entity extends Model
             return $this->getAttributeValue($key);
         }
 
-        return parent::getAttribute($this->getAttrKey($key));
+        return parent::getAttribute($this->getTranslateOrOriginalKey($key));
     }
 
     /**
@@ -86,8 +126,8 @@ class Entity extends Model
 
         // If an attribute is listed as a "special attribute" that must be translated,
         // we'll get the original attribute of the database
-        elseif(array_key_exists($key, $this->attr)) {
-            $key = $this->attr[$key];
+        elseif($this->isInTranslate($key)) {
+            $key = $this->getTranslateKey($key);
         }
         
         if ($this->isJsonCastable($key) && ! is_null($value)) {
@@ -97,6 +137,15 @@ class Entity extends Model
         $this->attributes[$key] = $value;
 
         return $this;
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public function getFormValue($key)
+    {
+        return $this->getAttribute($key);
     }
 
     /**

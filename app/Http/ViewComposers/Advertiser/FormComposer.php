@@ -30,7 +30,7 @@ class FormComposer
         $advisers = $this->adviserRepository->listsSelectAdvisers();
         $cities = $this->cityRepository->listsSelect();
         $activities =  $this->economicActivityRepository->listsSelect();
-
+        
         $view->with([
             'advisers'  => $advisers,
             'cities'    => $cities,

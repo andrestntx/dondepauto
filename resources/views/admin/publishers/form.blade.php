@@ -67,7 +67,8 @@
             keyboardNavigation: false,
             forceParse: false,
             calendarWeeks: true,
-            autoclose: true
+            autoclose: true,
+            format: 'yyyy-mm-dd',
         });
     </script>
 @endsection

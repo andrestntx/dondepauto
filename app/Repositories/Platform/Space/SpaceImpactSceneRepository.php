@@ -27,11 +27,11 @@ class SpaceImpactSceneRepository extends BaseRepository
      * @param string $id
      * @return mixed
      */
-    public function scenesWithSpaces($column = "nombre_tipo_lugar_LI", $id = "bd_tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI")
+    public function scenesWithSpaces($column = "nombre_tipo_lugar_LI", $id = "tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI")
     {
         return $this->model
-            ->join('bd_espacios_ofrecidos_LIST', 'bd_tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI', '=', 'bd_espacios_ofrecidos_LIST.id_tipo_lugar_ubicacion_LI')
-            ->groupBy('bd_tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI')
+            ->join('espacios_ofrecidos_LIST', 'tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI', '=', 'espacios_ofrecidos_LIST.id_tipo_lugar_ubicacion_LI')
+            ->groupBy('tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI')
             ->orderBy($column, 'asc')
             ->lists($column, $id)
             ->all();
