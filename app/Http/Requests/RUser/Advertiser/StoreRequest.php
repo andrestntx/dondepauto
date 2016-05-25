@@ -43,8 +43,8 @@ class StoreRequest extends Request
     {
         $rules = $this->storeRequest->rules();
         $rules['password'] = 'confirmed';
-        $rules['email'] = 'required|unique:bd_us_reg_LIST,email_us_LI';
-        $rules['economic_activity_id'] = 'exists:bd_actividades_economicas_LIST,id';
+        $rules['email'] = 'required|unique:us_reg_LIST,email_us_LI';
+        $rules['economic_activity_id'] = 'exists:actividades_economicas_LIST,id';
 
         return $rules;
     }
