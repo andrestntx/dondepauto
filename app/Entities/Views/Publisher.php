@@ -67,7 +67,7 @@ class Publisher extends PUser
      */
     public function getLastOfferAttribute()
     {
-        return $this->spaces->max('fecha_creacion_LI');
+        return $this->spaces->max('created_at');
     }
 
     /**

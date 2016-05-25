@@ -27,4 +27,5 @@ class ProposalService extends ResourceService
     {
         return ['data' => $this->repository->search($advertiser)];
     }
+    
 }
