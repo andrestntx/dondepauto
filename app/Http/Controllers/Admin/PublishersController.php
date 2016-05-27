@@ -154,5 +154,16 @@ class PublishersController extends ResourceController
     {
         $this->service->deleteModel($user);
     }
+
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    public function confirm($code)
+    {
+        $publisher = $this->facade->confirm($code);
+        return redirect()->route('medios.account', $publisher);
+    }
     
 }

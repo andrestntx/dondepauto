@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Requests\RUser;
+
+namespace App\Http\Requests\RUser\Publisher;
+
 use App\Http\Requests\Request;
 
-class StoreRequest extends Request
+class RegisterLandingRequest extends Request
 {
     /**
      * Determine if the users is authorized to make this request.
@@ -19,12 +21,13 @@ class StoreRequest extends Request
      * Get validation rules to create a Occupation
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            'first_name'    => 'required',
-            'last_name'     => 'required',
-            'email'         => 'required|unique:users',
-            'password'      => 'required|confirmed'
+            'name'      => 'required|max:255',
+            'email'     => 'required|email|max:255|unique:users',
+            'company'   => 'required',
+            'tel'       => 'required'
         ];
     }
 }

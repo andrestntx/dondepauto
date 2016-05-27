@@ -150,7 +150,7 @@ abstract class  BaseRepository {
     {
         $this->syncBoolFillable($data, $entity);
         $entity->fill($data);
-
+        
         if($entity->save()) {
             return $entity;
         }

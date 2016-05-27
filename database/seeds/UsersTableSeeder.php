@@ -26,6 +26,6 @@ class UsersTableSeeder extends Seeder
             'email'         => 'admin@dondepauto.co'
         ]);
         
-        factory(User::class, 30)->create();
+        factory(User::class, 60)->create();
     }
 }

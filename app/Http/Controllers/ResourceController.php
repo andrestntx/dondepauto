@@ -121,6 +121,18 @@ abstract class ResourceController extends BaseController
     {
         return redirect()->route($this->getRoute($actionRoute), $params)->with($with);
     }
+
+    /**
+     * @param $routeName
+     * @param null $id
+     * @param string $method
+     * @param bool $files
+     * @return array
+     */
+    protected function getSimpleFormData($routeName, $id = null, $method = 'POST', $files = false)
+    {
+        return $this->getFormData($this->getFormDataRoute($routeName, $id), $method, $files);
+    }
     
     /**
      * @param $route

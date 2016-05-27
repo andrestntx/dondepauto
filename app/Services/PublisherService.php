@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class PublisherService extends ResourceService
 {
@@ -36,6 +37,17 @@ class PublisherService extends ResourceService
 
     /**
      * @param array $data
+     * @param Model $publisher
+     * @return mixed
+     */
+    public function completeData(array $data, Model $publisher)
+    {
+        $data['complete_data'] = true;
+        return $this->updateModel($data, $publisher);
+    }
+
+    /**
+     * @param array $data
      * @return mixed
      */
     public function createModel(array $data)
@@ -56,8 +68,26 @@ class PublisherService extends ResourceService
         return $this->viewRepository->publishersWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
     }
 
+    /**
+     * @param $publisher
+     * @return mixed
+     */
     public function getSpaces($publisher)
     {
         return $this->repository->getSpaces($publisher);
+    }
+
+    /**
+     * @param array $data
+     * @param null $password
+     * @return mixed
+     */
+    public function register(array $data, $password = null)
+    {
+        if(! is_null($password)) {
+            $data['password'] = $password;
+        }
+
+        return $this->createModel($data);
     }
 }

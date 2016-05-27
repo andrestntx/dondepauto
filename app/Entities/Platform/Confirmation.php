@@ -80,4 +80,14 @@ class Confirmation extends Entity
             $this->attributes['usuario_act_LI'] = 'usActnO';
         }
     }
+    
+    public function getActiveAttribute()
+    {
+        if($this->usuario_act_LI == 'usActsI')
+        {
+            return true;
+        }
+        
+        return false;
+    }
 }

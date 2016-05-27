@@ -17,6 +17,11 @@ Carbon::setLocale('es');
 
 Route::auth();
 
+Route::get('medios/confirmar/{code}', [
+    'as'   => 'medios.confirm',
+    'uses' => 'Publisher\PublishersController@confirm'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', 'HomeController@index');
 
@@ -90,15 +95,6 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@search'
         ]);
 
-        Route::get('medios/{publisher}/espacios/search', [
-            'as'    => 'medios.espacios.search',
-            'uses' => 'Admin\PublishersController@searchSpaces'
-        ]);
-
-        Route::resource('medios', 'Admin\PublishersController', ['parameters' => [
-            'medios' => 'publishers'
-        ]]);
-
         Route::get('espacios/ajax', [
             'as'    => 'espacios.ajax',
             'uses' => 'Admin\SpacesController@ajax'
@@ -113,7 +109,43 @@ Route::group(['middleware' => 'auth'], function(){
             'espacios' => 'spaces'
         ]]);
 
+        Route::resource('medios', 'Admin\PublishersController', [
+            'parameters' => ['medios' => 'publishers']
+        ]);
 
+    });
+
+    Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {
+        Route::get('medios/{publisher}/espacios/search', [
+            'as'    => 'medios.espacios.search',
+            'uses' => 'Admin\PublishersController@searchSpaces'
+        ]);
+
+        Route::get('medios/{publishers}/cuenta', [
+            'uses' => 'Publisher\PublishersController@account',
+            'as' => 'medios.account'
+        ]);
+
+        Route::get('medios/{publishers}/inventario', [
+            'uses' => 'Admin\PublishersController@show',
+            'as' => 'medios.inventory'
+        ]);
+
+        Route::post('medios/{publishers}/complete', [
+            'uses' => 'Publisher\PublishersController@complete',
+            'as' => 'medios.complete'
+        ]);
+
+        Route::post('medios/{publishers}/account', [
+            'uses' => 'Publisher\PublishersController@updateAccount',
+            'as' => 'medios.update-account'
+        ]);
     });
 });
 
+Route::group(['prefix' => 'landing'], function(){
+    Route::post('register/publisher', [
+        'as'   => 'register.publisher',
+        'uses' => 'Auth\PublisherController@registerLanding'
+    ]);
+});
