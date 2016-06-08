@@ -75,7 +75,7 @@ return [
             'password' => env('DB_PRODUCTION_PASSWORD', 'secret'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
+            'prefix' => 'bd_',
             'strict' => false,
             'engine' => 'MyISAM',
         ],
