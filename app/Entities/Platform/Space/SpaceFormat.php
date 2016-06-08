@@ -21,6 +21,8 @@ class SpaceFormat extends Entity
      */
     protected $primaryKey = 'id_formato_LI';
 
+    protected $appends = ['id', 'name'];
+
     protected $databaseTranslate = ['name' => 'nombre_formato_LI', 'description' => 'descripcion_formato_LI', 'sub_category_id' => 'id_subcat_LI'];
 
     /**

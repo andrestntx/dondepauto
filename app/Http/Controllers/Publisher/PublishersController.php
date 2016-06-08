@@ -77,7 +77,25 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     public function complete(CompleteRequest $request, User $user)
     {        
         $this->facade->completeData($request->all(), $user);
-        return $this->redirect('inventory', $user);
+        return $this->redirect('publish', $user);
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function publish(User $user)
+    {
+        return $this->view('complete-thanks', ['publisher' => $user]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function publishCreate(User $user)
+    {
+        return $this->view('publish', ['publisher' => $user]);
     }
 
     /**

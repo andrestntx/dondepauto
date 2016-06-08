@@ -37,4 +37,19 @@ class SpaceCategoryRepository extends BaseRepository
             ->all();
     }
     
+    public function selectSubcategories()
+    {
+        $categories = $this->model->with('subCategories')->orderBy('nombre_cat_LI')->get();
+        $select = [];
+
+        foreach ($categories as $category) {
+            $select[$category->name] = [];
+            foreach ($category->subCategories->sortBy('nombre_subcat_LI') as $subCategory) {
+                $select[$category->name][$subCategory->id] = $subCategory->name;
+            }
+        }
+        
+        return $select;
+    }
+    
 }

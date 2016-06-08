@@ -161,6 +161,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         GeneaLabs\LaravelMixpanel\Providers\LaravelMixpanelServiceProvider::class,
         Mailchimp\MailchimpServiceProvider::class,
+        //Auth0\Login\LoginServiceProvider::class,
     ],
 
     /*
@@ -208,6 +209,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Mailchimp' => Mailchimp\MailchimpFacade::class,
+        //'Auth0' => 'Auth0\Login\Facade\Auth0'
     ],
 
 ];

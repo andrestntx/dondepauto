@@ -27,7 +27,7 @@ class RegisterLandingRequest extends Request
             'name'      => 'required|max:255',
             'email'     => 'required|email|max:255|unique:users',
             'company'   => 'required',
-            'tel'       => 'required'
+            'phone'       => 'required'
         ];
     }
 }

@@ -136,6 +136,16 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.complete'
         ]);
 
+        Route::get('medios/{publishers}/publicar', [
+            'uses' => 'Publisher\PublishersController@publish',
+            'as' => 'medios.publish'
+        ]);
+
+        Route::get('medios/{publishers}/publicar/create', [
+            'uses' => 'Publisher\PublishersController@publishCreate',
+            'as' => 'medios.publish.create'
+        ]);
+
         Route::post('medios/{publishers}/account', [
             'uses' => 'Publisher\PublishersController@updateAccount',
             'as' => 'medios.update-account'

@@ -26,7 +26,7 @@ class CompleteRequest extends Request
         return [
             'phone'			=> 'required',
             'cel'			=> 'required',
-            'company_nit'	=> 'required',
+            'company_nit'	=> '',
             'company_role'	=> 'required',
             'city_id'		=> 'required',
             'address'		=> 'required'
