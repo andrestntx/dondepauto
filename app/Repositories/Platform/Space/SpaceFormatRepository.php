@@ -54,6 +54,10 @@ class SpaceFormatRepository extends BaseRepository
             ->sortBy('category_sub_category_name')
             ->lists('category_sub_category_name', $key)
             ->all();
-        
+    }
+
+    public function jsonFormats()
+    {
+        return $this->model->select('nombre_formato_LI', 'id_formato_LI', 'id_subcat_LI')->get()->groupBy('id_subcat_LI')->toJson();
     }
 }

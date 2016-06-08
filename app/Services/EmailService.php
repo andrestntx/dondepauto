@@ -30,7 +30,7 @@ class EmailService
 
     public function sendPublisherInvitation(User $publisher, $code)
     {
-        $this->sendInvitation($publisher, 'confirm_publisher', $code);
+        $this->sendInvitation($publisher, 'publisher.confirm', $code);
     }
 
     public function sendAdvertiserInvitation(User $advertiser, $code)

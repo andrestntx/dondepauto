@@ -39,7 +39,7 @@ class User extends Entity
         'first_name', 'last_name', 'email', 'password', 'role', 'user_id',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
-        'commission_rate', 'retention', 'discount'
+        'commission_rate', 'retention', 'discount', 'complete_data'
     ];
 
     /**
@@ -81,7 +81,7 @@ class User extends Entity
         'cel' => 'celular_us_LI', 'password' => 'clave_us_LI', 'economic_activity_id' => 'id_actividadEconomica_LI',
         'signed_agreement' => 'firmo_acuerdo_LI', 'signed_at' => 'fecha_firma_acuerdo_us_LI', 'commission_rate' => 'porc_comision_us_LI',
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
-        'comments' => 'comentarios_us_LI'
+        'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI'
     ];
 
     /**
@@ -153,6 +153,14 @@ class User extends Entity
     public function advertiser()
     {
         return $this->hasOne(Advertiser::class, 'id', 'id_us_LI');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Entities\User', 'user_platform_id', 'id_us_LI');
     }
 
     /**
@@ -235,6 +243,16 @@ class User extends Entity
         }
         else {
             $this->attributes['firmo_acuerdo_LI'] = 'No_fir_ac';
+        }
+    }
+
+    public function setCompleteDataAttribute($value)
+    {
+        if($value) {
+            $this->attributes['es_us_activo_LI'] = 'act_Sta';
+        }
+        else {
+            $this->attributes['es_us_activo_LI'] = 'desact_Sta';
         }
     }
 

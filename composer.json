@@ -11,7 +11,8 @@
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "genealabs/laravel-mixpanel": "~0.5.1",
-        "pacely/mailchimp-apiv3": "dev-master"
+        "pacely/mailchimp-apiv3": "dev-master",
+        "auth0/login": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

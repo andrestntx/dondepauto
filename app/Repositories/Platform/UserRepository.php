@@ -99,5 +99,10 @@ class UserRepository extends BaseRepository
             ->orderBy('nombre_espacio_LI')
             ->paginate(12);
     }
+
+    public function register(array $data)
+    {
+        return $this->create($data);
+    }
     
 }

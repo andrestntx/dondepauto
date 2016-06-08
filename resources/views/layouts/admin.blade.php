@@ -60,7 +60,12 @@
                                 DP+
                             </div>
                         </li>
-                        {!! Menu::make('menu.sidebar', 'nav metismenu')->setParam('user_id', auth()->user()->id)->render() !!}
+                        {!! Menu::make('menu.sidebar', 'nav metismenu')
+                                ->setParams([
+                                    'user_id' => auth()->user()->id,
+                                    'user_platform_id' => auth()->user()->user_platform_id
+                                ])->render()
+                        !!}
                     </ul>
 
                 </div>

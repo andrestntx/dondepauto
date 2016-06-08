@@ -33,4 +33,46 @@ class ConfirmationService extends ResourceService
         $code = str_random(30);
         return $this->repository->generateConfirmation($user, $code);
     }
+
+    /**
+     * @param $code
+     * @return bool
+     */
+    public function verify($code)
+    {
+        return $this->repository->isActive($code);    
+    }
+
+    /**
+     * @param $code
+     * @return User
+     */
+    public function getUser($code)
+    {
+        return $this->repository->getUser($code);
+    } 
+
+    /**
+     * @param $code
+     * @return User
+     */
+    public function confirm($code)
+    {
+        return $this->repository->confirm($code);
+    }
+
+    /**
+     * @param $code
+     * @return User
+     */
+    function verifyAndConfirm($code)
+    {
+        $confirmation = $this->repository->findOrFailByCode($code);
+
+        if(! $confirmation->active){
+            return $this->repository->confirmModel($confirmation);
+        }
+
+        return $confirmation->user;
+    }
 }

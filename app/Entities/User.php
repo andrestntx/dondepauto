@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'user_platform_id'
     ];
 
     /**
@@ -105,4 +105,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Entities\Platform\User');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function publisher()
+    {
+        return $this->belongsTo('App\Entities\Platform\User', 'id_us_LI');
+    }
+
 }
