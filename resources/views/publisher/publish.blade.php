@@ -6,6 +6,17 @@
 
 @section('extra-css')
     <link href="/assets/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+
+    <style type="text/css">
+        .wizard .content .body ul.select2-selection__rendered li {
+            display: block;
+        }
+
+        .wizard .content .body input.select2-search__field {
+            border: none;
+        }
+
+    </style>
 @endsection
 
 @section('content')
@@ -22,7 +33,9 @@
     <div class="col-md-6 col-md-offset-3" style="margin-top:30px;">
         <div class="ibox">       
             <div class="ibox-content">
+                
                 {!! Form::open(['url' => '/', 'id' => 'form-publish', 'class' => 'wizard-big form-steps']) !!}
+                    
                     <h1>Datos básicos</h1>
                     <fieldset>
                         <h2>Datos básicos</h2>
@@ -41,46 +54,56 @@
                             </div>
                         </div>
                     </fieldset>
+
                     <h1>Segmentación</h1>
                     <fieldset>
                         <h2>Segmentación</h2>
                         <div class="row">
                             
                             <div class="col-md-12">
-                                {!! Field::select('impact_scene_id', $scenes) !!}
+                                {!! Field::select('impact_scene_id', $scenes, ['empty' => 'Selecciona el escenario donde se encuentra el espacio publicitario']) !!}
                             </div>
 
-                            <legend class="h4" style="padding-top: 10px;">Restricciones</legend>
-                            <div class="col-md-4" style="padding-left: 35px; padding-top: 10px;">
-                                <div class="checkbox m-r-xs">
-                                    {!! Form::checkbox('alcohol_restriction', 1, null, ['id' => 'alcohol_restriction']) !!}
-                                    <label for="alcohol_restriction">
-                                        Alcohol
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="padding-left: 35px; padding-top: 10px;">
-                                <div class="checkbox m-r-xs">
-                                    {!! Form::checkbox('snuff_restriction', 1, null, ['id' => 'snuff_restriction']) !!}
-                                    <label for="snuff_restriction">
-                                        Tabaco
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="padding-left: 35px; padding-top: 10px;">
-                                <div class="checkbox m-r-xs">
-                                    {!! Form::checkbox('policy_restriction', 1, null, ['id' => 'policy_restriction']) !!}
-                                    <label for="policy_restriction">
-                                        Política
-                                    </label>
-                                </div>
-                            </div>
                             <div class="col-md-12">
-                                {!! Field::text('address') !!}
+                                {!! Field::select('audience_id', $audiences, ['label' => 'Audiencia', 'data-placeholder' => 'Seleccione las audiencias de su espacio publicitario',  'class' => 'select2-audience', 'required', 'multiple']) !!}
                             </div>
+
                             <div class="col-md-12">
-                                {!! Field::select('city_id', $cities) !!}
+                                <legend class="h4" style="padding-top: 10px; margin-bottom:0;">Restricciones</legend>
+                                <div class="col-md-4" style="padding-left: 35px; padding-top: 10px;">
+                                    <div class="checkbox m-r-xs text-center">
+                                        {!! Form::checkbox('alcohol_restriction', 1, null, ['id' => 'alcohol_restriction']) !!}
+                                        <label for="alcohol_restriction" title="No se permite hacer publicidad de licores">
+                                            Alcohol
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="padding-left: 35px; padding-top: 10px;">
+                                    <div class="checkbox m-r-xs text-center">
+                                        {!! Form::checkbox('snuff_restriction', 1, null, ['id' => 'snuff_restriction']) !!}
+                                        <label for="snuff_restriction" title="No se permite hacer publicidad de tabaco">
+                                            Tabaco
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="padding-left: 35px; padding-top: 10px;">
+                                    <div class="checkbox m-r-xs text-center">
+                                        {!! Form::checkbox('policy_restriction', 1, null, ['id' => 'policy_restriction']) !!}
+                                        <label for="policy_restriction" title="No se permite hacer publicidad de polatica">
+                                            Política
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
+                            
+                            <div class="col-md-12">
+                                {!! Field::select('city_id', $cities, ['label' => 'Ciudades', 'class' => 'select-cities', 'data-placeholder' => 'Ciudades donde se encuentra el espacio publicitario', 'multiple']) !!}
+                            </div>
+
+                            <div class="col-md-12">
+                                {!! Field::text('address', ['ph' => 'Ejemplo: Carreara 11a # 119 - 35']) !!}
+                            </div>
+  
                         </div>
                     </fieldset>
 
@@ -89,10 +112,10 @@
                         <h2>Precio</h2>
                         <div class="row">
                             <div class="col-md-12">
-                                {!! Field::text('impact') !!}
+                                {!! Field::number('impact', ['ph' => 'Cantidad de personas que impacta tu espacio']) !!}
                             </div>
                             <div class="col-md-12">
-                                {!! Field::text('minimal_price') !!}
+                                {!! Field::number('minimal_price', ['ph' => 'Precio mínimo del espacio']) !!}
                             </div>
                             <div class="col-md-12">
                                 {!! Field::select('period', $periods, ['empty' => 'seleccione un período']) !!}
@@ -105,6 +128,7 @@
                         <h2>Fotografías</h2>
                         <div class="row">
                             <div class="col-md-12">
+                                {!! Field::select('period', $periods, ['empty' => 'seleccione un período']) !!}
                             </div>
                         </div>
                     </fieldset>
@@ -120,8 +144,19 @@
 
     <script>
         $(document).ready(function(){
+            
             $("#form-publish").steps({
                 bodyTag: "fieldset",
+                enableCancelButton: false,
+                labels: {
+                    cancel: "Cancelar",
+                    current: "paso actual:",
+                    pagination: "Paginación",
+                    finish: "Terminar",
+                    next: "Siguiente",
+                    previous: "Anterior",
+                    loading: "Cargando ..."
+                },
                 onStepChanging: function (event, currentIndex, newIndex)
                 {
                     // Always allow going backward even if the current step contains invalid fields!
@@ -154,17 +189,9 @@
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)
                 {
-                    // Suppress (skip) "Warning" step if the user is old enough.
-                    if (currentIndex === 2 && Number($("#age").val()) >= 18)
-                    {
-                        $(this).steps("next");
-                    }
-
-                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-                    if (currentIndex === 2 && priorIndex === 3)
-                    {
-                        $(this).steps("previous");
-                    }
+                    $('.select-cities').select2();
+                    $('#impact_scene_id').select2();
+                    $('.select2-audience').select2();
                 },
                 onFinishing: function (event, currentIndex)
                 {
@@ -207,12 +234,12 @@
                 },
                 messages: {
                     name: {
-                        required:  'Es importante que asignes un buen nombre a tu Espacio. Es importante que asignes una buena descripción a tu Espacio',
-                        minlength: 'Escribe un nombre con almenos 15 letras'
+                        required:  'Es importante que asignes un buen nombre con el cual los usuarios identifiquen fácilmente el espacio publicitario que estás ofertando.',
+                        minlength: 'Escribe un nombre con almenos 15 letras. Cuanto mejor describas tu espacio, será más fácil que nuestros clientes lo elijan'
                     },
                     description: {
-                        required:  'Es importante que asignes una buena descripción a tu Espacio. Es importante que asignes una buena descripción a tu Espacio',
-                        minlength: 'Escribe una descripción con almenos 15 letras'
+                        required:  'No olvides escribir una buena descripción a tu espacio publicitario. Escribe todo lo que creas necesario y pueda ser util para el cliente',
+                        minlength: 'Escribe una descripción con almenos 15 palabras'
                     },
                     category_id: {
                         required: 'Selecciona la categoría'
@@ -229,6 +256,8 @@
             });
 
             var formats = $(".select2-format").data('formats');
+
+            $('.select2-category').select2();
 
             $( ".select2-category" ).change(function() {
                 $(".select2-format").prop("disabled", false).focus();

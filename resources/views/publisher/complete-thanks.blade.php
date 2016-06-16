@@ -11,7 +11,7 @@
                 <div class="col-md-10 col-md-offset-1 text-center">
                     <h2 style="margin-bottom:5px;">{{ $publisher->company }}</h2>
                     <h3 class="text-lg">¡Tenemos clientes potenciales para tu medio publicitario!</h3>
-                    <a href="#" class="btn btn-lg btn-xlg btn-effect-ripple" style="margin-top:20px;">EMPEZAR A OFERTAR</a>
+                    <a href="{{ route('medios.publish.create', $publisher) }}" class="btn btn-lg btn-xlg btn-effect-ripple" style="margin-top:20px;">EMPEZAR A OFERTAR</a>
                 </div>
             </div>  
         </div>          
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 text-center">
                    <h3 class="text-lg-center">Publica tu inventario de ofertas, <span class="theme-color">activa el servicio</span> y comienza a vender</h3>
-                   <a href="#" class="btn btn-lg btn-effect-ripple btn-xlg" style="margin-top:20px;">¡ PUBLICA TU PRIMERA OFERTA !</a>
+                   <a href="{{ route('medios.publish.create', $publisher) }}" class="btn btn-lg btn-effect-ripple btn-xlg" style="margin-top:20px;">¡ PUBLICA TU PRIMERA OFERTA !</a>
                 </div>
             </div>  
         </div>          
