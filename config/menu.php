@@ -21,6 +21,6 @@ return [
 
         // Publishers
         'account'           => ['route' => ['medios.account', ':user_platform_id'], 'i' => 'fa fa-user', 'title' => 'Mi cuenta', 'roles' => ['publisher']],
-        'inventory'         => ['route' => ['medios.inventory', ':user_platform_id'], 'i' => 'fa fa-user', 'title' => 'Inventario', 'roles' => ['publisher']],
+        'inventory'         => ['route' => ['medios.inventory', ':user_platform_id'], 'i' => 'fa fa-th-list', 'title' => 'Inventario', 'roles' => ['publisher']],
     ]
 ];

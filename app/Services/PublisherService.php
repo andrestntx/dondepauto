@@ -53,6 +53,7 @@ class PublisherService extends ResourceService
     public function createModel(array $data)
     {
         $data['role'] = 'publisher';
+        $data['complete_data'] = false;
         return $this->repository->create($data);
     }
 

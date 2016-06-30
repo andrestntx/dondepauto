@@ -10,13 +10,17 @@ namespace App\Http\Controllers\Publisher;
 
 use App\Entities\Platform\User;
 use App\Facades\PublisherFacade;
+use App\Facades\SpaceFacade;
 use App\Http\Requests\RUser\Publisher\CompleteRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
+use Exception;
+use Illuminate\Http\Request;
 
 class PublishersController extends \App\Http\Controllers\Admin\PublishersController
 {
     protected $facade;
+    protected $spaceFacade;
 
     /**
      * [$routePrefix prefix route in more one response view]
@@ -39,11 +43,13 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
      * AdvertisersController constructor.
      * @param PublisherFacade $facade
      * @param PublisherService $service
+     * @param SpaceFacade $spaceFacade
      */
-    function __construct(PublisherFacade $facade, PublisherService $service)
+    function __construct(PublisherFacade $facade, PublisherService $service, SpaceFacade $spaceFacade)
     {
         $this->facade = $facade;
         $this->service = $service;
+        $this->spaceFacade = $spaceFacade;
     }
 
     /**
@@ -55,13 +61,13 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     public function account(User $user)
     {
         if($user->complete_data) {
-            return $this->view('account', [
+            return $this->view('account.form', [
                 'publisher' => $user,
                 'formData'  => $this->getSimpleFormData('update-account', $user)
             ]);
         }
 
-        return $this->view('complete', [
+        return $this->view('complete.form', [
             'publisher'     => $user,
             'formData'      => $this->getSimpleFormData('complete', $user)
         ]);
@@ -77,7 +83,7 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     public function complete(CompleteRequest $request, User $user)
     {        
         $this->facade->completeData($request->all(), $user);
-        return $this->redirect('publish', $user);
+        return redirect()->route('home');
     }
 
     /**
@@ -93,7 +99,7 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
      * @param User $user
      * @return \Illuminate\Auth\Access\Response
      */
-    public function publishCreate(User $user)
+    public function firstSpace(User $user)
     {
         return $this->view('publish', ['publisher' => $user]);
     }
@@ -118,5 +124,4 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
         $publisher = $this->facade->confirm($code);
         return redirect()->route('medios.account', $publisher);
     }
-    
 }

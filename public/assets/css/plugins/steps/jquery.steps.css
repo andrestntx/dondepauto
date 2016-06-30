@@ -147,9 +147,7 @@
     border-radius: 5px;
 }
 
-.wizard-big.wizard > .content {
-    min-height: 320px;
-}
+
 .wizard.vertical > .content
 {
     display: inline;
@@ -161,7 +159,7 @@
 .wizard > .content > .body
 {
     float: left;
-    position: absolute;
+    position: relative;
     width: 97.4%;
     height: 95%;
     padding: 2.5% 0 2.5% 2.5%;
@@ -218,7 +216,7 @@
     color: #8a1f11;
     display: inline-block;
     margin-left: 0em;
-    font-size: 1.05em;
+    font-size: 1.035em;
     margin-top: 0.2em;
     margin-bottom: 0;
     font-weight: 500;

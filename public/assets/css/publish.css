@@ -1,0 +1,225 @@
+/* Paste this css to your style sheet file or under head tag */
+/* This only works with JavaScript, 
+if it's not present, don't show loader */
+.no-js #loader { display: none;  }
+
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+
+.se-pre-con {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url("/images/loading-recarga.gif") center no-repeat rgba(255, 255, 255, 0.5);
+    display: none;
+}
+
+.fixed {
+    position: fixed;
+    top: 20px;
+    max-width: 240px;
+}
+
+
+.bootbox-body .row p {
+    font-size: 1.2em;
+    margin: 0.4em 0;
+}
+
+.bootbox h4.modal-title {
+    font-size: 1.4em;
+}
+
+.bootbox tr td {
+    padding: 0.5em 0.8em;
+    font-size: 1.2em;
+}
+
+#content-page {
+    margin-top:0px;
+}
+
+#field_discount {
+    margin-bottom: 0;
+}
+
+h2#title-page {
+    margin-top:15px; 
+    margin-bottom:15px; 
+    font-size: 2.2em; 
+    text-transform:none;
+}
+
+.messages {
+    border: solid 3px #e7eaec; 
+    margin-top: 20px; 
+    height: auto; 
+    background-color: #ffffff; 
+    border-color: #e7eaec; 
+    padding: 10px 12px;
+}
+
+.messages a#activate {  
+    display: none;
+}
+
+.messages a.mclose {    
+    float: right;
+    margin-top: 0;
+    margin-right: -7px;
+    cursor: pointer;
+    color: #a7a2a2;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    text-align: center;
+}
+
+.messages a.mclose:before {
+    content: "x";
+}
+
+.messages h3 {
+    margin-top: 10px;
+}
+
+.messages .loading img {
+    width: 40px; 
+    display: inline-block; 
+    vertical-align: middle;    
+}
+
+.messages p {
+    text-align: justify;
+}
+
+#modalPoints .modal-header, #modalInfo .modal-header {
+    padding: 30px 15px 10px 15px;
+}
+
+#modalPoints .modal-icon {
+    font-size: 60px;
+    color: #c3c7c7;
+}
+
+#modalPoints .modal-title {
+    font-size: 2.4em;
+}
+
+#modalPoints .modal-subtitle {
+    margin-bottom: 0;
+    font-size: 1.18em;
+    color: #908d8d;
+}
+
+#modalInfo .modal-title {
+    font-size: 1.4em;
+}
+
+#modalInfo .modal-body {
+    padding-bottom: 0;
+}
+
+#modalInfo ul {
+    padding-left: 2em;
+    padding-right: 1em;
+}
+
+#modalInfo ul li {
+    font-size: 1.04em;
+    text-align: justify;
+    margin-bottom: 1em;
+}
+    
+#modalPoints .modal-body p {
+    font-size: 1.2em;
+    text-align: justify;
+}
+
+p#info-page {
+    font-size: 1.15em;
+}
+
+#points {
+    padding-right: 0;
+}
+
+#points #title-point {
+    font-weight: 500;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0.4em auto 0.3em auto;
+    display: block;
+}
+
+#points .pieProgress {
+    width: 50%; 
+    margin-bottom: 30px; 
+    margin: auto; 
+    text-align:center;
+}
+
+#points .pie_progress__number {
+  font-size: 50px;
+}
+
+#points .pie_progress__content, #points .pie_progress__number, #points .pie_progress__label, #points .pie_progress__icon {
+    top: 50%;
+}
+
+.sk-spinner-three-bounce.sk-spinner.sk-publish {
+    margin: 0;
+    width: auto;
+    text-align: left;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.sk-spinner-three-bounce.sk-spinner.sk-publish div {
+    background-color: #44bc52;
+}
+
+.wizard .content .body ul.select2-selection__rendered li {
+    display: block;
+}
+
+.wizard .content .body input.select2-search__field {
+    border: none;
+}
+
+#with_discount {
+    border-top: dashed 1px gray;
+    padding-top: 1.5em;
+    padding-bottom: 0.85em;
+    color: gray;
+    background-color: #E4E4E4;
+}
+
+#with_discount p strong, #with_discount p {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+#with_discount p#label_public_price strong {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+#with_discount p#public_price {
+    font-size: 21px;
+    font-weight: 600;
+    color: #01AEEF;
+}
+
+#with_discount p#public_price .popover {
+    color: gray;
+}
+
+#with_discount span.period_value {
+    font-size: 13px;
+    color: gray;
+    font-weight: 500;
+}

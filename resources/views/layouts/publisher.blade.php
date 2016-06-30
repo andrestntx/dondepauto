@@ -33,7 +33,13 @@
         <link href="/assets/css/plugins/chosen/chosen.css" rel="stylesheet">
         <link href="/assets/css/plugins/select2/select2.min.css" rel="stylesheet">
 
+        <link href="/assets/css/plugins/switchery/switchery.css" rel="stylesheet">
+
         <link href="/assets/css/publisher.css" rel="stylesheet">
+
+        <link href="/assets/css/progress.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="/assets/css/plugins/tags_input/jquery.tagsinput.css" />
 
         @yield('extra-css')
 
@@ -82,7 +88,7 @@
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
-                                <span class="m-r-sm text-muted welcome-message">Bienvenido <strong style="text-transform:capitalize;">{{ $publisher->company }}</strong></span>
+                                <span class="m-r-sm text-muted welcome-message">Bienvenido <strong style="text-transform:capitalize;" id="publisher_name">{{ $publisher->company }}</strong></span>
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -256,6 +262,29 @@
         <!-- Validation -->
         <script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
 
+        <!-- Switchery -->
+        <script src="/assets/js/plugins/switchery/switchery.js"></script>
+
+        <script src="/assets/js/plugins/tags_input/jquery.tagsinput.js"></script>
+
+        <!-- Steps -->
+        <script src="/assets/js/plugins/staps/jquery.steps.min.js"></script>
+
+        <!-- Bootbox -->
+        <script src="/assets/js/plugins/bootbox/bootbox.min.js"></script>
+
+        <!-- DROPZONE -->
+        <script src="/assets/js/plugins/dropzone/dropzone.js"></script>
+
+        <!-- CIRCLE PROGRESS -->
+        <script src="/assets/js/jquery-asPieProgress.min.js"></script>
+
+        <script src="/assets/js/plugins/number/jquery.number.min.js"></script>
+
+        <script src="http://malsup.github.com/jquery.form.js"></script>
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
         <script>
             $(".chosen-select").chosen({disable_search_threshold: 10});
 
@@ -264,6 +293,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
         </script>
 
         @yield('extra-js')

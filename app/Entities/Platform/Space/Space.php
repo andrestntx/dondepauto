@@ -23,15 +23,20 @@ class Space extends Entity
      */
     protected $primaryKey = 'id_espacio_LI';
 
-    protected $fillable = ['name', 'description', 'address', 'impact', 'minimal_price','period',
-        'city_id','format_id','impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction'
+    protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
+        'city_id','format_id', 'sub_category_id', 'category_id', 'impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction', 'sex_restriction',
+        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id'
     ];
 
-    protected $databaseTranslate = ['name' => 'nombre_espacio_LI', 'description' => 'descripcion_espacio_LI', 'address' => 'direccion_ubicacion_LI', 'impact' => 'impacto_espacio_LI', 'minimal_price' => 'precio_espacio_LI',
-        'period' => 'periodo_servicio_espacio_LI', 'city_id' => 'id_ciudad_LI', 'format_id' => 'id_formato_LI',
-        'impact_scene_id' => 'id_tipo_lugar_ubicacion_LI', 'alcohol_restriction' => 'restringeAlcohol_LI', 
-        'snuff_restriction' => 'restringeTabaco_LI', 'policy_restriction' => 'restringePolitica_LI',
-        'category_id' => 'id_cat_LI', 'sub_category_id' => 'id_subcat_LI', 'percentage_markup' => 'porcentaje_precio_margen_espacio_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_espacio_LI', 'description' => 'descripcion_espacio_LI', 'address' => 'direccion_ubicacion_LI',
+        'impact' => 'impacto_espacio_LI', 'impact_agency' => 'agencia_impactos_LI', 'minimal_price' => 'precio_espacio_LI', 'dimension' => 'dimensiones_espacio_LI',
+        'period' => 'periodo_servicio_espacio_LI', 'city_id' => 'id_ciudad_LI', 'format_id' => 'id_formato_LI', 'youtube' => 'link_youtube_LI',
+        'impact_scene_id' => 'id_tipo_lugar_ubicacion_LI', 'alcohol_restriction' => 'restringeAlcohol_LI', 'discount' => 'descuento_espacio_LI',
+        'snuff_restriction' => 'restringeTabaco_LI', 'policy_restriction' => 'restringePolitica_LI', 'sex_restriction' =>  'restringeSexo_LI',
+            'more_audiences' => 'tags_espacio_LI', 'publisher_id' => 'id_us_reg_LI',
+        'publisher_company' => 'nombre_empresa_proveedora_espacio_LI', 'public_price' => 'precio_margen_espacio_LI', 'margin' => 'porcentaje_precio_margen_espacio_LI',
+        'category_id' => 'id_cat_LI', 'sub_category_id' => 'id_subcat_LI', 'percentage_markup' => 'porcentaje_precio_margen_espacio_LI',
+        'active' => 'espacio_activo_LI'];
 
     /**
      * The accessors to append to the model's array form.
@@ -52,6 +57,27 @@ class Space extends Entity
      * @var string
      */
     protected $table = 'espacios_ofrecidos_LIST';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const CREATED_AT = 'fecha_creacion_LI';
+
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const UPDATED_AT = null;
 
     /**
      * Get an attribute from the model.
@@ -92,6 +118,21 @@ class Space extends Entity
         }
         
         return $this->space->getAttribute($key);
+    }
+
+    public function cities()
+    {
+        return $this->belongsToMany(SpaceCity::class, 'city_space', 'space_id', 'city_id');
+    }
+
+    public function audiences()
+    {
+        return $this->belongsToMany(Audience::class, 'audience_space', 'space_id', 'audience_id');
+    }
+
+    public function impactScenes()
+    {
+        return $this->belongsToMany(SpaceImpactScene::class, 'impact_scene_space', 'space_id', 'impact_scene_id');
     }
 
     /**
@@ -178,6 +219,13 @@ class Space extends Entity
         return $this->space->category_name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSubCategoryNameAttribute()
+    {
+        return $this->subCategory->name;
+    }
 
     /**
      * @param $value
@@ -201,6 +249,14 @@ class Space extends Entity
     public function setPolicyRestrictionAttribute($value)
     {
         $this->setRestriction($value, 'restringePolitica_LI');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setSexRestrictionAttribute($value)
+    {
+        $this->setRestriction($value, 'restringeSexo_LI');
     }
 
     /**
