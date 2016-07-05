@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    
     /**
      * Encrypt the users password
      * @param string $value
@@ -99,6 +99,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return bool
+     */
+    public function isPublisher()
+    {
+        return $this->isRole('publisher');
+    }
+
+    /**
      * Get the clients for the adviser.
      */
     public function clients()
@@ -111,7 +119,7 @@ class User extends Authenticatable
      */
     public function publisher()
     {
-        return $this->belongsTo('App\Entities\Platform\User', 'id_us_LI');
+        return $this->belongsTo('App\Entities\Platform\User', 'user_platform_id');
     }
 
 }

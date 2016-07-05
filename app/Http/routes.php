@@ -23,7 +23,7 @@ Route::get('medios/confirmar/{code}', [
 ]);
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', 'HomeController@index');
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
     Route::group(['middleware' => 'role:director;admin'], function() {
         Route::resource('directores', 'Admin\DirectorsController', ['parameters' => [
@@ -126,14 +126,19 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.account'
         ]);
 
+        Route::post('medios/{publishers}/complete', [
+            'uses' => 'Publisher\PublishersController@complete',
+            'as' => 'medios.complete'
+        ]);
+
         Route::get('medios/{publishers}/inventario', [
             'uses' => 'Admin\PublishersController@show',
             'as' => 'medios.inventory'
         ]);
 
-        Route::post('medios/{publishers}/complete', [
-            'uses' => 'Publisher\PublishersController@complete',
-            'as' => 'medios.complete'
+        Route::get('medios/{publishers}/acuerdo', [
+            'uses' => 'Publisher\PublishersController@agreement',
+            'as' => 'medios.agreement'
         ]);
 
         Route::get('medios/{publishers}/publicar', [
@@ -141,10 +146,10 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.publish'
         ]);
 
-        Route::get('medios/{publishers}/publicar/create', [
-            'uses' => 'Publisher\PublishersController@publishCreate',
-            'as' => 'medios.publish.create'
-        ]);
+        Route::resource('medios.espacios', 'Publisher\PublishersSpacesController', ['parameters' => [
+            'medios'    => 'publishers',
+            'espacios'  => 'spaces'
+        ]]);
 
         Route::post('medios/{publishers}/account', [
             'uses' => 'Publisher\PublishersController@updateAccount',

@@ -2,8 +2,8 @@
 
 namespace App\Http\ViewComposers\Space;
 
+use App\Repositories\Platform\Space\AudienceTypeRepository;
 use App\Repositories\Platform\Space\SpaceCategoryRepository;
-use App\Repositories\Platform\Space\SpaceSubCategoryRepository;
 use App\Repositories\Platform\Space\SpaceFormatRepository;
 use App\Repositories\Platform\Space\SpaceCityRepository;
 use App\Repositories\Platform\Space\SpaceImpactSceneRepository;
@@ -21,15 +21,17 @@ class OfferComposer extends BaseComposer
     protected $impactSceneRepository;
     protected $periodRepository;
     protected $formatRepository;
+    protected $audienceTypeRepository;
 
     function __construct(SpaceCategoryRepository $categoryRepository, SpaceCityRepository $cityRepository, SpaceImpactSceneRepository $impactSceneRepository, 
-                         SpacePeriodRepository $periodRepository, SpaceFormatRepository $formatRepository)
+                         SpacePeriodRepository $periodRepository, SpaceFormatRepository $formatRepository, AudienceTypeRepository $audienceTypeRepository)
     {
         $this->categoryRepository       = $categoryRepository;
         $this->impactSceneRepository    = $impactSceneRepository;
         $this->cityRepository           = $cityRepository;
         $this->periodRepository         = $periodRepository;
         $this->formatRepository         = $formatRepository;
+        $this->audienceTypeRepository       = $audienceTypeRepository;
     }
 
     /**
@@ -44,13 +46,15 @@ class OfferComposer extends BaseComposer
         $cities         = $this->cityRepository->listsSelect();
         $periods        = $this->periodRepository->listsSelect();
         $formats        = $this->formatRepository->jsonFormats();
+        $audiences      = $this->audienceTypeRepository->selectAudiences();
 
         $view->with([
             'formats'       => $formats,
             'categories'    => $categories,    
             'scenes'        => $scenes,
             'cities'        => $cities,
-            'periods'       => $periods
+            'periods'       => $periods,
+            'audiences'     => $audiences,
         ]);
     }
 }

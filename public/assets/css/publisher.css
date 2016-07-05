@@ -165,7 +165,18 @@
         font-weight: 600;
     }
 
-    .publisher-content .btn {
+    .publisher-content .btn.btn-xs-circle {
+        width: 15px;
+        height: 15px;
+        padding: 1px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 0;
+        vertical-align: middle;
+    }
+
+    .publisher-content .btn.btn-warning {
        background-color: #FFAC1A; 
        color: white;
        font-size: 1.3em;
@@ -235,11 +246,13 @@
     }            
 
     .publisher-content .form-steps h2 {
-        margin-bottom: 10px;
-        font-size: 2em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        font-size: 1.8em;
+        text-transform: inherit;
     }
 
     .publisher-content .wizard-big.wizard > .content {
-        min-height: 450px;
         overflow: auto;
+        position: relative;
     }

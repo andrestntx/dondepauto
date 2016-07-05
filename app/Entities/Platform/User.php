@@ -246,6 +246,9 @@ class User extends Entity
         }
     }
 
+    /**
+     * @param $value
+     */
     public function setCompleteDataAttribute($value)
     {
         if($value) {
@@ -254,6 +257,18 @@ class User extends Entity
         else {
             $this->attributes['es_us_activo_LI'] = 'desact_Sta';
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCompleteDataAttribute()
+    {
+        if($this->es_us_activo_LI == 'act_Sta') {
+            return true;
+        }
+
+        return false;
     }
 
     /**

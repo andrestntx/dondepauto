@@ -13,29 +13,31 @@ var SpaceService = function() {
         table = $('#spaces-datatable').DataTable({
             "order": [[1, "desc"]],
             "ajax": urlSearch,
+            "processing": true,
+            "serverSide": true,
             "deferRender": true,
             "columns": [
-                { "data": null, "orderable": false },
-                { "data": "publisher_company" },
-                { "data": "name" },
-                { "data": "category_name" },
-                { "data": "sub_category_name" },
-                { "data": "format_name" },
-                { "data": "commission" },
-                { "data": "minimal_price" },
-                { "data": "percentage_markdown" },
-                { "data": "markup_price" },
-                { "data": "public_price" },
-                { "data": "category_id" }, // 12
-                { "data": "sub_category_id" },
-                { "data": "format_id" },
-                { "data": "publisher_id" },
-                { "data": "city_id" },
-                { "data": "tags" },
-                { "data": "description" },
-                { "data": "address" },
-                { "data": "impact_scene_id" },
-                { "data": "publisher_email" }
+                { "data": null, "name": "id", "orderable": false},
+                { "data": "publisher_company", "name": "publisher_company" },
+                { "data": "name", "name": "name" },
+                { "data": "category_name", "name": "category_name" },
+                { "data": "sub_category_name", "name": "sub_category_name" },
+                { "data": "format_name", "name": "format_name" },
+                { "data": "publisher_commission_rate", "name": "publisher_commission_rate" },
+                { "data": "minimal_price", "data": "minimal_price" },
+                { "data": "percentage_markdown", "name": "percentage_markdown" },
+                { "data": "markup_price", "name": "markup_price" },
+                { "data": "public_price", "name": "public_price" },
+                { "data": "category_id", "name": "category_id" }, // 12
+                { "data": "sub_category_id", "name": "sub_category_id" },
+                { "data": "format_id", "name": "format_id" },
+                { "data": "publisher_id", "name": "publisher_id" },
+                { "data": "city_id", "name": "city_id" },
+                { "data": "tags", "name": "tags" },
+                { "data": "description", "name": "description" },
+                { "data": "address", "name": "address" },
+                { "data": "impact_scene_id", "name": "impact_scene_id" },
+                { "data": "publisher_email", "name": "publisher_email" }
             ],
             "columnDefs": [
                 {
@@ -124,7 +126,62 @@ var SpaceService = function() {
         $('.scroll_content_image').slimscroll({
             height: '160px'
         });
-    }
+    };
+
+    function changeSelects(inputs) {
+
+        var columns = [];
+
+        if(inputs.sub_categories) {
+            $('#sub_categories option:gt(0)').remove();
+            $.each(inputs.sub_categories, function(value,text) {
+                $('#sub_categories').append(
+                    $("<option></option>").attr("value", value).text(text)
+                );
+            }); 
+            columns.push(12);
+        }
+
+        if(inputs.publishers) {
+            $('#publishers option:gt(0)').remove();
+            $.each(inputs.publishers, function(value,text) {
+                $('#publishers').append(
+                    $("<option></option>").attr("value", value).text(text)
+                );
+            });  
+            columns.push(14);
+        }
+
+        if(inputs.cities) {                
+            $('#cities option:gt(0)').remove();
+            $.each(inputs.cities, function(value,text) {
+                $('#cities').append(
+                    $("<option></option>").attr("value", value).text(text)
+                );
+            }); 
+            columns.push(15);
+        }
+
+        if(inputs.formats) {
+            $('#formats').removeAttr("disabled");
+            $('#formats option:gt(0)').remove();
+            $.each(inputs.formats, function(value,text) {
+                $('#formats').append(
+                    $("<option></option>").attr("value", value).text(text)
+                );
+            }); 
+            columns.push(13);
+        }
+        else if(! $("#sub_categories").val()) { 
+            $('#formats').attr('disabled','disabled');
+            $('#formats').val('');
+            columns.push(13);
+        }
+
+        console.log(columns);
+        
+        UserService.cleanColumnsSearch(columns); 
+    };
 
     function drawModal(inputId, space, urlName) {
         //$("#prueba").html(UserService.getHtmlModalStates(space.states, ''));
@@ -208,6 +265,9 @@ var SpaceService = function() {
         },
         initDatatable: function(urlSearch) {
             initTable(urlSearch); 
+        },
+        changeSelects: function(inputs) {
+            changeSelects(inputs);
         }
     };
 }();

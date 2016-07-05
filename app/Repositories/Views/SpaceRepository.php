@@ -36,6 +36,6 @@ class SpaceRepository extends BaseRepository
             $query->wherePublisherId($publisher->id);
         }
 
-        return $query->orderBy('created_at', 'desc')->get();
+        return $query->orderBy('created_at', 'desc');
     }
 }

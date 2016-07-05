@@ -23,6 +23,8 @@ class SpaceImage extends Entity
 
     protected $appends = ['thumb', 'url'];
 
+    protected $fillable = ['thumb', 'url'];
+
     /**
      * The table associated with the model.
      *

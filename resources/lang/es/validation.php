@@ -167,7 +167,9 @@ return [
         'impact_scene_id'       => 'escenario de impacto',
         'impact'                => 'impacto',
         'minimal_price'         => 'precio mínimo',
-        'period'                => 'período'
+        'period'                => 'período',
+        'audiences'             => 'audiencias',
+        'impact_scenes'         => 'escenarios de impacto'
     ],
 
     'empty_option'         => [

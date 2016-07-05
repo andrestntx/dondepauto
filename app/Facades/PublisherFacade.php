@@ -116,10 +116,11 @@ class PublisherFacade
      */
     public function registerAutoPassword(array $data)
     {
-        $password = $this->passwordService->generate();
-        $data = $this->userService->divideName($data);
-        $publisher = $this->service->register($data, $password);
-        $user = $this->userService->createPublisher($data, $password, $publisher);
+        $password   = $this->passwordService->generate();
+        $data       = $this->userService->divideName($data);
+        $publisher  = $this->service->register($data, $password);
+        $user       = $this->userService->createPublisher($data, $password, $publisher);
+        
         //$this->mixpanelService->registerUser($user);
         $confirmation = $this->confirmationService->generateConfirmation($publisher);
         $this->emailService->sendPublisherInvitation($publisher, $confirmation->code);

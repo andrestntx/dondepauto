@@ -66,14 +66,14 @@
                         <div class="col-md-12">
                             {!! Form::model($publisher, $formData + ['id' => 'form-complete']) !!}
                                 {!! Field::text('company_role', ['ph' => 'Ejemplo: Director de ventas', 'required']) !!}
-                                {!! Field::number('phone', ['ph' => 'Ejemplo: 031 631 4163', 'required']) !!}
+                                {!! Field::number('phone', ['ph' => 'Ejemplo: 031 631 4163', 'required', 'label' => 'Télefono fijo corporativo']) !!}
                                 {!! Field::number('cel', ['ph' => 'Ejemplo: 305 244 6999', 'required']) !!}
-                                {!! Field::select('city_id', $cities, ['empty' => 'Seleccione la ciudad', 'class' => 'select2-cities', 'required']) !!}
-                                {!! Field::text('address', ['ph' => 'Ejemplo: carrera 11a # 119 - 35', 'required']) !!}
-                                {!! Field::number('company_nit', ['ph' => 'Ejemplo: 900774988']) !!}
+                                {!! Field::select('city_id', $cities, ['empty' => 'Seleccione la ciudad de la empresa', 'class' => 'select2-cities', 'required']) !!}
+                                {!! Field::text('address', ['ph' => 'Ejemplo: carrera 11a # 119 - 35', 'label' => 'Dirección de la empresa', 'required']) !!}
+                                {{--  {!! Field::number('company_nit', ['ph' => 'Ejemplo: 900774988']) !!} --}}
                                 <div class="form-group">
                                     <div class="col-md-8 col-md-offset-4">
-                                        <button type="submit" class="btn btn-effect-ripple btn-lg">Finalizar registro</button>
+                                        <button type="submit" class="btn btn-warning btn-effect-ripple btn-lg">Finalizar registro</button>
                                     </div>
                                 </div>
                             {!! Form::close() !!}
@@ -125,8 +125,8 @@
         });
 
         $(".select2-cities").select2({
-            placeholder: "Seleccione la ciudad",
-            allowClear: true
+            placeholder: "Seleccione la ciudad de la empresa",
+            allowClear: false
         });
 
 

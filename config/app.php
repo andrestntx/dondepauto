@@ -161,6 +161,8 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         GeneaLabs\LaravelMixpanel\Providers\LaravelMixpanelServiceProvider::class,
         Mailchimp\MailchimpServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
         //Auth0\Login\LoginServiceProvider::class,
     ],
 
@@ -209,6 +211,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Mailchimp' => Mailchimp\MailchimpFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class
         //'Auth0' => 'Auth0\Login\Facade\Auth0'
     ],
 

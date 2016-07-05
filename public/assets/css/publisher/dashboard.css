@@ -1,0 +1,40 @@
+.dashboard h1 {
+    font-size: 2.4em;
+    font-weight: bold;
+    margin: 0.3em 0;
+    text-transform: inherit;
+}
+
+.dashboard h1:first-letter {
+    text-transform: uppercase;
+}
+
+.dashboard .ibox {
+	margin: 0;
+}
+
+.dashboard .sub-title {
+	padding: 1em 5%;
+}
+
+.dashboard .sub-title h2 {
+    font-size: 1.7em;
+    text-transform: initial;
+    font-weight: 600;
+    line-height: normal;
+    margin: 1em;
+}
+
+.dashboard .content {
+    border-top: 1.7px solid #c7c2c2;
+    padding: 1em 5%;
+}
+
+.dashboard .content h1 {
+    font-size: 2em;
+    text-transform: none;
+}
+
+.dashboard .content .btn.btn-xlg {
+    margin: 0.5em 1em;
+}

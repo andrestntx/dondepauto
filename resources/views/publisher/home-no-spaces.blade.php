@@ -11,7 +11,7 @@
                 <div class="col-md-10 col-md-offset-1 text-center">
                     <h2 style="margin-bottom:5px;">{{ $publisher->company }}</h2>
                     <h3 class="text-lg">¡Tenemos clientes potenciales para tu medio publicitario!</h3>
-                    <a href="#" class="btn btn-lg btn-xlg btn-effect-ripple" style="margin-top:20px;">EMPEZAR A OFERTAR</a>
+                    <a href="{{ route('medios.espacios.create', $publisher) }}" class="btn btn-warning btn-lg btn-xlg btn-effect-ripple" style="margin-top:20px;">EMPEZAR A OFERTAR</a>
                 </div>
             </div>  
         </div>          
@@ -22,23 +22,23 @@
         <div class="icons-features">
             <div class="icon-features">
                 <img src="/assets/img/icons-features/1.png">
-                <p>Publicar tus ofertas es muy fácil y gratis</p>
+                <p>Publicar ofertas es muy fácil, y aportas valor a potenciales clientes en la toma de decisiones</p>
             </div>
             <div class="icon-features">
                 <img src="/assets/img/icons-features/2.png">
-                <p>Obtienes mayor visibilidad, alcance comercial y la posibilidad de mayores ventas recurrentes</p>
+                <p>DóndePauto se encarga del marketing. Obtienes mayor visibilidad, alcance, y la posibilidad de más ventas</p>
             </div>
             <div class="icon-features">
                 <img src="/assets/img/icons-features/3.png">
-                <p><strong>DóndePauto</strong> se encarga de promocionar y vender tus espacios de pauta</p>
+                <p><strong>DóndePauto</strong> gestiona el cierre de negocios (con el acompañamiento del medio si es necesario)</p>
             </div>
             <div class="icon-features">
                 <img src="/assets/img/icons-features/4.png">
-                <p>Solo pagas por ventas efectivas!. Tu estables la comisión</p>
+                <p><strong>No negociamos con otras Agencias</strong> con las que has acordado comisión. DóndePauto consigue sus propios clientes directos</p>
             </div>
             <div class="icon-features">
                 <img src="/assets/img/icons-features/5.png">
-                <p>Amplias tus oportunidades de negocios con anunciantes que no están con las tradicionales agencias de medios</p>
+                <p>Sólo pagas por ventas efectivas! Acordamos la comisión</p>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 text-center">
                    <h3 class="text-lg-center">Publica tu inventario de ofertas, <span class="theme-color">activa el servicio</span> y comienza a vender</h3>
-                   <a href="#" class="btn btn-lg btn-effect-ripple btn-xlg" style="margin-top:20px;">¡ PUBLICA TU PRIMERA OFERTA !</a>
+                   <a href="{{ route('medios.espacios.create', $publisher) }}" class="btn btn-lg btn-warning btn-effect-ripple btn-xlg" style="margin-top:20px;">¡ PUBLICAR MI PRIMERA OFERTA !</a>
                 </div>
             </div>  
         </div>          
@@ -57,7 +57,8 @@
     <div class="col-xs-12 text-center" style="margin-top:20px;">
         
         <img src="/assets/img/question.png" style="max-width:70px;">
-        <h4 class="text-lg">¡Quiero conocer cómo funciona el <a href="#" target="_blank" class="theme-color">servicio de DóndePauto!</a> </h4>
+        <h4 class="text-lg" style="margin-bottom:10px;">¡Quiero conocer cómo funciona el <a href="#" target="_blank" class="theme-color" >servicio de DóndePauto!</a> </h4>
+        <p class="text-lg" style="font-size: 15.3px;"> (modalidades de ventas, oblicaciones de DóndePauto, precios de oferta al público, formas de pagos por tus servicios)</p>
         <div class="col-md-10 col-md-offset-1 sponsors">
             <div style="border: 1px dotted #C7C3C3; max-width: 1000px; display: block; margin: 48px auto 0 auto;"></div>
             <h3>Apoyos recibidos</h3>
