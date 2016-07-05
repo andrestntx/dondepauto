@@ -78,6 +78,9 @@ return [
             'prefix' => 'bd_',
             'strict' => false,
             'engine' => 'MyISAM',
+            'options'   => array(
+                PDO::ATTR_EMULATE_PREPARES => true
+            )
         ],
 
         'mysql' => [
