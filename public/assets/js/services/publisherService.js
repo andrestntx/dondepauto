@@ -12,6 +12,8 @@ var PublisherService = function() {
             'info': true,
             "ajax": urlSearch,
             "deferRender": true,
+            "processing": true,
+            "serverSide": true,
             "columns": [
                 { "data": null, "orderable": false },
                 { "data": "company" },
