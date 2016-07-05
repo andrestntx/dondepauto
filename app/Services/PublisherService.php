@@ -32,7 +32,7 @@ class PublisherService extends ResourceService
      */
     public function search()
     {
-        return ['data' => $this->viewRepository->search()];
+        return $this->viewRepository->search();
     }
 
     /**
