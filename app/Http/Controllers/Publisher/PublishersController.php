@@ -124,4 +124,13 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
         $publisher = $this->facade->confirm($code);
         return redirect()->route('medios.account', $publisher);
     }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function agreement(User $user)
+    {
+        return $this->view('agreement.form', ['publisher' => $user]);
+    }
 }

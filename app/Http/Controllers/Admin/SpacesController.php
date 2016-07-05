@@ -67,7 +67,7 @@ class SpacesController extends ResourceController
      */
     public function search(Request $request)
     {
-        return $this->facade->search();
+        return \Datatables::of($this->facade->search())->make(true);
     }
 
     /**

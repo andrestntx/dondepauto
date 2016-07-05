@@ -35,6 +35,8 @@ class CreateViewSpacesView extends Migration
                 (CASE WHEN bd_espacios_ofrecidos_LIST.restringeTabaco_LI = 'S' THEN TRUE ELSE FALSE END) as snuff_restriction,
                 (CASE WHEN bd_espacios_ofrecidos_LIST.restringePolitica_LI = 'S' THEN TRUE ELSE FALSE END) as policy_restriction,
                 bd_espacios_ofrecidos_LIST.precio_espacio_LI as minimal_price, bd_espacios_ofrecidos_LIST.porcentaje_precio_margen_espacio_LI as percentage_markup,
+                (bd_espacios_ofrecidos_LIST.precio_espacio_LI * bd_espacios_ofrecidos_LIST.porcentaje_precio_margen_espacio_LI) as markup_price,
+                ((bd_espacios_ofrecidos_LIST.precio_espacio_LI * bd_espacios_ofrecidos_LIST.porcentaje_precio_margen_espacio_LI) + bd_espacios_ofrecidos_LIST.precio_espacio_LI) as public_price,
                 (((1 / (1 + bd_espacios_ofrecidos_LIST.porcentaje_precio_margen_espacio_LI)) - 1) * -1)  as percentage_markdown,
                 bd_espacios_ofrecidos_LIST.periodo_servicio_espacio_LI as period,
                 (CASE WHEN bd_espacios_ofrecidos_LIST.espacio_eliminado_LI = 'Si_el' THEN TRUE ELSE FALSE END) as is_delete

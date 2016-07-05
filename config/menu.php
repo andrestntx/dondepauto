@@ -21,6 +21,7 @@ return [
 
         // Publishers
         'account'           => ['route' => ['medios.account', ':user_platform_id'], 'i' => 'fa fa-user', 'title' => 'Mi cuenta', 'roles' => ['publisher']],
-        'inventory'         => ['route' => ['medios.inventory', ':user_platform_id'], 'i' => 'fa fa-th-list', 'title' => 'Inventario', 'roles' => ['publisher']],
+        'inventory'         => ['route' => ['medios.espacios.index', ':user_platform_id'], 'i' => 'fa fa-shopping-cart', 'title' => 'Inventario', 'roles' => ['publisher']],
+        'agreement'         => ['route' => ['medios.agreement', ':user_platform_id'], 'i' => 'fa fa-file-text-o', 'title' => 'Acuerdo', 'roles' => ['publisher']],
     ]
 ];

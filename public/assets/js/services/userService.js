@@ -22,6 +22,7 @@ var UserService = function() {
 		initSimpleSearchSelect: function (input, column) 
 		{
 			$(input).on( 'change', function () {
+	            
 	            dataTable
 	                .column(column)
 	                .search( this.value )
@@ -30,11 +31,18 @@ var UserService = function() {
 		},
 
 		cleanColumnSearch: function (column) 
-		{
-			console.log('busco');
+		{           
             dataTable
                 .column(column)
-                .search(' ')
+                .search('')
+                .draw();
+		},
+
+		cleanColumnsSearch: function (columns) 
+		{            
+            dataTable
+                .columns(columns)
+                .search('')
                 .draw();
 		},
 

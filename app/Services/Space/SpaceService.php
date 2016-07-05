@@ -40,7 +40,7 @@ class SpaceService extends ResourceService
      */
     public function search(User $publisher = null)
     {
-        return ['data' => $this->viewRepository->search($publisher)];
+        return $this->viewRepository->search($publisher);
     }
 
     /**
