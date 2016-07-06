@@ -32,8 +32,8 @@ class Publisher extends PUser
      *
      * @var array
      */
-    protected $appends = ['name', 'state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
-        'last_log_login_at_datatable', 'signed_agreement_lang', 'space_city_names', 'activated_at_datatable',
+    protected $appends = ['state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
+        'signed_agreement_lang', 'space_city_names', 'activated_at_datatable',
         'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans'
     ];
 
@@ -119,9 +119,17 @@ class Publisher extends PUser
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function spaces()
+    public function spacesView()
     {
         return $this->hasMany('App\Entities\Views\Space', 'publisher_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function spaces()
+    {
+        return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
     }
 
     /**

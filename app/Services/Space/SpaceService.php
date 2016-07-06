@@ -115,4 +115,9 @@ class SpaceService extends ResourceService
         \Log::info($this->getData($data, $format, $publisher));
         return $this->repository->create($this->getData($data, $format, $publisher));
     }
+
+    public function countSpaces(User $user) 
+    {
+        return $this->repository->countSpaces($user);
+    }
 }

@@ -26,7 +26,6 @@ var PublisherService = function() {
                 { "data": "state_id", "name": "state_id"},
                 { "data": "address", "name": "address"},
                 { "data": "created_at_datatable", "name": "created_at_datatable"},
-                { "data": "last_log_login_at_datatable", "name": "last_log_login_at_datatable"},
                 { "data": "space_city_names", "name": "space_city_names"},
                 { "data": "activated_at_datatable", "name": "activated_at_datatable"},
                 { "data": "signed_agreement", "name": "signed_agreement"},
@@ -36,7 +35,7 @@ var PublisherService = function() {
             ],
             "columnDefs": [
                 {
-                    "targets": [4,5,8,9,10,11,12,13,14,15,16,17],
+                    "targets": [4,5,8,9,10,11,12,13,14,15,16],
                     "visible": false,
                     "searchable": true
                 },
@@ -85,7 +84,7 @@ var PublisherService = function() {
 
         UserService.initDatatable(table);
         UserService.initSimpleSearchSelect("#registration_states",8);
-        UserService.initSimpleSearchSelectText('#with_spaces', 12);
+        UserService.initSimpleSearchSelectText('#with_spaces', 11);
 
         $("#publishers-datatable_filter input").unbind();
 
@@ -118,7 +117,7 @@ var PublisherService = function() {
             $("#agreement_at_start").datepicker("setDate", null);
             $("#agreement_at_end").datepicker("setDate", null);
 
-            table.column(14)
+            table.column(13)
                 .search('')
                 .draw();
 
@@ -141,7 +140,7 @@ var PublisherService = function() {
             $('#offer_at_start').prop('disabled', false);
             $('#offer_at_end').prop('disabled', false);
 
-            table.column(16)
+            table.column(15)
                 .search('true')
                 .draw();
 
@@ -156,7 +155,7 @@ var PublisherService = function() {
             $("#offer_at_start").datepicker("setDate", null);
             $("#offer_at_end").datepicker("setDate", null);
 
-            table.column(16)
+            table.column(15)
                 .search('')
                 .draw();
 
@@ -181,8 +180,8 @@ var PublisherService = function() {
         $.fn.dataTableExt.afnFiltering.push(
             function( oSettings, aData, iDataIndex) {
                 return UserService.searchDateRange(aData, '#created_at_start', '#created_at_end', 10) &&
-                        UserService.searchDateRange(aData, '#agreement_at_start', '#agreement_at_end', 15) &&
-                        UserService.searchDateRange(aData, '#offer_at_start', '#offer_at_end', 17);
+                        UserService.searchDateRange(aData, '#agreement_at_start', '#agreement_at_end', 14) &&
+                        UserService.searchDateRange(aData, '#offer_at_start', '#offer_at_end', 16);
             }
         );
     }

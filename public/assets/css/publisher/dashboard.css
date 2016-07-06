@@ -38,3 +38,35 @@
 .dashboard .content .btn.btn-xlg {
     margin: 0.5em 1em;
 }
+
+#icons {
+    margin-bottom: 40px;
+}
+
+#icons figure img {
+    max-width: 150px;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#icons figure p {
+    text-align: center;
+    font-size: 1.15em;
+}
+
+#icons figure i {
+    font-size: 1.7em;
+    color: #4ead1f;
+}
+
+#icons .line {
+    height: 3px;
+    width: 70%;
+    margin: auto 15%;
+    background: rgba(177, 172, 172, 0.57);
+    position: absolute;
+    top: 36%;
+}
+

@@ -77,15 +77,6 @@ class PUser  extends Model {
     }
 
     /**
-     * Return the Full Name
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return ucwords(strtolower($this->first_name . ' ' . $this->last_name));
-    }
-
-    /**
      * Return the company name uppercase
      * @param $value
      * @return string

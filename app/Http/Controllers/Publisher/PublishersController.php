@@ -131,6 +131,15 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
      */
     public function agreement(User $user)
     {
+        return $this->view('agreement.info', ['publisher' => $user]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function completeAgreement(User $user)
+    {
         return $this->view('agreement.form', ['publisher' => $user]);
     }
 }

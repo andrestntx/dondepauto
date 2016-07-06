@@ -10,8 +10,10 @@ namespace App\Repositories\Platform\Space;
 
 
 use App\Entities\Platform\Space\Space;
+use App\Entities\Platform\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
+
 
 class SpaceRepository extends BaseRepository
 {
@@ -101,6 +103,9 @@ class SpaceRepository extends BaseRepository
         return $space->save();
     }
 
-
+    public function countSpaces(User $user) 
+    {
+        return $user->spaces()->count();
+    }
     
 }

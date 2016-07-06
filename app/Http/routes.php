@@ -141,6 +141,11 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.agreement'
         ]);
 
+        Route::get('medios/{publishers}/acuerdo/completar', [
+            'uses' => 'Publisher\PublishersController@completeAgreement',
+            'as' => 'medios.agreement.complete'
+        ]);
+
         Route::get('medios/{publishers}/publicar', [
             'uses' => 'Publisher\PublishersController@publish',
             'as' => 'medios.publish'

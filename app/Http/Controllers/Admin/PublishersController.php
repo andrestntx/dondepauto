@@ -67,6 +67,8 @@ class PublishersController extends ResourceController
     public function search(Request $request)
     {
         return \Datatables::of($this->facade->search())->make(true);
+
+        return view('home');
     }
 
     /**
