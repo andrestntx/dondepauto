@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'user_platform_id'
     ];
 
     /**
@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    
     /**
      * Encrypt the users password
      * @param string $value
@@ -99,10 +99,27 @@ class User extends Authenticatable
     }
 
     /**
+     * @return bool
+     */
+    public function isPublisher()
+    {
+        return $this->isRole('publisher');
+    }
+
+    /**
      * Get the clients for the adviser.
      */
     public function clients()
     {
         return $this->hasMany('App\Entities\Platform\User');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function publisher()
+    {
+        return $this->belongsTo('App\Entities\Platform\User', 'user_platform_id');
+    }
+
 }

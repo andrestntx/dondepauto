@@ -3,8 +3,8 @@
         {{ $label }}
     </label>
 
-    @if ($required)
-        <span class="label label-info">Required</span>
+    @if (! $required)
+        <span class="">(Opcional)</span>
     @endif
 
     <div class="controls">

@@ -10,6 +10,7 @@ namespace App\Services;
 
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class PublisherService extends ResourceService
 {
@@ -31,7 +32,18 @@ class PublisherService extends ResourceService
      */
     public function search()
     {
-        return ['data' => $this->viewRepository->search()];
+        return $this->viewRepository->search();
+    }
+
+    /**
+     * @param array $data
+     * @param Model $publisher
+     * @return mixed
+     */
+    public function completeData(array $data, Model $publisher)
+    {
+        $data['complete_data'] = true;
+        return $this->updateModel($data, $publisher);
     }
 
     /**
@@ -41,6 +53,7 @@ class PublisherService extends ResourceService
     public function createModel(array $data)
     {
         $data['role'] = 'publisher';
+        $data['complete_data'] = false;
         return $this->repository->create($data);
     }
 
@@ -54,5 +67,28 @@ class PublisherService extends ResourceService
     public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null)
     {
         return $this->viewRepository->publishersWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
+    }
+
+    /**
+     * @param $publisher
+     * @return mixed
+     */
+    public function getSpaces($publisher)
+    {
+        return $this->repository->getSpaces($publisher);
+    }
+
+    /**
+     * @param array $data
+     * @param null $password
+     * @return mixed
+     */
+    public function register(array $data, $password = null)
+    {
+        if(! is_null($password)) {
+            $data['password'] = $password;
+        }
+
+        return $this->createModel($data);
     }
 }

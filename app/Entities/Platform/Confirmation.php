@@ -36,7 +36,7 @@ class Confirmation extends Entity
      *
      * @var string
      */
-    protected $table = 'bd_us_reg_cod_LIST';
+    protected $table = 'us_reg_cod_LIST';
 
     /**
      * The attributes that are mass assignable.
@@ -55,7 +55,7 @@ class Confirmation extends Entity
     public $timestamps = false;
 
 
-    protected $attr  = [
+    protected $databaseTranslate  = [
         'id' => 'id_LI', 'user_id' => 'id_us_LI', 'active' => 'usuario_act_LI', 'code' => 'cod_act_ha_LI'
     ];
 
@@ -79,5 +79,15 @@ class Confirmation extends Entity
         else {
             $this->attributes['usuario_act_LI'] = 'usActnO';
         }
+    }
+    
+    public function getActiveAttribute()
+    {
+        if($this->usuario_act_LI == 'usActsI')
+        {
+            return true;
+        }
+        
+        return false;
     }
 }

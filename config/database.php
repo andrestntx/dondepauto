@@ -75,9 +75,12 @@ return [
             'password' => env('DB_PRODUCTION_PASSWORD', 'secret'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
+            'prefix' => 'bd_',
             'strict' => false,
-            'engine' => null,
+            'engine' => 'MyISAM',
+            'options'   => array(
+                PDO::ATTR_EMULATE_PREPARES => true
+            )
         ],
 
         'mysql' => [
@@ -89,11 +92,10 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
+            'prefix' => 'bd_',
             'strict' => false,
-            'engine' => null,
+            'engine' => 'MyISAM',
         ],
-
 
         'pgsql' => [
             'driver' => 'pgsql',

@@ -81,9 +81,25 @@ Breadcrumbs::register('publishers', function ($breadcrumbs) {
 Breadcrumbs::register('publishers.publisher', function ($breadcrumbs, $publisher) {
     $breadcrumbs->parent('publishers');
     if ($publisher->exists) {
-        $breadcrumbs->push($publisher->name, route('medios.show', $publisher));
+        $breadcrumbs->push($publisher->company, route('medios.show', $publisher));
     } else {
         $breadcrumbs->push('Nuevo Medio', route('medios.create'));
+    }
+});
+
+// Home > publishers > {{ $publisher }} > spaces
+Breadcrumbs::register('publishers.publisher.spaces', function ($breadcrumbs, $publisher) {
+    $breadcrumbs->parent('publishers.publisher', $publisher);
+    $breadcrumbs->push('Espacios', route('medios.show', $publisher));
+});
+
+// Home > publishers > {{ $publisher }} > spaces > {{ $space }}
+Breadcrumbs::register('spaces.space', function ($breadcrumbs, $space) {
+    $breadcrumbs->parent('publishers.publisher.spaces', $space->publisher);
+    if ($space->exists) {
+        $breadcrumbs->push($space->name, route('espacios.show', $space));
+    } else {
+        $breadcrumbs->push('Nuevo Espacio', route('espacios.create'));
     }
 });
 
@@ -93,12 +109,3 @@ Breadcrumbs::register('spaces', function ($breadcrumbs) {
     $breadcrumbs->push('Espacios', url('espacios'));
 });
 
-// Home > spaces > {{ $space }}
-Breadcrumbs::register('spaces.space', function ($breadcrumbs, $space) {
-    $breadcrumbs->parent('spaces');
-    if ($space->exists) {
-        $breadcrumbs->push($space->name, route('espacios.show', $space));
-    } else {
-        $breadcrumbs->push('Nuevo Espacio', route('espacios.create'));
-    }
-});

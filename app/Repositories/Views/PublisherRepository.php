@@ -28,7 +28,7 @@ class PublisherRepository extends BaseRepository
      */
     public function search()
     {
-        return $this->model->with(['logs', 'spaces.city'])->get();
+        return $this->model->with(['spaces.city', 'logs'])->get();
     }
 
     /**
@@ -43,7 +43,7 @@ class PublisherRepository extends BaseRepository
     public function publishersWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null, $column = "company", $id = "id")
     {
         $query = $this->model
-            ->join('bd_espacios_ofrecidos_LIST', 'id_us_reg_LI', '=', 'id')
+            ->join('espacios_ofrecidos_LIST', 'id_us_reg_LI', '=', 'id')
             ->groupBy('id')
             ->orderBy('company', 'asc');
 

@@ -66,7 +66,19 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
-        return $this->facade->search();
+        return \Datatables::of($this->facade->search())->make(true);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @param User $publisher
+     * @return \Illuminate\Http\Response
+     */
+    public function searchSpaces(Request $request, User $publisher)
+    {
+        return $this->facade->searchSpaces($publisher);
     }
 
     /**
@@ -94,12 +106,15 @@ class PublishersController extends ResourceController
     /**
      * Display the specified resource.
      *
-     * @param  User  $user
+     * @param  User  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $publisher)
     {
-        return $this->view('show', ['user' => $user]);
+        $publisher->load('publisher');
+        $spaces = $this->facade->getSpaces($publisher);
+
+        return $this->view('show', ['publisher' => $publisher, 'spaces' => $spaces]);
     }
 
     /**
@@ -124,9 +139,9 @@ class PublishersController extends ResourceController
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, User $user)
-    {
+    {        
         $this->facade->updateModel($request->all(), $user);
-        return $this->redirect('index');
+        return $this->redirect('show', $user);
     }
     
     /**
@@ -138,6 +153,17 @@ class PublishersController extends ResourceController
     public function destroy(User $user)
     {
         $this->service->deleteModel($user);
+    }
+
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    public function confirm($code)
+    {
+        $publisher = $this->facade->confirm($code);
+        return redirect()->route('medios.account', $publisher);
     }
     
 }

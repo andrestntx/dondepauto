@@ -40,6 +40,9 @@ h5 {
   margin-top: 5px;
   font-weight: 600;
 }
+td.text-small {
+  font-size: 12px;
+}
 .nav > li > a {
   color: #a7b1c2;
   font-weight: 600;
@@ -1603,6 +1606,15 @@ a.DTTT_button:hover:not(.DTTT_disabled) {
 .img-circle {
   border-radius: 50%;
 }
+.btn-xs-circle {
+    width: 20px;
+    height: 20px;
+    padding: 3px 0;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 0;
+}
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -1822,7 +1834,7 @@ a.DTTT_button:hover:not(.DTTT_disabled) {
 }
 .form-control:focus,
 .single-line:focus {
-  border-color: #1ab394 !important;
+  border-color: #2cbaf8 !important;
 }
 .has-success .form-control {
   border-color: #1ab394;
@@ -3770,7 +3782,7 @@ table.table-mail tr td {
 }
 /* BACKGROUNDS */
 .gray-bg {
-  background-color: #f3f3f4;
+  background-color: #E4E4E4;
 }
 .white-bg {
   background-color: #ffffff;
@@ -6933,6 +6945,9 @@ body.landing-page {
   }
   .landing-page .featurette-heading {
     font-size: 50px;
+  }
+  .publisher-content .content-landing {
+      padding: 0 40px;
   }
 }
 @media (max-width: 992px) {

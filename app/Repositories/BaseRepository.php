@@ -25,6 +25,12 @@ abstract class  BaseRepository {
      * @var Builder
      */
     protected $builder;
+
+    /**
+     * @var array
+     */
+    protected $boolFillable = [];
+
     /**
      * @param App $app
      * @throws \App\Exceptions\RepositoryException
@@ -82,16 +88,17 @@ abstract class  BaseRepository {
      * @param string|null $key
      * @return mixed
      */
-    function listsSelect($column = "name", $key = "id")
+    function listsSelect($column = "name", $key = null)
     {
-        if(method_exists($this->model, 'getAttrKey')) {
-            $query = $this->model->select($this->model->getAttrKey($column), $this->model->getAttrKey($key));
-        }
-        else {
-            $query = $this->model->select($column, $key);
+        if(is_null($key)) {
+            $key = $this->model->getKeyName();
         }
 
-        return $query->get()->lists($column, $key)->all();
+        if($column == 'name' && method_exists($this->model, 'getTranslateOrOriginalKey') && $this->model->getTranslateOrOriginalKey('name')) {
+            $column = $this->model->getTranslateOrOriginalKey('name');
+        }
+
+        return $this->model->get()->sortBy($column)->lists($column, $key)->all();
     }
     
     /**
@@ -122,6 +129,17 @@ abstract class  BaseRepository {
         }
         return $this->model->create($data);
     }
+
+    protected function syncBoolFillable(&$data, $entity)
+    {
+        foreach ($this->boolFillable as $value) 
+        {
+            if(! array_key_exists($value, $data))
+            {
+                $data[$value] = 0;
+            }
+        }
+    }
     
     /**
      * @param array $data
@@ -130,7 +148,9 @@ abstract class  BaseRepository {
      */
     public function update(array $data, $entity)
     {
+        $this->syncBoolFillable($data, $entity);
         $entity->fill($data);
+        
         if($entity->save()) {
             return $entity;
         }

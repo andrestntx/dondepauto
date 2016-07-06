@@ -77,6 +77,7 @@
                         <thead>
                         <tr class="info">
                             <th></th>
+                            <th>Registro</th>
                             <th>Empresa</th>
                             <th>Ciudad</th>
                             <th>Nombre</th>
@@ -91,6 +92,7 @@
                         <tr>
                             <th></th>
                             <th>Empresa</th>
+                            <th>Registro</th>
                             <th>Ciudad</th>
                             <th>Nombre</th>
                             <th>Email</th>

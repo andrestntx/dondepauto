@@ -9,8 +9,10 @@
 namespace App\Repositories\Platform;
 
 
+use App\Entities\Platform\Confirmation;
 use App\Entities\Platform\User;
 use App\Repositories\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class ConfirmationRepository extends BaseRepository
 {
@@ -37,5 +39,55 @@ class ConfirmationRepository extends BaseRepository
             'code'      => $code,
             'active'    => false
         ]);
+    }
+
+    /**
+     * @param $code
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function findOrFailByCode($code)
+    {
+        return $this->findOrFailBy($this->model->getTranslateOrOriginalKey('code'), $code);
+    }
+
+    /**
+     * @param $code
+     * @return boolean
+     */
+    public function isActive($code)
+    {
+        return $this->findOrFailByCode($code)->active;
+    } 
+
+    /**
+     * @param $code
+     * @return User
+     */
+    public function confirm($code)
+    {
+        $confirmation = $this->findOrFailByCode($code);
+        return $this->confirmModel($confirmation);
+    }
+
+
+    /**
+     * @param Model $confirmation
+     * @return User
+     */
+    public function confirmModel(Model $confirmation)
+    {
+        $confirmation->active = true;
+        $confirmation->save();
+
+        return $confirmation->user;
+    }
+
+    /**
+     * @param $code
+     * @return User
+     */
+    public function getUser($code)
+    {
+        return $this->findOrFailByCode($code)->user;
     }
 }

@@ -19,14 +19,14 @@ class SpaceImpactScene extends Entity
      */
     protected $primaryKey = 'id_tipo_lugar_LI';
 
-    protected $attr = ['name' => 'nombre_tipo_lugar_LI'];
+    protected $databaseTranslate = ['name' => 'nombre_tipo_lugar_LI'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_tipos_lugares_ubicacion_espacios_LIST';
+    protected $table = 'tipos_lugares_ubicacion_espacios_LIST';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough

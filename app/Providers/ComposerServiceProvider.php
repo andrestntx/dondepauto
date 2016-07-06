@@ -17,11 +17,14 @@ class ComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Adviser\ListComposer' => 'admin.advisers.lists',
             'App\Http\ViewComposers\Advertiser\ListComposer' => 'admin.advertisers.lists',
             'App\Http\ViewComposers\Advertiser\FormComposer' => 'admin.advertisers.form',
-            'App\Http\ViewComposers\Publisher\FormComposer' => 'admin.publishers.form',
+            'App\Http\ViewComposers\Publisher\FormComposer' => ['admin.publishers.form', 'publisher.complete.form', 'publisher.account.form'],
             'App\Http\ViewComposers\Publisher\ListComposer' => 'admin.publishers.lists',
             'App\Http\ViewComposers\Space\ListComposer' => 'admin.spaces.lists',
+            'App\Http\ViewComposers\Space\FormComposer' => 'admin.spaces.form',
+            'App\Http\ViewComposers\Space\OfferComposer' => 'publisher.spaces.form',
         ]);
     }
+    
     /**
      * Register the application services.
      */

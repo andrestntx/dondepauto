@@ -28,7 +28,7 @@ class CityRepository extends BaseRepository
     protected function citiesWithUsers($role)
     {
         return $this->model
-            ->join('bd_us_reg_LIST', 'id_ciudad', '=', 'id_ciudad_LI')
+            ->join('us_reg_LIST', 'id_ciudad', '=', 'id_ciudad_LI')
             ->where('tipo_us_LI', User::getRole($role))
             ->groupBy('id_ciudad')
             ->orderBy('ciudad', 'asc')

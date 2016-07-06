@@ -12,25 +12,27 @@ var PublisherService = function() {
             'info': true,
             "ajax": urlSearch,
             "deferRender": true,
+            "processing": true,
+            "serverSide": true,
             "columns": [
-                { "data": null, "orderable": false },
-                { "data": "company" },
-                { "data": "name" },
-                { "data": "email" },
-                { "data": "phone"},
-                { "data": "cel"},
-                { "data": "state" },
-                { "data": "count_spaces" },
-                { "data": "state_id"},
-                { "data": "address"},
-                { "data": "created_at_datatable"},
-                { "data": "last_log_login_at_datatable"},
-                { "data": "space_city_names"},
-                { "data": "activated_at_datatable"},
-                { "data": "signed_agreement"},
-                { "data": "signed_at_datatable"},
-                { "data": "has_offers"},
-                { "data": "last_offer_at_datatable"}
+                { "data": null, "name": "company", "orderable": false },
+                { "data": "company" , "name": "company" },
+                { "data": "name" , "name": "name" },
+                { "data": "email" , "name": "email" },
+                { "data": "phone", "name": "phone"},
+                { "data": "cel", "name": "cel"},
+                { "data": "state" , "name": "state" },
+                { "data": "count_spaces" , "name": "count_spaces" },
+                { "data": "state_id", "name": "state_id"},
+                { "data": "address", "name": "address"},
+                { "data": "created_at_datatable", "name": "created_at_datatable"},
+                { "data": "last_log_login_at_datatable", "name": "last_log_login_at_datatable"},
+                { "data": "space_city_names", "name": "space_city_names"},
+                { "data": "activated_at_datatable", "name": "activated_at_datatable"},
+                { "data": "signed_agreement", "name": "signed_agreement"},
+                { "data": "signed_at_datatable", "name": "signed_at_datatable"},
+                { "data": "has_offers", "name": "has_offers"},
+                { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}
             ],
             "columnDefs": [
                 {
@@ -61,7 +63,7 @@ var PublisherService = function() {
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 $('td:eq(0)', nRow).html(
-                    "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-plus'></i></button>"
+                    "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-search-plus'></i></button>"
                 );
                 if(!aData.company || !aData.company.trim()) {
                     $('td:eq(1)', nRow).html('--');
@@ -71,7 +73,7 @@ var PublisherService = function() {
                 );
                 if(aData.count_spaces > 0){
                     $('td:eq(5)', nRow).html(
-                        '<span class="badge badge-warning">' + aData.count_spaces + '</span>'
+                        '<span class="badge badge-info">' + aData.count_spaces + '</span>'
                     );
                 }
             },
@@ -83,7 +85,15 @@ var PublisherService = function() {
 
         UserService.initDatatable(table);
         UserService.initSimpleSearchSelect("#registration_states",8);
-        UserService.initSimpleSearchSelect('#with_spaces', 12);
+        UserService.initSimpleSearchSelectText('#with_spaces', 12);
+
+        $("#publishers-datatable_filter input").unbind();
+
+        $("#publishers-datatable_filter input").bind('keyup', function(e) {
+            if(e.keyCode == 13) {
+                table.search(this.value).draw();   
+            }
+        }); 
     }
 
     function initSearchAgreement() {
@@ -192,12 +202,42 @@ var PublisherService = function() {
         $('#publisherModal #discarded').text(publisher.count_discarded_intentions);
 
         /** Agreement **/
-        $('#publisherModal #signed_agreement').text(publisher.signed_agreement_lang);
+        $('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
         $('#publisherModal #commission_rate').text(publisher.commission_rate);
-        $('#publisherModal #signed_at').text(publisher.signed_at);
+        $('#publisherModal #signed_at').text(publisher.signed_at_datatable);
         $('#publisherModal #discount').text(publisher.discount);
         $('#publisherModal #retention').text(publisher.retention);
+
+        /** Spaces **/
+        $('#publisherModal a#link-spaces').attr('href', '/medios/' + publisher.id);
+        $('#publisherModal #count-spaces').text('(' + publisher.count_spaces + ')');
+        $('#publisherModal #created_at').text(publisher.created_at_humans);
     }
+
+    function drawShowPrices() {
+        var publisher = $("#publisher").data("publisher");
+        $("#prueba").html(UserService.getHtmlModalStates(publisher.states, ''));
+
+        var minimalPrices = $(".minimal-price");
+        $.each(minimalPrices, function( index, div ) {
+          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+        });
+
+        var markupPrices = $(".markup-price");
+        $.each(markupPrices, function( index, div ) {
+          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+        });
+
+        var publicPrices = $(".public-price");
+        $.each(publicPrices, function( index, div ) {
+          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+        });
+
+        var markupPers = $(".markup-per");
+        $.each(markupPers, function( index, div ) {
+          $(this).text(numeral($(this).data('per')).format('0%'));
+        });
+    };
 
     return {
         init: function(urlSearch) {
@@ -207,6 +247,9 @@ var PublisherService = function() {
             initModalEvent();
             initSearchAgreement();
             initSearchOffers();
+        },
+        drawShowPrices: function() {
+            drawShowPrices();
         }
     };
 }();

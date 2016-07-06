@@ -8,6 +8,7 @@
 
 namespace App\Facades;
 
+use App\Entities\Platform\User;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
@@ -46,11 +47,20 @@ class SpaceFacade
 
     /**
      * @param array $data
+     * @param array $images
+     * @param User $publisher
      * @return mixed
      */
-    public function createModel(array $data)
+    public function createModel(array $data, array $images = null, User $publisher)
     {
-        return $this->service->createModel($data);        
+        $format = $this->formatService->getModel($data['format_id']);
+        $space  = $this->service->createSpace($data, $format, $publisher);
+        
+        if($images) {
+            $imageNames = $this->service->saveImages($data['images'], $space);
+        }
+        
+        return $space;
     }
 
     /**
@@ -77,8 +87,6 @@ class SpaceFacade
 
         if(is_null($format_id) || empty($format_id)) {
             if( is_null($subCategory_id) || empty($subCategory_id)) {
-                \Log::info('consulto subcategorias: ' . $category_id . ' y sub: ' . $subCategory_id );
-
                 $result['sub_categories'] = $this->subCategoryService->searchWithSpaces($category_id, $publisher_id);
             }
             else {

@@ -17,6 +17,11 @@ return [
         'adviser_advertisers'   => ['route' => ['asesores.anunciantes.index', ':user_id'], 'i' =>  'fa fa-users', 'title' => 'Anunciantes', 'roles' => ['adviser']],
         'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Espacios', 'roles' => ['admin', 'director']],
         'intentions'    => ['url' => 'intenciones', 'i' =>  'fa fa-rocket', 'title' => 'Intenciones', 'roles' => ['admin', 'director', 'adviser']],
-        'propuestas'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
+        'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
+
+        // Publishers
+        'account'           => ['route' => ['medios.account', ':user_platform_id'], 'i' => 'fa fa-user', 'title' => 'Mi cuenta', 'roles' => ['publisher']],
+        'inventory'         => ['route' => ['medios.espacios.index', ':user_platform_id'], 'i' => 'fa fa-shopping-cart', 'title' => 'Inventario', 'roles' => ['publisher']],
+        'agreement'         => ['route' => ['medios.agreement', ':user_platform_id'], 'i' => 'fa fa-file-text-o', 'title' => 'Acuerdo', 'roles' => ['publisher']],
     ]
 ];

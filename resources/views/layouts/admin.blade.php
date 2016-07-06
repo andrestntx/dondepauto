@@ -27,8 +27,11 @@
 
         <!-- DataPicker -->
         <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
         <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+
+        <!-- Select Chosen -->
+        <link href="/assets/css/plugins/chosen/chosen.css" rel="stylesheet">
+        <link href="/assets/css/plugins/select2/select2.min.css" rel="stylesheet">
 
         @yield('extra-css')
 
@@ -57,7 +60,12 @@
                                 DP+
                             </div>
                         </li>
-                        {!! Menu::make('menu.sidebar', 'nav metismenu')->setParam('user_id', auth()->user()->id)->render() !!}
+                        {!! Menu::make('menu.sidebar', 'nav metismenu')
+                                ->setParams([
+                                    'user_id' => auth()->user()->id,
+                                    'user_platform_id' => auth()->user()->user_platform_id
+                                ])->render()
+                        !!}
                     </ul>
 
                 </div>
@@ -246,7 +254,17 @@
         <!-- Data picker -->
         <script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
+        <!-- Chosen -->
+        <script src="/assets/js/plugins/chosen/chosen.jquery.js"></script>
+
+        <!-- Select2 -->
+        <script src="/assets/js/plugins/select2/select2.full.min.js"></script>
+
+        <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
         <script>
+            $(".chosen-select").chosen({disable_search_threshold: 10});
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

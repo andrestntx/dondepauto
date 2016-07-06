@@ -18,7 +18,7 @@ class City extends Entity
      */
     protected $primaryKey = 'id_ciudad';
 
-    protected $attr = ['name' => 'ciudad', 'id' => 'id_ciudad'];
+    protected $databaseTranslate = ['name' => 'ciudad', 'id' => 'id_ciudad'];
 
     /**
      * The table associated with the model.

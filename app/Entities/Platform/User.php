@@ -2,6 +2,11 @@
 
 namespace App\Entities\Platform;
 
+use App\Entities\Views\Advertiser;
+use App\Entities\Views\Publisher;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Model;
+
 class User extends Entity
 {
     /**
@@ -16,14 +21,14 @@ class User extends Entity
      *
      * @var array
      */
-    protected $appends = ['name', 'state', 'space_city_names', 'space_city_ids'];
+    protected $appends = ['states' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bd_us_reg_LIST';
+    protected $table = 'us_reg_LIST';
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +38,8 @@ class User extends Entity
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'role', 'user_id',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
-        'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments'
+        'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
+        'commission_rate', 'retention', 'discount', 'complete_data'
     ];
 
     /**
@@ -68,15 +74,54 @@ class User extends Entity
 
     protected static $roles = ['admin', 'director', 'adviser', 'advertiser' => 'Co_tip_u', 'publisher' => 'Ve_tip_u'];
 
-    protected $attr  = [
+    protected $databaseTranslate  = [
         'first_name' => 'nombre_us_LI', 'last_name' => 'apellido_us_LI', 'email' => 'email_us_LI', 'role' => 'tipo_us_LI',
         'company' => 'empresa_us_LI', 'id' => 'id_us_LI', 'company_nit' => 'nit_empresa_us_LI', 'company_role' => 'cargo_us_LI',
         'company_area' => 'area_cargo_us_LI', 'city_id' => 'id_ciudad_LI', 'address' => 'direccion_us_LI', 'phone' => 'telefono_fijo_us_LI',
         'cel' => 'celular_us_LI', 'password' => 'clave_us_LI', 'economic_activity_id' => 'id_actividadEconomica_LI',
         'signed_agreement' => 'firmo_acuerdo_LI', 'signed_at' => 'fecha_firma_acuerdo_us_LI', 'commission_rate' => 'porc_comision_us_LI',
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
-        'comments' => 'comentarios_us_LI'
+        'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI'
     ];
+
+    /**
+     * Get the value of an attribute using its mutator for array conversion.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function mutateAttributeForArray($key, $value)
+    {
+        if($this->isInTranslate($key) && ! $this->hasGetMutator($key)) {
+            $value = parent::getAttribute($this->getTranslateKey($key));
+        }
+        else if(! $this->hasGetMutator($key) && $this->exists && $this->type()->getAttribute($key)) {
+            $value = $this->type()->getAttribute($key);
+        }
+        else {
+            $value = $this->mutateAttribute($key, $value);
+        }
+
+        return $value instanceof Arrayable ? $value->toArray() : $value;
+    }
+
+    /**
+     * Get an attribute from the model.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    public function getAttribute($key)
+    {
+        $value = parent::getAttribute($key);
+
+        if(is_null($value) && $this->exists){
+            $value = $this->type()->getAttribute($key);
+        }
+
+        return $value;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -95,6 +140,42 @@ class User extends Entity
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function publisher()
+    {
+        return $this->hasOne(Publisher::class, 'id', 'id_us_LI');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function advertiser()
+    {
+        return $this->hasOne(Advertiser::class, 'id', 'id_us_LI');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Entities\User', 'user_platform_id', 'id_us_LI');
+    }
+
+    /**
+     * @return Model
+     */
+    public function type()
+    {
+        if($this->isRole('publisher')) {
+            return $this->publisher;
+        }
+        
+        return $this->advertiser;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function activity()
@@ -110,6 +191,7 @@ class User extends Entity
     {
         return self::$roles[$role];
     }
+
 
     /**
      * @return string
@@ -165,24 +247,28 @@ class User extends Entity
     }
 
     /**
-     * @return bool
+     * @param $value
      */
-    public function getSignedAgreementAttribute()
+    public function setCompleteDataAttribute($value)
     {
-        return $this->firmo_acuerdo_LI == 'Si_fir_ac';
+        if($value) {
+            $this->attributes['es_us_activo_LI'] = 'act_Sta';
+        }
+        else {
+            $this->attributes['es_us_activo_LI'] = 'desact_Sta';
+        }
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getSignedAgreementLangAttribute()
+    public function getCompleteDataAttribute()
     {
-        if($this->signed_agreement)
-        {
-            return 'Si';
+        if($this->es_us_activo_LI == 'act_Sta') {
+            return true;
         }
 
-        return 'No';
+        return false;
     }
 
     /**
@@ -252,20 +338,12 @@ class User extends Entity
     }
 
     /**
-     * Return the Full Name
-     * @return string
+     * @param string $role
+     * @return bool
      */
-    public function getNameAttribute()
+    public function isRole($role)
     {
-        return ucwords(strtolower($this->first_name . ' ' . $this->last_name));
-    }
-
-    /**
-     * @return string
-     */
-    public function getStateAttribute()
-    {
-        return 'Activo';
+        return $role == $this->role;
     }
 
     /**

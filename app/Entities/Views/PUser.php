@@ -20,6 +20,30 @@ class PUser  extends Model {
      */
     protected $dates = ['created_at', 'activated_at'];
 
+    protected $classes = [
+        'complete-data'   => 'primary',
+        'incomplete' => 'warning',
+        'email-no-validated' => 'danger'
+    ];
+
+    protected $icons = [
+        'complete-data'   => 'fa fa-check',
+        'incomplete' => 'fa fa-warning',
+        'email-no-validated' => 'fa fa-envelope'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function logs()
+    {
+        return $this->hasMany('App\Entities\Platform\Login', 'id_user_log_LI', 'id');
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
     public function getClass($value) {
         if($value) {
             return 'primary';
@@ -28,6 +52,9 @@ class PUser  extends Model {
         return 'danger';
     }
 
+    /**
+     * @return array
+     */
     public function getStatesAttribute()
     {
         return [
@@ -49,18 +76,6 @@ class PUser  extends Model {
         ];
     }
 
-    protected $classes = [
-        'complete-data'   => 'primary',
-        'incomplete' => 'warning',
-        'email-no-validated' => 'danger'
-    ];
-
-    protected $icons = [
-        'complete-data'   => 'fa fa-check',
-        'incomplete' => 'fa fa-warning',
-        'email-no-validated' => 'fa fa-envelope'
-    ];
-
     /**
      * Return the Full Name
      * @return string
@@ -70,11 +85,27 @@ class PUser  extends Model {
         return ucwords(strtolower($this->first_name . ' ' . $this->last_name));
     }
 
+    /**
+     * Return the company name uppercase
+     * @param $value
+     * @return string
+     */
+    public function getCompanyAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    /**
+     * @return mixed
+     */
     public function getLastLog()
     {
         return $this->logs->max('fecha_login_LI');
     }
 
+    /**
+     * @return string
+     */
     public function getLastLogLoginAtDatatableAttribute()
     {
         if($lasLog = $this->getLastLog())
@@ -85,11 +116,17 @@ class PUser  extends Model {
         return '';
     }
 
+    /**
+     * @return mixed
+     */
     public function getCreatedAtDatatableAttribute()
     {
         return $this->created_at->format('d/m/Y');
     }
 
+    /**
+     * @return mixed
+     */
     public function getActivatedAtDatatableAttribute()
     {
         return $this->activated_at->format('d/m/Y');
@@ -132,14 +169,6 @@ class PUser  extends Model {
     public function getStateIconAttribute()
     {
         return $this->icons[$this->state_id];
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function logs()
-    {
-        return $this->hasMany('App\Entities\Platform\Login', 'id_user_log_LI', 'id');
     }
 
 }

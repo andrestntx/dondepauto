@@ -162,6 +162,14 @@ return [
         'categories_and_sub'    => 'categorías y sub-categorías',
         'formats'               => 'formatos',
         'scenes'                => 'escenarios de impacto',
+        'sub_category_id'       => 'sub categoría',
+        'format_id'             => 'formato',
+        'impact_scene_id'       => 'escenario de impacto',
+        'impact'                => 'impacto',
+        'minimal_price'         => 'precio mínimo',
+        'period'                => 'período',
+        'audiences'             => 'audiencias',
+        'impact_scenes'         => 'escenarios de impacto'
     ],
 
     'empty_option'         => [

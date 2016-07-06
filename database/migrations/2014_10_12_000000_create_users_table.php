@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->integer('user_platform_id')->nullable();
+            $table->foreign('user_platform_id')->references('id_us_LI')->on('us_reg_LIST');
         });
     }
 

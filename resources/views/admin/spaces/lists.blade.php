@@ -46,40 +46,8 @@
                 <div class="row">
 
                 </div>
-                <div class="table-responsive">
-                    <table id="spaces-datatable" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
-                        <thead>
-                        <tr class="info">
-                            <th></th>
-                            <th>Medio</th>
-                            <th>Espacio</th>
-                            <th>Categoría</th>
-                            <th>Sub_categoría</th>
-                            <th>Formato</th>
-                            <th title="Comisión"> % </th>
-                            <th>$_Mínimo</th>
-                            <th>Markup</th>
-                            <th>$_Markup</th>
-                            <th>$_Público</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>Medio</th>
-                            <th>Espacio</th>
-                            <th>Categoría</th>
-                            <th>Sub categoría</th>
-                            <th>Formato</th>
-                            <th title="Comisión">.%.</th>
-                            <th>$ Mínimo</th>
-                            <th>Markup</th>
-                            <th>$ Markup</th>
-                            <th>$ Público</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                
+                @include('admin.spaces.table')
             </div>
         </div>
     </div>
@@ -100,62 +68,16 @@
 
     <script type="text/javascript">
 
-        function changeSelects(inputs) {
-            if(inputs.sub_categories) {
-                $('#sub_categories option:gt(0)').remove();
-                $.each(inputs.sub_categories, function(value,text) {
-                    $('#sub_categories').append(
-                        $("<option></option>").attr("value", value).text(text)
-                    );
-                }); 
-                UserService.cleanColumnSearch(12);
-            }
-
-            if(inputs.publishers) {
-                $('#publishers option:gt(0)').remove();
-                $.each(inputs.publishers, function(value,text) {
-                    $('#publishers').append(
-                        $("<option></option>").attr("value", value).text(text)
-                    );
-                });  
-                UserService.cleanColumnSearch(14);
-            }
-
-            if(inputs.cities) {                
-                $('#cities option:gt(0)').remove();
-                $.each(inputs.cities, function(value,text) {
-                    $('#cities').append(
-                        $("<option></option>").attr("value", value).text(text)
-                    );
-                }); 
-                UserService.cleanColumnSearch(15);
-            }
-
-            if(inputs.formats) {
-                $('#formats').removeAttr("disabled");
-                $('#formats option:gt(0)').remove();
-                $.each(inputs.formats, function(value,text) {
-                    $('#formats').append(
-                        $("<option></option>").attr("value", value).text(text)
-                    );
-                }); 
-                UserService.cleanColumnSearch(13); 
-            }
-            else if(! $("#sub_categories").val()) { 
-                $('#formats').attr('disabled','disabled');
-                $('#formats').val('');
-                UserService.cleanColumnSearch(13);
-            }
-        }
-
         $("#categories").on('change', function () {
+            console.log('cambio categoria');
+
             var parameters = {
                 'category': $("#categories").val()
             };
 
             $.get("/espacios/ajax", parameters, function( data ) {
                 if(data.success) {
-                    changeSelects(data.inputs);
+                    SpaceService.changeSelects(data.inputs);
                 }
             });
         } );
@@ -169,7 +91,7 @@
 
             $.get("/espacios/ajax", parameters, function( data ) {
                 if(data.success) {
-                    changeSelects(data.inputs);
+                    SpaceService.changeSelects(data.inputs);
                 }
             });
         });

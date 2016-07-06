@@ -62,14 +62,14 @@ class AdvertiserRepository extends BaseRepository
                             ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
                     }
                 });
-            },
-            'logs']);
+            }, 'proposals'
+        ]);
 
         if(!is_null($user)) {
             $advertisers->whereUserId($user->id);
         }
 
-        $advertisers = $advertisers->get();
+        $advertisers = $advertisers->orderBy('created_at', 'desc')->get();
 
         if(!empty($intentionsInit) || !empty($intentionsFinish)) {
            $advertisers = $advertisers->filter(function ($advertiser) {

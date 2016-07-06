@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <th width="200" height="50" align="center" style="padding-bottom:50px;">
-                        <a href="http://www.dondepauto.co/aceptar-invitacion-registro/{{ $code }}"><img src="http://www.dondepauto.co/newsletter/images/v2/botonUnirmeADP_naranja.jpg" style="width:100%;max-width:361px;" width="361" border="0" /></a>
+                        <a href="@yield('action')"><img src="http://www.dondepauto.co/newsletter/images/v2/botonUnirmeADP_naranja.jpg" style="width:100%;max-width:361px;" width="361" border="0" /></a>
                     </th>
                 </tr>
                 <tr>
