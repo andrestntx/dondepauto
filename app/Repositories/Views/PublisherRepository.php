@@ -28,7 +28,7 @@ class PublisherRepository extends BaseRepository
      */
     public function search()
     {
-        return $this->model->with(['spaces.city'])->get();
+        return $this->model->with(['spaces.city', 'logs'])->get();
     }
 
     /**

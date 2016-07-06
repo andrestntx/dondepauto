@@ -15,24 +15,24 @@ var PublisherService = function() {
             "processing": true,
             "serverSide": true,
             "columns": [
-                { "data": null, "orderable": false },
-                { "data": "company" },
-                { "data": "name" },
-                { "data": "email" },
-                { "data": "phone"},
-                { "data": "cel"},
-                { "data": "state" },
-                { "data": "count_spaces" },
-                { "data": "state_id"},
-                { "data": "address"},
-                { "data": "created_at_datatable"},
-                { "data": "last_log_login_at_datatable"},
-                { "data": "space_city_names"},
-                { "data": "activated_at_datatable"},
-                { "data": "signed_agreement"},
-                { "data": "signed_at_datatable"},
-                { "data": "has_offers"},
-                { "data": "last_offer_at_datatable"}
+                { "data": null, "name": "company", "orderable": false },
+                { "data": "company" , "name": "company" },
+                { "data": "name" , "name": "name" },
+                { "data": "email" , "name": "email" },
+                { "data": "phone", "name": "phone"},
+                { "data": "cel", "name": "cel"},
+                { "data": "state" , "name": "state" },
+                { "data": "count_spaces" , "name": "count_spaces" },
+                { "data": "state_id", "name": "state_id"},
+                { "data": "address", "name": "address"},
+                { "data": "created_at_datatable", "name": "created_at_datatable"},
+                { "data": "last_log_login_at_datatable", "name": "last_log_login_at_datatable"},
+                { "data": "space_city_names", "name": "space_city_names"},
+                { "data": "activated_at_datatable", "name": "activated_at_datatable"},
+                { "data": "signed_agreement", "name": "signed_agreement"},
+                { "data": "signed_at_datatable", "name": "signed_at_datatable"},
+                { "data": "has_offers", "name": "has_offers"},
+                { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}
             ],
             "columnDefs": [
                 {
@@ -85,7 +85,15 @@ var PublisherService = function() {
 
         UserService.initDatatable(table);
         UserService.initSimpleSearchSelect("#registration_states",8);
-        UserService.initSimpleSearchSelect('#with_spaces', 12);
+        UserService.initSimpleSearchSelectText('#with_spaces', 12);
+
+        $("#publishers-datatable_filter input").unbind();
+
+        $("#publishers-datatable_filter input").bind('keyup', function(e) {
+            if(e.keyCode == 13) {
+                table.search(this.value).draw();   
+            }
+        }); 
     }
 
     function initSearchAgreement() {
