@@ -30,7 +30,7 @@ class PublisherRepository extends BaseRepository
     {
         return $this->model->select([
                 'company', 'name', 'email', 'phone', 'cel', 'created_at', 'signed_at', 
-                'signed_agreement', 'activated_at', 'id', 'address'
+                'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data'
             ])->with(['spaces' => function($query) {
                     $query->select('id_us_reg_LI as publisher_id', 'id_espacio_LI');
                 }, 'spaces.city' => function($query) {
