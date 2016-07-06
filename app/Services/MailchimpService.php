@@ -56,7 +56,7 @@ class MailchimpService
     {
         $this->mailchimp->put($this->getUserUrl($user), [
             'email_address' => $user->email,
-            //'status'        => 'subscribed',
+            //'status'      => 'subscribed',
             "status_if_new" => "subscribed",
             'merge_fields'  =>  [
                 'FNAME'     => $user->first_name,
