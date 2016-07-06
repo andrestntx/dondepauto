@@ -85,6 +85,10 @@ class PublishersSpacesController extends ResourceController
             return ['result' => 'false'];
         }
 
+        if($this->spaceFacade->countSpaces($user) == 1) {
+            return ['result' => 'true', 'route' => route('medios.agreement', $user)];
+        }
+
         return ['result' => 'true', 'route' => route('home')];
     }
 }

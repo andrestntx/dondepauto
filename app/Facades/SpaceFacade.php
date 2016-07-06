@@ -102,4 +102,9 @@ class SpaceFacade
 
         return $result;
     }
+
+    public function countSpaces(User $user) 
+    {
+        return $this->service->countSpaces($user);
+    }
 }

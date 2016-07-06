@@ -94,7 +94,7 @@ class Space extends Entity
         $databaseTranslate = parent::getAttribute($this->getTranslateOrOriginalKey($key));
 
         if(is_null($databaseTranslate)) {
-            $databaseTranslate = $this->space->getAttribute($key);
+            // $databaseTranslate = $this->space->getAttribute($key);
         }
 
         return $databaseTranslate;
@@ -148,7 +148,7 @@ class Space extends Entity
      */
     public function city()
     {
-        return $this->belongsTo(SpaceCity::class, 'id_ciudad_LI');
+        return $this->belongsTo(SpaceCity::class, 'id_espacio_LI', 'id_ciudad_LI');
     }
 
     /**
