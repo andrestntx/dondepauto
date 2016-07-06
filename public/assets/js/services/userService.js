@@ -22,10 +22,19 @@ var UserService = function() {
 		initSimpleSearchSelect: function (input, column) 
 		{
 			$(input).on( 'change', function () {
-	            
 	            dataTable
 	                .column(column)
 	                .search( this.value )
+	                .draw();
+	        } );
+		},
+
+		initSimpleSearchSelectText: function (input, column) 
+		{
+			$(input).on( 'change', function () {
+	            dataTable
+	                .column(column)
+	                .search( $(this).find("option:selected").text() )
 	                .draw();
 	        } );
 		},

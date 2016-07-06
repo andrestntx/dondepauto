@@ -102,6 +102,14 @@ var SpaceService = function() {
         });
 
         UserService.initDatatable(table);
+
+        $("#spaces-datatable_filter input").unbind();
+
+        $("#spaces-datatable_filter input").bind('keyup', function(e) {
+            if(e.keyCode == 13) {
+                table.search(this.value).draw();   
+            }
+        }); 
     };
 
     function initFilters() {

@@ -129,7 +129,7 @@ class Publisher extends PUser
      */
     public function getSpaceCityNamesAttribute()
     {
-        return $this->spaces->lists('city_name');
+        return implode(",", $this->spaces->lists('city_name')->all());
     }
 
     /**
