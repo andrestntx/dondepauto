@@ -93,7 +93,6 @@
             PublisherService.drawShowPrices();
             SpaceService.initDatatable($('#publisher').data('datatable'));
             SpaceService.initModalEvent();
-
         });
     </script>
 @endsection

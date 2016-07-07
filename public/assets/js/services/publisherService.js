@@ -16,35 +16,36 @@ var PublisherService = function() {
             "serverSide": true,
             "columns": [
                 { "data": null, "name": "company", "orderable": false },
+                { "data": "created_at_datatable", "name": "created_at_datatable"},
                 { "data": "company" , "name": "company" },
-                { "data": "name" , "name": "name" },
-                { "data": "email" , "name": "email" },
-                { "data": "phone", "name": "phone"},
-                { "data": "cel", "name": "cel"},
+                { "data": "first_name" , "name": "first_name" },
                 { "data": "state" , "name": "state" },
                 { "data": "count_spaces" , "name": "count_spaces" },
+                { "data": "comments" , "name": "comments" },
+
                 { "data": "state_id", "name": "state_id"},
-                { "data": "address", "name": "address"},
-                { "data": "created_at_datatable", "name": "created_at_datatable"},
                 { "data": "space_city_names", "name": "space_city_names"},
+                { "data": "has_offers", "name": "has_offers"},
+
                 { "data": "activated_at_datatable", "name": "activated_at_datatable"},
                 { "data": "signed_agreement", "name": "signed_agreement"},
                 { "data": "signed_at_datatable", "name": "signed_at_datatable"},
-                { "data": "has_offers", "name": "has_offers"},
                 { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}
             ],
             "columnDefs": [
                 {
-                    "targets": [3,4,5,8,9,10,11,12,13,14,15,16],
+                    "targets": [0,1,2,3,4,5,6],
+                    "searchable": false,
+                    "visible": true
+                },
+                {
+                    "targets": [7,8,9,10,11,12,13],
+                    "searchable": false,
                     "visible": false
                 },
                 {
-                    "targets": [4,5,8,9,10,11,12,13,14,15,16],
-                    "searchable": false
-                },
-                {
                     className: "text-center",
-                    "targets": [0,3,4,6,7]
+                    "targets": [0,1,4,5]
                 }
             ],
             "language": {
@@ -68,13 +69,13 @@ var PublisherService = function() {
                     "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-search-plus'></i></button>"
                 );
                 if(!aData.company || !aData.company.trim()) {
-                    $('td:eq(1)', nRow).html('--');
+                    $('td:eq(2)', nRow).html('--');
                 }
-                $('td:eq(3)', nRow).html(
+                $('td:eq(4)', nRow).html(
                     UserService.getHtmlTableStates(aData.states)
                 );
                 if(aData.count_spaces > 0){
-                    $('td:eq(4)', nRow).html(
+                    $('td:eq(5)', nRow).html(
                         '<span class="badge badge-info">' + aData.count_spaces + '</span>'
                     );
                 }
@@ -86,8 +87,8 @@ var PublisherService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states",8);
-        UserService.initSimpleSearchSelect('#with_spaces', 11);
+        UserService.initSimpleSearchSelect("#registration_states", 6);
+        UserService.initSimpleSearchSelect('#with_spaces', 7);
 
         $("#publishers-datatable_filter input").unbind();
 
@@ -110,9 +111,9 @@ var PublisherService = function() {
             $('#registration_states option[value=complete-data]').prop('selected', true);
             $('#registration_states').prop('disabled', true);
 
-            table.column(13)
+            table.column(11)
                     .search('1')
-                .column(8)
+                .column(7)
                     .search('complete-data')
                 .draw();
         });
@@ -133,11 +134,11 @@ var PublisherService = function() {
 
             $('#registration_states').prop('disabled', false);
 
-            table.column(13)
+            table.column(11)
                     .search('0')
-                .column(8)
+                .column(7)
                     .search(optionState)
-                .column(14)
+                .column(12)
                     .search(' , ')
                 .draw();
         });
@@ -155,9 +156,9 @@ var PublisherService = function() {
             $('#registration_states option[value=complete-data]').prop('selected', true);
             $('#registration_states').prop('disabled', true);
 
-            table.column(15)
+            table.column(9)
                     .search('true')
-                .column(8)
+                .column(7)
                     .search(optionState)
                 .draw();
         });
@@ -179,9 +180,9 @@ var PublisherService = function() {
 
             $('#registration_states').prop('disabled', false);
 
-            table.column(15)
+            table.column(9)
                     .search('')
-                .column(8)
+                .column(7)
                     .search(optionState)
                 .draw();
             

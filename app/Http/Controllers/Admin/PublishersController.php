@@ -84,9 +84,9 @@ class PublishersController extends ResourceController
                         }
                         if($column['name'] == 'space_city_names' && trim($column['search']['value'])) {
                             $cities = $publisher->hasSpaceCity(intval($column['search']['value']));
+
                         }
                     }
-
                     return $state && $hasOffers && $cities;
                 });
             })
@@ -104,7 +104,7 @@ class PublishersController extends ResourceController
      */
     public function searchSpaces(Request $request, User $publisher)
     {
-        return $this->facade->searchSpaces($publisher);
+        return \Datatables::of($this->facade->searchSpaces($publisher))->make(true);
     }
 
     /**

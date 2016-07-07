@@ -24,7 +24,7 @@
                                 <legend class="h4" style="padding-top: 10px;">Acuerdo</legend>
                                 <div class="col-md-6" style="padding-left: 35px; padding-top: 10px;">
                                     <div class="checkbox m-r-xs">
-                                        {!! Form::checkbox('signed_agreement', 1, null, ['id' => 'signed_agreement']) !!}
+                                        {!! Form::checkbox('signed_agreement', 1, $publisher->has_signed_agreement, ['id' => 'signed_agreement']) !!}
                                         <label for="signed_agreement">
                                             Acuerdo firmado
                                         </label>
