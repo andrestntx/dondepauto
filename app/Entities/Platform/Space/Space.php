@@ -109,7 +109,7 @@ class Space extends Entity
      */
     protected function mutateAttribute($key, $value)
     {
-        if($this->hasGetMutator($key)) {
+        /*if($this->hasGetMutator($key)) {
             return $this->{'get'.Str::studly($key).'Attribute'}($value);    
         }
         
@@ -117,7 +117,7 @@ class Space extends Entity
            return $this->space->mutateAttribute($key, $value);     
         }
         
-        return $this->space->getAttribute($key);
+        return $this->space->getAttribute($key);*/
     }
 
     public function cities()
@@ -216,7 +216,7 @@ class Space extends Entity
      */
     public function getCategoryNameAttribute()
     {
-        return $this->space->category_name;
+        return $this->subCategory->category_name;
     }
 
     /**

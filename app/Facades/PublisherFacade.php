@@ -54,12 +54,15 @@ class PublisherFacade
         return $this->spaceService->search($publisher);
     }
 
+
     /**
+     * @param array $columns
+     * @param array $search
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search()
+    public function search(array $columns, array $search)
     {
-        return $this->service->search();
+        return $this->service->search($columns, $search);
     }
 
     /**

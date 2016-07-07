@@ -16,6 +16,13 @@ var UserService = function() {
 	            keyboardNavigation: false,
 	            forceParse: false,
 	            autoclose: true,
+	        }).on('changeDate', function(e) {
+	        	console.log($(this).data('column'));
+	        	dataTable
+	            	.column($(this).data('column'))
+	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
+	            	.draw();
+	        	console.log();
 	        });
 	    },
 
@@ -74,16 +81,32 @@ var UserService = function() {
 	        } );
 		},
 
-		initDrawDateRange: function(inputInit, inputFinish) 
+		/*initDrawDateRange: function(inputInit, inputFinish, column) 
 		{
-			$(inputInit + ', ' + inputFinish).on('change', function() {
-	            dataTable.draw();
+			$('#created_at_start').change(function() {
+				console.log('busca fecha 1');
+	            dataTable
+	            	.column(column)
+	            	.search($(inputInit).val() + ',' + $(inputFinish).val())
+	            	.draw();
 	        } );
-		},
+
+			$(inputFinish).on('change', function() {
+				console.log('busca fecha 2');
+	            dataTable
+	            	.column(column)
+	            	.search($(inputInit).val() + ',' + $(inputFinish).val())
+	            	.draw();
+	        } );
+		},*/
 
 		searchDateRange: function (aData, inputInit, inputFinish, column) {
+
 	        var iFini = $(inputInit).val();
 	        var iFfin = $(inputFinish).val();
+
+	        console.log(iFini);
+	        console.log(iFfin);
 
 	        iFini = iFini.substring(6,10) + iFini.substring(3,5)+ iFini.substring(0,2);
 	        iFfin = iFfin.substring(6,10) + iFfin.substring(3,5)+ iFfin.substring(0,2);
