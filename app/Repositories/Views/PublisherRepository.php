@@ -45,7 +45,7 @@ class PublisherRepository extends BaseRepository
                 }*/
             ]);
 
-       if(trim($search['value'])) {
+        if(trim($search['value'])) {
             $value = $search['value'];
             $publisherQuery->where(function ($query) use($value) {
                 $query->where('company', 'LIKE', '%' . $value . '%')
@@ -57,7 +57,6 @@ class PublisherRepository extends BaseRepository
 
         foreach ($columns as $column) {
             $this->searchDateRange($column, 'created_at_datatable', 'created_at', $publisherQuery);
-            $this->searchDateRange($column, 'last_offer_at_datatable', 'activated_at', $publisherQuery);
             $this->searchDateRange($column, 'signed_at_datatable', 'signed_at', $publisherQuery);
 
             if ($column['name'] == 'signed_agreement' && trim($column['search']['value'])) {

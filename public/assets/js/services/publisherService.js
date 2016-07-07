@@ -87,8 +87,8 @@ var PublisherService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states", 6);
-        UserService.initSimpleSearchSelect('#with_spaces', 7);
+        UserService.initSimpleSearchSelect("#registration_states", 7);
+        UserService.initSimpleSearchSelect('#with_spaces', 8);
 
         $("#publishers-datatable_filter input").unbind();
 
