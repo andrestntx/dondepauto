@@ -36,8 +36,11 @@ var PublisherService = function() {
             "columnDefs": [
                 {
                     "targets": [4,5,8,9,10,11,12,13,14,15,16],
-                    "visible": false,
-                    "searchable": true
+                    "visible": false
+                },
+                {
+                    "targets": [4,5,8,9,10,11,12,13,14,15,16],
+                    "searchable": false
                 },
                 {
                     className: "text-center",
@@ -84,7 +87,7 @@ var PublisherService = function() {
 
         UserService.initDatatable(table);
         UserService.initSimpleSearchSelect("#registration_states",8);
-        UserService.initSimpleSearchSelectText('#with_spaces', 11);
+        UserService.initSimpleSearchSelect('#with_spaces', 11);
 
         $("#publishers-datatable_filter input").unbind();
 
@@ -99,27 +102,27 @@ var PublisherService = function() {
         var optionState = '';
 
         $('#signed_agreement').on('ifChecked', function(event){
+            console.log('true');
             $('#agreement_at_start').prop('disabled', false);
             $('#agreement_at_end').prop('disabled', false);
-
-            table.column(14)
-                .search('true')
-                .draw();
 
             optionState = $('#registration_states').val();
             $('#registration_states option[value=complete-data]').prop('selected', true);
             $('#registration_states').prop('disabled', true);
-        });
-
-        $('#signed_agreement').on('ifUnchecked', function(event){
-            $('#agreement_at_start').prop('disabled', true);
-            $('#agreement_at_end').prop('disabled', true);
-            $("#agreement_at_start").datepicker("setDate", null);
-            $("#agreement_at_end").datepicker("setDate", null);
 
             table.column(13)
-                .search('')
+                    .search('1')
+                .column(8)
+                    .search('complete-data')
                 .draw();
+        });
+
+        $('#signed_agreement').on('ifUnchecked', function(event) {
+            $('#agreement_at_start').prop('disabled', true);
+            $('#agreement_at_end').prop('disabled', true);
+            /*$("#agreement_at_start").datepicker("setDate", null);
+            $("#agreement_at_end").datepicker("setDate", null); */
+
 
             if(optionState == '') {
                 $('#registration_states :nth-child(1)').prop('selected', true);
@@ -129,7 +132,14 @@ var PublisherService = function() {
             }
 
             $('#registration_states').prop('disabled', false);
-            
+
+            table.column(13)
+                    .search('0')
+                .column(8)
+                    .search(optionState)
+                .column(14)
+                    .search(' , ')
+                .draw();
         });
     }
 
@@ -137,27 +147,28 @@ var PublisherService = function() {
         var optionState = '';
 
         $('#offer').on('ifChecked', function(event){
+            console.log('ofertó');
             $('#offer_at_start').prop('disabled', false);
             $('#offer_at_end').prop('disabled', false);
-
-            table.column(15)
-                .search('true')
-                .draw();
 
             optionState = $('#registration_states').val();
             $('#registration_states option[value=complete-data]').prop('selected', true);
             $('#registration_states').prop('disabled', true);
+
+            table.column(15)
+                    .search('true')
+                .column(8)
+                    .search(optionState)
+                .draw();
         });
 
         $('#offer').on('ifUnchecked', function(event){
+            console.log('no ofertó');
             $('#offer_at_start').prop('disabled', true);
             $('#offer_at_end').prop('disabled', true);
             $("#offer_at_start").datepicker("setDate", null);
             $("#offer_at_end").datepicker("setDate", null);
 
-            table.column(15)
-                .search('')
-                .draw();
 
             if(optionState == '') {
                 $('#registration_states :nth-child(1)').prop('selected', true);
@@ -167,23 +178,21 @@ var PublisherService = function() {
             }
 
             $('#registration_states').prop('disabled', false);
+
+            table.column(15)
+                    .search('')
+                .column(8)
+                    .search(optionState)
+                .draw();
             
         });
     }        
 
     function initSearchDateRanges()
     {
-        UserService.initDrawDateRange('#created_at_start', '#created_at_end');
-        UserService.initDrawDateRange('#agreement_at_start', '#agreemet_at_end');
-        UserService.initDrawDateRange('#offer_at_start', '#offer_at_end');
-
-        $.fn.dataTableExt.afnFiltering.push(
-            function( oSettings, aData, iDataIndex) {
-                return UserService.searchDateRange(aData, '#created_at_start', '#created_at_end', 10) &&
-                        UserService.searchDateRange(aData, '#agreement_at_start', '#agreement_at_end', 14) &&
-                        UserService.searchDateRange(aData, '#offer_at_start', '#offer_at_end', 16);
-            }
-        );
+        //UserService.initDrawDateRange('#created_at_start', '#created_at_end', 10);
+        //UserService.initDrawDateRange('#agreement_at_start', '#agreement_at_end', 14);
+        //UserService.initDrawDateRange('#offer_at_start', '#offer_at_end', 16);
     }
 
     function initModalEvent() {

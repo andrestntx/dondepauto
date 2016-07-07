@@ -139,6 +139,23 @@ class PUser  extends Model {
     }
 
     /**
+     * @param $state
+     * @return bool
+     */
+    public function hasState($state)
+    {
+        if(trim($state)) {
+            if($this->state_id == $state) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return string
      */
     public function getStateAttribute()

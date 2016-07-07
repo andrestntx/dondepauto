@@ -49,7 +49,7 @@
                     <div class="col-md-4">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro inicial</label>
-                            <div class="input-daterange input-group" id="datepicker">
+                            <div class="input-daterange input-group" id="datepicker_created_at_start" data-column="10">
                                 <input type="text" class="input-sm form-control" id="created_at_start" name="created_at_start"/>
                                 <span class="input-group-addon">a</span>
                                 <input type="text" class="input-sm form-control" id="created_at_end" name="created_at_end"/>
@@ -62,7 +62,7 @@
                     <div class="col-md-4">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label"> <input type="checkbox" class="i-checks" id="signed_agreement"> Firma de acuerdo</label>
-                            <div class="input-daterange input-group" id="datepicker_agreement">
+                            <div class="input-daterange input-group" id="datepicker_agreement" data-column="14">
                                 <input type="text" class="input-sm form-control" disabled id="agreement_at_start" name="agreement_at_start"/>
                                 <span class="input-group-addon">a</span>
                                 <input type="text" class="input-sm form-control" disabled id="agreement_at_end" name="agreement_at_end"/>
@@ -77,7 +77,7 @@
                     <div class="col-md-4">
                         <div class="form-group" id="data_offer_at">
                             <label class="control-label"> <input type="checkbox" class="i-checks" id="offer"> Ofertó</label>
-                            <div class="input-daterange input-group" id="datepicker_offer">
+                            <div class="input-daterange input-group" id="datepicker_offer" data-column="16">
                                 <input type="text" class="input-sm form-control" disabled id="offer_at_start" name="offer_at_start"/>
                                 <span class="input-group-addon">a</span>
                                 <input type="text" class="input-sm form-control" disabled id="offer_at_end" name="offer_at_end"/>

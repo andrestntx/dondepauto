@@ -27,12 +27,15 @@ class PublisherService extends ResourceService
         $this->repository = $repository;
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param array $columns
+     * @param array $search
+     * @return mixed
      */
-    public function search()
+    public function search(array $columns, array $search)
     {
-        return $this->viewRepository->search();
+        return $this->viewRepository->search($columns, $search);
     }
 
     /**

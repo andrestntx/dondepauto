@@ -15,6 +15,7 @@ use App\Http\Requests\RUser\Publisher\StoreRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PublishersController extends ResourceController
 {
@@ -66,7 +67,30 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
-        return \Datatables::of($this->facade->search())->make(true);
+        \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
+            ->filter(function ($instance) use ($request) {
+                
+                $instance->collection = $instance->collection->filter(function ($publisher) use ($request) {
+                    $state = true;
+                    $hasOffers = true;
+                    $cities = true;
+
+                    foreach ($request->get('columns') as $column) {
+                        if($column['name'] == 'state_id') {
+                            $state = $publisher->hasState($column['search']['value']);
+                        }
+                        if($column['name'] == 'has_offers' && $column['search']['value'] == 'true') {
+                            $hasOffers = $publisher->has_offers;
+                        }
+                        if($column['name'] == 'space_city_names' && trim($column['search']['value'])) {
+                            $cities = $publisher->hasSpaceCity(intval($column['search']['value']));
+                        }
+                    }
+
+                    return $state && $hasOffers && $cities;
+                });
+            })
+            ->make(true);
 
         return view('home');
     }
