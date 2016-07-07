@@ -58,7 +58,7 @@ class PublisherRepository extends BaseRepository
             $this->searchDateRange($column, 'last_offer_at_datatable', 'activated_at', $publisherQuery);
             $this->searchDateRange($column, 'signed_at_datatable', 'signed_at', $publisherQuery);
 
-            if ($column['name'] == 'signed_agreement' && strlen($column['search']['value']) > 0) {
+            if ($column['name'] == 'signed_agreement' && trim($column['search']['value'])) {
                 $publisherQuery->where('signed_agreement', '=', $column['search']['value']);
             }
         }

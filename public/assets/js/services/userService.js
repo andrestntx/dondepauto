@@ -17,12 +17,16 @@ var UserService = function() {
 	            forceParse: false,
 	            autoclose: true,
 	        }).on('changeDate', function(e) {
-	        	console.log($(this).data('column'));
 	        	dataTable
 	            	.column($(this).data('column'))
 	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
 	            	.draw();
 	        	console.log();
+	        }).on('clearDate', function(e) {
+	        	dataTable
+	            	.column($(this).data('column'))
+	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
+	            	.draw();
 	        });
 	    },
 
@@ -205,7 +209,7 @@ var UserService = function() {
 	    		width = '190';
 	    	}
 
-	    	var html 		= $('<div style="width:' + width + 'px;"></div>').addClass('text-center');
+	    	var html 		= $('<div style="width:' + width + 'px; margin: 0 auto;"></div>').addClass('text-center');
 
 	    	$.each( states, function( key, state ) {
 	    		var i 		= $('<i></i>').addClass(state.icon);

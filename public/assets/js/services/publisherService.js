@@ -35,7 +35,7 @@ var PublisherService = function() {
             ],
             "columnDefs": [
                 {
-                    "targets": [4,5,8,9,10,11,12,13,14,15,16],
+                    "targets": [3,4,5,8,9,10,11,12,13,14,15,16],
                     "visible": false
                 },
                 {
@@ -44,7 +44,7 @@ var PublisherService = function() {
                 },
                 {
                     className: "text-center",
-                    "targets": [0,6,7]
+                    "targets": [0,3,4,6,7]
                 }
             ],
             "language": {
@@ -70,11 +70,11 @@ var PublisherService = function() {
                 if(!aData.company || !aData.company.trim()) {
                     $('td:eq(1)', nRow).html('--');
                 }
-                $('td:eq(4)', nRow).html(
+                $('td:eq(3)', nRow).html(
                     UserService.getHtmlTableStates(aData.states)
                 );
                 if(aData.count_spaces > 0){
-                    $('td:eq(5)', nRow).html(
+                    $('td:eq(4)', nRow).html(
                         '<span class="badge badge-info">' + aData.count_spaces + '</span>'
                     );
                 }
