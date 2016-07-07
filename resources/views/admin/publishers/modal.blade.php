@@ -98,7 +98,7 @@
                         </div>
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <a href="#" class="h5" id="link-spaces" style="font-size: 15px;"> 
+                                <a href="#" class="h5" id="link-spaces" style="font-size: 15px;" target="_blank"> 
                                     <i class="fa fa-newspaper-o"></i> 
                                     Espacios Publicitarios <span style="font-size:18px;" id="count-spaces">(0)</span>
                                 </a>
@@ -110,7 +110,7 @@
             </div>
 
             <div class="modal-footer">
-                <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
+                <a href="#" class="btn btn-warning" target="_blank" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
                 <a href="#" class="btn btn-danger" id="" data-toggle="tooltip" data-placement="top" title="Desactivar anunciante"><i class="fa fa-trash"></i></a>
             </div>
         </div>

@@ -246,6 +246,15 @@ class User extends Entity
         }
     }
 
+    public function getHasSignedAgreementAttribute()
+    {
+        if($this->signed_agreement == 'Si_fir_ac') {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * @param $value
      */
