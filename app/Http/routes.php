@@ -169,3 +169,11 @@ Route::group(['prefix' => 'landing'], function(){
         'uses' => 'Auth\PublisherController@registerLanding'
     ]);
 });
+
+Route::get('metricas/espacios', function(\Illuminate\Http\Request $request){
+    return DB::table('view_spaces')
+            ->select(\DB::raw("COUNT(*) as espacios_publicados"))
+            ->where("created_at", ">=", $request->get('start'))
+            ->where("created_at", "<=", $request->get('end'))
+            ->get();
+});
