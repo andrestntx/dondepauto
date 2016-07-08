@@ -70,3 +70,91 @@
     top: 36%;
 }
 
+.dashboard .slide-tips {
+    margin-top: 1em;
+}
+
+.publisher-content .slide-tips h2 {
+    text-transform: none;
+    font-size: 1.6em;
+    margin-bottom: 1em;
+    color: #2cbaf8;
+}
+
+.publisher-content .slide-tips h3 {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: normal;
+    font-weight: 600;
+    margin: 1em 5em;
+}
+
+.ibox-content-margin {
+    border: 3.6px solid #dad8d8;
+}    
+
+.publisher-content .slide-tips p {
+    margin: auto;
+    font-size: 1.25em;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.publisher-content .agreement-form {
+    margin-top: 2em;
+}
+
+.publisher-content .agreement-form h2 {
+    font-weight: 600;
+    font-size: 2em;
+    margin-bottom: 35px;
+    text-transform: none;
+}
+
+.publisher-content .agreement-form img.icon-steps{
+    width: 50%;
+    margin: auto;
+    display: block;
+    max-width: 75px;
+}
+
+.publisher-content .agreement-form p.intro-form {
+    font-size: 1.2em;
+    text-align: justify;
+}
+
+.agreement-form .ibox {
+    border-color: #2cbaf8;
+    margin-top: 1.6em;
+}
+
+.agreement-form .ibox-title {
+    border-color: #2cbaf8;
+    padding: 5px;
+}
+
+.publisher-content .agreement-form .ibox-title h3 {
+    font-size: 1.35em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.publisher-content .agreement-form .btn-save-agreement {
+    margin-top: 1.8em;
+}
+
+.publisher-content .agreement-form .btn-save-agreement img {
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+
+.horizontal-line {
+    width: 0;
+    height: 660px;
+    border: 1px dashed #c7c1c1;
+    margin: auto;
+    text-align: center;
+    margin-top: 5px;
+}
+    

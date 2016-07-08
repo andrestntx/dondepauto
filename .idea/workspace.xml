@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcc5aa23-d089-47d0-8c6e-3937462c08ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-    </list>
+    <list default="true" id="dcc5aa23-d089-47d0-8c6e-3937462c08ea" name="Default" comment="" />
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -87,8 +85,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="175" column="63" selection-start-line="175" selection-start-column="63" selection-end-line="175" selection-end-column="63" />
+            <state relative-caret-position="520">
+              <caret line="177" column="20" selection-start-line="177" selection-start-column="20" selection-end-line="177" selection-end-column="20" />
               <folding>
                 <marker date="1467936479042" expanded="true" signature="5829:5927" placeholder="SELECT COUNT... bd_view_spaces" />
               </folding>
@@ -380,12 +378,12 @@
       <workItem from="1467209543141" duration="9775000" />
       <workItem from="1467297059300" duration="12185000" />
       <workItem from="1467733560330" duration="14247000" />
-      <workItem from="1467910512385" duration="10212000" />
+      <workItem from="1467910512385" duration="10380000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="510780000" />
+    <option name="totallyTimeSpent" value="510948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1370" height="735" extended-state="0" />
@@ -802,8 +800,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="175" column="63" selection-start-line="175" selection-start-column="63" selection-end-line="175" selection-end-column="63" />
+        <state relative-caret-position="520">
+          <caret line="177" column="20" selection-start-line="177" selection-start-column="20" selection-end-line="177" selection-end-column="20" />
           <folding>
             <marker date="1467936479042" expanded="true" signature="5829:5927" placeholder="SELECT COUNT... bd_view_spaces" />
           </folding>
