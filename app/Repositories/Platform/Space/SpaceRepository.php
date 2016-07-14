@@ -36,6 +36,9 @@ class SpaceRepository extends BaseRepository
     public function sync(array $data, Space $space)
     {
         if(array_key_exists('audiences', $data)) {
+            \Log::info($data['audiences']);
+            \Log::info(explode(',', $data['audiences']));
+
             $space->audiences()->sync(explode(',', $data['audiences']));
         }
 

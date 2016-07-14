@@ -25,7 +25,7 @@ class Space extends Entity
 
     protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
         'city_id','format_id', 'sub_category_id', 'category_id', 'impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction', 'sex_restriction',
-        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id'
+        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id', 'religion_restriction'
     ];
 
     protected $databaseTranslate = ['name' => 'nombre_espacio_LI', 'description' => 'descripcion_espacio_LI', 'address' => 'direccion_ubicacion_LI',
@@ -33,10 +33,10 @@ class Space extends Entity
         'period' => 'periodo_servicio_espacio_LI', 'city_id' => 'id_ciudad_LI', 'format_id' => 'id_formato_LI', 'youtube' => 'link_youtube_LI',
         'impact_scene_id' => 'id_tipo_lugar_ubicacion_LI', 'alcohol_restriction' => 'restringeAlcohol_LI', 'discount' => 'descuento_espacio_LI',
         'snuff_restriction' => 'restringeTabaco_LI', 'policy_restriction' => 'restringePolitica_LI', 'sex_restriction' =>  'restringeSexo_LI',
-            'more_audiences' => 'tags_espacio_LI', 'publisher_id' => 'id_us_reg_LI',
+            'more_audiences' => 'tags_espacio_LI', 'publisher_id' => 'id_us_reg_LI', 'religion_restriction' => 'restringeReligion_LI',
         'publisher_company' => 'nombre_empresa_proveedora_espacio_LI', 'public_price' => 'precio_margen_espacio_LI', 'margin' => 'porcentaje_precio_margen_espacio_LI',
         'category_id' => 'id_cat_LI', 'sub_category_id' => 'id_subcat_LI', 'percentage_markup' => 'porcentaje_precio_margen_espacio_LI',
-        'active' => 'espacio_activo_LI'];
+        'active' => 'espacio_activo_LI', 'private' => 'espacio_privado_LI', 'points' => 'puntaje_LI'];
 
     /**
      * The accessors to append to the model's array form.
@@ -87,6 +87,7 @@ class Space extends Entity
      */
     public function getAttribute($key)
     {
+
         if (array_key_exists($key, $this->attributes) || $this->hasGetMutator($key)) {
             return $this->getAttributeValue($key);
         }
@@ -107,7 +108,7 @@ class Space extends Entity
      * @param  mixed  $value
      * @return mixed
      */
-    protected function mutateAttribute($key, $value)
+    /*protected function mutateAttribute($key, $value)
     {
         /*if($this->hasGetMutator($key)) {
             return $this->{'get'.Str::studly($key).'Attribute'}($value);    
@@ -118,21 +119,64 @@ class Space extends Entity
         }
         
         return $this->space->getAttribute($key);*/
-    }
+    //}
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function cities()
     {
         return $this->belongsToMany(SpaceCity::class, 'city_space', 'space_id', 'city_id');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCitiesListAttribute()
+    {
+        return $this->cities->lists('id')->all();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function audiences()
     {
         return $this->belongsToMany(Audience::class, 'audience_space', 'space_id', 'audience_id');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAudiencesListAttribute()
+    {
+        return $this->audiences->lists('id')->all();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImagesListAttribute()
+    {
+        return $this->images->map(function ($item, $key) {
+            return ['url' => $item->thumb];
+        })->toJson();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function impactScenes()
     {
         return $this->belongsToMany(SpaceImpactScene::class, 'impact_scene_space', 'space_id', 'impact_scene_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImpactScenesListAttribute()
+    {
+        return $this->impactScenes->lists('id')->all();
     }
 
     /**
@@ -203,12 +247,24 @@ class Space extends Entity
         return $this->city;
     }
 
+    public function getFormatNameAttribute() {
+        return $this->format->name;
+    }
+
+    /**
+     * @return Model
+     */
+    public function getSubCategory()
+    {
+        return $this->format->subCategory;
+    }
+
     /**
      * @return Model
      */
     public function getCategory()
     {
-        return $this->subCategory->category;
+        return $this->getSubCategory()->category;
     }
 
     /**
@@ -216,7 +272,7 @@ class Space extends Entity
      */
     public function getCategoryNameAttribute()
     {
-        return $this->subCategory->category_name;
+        return $this->getCategory()->name;
     }
 
     /**
@@ -224,7 +280,7 @@ class Space extends Entity
      */
     public function getSubCategoryNameAttribute()
     {
-        return $this->subCategory->name;
+        return $this->getSubCategory()->name;
     }
 
     /**
@@ -257,6 +313,49 @@ class Space extends Entity
     public function setSexRestrictionAttribute($value)
     {
         $this->setRestriction($value, 'restringeSexo_LI');
+    }
+
+
+    public function isRestriction($column)
+    {
+        if($column == 'S') {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function getSnuffRestrictionBoolAttribute()
+    {
+        return $this->isRestriction($this->snuff_restriction);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAlcoholRestrictionBoolAttribute()
+    {
+        return $this->isRestriction($this->alcohol_restriction);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPolicyRestrictionBoolAttribute()
+    {
+        return $this->isRestriction($this->policy_restriction);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSexRestrictionBoolAttribute()
+    {
+        return $this->isRestriction($this->sex_restriction);
     }
 
     /**

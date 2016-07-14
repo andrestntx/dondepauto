@@ -56,6 +56,20 @@ class ResourceService {
     }
 
     /**
+     * @param array $data
+     * @param Model|null $entity
+     * @return mixed
+     */
+    public function createOrUpdateModel(array $data, Model $entity = null)
+    {
+        if(is_null($entity)) {
+            return $this->repository->create($data);    
+        }
+
+        return $this->repository->update($data, $entity);
+    }
+
+    /**
      * @param $entity
      * @return bool
      */

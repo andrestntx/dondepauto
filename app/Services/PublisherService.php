@@ -8,26 +8,31 @@
 
 namespace App\Services;
 
+use App\Entities\Platform\User;
+use App\Repositories\File\PublisherDocumentsRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 
 class PublisherService extends ResourceService
 {
     protected $viewRepository;
+    protected $publisherDocumentsRepository;
 
     /**
      * UserService constructor.
      * @param PublisherRepository $viewRepository
      * @param UserRepository $repository
+     * @param PublisherDocumentsRepository $publisherDocumentsRepository
      */
-    function __construct(PublisherRepository $viewRepository, UserRepository $repository)
+    function __construct(PublisherRepository $viewRepository, UserRepository $repository, PublisherDocumentsRepository $publisherDocumentsRepository)
     {
         $this->viewRepository = $viewRepository;
         $this->repository = $repository;
+        $this->publisherDocumentsRepository = $publisherDocumentsRepository;
     }
-
-
+    
     /**
      * @param array $columns
      * @param array $search
@@ -93,5 +98,21 @@ class PublisherService extends ResourceService
         }
 
         return $this->createModel($data);
+    }
+
+
+    /**
+     * @param User $publisher
+     * @param UploadedFile $commerceDocument
+     * @param UploadedFile $rutDocument
+     * @param UploadedFile $bankDocument
+     * @param UploadedFile $letterDocument
+     */
+    public function saveDocuments(User $publisher, UploadedFile $commerceDocument, UploadedFile $rutDocument, UploadedFile $bankDocument, UploadedFile $letterDocument)
+    {
+        $this->publisherDocumentsRepository->saveCommerceDocument($publisher, $commerceDocument);
+        $this->publisherDocumentsRepository->saveRutDocument($publisher, $rutDocument);
+        $this->publisherDocumentsRepository->saveBankDocument($publisher, $bankDocument);
+        $this->publisherDocumentsRepository->saveLetterDocument($publisher, $letterDocument);
     }
 }

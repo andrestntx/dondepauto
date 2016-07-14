@@ -13,6 +13,7 @@
 
 @section('content')
     <div class="se-pre-con"></div>
+    <div id="serverImages" data-images="{{ $space->images_list }}"></div>
     
     <div class="col-md-8 col-md-offset-2 text-center">
         <h2 id="title-page">Publicar mi primera oferta</h2>
@@ -49,7 +50,7 @@
             <div class="ibox-content">
                 
                 <div class="row">
-                    <div class="col-md-3" id="points">
+                    <div class="col-md-3" id="points" data-totalpoints="{{ $space->points }}">
                         <div id="fixedPoints">
                             <div class="pieProgress" role="progressbar" data-goal="100" aria-valuemin="0" data-step="2" aria-valuemax="100">
                                 <div class="pie_progress__number">0</div>
@@ -94,7 +95,7 @@
                     </div> 
 
                     <div class="col-md-9">
-                        {!! Form::open(['route' => ['medios.espacios.store', $publisher], 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-publish', 'class' => 'wizard-big form-steps']) !!}
+                        {!! Form::model($space, ['route' => $route, 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-publish', 'class' => 'wizard-big form-steps']) !!}
                             <h1>Datos básicos</h1>
                             <fieldset>
                                 <h2>Datos básicos de este espacio publicitario</h2>
@@ -108,14 +109,18 @@
                                         </div>
                                     </div> --}}
                                    
-                                  <div class="col-lg-12">
+                                    <div class="col-lg-12">
                                         {!! Field::text('name', ['label' => 'Título del espacio publicitario', 'ph' => 'Ejemplo: Pantalla Digital en Hall Principal centro comercial Unicentro Bogotá', 'required']) !!}
                                     </div>
                                     <div class="col-md-6">
                                         {!! Field::select('category_id', $categories, ['label' => 'Categoría (Tipo de pauta del espacio)', 'class' => 'select2-category', 'required']) !!}
                                     </div>
                                     <div class="col-md-6">
-                                        {!! Field::select('format_id', ['' => ''], ['class' => 'select2-format', 'required', 'disabled', 'data-formats' => $formats, 'id' => 'format_id', 'empty' => 'Primero seleccione la categoría', 'label' => 'Formato del espacio']) !!}
+                                        @if($space->format_id)
+                                            {!! Field::select('format_id', $spaceFormats, ['class' => 'select2-format', 'required', 'data-formats' => $formats, 'id' => 'format_id', 'empty' => 'Primero seleccione la categoría', 'label' => 'Formato del espacio']) !!}
+                                        @else
+                                            {!! Field::select('format_id', ['' => ''], ['class' => 'select2-format', 'required', 'disabled', 'data-formats' => $formats, 'id' => 'format_id', 'empty' => 'Primero seleccione la categoría', 'label' => 'Formato del espacio']) !!}
+                                        @endif
                                     </div>
                                     <div class="col-md-12">
                                         {!! Field::textarea('description', ['label' => 'Descripción del espacio', 'ph' => 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante', 'required', 'rows' => '5']) !!}
@@ -131,11 +136,10 @@
                                 <h2>Datos de la audiencia impactada</h2>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {!! Field::select('impact_scenes', $scenes, ['multiple', 'required', 'data-placeholder' => 'Selecciona los escenarios donde se encuentra el espacio publicitario']) !!}
+                                        {!! Field::select('impact_scenes', $scenes, $space->impact_scenes_list, ['multiple', 'required', 'data-placeholder' => 'Selecciona los escenarios donde se encuentra el espacio publicitario']) !!}
                                     </div>
-
                                     <div class="col-md-12">
-                                        {!! Field::select('audiences', $audiences, ['label' => 'Perfil de audiencias', 'data-placeholder' => 'Seleccione las audiencias de su espacio publicitario',  'class' => 'select2-audience', 'required', 'multiple']) !!}
+                                        {!! Field::select('audiences', $audiences, $space->audiences_list, ['label' => 'Perfil de audiencias', 'data-placeholder' => 'Seleccione las audiencias de su espacio publicitario',  'class' => 'select2-audience', 'required', 'multiple']) !!}
                                     </div>
 
                                     <div class="col-lg-12">
@@ -153,7 +157,7 @@
                                         <legend class="h4" style="padding-top: 10px; margin-bottom:0;">Restricciones</legend>
                                         <div class="col-md-2" style="padding-top: 10px;">
                                             <div class="checkbox m-r-xs text-center">
-                                                {!! Form::checkbox('alcohol_restriction', 1, null, ['id' => 'alcohol_restriction']) !!}
+                                                {!! Form::checkbox('alcohol_restriction', 1, $space->alcohol_restriction_bool, ['id' => 'alcohol_restriction']) !!}
                                                 <label for="alcohol_restriction" title="No se permite hacer publicidad de licores">
                                                     Alcohol
                                                 </label>
@@ -161,7 +165,7 @@
                                         </div>
                                         <div class="col-md-2" style="padding-top: 10px;">
                                             <div class="checkbox m-r-xs text-center">
-                                                {!! Form::checkbox('snuff_restriction', 1, null, ['id' => 'snuff_restriction']) !!}
+                                                {!! Form::checkbox('snuff_restriction', 1, $space->snuff_restriction_bool, ['id' => 'snuff_restriction']) !!}
                                                 <label for="snuff_restriction" title="No se permite hacer publicidad de tabaco">
                                                     Tabaco
                                                 </label>
@@ -169,7 +173,7 @@
                                         </div>
                                         <div class="col-md-2" style="padding-top: 10px;">
                                             <div class="checkbox m-r-xs text-center">
-                                                {!! Form::checkbox('policy_restriction', 1, null, ['id' => 'policy_restriction']) !!}
+                                                {!! Form::checkbox('policy_restriction', 1, $space->policy_restriction_bool, ['id' => 'policy_restriction']) !!}
                                                 <label for="policy_restriction" title="No se permite hacer publicidad de política">
                                                     Política
                                                 </label>
@@ -177,7 +181,7 @@
                                         </div>
                                         <div class="col-md-3" style="padding-top: 10px;">
                                             <div class="checkbox m-r-xs text-center">
-                                                {!! Form::checkbox('sex_restriction', 1, null, ['id' => 'sex_restriction']) !!}
+                                                {!! Form::checkbox('sex_restriction', 1, $space->sex_restriction_bool, ['id' => 'sex_restriction']) !!}
                                                 <label for="sex_restriction" title="No se permite hacer publicidad con contenido sexual">
                                                     Contenido sexual
                                                 </label>
@@ -185,7 +189,7 @@
                                         </div>
                                         <div class="col-md-3" style="padding-left: 10px; padding-top: 10px;">
                                             <div class="checkbox m-r-xs text-center">
-                                                {!! Form::checkbox('religion_restriction', 1, null, ['id' => 'religion_restriction']) !!}
+                                                {!! Form::checkbox('religion_restriction', 1, $space->religion_restriction_bool, ['id' => 'religion_restriction']) !!}
                                                 <label for="religion_restriction" title="No se permite hacer publicidad con contenido religioso">
                                                     Religión
                                                 </label>
@@ -194,7 +198,7 @@
                                     </div>
                                     
                                     <div class="col-md-12">
-                                        {!! Field::select('cities', $cities, ['label' => 'Ciudades', 'class' => 'select-cities', 'data-placeholder' => 'Ciudades donde se encuentra el espacio publicitario', 'multiple', 'required']) !!}
+                                        {!! Field::select('cities', $cities, $space->cities_list, ['label' => 'Ciudades', 'class' => 'select-cities', 'data-placeholder' => 'Ciudades donde se encuentra el espacio publicitario', 'multiple', 'required']) !!}
                                     </div>
 
                                     <div class="col-md-12">
@@ -229,7 +233,7 @@
                                 <h2>Precio</h2>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {!! Field::number('price', ['label' => 'Precio base (sin IVA)', 'ph' => 'Precio base del espacio (Sin IVA)', 'required']) !!}
+                                        {!! Field::number('price', $space->minimal_price, ['label' => 'Precio base (sin IVA)', 'ph' => 'Precio base del espacio (Sin IVA)', 'required']) !!}
                                     </div>
                                     <div class="col-md-12">
                                         {!! Field::select('period', $periods, ['empty' => 'seleccione un período', 'required', 'label' => 'Periodo de venta']) !!}

@@ -145,6 +145,21 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Publisher\PublishersController@completeAgreement',
             'as' => 'medios.agreement.complete'
         ]);
+        
+        Route::post('medios/{publishers}/acuerdo/completar', [
+            'uses' => 'Publisher\PublishersController@postCompleteAgreement',
+            'as' => 'medios.agreement.complete.docs'
+        ]);
+
+        Route::post('medios/{publishers}/acuerdo/documentos', [
+            'uses' => 'Publisher\PublishersController@uploadDocuments',
+            'as' => 'medios.agreement.complete.upload'
+        ]);
+
+        Route::get('medios/{publishers}/acuerdo/carta', [
+            'uses' => 'Publisher\PublishersController@getLetter',
+            'as' => 'medios.agreement.letter'
+        ]);
 
         Route::get('medios/{publishers}/publicar', [
             'uses' => 'Publisher\PublishersController@publish',

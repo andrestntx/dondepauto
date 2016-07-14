@@ -1,4 +1,33 @@
+$(".pieProgress").asPieProgress({
+    namespace: 'pieProgress',
+    barsize: 18,
+    barcolor: "#01aeef",
+    min: 0,
+    max: 100,
+    goal: 0,
+    step: 1,
+    speed: 50, // refresh speed
+    delay: 300,
+    easing: 'ease',
+    label: function(n) {
+        return n;
+    },
+    numberCallback: function(n){
+        if(n >= 1){
+            return parseInt(n);
+        }
+        
+        return 0;
+    }
+});
+
+
 $(document).ready(function(){
+
+    var initValue = $("#points").data('totalpoints');
+    var progresActive = false;
+    var actualValue = 0;
+    var sumValue    = 0;
 
     var myDropzone = null;
 
@@ -561,6 +590,8 @@ $(document).ready(function(){
 
     var switchery = new Switchery($('.js-switch')[0], { color: '#00AEEF' });
 
+    var dataImages = $("#serverImages").data('images');
+
     Dropzone.autoDiscover = false;
 
     myDropzone = new Dropzone('#myDropzone', {
@@ -594,6 +625,17 @@ $(document).ready(function(){
             this.on("completemultiple", function(files, response) {
                 //myDrop.removeFiles(files);
             });
+
+            var existingFileCount = 0; // The number of files already uploaded
+            var thisDropzone = this;
+
+            $.each(dataImages, function(key,value){
+                var mockFile = { name: "Imagen DP", size: '10000' };
+                thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+                thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.url);
+                thisDropzone.options.maxFiles = thisDropzone.options.maxFiles - existingFileCount;
+            });
+
         },
         sendingmultiple: function(files, xhr, formData) {
             formData.append("_token", $("input[name='_token']").val());
@@ -603,7 +645,7 @@ $(document).ready(function(){
             formData.append("dimension", $("input[name='dimension']").val());
             
             formData.append("impact_scenes", $("select[name='impact_scenes']").val());
-            formData.append("audiences", $("select[name='impact_scenes']").val());
+            formData.append("audiences", $("select[name='audiences']").val());
             formData.append("more_audiences", $("input[name='more_audiences']").val());
             formData.append("impact", $("input[name='impact']").val());
             formData.append("impact_agency", $("input[name='impact_agency']").val());
@@ -635,6 +677,8 @@ $(document).ready(function(){
 
             formData.append("period", $("select[name='period']").val());
             formData.append("discount", $("input[name='discount']").val());
+
+            formData.append("points", actualValue);
         },
         accept: function(file, done) {
             calculate('photos', this.getAcceptedFiles().length + 1);
@@ -649,9 +693,6 @@ $(document).ready(function(){
             return this._updateMaxFilesReachedClass();
         },
     });
-
-    var actualValue = 0;
-    var sumValue    = 0;
 
     function calculate(name, length) {
         var input = findInput(name);
@@ -691,11 +732,14 @@ $(document).ready(function(){
     }
 
     function updateValue(sumValue, input) {
-        newValue        = actualValue + sumValue - input.actual;
-        actualValue     = newValue;
-        input.actual    = sumValue;
+        console.log(progresActive);
+        if(progresActive) {
+            newValue        = actualValue + sumValue - input.actual;
+            actualValue     = newValue;
+            input.actual    = sumValue;
 
-        $('.pieProgress').asPieProgress('go', newValue);
+            $('.pieProgress').asPieProgress('go', newValue);
+        }
     }
 
     function findInput(name) {
@@ -720,7 +764,7 @@ $(document).ready(function(){
     $("input, textarea").on('change', function() {
         var length  = getLength($(this));
         var name    = $(this).attr('name');
-
+        
         calculate(name, length);
     }).change();
 
@@ -812,28 +856,6 @@ $(document).ready(function(){
         $("a.mclose").show();
     });
 
-    $(".pieProgress").asPieProgress({
-        namespace: 'pieProgress',
-        barsize: 18,
-        barcolor: "#01aeef",
-        min: 0,
-        max: 100,
-        goal: 100,
-        step: 1,
-        speed: 50, // refresh speed
-        delay: 300,
-        easing: 'ease',
-        label: function(n) {
-            return n;
-        },
-        numberCallback: function(n){
-            if(n >= 1){
-                return parseInt(n);
-            }
-            
-            return 0;
-        }
-    });
 
     $('[data-toggle="popover"]').popover({
         triger: 'focus',
@@ -855,6 +877,11 @@ $(document).ready(function(){
         }
     });
 
+    progresActive = true;
 
+    if(initValue > 0) {
+        actualValue = initValue;
+        $('.pieProgress').asPieProgress('go', initValue);
+    }
 
 });
