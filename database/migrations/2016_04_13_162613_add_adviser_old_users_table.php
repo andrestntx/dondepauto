@@ -26,7 +26,7 @@ class AddAdviserOldUsersTable extends Migration
     public function down()
     {
         Schema::table('us_reg_LIST', function (Blueprint $table) {
-            $table->dropIndex('bd_us_reg_list_user_id_foreign');
+            $table->dropIndex('us_reg_list_user_id_foreign');
             $table->dropColumn('user_id');
         });
     }

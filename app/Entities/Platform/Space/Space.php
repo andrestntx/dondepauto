@@ -83,15 +83,6 @@ class Space extends Entity
     const UPDATED_AT = null;
 
     /**
-     * Space constructor.
-     * @param $pointsService
-     */
-    public function __construct(SpacePointsService $pointsService)
-    {
-        $this->pointsService = $pointsService;
-    }
-
-    /**
      * Get an attribute from the model.
      *
      * @param  string  $key
@@ -300,6 +291,7 @@ class Space extends Entity
      */
     public function getNewPointsAttribute()
     {
+        $this->pointsService = new SpacePointsService();
         return $this->pointsService->calculatePoints($this);
     }
 

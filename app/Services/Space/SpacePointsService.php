@@ -234,6 +234,8 @@ class SpacePointsService
         if($this->hasAttribute($input, $attribute)) {
             return $input[$attribute];
         }
+
+        return null;
     }
 
     /**
@@ -298,7 +300,13 @@ class SpacePointsService
      */
     protected function getRules(array $input)
     {
-        return $this->getAttribute($input, 'rules');
+        $rules = $this->getAttribute($input, 'rules');
+
+        if(is_array($rules)) {
+            return $rules;
+        }
+        
+        return [];
     }
 
     /**
