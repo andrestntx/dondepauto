@@ -112,7 +112,22 @@ class SpaceService extends ResourceService
      */
     public function createSpace(array $data, SpaceFormat $format, User $publisher)
     {
-        \Log::info($this->getData($data, $format, $publisher));
         return $this->repository->create($this->getData($data, $format, $publisher));
+    }
+
+    /**
+     * @param array $data
+     * @param SpaceFormat $format
+     * @param Space $space
+     * @return mixed
+     */
+    public function updateSpace(array $data, SpaceFormat $format, Space $space)
+    {
+        return $this->repository->update($this->getData($data, $format, $space->publisher), $space);
+    }
+
+    public function countSpaces(User $user) 
+    {
+        return $this->repository->countSpaces($user);
     }
 }

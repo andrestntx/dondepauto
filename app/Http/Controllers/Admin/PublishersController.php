@@ -14,7 +14,9 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\Publisher\StoreRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PublishersController extends ResourceController
 {
@@ -66,7 +68,41 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
-        return \Datatables::of($this->facade->search())->make(true);
+        return \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
+            ->filter(function ($instance) use ($request) {
+                $instance->collection = $instance->collection->filter(function ($publisher) use ($request) {
+                    $state = true;
+                    $hasOffers = true;
+                    $cities = true;
+                    $dates = true;
+
+                    foreach ($request->get('columns') as $column) {
+                        if($column['name'] == 'state_id') {
+                            $state = $publisher->hasState($column['search']['value']);
+                        }
+                        if($column['name'] == 'has_offers' && $column['search']['value'] == 'true') {
+                            $hasOffers = $publisher->has_offers;
+                        }
+                        if($column['name'] == 'space_city_names' && trim($column['search']['value'])) {
+                            $cities = $publisher->hasSpaceCity(intval($column['search']['value']));
+                        }
+                        if ($column['name'] == 'last_offer_at_datatable' && trim($column['search']['value'])) {
+                            $dateRange = explode(',', $column['search']['value']);
+
+                            if(trim($dateRange[0])) {
+                                $dates = strtotime($publisher->last_offer) >= strtotime(Carbon::createFromFormat('d/m/Y', $dateRange[0])->toDateString());
+                            }
+                            if(trim($dateRange[1])) {
+                                $dates = $dates && (strtotime($publisher->last_offer) <= strtotime(Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString()));
+                            }
+                        }
+                    }
+                    return $state && $hasOffers && $cities && $dates;
+                });
+            })
+            ->make(true);
+
+        return view('home');
     }
 
     /**
@@ -78,7 +114,7 @@ class PublishersController extends ResourceController
      */
     public function searchSpaces(Request $request, User $publisher)
     {
-        return $this->facade->searchSpaces($publisher);
+        return \Datatables::of($this->facade->searchSpaces($publisher))->make(true);
     }
 
     /**

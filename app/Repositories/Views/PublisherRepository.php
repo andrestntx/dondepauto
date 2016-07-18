@@ -10,6 +10,8 @@ namespace App\Repositories\Views;
 
 
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PublisherRepository extends BaseRepository
 {
@@ -23,12 +25,59 @@ class PublisherRepository extends BaseRepository
         return 'App\Entities\Views\Publisher';
     }
 
+
     /**
+     * @param array $columns
+     * @param array $search
      * @return mixed
      */
-    public function search()
+    public function search(array $columns, array $search)
     {
-        return $this->model->with(['spaces.city', 'logs'])->get();
+        $publisherQuery = $this->model->select([
+                'company', 'first_name', 'name', 'email', 'phone', 'cel', 'created_at', 'signed_at', 'comments',
+                'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data',
+                'commission_rate', 'discount', 'retention', 'city_name', 'company_nit', 'company_role', 'company_area',
+                'economic_activity_name'
+            ])->with(['spaces' => function($query) {
+                    $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at', 'id_ciudad_LI as city_id');
+                }/*, 'spaces.city' => function($query) {
+                    $query->select('nombre_ciudad_LI as name', 'id_ciudad_LI');
+                }*/
+            ]);
+
+        if(trim($search['value'])) {
+            $value = $search['value'];
+            $publisherQuery->where(function ($query) use($value) {
+                $query->where('company', 'LIKE', '%' . $value . '%')
+                    ->orWhere('name', 'LIKE', '%' . $value . '%')
+                    ->orWhere('comments', 'LIKE', '%' . $value . '%')
+                    ->orWhere('email', 'LIKE', '%' . $value . '%');
+            });
+        }
+
+        foreach ($columns as $column) {
+            $this->searchDateRange($column, 'created_at_datatable', 'created_at', $publisherQuery);
+            $this->searchDateRange($column, 'signed_at_datatable', 'signed_at', $publisherQuery);
+
+            if ($column['name'] == 'signed_agreement' && trim($column['search']['value'])) {
+                $publisherQuery->where('signed_agreement', '=', $column['search']['value']);
+            }
+        }
+
+        return $publisherQuery->get();
+    }
+
+    protected function searchDateRange($column, $search, $name, &$publisherQuery)
+    {
+        if ($column['name'] == $search && trim($column['search']['value'])) {
+            $dateRange = explode(',', $column['search']['value']);
+            if(trim($dateRange[0])) {
+                $publisherQuery->where($name, '>=', Carbon::createFromFormat('d/m/Y', $dateRange[0])->toDateString());
+            }
+            if(trim($dateRange[1])) {
+                $publisherQuery->where($name, '<=', Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString());
+            }
+        }
     }
 
     /**

@@ -13,11 +13,13 @@ use App\Services\ConfirmationService;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\PasswordService;
+use App\Services\RepresentativeService;
 use App\Services\UserService;
 use App\Services\PublisherService;
 use App\Services\MixpanelService;
 use App\Services\Space\SpaceService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class PublisherFacade
@@ -30,10 +32,12 @@ class PublisherFacade
     protected $mailchimpService;
     protected $passwordService;
     protected $userService;
+    protected $representativeService;
 
     public function __construct(PublisherService $service, EmailService $emailService, UserService $userService,
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
-                                MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService)
+                                MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService,
+                                RepresentativeService $representativeService)
     {
         $this->service = $service;
         $this->emailService = $emailService;
@@ -43,6 +47,7 @@ class PublisherFacade
         $this->spaceService = $spaceService;
         $this->passwordService = $passwordService;
         $this->userService = $userService;
+        $this->representativeService = $representativeService;
     }
 
     /**
@@ -54,12 +59,15 @@ class PublisherFacade
         return $this->spaceService->search($publisher);
     }
 
+
     /**
+     * @param array $columns
+     * @param array $search
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search()
+    public function search(array $columns, array $search)
     {
-        return $this->service->search();
+        return $this->service->search($columns, $search);
     }
 
     /**
@@ -139,6 +147,29 @@ class PublisherFacade
         Auth::loginUsingId($publisher->user->id);
         
         return $publisher;
+    }
+
+    /**
+     * @param User $user
+     * @param array $dataPublisher
+     * @param array $dataRepresentative
+     */
+    public function completeAgreement(User $user, array $dataPublisher, array $dataRepresentative)
+    {
+        $this->service->updateModel($dataPublisher, $user);
+        $this->representativeService->createOrUpdate($dataRepresentative, $user, $user->representative);
+    }
+
+    /**
+     * @param User $publisher
+     * @param UploadedFile $commerceDocument
+     * @param UploadedFile $rutDocument
+     * @param UploadedFile $bankDocument
+     * @param UploadedFile $letterDocument
+     */
+    public function saveDocuments(User $publisher, UploadedFile $commerceDocument, UploadedFile $rutDocument, UploadedFile $bankDocument, UploadedFile $letterDocument)
+    {
+        $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
     }
     
 }

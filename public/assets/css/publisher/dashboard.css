@@ -38,3 +38,405 @@
 .dashboard .content .btn.btn-xlg {
     margin: 0.5em 1em;
 }
+
+#icons {
+    margin-bottom: 40px;
+}
+
+#icons figure img {
+    max-width: 150px;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#icons figure p {
+    text-align: center;
+    font-size: 1.15em;
+}
+
+#icons figure i {
+    font-size: 1.7em;
+    color: #4ead1f;
+}
+
+#icons .line {
+    height: 3px;
+    width: 70%;
+    margin: auto 15%;
+    background: rgba(177, 172, 172, 0.57);
+    position: absolute;
+    top: 36%;
+}
+
+.dashboard .slide-tips {
+    margin-top: 1em;
+}
+
+.publisher-content .slide-tips h2 {
+    text-transform: none;
+    font-size: 1.6em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    color: #2cbaf8;
+}
+
+.publisher-content .slide-tips h3 {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: normal;
+    font-weight: 600;
+    margin: 1em 5em;
+}
+
+.ibox-content-margin {
+    border: 3.6px solid #dad8d8;
+}    
+
+.publisher-content .slide-tips p {
+    margin: auto;
+    font-size: 1.25em;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.publisher-content .agreement-form {
+    margin-top: 2em;
+}
+
+.publisher-content .agreement-form .documents {
+    padding-bottom: 2em;
+}
+
+.publisher-content .agreement-form h2 {
+    font-weight: 600;
+    font-size: 2em;
+    margin-bottom: 35px;
+    text-transform: none;
+}
+
+.publisher-content .agreement-form img.icon-steps{
+    width: 50%;
+    margin: auto;
+    display: block;
+    max-width: 75px;
+}
+
+.publisher-content .agreement-form p.intro-form {
+    font-size: 1.2em;
+    text-align: justify;
+}
+
+.publisher-content .agreement-form p.intro-form.last-intro {
+    padding: 2em 0 1em 0;
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.agreement-form .ibox {
+    border-color: #2cbaf8;
+    margin-top: 1.6em;
+}
+
+.agreement-form .ibox-title {
+    border-color: #2cbaf8;
+    padding: 5px;
+}
+
+.publisher-content .agreement-form .ibox-title h3 {
+    font-size: 1.35em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.publisher-content .agreement-form .btn-save-agreement {
+    margin-top: 1.8em;
+}
+
+.publisher-content .agreement-form .btn-save-agreement img {
+    width: 90%;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+}
+
+.publisher-content .agreement-form .btn-save-agreement img:hover {
+    width: 91%;
+    background: rgba(200, 234, 241, 0.28);
+}
+
+.horizontal-line {
+    width: 0;
+    height: 660px;
+    border: 1px dashed #c7c1c1;
+    margin: auto;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    cursor: pointer;
+    width: 100%;
+}
+
+.inputfile + label span.upload-label {
+    vertical-align: top;
+    color: gray;
+    font-size: 1.05em;
+    padding-top: 0;
+    font-weight: 600;
+    padding: 0 0 0 10px;
+}
+
+.inputfile + label span.upload-pdf {
+    vertical-align: top;
+    display: inline-block;
+    color: gray;
+    font-size: 0.95em;
+    font-weight: bold;
+    padding: 2px 10px 0 10px;
+    color: #2cbaf8;
+}
+
+.inputfile + label span.upload-text {
+    padding: 3px 10px;
+    vertical-align: top;
+    font-size: 0.91em;
+    color: gray;
+    font-weight: 100;
+    display: block;
+}
+
+.inputfile + label .label-text {
+    width: 80%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inputfile + label .label-check {
+    width: 5%;
+    display: none;
+    vertical-align: top;
+    font-size: 1.5em;
+    color: #0bde0b;
+}
+
+
+.inputfile + label span.upload-pdf:hover {
+    color: #1faae6;
+}
+
+.inputfile + label figure {
+    width: 10%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inputfile + label figure img {
+    width: 100%;
+}
+
+.file-content {
+    display: table;
+    table-layout: fixed;
+    padding-bottom: 1.3em;
+    padding-top: 1.6em;
+    border-bottom: 3px dashed #d0cdcd;
+}
+
+.file-content div.col-md-6, .file-content div.col-sm-6 {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.file-content p {
+    font-size: 1.2em;
+}
+
+.dashboard .slick-dots li.slick-active button:before {
+    color: #2cbaf8;
+}
+
+.dashboard .slick-dots li button:before {
+    font-size: 11px;
+}
+
+.dashboard #data-agreement label.error{
+    font-size: 1em;
+    font-weight: 600;
+    margin: 1px 0;
+    /* display: none !important; */
+}
+
+.dashboard span.label-message {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0 1em 0 0;
+    display: block;
+    color: #12710c;
+}
+
+.dashboard .form-control.error {
+    border: 1px dotted #e00b21;
+    box-shadow: 1px 1px 1px rgba(224, 11, 33, 0.43);
+}
+
+.se-pre-con {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url("/images/loading-recarga.gif") center no-repeat rgba(255, 255, 255, 0.5);
+    display: none;
+}
+
+thead tr {
+    font-size: 15px;
+}
+
+#pointsInventary .pieProgress {
+    width: 45%;
+    margin-bottom: 30px;
+    margin: auto;
+    text-align: center;
+}
+
+#pointsInventary a#help-modal-point {
+    font-weight: 500;
+    font-size: 1.15em;
+    text-align: center;
+    margin: 0.5em auto 0.3em auto;
+    display: block;
+}
+
+#pointsInventary p#title-point {
+    font-weight: 500;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0 auto 0.3em auto;
+    display: block;
+}
+
+#pointsInventary .pie_progress__number {
+    margin-top: 5px;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.dashboard .inventary {
+    padding-top: 1em;
+}
+
+#modalPointsInventary h4.modal-title {
+    font-size: 22px;
+    padding: 0 25px;
+    font-weight: bold;
+}
+
+#modalPointsInventary .modal-body p {
+    font-size: 15px;
+    text-align: justify;
+}
+
+#modalPointsInventary .modal-header {
+    padding: 15px 20px;
+}
+
+img.icon-modal {
+    display: block;
+    margin: 10px auto;
+    max-width: 90px;
+}
+
+p.tip-extra {
+    border: 1px solid #01AEEF;
+    padding: 5px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.inventary h1 {
+    margin-top: 22%;
+    font-size: 1.45em;
+    font-weight: 400;
+}
+
+.publisher-content .inventary h2 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.inventary .col-xs-4 {
+    width: 33%;
+    height: 180px;
+    display: inline-block;
+    vertical-align: middle;
+    border-right: 1px solid rgba(128, 128, 128, 0.29);
+}
+
+.inventary .col-xs-4:last-child {
+    border: none !important;
+}
+
+img.img-icon {
+    width: 30px;
+}
+
+a.create-datatable {
+    float: right;
+}
+
+.dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_filter label {
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_filter label input.form-control.input {
+    width: 90%;
+}
+
+#inventary-datatable_length, #inventary-datatable_filter {
+    display: none !important;
+}
+
+div#inventary-datatable_length {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .file-content div.col-md-6, .file-content div.col-sm-6 {
+        float: left;
+    }
+
+    .inventary .col-xs-4 {
+        float: left;
+    }
+}
+
+@media (min-width: 993px) {
+    .file-content div.col-md-6, .file-content div.col-sm-6 {
+        float: none;
+    }
+
+    .inventary .col-xs-4 {
+        float: none;
+    }
+}
+
+
+    

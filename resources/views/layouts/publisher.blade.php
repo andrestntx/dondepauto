@@ -15,15 +15,8 @@
         <link href="/assets/css/style.css" rel="stylesheet">
         <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
-        <!-- Data Tables -->
-        <link href="/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-        <link href="/assets/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
-        <link href="/assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
-
         <!-- Toastr style -->
         <link href="/assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
-        <link href="/assets/css/plugins/dataTables/selected.css" rel="stylesheet">
 
         <!-- DataPicker -->
         <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -41,6 +34,7 @@
 
         <link rel="stylesheet" type="text/css" href="/assets/css/plugins/tags_input/jquery.tagsinput.css" />
 
+        @yield('extra-css-layout')
         @yield('extra-css')
 
     </head>
@@ -237,12 +231,6 @@
         <!-- Sparkline -->
         <script src="/assets/js/plugins/sparkline/jquery.sparkline.min.js"></script>
 
-        <!-- Data Tables -->
-        <script src="/assets/js/plugins/dataTables/jquery.dataTables.js"></script>
-        <script src="/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-        <script src="/assets/js/plugins/dataTables/dataTables.responsive.js"></script>
-        <script src="/assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
-
         <script src="/assets/js/plugins/confirm/jquery.confirm.min.js"></script>
 
         <!-- Toastr script -->
@@ -296,6 +284,7 @@
 
         </script>
 
+        @yield('extra-js-layout')
         @yield('extra-js')
 
     </body>

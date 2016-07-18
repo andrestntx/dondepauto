@@ -17,6 +17,7 @@ class AddColumnsSpacesTable extends Migration
             $table->string('link_youtube_LI')->nullable();
             $table->integer('descuento_espacio_LI')->default(0);
             $table->enum('restringeSexo_LI', ['N', 'S'])->default('N');
+            $table->enum('restringeReligion_LI', ['N', 'S'])->default('N');
         });
     }
 

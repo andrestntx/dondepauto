@@ -77,15 +77,6 @@ class PUser  extends Model {
     }
 
     /**
-     * Return the Full Name
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return ucwords(strtolower($this->first_name . ' ' . $this->last_name));
-    }
-
-    /**
      * Return the company name uppercase
      * @param $value
      * @return string
@@ -121,7 +112,7 @@ class PUser  extends Model {
      */
     public function getCreatedAtDatatableAttribute()
     {
-        return $this->created_at->format('d/m/Y');
+        return $this->created_at->format('Y-m-d');
     }
 
     /**
@@ -145,6 +136,23 @@ class PUser  extends Model {
         }
     
         return 'email-no-validated';
+    }
+
+    /**
+     * @param $state
+     * @return bool
+     */
+    public function hasState($state)
+    {
+        if(trim($state)) {
+            if($this->state_id == $state) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     /**

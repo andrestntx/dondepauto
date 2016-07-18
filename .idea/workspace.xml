@@ -1,316 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcc5aa23-d089-47d0-8c6e-3937462c08ea" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/plugins/images/spritemapab.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/acelerated_wayra.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/fondogris.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/iconoi.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/iconoverde.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/iconoverde25.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/icons-features/1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/icons-features/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/icons-features/3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/icons-features/4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/icons-features/5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/li-provider-15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/question.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/continue.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/edit.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/pause.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/placeholders/not_available-generic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/placeholders/waiting-generic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/processing.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/retry.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/trash.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/loading-recarga.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/1002_2109481152613.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/1003_4336089456920.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/1003_5030791390222.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/972_1174591421150.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/972_7204453022685.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/973_3917420203798.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/974_6303192932625.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/975_4948459136300.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/976_1450757109561.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/976_1505395790097.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/976_2898723938037.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/976_5458991847933.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/976_8081787494012.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/977_2688204133418.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/978_1368214163930.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/978_215673665051.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/978_4735001286027.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/978_5101659622975.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/978_790753036738.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/987_351813273971.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/987_3655262498651.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/987_5733491071500.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/987_8567319582683.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/987_959989126772.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/988_1779371710495.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/988_352701764089.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/989_1673061748501.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/989_1713389754296.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/989_2542447648477.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/989_6289535602090.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/989_8752657220699.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/989_8816234450788.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/990_1181430169847.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/990_2357939751819.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/990_4825093019754.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/990_6903776038439.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/991_271351848264.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/991_3528572173790.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/991_5818896935788.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/991_7401388842613.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/993_7484553021379.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/994_5842754237820.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/994_8471412098967.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/995_471510694363.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/995_6733915320598.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/1002_2109481152613.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/1003_5030791390222.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/972_7204453022685.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/973_3917420203798.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/974_6303192932625.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/975_4948459136300.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/976_1450757109561.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/977_2688204133418.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/978_5101659622975.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/987_959989126772.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/988_352701764089.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/989_1713389754296.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/990_6903776038439.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/991_5818896935788.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/993_7484553021379.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/994_8471412098967.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/995_471510694363.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/1002_2109481152613.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/1003_4336089456920.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/1003_5030791390222.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/972_1174591421150.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/972_7204453022685.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/973_3917420203798.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/974_6303192932625.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/975_4948459136300.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/976_1450757109561.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/976_1505395790097.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/976_2898723938037.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/976_5458991847933.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/976_8081787494012.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/977_2688204133418.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/978_1368214163930.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/978_215673665051.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/978_4735001286027.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/978_5101659622975.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/978_790753036738.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/987_351813273971.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/987_3655262498651.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/987_5733491071500.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/987_8567319582683.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/987_959989126772.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/988_1779371710495.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/988_352701764089.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/989_1673061748501.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/989_1713389754296.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/989_2542447648477.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/989_6289535602090.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/989_8752657220699.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/989_8816234450788.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/990_1181430169847.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/990_2357939751819.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/990_4825093019754.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/990_6903776038439.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/991_271351848264.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/991_3528572173790.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/991_5818896935788.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/991_7401388842613.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/993_7484553021379.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/994_5842754237820.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/994_8471412098967.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/995_471510694363.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/995_6733915320598.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/Audience.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/AudienceType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceImage.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Proposal/Item.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Facades/ProposalFacade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/PublisherController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Requests/RUser/Publisher/CompleteRequest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Requests/RUser/Publisher/RegisterLandingRequest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Space/OfferComposer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/File/BaseRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/File/ImagesRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/File/SpaceImagesRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/AudienceRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/AudienceTypeRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpacePeriodRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Proposal/ItemRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Proposal/ProposalRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/PasswordService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/ProposalService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Space/AudienceService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Space/AudienceTypeService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/datatables.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/debugbar.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/excel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/image.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_05_18_085604_create_bd_propuestas_list_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_05_18_101707_create_bd_items_propuestas_list_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_16_164331_create_audience_types_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_16_164412_create_audiences_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_28_145723_add_columns_spaces_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_28_150617_create_impact_scene_space_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_28_150640_create_audience_space_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_28_150702_create_city_space_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/progress.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/publish.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/publisher.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/publisher/dashboard.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/jquery-asPieProgress.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/bootbox/bootbox.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/fine-uploader-gallery.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/fine-uploader-gallery.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/fine-uploader-new.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/fine-uploader-new.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/fine-uploader.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/fine-uploader.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/iframe.xss.response.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/jquery.fine-uploader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/jquery.fine-uploader.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/templates/default.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/templates/gallery.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/fine-uploader/templates/simple-thumbnails.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/number/jquery.number.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/services/publishService.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/vendor/datatables/buttons.server-side.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/advertisers/show.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/form.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/lists.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/modal.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/table.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/modal-space.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/show.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/table.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/account/form.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/agreement/form.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/complete/form.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/dashboard.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/home-no-spaces.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/spaces/form.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/spaces/lists.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/print.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/script.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/debugbar/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/emails/confirm_medium.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/publisher/confirm.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/plugins/images/spritemap.png" afterPath="$PROJECT_DIR$/public/assets/css/plugins/images/spritemap.png" />
+    <list default="true" id="1cdcab49-3bda-43d3-aae8-f61c42e21464" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/icons/aggrement/icono1azul.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/icons/aggrement/icono1gris.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/icons/aggrement/icono2azul.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/icons/aggrement/icono2gris.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/icons/aggrement/icono3azul.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/icons/aggrement/icono3gris.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/agreement/check.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/agreement/download.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/agreement/icono1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/agreement/icono2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/agreement/iconopdf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/iconmodal.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/iconototalof.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/img/dashboard/iconovalorport.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/981/bank.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/981/commerce.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/981/letter.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/981/rut.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/982/bank.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/982/commerce.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/982/letter.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/documents/publishers/982/rut.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/files/adwords.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/1017_4408419979737.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/1017_6471168166493.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/big/1017_7283832256683.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/detailThumbs/1017_7283832256683.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/1017_4408419979737.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/1017_6471168166493.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/marketplace/thumb/1017_7283832256683.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Platform/Representative.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/File/PublisherDocumentsRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Platform/RepresentativeRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/RepresentativeService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_07_11_122422_create_legal_representatitves_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_07_12_091016_add_company_legal_name_platform_users_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_07_13_144202_add_points_spaces_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_07_13_144811_add_privacy_platform_users_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/css/plugins/tour/bootstrap-tour.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/custom-file/custom-file-input.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/plugins/tour/bootstrap-tour.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/js/services/publisher/inventaryService.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/layouts/publisher-datatable.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/pdf/letter.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/publisher/agreement/info.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/City.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/City.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Confirmation.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Confirmation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Country.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Country.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/EconomicActivity.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/EconomicActivity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Entity.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Entity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Intention.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Intention.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Locality.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Locality.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Login.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Neighborhood.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Neighborhood.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/Audience.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/Audience.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCategory.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCity.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCityZone.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCityZone.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceFormat.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceFormat.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceImpactScene.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceImpactScene.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceSubCategory.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceSubCategory.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/User.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/User.php" afterPath="$PROJECT_DIR$/app/Entities/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/Advertiser.php" afterPath="$PROJECT_DIR$/app/Entities/Views/Advertiser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/PUser.php" afterPath="$PROJECT_DIR$/app/Entities/Views/PUser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/Publisher.php" afterPath="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/Space.php" afterPath="$PROJECT_DIR$/app/Entities/Views/Space.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" afterPath="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/PublisherFacade.php" afterPath="$PROJECT_DIR$/app/Facades/PublisherFacade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/SpaceFacade.php" afterPath="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PublishersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PublishersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ResourceController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResourceController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/RUser/Advertiser/StoreRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/RUser/Advertiser/StoreRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/RUser/Publisher/StoreRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/RUser/Publisher/StoreRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/RUser/Publisher/UpdateRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/RUser/Publisher/UpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/RUser/StoreRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/RUser/StoreRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/Space/StoreRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/Space/StoreRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/Space/UpdateRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/Space/UpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/ViewComposers/Advertiser/FormComposer.php" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Advertiser/FormComposer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/ViewComposers/Space/FormComposer.php" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Space/FormComposer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/breadcrumbs.php" afterPath="$PROJECT_DIR$/app/Http/breadcrumbs.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/BaseRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/BaseRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/CityRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/CityRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/ConfirmationRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/ConfirmationRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/EconomicActivityRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/EconomicActivityRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCategoryRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCategoryRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceFormatRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceFormatRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceImpactSceneRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceImpactSceneRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceSubCategoryRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceSubCategoryRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/UserRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/UserRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Views/PublisherRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Views/PublisherRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ConfirmationService.php" afterPath="$PROJECT_DIR$/app/Services/ConfirmationService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/EmailService.php" afterPath="$PROJECT_DIR$/app/Services/EmailService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/PublisherService.php" afterPath="$PROJECT_DIR$/app/Services/PublisherService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ResourceService.php" afterPath="$PROJECT_DIR$/app/Services/ResourceService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/Space/SpaceService.php" afterPath="$PROJECT_DIR$/app/Services/Space/SpaceService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/UserService.php" afterPath="$PROJECT_DIR$/app/Services/UserService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/config/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/menu.php" afterPath="$PROJECT_DIR$/config/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/ModelFactory.php" afterPath="$PROJECT_DIR$/database/factories/ModelFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_13_162613_add_adviser_old_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_13_162613_add_adviser_old_users_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_18_143015_add_columns_platform_users.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_18_143015_add_columns_platform_users.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_19_164657_add_commercial_state_platform_intentions.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_19_164657_add_commercial_state_platform_intentions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_20_135443_create_view_advertisers_view.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_20_135443_create_view_advertisers_view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_21_133919_craete_view_publishers_view.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_21_133919_craete_view_publishers_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_05_11_093729_create_view_spaces_view.php" afterPath="$PROJECT_DIR$/database/migrations/2016_05_11_093729_create_view_spaces_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/plugins/dropzone/dropzone.css" afterPath="$PROJECT_DIR$/public/assets/css/plugins/dropzone/dropzone.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/plugins/select2/select2.min.css" afterPath="$PROJECT_DIR$/public/assets/css/plugins/select2/select2.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/plugins/steps/jquery.steps.css" afterPath="$PROJECT_DIR$/public/assets/css/plugins/steps/jquery.steps.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/plugins/tags_input/jquery.tagsinput.css" afterPath="$PROJECT_DIR$/public/assets/css/plugins/tags_input/jquery.tagsinput.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/style.css" afterPath="$PROJECT_DIR$/public/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/plugins/staps/jquery.steps.min.js" afterPath="$PROJECT_DIR$/public/assets/js/plugins/staps/jquery.steps.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/advertiserService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/advertiserService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_06_28_145723_add_columns_spaces_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_06_28_145723_add_columns_spaces_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/plugins/slick/slick-theme.css" afterPath="$PROJECT_DIR$/public/assets/css/plugins/slick/slick-theme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/publisher/dashboard.css" afterPath="$PROJECT_DIR$/public/assets/css/publisher/dashboard.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/publishService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/publishService.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/publisherService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/publisherService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/spaceService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/spaceService.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/userService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/userService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/lang/es/validation.php" afterPath="$PROJECT_DIR$/resources/lang/es/validation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/advertisers/lists.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/advertisers/lists.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/advertisers/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/advertisers/modal.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/directors/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/directors/show.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/publishers/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/publishers/lists.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/lists.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/publishers/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/modal.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/spaces/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/form.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/spaces/lists.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/lists.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/spaces/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/modal.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/confirm_registration.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/confirm_registration.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/themes/bootstrap/fields/default.blade.php" afterPath="$PROJECT_DIR$/resources/views/themes/bootstrap/fields/default.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/publishers/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/show.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/publisher/agreement/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/publisher/agreement/form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/publisher/spaces/form.blade.php" afterPath="$PROJECT_DIR$/resources/views/publisher/spaces/form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/publisher/spaces/lists.blade.php" afterPath="$PROJECT_DIR$/resources/views/publisher/spaces/lists.blade.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -331,43 +103,25 @@
     <favorites_list name="pauto" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SpaceFacade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
+    <leaf>
+      <file leaf-file-name="SpacePointsService.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Services/Space/SpacePointsService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.541666">
-              <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.37883437">
+              <caret line="397" column="0" selection-start-line="397" selection-start-column="0" selection-end-line="397" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MailchimpService.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Services/MailchimpService.php">
+      <file leaf-file-name="Space.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="laravel.log" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpacesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
-              <folding />
+            <state vertical-scroll-proportion="-4.0784316">
+              <caret line="25" column="83" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="83" />
+              <folding>
+                <element signature="e#6#99#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -380,57 +134,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/SpaceCategory.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/CityZone.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Neighborhood.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Locality.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/City.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/SpaceCity.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/SpaceCityZone.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceFormat.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCity.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Country.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/CountryRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityZoneRepository.php" />
-        <option value="$PROJECT_DIR$/app/Services/Space/SpaceService.php" />
-        <option value="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCategory.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Views/Medium.php" />
-        <option value="$PROJECT_DIR$/app/Http/breadcrumbs.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceSubCategory.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/CityRepository.php" />
-        <option value="$PROJECT_DIR$/resources/lang/es/validation.php" />
-        <option value="$PROJECT_DIR$/app/Services/Space/SpaceFormatService.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceFormatRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/BaseRepository.php" />
-        <option value="$PROJECT_DIR$/app/Services/ResourceService.php" />
-        <option value="$PROJECT_DIR$/app/Services/Space/SpaceCategoryService.php" />
-        <option value="$PROJECT_DIR$/app/Services/Space/SpaceSubCategoryService.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceSubCategoryRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCategoryRepository.php" />
-        <option value="$PROJECT_DIR$/app/Services/Space/SpaceCityService.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityRepository.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php" />
-        <option value="$PROJECT_DIR$/app/Services/MediumService.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Views/MediumRepository.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Views/PUser.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/User.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCityZone.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_05_11_093729_create_view_spaces_view.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Views/Space.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" />
-        <option value="$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ListComposer.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/SpaceImpactScenery.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceImpactSceneryRepository.php" />
-        <option value="$PROJECT_DIR$/app/Http/ViewComposers/Space/ListComposer.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceImpactSceneRepository.php" />
-        <option value="$PROJECT_DIR$/storage/logs/laravel.log" />
-        <option value="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
+        <option value="$PROJECT_DIR$/app/Services/Space/SpacePointsService.php" />
       </list>
     </option>
   </component>
@@ -458,7 +162,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -476,6 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -494,16 +199,133 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Space" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Space" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -521,11 +343,6 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -538,46 +355,35 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="dcc5aa23-d089-47d0-8c6e-3937462c08ea" name="Default" comment="" />
-      <created>1460495948116</created>
+      <changelist id="1cdcab49-3bda-43d3-aae8-f61c42e21464" name="Default" comment="" />
+      <created>1468806068270</created>
       <option name="number" value="Default" />
-      <updated>1460495948116</updated>
-      <workItem from="1460495952197" duration="5007000" />
-      <workItem from="1460554024333" duration="85498000" />
-      <workItem from="1461005494826" duration="47236000" />
-      <workItem from="1461182806722" duration="13508000" />
-      <workItem from="1461245646837" duration="25350000" />
-      <workItem from="1461593707700" duration="24041000" />
-      <workItem from="1461622126811" duration="32376000" />
-      <workItem from="1461769194929" duration="21827000" />
-      <workItem from="1461850693379" duration="27619000" />
-      <workItem from="1462197519202" duration="31914000" />
-      <workItem from="1462884950160" duration="38679000" />
+      <updated>1468806068270</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="29" width="1405" height="773" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24199288" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24982207" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -585,380 +391,25 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="25" />
+      <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
+    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Space/FormComposer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/Space/UpdateRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/Space/StoreRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/EconomicActivity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Neighborhood.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Locality.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/SpaceFormat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Country.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/CountryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+        <state vertical-scroll-proportion="-4.0784316">
+          <caret line="25" column="83" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="83" />
           <folding>
-            <element signature="e#133#171#0#PHP" expanded="false" />
+            <element signature="e#6#99#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceCityZoneService.php">
+    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpacePointsService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityZoneRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/breadcrumbs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/SpaceSubCategory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/CityRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="38" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lang/es/validation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="162" column="44" selection-start-line="162" selection-start-column="44" selection-end-line="162" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceFormatRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/BaseRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="4" selection-start-line="138" selection-start-column="4" selection-end-line="138" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/ResourceService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCategory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceCategoryService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceFormatService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="30" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceSubCategoryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCategoryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceSubCategoryService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceCityService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="11" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Views/PUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="280" column="59" selection-start-line="280" selection-start-column="59" selection-end-line="280" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/SpaceCityZone.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Views/Publisher.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="5" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_05_11_093729_create_view_spaces_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="162" selection-start-line="27" selection-start-column="145" selection-end-line="27" selection-end-column="162" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Views/Space.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ListComposer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/City.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/SpaceImpactScene.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceImpactSceneRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Space/ListComposer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="96" selection-start-line="24" selection-start-column="70" selection-end-line="24" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/storage/logs/laravel.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.541666">
-          <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/MailchimpService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.37883437">
+          <caret line="397" column="0" selection-start-line="397" selection-start-column="0" selection-end-line="397" selection-end-column="0" />
           <folding />
         </state>
       </provider>

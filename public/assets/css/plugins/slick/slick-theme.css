@@ -165,6 +165,7 @@
 .slick-dots li button:hover,
 .slick-dots li button:focus
 {
+    color:red;
     outline: none;
 }
 .slick-dots li button:hover:before,
@@ -189,7 +190,7 @@
     text-align: center;
 
     opacity: .25;
-    color: black;
+    color: #2cbaf8;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -197,5 +198,5 @@
 .slick-dots li.slick-active button:before
 {
     opacity: .75;
-    color: black;
+    color: blue;
 }

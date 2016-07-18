@@ -14,6 +14,7 @@ use App\Facades\SpaceFacade;
 use App\Http\Requests\RUser\Publisher\CompleteRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -131,6 +132,52 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
      */
     public function agreement(User $user)
     {
-        return $this->view('agreement.form', ['publisher' => $user]);
+        return $this->view('agreement.info', ['publisher' => $user]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function completeAgreement(User $user)
+    {
+        return $this->view('agreement.form', ['publisher' => $user, 'representative' => $user->getRepresentativeOrNew()]);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return array
+     */
+    public function postCompleteAgreement(Request $request, User $user)
+    {
+        $this->facade->completeAgreement($user, $request->get('publisher'), $request->get('repre'));
+        return ['success' => 'true', 'file' => route('medios.agreement.letter', $user)];
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function getLetter(User $user)
+    {
+        $date = Carbon::now();
+        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        $dateString = $date->day . ' de ' . $months[$date->month - 1] . ' de ' .$date->year;
+        $user->load('representative');
+
+        return \PDF::loadView('pdf.letter', ['publisher' => $user, 'date' => $dateString])
+            ->setPaper('a4')
+            ->stream('carta_dondepauto.pdf');
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     */
+    public function uploadDocuments(Request $request, User $user)
+    {
+        $this->facade->saveDocuments($user, $request->file('commerce'), $request->file('rut'), $request->file('bank'),$request->file('letter'));
     }
 }

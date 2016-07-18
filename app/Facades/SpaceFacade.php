@@ -8,6 +8,7 @@
 
 namespace App\Facades;
 
+use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
@@ -63,14 +64,23 @@ class SpaceFacade
         return $space;
     }
 
+
     /**
      * @param array $data
-     * @param Model $space
-     * @return mixed
+     * @param array|null $images
+     * @param Space $space
+     * @return Space|mixed
      */
-    public function updateModel(array $data, Model $space)
+    public function updateModel(array $data, array $images = null, Space $space)
     {
-        return $this->service->updateModel($data, $space);
+        $format = $this->formatService->getModel($data['format_id']);
+        $space  = $this->service->updateSpace($data, $format, $space);
+
+        if($images) {
+            $imageNames = $this->service->saveImages($data['images'], $space);
+        }
+        
+        return $space;
     }
 
     /**
@@ -101,5 +111,10 @@ class SpaceFacade
         $result['publishers']        = $this->publisherService->searchWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
 
         return $result;
+    }
+
+    public function countSpaces(User $user) 
+    {
+        return $this->service->countSpaces($user);
     }
 }

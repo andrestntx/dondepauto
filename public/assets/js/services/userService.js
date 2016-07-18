@@ -16,6 +16,17 @@ var UserService = function() {
 	            keyboardNavigation: false,
 	            forceParse: false,
 	            autoclose: true,
+	        }).on('changeDate', function(e) {
+	        	dataTable
+	            	.column($(this).data('column'))
+	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
+	            	.draw();
+	        	console.log();
+	        }).on('clearDate', function(e) {
+	        	dataTable
+	            	.column($(this).data('column'))
+	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
+	            	.draw();
 	        });
 	    },
 
@@ -74,16 +85,32 @@ var UserService = function() {
 	        } );
 		},
 
-		initDrawDateRange: function(inputInit, inputFinish) 
+		/*initDrawDateRange: function(inputInit, inputFinish, column) 
 		{
-			$(inputInit + ', ' + inputFinish).on('change', function() {
-	            dataTable.draw();
+			$('#created_at_start').change(function() {
+				console.log('busca fecha 1');
+	            dataTable
+	            	.column(column)
+	            	.search($(inputInit).val() + ',' + $(inputFinish).val())
+	            	.draw();
 	        } );
-		},
+
+			$(inputFinish).on('change', function() {
+				console.log('busca fecha 2');
+	            dataTable
+	            	.column(column)
+	            	.search($(inputInit).val() + ',' + $(inputFinish).val())
+	            	.draw();
+	        } );
+		},*/
 
 		searchDateRange: function (aData, inputInit, inputFinish, column) {
+
 	        var iFini = $(inputInit).val();
 	        var iFfin = $(inputFinish).val();
+
+	        console.log(iFini);
+	        console.log(iFfin);
 
 	        iFini = iFini.substring(6,10) + iFini.substring(3,5)+ iFini.substring(0,2);
 	        iFfin = iFfin.substring(6,10) + iFfin.substring(3,5)+ iFfin.substring(0,2);
@@ -182,7 +209,7 @@ var UserService = function() {
 	    		width = '190';
 	    	}
 
-	    	var html 		= $('<div style="width:' + width + 'px;"></div>').addClass('text-center');
+	    	var html 		= $('<div style="width:' + width + 'px; margin: 0 auto;"></div>').addClass('text-center');
 
 	    	$.each( states, function( key, state ) {
 	    		var i 		= $('<i></i>').addClass(state.icon);

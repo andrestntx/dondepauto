@@ -141,6 +141,26 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.agreement'
         ]);
 
+        Route::get('medios/{publishers}/acuerdo/completar', [
+            'uses' => 'Publisher\PublishersController@completeAgreement',
+            'as' => 'medios.agreement.complete'
+        ]);
+        
+        Route::post('medios/{publishers}/acuerdo/completar', [
+            'uses' => 'Publisher\PublishersController@postCompleteAgreement',
+            'as' => 'medios.agreement.complete.docs'
+        ]);
+
+        Route::post('medios/{publishers}/acuerdo/documentos', [
+            'uses' => 'Publisher\PublishersController@uploadDocuments',
+            'as' => 'medios.agreement.complete.upload'
+        ]);
+
+        Route::get('medios/{publishers}/acuerdo/carta', [
+            'uses' => 'Publisher\PublishersController@getLetter',
+            'as' => 'medios.agreement.letter'
+        ]);
+
         Route::get('medios/{publishers}/publicar', [
             'uses' => 'Publisher\PublishersController@publish',
             'as' => 'medios.publish'
@@ -163,4 +183,12 @@ Route::group(['prefix' => 'landing'], function(){
         'as'   => 'register.publisher',
         'uses' => 'Auth\PublisherController@registerLanding'
     ]);
+});
+
+Route::get('metricas/espacios', function(\Illuminate\Http\Request $request){
+    return DB::table('view_spaces')
+            ->select(\DB::raw("COUNT(*) as espacios_publicados"))
+            ->where("created_at", ">=", $request->get('start'))
+            ->where("created_at", "<=", $request->get('end'))
+            ->get();
 });
