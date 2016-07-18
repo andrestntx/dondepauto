@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cdcab49-3bda-43d3-aae8-f61c42e21464" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/Space/SpacePointsService.php" afterPath="$PROJECT_DIR$/app/Services/Space/SpacePointsService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_13_162613_add_adviser_old_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_13_162613_add_adviser_old_users_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_06_28_145723_add_columns_spaces_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_06_28_145723_add_columns_spaces_table.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +27,8 @@
       <file leaf-file-name="SpacePointsService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/Space/SpacePointsService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38343558">
-              <caret line="307" column="8" selection-start-line="307" selection-start-column="8" selection-end-line="307" selection-end-column="8" />
+            <state vertical-scroll-proportion="-0.896">
+              <caret line="370" column="0" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
               <folding>
                 <element signature="e#6#91#0#PHP" expanded="true" />
               </folding>
@@ -53,10 +49,11 @@
       <file leaf-file-name="Space.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.791667">
-              <caret line="299" column="7" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="7" />
+            <state vertical-scroll-proportion="91.56863">
+              <caret line="38" column="48" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="48" />
               <folding>
                 <element signature="e#6#99#0#PHP" expanded="true" />
+                <element signature="e#142#175#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -256,18 +253,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.791667">
-          <caret line="299" column="7" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="7" />
+        <state vertical-scroll-proportion="91.56863">
+          <caret line="38" column="48" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="48" />
           <folding>
             <element signature="e#6#99#0#PHP" expanded="true" />
+            <element signature="e#142#175#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/Space/SpacePointsService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38343558">
-          <caret line="307" column="8" selection-start-line="307" selection-start-column="8" selection-end-line="307" selection-end-column="8" />
+        <state vertical-scroll-proportion="-0.896">
+          <caret line="370" column="0" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
           <folding>
             <element signature="e#6#91#0#PHP" expanded="true" />
           </folding>

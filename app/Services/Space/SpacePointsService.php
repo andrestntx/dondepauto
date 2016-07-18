@@ -305,7 +305,7 @@ class SpacePointsService
         if(is_array($rules)) {
             return $rules;
         }
-        
+
         return [];
     }
 
@@ -316,13 +316,15 @@ class SpacePointsService
      */
     protected function findRules(array $rules, $value)
     {
+        $findRule = null;
+
         foreach($rules as $rule) {
-            if($rule >= $value) {
-                return $rule;
+            if($value >= $rule['min']) {
+                $findRule = $rule;
             }
         }
 
-        return null;
+        return $findRule;
     }
 
     /**
@@ -364,8 +366,10 @@ class SpacePointsService
      * @return int|mixed
      */
     protected function calculate(array $input, $value = 0) {
+        \Log::info('value: ' . $value);
         if($this->hasAttribute($input, 'maxPoints')) {
             if($rule = $this->getRule($input, $value)) {
+                \Log::info($rule);
                 return $this->getAttribute($input, 'maxPoints') * $rule['points'];
             }
 
@@ -409,6 +413,10 @@ class SpacePointsService
             $spaceAttribute = $this->getAttribute($input, 'name');
             $type = $this->getAttribute($input, 'type');
 
+            \Log::info('input: ' . $inputName);
+            \Log::info('input_attr: ' . $spaceAttribute);
+            \Log::info('input_type: ' . $type);
+
             if($type == 'exists') {
                 if( ! is_null($space->$spaceAttribute)) {
                     $points += $this->calculate($input);
@@ -426,6 +434,8 @@ class SpacePointsService
             else {
                 $points += $this->calculateString($input, $space->$spaceAttribute);
             }
+
+            \Log::info('input_points: ' . $points);
         }
 
         return $points;
