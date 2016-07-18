@@ -14,6 +14,7 @@ use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
 use App\Services\Space\SpaceFormatService;
+use App\Services\Space\SpacePointsService;
 use App\Services\Space\SpaceService;
 use App\Services\Space\SpaceSubCategoryService;
 use Illuminate\Database\Eloquent\Model;
@@ -26,9 +27,10 @@ class SpaceFacade
     protected $categoryService;
     protected $cityService;
     protected $publisherService;
+    protected $spacePointsService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
-        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService)
+        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService, SpacePointsService $spacePointsService)
     {
         $this->service = $service;
         $this->subCategoryService = $subCategoryService;
@@ -36,6 +38,7 @@ class SpaceFacade
         $this->categoryService = $categoryService;
         $this->cityService = $cityService;
         $this->publisherService = $publisherService;
+        $this->spacePointsService = $spacePointsService;
     }
 
     /**
@@ -113,8 +116,21 @@ class SpaceFacade
         return $result;
     }
 
-    public function countSpaces(User $user) 
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function countSpaces(User $user)
     {
         return $this->service->countSpaces($user);
+    }
+
+    /**
+     * @param Space $space
+     * @return mixed
+     */
+    public function recalculatePoints(Space $space) {
+        $points = $this->spacePointsService->calculatePoints($space);
+        return $this->service->updateModel(['points' => $points], $space);
     }
 }

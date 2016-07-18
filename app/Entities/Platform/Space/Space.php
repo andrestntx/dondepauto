@@ -11,6 +11,7 @@ namespace App\Entities\Platform\Space;
 
 use App\Entities\Platform\Entity;
 use App\Entities\Platform\User;
+use App\Services\Space\SpacePointsService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,8 @@ class Space extends Entity
      * @var string
      */
     protected $primaryKey = 'id_espacio_LI';
+
+    protected $pointsService;
 
     protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
         'city_id','format_id', 'sub_category_id', 'category_id', 'impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction', 'sex_restriction',
@@ -78,6 +81,15 @@ class Space extends Entity
      * @var string
      */
     const UPDATED_AT = null;
+
+    /**
+     * Space constructor.
+     * @param $pointsService
+     */
+    public function __construct(SpacePointsService $pointsService)
+    {
+        $this->pointsService = $pointsService;
+    }
 
     /**
      * Get an attribute from the model.
@@ -281,6 +293,14 @@ class Space extends Entity
     public function getSubCategoryNameAttribute()
     {
         return $this->getSubCategory()->name;
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function getNewPointsAttribute()
+    {
+        return $this->pointsService->calculatePoints($this);
     }
 
     /**
