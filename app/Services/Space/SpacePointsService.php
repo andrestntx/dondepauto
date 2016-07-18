@@ -43,6 +43,7 @@ class SpacePointsService
         ],
         'impact' => [
             'name' => 'impact',
+            'type' => 'integer',
             'title' => 'Impactos estimados',
             'content' => 'Digita el número (#) de impresiones, visualizaciones, personas o audiencia que impacta este espacio publicitario durante el periodo aplicable',
             'maxPoints' => 10,
@@ -53,7 +54,7 @@ class SpacePointsService
             ]
         ],
         'price' => [
-            'name' => 'price',
+            'name' => 'minimal_price',
             'title' => 'Precio de oferta',
             'content' => 'Haz más atractivas tus ofertas con precios llamativos y competitivos. El cliente siempre compara alternativas por precios y alcance de impactos (ROI)',
             'maxPoints' => 1,
@@ -423,6 +424,7 @@ class SpacePointsService
                 }
             }
             else if($type == 'collection') {
+                \Log::info($space->$spaceAttribute);
                 $points += $this->calculate($input, $space->$spaceAttribute->count());
             }
             else if($type == 'json') {
