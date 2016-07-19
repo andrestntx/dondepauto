@@ -178,6 +178,14 @@ class User extends Entity
     }
 
     /**
+     * @return mixed
+     */
+    public function getCountSpacesAttribute()
+    {
+        return $this->spaces->count();
+    }
+
+    /**
      * @return Representative|mixed
      */
     public function getRepresentativeOrNew()

@@ -55,6 +55,10 @@ class SpaceRepository extends BaseRepository
     public function create(array $data)
     {
         $space = parent::create($data);
+
+        $space->url = $data['name'];
+        $space->save();
+
         $this->sync($data, $space);
 
         return $space;

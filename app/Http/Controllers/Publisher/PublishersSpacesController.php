@@ -72,7 +72,7 @@ class PublishersSpacesController extends ResourceController
      */
     public function show(User $user, Space $space)
     {
-        return ['hola' => 'sisis'];
+        return $this->view('show', ['publisher' => $user, 'space' => $space]);
     }
 
     /**

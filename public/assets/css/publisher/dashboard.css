@@ -13,6 +13,10 @@
 	margin: 0;
 }
 
+.dashboard .ibox.publihser-name {
+    margin-bottom: 1.3em;
+}
+
 .dashboard .sub-title {
 	padding: 1em 5%;
 }
@@ -37,6 +41,14 @@
 
 .dashboard .content .btn.btn-xlg {
     margin: 0.5em 1em;
+}
+
+hr.separator-dashbaord {
+    border-top: 4px solid rgba(181, 181, 181, 0.41);
+}
+
+.dashboard #icons.short {
+    margin-bottom: 0;
 }
 
 #icons {
@@ -93,6 +105,179 @@
 .ibox-content-margin {
     border: 3.6px solid #dad8d8;
 }    
+
+/** Dashboard IBOX **/
+
+.dashboard .ibox-dashboard h2 {
+    font-size: 2em;
+    margin-bottom: 0.4em;
+}
+
+.dashboard .ibox-dashboard h2 + hr {
+    margin: 0 auto 20px auto;
+    width: 70%;
+    display: block;
+    border-top: 3px solid #8e8787;
+}
+
+.dashboard .ibox-dashboard hr {
+    border-top: 3px solid rgba(197, 197, 197, 0.55);
+}
+
+.dashboard .ibox-dashboard .ibox-content {
+    border-style: solid;
+    border-width: 0px 3px 0px 3px;
+    border-color: rgba(187, 182, 182, 0.6);
+}
+
+
+.dashboard .ibox-dashboard .ibox-footer {
+    border-style: solid;
+    border-width: 1px 3px 3px 3px;
+    border-color: rgba(187, 182, 182, 0.6);
+}
+
+.dashboard .ibox-dashboard .ibox-title {
+    min-height: 0;
+    padding: 7px 15px 7px;
+}
+
+.dashboard .ibox-dashboard .ibox-title.ibox-title-green {
+    background-color: #01BB48;
+}
+
+
+.dashboard .ibox-dashboard .inventary-detail h1 {
+    font-size: 1.45em;
+    font-weight: 400;
+}
+
+.dashboard .ibox-dashboard .inventary-detail h2 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dashboard .ibox-dashboard #pointsInventary a#help-modal-point {
+    font-size: 1.34em;
+}
+
+.dashboard .ibox-dashboard .btn {
+    font-size: 1.3em;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-icon {
+    display: inline-block;
+    width: 16%;
+    text-align: right;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-text {
+    display: inline-block;
+    vertical-align: middle;
+    width: 80%;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-text h1 {
+    font-size: 2em;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-text h2 {
+    font-size: 1.4em;
+    font-weight: 400; 
+}
+
+.dashboard .ibox-dashboard .agreement-detail hr {
+    margin-top: 0.01em;
+    margin-bottom: 1em;
+}
+
+/** END Dashboard IBOX **/
+
+/** END Dashboard BOX MESSAGE **/
+
+.dashboard .box-message {
+    padding-top: 25px;
+    background: white;
+    position: relative;
+    display: block;
+    margin-top: 1.7em;
+    width: 100%;
+    text-align: center;
+    border: 3px #05B842 solid;
+}
+
+.dashboard .box-message .icon-message {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    margin-left: -15px;
+    display: inline-block;
+    background: #fff8f7;
+    border-radius: 50%;
+    border: 3px solid #05B842;
+    padding: 6px;
+}
+
+.dashboard .box-message .icon-message img {
+    width: 20px;
+    height: 20px;
+}
+
+/** END Dashboard BOX MESSAGE **/
+
+/** Dashboard COMERCIAL DETAIL **/
+    
+.dashboard .comercial-detail h1 {
+        font-weight: bold;
+    font-size: 2.5em;
+    margin-top: 0;
+}
+
+.dashboard .comercial-detail h2 {
+    font-size: 1.6em;
+    font-weight: bold;
+    text-align: left;
+    color: rgba(140, 140, 140, 0.89);
+    display: inline-block;
+    text-transform: none;
+    margin-bottom: 1.2em;
+    margin-top: 0.7em;
+}
+
+.dashboard .comercial-detail p {
+    font-size: 1.2em;
+}
+
+.dashboard .comercial-detail h2 span {
+    border-bottom: 2px solid rgba(128, 128, 128, 0.65);
+    border-bottom-width: 3px;
+    padding-bottom: 3px;
+    width: 70%;
+    height: 2px;
+    margin: auto;
+    display: block;
+    margin-top: 5px;
+}
+
+
+/** END Dashboard COMERCIAL DETAIL **/
+
+
+/** Dashboard GENERAL STYLE **/
+    
+hr.hr-pencil {
+    border-top: 4px rgba(195, 192, 192, 0.5) dashed;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+    
+/** END Dashboard GENERAL STYLE **/
+
+
 
 .publisher-content .slide-tips p {
     margin: auto;

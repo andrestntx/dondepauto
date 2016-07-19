@@ -183,6 +183,31 @@ class Space extends Entity
     }
 
     /**
+     * @param $value
+     * @return string
+     */
+    protected function getSlug($value) {
+        $slug = strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($value, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+        return $slug . '-' . rand(111111,999999);
+    }
+
+    /**
+     * @param $value
+     */
+    protected function setUrlAttribute($value) {
+        $this->urlTag = $this->getSlug($value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUrlMarketplaceAttribute()
+    {
+        return 'http://www.dondepauto.co/espacio-publicitario/' . $this->urlTag;
+    }
+
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function zone()

@@ -52,6 +52,9 @@ class SpaceImage extends Entity
 
     public function getUrlAttribute($value)
     {
+        if(\File::exists('images/marketplace/big/' . $this->url_thumb_LI)) {
+            return url('/images/marketplace/big/' . $this->url_thumb_LI);
+        }
         return 'http://dondepauto.co/images/marketplace/big/' . $this->url_imagen_LI;
     }
 
