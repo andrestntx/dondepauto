@@ -202,6 +202,16 @@ class SpacePointsService
     }
 
     /**
+     * @param $inputName
+     * @param $value
+     * @return mixed
+     */
+    protected function setActualPoints($inputName, $value)
+    {
+        return $this->inputs[$inputName]['actual'] = $value;
+    }
+
+    /**
      * @param $input
      * @param $attribute
      * @return bool
@@ -367,10 +377,8 @@ class SpacePointsService
      * @return int|mixed
      */
     protected function calculate(array $input, $value = 0) {
-        \Log::info('value: ' . $value);
         if($this->hasAttribute($input, 'maxPoints')) {
             if($rule = $this->getRule($input, $value)) {
-                \Log::info($rule);
                 return $this->getAttribute($input, 'maxPoints') * $rule['points'];
             }
 
@@ -400,6 +408,14 @@ class SpacePointsService
         return $this->calculate($input, strlen($inputString));
     }
 
+    /**
+     * @param Space $space
+     * @return array
+     */
+    public function getRulePoints(Space $space)
+    {
+        return ['points' => $this->calculatePoints($space), 'inputs' => $this->getInputs()];
+    }
 
     /**
      * @param Space $space
@@ -408,36 +424,33 @@ class SpacePointsService
     public function calculatePoints(Space $space)
     {
         $points = 0;
+        if($space->exists) {
+            foreach($this->getInputs() as $inputName => $input) {
+                $newPoint = 0;
+                $spaceAttribute = $this->getAttribute($input, 'name');
+                $type = $this->getAttribute($input, 'type');
 
-        foreach($this->getInputs() as $inputName => $input) {
-
-            $spaceAttribute = $this->getAttribute($input, 'name');
-            $type = $this->getAttribute($input, 'type');
-
-            \Log::info('input: ' . $inputName);
-            \Log::info('input_attr: ' . $spaceAttribute);
-            \Log::info('input_type: ' . $type);
-
-            if($type == 'exists') {
-                if( ! is_null($space->$spaceAttribute)) {
-                    $points += $this->calculate($input);
+                if($type == 'exists') {
+                    if( ! is_null($space->$spaceAttribute)) {
+                        $newPoint = $this->calculate($input);
+                    }
                 }
-            }
-            else if($type == 'collection') {
-                \Log::info($space->$spaceAttribute);
-                $points += $this->calculate($input, $space->$spaceAttribute->count());
-            }
-            else if($type == 'json') {
-                $points += $this->calculate($input, count(explode(',', $space->$spaceAttribute)));
-            }
-            else if($type == 'integer') {
-                $points += $this->calculate($input, $space->$spaceAttribute);
-            }
-            else {
-                $points += $this->calculateString($input, $space->$spaceAttribute);
-            }
+                else if($type == 'collection') {
+                    $newPoint = $this->calculate($input, $space->$spaceAttribute->count());
+                }
+                else if($type == 'json') {
+                    $newPoint = $this->calculate($input, count(explode(',', $space->$spaceAttribute)));
+                }
+                else if($type == 'integer') {
+                    $newPoint = $this->calculate($input, $space->$spaceAttribute);
+                }
+                else {
+                    $newPoint = $this->calculateString($input, $space->$spaceAttribute);
+                }
 
-            \Log::info('input_points: ' . $points);
+                $points += $newPoint;
+                $this->setActualPoints($inputName, $newPoint);
+            }
         }
 
         return $points;

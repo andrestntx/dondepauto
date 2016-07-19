@@ -4,6 +4,8 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/publisher/dashboard.css" />
     <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="/assets/css/plugins/tour/bootstrap-tour.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 @endsection
 
 @section('breadcrumbs')
@@ -100,16 +102,16 @@
                                         <tr>
                                             <td class="text-center"> 
                                                 <div class="checkbox checkbox-info text-center">
-                                                    {{ Form::checkbox('active[$space->id]', 1, $space->active) }}
+                                                    {{ Form::checkbox('active[' . $space->id . ']', 1, $space->active, ['class' => 'check-active', 'data-publisher' => $publisher->id, 'data-space' => $space->id]) }}
                                                     <label></label>
                                                 </div> 
                                             </td>
                                             <td> <a href="{{ route('medios.espacios.show', [$publisher, $space]) }}" target="_blank"> {{ $space->name }} </a></td>
-                                            <th class="text-center"> <a href="/" class="btn btn-sm btn-warning" style="font-size: 0.9em;">Crear oferta similar</a></th>
+                                            <th class="text-center"> <a href="{{ route('medios.espacios.duplicate', [$publisher, $space]) }}" class="btn btn-sm btn-warning" style="font-size: 0.9em;">Crear oferta similar</a></th>
                                             <td> {{ $space->category_name }} / {{ $space->sub_category_name }} </td>
                                             <td> {{ $space->format_name }} </td>
                                             <td class="text-center" style="color:#1ab394;"> <strong> ${{ number_format($space->minimal_price, 0, ',', '.') }} </strong> </td>
-                                            <td class="text-center"> <strong>{{ $space->points }} </strong></td>
+                                            <td class="text-center"> <strong>{{ $space->new_points }} </strong></td>
                                             @if($publisher->private)
                                                 <td class="text-center"> 
                                                     @if($space->private)
@@ -135,6 +137,8 @@
 
     <script src="/assets/js/services/publisher/inventaryService.js"></script>
     <script src="/assets/js/plugins/tour/bootstrap-tour.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script>
         $(".pieProgress").asPieProgress({
@@ -210,6 +214,44 @@
 
             $("#restart-tour").click(function() {
                 tour.restart();
+            });
+
+            $('.check-active').click(function (event) {
+                var myCheck = this;
+                var url = '/medios/' + $(this).data('publisher') + '/espacios/' +  $(this).data('space') + '/';
+                event.preventDefault();
+
+                if($(this).is(':checked')) {
+                    swal({
+                        title: "¿Estás seguro?",
+                        text: "La oferta quedará disponible",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "#21B9BB",
+                        confirmButtonText: "Si, Activar",
+                        closeOnConfirm: false
+                    }, function () {
+                        $(myCheck).prop("checked", true);
+                        swal("Oferta activa!", "Tu oferta ha sido activada.", "success");
+                        $.post( url + 'active', function() {});
+                    });
+                }
+                else {
+                    swal({
+                        title: "¿Estás seguro?",
+                        text: "La oferta quedará completamente inactiva",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#FFAC1A",
+                        confirmButtonText: "Si, Desactivar!",
+                        cancelButtonText: "Cancelar",
+                        closeOnConfirm: false
+                    }, function () {
+                        $(myCheck).prop("checked", false);
+                        swal("Oferta inactiva!", "Tu oferta ha sido desactivada.", "success");
+                        $.post( url + 'inactive', function() {});
+                    });
+                }
             });
         });
 

@@ -28,7 +28,7 @@ class Space extends Entity
 
     protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
         'city_id','format_id', 'sub_category_id', 'category_id', 'impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction', 'sex_restriction',
-        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id', 'religion_restriction'
+        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id', 'religion_restriction', 'points'
     ];
 
     protected $databaseTranslate = ['name' => 'nombre_espacio_LI', 'description' => 'descripcion_espacio_LI', 'address' => 'direccion_ubicacion_LI',
@@ -46,7 +46,7 @@ class Space extends Entity
      *
      * @var array
      */
-    protected $appends = ['publisher_name', 'category_sub_category', 'commission', 'markup_price', 'public_price',
+    protected $appends = ['category_sub_category', 'commission', 'markup_price', 'public_price',
         'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'category_name', 'alcohol_restriction', 
         'snuff_restriction', 'policy_restriction', 'publisher_company', 'publisher_phone', 'publisher_email',
         'percentage_markdown', 'minimal_price', 'sub_category_name', 'category_name', 'format_name', 'impact_scene_name',
@@ -162,7 +162,7 @@ class Space extends Entity
     public function getImagesListAttribute()
     {
         return $this->images->map(function ($item, $key) {
-            return ['url' => $item->thumb];
+            return ['url' => $item->thumb, 'name' => $item->id_imagen_LI];
         })->toJson();
     }
 
@@ -292,7 +292,38 @@ class Space extends Entity
     public function getNewPointsAttribute()
     {
         $this->pointsService = new SpacePointsService();
-        return $this->pointsService->calculatePoints($this);
+        return round($this->pointsService->calculatePoints($this));
+    }
+    
+    public function getRulesJsonAttribute()
+    {
+        $this->pointsService = new SpacePointsService();
+        return json_encode($this->pointsService->getRulePoints($this));
+    }
+
+    /**
+     * @param $value
+     */
+    public function setActiveAttribute($value)
+    {
+        if($value) {
+            $this->espacio_activo_LI = 'Si_act';
+        }
+        else {
+            $this->espacio_activo_LI = 'No_act';
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getActiveAttribute()
+    {
+        if($this->espacio_activo_LI == 'Si_act') {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -328,6 +359,10 @@ class Space extends Entity
     }
 
 
+    /**
+     * @param $column
+     * @return bool
+     */
     public function isRestriction($column)
     {
         if($column == 'S') {

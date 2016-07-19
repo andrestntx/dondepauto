@@ -61,8 +61,18 @@ class PublishersSpacesController extends ResourceController
      */
     public function index(User $user)
     {
-        $user->load('spaces.format.subCategory.category');
+        $user->load(['spaces.format.subCategory.category', 'spaces.cities', 'spaces.audiences', 'spaces.images', 'spaces.impactScenes']);
         return $this->view('lists', ['publisher' => $user]);
+    }
+
+    /**
+     * @param User $user
+     * @param Space $space
+     * @return array
+     */
+    public function show(User $user, Space $space)
+    {
+        return ['hola' => 'sisis'];
     }
 
     /**
@@ -72,7 +82,9 @@ class PublishersSpacesController extends ResourceController
     public function create(User $user)
     {
         $route = ['medios.espacios.store', $user];
-        return $this->view('form', ['publisher' => $user, 'space' => new Space(), 'route' => $route]);
+        $type = 'POST';
+
+        return $this->view('form', ['publisher' => $user, 'space' => new Space(), 'route' => $route, 'type' => $type]);
     }
 
     /**
@@ -85,8 +97,24 @@ class PublishersSpacesController extends ResourceController
         $space->load('format.subCategory.formats');
         $formats = $space->format->subCategory->formats->lists('name', 'id')->all();
         $route = ['medios.espacios.update', $user, $space];
+        $type = 'POST';
+        
+        return $this->view('form', ['publisher' => $user, 'space' => $space, 'spaceFormats' => $formats, 'route' => $route, 'type' => $type]);
+    }
 
-        return $this->view('form', ['publisher' => $user, 'space' => $space, 'spaceFormats' => $formats, 'route' => $route]);
+    /**
+     * @param User $user
+     * @param Space $space
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function duplicate(User $user, Space $space)
+    {
+        $space->load('format.subCategory.formats');
+        $formats = $space->format->subCategory->formats->lists('name', 'id')->all();
+        $route = ['medios.espacios.post-duplicate', $user, $space];
+        $type = 'POST';
+
+        return $this->view('form', ['publisher' => $user, 'space' => $space, 'spaceFormats' => $formats, 'route' => $route, 'type' => $type]);
     }
 
     /**
@@ -97,30 +125,88 @@ class PublishersSpacesController extends ResourceController
     public function store(Request $request, User $user)
     {
         try {
-            $this->spaceFacade->createModel($request->all(), $request->file('images'), $user);
+            $space = $this->spaceFacade->createModel($request->all(), $request->file('images'), $user);
         } catch (Exception $e) {
-            return ['result' => 'false'];
+            return ['result' => 'false', 'route' => route('home')];
         }
 
         if($this->spaceFacade->countSpaces($user) == 1) {
             return ['result' => 'true', 'route' => route('medios.agreement', $user)];
         }
-
-        return ['result' => 'true', 'route' => route('home')];
+        
+        return ['result' => 'true', 'route' => route('medios.espacios.index', $user)];
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Space $space
+     * @return array
+     */
     public function update(Request $request, User $user, Space $space)
     {
         try {
-            $this->spaceFacade->updateModel($request->all(), $request->file('images'), $space);
+            $this->spaceFacade->updateModel($request->all(), $request->file('images'), $request->get('keep_images'), $space);
         } catch (Exception $e) {
-            return ['result' => 'false'];
+            return ['result' => 'false', 'route' => route('home')];
         }
 
         if($this->spaceFacade->countSpaces($user) == 1) {
             return ['result' => 'true', 'route' => route('medios.agreement', $user)];
         }
 
-        return ['result' => 'true', 'route' => route('home')];
+        return ['result' => 'true', 'route' => route('medios.espacios.show', [$user, $space])];
     }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Space $space
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function postDuplicate(Request $request, User $user, Space $space)
+    {
+        try {
+            $space = $this->spaceFacade->duplicateModel($request->all(), $request->file('images'), $request->get('keep_images'), $user, $space);
+        } catch (Exception $e) {
+            return ['result' => 'false', 'route' => route('home')];
+        }
+
+        return ['result' => 'true', 'route' => route('medios.espacios.show', [$user, $space])];
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function updateAllPoints(Request $request)
+    {
+        $this->spaceFacade->recalculateAllPoints();
+        return ['result' => 'true'];
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return array
+     */
+    public function updatePoints(Request $request, User $user)
+    {
+        $this->spaceFacade->recalculateAllPoints();
+        return ['result' => 'true'];
+    }
+
+    public function active(Request $request, User $user, Space $space)
+    {
+        $this->spaceFacade->activeSpace($space, true);
+        return ['result' => 'true'];
+    }
+
+    public function inactive(Request $request, User $user, Space $space)
+    {
+        $this->spaceFacade->activeSpace($space, false);
+        return ['result' => 'true'];
+    }
+
+
 }

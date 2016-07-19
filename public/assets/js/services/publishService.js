@@ -255,7 +255,18 @@ $(document).ready(function(){
                             myDropzone.processQueue();
                         }
                         else {
+                            var data = {};
+
+                            $.each($(".dz-success-server img"), function(key,value) {
+                                $(data).attr("keep_images[" + key + "]", $(value).attr('alt'));
+                            });
+
+                            $(data).attr("impact_scenes", $("select[name='impact_scenes']").val().toString());
+                            $(data).attr("audiences", $("select[name='audiences']").val().toString());
+                            $(data).attr("cities", $("select[name='cities']").val().toString());
+
                             $('form').ajaxSubmit({
+                                data: data,
                                 success: function (data) {
                                     window.location.replace(data.route);
                                 }
@@ -351,7 +362,7 @@ $(document).ready(function(){
         }
     });
 
-    var inputs = [
+    /*var inputs = [
         {   
             name: 'name', 
             title: 'Título de la oferta',
@@ -551,7 +562,12 @@ $(document).ready(function(){
             title: 'Video de Youtube',
             content: 'Incluye un video reel de tu oferta (agrega el Link de YouTube)'
         }
-    ];
+    ];*/
+
+    var spaceRules = $("#spaceRules").data("rules");
+    var inputs = spaceRules.inputs;
+    var points = spaceRules.points;
+
 
     $(".select2-categorys").select2({
         placeholder: "Selecciona el tipo de pauta",
@@ -594,8 +610,11 @@ $(document).ready(function(){
 
     Dropzone.autoDiscover = false;
 
+    var existingFileCount = 0; // The number of files already uploaded
+
     myDropzone = new Dropzone('#myDropzone', {
         url: $("form").attr('action'),
+        method: $("form").data("typeform"),
         addRemoveLinks: true,
         dictRemoveFile: 'Quitar foto',
         dictMaxFilesExceeded: 'Sólo puedes agregar 6 fotografías',
@@ -606,15 +625,18 @@ $(document).ready(function(){
         acceptedFiles: 'image/*',
         autoProcessQueue: false,
         parallelUploads: 6,
-        autoDiscover: true,
         paramName: 'images',
         clickable: true,
         uploadMultiple: true,
         maxFiles: 6,
+        headers: { 
+            "X-CSRF-TOKEN": $("input[name='_token']").val()
+        },
         //maxFilesize: 1,
         // The setting up of the dropzone
         init: function() {
-            var myDrop = this;
+            var thisDropzone = this;
+
             this.on("successmultiple", function(files, response) {
                 window.location.replace(response.route);
             });
@@ -626,79 +648,93 @@ $(document).ready(function(){
                 //myDrop.removeFiles(files);
             });
 
-            var existingFileCount = 0; // The number of files already uploaded
-            var thisDropzone = this;
+            this.on("sendingmultiple", function(files, xhr, formData) {
+                formData.append("name", $("input[name='name']").val());
+                formData.append("format_id", $("select[name='format_id']").val());
+                formData.append("description", $("textarea[name='description']").val());
+                formData.append("dimension", $("input[name='dimension']").val());
+                
+                formData.append("impact_scenes", $("select[name='impact_scenes']").val());
+                formData.append("audiences", $("select[name='audiences']").val());
+                formData.append("more_audiences", $("input[name='more_audiences']").val());
+                formData.append("impact", $("input[name='impact']").val());
+                formData.append("impact_agency", $("input[name='impact_agency']").val());
 
+                if($("input[name='alcohol_restriction']:checked").val()) {
+                    formData.append("alcohol_restriction", $("input[name='alcohol_restriction']").val());
+                }
+
+                if($("input[name='snuff_restriction']:checked").val()) {
+                    formData.append("snuff_restriction", $("input[name='snuff_restriction']").val());
+                }
+
+                if($("input[name='policy_restriction']:checked").val()) {
+                    formData.append("policy_restriction", $("input[name='policy_restriction']").val());
+                }
+
+                if($("input[name='sex_restriction']:checked").val()) {
+                    formData.append("sex_restriction", $("input[name='sex_restriction']").val());
+                }
+                
+                formData.append("cities", $("select[name='cities']").val());
+                formData.append("address", $("input[name='address']").val());
+                
+                formData.append("youtube", $("input[name='youtube']").val());
+
+                formData.append("minimal_price", $("input[name='minimal_price']").val());
+                formData.append("public_price", $("input[name='public_price']").val());
+                formData.append("margin", $("input[name='margin']").val());
+
+                formData.append("period", $("select[name='period']").val());
+                formData.append("discount", $("input[name='discount']").val());
+
+                formData.append("points", actualValue);
+
+                $.each($(".dz-success-server img"), function(key,value) {
+                    formData.append("keep_images[" + key + "]", $(value).attr('alt'));
+                });
+            });
+
+            this.on("removedfile", function(file) {
+
+                console.log(this.getAcceptedFiles().length + existingFileCount);
+
+                if (file.size == "100001") { 
+                    existingFileCount --;
+                    thisDropzone.options.maxFiles = thisDropzone.options.maxFiles + 1;
+                }
+                
+                calculate('photos', this.getAcceptedFiles().length + existingFileCount);
+                return this._updateMaxFilesReachedClass();
+            });
+
+            
             $.each(dataImages, function(key,value){
-                var mockFile = { name: "Imagen DP", size: '10000' };
+
+                var mockFile = { name: value.name, size: '100001' };
                 thisDropzone.options.addedfile.call(thisDropzone, mockFile);
                 thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.url);
-                thisDropzone.options.maxFiles = thisDropzone.options.maxFiles - existingFileCount;
+                thisDropzone.options.maxFiles = thisDropzone.options.maxFiles - 1;
+
+                mockFile.previewElement.classList.add('dz-success');
+                mockFile.previewElement.classList.add('dz-complete');
+                mockFile.previewElement.classList.add('dz-success-server');
+
+                existingFileCount ++;
             });
 
         },
-        sendingmultiple: function(files, xhr, formData) {
-            formData.append("_token", $("input[name='_token']").val());
-            formData.append("name", $("input[name='name']").val());
-            formData.append("format_id", $("select[name='format_id']").val());
-            formData.append("description", $("textarea[name='description']").val());
-            formData.append("dimension", $("input[name='dimension']").val());
-            
-            formData.append("impact_scenes", $("select[name='impact_scenes']").val());
-            formData.append("audiences", $("select[name='audiences']").val());
-            formData.append("more_audiences", $("input[name='more_audiences']").val());
-            formData.append("impact", $("input[name='impact']").val());
-            formData.append("impact_agency", $("input[name='impact_agency']").val());
-
-            if($("input[name='alcohol_restriction']:checked").val()) {
-                formData.append("alcohol_restriction", $("input[name='alcohol_restriction']").val());
-            }
-
-            if($("input[name='snuff_restriction']:checked").val()) {
-                formData.append("snuff_restriction", $("input[name='snuff_restriction']").val());
-            }
-
-            if($("input[name='policy_restriction']:checked").val()) {
-                formData.append("policy_restriction", $("input[name='policy_restriction']").val());
-            }
-
-            if($("input[name='sex_restriction']:checked").val()) {
-                formData.append("sex_restriction", $("input[name='sex_restriction']").val());
-            }
-            
-            formData.append("cities", $("select[name='cities']").val());
-            formData.append("address", $("input[name='address']").val());
-            
-            formData.append("youtube", $("input[name='youtube']").val());
-
-            formData.append("minimal_price", $("input[name='minimal_price']").val());
-            formData.append("public_price", $("input[name='public_price']").val());
-            formData.append("margin", $("input[name='margin']").val());
-
-            formData.append("period", $("select[name='period']").val());
-            formData.append("discount", $("input[name='discount']").val());
-
-            formData.append("points", actualValue);
-        },
         accept: function(file, done) {
-            calculate('photos', this.getAcceptedFiles().length + 1);
+            calculate('photos', this.getAcceptedFiles().length + existingFileCount + 1);
             return done();
         },
-        removedfile: function(file) {
-            calculate('photos', this.getAcceptedFiles().length);
-            var _ref;
-            if ((_ref = file.previewElement) != null) {
-                _ref.parentNode.removeChild(file.previewElement);
-            }
-            return this._updateMaxFilesReachedClass();
-        },
+
     });
 
     function calculate(name, length) {
         var input = findInput(name);
 
-        if(input.length > 0 && input[0].rules) {
-            input       = input[0];
+        if(input.rules) {
             var rules   = $.grep(input.rules, function(r){ return length >= r.min });
             var maxRule = Math.max.apply(Math, rules.map(function(rule){return rule.min;}));
             var rule    = $.grep(rules, function(r){ return maxRule == r.min });
@@ -716,10 +752,7 @@ $(document).ready(function(){
 
     function calculateSelect(name, value) {
         var input = findInput(name);
-
-        if(input.length > 0) {
-            input = input[0];
-            
+        if(input.actual >= 0) {      
             if(value > 0 || value.length > 0) {
                 sumValue = input.maxPoints;  
             }
@@ -732,7 +765,6 @@ $(document).ready(function(){
     }
 
     function updateValue(sumValue, input) {
-        console.log(progresActive);
         if(progresActive) {
             newValue        = actualValue + sumValue - input.actual;
             actualValue     = newValue;
@@ -743,7 +775,14 @@ $(document).ready(function(){
     }
 
     function findInput(name) {
-        return $.grep(inputs, function(i){ return i.name == name; });
+        var input = inputs[name];
+
+        if(input) {
+            return inputs[name];
+        }
+
+        return {};
+        
     }
 
     function getLength(input) {
@@ -798,8 +837,8 @@ $(document).ready(function(){
 
     function showMessages(name) {
         var input = findInput(name);
-        if(input.length > 0 && inputName != name && input[0].title) {
-            input = input[0];
+
+        if(input.title && inputName != name) {
             showMessage(input.title, input.content);  
         }
 
@@ -882,6 +921,13 @@ $(document).ready(function(){
     if(initValue > 0) {
         actualValue = initValue;
         $('.pieProgress').asPieProgress('go', initValue);
+    }
+
+    function toObject(arr) {
+      var rv = {};
+      for (var i = 0; i < arr.length; ++i)
+        rv[i] = arr[i];
+      return rv;
     }
 
 });

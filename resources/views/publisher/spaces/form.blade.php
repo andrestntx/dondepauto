@@ -50,7 +50,7 @@
             <div class="ibox-content">
                 
                 <div class="row">
-                    <div class="col-md-3" id="points" data-totalpoints="{{ $space->points }}">
+                    <div class="col-md-3" id="points" data-totalpoints="{{ $space->new_points }}">
                         <div id="fixedPoints">
                             <div class="pieProgress" role="progressbar" data-goal="100" aria-valuemin="0" data-step="2" aria-valuemax="100">
                                 <div class="pie_progress__number">0</div>
@@ -94,8 +94,8 @@
                         </div>
                     </div> 
 
-                    <div class="col-md-9">
-                        {!! Form::model($space, ['route' => $route, 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-publish', 'class' => 'wizard-big form-steps']) !!}
+                    <div class="col-md-9" id="spaceRules" data-rules="{{ $space->rules_json }}">
+                        {!! Form::model($space, ['route' => $route, 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-publish', 'class' => 'wizard-big form-steps', 'method' => $type, 'data-typeform' => $type]) !!}
                             <h1>Datos básicos</h1>
                             <fieldset>
                                 <h2>Datos básicos de este espacio publicitario</h2>

@@ -36,9 +36,6 @@ class SpaceRepository extends BaseRepository
     public function sync(array $data, Space $space)
     {
         if(array_key_exists('audiences', $data)) {
-            \Log::info($data['audiences']);
-            \Log::info(explode(',', $data['audiences']));
-
             $space->audiences()->sync(explode(',', $data['audiences']));
         }
 
@@ -72,14 +69,14 @@ class SpaceRepository extends BaseRepository
     {
         parent::update($data, $entity);
 
-        $entity->sub_category_id 	= $entity->format->subCategory->id;
-        $entity->category_id 		= $entity->format->getCategory()->id; 
-
-        if($entity->save()) {
-            return $entity;
+        if($entity->format && $entity->format->subCategory) {
+            $entity->sub_category_id 	= $entity->format->subCategory->id;
+            $entity->category_id 		= $entity->format->getCategory()->id;
+            $entity->save();
         }
 
-        return false;
+        $this->sync($data, $entity);
+        return $entity;
     }
 
     /**
@@ -106,9 +103,32 @@ class SpaceRepository extends BaseRepository
         return $space->save();
     }
 
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function countSpaces(User $user) 
     {
         return $user->spaces()->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function allSpaces()
+    {
+        return $this->model->load(['images', 'audiences', 'format.subCategory.category', 'impactScenes'])->get();
+    }
+
+    /**
+     * @param Space $space
+     * @param bool $active
+     * @return bool
+     */
+    public function active(Space $space, $active = true)
+    {
+        $space->active = $active;
+        return $space->save();
     }
     
 }
