@@ -115,4 +115,23 @@ class PublisherService extends ResourceService
         $this->publisherDocumentsRepository->saveBankDocument($publisher, $bankDocument);
         $this->publisherDocumentsRepository->saveLetterDocument($publisher, $letterDocument);
     }
+
+    /**
+     * @param User $publisher
+     * @param $dateString
+     * @return mixed
+     */
+    public function generateLetter(User $publisher, $dateString)
+    {
+        return $this->publisherDocumentsRepository->generateLetter($publisher, $dateString);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTerms()
+    {
+        return $this->publisherDocumentsRepository->getTerms();
+    }
+
 }

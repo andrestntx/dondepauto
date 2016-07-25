@@ -126,7 +126,7 @@
 
                                     <div class="col-md-12">
                                         <div class="col-md-6"> 
-                                            {!! Field::text('repre[doc]', $representative->doc, ['label' => 'Cédula Rep. Legal', 'required']) !!} 
+                                            {!! Field::number('repre[doc]', $representative->doc, ['label' => 'Cédula Rep. Legal', 'required']) !!} 
                                         </div>                                    
                                         <div class="col-md-6"> 
                                             {!! Field::text('repre[phone]', $representative->phone, ['label' => 'Teléfono Fijo Rep. Legal', 'required']) !!} 
@@ -332,7 +332,7 @@
                     minlength: ""
                 },
                 "repre[doc]": {
-                    default: "Ingrese el número de cédula del Rep. Lega, separado por puntos. EJ: 91.517.500",
+                    default: "Ingrese el número de cédula del Rep. Legal. EJ: 91517500",
                     required: "",
                     minlength: ""
                 },

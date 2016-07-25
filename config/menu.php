@@ -32,11 +32,23 @@ return [
                             'title' => 'Inventario', 
                             'allows' => ['inventory', ':publisher']
                         ],
+        'new_offert'     => [
+                            'route' => ['medios.espacios.create', ':user_platform_id'], 
+                            'i' => 'fa fa-plus-circle', 
+                            'title' => 'Crear oferta', 
+                            'allows' => ['inventory', ':publisher']
+                        ],
         'agreement'     => [
-                            'route' => ['medios.agreement', ':user_platform_id'], 
+                            'route' => ['medios.agreement.complete', ':user_platform_id'], 
                             'i' => 'fa fa-file-text-o', 
-                            'title' => 'Acuerdo', 
+                            'title' => 'Activación Proveedor', 
                             'allows' => ['agreement', ':publisher']
+                        ],
+        'faqs'          => [
+                            'route' => ['medios.faqs', ':user_platform_id'], 
+                            'i' => 'fa fa-question-circle', 
+                            'title' => 'Preguntas frecuentes', 
+                            'roles' => ['publisher']
                         ],
     ]
 ];

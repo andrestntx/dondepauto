@@ -27,6 +27,14 @@ class PublisherDocumentsRepository extends BaseRepository
     }
 
     /**
+     * @return string
+     */
+    public function getTerms()
+    {
+        return $this->getPath() . '/terms.pdf';
+    }
+
+    /**
      * @param User $publisher
      * @return mixed
      */
@@ -95,5 +103,26 @@ class PublisherDocumentsRepository extends BaseRepository
     public function saveLetterDocument(User $publisher, UploadedFile $document)
     {
         return $this->saveDocument($publisher, $document, 'letter');
+    }
+
+    /**
+     * @param User $publisher
+     * @param $dateString
+     * @return mixed
+     */
+    public function generateLetter(User $publisher, $dateString)
+    {
+        $publisher->load('representative');
+
+        if(! \File::exists($this->getPathPublisher($publisher))) {
+            \Storage::makeDirectory($this->getPathPublisher($publisher));
+        }
+
+        $stream = \PDF::loadView('pdf.letter', ['publisher' => $publisher, 'date' => $dateString])
+            ->setPaper('a4')
+            ->save($this->getPathPublisher($publisher) . '/letter-generated.pdf')
+            ->stream('carta_dondepauto.pdf');
+
+        return ['stream' => $stream, 'path' => $this->getDocument($publisher, 'letter-generated')];
     }
 }

@@ -147,7 +147,8 @@ class PublishersSpacesController extends ResourceController
             \Alert::success($user->company)->details('Haz creado una nueva oferta para presentar a clientes DóndePauto. Publica más ofertas y actívate como Proveedor!');
             return ['result' => 'true', 'route' => route('medios.agreement', $user)];
         }
-        
+
+        \Alert::success($user->company)->details('Haz creado una nueva oferta. Publica más ofertas y aumenta tus posibilidades de ventas');
         return ['result' => 'true', 'route' => route('medios.espacios.index', $user)];
     }
 
@@ -186,6 +187,7 @@ class PublishersSpacesController extends ResourceController
             return ['result' => 'false', 'route' => route('home')];
         }
 
+        \Alert::success($user->company)->details('Haz creado una nueva oferta. Publica más ofertas y aumenta tus posibilidades de ventas');
         return ['result' => 'true', 'route' => route('medios.espacios.show', [$user, $space])];
     }
 

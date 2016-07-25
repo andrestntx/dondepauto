@@ -14,8 +14,6 @@ use App\Facades\SpaceFacade;
 use App\Http\Requests\RUser\Publisher\CompleteRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
-use Carbon\Carbon;
-use Exception;
 use Illuminate\Http\Request;
 
 class PublishersController extends \App\Http\Controllers\Admin\PublishersController
@@ -68,14 +66,16 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
             ]);
         }*/
 
-        $this->authorize('account', $publisher);
+        if(\Gate::allows('account', $publisher)) {
+            \Alert::success($publisher->company)->details('Tu registro ha sido confirmado!  Completa tus datos y establece contacto con el área de compras y negociaciones.');
 
-        \Alert::success($publisher->company)->details('Tu registro ha sido confirmado!  Completa tus datos y establece contacto con el área de compras y negociaciones.');
+            return $this->view('complete.form', [
+                'publisher'     => $publisher,
+                'formData'      => $this->getSimpleFormData('complete', $publisher)
+            ]);
+        }
 
-        return $this->view('complete.form', [
-            'publisher'     => $publisher,
-            'formData'      => $this->getSimpleFormData('complete', $publisher)
-        ]);
+        return redirect()->route('home');
     }
 
     /**
@@ -91,7 +91,7 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
         $this->facade->completeData($request->all(), $publisher);
 
         \Alert::success($publisher->company)->details('Gracias por completar tu datos de contacto! Ahora podrás presentar tus ofertas y activarte como Proveedor.');
-        return redirect()->route('home');
+        return redirect()->route('medios.agreement', $publisher);
     }
 
     /**
@@ -153,6 +153,18 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
         return $this->view('agreement.form', ['publisher' => $publisher, 'representative' => $publisher->getRepresentativeOrNew()]);
     }
 
+    /**
+     * @param Request $request
+     * @param User $publisher
+     * @return array
+     */
+    public function changeAgreement(Request $request, User $publisher)
+    {
+        $this->authorize('changeAgreement', $publisher);
+        $this->facade->changeAgreement($publisher, $request->get('comments'));
+        return ['success' => 'true'];
+    }
+
 
     /**
      * @param Request $request
@@ -167,19 +179,21 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     }
 
     /**
-     * @param User $user
+     * @param User $publisher
      * @return mixed
      */
-    public function getLetter(User $user)
+    public function getLetter(User $publisher)
     {
-        $date = Carbon::now();
-        $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-        $dateString = $date->day . ' de ' . $months[$date->month - 1] . ' de ' .$date->year;
-        $user->load('representative');
+        return $this->facade->generateLetter($publisher);
+    }
 
-        return \PDF::loadView('pdf.letter', ['publisher' => $user, 'date' => $dateString])
-            ->setPaper('a4')
-            ->stream('carta_dondepauto.pdf');
+    /**
+     * @param User $publisher
+     * @return $this
+     */
+    public function faqs(User $publisher)
+    {
+        return view('publisher.faqs')->with('publisher', $publisher);
     }
 
     /**

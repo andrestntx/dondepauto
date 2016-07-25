@@ -116,6 +116,12 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {
+        
+        Route::get('medios/{publishers}/faqs', [
+            'as'    => 'medios.faqs',
+            'uses' => 'Publisher\PublishersController@faqs'
+        ]);
+
         Route::get('medios/{publisher}/espacios/search', [
             'as'    => 'medios.espacios.search',
             'uses' => 'Admin\PublishersController@searchSpaces'
@@ -139,6 +145,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('medios/{publishers}/acuerdo', [
             'uses' => 'Publisher\PublishersController@agreement',
             'as' => 'medios.agreement'
+        ]);
+
+        Route::post('medios/{publishers}/acuerdo/solicitar-cambio', [
+            'uses' => 'Publisher\PublishersController@changeAgreement',
+            'as' => 'medios.agreement.change'
         ]);
 
         Route::get('medios/{publishers}/acuerdo/completar', [

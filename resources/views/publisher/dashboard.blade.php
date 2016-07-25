@@ -2,6 +2,8 @@
 
 @section('extra-css')
     <link rel="stylesheet" type="text/css" href="/assets/css/publisher/dashboard.css" />
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 @endsection
 
 @section('breadcrumbs')
@@ -9,6 +11,7 @@
 @endsection
 
 @section('content')
+    <div class="se-pre-con"></div>
     <div class="dashboard">
         <div class="ibox float-e-margins publihser-name">
             <div class="ibox-content">
@@ -161,11 +164,11 @@
                         <div class="ibox-footer">
                             <div class="row text-center">
                                 <div class="col-sm-12">  
-                                    @if($publisher->has_signed_agreement) 
-                                        <a href="{{ route('medios.espacios.index', $publisher) }}" class="btn btn-lg btn-info btn-effect-ripple btn-sm">
+                                    @if($publisher->has_signed_agreement || $publisher->in_verification) 
+                                        <button type="button" class="btn btn-info btn-lg btn-effect-ripple " data-toggle="modal" data-target="#myModal">
                                             <i class="fa fa-pencil"></i> 
                                             SOLICITAR CAMBIO DE INFORMACIÓN
-                                        </a> 
+                                        </button>
                                     @else
                                         <a href="{{ route('medios.agreement.complete', $publisher) }}" class="btn btn-lg btn-info btn-effect-ripple btn-sm">
                                             <i class="fa fa-pencil"></i> 
@@ -313,19 +316,62 @@
                         </div>
                     </div>
                     <div class="col-sm-12 text-center">
-                        <a href="/" title="" class="btn btn-info btn-effect-ripple btn-sm">
-                            <i class="fa fa-pencil"></i> SOLICITAR CAMBIO DE INFORMACIÓN
-                        </a> 
+                        <button type="button" class="btn btn-info btn-lg btn-effect-ripple " data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-pencil"></i> 
+                            SOLICITAR CAMBIO DE INFORMACIÓN
+                        </button>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>    
+    </div>   
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Solicitar cambio de información</h4>
+          </div>
+          <div class="modal-body">
+            {!! Field::textarea('comments', ['id' => 'comments-message', 'label' => 'Para modificar o reemplazar la información registrada en DóndePauto, déjanos un mensaje aquí.  Un asesor de servicio se comunicará con usted en breve.', 'required', 'placeholder' => '', 'data-url' => route('medios.agreement.change', $publisher) ]) !!}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendMessage();">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </div> 
    
 @endsection
 
 @section('extra-js')
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        function sendMessage() {
+            $(".se-pre-con").delay(700).show(0);
+            $.post($("#comments-message").data('url'), {'comments': $("#comments-message").val()} )
+                .done( function(data, status) {
+                    $("#comments-message").val('');
+                    $(".se-pre-con").delay(400).hide(0); 
+                    swal({
+                        title: 'Gracias',
+                        text: 'Hemos recibido sus comentarios y pronto un asesor de servicios lo contactará',
+                        type: "success",
+                        confirmButtonText: "Continuar",
+                        confirmButtonColor: "#FFAC1A",
+                        html: true
+                    });
+                });
+        }
+    </script>
+
+
     <script>
         $(".pieProgress").asPieProgress({
             namespace: 'pieProgress',

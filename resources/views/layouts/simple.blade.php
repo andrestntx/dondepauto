@@ -33,7 +33,7 @@
 
 
     </head>
-    <body>
+    <body class="mini-navbar pace-done">
         <div id="wrapper">
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
@@ -63,7 +63,12 @@
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
-                                <span class="m-r-sm text-muted welcome-message">Bienvenido a DondePauto.CO</span>
+                                <span class="m-r-sm text-muted welcome-message">
+                                    <a href="{{ route('home') }}" title="Menú Principal"> {{ ucfirst($publisher->company) }} </a>
+                                </span>
+                                <span class="m-r-sm text-muted welcome-message">
+                                    <a href="{{ route('medios.espacios.index', $publisher) }}" title="Mi Inventario">Mi Inventario</a>
+                                </span>
                             </li>
                             {{-- <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -174,7 +179,6 @@
                 <div class="wrapper wrapper-content animated fadeIn">
 
                     <div class="row">
-                        {!! Alert::render() !!}
                         @yield('content')
                     </div>
 
@@ -230,6 +234,25 @@
 
         <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+        <script type="text/javascript">
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-full-width",
+                "onclick": null,
+                "showDuration": "400000",
+                "hideDuration": "10000",
+                "timeOut": "20000",
+                "extendedTimeOut": "10000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        </script>
+
         <script>
             $(".chosen-select").chosen({disable_search_threshold: 10});
 
@@ -242,5 +265,9 @@
 
         @yield('extra-js')
 
+        {!! Alert::render('themes/alert-toastr') !!}
+
     </body>
 </html>
+
+

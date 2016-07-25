@@ -10,6 +10,7 @@ namespace App\Facades;
 
 use App\Entities\Platform\User;
 use App\Services\ConfirmationService;
+use App\Services\DateService;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\PasswordService;
@@ -33,11 +34,12 @@ class PublisherFacade
     protected $passwordService;
     protected $userService;
     protected $representativeService;
+    protected $dateService;
 
     public function __construct(PublisherService $service, EmailService $emailService, UserService $userService,
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService,
-                                RepresentativeService $representativeService)
+                                RepresentativeService $representativeService, DateService $dateService)
     {
         $this->service = $service;
         $this->emailService = $emailService;
@@ -48,6 +50,7 @@ class PublisherFacade
         $this->passwordService = $passwordService;
         $this->userService = $userService;
         $this->representativeService = $representativeService;
+        $this->dateService = $dateService;
     }
 
     /**
@@ -171,5 +174,24 @@ class PublisherFacade
     {
         $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
     }
-    
+
+    /**
+     * @param User $publisher
+     * @return mixed
+     */
+    public function generateLetter(User $publisher)
+    {
+        $letter = $this->service->generateLetter($publisher, $this->dateService->getLangDateToday());
+        $this->emailService->sendLetter($publisher, $letter['path'], $this->service->getTerms());
+        return $letter['stream'];
+    }
+
+    /**
+     * @param User $publisher
+     * @param $comments
+     */
+    public function changeAgreement(User $publisher, $comments)
+    {
+        $this->emailService->changeAgreement($publisher, $comments);
+    }
 }

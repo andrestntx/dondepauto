@@ -49,6 +49,18 @@ class PlatformUserPolicy
      * @param PlatformUser $publisher
      * @return bool
      */
+    public function changeAgreement(User $user, PlatformUser $publisher)
+    {
+        if ($user->user_platform_id == $publisher->id && ($publisher->has_signed_agreement || $publisher->in_verification)) {
+            return true;
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param PlatformUser $publisher
+     * @return bool
+     */
     public function account(User $user, PlatformUser $publisher)
     {
         if($user->user_platform_id == $publisher->id && ! $publisher->complete_data) {
