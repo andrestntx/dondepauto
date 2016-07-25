@@ -20,8 +20,23 @@ return [
         'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
 
         // Publishers
-        'account'           => ['route' => ['medios.account', ':user_platform_id'], 'i' => 'fa fa-user', 'title' => 'Mi cuenta', 'roles' => ['publisher']],
-        'inventory'         => ['route' => ['medios.espacios.index', ':user_platform_id'], 'i' => 'fa fa-shopping-cart', 'title' => 'Inventario', 'roles' => ['publisher']],
-        'agreement'         => ['route' => ['medios.agreement', ':user_platform_id'], 'i' => 'fa fa-file-text-o', 'title' => 'Acuerdo', 'roles' => ['publisher']],
+        'account'       => [
+                            'route' => ['medios.account', ':user_platform_id'], 
+                            'i' => 'fa fa-user', 
+                            'title' => 'Mi cuenta', 
+                            'allows' => ['account', ':publisher']
+                        ],
+        'inventory'     => [
+                            'route' => ['medios.espacios.index', ':user_platform_id'], 
+                            'i' => 'fa fa-shopping-cart', 
+                            'title' => 'Inventario', 
+                            'allows' => ['inventory', ':publisher']
+                        ],
+        'agreement'     => [
+                            'route' => ['medios.agreement', ':user_platform_id'], 
+                            'i' => 'fa fa-file-text-o', 
+                            'title' => 'Acuerdo', 
+                            'allows' => ['agreement', ':publisher']
+                        ],
     ]
 ];

@@ -4,6 +4,8 @@ namespace App\Entities\Platform;
 
 use App\Entities\Views\Advertiser;
 use App\Entities\Views\Publisher;
+use App\Repositories\File\PublisherDocumentsRepository;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -129,6 +131,19 @@ class User extends Entity
         return round($this->spaces->avg('points'), 0);
     }
 
+
+    /**
+     * @return bool
+     */
+    public function getHasOffersAttribute()
+    {
+        if($this->spaces->count() > 0){
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -239,6 +254,79 @@ class User extends Entity
         return 'Sin actividad';
     }
 
+    public function getRepresentativeNameAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->name;
+        }
+
+        return '';
+    }
+
+    public function getRepresentativeDocAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->doc;
+        }
+
+        return '';
+    }
+
+    public function getRepresentativePhoneAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->phone;
+        }
+
+        return '';
+    }
+
+    public function getRepresentativeEmailAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->email;
+        }
+
+        return '';
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getBank()
+    {
+        if($this->banks) {
+            return $this->banks->first();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankAccountNumberAttribute()
+    {
+        if($bank = $this->getBank()) {
+            return $bank->pivot->account_number;
+        }
+
+        return '-';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankNameAttribute()
+    {
+        if($bank = $this->getBank()) {
+            return $bank->name;
+        }
+
+        return '-';
+    }
+
     /**
      * @return string
      */
@@ -280,6 +368,9 @@ class User extends Entity
         }
     }
 
+    /**
+     * @return bool
+     */
     public function getHasSignedAgreementAttribute()
     {
         if($this->signed_agreement == 'Si_fir_ac') {
@@ -287,6 +378,46 @@ class User extends Entity
         }
 
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInVerificationAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+
+        if(! $this->has_signed_agreement && $fileRepository->hasFiles($this)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param $name
+     * @return string
+     */
+    public function getDocument($name)
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+
+        return $fileRepository->getDocument($this, $name);
+    }
+
+    public function getExpiredOffersAttribute()
+    {
+        if(! $this->has_signed_agreement && $this->expired_offers_days <= 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getExpiredOffersDaysAttribute()
+    {
+        return 30 - $this->created_at->diff(Carbon::now())->days;
     }
 
     /**
@@ -397,10 +528,23 @@ class User extends Entity
         return md5(strtolower($this->email));
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function spaces()
     {
         return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function banks()
+    {
+        return $this->belongsToMany('App\Entities\Platform\Bank', 'bank_user', 'publisher_id', 'bank_id')
+            ->withPivot('account_number');
+    }
+
 
     public function getSpaceCityNamesAttribute()
     {

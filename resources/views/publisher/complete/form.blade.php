@@ -11,9 +11,7 @@
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <h3>Al ofertar en <span class="theme-color">DóndePauto</span> obtienes mayor visibilidad, alcance comercial y la posibilidad de más ventas con el universo de marcas en Colombia</h3>
-                    <h4>Nos encargamos de promocionar y vender los espacios de pauto de los medios de comunicación
-                    más destacados del país</h4>
+                    <h3>Al presentar tus ofertas en <span class="theme-color">DóndePauto</span> obtienes mayor visibilidad, alcance y la posibilidad de ampliar tus ventas</h3>
                 </div>
             </div>  
         </div>          
@@ -23,14 +21,13 @@
         <div class="col-md-6">
             <h5 class="theme-color">¿Por qué completar tu registro?</h5>
             <ul class="features-complete">
-                <li>Accedes a todo nuestro portafolio de medios y visualizas
-                    precios de referencia de productos similares publicados.
+                <li>Accedes a todo nuestro inventario de ofertas donde podrás visualizar precios de referencia de medios similares
                 </li>
-                <li>Habilitas la opción para Publicar tus ofertas</li>
-                <li>Podrás disponer de un asesor de servicios</li>
-                <li>Amplias la información de nuestro modelo de servicio (precios de
+                <li>Habilitas la opción para presentar tus osfertas a través de la plataforma</li>
+                <li>Dispones de un asesor de servicios quien solucionará todas tus inquietudes acerca 
+                    del modelo de servicio <span style="font-style: italic;">(precios de
                     lista al público, cómo recibes el pago
-                    por tus servicios o productos vendidos, etc.
+                    por tus servicios o productos vendidos, etc).</span>
                 </li>
             </ul>
             <div class="ibox adviser float-e-margins">
@@ -96,12 +93,10 @@
                     <h4 class="modal-title">Ten en cuenta</h4>
                 </div>
                 <div class="modal-body">
-                    <p style="font-size: 1.2em;">La persona que se registre debe ser el Ejecutivo o Director comercial encargado de ventas
-                    y los datos registrados deben ser comerciales corporativos</p>
-                    <p style="font-size: 1.2em;">Aqulla persona natural que se registre a nombre de una empresa jurídica Medio Publicitario,
+                    <p style="font-size: 1.2em;">La persona que se registre debe ser un Ejecutivo o Director comercial encargado de las ventas del medio, y los datos registrados deben ser comerciales corporativos, no personales.</p>
+                    <p style="font-size: 1.2em;">Aquella persona natural que se registre a nombre de una empresa jurídica Medio Publicitario,
                     deberá tener autorización y capacidad legal para actuar en nombre de tal organización. 
-                    DóndePauto solicitará documentos de la empresa y el poder del Representante Legal que autorice
-                    a esta persona para el uso de la plataforma DóndePauto.CO en nombre de la empresa.</p>
+                    </p>
                 </div>
 
                 <div class="modal-footer">
@@ -115,6 +110,9 @@
 
 @section('extra-js')
     <script>
+
+        /*toastr.success('Tu registro ha sido confirmado!  Completa tus datos y establece contacto con el área de compras y negociaciones.', $("#publisher_company").data('company'));*/
+
         $('.datepicker').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,

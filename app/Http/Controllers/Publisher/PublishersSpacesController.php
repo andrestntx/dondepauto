@@ -88,6 +88,19 @@ class PublishersSpacesController extends ResourceController
     }
 
     /**
+     * @param User $publisher
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function firstCreate(User $publisher)
+    {
+        if($publisher->has_offers) {
+            return redirect('medios.espacios.create', $publisher);
+        }
+
+        return view('publisher.home-no-spaces')->with('publisher', $publisher);
+    }
+
+    /**
      * @param User $user
      * @param Space $space
      * @return \Illuminate\Auth\Access\Response
@@ -131,6 +144,7 @@ class PublishersSpacesController extends ResourceController
         }
 
         if($this->spaceFacade->countSpaces($user) == 1) {
+            \Alert::success($user->company)->details('Haz creado una nueva oferta para presentar a clientes DóndePauto. Publica más ofertas y actívate como Proveedor!');
             return ['result' => 'true', 'route' => route('medios.agreement', $user)];
         }
         

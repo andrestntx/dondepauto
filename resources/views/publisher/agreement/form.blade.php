@@ -18,14 +18,14 @@
     <div class="dashboard">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 slide-tips">
             <h2 class="text-center m">
-                ¿Por qué validamos a los Medios Publicitarios que presentamos a los anunciantes?
+                ¿Por qué validamos a los Medios Publicitarios?
             </h2>
             <h3 class="text-center m">
-                DóndePatuo busca generar confianza entre las marcas anunciantes que compran a través de su plataforma de servicio. Para esto verificamos:
+                DóndePatuo busca generar confianza entre las marcas anunciantes que compran a través de su plataforma. <strong>Para esto verificamos:</strong>
             </h3>
         </div>
 
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1 slide-tips">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 slide-tips" id="slide">
             <div class="ibox float-e-margins">
                 <div class="ibox-content ibox-content-margin">
                     <div class="row slide-tips-content">
@@ -84,7 +84,7 @@
 
             <div class="col-sm-8">
                 <h2>Carta de aceptación de términos de la plataforma</h2>
-                <p class="intro-form">Para generar el borrador de la <strong>Carta de Aceptación y de Incentivo Económico</strong>, que deberá ser firmada por el Representante Legal del Medio Publicitario y enviada en original a las oficinas de DóndePauto, por favor registra la información exacta de su empresa y de su Representante Legal</p>
+                <p class="intro-form">Para generar el borrador de la <strong>Carta de Aceptación y de Incentivo Económico</strong>, por favor registra la información exacta de su empresa y de su Representante Legal</p>
 
                 {!! Form::open(['id' => 'data-agreement', 'type' => 'POST']) !!}
                     <div class="col-xs-12">
@@ -152,7 +152,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 agreement-form">
+        <div class="col-xs-12 agreement-form" style="margin-top: 5em;">
             <div class="col-sm-2">
                 <img src="/assets/img/agreement/icono1.png" class="icon-steps">
                 <div class="horizontal-line hidden-xs hidden-sm">
@@ -161,7 +161,6 @@
 
             <div class="col-sm-8 documents">
                 <h2>Documentos para validación de medio Publicitario</h2>
-                <p class="intro-form">Para validar la existencia y representación legal de <strong>{{ $publisher->company }}</strong> por favor subir la siguiente documentación en formato PDF</p>
 
                 {!! Form::open(['route' => ['medios.agreement.complete.upload', $publisher], 'files' => 'true', 'id' => 'form-files']) !!}
                     <div class="row">
@@ -170,7 +169,7 @@
                                 <p><strong>Cámara de Comercio:</strong> Para verificar la existencia y capacidad legal para la venta de espacios publicitarios.</p>
                             </div>
                             <div class="col-sm-6 js">
-                                {!! Form::file('commerce', ['class' => 'inputfile', 'id' => 'commerce', 'required']) !!}
+                                {!! Form::file('commerce', ['class' => 'inputfile', 'id' => 'commerce', 'required', 'accept' => "application/pdf"]) !!}
                                 <label for="commerce">
                                     <figure><img src="/assets/img/agreement/iconopdf.png"></figure>
                                     <div class="label-text">
@@ -189,7 +188,7 @@
                                 <p><strong>RUT:</strong> Para verificar la actividad económica, forma de facturación y retenciones aplicablespor su actividad económica.</p>
                             </div>
                             <div class="col-sm-6 js">
-                                {!! Form::file('rut', ['class' => 'inputfile', 'id' => 'rut', 'required']) !!}
+                                {!! Form::file('rut', ['class' => 'inputfile', 'id' => 'rut', 'required', 'accept' => "application/pdf"]) !!}
                                 <label for="rut">
                                     <figure><img src="/assets/img/agreement/iconopdf.png"></figure>
                                     <div class="label-text">
@@ -207,7 +206,7 @@
                                 <p><strong>Certificación Bancaria:</strong> Para registrar en nuestro sistema la cuenta bancaria a donde se harán las transferencias al medio publicitario.</p>
                             </div>
                             <div class="col-sm-6 js">
-                                {!! Form::file('bank', ['class' => 'inputfile', 'id' => 'bank', 'required']) !!}
+                                {!! Form::file('bank', ['class' => 'inputfile', 'id' => 'bank', 'required', 'accept' => "application/pdf"]) !!}
                                 <label for="bank">
                                     <figure><img src="/assets/img/agreement/iconopdf.png"></figure>
                                     <div class="label-text">
@@ -222,10 +221,10 @@
                         </div>
                         <div class="col-md-12 file-content">
                             <div class="col-sm-6">
-                                <p><strong>Carta de Aceptación e Incentivos del Representante Legal:</strong> Para validar que se aceptan los términos y condiciones de la Plataforma, se formaliza el incentivo de comisión para DóndePauto, y confirmar el registro del funcionario que administrará y formulará las ofertas del Medio Publicitario.</p>
+                                <p><strong>Carta de Aceptación e Incentivos del Representante Legal:</strong> Para validar que se aceptan los términos y condiciones de la Plataforma y se formaliza el incentivo de comisión para DóndePauto,</p>
                             </div>
                             <div class="col-sm-6 js">
-                                {!! Form::file('letter', ['class' => 'inputfile', 'id' => 'letter', 'required']) !!}
+                                {!! Form::file('letter', ['class' => 'inputfile', 'id' => 'letter', 'required', 'accept' => "application/pdf"]) !!}
                                 <label for="letter">
                                     <figure><img src="/assets/img/agreement/iconopdf.png"></figure>
                                     <div class="label-text">
@@ -270,7 +269,8 @@
                 </div>
                 <div class="modal-body" id="modalText">
                     <p style="font-size: 15px; text-align: justify; margin-bottom: 10px; color:black;">Tu información comercial y societaria se ha registrado exitosamente. Dóndepauto verificará la información para activar su medio publicitario como proveedor</p>
-                    <p style="font-size: 15px; text-align: justify; margin-bottom: 10px; color:black;">Una vez verificada esta información tus ofertas se activarán en la plataforma y podrán ser promocionadas y presentadas a potenciales clientes interesados. Si no has publicado todas tus ofertas, <a href="/">ingresa aquí</a></p>
+                    <p style="font-size: 15px; text-align: justify; margin-bottom: 10px; color:black;">Una vez verificada esta información tus ofertas se activarán en la plataforma y podrán ser promocionadas y presentadas a potenciales clientes interesados.</p>
+                    <p style="font-size: 15px; text-align: justify; margin-bottom: 10px; color:black;">Si no has publicado todas tus ofertas, <a href="/">ingresa aquí</a></p>
                 </div>
 
                 <div class="modal-footer">
@@ -377,7 +377,14 @@
                     });
                 }
                 else {
-                    alert('Debe aceptar los terminos y condiciones');
+                    swal({
+                        title: "¡Atención!",
+                        text: "Debe aceptar los terminos y condiciones",
+                        type: "warning",
+                        showCancelButton: true,
+                        showConfirmButton: false,
+                        cancelButtonText: "Regresar",
+                    });
                 }
 
                 return false;

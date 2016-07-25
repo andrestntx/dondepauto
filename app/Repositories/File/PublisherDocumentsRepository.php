@@ -28,6 +28,25 @@ class PublisherDocumentsRepository extends BaseRepository
 
     /**
      * @param User $publisher
+     * @return mixed
+     */
+    public function hasFiles(User $publisher)
+    {
+        return \File::exists($this->getPathPublisher($publisher) . '/bank.pdf');
+    }
+
+    /**
+     * @param User $publisher
+     * @param $name
+     * @return string
+     */
+    public function getDocument(User $publisher, $name)
+    {
+        return $this->getPathPublisher($publisher) . '/'. $name .'.pdf';
+    }
+
+    /**
+     * @param User $publisher
      * @param UploadedFile $document
      * @param $name
      * @return null|\Symfony\Component\HttpFoundation\File\File

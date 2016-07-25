@@ -30,6 +30,8 @@
 
         @yield('extra-css')
 
+
+
     </head>
     <body>
         <div id="wrapper">
@@ -38,29 +40,15 @@
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
-                                    <img alt="image" class="img-circle" src="/assets/img/profile_small.jpg" />
-                                     </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ auth()->user()->name }}</strong>
-                                     </span> <span class="text-muted text-xs block">{{ auth()->user()->role }} <b class="caret"></b></span> </span> </a>
-                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a href="profile.html">Profile</a></li>
-                                    <li><a href="contacts.html">Contacts</a></li>
-                                    <li><a href="mailbox.html">Mailbox</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="login.html">Logout</a></li>
-                                </ul>
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ $publisher->name }}</strong>
+                                     </span> <span class="text-muted text-xs block">{{ $publisher->company }} </span> </a>
                             </div>
                             <div class="logo-element">
                                 DP+
                             </div>
                         </li>
-                        {!! Menu::make('menu.sidebar', 'nav metismenu')
-                                ->setParams([
-                                    'user_id' => auth()->user()->id,
-                                    'user_platform_id' => auth()->user()->user_platform_id
-                                ])->render()
-                        !!}
+                        @include('layouts.publisher-menu')
                     </ul>
 
                 </div>
@@ -77,7 +65,7 @@
                             <li>
                                 <span class="m-r-sm text-muted welcome-message">Bienvenido a DondePauto.CO</span>
                             </li>
-                            <li class="dropdown">
+                            {{-- <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                                 </a>
@@ -171,7 +159,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="/logout">
@@ -186,6 +174,7 @@
                 <div class="wrapper wrapper-content animated fadeIn">
 
                     <div class="row">
+                        {!! Alert::render() !!}
                         @yield('content')
                     </div>
 

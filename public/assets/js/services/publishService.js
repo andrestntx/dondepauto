@@ -222,19 +222,19 @@ $(document).ready(function(){
                 title: "Estás a punto de publicar este espacio publicitario", 
                 message: '<table>' +
                         '    <tr>' +
-                        '        <td style="width: 110px;">Titulo</td>' +
+                        '        <td style="width: 110px;"><strong>Título</strong></td>' +
                         '        <td>' + name + '</td>' +
                         '    </tr>' +
                         '    <tr>' +
-                        '        <td>Categoria</td>' +
+                        '        <td><strong>Categoria</strong></td>' +
                         '        <td>' + category + '</td>' +
                         '    </tr>' +
                         '    <tr>' +
-                        '        <td>Precio de Oferta</td>' +
+                        '        <td><strong>Precio de Oferta</strong></td>' +
                         '        <td>' + $("#public_price").text() + '</td>' +
                         '    </tr>' +
                         '    <tr>' +
-                        '        <td>Impactos</td>' +
+                        '        <td><strong>Impactos</strong></td>' +
                         '        <td>' + impacts + ' / ' + period + '</td>' +
                         '    </tr>' +
                         '</table>',
@@ -247,7 +247,7 @@ $(document).ready(function(){
                       }
                     },
                     success: {
-                      label: "Publicar",
+                      label: "Aceptar",
                       className: "btn-success",
                       callback: function() {
                         $(".se-pre-con").delay(700).show(0);
@@ -352,7 +352,7 @@ $(document).ready(function(){
                 required: 'Debes seleccionar el periodo de venta según el precio base'
             },
             discount: {
-                required: 'Debes asignar una variable de descuento. En caso de que no desees establecer un descuento, escribe 0 CERO',
+                required: 'Debes asignar una variable de descuento. En caso de que no desees establecer un descuento, digita el número 0 (CERO)',
                 min: 'El  descuento minimo es 0',
                 max: 'El descuento máximo es 100'
             },

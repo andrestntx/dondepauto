@@ -74,7 +74,7 @@
                             <input type="text" id="myInputTextField" placeholder="Buscar.." class="form-control" style="border: 2px solid #cecdcd; float: left; width: 80%; height: 38px; ">
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ route('medios.espacios.create', $publisher) }}" class="btn btn-warning btn-effect-ripple create-datatable">
+                            <a href="{{ route('medios.espacios.first-create', $publisher) }}" class="btn btn-warning btn-effect-ripple create-datatable">
                                 <i class="fa fa-plus-circle"></i> CREAR NUEVA OFERTA
                             </a> 
                         </div>

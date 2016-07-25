@@ -29,6 +29,10 @@
     margin: 1em;
 }
 
+.dashboard .sub-title-lg h2 {
+    font-size: 2em;
+}
+
 .dashboard .content {
     border-top: 1.7px solid #c7c2c2;
     padding: 1em 5%;
@@ -55,12 +59,27 @@ hr.separator-dashbaord {
     margin-bottom: 40px;
 }
 
+#icons.agreement-info {
+    margin-top: 40px;
+}
+
 #icons figure img {
-    max-width: 150px;
+    max-width: 120px;
     width: 80%;
     margin: 0 auto;
     display: block;
-    margin-bottom: 10px;
+}
+
+#icons.agreement-info figure img {
+    max-width: 150px;
+}
+
+#icons.agreement-info figure a img:hover {
+    max-width: 146px;
+}
+
+#icons figure a img:hover {
+    max-width: 125px;
 }
 
 #icons figure p {
@@ -86,9 +105,13 @@ hr.separator-dashbaord {
     margin-top: 1em;
 }
 
+.dashboard #slide.slide-tips {
+    margin-top: 0em;
+}
+
 .publisher-content .slide-tips h2 {
     text-transform: none;
-    font-size: 1.6em;
+    font-size: 2.5em;
     margin-bottom: 1em;
     margin-top: 1em;
     color: #2cbaf8;
@@ -100,6 +123,8 @@ hr.separator-dashbaord {
     line-height: normal;
     font-weight: 600;
     margin: 1em 5em;
+    margin-top: 5em;
+    margin-bottom: 0;
 }
 
 .ibox-content-margin {
@@ -165,8 +190,8 @@ hr.separator-dashbaord {
     font-size: 1.34em;
 }
 
-.dashboard .ibox-dashboard .btn {
-    font-size: 1.3em;
+.dashboard .ibox-dashboard .btn, .comercial-detail .btn {
+    font-size: 1.15em;
 }
 
 .dashboard .ibox-dashboard .agreement-detail .agreement-icon {
@@ -200,7 +225,7 @@ hr.separator-dashbaord {
 /** END Dashboard BOX MESSAGE **/
 
 .dashboard .box-message {
-    padding-top: 25px;
+    padding: 25px 10px 0 10px;
     background: white;
     position: relative;
     display: block;
@@ -208,6 +233,23 @@ hr.separator-dashbaord {
     width: 100%;
     text-align: center;
     border: 3px #05B842 solid;
+}
+
+.dashboard .box-message h3 {
+    font-size: 1.1em;
+}
+
+
+.dashboard .box-message.box-message-danger, .dashboard .box-message.box-message-danger .icon-message {
+    border-color: #ff5466;
+}
+
+.dashboard .box-message.box-message-warning, .dashboard .box-message.box-message-warning .icon-message {
+    border-color: #ffac1a;
+}
+
+.dashboard .box-message.box-message-info, .dashboard .box-message.box-message-info .icon-message {
+    border-color: #2CBAF8;
 }
 
 .dashboard .box-message .icon-message {
@@ -232,9 +274,10 @@ hr.separator-dashbaord {
 /** Dashboard COMERCIAL DETAIL **/
     
 .dashboard .comercial-detail h1 {
-        font-weight: bold;
-    font-size: 2.5em;
+    font-weight: bold;
+    font-size: 2.3em;
     margin-top: 0;
+    margin-bottom: 1em;
 }
 
 .dashboard .comercial-detail h2 {
@@ -248,13 +291,22 @@ hr.separator-dashbaord {
     margin-top: 0.7em;
 }
 
+.dashboard .comercial-detail .ibox h2 {
+    margin: 0 0 6px 0;
+    text-align: center;
+    display: block;
+    font-size: 1.5em;
+}
+
 .dashboard .comercial-detail p {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.24);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .dashboard .comercial-detail h2 span {
     border-bottom: 2px solid rgba(128, 128, 128, 0.65);
-    border-bottom-width: 3px;
     padding-bottom: 3px;
     width: 70%;
     height: 2px;
@@ -277,7 +329,51 @@ hr.hr-pencil {
     
 /** END Dashboard GENERAL STYLE **/
 
+.dashboard .comercial-detail {
+    margin-bottom: 60px; 
+}
 
+.dashboard .comercial-detail .list-point {
+    display: list-item;
+}
+
+.dashboard .comercial-detail .list-point-red {
+    list-style-image: url('/assets/img/dashboard/circulorojo.png');
+}
+
+.dashboard .comercial-detail .list-point-orange {
+        list-style-image: url('/assets/img/dashboard/circulonaranja.png');
+}
+
+.dashboard .comercial-detail .btn {
+    margin-top: 20px;
+}
+
+.dashboard .comercial-detail .ibox .btn {
+    margin-top: 0;
+}
+
+.dashboard .comercial-detail a.comercial-file {
+    border: 2px solid rgba(153, 149, 149, 0.42);
+    padding: 8px 10px;
+    display: block;
+    color: gray;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.dashboard .comercial-detail .comercial-file:hover {
+    border-color: #2CBAF8;
+    color: #2CBAF8;
+}
+
+.dashboard .comercial-detail .comercial-file img.img-icon {
+    width: 23px;
+}
+
+.dashboard .comercial-detail  .ibox-dashboard h2 + hr {
+    border-top: 2px solid rgba(128, 128, 128, 0.65);
+}
 
 .publisher-content .slide-tips p {
     margin: auto;
@@ -286,8 +382,13 @@ hr.hr-pencil {
     margin-top: 5px;
 }
 
+.publisher-content .slide-tips .ibox-content.ibox-content-margin {
+    background: none;
+    border: none;
+}
+
 .publisher-content .agreement-form {
-    margin-top: 2em;
+    margin-top: 3em;
 }
 
 .publisher-content .agreement-form .documents {
@@ -500,7 +601,7 @@ thead tr {
 
 #pointsInventary a#help-modal-point {
     font-weight: 500;
-    font-size: 1.45em;
+    font-size: 1.25em;
     text-align: center;
     margin: 0.5em auto 0.3em auto;
     display: block;

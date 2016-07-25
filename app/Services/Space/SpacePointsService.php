@@ -17,7 +17,7 @@ class SpacePointsService
         'name' => [
             'name' => 'name',
             'title' => 'Título de la oferta',
-            'content' => 'El título de la oferta es clave para captar la atención del anunciante. Ingresa un título preciso, entre 40 y 70 caracteres, que permita identificar rápida y fácilmente las características básicas de la oferta',
+            'content' => 'El título de la oferta es clave para captar la atención del anunciante. Ingresa un título preciso, entre 30 y 70 caracteres, que permita identificar rápida y fácilmente las características básicas de la oferta',
             'maxPoints' => 6,
             'actual' => 0,
             'rules' => [
@@ -30,7 +30,7 @@ class SpacePointsService
         'description' => [
             'name' => 'description',
             'title' => 'Descripción',
-            'content' => 'Describe las características de este espacio publicitario. Capta el interés y atención del anunciante, y se específico brindando información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante. El anunciante debe entender qué recibe, a cambio de su inversión',            
+            'content' => 'Describe las características de este espacio publicitario. Capta el interés y atención del anunciante, y se específico brindando información completa. El anunciante debe entender qué recibe, a cambio de su inversión',
             'maxPoints' => 15,
             'actual' => 0,
             'rules' => [
@@ -84,7 +84,7 @@ class SpacePointsService
             'name' => 'impactScenes',
             'type' => 'collection',
             'title' => 'Escenarios de impacto',
-            'content' => 'Selecciona lugares de interés, puntos de referencia o zonas comerciales de la ciudad a donde llega tu espacio publicitario o donde son impactadas audiencias o personas. Aumenta las probabilidades de que te encuentren clientes de nicho',
+            'content' => 'Selecciona lugares de interés, puntos de referencia o zonas comerciales de la ciudad a donde llega tu espacio publicitario o donde son impactadas audiencias o personas. Aumenta las probabilidades de que te encuentren clientes de nicho.',
             'maxPoints' => 10,
             'actual' => 0,
             'rules' => [

@@ -63,7 +63,7 @@
 
 			<li>
 				Autorizo para que cualquier notificación relevante respecto a modificaciones en las condiciones
-				de la Plataforma, métricas d de negociaciones comerciales y ventas finalizadas, o cualquier
+				de la Plataforma, métricas de negociaciones comerciales y ventas finalizadas, o cualquier
 				modificación a nuestra cuenta de usuario, me sean notificadas a: <strong>{{ $publisher->representative->email }}</strong>
 			</li>
 		</ul>

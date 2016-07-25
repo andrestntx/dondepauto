@@ -123,10 +123,10 @@
                                         @endif
                                     </div>
                                     <div class="col-md-12">
-                                        {!! Field::textarea('description', ['label' => 'Descripción del espacio', 'ph' => 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante', 'required', 'rows' => '5']) !!}
+                                        {!! Field::textarea('description', ['label' => 'Descripción del espacio', 'ph' => 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante y su agencia', 'required', 'rows' => '5']) !!}
                                     </div>
                                     <div class="col-lg-12">
-                                        {!! Field::text('dimension', ['label' => 'Dimensiones o tamaño', 'ph' => 'Ejemplo: 3 x 4 metros; 1mm Alto x 2mm Ancho']) !!}
+                                        {!! Field::text('dimension', ['label' => 'Dimensiones o tamaño', 'ph' => 'Ejemplo: 3 x 4 metros; 1m Alto x 2m Ancho']) !!}
                                     </div>
                                 </div>
                             </fieldset>
@@ -139,7 +139,7 @@
                                         {!! Field::select('impact_scenes', $scenes, $space->impact_scenes_list, ['multiple', 'required', 'data-placeholder' => 'Selecciona los escenarios donde se encuentra el espacio publicitario']) !!}
                                     </div>
                                     <div class="col-md-12">
-                                        {!! Field::select('audiences', $audiences, $space->audiences_list, ['label' => 'Perfil de audiencias', 'data-placeholder' => 'Seleccione las audiencias de su espacio publicitario',  'class' => 'select2-audience', 'required', 'multiple']) !!}
+                                        {!! Field::select('audiences', $audiences, $space->audiences_list, ['label' => 'Perfil de audiencias', 'data-placeholder' => 'Seleccione las audiencias del espacio publicitario',  'class' => 'select2-audience', 'required', 'multiple']) !!}
                                     </div>
 
                                     <div class="col-lg-12">

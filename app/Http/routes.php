@@ -181,6 +181,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Publisher\PublishersSpacesController@duplicate'
         ]);
 
+        Route::get('medios/{publishers}/espacios/first-create', [
+            'as' => 'medios.espacios.first-create',
+            'uses' => 'Publisher\PublishersSpacesController@firstCreate'
+        ]);
+
         Route::post('medios/{publishers}/espacios/{spaces}/duplicar', [
             'as' => 'medios.espacios.post-duplicate',
             'uses' => 'Publisher\PublishersSpacesController@postDuplicate'
@@ -200,8 +205,6 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.espacios.update',
             'uses' => 'Publisher\PublishersSpacesController@update'
         ]);
-        
-        
         
         Route::resource('medios.espacios', 'Publisher\PublishersSpacesController',
             ['parameters' => [
