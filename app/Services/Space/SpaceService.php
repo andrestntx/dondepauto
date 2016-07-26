@@ -10,6 +10,7 @@ namespace App\Services\Space;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\Space\SpaceFormat;
+use App\Entities\Platform\Space\SpaceImage;
 use App\Entities\Platform\User;
 use App\Repositories\File\SpaceImagesRepository;
 use App\Repositories\Platform\Space\SpaceRepository;
@@ -51,34 +52,50 @@ class SpaceService extends ResourceService
     {
         return $space->id . '_' . rand(1,9000000000000) . '.jpg';
     }
-    
 
     /**
      * @param array $images
      * @param Space $space
+     * @param array $keep_images
      * @return array
      */
-    public function saveImages(array $images, Space $space)
+    public function saveImages($images = [], Space $space, $keep_images = [])
     {
         $names = array();
-        $space->images()->delete();
+        $space->images()->whereNotIn('id_imagen_LI', $keep_images)->delete();
 
-        foreach ($images as $key => $image) {
-            $name = $this->generateImageName($space);
-            array_push($names, $name);
+        if(!is_null($images)) {
+            foreach ($images as $key => $image) {
+                $name = $this->generateImageName($space);
+                array_push($names, $name);
 
-            if($key == 0) {
-                $this->imagesRepository->saveSpaceImage($image, $name, true);
-                $this->repository->updateDetailThumb($space, $name);
+                if($key == 0) {
+                    $this->imagesRepository->saveSpaceImage($image, $name, true);
+                    $this->repository->updateDetailThumb($space, $name);
+                }
+                else {
+                    $this->imagesRepository->saveSpaceImage($image, $name);
+                }
+
+                $this->repository->createImage($space, $name);
             }
-            else {
-                $this->imagesRepository->saveSpaceImage($image, $name);
-            }
-
-            $this->repository->createImage($space, $name);
         }
-        
+
         return $names;
+    }
+
+    /**
+     * @param array $images
+     * @param Space $space
+     * @param Space $copySpace
+     * @param array $keep_images
+     * @return array
+     */
+    public function saveAndCopyImages($images = [], Space $space, Space $copySpace, $keep_images = [])
+    {
+        $copyImages = $this->imagesRepository->copyImages($copySpace->images, $keep_images);
+        $space->images()->saveMany($copyImages);
+        return $this->saveImages($images, $space, $space->images->lists('id'));
     }
 
     /**
@@ -112,12 +129,44 @@ class SpaceService extends ResourceService
      */
     public function createSpace(array $data, SpaceFormat $format, User $publisher)
     {
-        \Log::info($this->getData($data, $format, $publisher));
         return $this->repository->create($this->getData($data, $format, $publisher));
     }
 
+    /**
+     * @param array $data
+     * @param SpaceFormat $format
+     * @param Space $space
+     * @return mixed
+     */
+    public function updateSpace(array $data, SpaceFormat $format, Space $space)
+    {
+        return $this->repository->update($this->getData($data, $format, $space->publisher), $space);
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function countSpaces(User $user) 
     {
         return $this->repository->countSpaces($user);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function allSpaces()
+    {
+        return $this->repository->allSpaces();
+    }
+
+    /**
+     * @param Space $space
+     * @param bool $active
+     * @return bool
+     */
+    public function activeSpace(Space $space, $active = true) 
+    {
+        return $this->repository->active($space, $active);
     }
 }

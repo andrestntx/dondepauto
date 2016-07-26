@@ -20,34 +20,26 @@
             </div>          
         </div>
 
-        <div class="col-xs-12 text-center sub-title">
-            <h2>Activa y valida tu medio publicitario</h2>
+        <div class="col-xs-12 text-center sub-title sub-title-lg">
+            <h2>
+                @if(! $publisher->has_offers && ! $publisher->has_signed_agreement)
+                    Sólo estás a dos pasos para activarte como proveedor
+                @elseif($publisher->has_offers || $publisher->has_signed_agreement)
+                    Sólo estás a un paso para activarte como proveedor
+                @else
+                    Felicitaciones 
+                @endif
+            </h2>
         </div>
 
-        <div class="col-xs-8 col-xs-offset-2" id="icons">
-            <div class="line hidden-xs hidden-sm">
-                
-            </div>
-            <div class="figures">
-                <figure class="col-sm-4">
-                    <img src="/assets/icons/aggrement/icono1gris.png">
-                    <p><i class="fa fa-check"></i> Completaste tus datos</p>
-                </figure>
-                <figure class="col-sm-4">
-                    <img src="/assets/icons/aggrement/icono2gris.png">
-                    <p><i class="fa fa-check"></i> Publicaste tus ofertas</p>
-                </figure>
-                <figure class="col-sm-4">
-                    <img src="/assets/icons/aggrement/icono3azul.png">
-                    <p><strong>Formaliza el acuerdo de servicios y da de alta tus ofertas</strong></p>
-                </figure>
-            </div>
+        <div class="col-xs-8 col-xs-offset-2 agreement-info" id="icons">
+            @include('publisher.steps')
         </div>
 
-        <div class="col-xs-12 text-center" style="margin-bottom:30px;">
-            <a href="{{ route('medios.agreement.complete', $publisher) }}" class="btn btn-lg btn-warning btn-effect-ripple btn-xlg">
-                ACTIVAR OFERTAS
-            </a> 
+        <div class="col-md-10 col-md-offset-1 text-center" style="margin-top: 20px; border-top: 2px dashed rgba(128, 128, 128, 0.42); padding-top: 20px; padding-bottom: 30px;">
+            <img src="/assets/img/question.png" style="max-width:70px;">
+            <h4 class="text-lg" style="margin-bottom:10px;">¡Quiero conocer <a href="http://www.dondepauto.co/modelo-de-negocio-medios-publicitarios" target="_blank" class="theme-color" >cómo funciona DóndePauto!</a> </h4>
+            <p class="text-lg" style="font-size: 15.3px;"> (modalidades de ventas, oblicaciones de DóndePauto, precios de oferta al público, formas de pagos por tus servicios)</p>
         </div>
 
     </div>    

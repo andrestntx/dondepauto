@@ -15,15 +15,8 @@
         <link href="/assets/css/style.css" rel="stylesheet">
         <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
-        <!-- Data Tables -->
-        <link href="/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-        <link href="/assets/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
-        <link href="/assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
-
         <!-- Toastr style -->
         <link href="/assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
-        <link href="/assets/css/plugins/dataTables/selected.css" rel="stylesheet">
 
         <!-- DataPicker -->
         <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -41,39 +34,31 @@
 
         <link rel="stylesheet" type="text/css" href="/assets/css/plugins/tags_input/jquery.tagsinput.css" />
 
+        <!-- Toastr style -->
+        <link href="/assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+        @yield('extra-css-layout')
         @yield('extra-css')
 
+
+
     </head>
-    <body class="mini-navbar pace-done">
+    <body class="mini-navbar pace-done" id="publisher_company" data-company="{{ $publisher->company }}">
         <div id="wrapper">
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
-                                    <img alt="image" class="img-circle" src="/assets/img/profile_small.jpg" />
-                                     </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ auth()->user()->name }}</strong>
-                                     </span> <span class="text-muted text-xs block">{{ auth()->user()->role }} <b class="caret"></b></span> </span> </a>
-                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a href="profile.html">Profile</a></li>
-                                    <li><a href="contacts.html">Contacts</a></li>
-                                    <li><a href="mailbox.html">Mailbox</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="login.html">Logout</a></li>
-                                </ul>
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ $publisher->name }}</strong>
+                                     </span> <span class="text-muted text-xs block">{{ $publisher->company }} </span> </a>
                             </div>
                             <div class="logo-element">
                                 DP+
                             </div>
                         </li>
-                        {!! Menu::make('menu.sidebar', 'nav metismenu')
-                                ->setParams([
-                                    'user_id' => auth()->user()->id,
-                                    'user_platform_id' => auth()->user()->user_platform_id
-                                ])->render()
-                        !!}
+                        @include('layouts.publisher-menu')
                     </ul>
 
                 </div>
@@ -88,9 +73,14 @@
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
-                                <span class="m-r-sm text-muted welcome-message">Bienvenido <strong style="text-transform:capitalize;" id="publisher_name">{{ $publisher->company }}</strong></span>
+                                <span class="m-r-sm text-muted welcome-message">
+                                    <a href="{{ route('home') }}" title="Menú Principal"> {{ ucfirst($publisher->company) }} </a>
+                                </span>
+                                <span class="m-r-sm text-muted welcome-message">
+                                    <a href="{{ route('medios.espacios.index', $publisher) }}" title="Mi Inventario">Mi Inventario</a>
+                                </span>
                             </li>
-                            <li class="dropdown">
+                            {{-- <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                                 </a>
@@ -184,7 +174,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="/logout">
@@ -237,12 +227,6 @@
         <!-- Sparkline -->
         <script src="/assets/js/plugins/sparkline/jquery.sparkline.min.js"></script>
 
-        <!-- Data Tables -->
-        <script src="/assets/js/plugins/dataTables/jquery.dataTables.js"></script>
-        <script src="/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-        <script src="/assets/js/plugins/dataTables/dataTables.responsive.js"></script>
-        <script src="/assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
-
         <script src="/assets/js/plugins/confirm/jquery.confirm.min.js"></script>
 
         <!-- Toastr script -->
@@ -285,6 +269,28 @@
 
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 
+        <!-- Toastr script -->
+        <script src="/assets/js/plugins/toastr/toastr.min.js"></script>
+
+        <script type="text/javascript">
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-full-width",
+                "onclick": null,
+                "showDuration": "400000",
+                "hideDuration": "10000",
+                "timeOut": "20000",
+                "extendedTimeOut": "10000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        </script>
+
         <script>
             $(".chosen-select").chosen({disable_search_threshold: 10});
 
@@ -296,7 +302,10 @@
 
         </script>
 
+        @yield('extra-js-layout')
         @yield('extra-js')
 
     </body>
 </html>
+
+{!! Alert::render('themes/alert-toastr') !!}

@@ -36,6 +36,13 @@ class User extends Authenticatable
         }
     }
 
+    public function setPasswordsAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['password'] = $value;
+        }
+    }
+
     /**
      * Return the Full Name 
      * @return string

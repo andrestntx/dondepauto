@@ -149,6 +149,16 @@ td.text-small {
   right: 0;
   left: auto;
 }
+.toast-title {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+#publisher_company #toast-container > .toast-success {
+  background-image: none;
+}
+.toast-message {
+  font-size: 15px;
+}
 .dropdown-messages,
 .dropdown-alerts {
   padding: 10px 10px 10px 10px;

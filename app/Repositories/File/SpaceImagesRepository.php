@@ -2,6 +2,9 @@
 
 namespace App\Repositories\File;
 
+use App\Entities\Platform\Space\Space;
+use App\Entities\Platform\Space\SpaceImage;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Image;
 
@@ -49,7 +52,7 @@ class SpaceImagesRepository extends ImagesRepository
     protected function saveThumbImage(Image $image, $name)
     {
         $thumb = $this->generateThumbImage($image, $name, 45);
-        $this->saveImageMorePath($thumb, 'thumb', $name);        
+        $this->saveImageMorePath($thumb, 'thumbs', $name);
     }
 
     /**
@@ -80,5 +83,27 @@ class SpaceImagesRepository extends ImagesRepository
         $this->saveThumbImage($image, $name);
         
         return $image;
+    }
+
+
+    /**
+     * @param Collection $copyImages
+     * @param array $keep_images
+     * @return array
+     */
+    public function copyImages(Collection $copyImages, $keep_images = [])
+    {
+        $newImages = [];
+
+        foreach ($copyImages as $image) {
+            if(in_array($image->id, $keep_images)) {
+                array_push($newImages, new SpaceImage([
+                    'thumb' => $image->url_thumb_LI,
+                    'url' => $image->url_imagen_LI
+                ]));
+            }
+        }
+        
+        return $newImages;
     }
 }

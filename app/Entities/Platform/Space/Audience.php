@@ -36,4 +36,12 @@ class Audience extends Entity
         return $this->type_name . ' - ' . $this->name;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function spaces()
+    {
+        return $this->belongsToMany(Space::class, 'audience_space', 'space_id', 'audience_id');
+    }
+
 }

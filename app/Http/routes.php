@@ -22,6 +22,11 @@ Route::get('medios/confirmar/{code}', [
     'uses' => 'Publisher\PublishersController@confirm'
 ]);
 
+Route::get('medios/login/{publishers}', [
+    'uses' => 'Auth\PublisherController@platformLogin',
+    'as' => 'medios.platform.login'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
@@ -116,6 +121,12 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {
+        
+        Route::get('medios/{publishers}/faqs', [
+            'as'    => 'medios.faqs',
+            'uses' => 'Publisher\PublishersController@faqs'
+        ]);
+
         Route::get('medios/{publisher}/espacios/search', [
             'as'    => 'medios.espacios.search',
             'uses' => 'Admin\PublishersController@searchSpaces'
@@ -141,9 +152,29 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.agreement'
         ]);
 
+        Route::post('medios/{publishers}/acuerdo/solicitar-cambio', [
+            'uses' => 'Publisher\PublishersController@changeAgreement',
+            'as' => 'medios.agreement.change'
+        ]);
+
         Route::get('medios/{publishers}/acuerdo/completar', [
             'uses' => 'Publisher\PublishersController@completeAgreement',
             'as' => 'medios.agreement.complete'
+        ]);
+        
+        Route::post('medios/{publishers}/acuerdo/completar', [
+            'uses' => 'Publisher\PublishersController@postCompleteAgreement',
+            'as' => 'medios.agreement.complete.docs'
+        ]);
+
+        Route::post('medios/{publishers}/acuerdo/documentos', [
+            'uses' => 'Publisher\PublishersController@uploadDocuments',
+            'as' => 'medios.agreement.complete.upload'
+        ]);
+
+        Route::get('medios/{publishers}/acuerdo/carta', [
+            'uses' => 'Publisher\PublishersController@getLetter',
+            'as' => 'medios.agreement.letter'
         ]);
 
         Route::get('medios/{publishers}/publicar', [
@@ -151,10 +182,53 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.publish'
         ]);
 
-        Route::resource('medios.espacios', 'Publisher\PublishersSpacesController', ['parameters' => [
-            'medios'    => 'publishers',
-            'espacios'  => 'spaces'
-        ]]);
+        Route::get('actualizar-puntos', [
+            'as' => 'medios.espacios.update-all-points',
+            'uses' => 'Publisher\PublishersSpacesController@updateAllPoints'
+        ]);
+
+        Route::get('medios/{publishers}/espacios/actualizar-puntos', [
+            'as' => 'medios.espacios.update-points',
+            'uses' => 'Publisher\PublishersSpacesController@updatePoints'
+        ]);
+
+        Route::get('medios/{publishers}/espacios/{spaces}/duplicar', [
+            'as' => 'medios.espacios.duplicate',
+            'uses' => 'Publisher\PublishersSpacesController@duplicate'
+        ]);
+
+        Route::get('medios/{publishers}/espacios/first-create', [
+            'as' => 'medios.espacios.first-create',
+            'uses' => 'Publisher\PublishersSpacesController@firstCreate'
+        ]);
+
+        Route::post('medios/{publishers}/espacios/{spaces}/duplicar', [
+            'as' => 'medios.espacios.post-duplicate',
+            'uses' => 'Publisher\PublishersSpacesController@postDuplicate'
+        ]);
+
+        Route::post('medios/{publishers}/espacios/{spaces}/active', [
+            'as' => 'medios.espacios.active',
+            'uses' => 'Publisher\PublishersSpacesController@active'
+        ]);
+
+        Route::post('medios/{publishers}/espacios/{spaces}/inactive', [
+            'as' => 'medios.espacios.active',
+            'uses' => 'Publisher\PublishersSpacesController@inactive'
+        ]);
+
+        Route::post('medios/{publishers}/espacios/{spaces}', [
+            'as' => 'medios.espacios.update',
+            'uses' => 'Publisher\PublishersSpacesController@update'
+        ]);
+        
+        Route::resource('medios.espacios', 'Publisher\PublishersSpacesController',
+            ['parameters' => [
+                'medios'    => 'publishers',
+                'espacios'  => 'spaces'
+            ],
+            'except' => 'update'
+        ]);
 
         Route::post('medios/{publishers}/account', [
             'uses' => 'Publisher\PublishersController@updateAccount',

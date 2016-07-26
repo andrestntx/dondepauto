@@ -163,7 +163,8 @@ return [
         Mailchimp\MailchimpServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         //Auth0\Login\LoginServiceProvider::class,
     ],
 
@@ -214,7 +215,8 @@ return [
         'Mailchimp' => Mailchimp\MailchimpFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class
         //'Auth0' => 'Auth0\Login\Facade\Auth0'
     ],
 

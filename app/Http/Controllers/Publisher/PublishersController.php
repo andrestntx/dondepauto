@@ -14,7 +14,6 @@ use App\Facades\SpaceFacade;
 use App\Http\Requests\RUser\Publisher\CompleteRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
-use Exception;
 use Illuminate\Http\Request;
 
 class PublishersController extends \App\Http\Controllers\Admin\PublishersController
@@ -55,35 +54,44 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User  $user
+     * @param  User  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function account(User $user)
+    public function account(User $publisher)
     {
-        if($user->complete_data) {
+        /*if($user->complete_data) {
             return $this->view('account.form', [
                 'publisher' => $user,
                 'formData'  => $this->getSimpleFormData('update-account', $user)
             ]);
+        }*/
+
+        if(\Gate::allows('account', $publisher)) {
+            \Alert::success($publisher->company)->details('Tu registro ha sido confirmado!  Completa tus datos y establece contacto con el área de compras y negociaciones.');
+
+            return $this->view('complete.form', [
+                'publisher'     => $publisher,
+                'formData'      => $this->getSimpleFormData('complete', $publisher)
+            ]);
         }
 
-        return $this->view('complete.form', [
-            'publisher'     => $user,
-            'formData'      => $this->getSimpleFormData('complete', $user)
-        ]);
+        return redirect()->route('home');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  CompleteRequest  $request
-     * @param  User  $user
+     * @param  User  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function complete(CompleteRequest $request, User $user)
-    {        
-        $this->facade->completeData($request->all(), $user);
-        return redirect()->route('home');
+    public function complete(CompleteRequest $request, User $publisher)
+    {
+        $this->authorize('account', $publisher);
+        $this->facade->completeData($request->all(), $publisher);
+
+        \Alert::success($publisher->company)->details('Gracias por completar tu datos de contacto! Ahora podrás presentar tus ofertas y activarte como Proveedor.');
+        return redirect()->route('medios.agreement', $publisher);
     }
 
     /**
@@ -126,20 +134,74 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     }
 
     /**
-     * @param User $user
+     * @param User $publisher
      * @return \Illuminate\Auth\Access\Response
      */
-    public function agreement(User $user)
+    public function agreement(User $publisher)
     {
-        return $this->view('agreement.info', ['publisher' => $user]);
+        $this->authorize('agreement', $publisher);
+        return $this->view('agreement.info', ['publisher' => $publisher]);
     }
 
     /**
-     * @param User $user
+     * @param User $publisher
      * @return \Illuminate\Auth\Access\Response
      */
-    public function completeAgreement(User $user)
+    public function completeAgreement(User $publisher)
     {
-        return $this->view('agreement.form', ['publisher' => $user]);
+        $this->authorize('agreement', $publisher);
+        return $this->view('agreement.form', ['publisher' => $publisher, 'representative' => $publisher->getRepresentativeOrNew()]);
+    }
+
+    /**
+     * @param Request $request
+     * @param User $publisher
+     * @return array
+     */
+    public function changeAgreement(Request $request, User $publisher)
+    {
+        $this->authorize('changeAgreement', $publisher);
+        $this->facade->changeAgreement($publisher, $request->get('comments'));
+        return ['success' => 'true'];
+    }
+
+
+    /**
+     * @param Request $request
+     * @param User $publisher
+     * @return array
+     */
+    public function postCompleteAgreement(Request $request, User $publisher)
+    {
+        $this->authorize('agreement', $publisher);
+        $this->facade->completeAgreement($publisher, $request->get('publisher'), $request->get('repre'));
+        return ['success' => 'true', 'file' => route('medios.agreement.letter', $publisher)];
+    }
+
+    /**
+     * @param User $publisher
+     * @return mixed
+     */
+    public function getLetter(User $publisher)
+    {
+        return $this->facade->generateLetter($publisher);
+    }
+
+    /**
+     * @param User $publisher
+     * @return $this
+     */
+    public function faqs(User $publisher)
+    {
+        return view('publisher.faqs')->with('publisher', $publisher);
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     */
+    public function uploadDocuments(Request $request, User $user)
+    {
+        $this->facade->saveDocuments($user, $request->file('commerce'), $request->file('rut'), $request->file('bank'),$request->file('letter'));
     }
 }

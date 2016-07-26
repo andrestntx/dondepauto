@@ -2,6 +2,8 @@
 
 namespace App\Repositories\File;
 
+use App\Entities\Platform\Space\SpaceImage;
+use Illuminate\Database\Eloquent\Collection;
 use Intervention\Image\Image;
 
 /**

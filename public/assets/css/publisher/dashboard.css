@@ -1,3 +1,8 @@
+.modal label {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
 .dashboard h1 {
     font-size: 2.4em;
     font-weight: bold;
@@ -9,8 +14,25 @@
     text-transform: uppercase;
 }
 
+.dashboard .faq-answer {
+    font-size: 1.13em;
+    padding: 15px 25px;
+}
+
+.dashboard .faq-answer li {
+    margin-bottom: 10px;
+}
+
+.dashboard a.faq-question {
+    color: #35b6d8;
+}
+
 .dashboard .ibox {
 	margin: 0;
+}
+
+.dashboard .ibox.publihser-name {
+    margin-bottom: 1.3em;
 }
 
 .dashboard .sub-title {
@@ -23,6 +45,10 @@
     font-weight: 600;
     line-height: normal;
     margin: 1em;
+}
+
+.dashboard .sub-title-lg h2 {
+    font-size: 2em;
 }
 
 .dashboard .content {
@@ -39,16 +65,39 @@
     margin: 0.5em 1em;
 }
 
+hr.separator-dashbaord {
+    border-top: 4px solid rgba(181, 181, 181, 0.41);
+}
+
+.dashboard #icons.short {
+    margin-bottom: 0;
+}
+
 #icons {
     margin-bottom: 40px;
 }
 
+#icons.agreement-info {
+    margin-top: 40px;
+}
+
 #icons figure img {
-    max-width: 150px;
+    max-width: 120px;
     width: 80%;
     margin: 0 auto;
     display: block;
-    margin-bottom: 10px;
+}
+
+#icons.agreement-info figure img {
+    max-width: 150px;
+}
+
+#icons.agreement-info figure a img:hover {
+    max-width: 146px;
+}
+
+#icons figure a img:hover {
+    max-width: 125px;
 }
 
 #icons figure p {
@@ -70,3 +119,628 @@
     top: 36%;
 }
 
+.dashboard .slide-tips {
+    margin-top: 1em;
+}
+
+.dashboard #slide.slide-tips {
+    margin-top: 0em;
+}
+
+.publisher-content .slide-tips h2 {
+    text-transform: none;
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    color: #2cbaf8;
+}
+
+.publisher-content .slide-tips h3 {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: normal;
+    font-weight: 600;
+    margin: 1em 5em;
+    margin-top: 5em;
+    margin-bottom: 0;
+}
+
+.ibox-content-margin {
+    border: 3.6px solid #dad8d8;
+}    
+
+/** Dashboard IBOX **/
+
+.dashboard .ibox-dashboard h2 {
+    font-size: 2em;
+    margin-bottom: 0.4em;
+}
+
+.dashboard .ibox-dashboard h2 + hr {
+    margin: 0 auto 20px auto;
+    width: 70%;
+    display: block;
+    border-top: 3px solid #8e8787;
+}
+
+.dashboard .ibox-dashboard hr {
+    border-top: 3px solid rgba(197, 197, 197, 0.55);
+}
+
+.dashboard .ibox-dashboard .ibox-content {
+    border-style: solid;
+    border-width: 0px 3px 0px 3px;
+    border-color: rgba(187, 182, 182, 0.6);
+}
+
+
+.dashboard .ibox-dashboard .ibox-footer {
+    border-style: solid;
+    border-width: 1px 3px 3px 3px;
+    border-color: rgba(187, 182, 182, 0.6);
+}
+
+.dashboard .ibox-dashboard .ibox-title {
+    min-height: 0;
+    padding: 7px 15px 7px;
+}
+
+.dashboard .ibox-dashboard .ibox-title.ibox-title-green {
+    background-color: #01BB48;
+}
+
+
+.dashboard .ibox-dashboard .inventary-detail h1 {
+    font-size: 1.45em;
+    font-weight: 400;
+}
+
+.dashboard .ibox-dashboard .inventary-detail h2 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dashboard .ibox-dashboard #pointsInventary a#help-modal-point {
+    font-size: 1.34em;
+}
+
+.dashboard .ibox-dashboard .btn, .comercial-detail .btn {
+    font-size: 1.15em;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-icon {
+    display: inline-block;
+    width: 16%;
+    text-align: right;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-text {
+    display: inline-block;
+    vertical-align: middle;
+    width: 80%;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-text h1 {
+    font-size: 2em;
+}
+
+.dashboard .ibox-dashboard .agreement-detail .agreement-text h2 {
+    font-size: 1.4em;
+    font-weight: 400; 
+}
+
+.dashboard .ibox-dashboard .agreement-detail hr {
+    margin-top: 0.01em;
+    margin-bottom: 1em;
+}
+
+/** END Dashboard IBOX **/
+
+/** END Dashboard BOX MESSAGE **/
+
+.dashboard .box-message {
+    padding: 25px 10px 0 10px;
+    background: white;
+    position: relative;
+    display: block;
+    margin-top: 1.7em;
+    width: 100%;
+    text-align: center;
+    border: 3px #05B842 solid;
+}
+
+.dashboard .box-message h3 {
+    font-size: 1.1em;
+}
+
+
+.dashboard .box-message.box-message-danger, .dashboard .box-message.box-message-danger .icon-message {
+    border-color: #ff5466;
+}
+
+.dashboard .box-message.box-message-warning, .dashboard .box-message.box-message-warning .icon-message {
+    border-color: #ffac1a;
+}
+
+.dashboard .box-message.box-message-info, .dashboard .box-message.box-message-info .icon-message {
+    border-color: #2CBAF8;
+}
+
+.dashboard .box-message .icon-message {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    margin-left: -15px;
+    display: inline-block;
+    background: #fff8f7;
+    border-radius: 50%;
+    border: 3px solid #05B842;
+    padding: 6px;
+}
+
+.dashboard .box-message .icon-message img {
+    width: 20px;
+    height: 20px;
+}
+
+/** END Dashboard BOX MESSAGE **/
+
+/** Dashboard COMERCIAL DETAIL **/
+    
+.dashboard .comercial-detail h1 {
+    font-weight: bold;
+    font-size: 2.3em;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+.dashboard .comercial-detail h2 {
+    font-size: 1.6em;
+    font-weight: bold;
+    text-align: left;
+    color: rgba(140, 140, 140, 0.89);
+    display: inline-block;
+    text-transform: none;
+    margin-bottom: 1.2em;
+    margin-top: 0.7em;
+}
+
+.dashboard .comercial-detail .ibox h2 {
+    margin: 0 0 6px 0;
+    text-align: center;
+    display: block;
+    font-size: 1.5em;
+}
+
+.dashboard .comercial-detail p {
+    font-size: 1.1em;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.24);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.dashboard .comercial-detail h2 span {
+    border-bottom: 2px solid rgba(128, 128, 128, 0.65);
+    padding-bottom: 3px;
+    width: 70%;
+    height: 2px;
+    margin: auto;
+    display: block;
+    margin-top: 5px;
+}
+
+
+/** END Dashboard COMERCIAL DETAIL **/
+
+
+/** Dashboard GENERAL STYLE **/
+    
+hr.hr-pencil {
+    border-top: 4px rgba(195, 192, 192, 0.5) dashed;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+    
+/** END Dashboard GENERAL STYLE **/
+
+.dashboard .comercial-detail {
+    margin-bottom: 60px; 
+}
+
+.dashboard .comercial-detail .list-point {
+    display: list-item;
+}
+
+.dashboard .comercial-detail .list-point-red {
+    list-style-image: url('/assets/img/dashboard/circulorojo.png');
+}
+
+.dashboard .comercial-detail .list-point-orange {
+        list-style-image: url('/assets/img/dashboard/circulonaranja.png');
+}
+
+.dashboard .comercial-detail .btn {
+    margin-top: 20px;
+}
+
+.dashboard .comercial-detail .ibox .btn {
+    margin-top: 0;
+}
+
+.dashboard .comercial-detail a.comercial-file {
+    border: 2px solid rgba(153, 149, 149, 0.42);
+    padding: 8px 10px;
+    display: block;
+    color: gray;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.dashboard .comercial-detail .comercial-file:hover {
+    border-color: #2CBAF8;
+    color: #2CBAF8;
+}
+
+.dashboard .comercial-detail .comercial-file img.img-icon {
+    width: 23px;
+}
+
+.dashboard .comercial-detail  .ibox-dashboard h2 + hr {
+    border-top: 2px solid rgba(128, 128, 128, 0.65);
+}
+
+.publisher-content .slide-tips p {
+    margin: auto;
+    font-size: 1.25em;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.publisher-content .slide-tips .ibox-content.ibox-content-margin {
+    background: none;
+    border: none;
+}
+
+.publisher-content .agreement-form {
+    margin-top: 3em;
+}
+
+.publisher-content .agreement-form .documents {
+    padding-bottom: 2em;
+}
+
+.publisher-content .agreement-form h2 {
+    font-weight: 600;
+    font-size: 2em;
+    margin-bottom: 35px;
+    text-transform: none;
+}
+
+.publisher-content .agreement-form img.icon-steps{
+    width: 50%;
+    margin: auto;
+    display: block;
+    max-width: 75px;
+}
+
+.publisher-content .agreement-form p.intro-form {
+    font-size: 1.2em;
+    text-align: justify;
+}
+
+.publisher-content .agreement-form p.intro-form.last-intro {
+    padding: 2em 0 1em 0;
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.agreement-form .ibox {
+    border-color: #2cbaf8;
+    margin-top: 1.6em;
+}
+
+.agreement-form .ibox-title {
+    border-color: #2cbaf8;
+    padding: 5px;
+}
+
+.publisher-content .agreement-form .ibox-title h3 {
+    font-size: 1.35em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.publisher-content .agreement-form .btn-save-agreement {
+    margin-top: 1.8em;
+}
+
+.publisher-content .agreement-form .btn-save-agreement img {
+    width: 90%;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+}
+
+.publisher-content .agreement-form .btn-save-agreement img:hover {
+    width: 91%;
+    background: rgba(200, 234, 241, 0.28);
+}
+
+.horizontal-line {
+    width: 0;
+    height: 660px;
+    border: 1px dashed #c7c1c1;
+    margin: auto;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    cursor: pointer;
+    width: 100%;
+}
+
+.inputfile + label span.upload-label {
+    vertical-align: top;
+    color: gray;
+    font-size: 1.05em;
+    padding-top: 0;
+    font-weight: 600;
+    padding: 0 0 0 10px;
+}
+
+.inputfile + label span.upload-pdf {
+    vertical-align: top;
+    display: inline-block;
+    color: gray;
+    font-size: 0.95em;
+    font-weight: bold;
+    padding: 2px 10px 0 10px;
+    color: #2cbaf8;
+}
+
+.inputfile + label span.upload-text {
+    padding: 3px 10px;
+    vertical-align: top;
+    font-size: 0.91em;
+    color: gray;
+    font-weight: 100;
+    display: block;
+}
+
+.inputfile + label .label-text {
+    width: 80%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inputfile + label .label-check {
+    width: 5%;
+    display: none;
+    vertical-align: top;
+    font-size: 1.5em;
+    color: #0bde0b;
+}
+
+
+.inputfile + label span.upload-pdf:hover {
+    color: #1faae6;
+}
+
+.inputfile + label figure {
+    width: 10%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inputfile + label figure img {
+    width: 100%;
+}
+
+.file-content {
+    display: table;
+    table-layout: fixed;
+    padding-bottom: 1.3em;
+    padding-top: 1.6em;
+    border-bottom: 3px dashed #d0cdcd;
+}
+
+.file-content div.col-md-6, .file-content div.col-sm-6 {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.file-content p {
+    font-size: 1.2em;
+}
+
+.dashboard .slick-dots li.slick-active button:before {
+    color: #2cbaf8;
+}
+
+.dashboard .slick-dots li button:before {
+    font-size: 11px;
+}
+
+.dashboard #data-agreement label.error{
+    font-size: 1em;
+    font-weight: 600;
+    margin: 1px 0;
+    /* display: none !important; */
+}
+
+.dashboard span.label-message {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0 1em 0 0;
+    display: block;
+    color: #12710c;
+}
+
+.dashboard .form-control.error {
+    border: 1px dotted #e00b21;
+    box-shadow: 1px 1px 1px rgba(224, 11, 33, 0.43);
+}
+
+.se-pre-con {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url("/images/loading-recarga.gif") center no-repeat rgba(255, 255, 255, 0.5);
+    display: none;
+}
+
+thead tr {
+    font-size: 15px;
+}
+
+#pointsInventary .pieProgress {
+    width: 45%;
+    margin-bottom: 30px;
+    margin: auto;
+    text-align: center;
+}
+
+#pointsInventary a#help-modal-point {
+    font-weight: 500;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 0.5em auto 0.3em auto;
+    display: block;
+}
+
+#pointsInventary p#title-point {
+    font-weight: 500;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0 auto 0.3em auto;
+    display: block;
+}
+
+#pointsInventary .pie_progress__number {
+    margin-top: 5px;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.dashboard .inventary {
+    padding-top: 1em;
+}
+
+#modalPointsInventary h4.modal-title {
+    font-size: 22px;
+    padding: 0 25px;
+    font-weight: bold;
+}
+
+#modalPointsInventary .modal-body p {
+    font-size: 15px;
+    text-align: justify;
+}
+
+#modalPointsInventary .modal-header {
+    padding: 15px 20px;
+}
+
+img.icon-modal {
+    display: block;
+    margin: 10px auto;
+    max-width: 90px;
+}
+
+p.tip-extra {
+    border: 1px solid #01AEEF;
+    padding: 5px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.inventary h1 {
+    margin-top: 22%;
+    font-size: 1.45em;
+    font-weight: 400;
+}
+
+.publisher-content .inventary h2 {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.inventary .col-xs-4 {
+    width: 33%;
+    height: 200px;
+    display: inline-block;
+    vertical-align: middle;
+    border-right: 1px solid rgba(128, 128, 128, 0.29);
+}
+
+.inventary .col-xs-4:last-child {
+    border: none !important;
+}
+
+img.img-icon {
+    width: 30px;
+}
+
+a.create-datatable {
+    float: right;
+}
+
+.dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_filter label {
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_filter label input.form-control.input {
+    width: 90%;
+}
+
+#inventary-datatable_length, #inventary-datatable_filter {
+    display: none !important;
+}
+
+div#inventary-datatable_length {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .file-content div.col-md-6, .file-content div.col-sm-6 {
+        float: left;
+    }
+
+    .inventary .col-xs-4 {
+        float: left;
+    }
+}
+
+@media (min-width: 993px) {
+    .file-content div.col-md-6, .file-content div.col-sm-6 {
+        float: none;
+    }
+
+    .inventary .col-xs-4 {
+        float: none;
+    }
+}
+
+
+    

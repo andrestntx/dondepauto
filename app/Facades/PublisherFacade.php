@@ -10,14 +10,17 @@ namespace App\Facades;
 
 use App\Entities\Platform\User;
 use App\Services\ConfirmationService;
+use App\Services\DateService;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\PasswordService;
+use App\Services\RepresentativeService;
 use App\Services\UserService;
 use App\Services\PublisherService;
 use App\Services\MixpanelService;
 use App\Services\Space\SpaceService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class PublisherFacade
@@ -30,10 +33,13 @@ class PublisherFacade
     protected $mailchimpService;
     protected $passwordService;
     protected $userService;
+    protected $representativeService;
+    protected $dateService;
 
     public function __construct(PublisherService $service, EmailService $emailService, UserService $userService,
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
-                                MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService)
+                                MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService,
+                                RepresentativeService $representativeService, DateService $dateService)
     {
         $this->service = $service;
         $this->emailService = $emailService;
@@ -43,6 +49,8 @@ class PublisherFacade
         $this->spaceService = $spaceService;
         $this->passwordService = $passwordService;
         $this->userService = $userService;
+        $this->representativeService = $representativeService;
+        $this->dateService = $dateService;
     }
 
     /**
@@ -131,6 +139,23 @@ class PublisherFacade
         return $user;
     }
 
+    /**
+     * @param User $publisher
+     * @return User
+     */
+    public function loginPublisher(User $publisher)
+    {
+        $user = $publisher->user;
+
+        if(! $user) {
+            $user = $this->userService->createUserOfPublisher($publisher);
+        }
+
+        Auth::loginUsingId($user->id);
+
+        return $publisher;
+    }
+
 
     /**
      * @param $code
@@ -143,5 +168,47 @@ class PublisherFacade
         
         return $publisher;
     }
-    
+
+    /**
+     * @param User $user
+     * @param array $dataPublisher
+     * @param array $dataRepresentative
+     */
+    public function completeAgreement(User $user, array $dataPublisher, array $dataRepresentative)
+    {
+        $this->service->updateModel($dataPublisher, $user);
+        $this->representativeService->createOrUpdate($dataRepresentative, $user, $user->representative);
+    }
+
+    /**
+     * @param User $publisher
+     * @param UploadedFile $commerceDocument
+     * @param UploadedFile $rutDocument
+     * @param UploadedFile $bankDocument
+     * @param UploadedFile $letterDocument
+     */
+    public function saveDocuments(User $publisher, UploadedFile $commerceDocument, UploadedFile $rutDocument, UploadedFile $bankDocument, UploadedFile $letterDocument)
+    {
+        $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
+    }
+
+    /**
+     * @param User $publisher
+     * @return mixed
+     */
+    public function generateLetter(User $publisher)
+    {
+        $letter = $this->service->generateLetter($publisher, $this->dateService->getLangDateToday());
+        $this->emailService->sendLetter($publisher, $letter['path'], $this->service->getTerms());
+        return $letter['stream'];
+    }
+
+    /**
+     * @param User $publisher
+     * @param $comments
+     */
+    public function changeAgreement(User $publisher, $comments)
+    {
+        $this->emailService->changeAgreement($publisher, $comments);
+    }
 }

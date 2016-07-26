@@ -4,10 +4,12 @@ namespace App\Entities\Platform;
 
 use App\Entities\Views\Advertiser;
 use App\Entities\Views\Publisher;
+use App\Repositories\File\PublisherDocumentsRepository;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Entity
+class User extends EntityAuth
 {
     /**
      * The primary key for the model.
@@ -39,7 +41,7 @@ class User extends Entity
         'first_name', 'last_name', 'email', 'password', 'role', 'user_id',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
-        'commission_rate', 'retention', 'discount', 'complete_data'
+        'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal'
     ];
 
     /**
@@ -81,7 +83,8 @@ class User extends Entity
         'cel' => 'celular_us_LI', 'password' => 'clave_us_LI', 'economic_activity_id' => 'id_actividadEconomica_LI',
         'signed_agreement' => 'firmo_acuerdo_LI', 'signed_at' => 'fecha_firma_acuerdo_us_LI', 'commission_rate' => 'porc_comision_us_LI',
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
-        'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI'
+        'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI', 'company_legal' => 'razon_social_us_LI',
+        'private' => 'opcion_espacios_privados_LI'
     ];
 
     /**
@@ -123,6 +126,24 @@ class User extends Entity
         return $value;
     }
 
+    public function getAvgPointsAttribute()
+    {
+        return round($this->spaces->avg('points'), 0);
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function getHasOffersAttribute()
+    {
+        if($this->spaces->count() > 0){
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -150,6 +171,14 @@ class User extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
+    public function representative()
+    {
+        return $this->hasOne(Representative::class, 'publisher_id', 'id_us_LI');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function advertiser()
     {
         return $this->hasOne(Advertiser::class, 'id', 'id_us_LI');
@@ -161,6 +190,26 @@ class User extends Entity
     public function user()
     {
         return $this->hasOne('App\Entities\User', 'user_platform_id', 'id_us_LI');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountSpacesAttribute()
+    {
+        return $this->spaces->count();
+    }
+
+    /**
+     * @return Representative|mixed
+     */
+    public function getRepresentativeOrNew()
+    {
+        if($repre = $this->representative) {
+            return $repre;
+        }
+
+        return new Representative();
     }
 
     /**
@@ -205,6 +254,79 @@ class User extends Entity
         return 'Sin actividad';
     }
 
+    public function getRepresentativeNameAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->name;
+        }
+
+        return '';
+    }
+
+    public function getRepresentativeDocAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->doc;
+        }
+
+        return '';
+    }
+
+    public function getRepresentativePhoneAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->phone;
+        }
+
+        return '';
+    }
+
+    public function getRepresentativeEmailAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->email;
+        }
+
+        return '';
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getBank()
+    {
+        if($this->banks) {
+            return $this->banks->first();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankAccountNumberAttribute()
+    {
+        if($bank = $this->getBank()) {
+            return $bank->pivot->account_number;
+        }
+
+        return '-';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankNameAttribute()
+    {
+        if($bank = $this->getBank()) {
+            return $bank->name;
+        }
+
+        return '-';
+    }
+
     /**
      * @return string
      */
@@ -246,6 +368,9 @@ class User extends Entity
         }
     }
 
+    /**
+     * @return bool
+     */
     public function getHasSignedAgreementAttribute()
     {
         if($this->signed_agreement == 'Si_fir_ac') {
@@ -253,6 +378,46 @@ class User extends Entity
         }
 
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInVerificationAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+
+        if(! $this->has_signed_agreement && $fileRepository->hasFiles($this)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param $name
+     * @return string
+     */
+    public function getDocument($name)
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+
+        return $fileRepository->getDocument($this, $name);
+    }
+
+    public function getExpiredOffersAttribute()
+    {
+        if(! $this->has_signed_agreement && $this->expired_offers_days <= 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getExpiredOffersDaysAttribute()
+    {
+        return 30 - $this->created_at->diff(Carbon::now())->days;
     }
 
     /**
@@ -363,10 +528,23 @@ class User extends Entity
         return md5(strtolower($this->email));
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function spaces()
     {
         return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function banks()
+    {
+        return $this->belongsToMany('App\Entities\Platform\Bank', 'bank_user', 'publisher_id', 'bank_id')
+            ->withPivot('account_number');
+    }
+
 
     public function getSpaceCityNamesAttribute()
     {

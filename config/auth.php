@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'userPlatform' => [
+            'driver' => 'session',
+            'provider' => 'userPlatform',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -68,6 +72,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Entities\User::class,
+        ],
+        'userPlatform' => [
+            'driver' => 'eloquent',
+            'model' => App\Entities\Platform\User::class,
         ],
 
         // 'users' => [

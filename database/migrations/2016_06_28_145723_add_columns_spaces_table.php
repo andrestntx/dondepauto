@@ -17,6 +17,7 @@ class AddColumnsSpacesTable extends Migration
             $table->string('link_youtube_LI')->nullable();
             $table->integer('descuento_espacio_LI')->default(0);
             $table->enum('restringeSexo_LI', ['N', 'S'])->default('N');
+            $table->enum('restringeReligion_LI', ['N', 'S'])->default('N');
         });
     }
 
@@ -28,7 +29,7 @@ class AddColumnsSpacesTable extends Migration
     public function down()
     {
         Schema::table('espacios_ofrecidos_LIST', function (Blueprint $table) {
-            $table->dropColumn(['restringeSexo_LI', 'agencia_impactos_LI', 'link_youtube_LI', 'descuento_espacio_LI']);
+            $table->dropColumn(['restringeSexo_LI', 'agencia_impactos_LI', 'link_youtube_LI', 'descuento_espacio_LI', 'restringeReligion_LI']);
         });
     }
 }

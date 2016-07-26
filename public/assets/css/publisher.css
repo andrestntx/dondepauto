@@ -76,7 +76,6 @@
 
     .publisher-content h2 {
         text-align: center;
-        text-transform: capitalize;
         font-weight: 900;
         font-size: 2.5em;
         margin-top: 0;
@@ -198,49 +197,49 @@
 
     
     .publisher-content .controls input::-webkit-input-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }
     
     .publisher-content .controls input:-moz-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }
     
     .publisher-content .controls input::-moz-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }
     
     .publisher-content .controls input:-ms-input-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }   
 
     .publisher-content .controls textarea::-webkit-input-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }
     
     .publisher-content .controls textarea:-moz-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }
     
     .publisher-content .controls textarea::-moz-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }
     
     .publisher-content .controls textarea:-ms-input-placeholder {
-        color: #ADA7A7;
+        color: #d0d0d0;
         font-style: italic;
         font-family: sans-serif;
     }            

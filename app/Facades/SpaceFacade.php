@@ -8,13 +8,16 @@
 
 namespace App\Facades;
 
+use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
 use App\Services\Space\SpaceFormatService;
+use App\Services\Space\SpacePointsService;
 use App\Services\Space\SpaceService;
 use App\Services\Space\SpaceSubCategoryService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class SpaceFacade
@@ -25,9 +28,10 @@ class SpaceFacade
     protected $categoryService;
     protected $cityService;
     protected $publisherService;
+    protected $spacePointsService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
-        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService)
+        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService, SpacePointsService $spacePointsService)
     {
         $this->service = $service;
         $this->subCategoryService = $subCategoryService;
@@ -35,6 +39,7 @@ class SpaceFacade
         $this->categoryService = $categoryService;
         $this->cityService = $cityService;
         $this->publisherService = $publisherService;
+        $this->spacePointsService = $spacePointsService;
     }
 
     /**
@@ -59,18 +64,47 @@ class SpaceFacade
         if($images) {
             $imageNames = $this->service->saveImages($data['images'], $space);
         }
-        
+        $this->recalculatePoints($space);
+
         return $space;
     }
 
     /**
      * @param array $data
-     * @param Model $space
+     * @param array $images
+     * @param array $keep_images
+     * @param User $publisher
+     * @param Space $copySpace
      * @return mixed
      */
-    public function updateModel(array $data, Model $space)
+    public function duplicateModel(array $data, $images = [], $keep_images = [], User $publisher, Space $copySpace)
     {
-        return $this->service->updateModel($data, $space);
+        $format = $this->formatService->getModel($data['format_id']);
+        $space  = $this->service->createSpace($data, $format, $publisher);
+        $this->service->saveAndCopyImages($images, $space, $copySpace, $keep_images);
+        
+        $this->recalculatePoints($space);
+
+        return $space;
+    }
+
+
+    /**
+     * @param array $data
+     * @param array $images
+     * @param array $keep_images
+     * @param Space $space
+     * @return Space|mixed
+     */
+    public function updateModel(array $data, $images = [], $keep_images = [], Space $space)
+    {
+        $format = $this->formatService->getModel($data['format_id']);
+        $space  = $this->service->updateSpace($data, $format, $space);
+        $this->service->saveImages($images, $space, $keep_images);
+
+        $this->recalculatePoints($space);
+
+        return $space;
     }
 
     /**
@@ -103,8 +137,61 @@ class SpaceFacade
         return $result;
     }
 
-    public function countSpaces(User $user) 
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function countSpaces(User $user)
     {
         return $this->service->countSpaces($user);
+    }
+
+    /**
+     * @param Space $space
+     * @return mixed
+     */
+    public function recalculatePoints(Space $space) 
+    {
+        $points = $this->spacePointsService->calculatePoints($space);
+        return $this->service->updateModel(['points' => $points], $space);
+    }
+
+    /**
+     * @param User $publisher
+     * @return mixed
+     */
+    public function recalculatePublisherPoints(User $publisher)
+    {
+        return $this->recalculateSpacesPoints($publisher->spaces);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function recalculateAllPoints()
+    {
+        return $this->recalculateSpacesPoints($this->service->allSpaces());
+    }
+
+    /**
+     * @param Collection $spaces
+     * @return mixed
+     */
+    public function recalculateSpacesPoints(Collection $spaces)
+    {
+        foreach ($spaces as $space) {
+            $this->recalculatePoints($space);
+        }
+
+        return $spaces;
+    }
+
+    /**
+     * @param Space $space
+     * @param bool $active
+     */
+    public function activeSpace(Space $space, $active = true)
+    {
+        $this->service->activeSpace($space, $active);
     }
 }
