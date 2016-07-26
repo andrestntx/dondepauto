@@ -70,6 +70,7 @@ class PublisherFacade
      */
     public function search(array $columns, array $search)
     {
+        \Log::info('facade');
         return $this->service->search($columns, $search);
     }
 
