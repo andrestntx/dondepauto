@@ -47,9 +47,9 @@ class Space extends Entity
      * @var array
      */
     protected $appends = ['public_price',
-        'category_name', 'alcohol_restriction', 
+        'alcohol_restriction',
         'snuff_restriction', 'policy_restriction', 'publisher_company',
-        'minimal_price', 'sub_category_name', 'category_name', 'format_name',
+        'minimal_price',
         'address', 'name', 'id', 'publisher_id'
     ];
 

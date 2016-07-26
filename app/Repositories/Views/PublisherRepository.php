@@ -43,7 +43,7 @@ class PublisherRepository extends BaseRepository
                 }/*, 'spaces.city' => function($query) {
                     $query->select('nombre_ciudad_LI as name', 'id_ciudad_LI');
                 }*/
-            , 'spaces.format']);
+            ]);
 
         if(trim($search['value'])) {
             $value = $search['value'];

@@ -68,7 +68,7 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
-        /*return \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
+        return \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
             ->filter(function ($instance) use ($request) {
                 $instance->collection = $instance->collection->filter(function ($publisher) use ($request) {
                     $state = true;
@@ -100,7 +100,7 @@ class PublishersController extends ResourceController
                     return $state && $hasOffers && $cities && $dates;
                 });
             })
-            ->make(true);*/
+            ->make(true);
 
         return view('home');
     }
