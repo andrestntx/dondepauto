@@ -119,17 +119,22 @@ class AuthController extends Controller
 
         $credentials = $this->getCredentials($request);
 
+        \Log::info($credentials);
+
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
         elseif(Auth::guard($this->getPlatformGuard())->attempt($this->getCredentialsPlatform($request), $request->has('remember'))) {
-
+            \Log::info('encontro el medio');
             if ($throttles) {
                 $this->clearLoginAttempts($request);
             }
 
             $this->publisherFacade->loginPublisher(Auth::guard($this->getPlatformGuard())->user());
             return redirect()->intended($this->redirectPath());
+        }
+        else {
+            \Log::info('encontro nada');
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
