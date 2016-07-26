@@ -22,7 +22,7 @@ Route::get('medios/confirmar/{code}', [
     'uses' => 'Publisher\PublishersController@confirm'
 ]);
 
-Route::get('medios/login/{publishers}', [
+Route::post('medios/login/{publishers}', [
     'uses' => 'Auth\PublisherController@platformLogin',
     'as' => 'medios.platform.login'
 ]);
