@@ -78,7 +78,7 @@ class PublishersController extends ResourceController
                     $cities = true;
                     $dates = true;
 
-                    /*foreach ($request->get('columns') as $column) {
+                    foreach ($request->get('columns') as $column) {
                         if($column['name'] == 'state_id') {
                             $state = $publisher->hasState($column['search']['value']);
                         }
@@ -99,7 +99,7 @@ class PublishersController extends ResourceController
                             }
                         }
                     }
-                    return $state && $hasOffers && $cities && $dates;*/
+                    return $state && $hasOffers && $cities && $dates;
                 });
             })
             ->make(true);
