@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'genealabs/laravel-mixpanel/*',
-        'landing/*'
+        'landing/*',
+        'medios/login/*'
     ];
 }
