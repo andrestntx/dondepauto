@@ -68,6 +68,8 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
+        \Log::info('controller');
+
         return \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
             ->filter(function ($instance) use ($request) {
                 $instance->collection = $instance->collection->filter(function ($publisher) use ($request) {
@@ -76,7 +78,7 @@ class PublishersController extends ResourceController
                     $cities = true;
                     $dates = true;
 
-                    foreach ($request->get('columns') as $column) {
+                    /*foreach ($request->get('columns') as $column) {
                         if($column['name'] == 'state_id') {
                             $state = $publisher->hasState($column['search']['value']);
                         }
@@ -97,12 +99,12 @@ class PublishersController extends ResourceController
                             }
                         }
                     }
-                    return $state && $hasOffers && $cities && $dates;
+                    return $state && $hasOffers && $cities && $dates;*/
                 });
             })
             ->make(true);
 
-        return view('home');
+       // return view('home');
     }
 
     /**
