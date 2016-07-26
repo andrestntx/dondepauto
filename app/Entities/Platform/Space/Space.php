@@ -46,12 +46,11 @@ class Space extends Entity
      *
      * @var array
      */
-    protected $appends = ['category_sub_category', 'commission', 'markup_price', 'public_price',
-        'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'category_name', 'alcohol_restriction', 
-        'snuff_restriction', 'policy_restriction', 'publisher_company', 'publisher_phone', 'publisher_email',
-        'percentage_markdown', 'minimal_price', 'sub_category_name', 'category_name', 'format_name', 'impact_scene_name',
-        'city_name', 'address', 'name', 'publisher_company_role', 'publisher_company_area', 
-        'publisher_signed_agreement', 'publisher_signed_at', 'publisher_commission_rate', 'publisher_retention', 'publisher_discount', 'id', 'publisher_id'
+    protected $appends = ['public_price',
+        'category_name', 'alcohol_restriction', 
+        'snuff_restriction', 'policy_restriction', 'publisher_company',
+        'minimal_price', 'sub_category_name', 'category_name', 'format_name',
+        'address', 'name', 'id', 'publisher_id'
     ];
 
     /**
@@ -154,6 +153,15 @@ class Space extends Entity
     public function getAudiencesListAttribute()
     {
         return $this->audiences->lists('id')->all();
+    }
+
+    /**
+     * Return the Category and SubCategory
+     * @return string
+     */
+    public function getCategorySubCategoryAttribute()
+    {
+        return ucwords(strtolower($this->category_name . ' - ' . $this->sub_category_name));
     }
 
     /**
@@ -276,7 +284,11 @@ class Space extends Entity
     }
 
     public function getFormatNameAttribute() {
-        return $this->format->name;
+        if($this->format) {
+            return $this->format->name;    
+        }
+        
+        return '';
     }
 
     /**
@@ -284,7 +296,11 @@ class Space extends Entity
      */
     public function getSubCategory()
     {
-        return $this->format->subCategory;
+        if($this->format) {
+            return $this->format->subCategory;    
+        }
+        
+        return null;
     }
 
     /**
@@ -292,7 +308,11 @@ class Space extends Entity
      */
     public function getCategory()
     {
-        return $this->getSubCategory()->category;
+        if($subCategory = $this->getSubCategory()) {
+            return $subCategory->category;
+        }
+
+        return null;
     }
 
     /**
@@ -300,7 +320,11 @@ class Space extends Entity
      */
     public function getCategoryNameAttribute()
     {
-        return $this->getCategory()->name;
+        if($category = $this->getCategory()) {
+            return $category->name;
+        }
+
+        return '';
     }
 
     /**
@@ -308,7 +332,11 @@ class Space extends Entity
      */
     public function getSubCategoryNameAttribute()
     {
-        return $this->getSubCategory()->name;
+        if($subCategory = $this->getSubCategory()) {
+            return $subCategory->name;
+        }
+
+        return '';
     }
 
     /**
