@@ -28,6 +28,9 @@ class HomeController extends Controller
                 return redirect()->route('medios.account', $publisher);
             }
 
+            //var_dump($publisher->user->password);
+            //dd($publisher->password);
+
             return view('publisher.dashboard')->with('publisher', $publisher);
         }
 

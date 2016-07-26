@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Entity
+class User extends EntityAuth
 {
     /**
      * The primary key for the model.

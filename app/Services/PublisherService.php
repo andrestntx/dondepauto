@@ -134,4 +134,13 @@ class PublisherService extends ResourceService
         return $this->publisherDocumentsRepository->getTerms();
     }
 
+    public function findOrCreateUser(User $publisher)
+    {
+        if(! $publisher->user) {
+            $this;
+        }
+
+        dd($publisher->user);
+    }
+
 }

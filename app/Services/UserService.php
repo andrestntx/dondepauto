@@ -44,6 +44,25 @@ class UserService extends ResourceService
     }
 
     /**
+     * @param RUser $publisher
+     * @return mixed
+     */
+    public function createUserOfPublisher(\App\Entities\Platform\User $publisher)
+    {
+        $user = $this->createPublisher([
+                'first_name' => $publisher->first_name,
+                'last_name' => $publisher->last_name,
+                'email' =>  $publisher->email
+            ], $publisher->password, $publisher
+        );
+
+        $user->passwords = $publisher->password;
+        $user->save();
+
+        return $user;
+    }
+
+    /**
      * @param array $data
      * @param null $password
      * @param RUser $publisher

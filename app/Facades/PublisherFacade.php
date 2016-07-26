@@ -139,6 +139,23 @@ class PublisherFacade
         return $user;
     }
 
+    /**
+     * @param User $publisher
+     * @return User
+     */
+    public function loginPublisher(User $publisher)
+    {
+        $user = $publisher->user;
+
+        if(! $user) {
+            $user = $this->userService->createUserOfPublisher($publisher);
+        }
+
+        Auth::loginUsingId($user->id);
+
+        return $publisher;
+    }
+
 
     /**
      * @param $code

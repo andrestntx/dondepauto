@@ -22,6 +22,11 @@ Route::get('medios/confirmar/{code}', [
     'uses' => 'Publisher\PublishersController@confirm'
 ]);
 
+Route::get('medios/login/{publishers}', [
+    'uses' => 'Auth\PublisherController@platformLogin',
+    'as' => 'medios.platform.login'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 

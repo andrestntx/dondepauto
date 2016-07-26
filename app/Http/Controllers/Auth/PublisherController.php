@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Entities\Platform\User;
 use App\Facades\PublisherFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RUser\Publisher\RegisterLandingRequest;
@@ -35,5 +36,15 @@ class PublisherController extends Controller
     public function registerLanding(RegisterLandingRequest $request)
     {
         return $this->publisherFacade->registerAutoPassword($request->all());
+    }
+
+    /**
+     * @param User $publisher
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function platformLogin(User $publisher)
+    {
+        $this->publisherFacade->loginPublisher($publisher);
+        return redirect()->route('home');
     }
 }
