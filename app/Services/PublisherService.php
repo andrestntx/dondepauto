@@ -40,7 +40,6 @@ class PublisherService extends ResourceService
      */
     public function search(array $columns, array $search)
     {
-        \Log::info('service');
         return $this->viewRepository->search($columns, $search);
     }
 
