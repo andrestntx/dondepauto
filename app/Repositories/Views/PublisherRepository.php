@@ -33,6 +33,7 @@ class PublisherRepository extends BaseRepository
      */
     public function search(array $columns, array $search)
     {
+        \Log::info('view repository');
         $publisherQuery = $this->model->select([
                 'company', 'first_name', 'name', 'email', 'phone', 'cel', 'created_at', 'signed_at', 'comments',
                 'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data',
@@ -63,7 +64,7 @@ class PublisherRepository extends BaseRepository
                 $publisherQuery->where('signed_agreement', '=', $column['search']['value']);
             }
         }
-
+        \Log::info('antes get');
         return $publisherQuery->get();
     }
 
