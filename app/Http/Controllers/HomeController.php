@@ -31,6 +31,7 @@ class HomeController extends Controller
             //var_dump($publisher->user->password);
             //dd($publisher->password);
 
+            $publisher->load(['spaces.audiences', 'spaces.impactScenes', 'spaces.images', 'spaces.cities']);
             return view('publisher.dashboard')->with('publisher', $publisher);
         }
 
