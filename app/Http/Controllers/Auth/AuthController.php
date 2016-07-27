@@ -83,7 +83,12 @@ class AuthController extends Controller
      */
     protected function getCredentialsPlatform(Request $request)
     {
-        return $request->only('email_us_LI', 'password');
+        $credentials = $this->getCredentials($request);
+
+        return [
+            'email_us_LI'   => $credentials['email'],
+            'password'      => $credentials['password']
+        ];
     }
 
     /**
@@ -95,6 +100,7 @@ class AuthController extends Controller
     {
         return 'userPlatform';
     }
+
 
     /**
      * Handle a login request to the application.
@@ -118,24 +124,16 @@ class AuthController extends Controller
         }
 
         $credentials = $this->getCredentials($request);
-
-        \Log::info($credentials);
+        $credentialsPlatform = $this->getCredentialsPlatform($request);
 
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
-        elseif(Auth::guard($this->getPlatformGuard())->attempt($this->getCredentialsPlatform($request), $request->has('remember'))) {
-            \Log::info('encontro el medio');
-            if ($throttles) {
-                $this->clearLoginAttempts($request);
-            }
+        elseif(Auth::guard('userPlatform')->attempt($credentialsPlatform, $request->has('remember'))) {
+            $this->publisherFacade->loginPublisher(Auth::guard('userPlatform')->user(), $request->has('remember'));
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
 
-            $this->publisherFacade->loginPublisher(Auth::guard($this->getPlatformGuard())->user());
-            return redirect()->intended($this->redirectPath());
-        }
-        else {
-            \Log::info('encontro nada');
-        }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this

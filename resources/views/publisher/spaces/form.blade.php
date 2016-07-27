@@ -16,7 +16,15 @@
     <div id="serverImages" data-images="{{ $space->images_list }}"></div>
     
     <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 id="title-page">Publicar mi primera oferta</h2>
+        <h2 id="title-page">
+            @if($publisher->has_offers)
+                Presentar mi primera oferta
+            @elseif($space->exists)
+                Editar oferta
+            @else
+                Presentar oferta nueva
+            @endif
+        </h2>
         <p id="info-page">Antes de publicar tu oferta, ten en cuenta <a href="esta información!" data-toggle="modal" data-target="#modalInfo">esta información</a></p>
         <div class="modal inmodal" id="modalInfo" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog">

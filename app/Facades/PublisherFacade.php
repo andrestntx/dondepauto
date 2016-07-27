@@ -141,9 +141,10 @@ class PublisherFacade
 
     /**
      * @param User $publisher
+     * @param bool $remember
      * @return User
      */
-    public function loginPublisher(User $publisher)
+    public function loginPublisher(User $publisher, $remember = false)
     {
         $user = $publisher->user;
 
@@ -151,7 +152,7 @@ class PublisherFacade
             $user = $this->userService->createUserOfPublisher($publisher);
         }
 
-        Auth::loginUsingId($user->id);
+        Auth::loginUsingId($user->id, $remember);
 
         return $publisher;
     }
