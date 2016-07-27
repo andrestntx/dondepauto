@@ -94,7 +94,7 @@ class PublishersSpacesController extends ResourceController
     public function firstCreate(User $publisher)
     {
         if($publisher->has_offers) {
-            return redirect('medios.espacios.create', $publisher);
+            return redirect()->route('medios.espacios.create', $publisher);
         }
 
         return view('publisher.home-no-spaces')->with('publisher', $publisher);

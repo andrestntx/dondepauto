@@ -128,7 +128,7 @@ class User extends EntityAuth
 
     public function getAvgPointsAttribute()
     {
-        return round($this->spaces->avg('points'), 0);
+        return round($this->spaces->avg('new_points'), 0);
     }
 
 
