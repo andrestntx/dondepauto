@@ -307,10 +307,12 @@
                                     <a href="{{ $publisher->getDocument('bank') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> certificación bancaria</a>
                                     <a href="{{ $publisher->getDocument('letter') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> carta de validación</a>
                                 @else
-                                    <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
-                                    <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
-                                    <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> certificación bancaria</a>
-                                    <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> carta de validación</a>
+                                    <div class="error-files">
+                                        <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
+                                        <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
+                                        <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> certificación bancaria</a>
+                                        <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> carta de validación</a>
+                                    </div>
                                 @endif
                             </div>
                         </div>

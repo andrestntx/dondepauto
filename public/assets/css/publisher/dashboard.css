@@ -381,8 +381,13 @@ hr.hr-pencil {
 }
 
 .dashboard .comercial-detail .comercial-file:hover {
-    border-color: #2CBAF8;
-    color: #2CBAF8;
+    border-color: #FF5466;
+    color: #FF5466;
+}
+
+.dashboard .comercial-detail .error-files .comercial-file:hover {
+    border-color: red;
+    color: red;
 }
 
 .dashboard .comercial-detail .comercial-file img.img-icon {
