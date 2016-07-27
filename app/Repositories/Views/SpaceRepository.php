@@ -30,7 +30,7 @@ class SpaceRepository extends BaseRepository
      */
     public function search(User $publisher = null)
     {
-        $query = $this->model->with(['images']);
+        $query = $this->model->whereIsDelete(0)->with(['images']);
 
         if(!is_null($publisher)) {
             $query->wherePublisherId($publisher->id);
