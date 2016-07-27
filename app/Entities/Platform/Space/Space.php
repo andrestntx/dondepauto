@@ -12,6 +12,7 @@ namespace App\Entities\Platform\Space;
 use App\Entities\Platform\Entity;
 use App\Entities\Platform\User;
 use App\Services\Space\SpacePointsService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -80,6 +81,20 @@ class Space extends Entity
      * @var string
      */
     const UPDATED_AT = null;
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('is_deleted', function(Builder $builder) {
+            $builder->where('espacio_eliminado_LI', '!=', 'Si_el');
+        });
+    }
 
     /**
      * Get an attribute from the model.
