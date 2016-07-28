@@ -7,3 +7,6 @@ Homestead.json
 composer.lock
 .idea/*
 public/documents/*
+public/marketplace/big/*
+public/marketplace/detailThumbs/*
+public/marketplace/thumbs/*
