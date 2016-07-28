@@ -123,7 +123,7 @@
                                         {!! Field::text('name', ['label' => 'Título del espacio publicitario', 'ph' => 'Ejemplo: Pantalla Digital en Hall Principal centro comercial Unicentro Bogotá', 'required']) !!}
                                     </div>
                                     <div class="col-md-6">
-                                        {!! Field::select('category_id', $categories, ['label' => 'Categoría (Tipo de pauta del espacio)', 'class' => 'select2-category', 'required']) !!}
+                                        {!! Field::select('category_id', $categories, $space->sub_category_id, ['label' => 'Categoría (Tipo de pauta del espacio)', 'class' => 'select2-category', 'required']) !!}
                                     </div>
                                     <div class="col-md-6">
                                         @if($space->format_id)
