@@ -264,6 +264,7 @@ $(document).ready(function(){
                             $(data).attr("impact_scenes", $("select[name='impact_scenes']").val().toString());
                             $(data).attr("audiences", $("select[name='audiences']").val().toString());
                             $(data).attr("cities", $("select[name='cities']").val().toString());
+                            $(data).attr("description", $(".note-editable").html());
 
                             $('form').ajaxSubmit({
                                 data: data,
@@ -651,7 +652,8 @@ $(document).ready(function(){
             this.on("sendingmultiple", function(files, xhr, formData) {
                 formData.append("name", $("input[name='name']").val());
                 formData.append("format_id", $("select[name='format_id']").val());
-                formData.append("description", $("textarea[name='description']").val());
+
+                formData.append("description", $(".note-editable").html());
                 formData.append("dimension", $("input[name='dimension']").val());
                 
                 formData.append("impact_scenes", $("select[name='impact_scenes']").val());
