@@ -126,4 +126,9 @@ class Advertiser extends PUser
         return $this->created_at->diffForHumans();
     }
 
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
 }
