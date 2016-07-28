@@ -14,9 +14,11 @@ var AdvertiserService = function() {
             "order": [[1, "desc"]],
             "ajax": urlSearch,
             "deferRender": true,
+            "processing": true,
+            "serverSide": true,
             "columns": [
                 { "data": null, "orderable": false },
-                { "data": "created_at"},
+                { "data": "created_at", name:"created_at"},
                 { "data": "company" },
                 { "data": "city_name" },
                 { "data": "name" },
@@ -25,19 +27,23 @@ var AdvertiserService = function() {
                 { "data": "cel"},
                 { "data": "state" },
                 { "data": "count_by_contact_intentions" },
-                { "data": "state_id"},
-                { "data": "city_id" },
+                { "data": "state_id", "name": "state_id", "searchable": true, "visible": false },
+                { "data": "city_id", "name": "city_id", "searchable": false, "visible": false },
                 { "data": "address"},
-                { "data": "economic_activity_id"},
-                { "data": "created_at_datatable"},
+                { "data": "economic_activity_id", "name": "economic_activity_id", "searchable": false, "visible": false },
+                { "data": "created_at_datatable", "name": "intention_at", "searchable": false, "visible": false},
                 { "data": "last_log_login_at_datatable"},
                 { "data": "activated_at_datatable"}
             ],
             "columnDefs": [
                 {
-                    "targets": [6,7,10,11,12,13,14,15,16],
+                    "targets": [1,2,3,4,5],
+                    "searchable": false
+                },
+                {
+                    "targets": [6,7,12,14,15,16],
                     "visible": false,
-                    "searchable": true
+                    "searchable": false
                 },
                 {
                     className: "text-center",
@@ -94,8 +100,16 @@ var AdvertiserService = function() {
 
         UserService.initDatatable(table);
         UserService.initSimpleSearchSelect("#registration_states",10);
-        UserService.initExactSearchSelect('#cities', 11);
-        UserService.initExactSearchSelect("#economic_activities", 113);
+        UserService.initSimpleSearchSelect('#cities', 11);
+        UserService.initSimpleSearchSelect("#economic_activities", 13);
+
+        $("#advertisers-datatable_filter input").unbind();
+
+        $("#advertisers-datatable_filter input").bind('keyup', function(e) {
+            if(e.keyCode == 13) {
+                table.search(this.value).draw();   
+            }
+        }); 
     }
     
     function initModalEvent() {
@@ -175,9 +189,9 @@ var AdvertiserService = function() {
         init: function(urlSearch) {
             initTable(urlSearch);
             UserService.initInputsDateRange();
-            UserService.initSearchDateRanges(13,14,15);
+            //UserService.initSearchDateRanges(13,14,15);
             initModalEvent();
-            initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
+            //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
         }
     };
 }();

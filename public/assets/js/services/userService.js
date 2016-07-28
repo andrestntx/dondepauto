@@ -11,6 +11,7 @@ var UserService = function() {
 		},
 
 		initInputsDateRange: function() {
+			console.log('initInputsDateRange');
 	        $('.input-daterange').datepicker({
 	        	format: 'dd/mm/yyyy',
 	            keyboardNavigation: false,
@@ -21,7 +22,7 @@ var UserService = function() {
 	            	.column($(this).data('column'))
 	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
 	            	.draw();
-	        	console.log();
+	            console.log('cambio fecha');
 	        }).on('clearDate', function(e) {
 	        	dataTable
 	            	.column($(this).data('column'))

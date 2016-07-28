@@ -165,9 +165,7 @@ class PublisherFacade
     public function confirm($code)
     {
         $publisher = $this->confirmationService->verifyAndConfirm($code);
-        Auth::loginUsingId($publisher->user->id);
-        
-        return $publisher;
+        return $this->loginPublisher($publisher, true);
     }
 
     /**

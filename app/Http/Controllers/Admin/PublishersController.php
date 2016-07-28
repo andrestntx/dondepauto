@@ -68,6 +68,8 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
+        \Log::info($request->all());
+
         return \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
             ->filter(function ($instance) use ($request) {
                 $instance->collection = $instance->collection->filter(function ($publisher) use ($request) {
