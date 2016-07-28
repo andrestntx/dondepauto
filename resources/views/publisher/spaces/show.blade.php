@@ -121,7 +121,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                    <h2 class="product-main-price">${{ $space->minimal_price }} / <small class="text-muted"> {{ $space->period }}</small> </h2>
+                                    <h2 class="product-main-price"> ${{ number_format($space->minimal_price, 0, ',', '.') }} / <small class="text-muted"> {{ $space->period }}</small> </h2>
                             </div>
 
                             <div class="col-md-6 m-t-md">
@@ -133,7 +133,7 @@
 
                         <h4 class="space-item-title">Descripción</h4>
                         <div class="small text-muted space-item-text">
-                            {{ $space->description }}
+                            {!! $space->description !!}
                         </div>
 
                         <div class="row space-item">
