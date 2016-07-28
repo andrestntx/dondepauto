@@ -9,6 +9,8 @@
     <link href="/assets/css/plugins/dropzone/basic.css" rel="stylesheet">
     <link href="/assets/css/plugins/dropzone/dropzone.css" rel="stylesheet">
     <link href="/assets/css/publish.css" rel="stylesheet">
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -131,7 +133,8 @@
                                         @endif
                                     </div>
                                     <div class="col-md-12">
-                                        {!! Field::textarea('description', ['label' => 'Descripción del espacio', 'ph' => 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante y su agencia', 'required', 'rows' => '5']) !!}
+                                            {!! Form::label('Descripción del espacio') !!}
+                                        <div class="summernote">@if($space->exists) {!! $space->description !!} @endif</div>
                                     </div>
                                     <div class="col-lg-12">
                                         {!! Field::text('dimension', ['label' => 'Dimensiones o tamaño', 'ph' => 'Ejemplo: 3 x 4 metros; 1m Alto x 2m Ancho']) !!}
@@ -300,5 +303,16 @@
 
 @section('extra-js')    
     <script src="/assets/js/services/publishService.js"></script>
+    <!-- SUMMERNOTE -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.summernote').summernote({
+                height: 160,
+                'placeholder': 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante y su agencia'
+            });
+
+       });
+    </script>
 @endsection
