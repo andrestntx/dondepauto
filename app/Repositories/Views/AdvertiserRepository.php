@@ -52,19 +52,9 @@ class AdvertiserRepository extends BaseRepository
     {
         $intentionsInit = '';
         $intentionsFinish = '';
-
-        $advertiserQuery = $this->model->with(['proposals', 'logs']);
+        $advertiserQuery = null;
 
         foreach ($columns as $column) {
-            $this->searchDateRange($column, 'created_at', 'created_at', $advertiserQuery);
-
-            if ($column['name'] == 'city_id' && trim($column['search']['value'])) {
-                $advertiserQuery->where('city_id', '=', $column['search']['value']);
-            }
-            if ($column['name'] == 'economic_activity_id' && trim($column['search']['value'])) {
-                $advertiserQuery->where('economic_activity_id', '=', $column['search']['value']);
-            }
-
             if ($column['name'] == 'intention_at' && trim($column['search']['value'])) {
 
                 $dateRange = explode(',', $column['search']['value']);
@@ -75,7 +65,7 @@ class AdvertiserRepository extends BaseRepository
                     $intentionsFinish = Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString();;
                 }
 
-                $advertiserQuery->with(['intentions' => function($query) use($intentionsInit, $intentionsFinish) {
+                $advertiserQuery = $this->model->with(['intentions' => function($query) use($intentionsInit, $intentionsFinish) {
                     $query->where(function($q) use ($intentionsInit, $intentionsFinish){
                         if(! empty($intentionsInit)) {
                             $q->whereDate('url_fecha_intencion_LI', '>=', $intentionsInit);
@@ -85,16 +75,28 @@ class AdvertiserRepository extends BaseRepository
                                 ->whereDate('url_fecha_intencion_LI', '!=', '0000-00-00');
                         }
                     })
-                    ->orWhere(function($q) use ($intentionsInit, $intentionsFinish){
-                        if(! empty($intentionsFinish)) {
-                            $q->whereDate('fecha_envio_intencion_LI', '>=', $intentionsInit);
-                        }
-                        if(! empty($intentionsFinish)) {
-                            $q->whereDate('fecha_envio_intencion_LI', '<=', $intentionsFinish)
-                                ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
-                        }
-                    });
-                }]);
+                        ->orWhere(function($q) use ($intentionsInit, $intentionsFinish){
+                            if(! empty($intentionsFinish)) {
+                                $q->whereDate('fecha_envio_intencion_LI', '>=', $intentionsInit);
+                            }
+                            if(! empty($intentionsFinish)) {
+                                $q->whereDate('fecha_envio_intencion_LI', '<=', $intentionsFinish)
+                                    ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
+                            }
+                        });
+                }, 'proposals', 'logs']);
+            }
+            else if($column['name'] == 'intention_at') {
+                $advertiserQuery = $this->model->with(['proposals', 'logs', 'intentions']);
+            }
+
+            $this->searchDateRange($column, 'created_at', 'created_at', $advertiserQuery);
+
+            if ($column['name'] == 'city_id' && trim($column['search']['value'])) {
+                $advertiserQuery->where('city_id', '=', $column['search']['value']);
+            }
+            if ($column['name'] == 'economic_activity_id' && trim($column['search']['value'])) {
+                $advertiserQuery->where('economic_activity_id', '=', $column['search']['value']);
             }
         }
 
@@ -113,12 +115,6 @@ class AdvertiserRepository extends BaseRepository
         }
 
         $advertisers = $advertiserQuery->orderBy('created_at', 'desc')->get();
-
-        if(!empty($intentionsInit) || !empty($intentionsFinish)) {
-            $advertisers = $advertisers->filter(function ($advertiser) {
-                return $advertiser->intentions->count() > 0;
-            });
-        }
 
         //abort('404');
 

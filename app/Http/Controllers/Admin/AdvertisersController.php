@@ -14,6 +14,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\Advertiser\StoreRequest;
 use App\Http\Requests\RUser\Advertiser\UpdateRequest;
 use App\Services\AdvertiserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdvertisersController extends ResourceController
@@ -67,18 +68,25 @@ class AdvertisersController extends ResourceController
      */
     public function search(Request $request)
     {
-         return \Datatables::of($this->facade->search(null, $request->get('columns'), $request->get('search'), $request->get('init'), $request->get('finish')))
+          return \Datatables::of($this->facade->search(null, $request->get('columns'), $request->get('search'), $request->get('init'), $request->get('finish')))
             ->filter(function ($instance) use ($request) {
                 $instance->collection = $instance->collection->filter(function ($advertiser) use ($request) {
                     $state = true;
+                    $intentions = true;
 
                     foreach ($request->get('columns') as $column) {
                         if($column['name'] == 'state_id') {
                             $state = $advertiser->hasState($column['search']['value']);
                         }
+
+                        if($column['name'] == 'intention_at' && trim($column['search']['value'])) {
+                            if($advertiser->intentions->count() == 0) {
+                                $intentions = false;
+                            }
+                        }
                     }
 
-                    return $state;
+                    return $state && $intentions;
                 });
             })
             ->make(true);
