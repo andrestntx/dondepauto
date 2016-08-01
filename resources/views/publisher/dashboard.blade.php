@@ -317,14 +317,14 @@
                             </div>
                         </div>
                     </div>
-                    @if($publisher->has_signed_agreement)
+                    @can('changeAgreement', $publisher)
                         <div class="col-sm-12 text-center">
                             <button type="button" class="btn btn-info btn-lg btn-effect-ripple " data-toggle="modal" data-target="#myModal">
                                 <i class="fa fa-pencil"></i> 
                                 SOLICITAR CAMBIO DE INFORMACIÓN
                             </button>
                         </div>
-                    @endif
+                    @endcan
                 </div>
             </div>
 
