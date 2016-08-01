@@ -855,6 +855,11 @@ $(document).ready(function(){
         showMessages($(this).attr('name'));
     });
 
+    $('select').on('select2:open', function (evt) {
+        showMessages($(this).attr('name'));
+    });
+
+
     $( "#more_audiences_tag" ).change(function(){
         showMessages('more_audiences');
     });
@@ -931,5 +936,15 @@ $(document).ready(function(){
         rv[i] = arr[i];
       return rv;
     }
+
+    $('.summernote').summernote({
+        height: 160,
+        'placeholder': 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante y su agencia',
+        callbacks: {
+            onFocus: function() {
+              showMessages('description');
+            }
+        }
+    });
 
 });
