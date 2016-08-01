@@ -198,7 +198,7 @@
                                     que aumentes tus posibilidades de ventas</p>
                                 @elseif($publisher->expired_offers)
                                     <h3>¡Tu Medio Publicitario NO ha sido activado como Proveedor!</h3>
-                                    <p>Tus ofertas ya no se mostrarán en la Plataforma.
+                                    <p>Tus ofertas ya no será presentadas a nuestros clientes.
                                     Formaliza tu vinculación radicando la carta de <strong>aceptación e incentivos</strong></p>
                                 @else
                                     <h3>¡Tu Medio Publicitario NO ha sido activado como Proveedor!</h3>
