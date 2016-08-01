@@ -23,7 +23,7 @@
             <ul class="features-complete">
                 <li>Accedes a todo nuestro inventario de ofertas donde podrás visualizar precios de referencia de medios similares
                 </li>
-                <li>Habilitas la opción para presentar tus osfertas a través de la plataforma</li>
+                <li>Habilitas la opción para presentar tus ofertas a través de la plataforma</li>
                 <li>Establecer contacto con el área de compras y negociaciones</li>
                 <li>Podrás conocer todo 
                     acerca del modelo de servicio <span style="font-style: italic;">(precios de

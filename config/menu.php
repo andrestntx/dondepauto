@@ -33,7 +33,7 @@ return [
                             'allows' => ['inventory', ':publisher']
                         ],
         'new_offert'     => [
-                            'route' => ['medios.espacios.create', ':user_platform_id'], 
+                            'route' => ['medios.espacios.first-create', ':user_platform_id'], 
                             'i' => 'fa fa-plus-circle', 
                             'title' => 'Crear oferta', 
                             'allows' => ['inventory', ':publisher']

@@ -33,11 +33,11 @@
                 <p>Amplias tu visibilidad, recordación y alcance comercial</p>
             </div>
             <div class="icon-features">
-                <img src="/assets/img/icons-features/4.png">
+                <img src="/assets/img/icons-features/5.png">
                 <p>Aumentas tus oportunidades con clientes que no trabajan con agencias tradicionales</p>
             </div>
             <div class="icon-features">
-                <img src="/assets/img/icons-features/5.png">
+                <img src="/assets/img/icons-features/4.png">
                 <p>Diversificas tus fuentes de ingresos</p>
             </div>
         </div>
