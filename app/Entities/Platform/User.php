@@ -45,6 +45,13 @@ class User extends EntityAuth
     ];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['fecha_activacion_Us_LI', 'fecha_registro_completo_Us_LI'];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -84,7 +91,7 @@ class User extends EntityAuth
         'signed_agreement' => 'firmo_acuerdo_LI', 'signed_at' => 'fecha_firma_acuerdo_us_LI', 'commission_rate' => 'porc_comision_us_LI',
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
         'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI', 'company_legal' => 'razon_social_us_LI',
-        'private' => 'opcion_espacios_privados_LI'
+        'private' => 'opcion_espacios_privados_LI', 'activated_at' => 'fecha_activacion_Us_LI', 'completed_at' => 'fecha_registro_completo_Us_LI'
     ];
 
     /**
@@ -126,6 +133,9 @@ class User extends EntityAuth
         return $value;
     }
 
+    /**
+     * @return float
+     */
     public function getAvgPointsAttribute()
     {
         return round($this->spaces->avg('new_points'), 0);
@@ -406,6 +416,9 @@ class User extends EntityAuth
         return $fileRepository->getDocument($this, $name);
     }
 
+    /**
+     * @return bool
+     */
     public function getExpiredOffersAttribute()
     {
         if(! $this->has_signed_agreement && $this->expired_offers_days <= 0) {
@@ -415,6 +428,9 @@ class User extends EntityAuth
         return false;
     }
 
+    /**
+     * @return int
+     */
     public function getExpiredOffersDaysAttribute()
     {
         return 30 - $this->created_at->diff(Carbon::now())->days;
@@ -431,6 +447,15 @@ class User extends EntityAuth
         else {
             $this->attributes['es_us_activo_LI'] = 'desact_Sta';
         }
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getEmailValidatedAttribute()
+    {
+        return $this->confirmation->active;
     }
 
     /**
@@ -504,6 +529,35 @@ class User extends EntityAuth
     }
 
     /**
+     * @param $query
+     * @param bool $complete
+     * @return mixed
+     */
+    public function scopeComplete($query, $complete = true)
+    {
+        if($complete) {
+            $complete = 'act_Sta';
+        }
+        else {
+            $complete = 'desact_Sta';
+        }
+
+        return $query->where('es_us_activo_LI', '=', $complete);
+    }
+
+    public function scopeHasSigned($query, $hasSigned = true)
+    {
+        if ($hasSigned) {
+            $hasSigned = 'act_Sta';
+        } else {
+            $hasSigned = 'desact_Sta';
+        }
+
+        return $query->where('firmo_acuerdo_LI', '=', $hasSigned);
+    }
+
+
+    /**
      * @return mixed
      */
     public function getRoleAttribute()
@@ -546,13 +600,40 @@ class User extends EntityAuth
     }
 
 
+    /**
+     * @return mixed
+     */
     public function getSpaceCityNamesAttribute()
     {
         return $this->spaces->lists('city_name');
     }
 
+    /**
+     * @return mixed
+     */
     public function getSpaceCityIdsAttribute()
     {
         return $this->spaces->lists('id_ciudad_LI');
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLastOfferAttribute()
+    {
+        return $this->spaces->max('created_at');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastOfferCreatedAtAttribute()
+    {
+        if($space = $this->last_offer) {
+            return $space->created_at;
+        }
+
+        return null;
+    }
+
 }

@@ -11,6 +11,7 @@ namespace App\Repositories\Platform;
 
 use App\Entities\User;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -103,6 +104,68 @@ class UserRepository extends BaseRepository
     public function register(array $data)
     {
         return $this->create($data);
+    }
+
+    /**
+     * @param int $differenceDays
+     * @return mixed
+     */
+    public function getPublisherInComplete($differenceDays = 3)
+    {
+        return $this->model->with('confirmation')
+            ->complete(false)
+            ->role('publisher')
+            ->get()
+            ->filter(function ($publisher, $key) use($differenceDays) {
+                return $publisher->email_validated && Carbon::now()->diffInDays($publisher->activated_at) == $differenceDays;
+            })->count();
+    }
+
+    /**
+     * @param int $differenceDays
+     * @return mixed
+     */
+    public function getPublisherNotOffers($differenceDays = 3)
+    {
+        return $this->model->with('spaces')
+            ->complete(true)
+            ->role('publisher')
+            ->get()
+            ->filter(function ($publisher, $key) use($differenceDays) {
+                return ! $publisher->has_offers && Carbon::now()->diffInDays($publisher->completed_at) == $differenceDays;
+            })->count();
+    }
+
+    /**
+     * @param int $differenceDays
+     * @return mixed
+     */
+    public function getPublisherHasOffers($differenceDays = 3)
+    {
+        return $this->model->with('spaces')
+            ->complete(true)
+            ->role('publisher')
+            ->get()
+            ->filter(function ($publisher, $key) use($differenceDays) {
+                return $publisher->has_offers && Carbon::now()->diffInDays($publisher->last_offert_created_at) == $differenceDays;
+            })->count();
+    }
+
+
+    /**
+     * @param int $differenceDays
+     * @return mixed
+     */
+    public function getPublisherNotSigned($differenceDays = 3)
+    {
+        return $this->model->with('spaces')
+            ->complete(true)
+            ->hasSigned(false)
+            ->role('publisher')
+            ->get()
+            ->filter(function ($publisher, $key) use($differenceDays) {
+                return Carbon::now()->diffInDays($publisher->completed_at) == $differenceDays;
+            })->count();
     }
     
 }

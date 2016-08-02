@@ -22,23 +22,35 @@ class MixpanelService
 
     public function registerUser(User $user)
     {
-        $this->mixPanel->people->set($user->id, [
-            '$first_name'                        => $user->first_name,
-            '$last_name'                         => $user->last_name,
-            '$created'                           => $user->created_at,
-            '$email'                             => $user->email,
-            'DP - User type'                    => $user->tipo_us_LI,
-            "DP - User id"                      => $user->id,
-			"DP - Email verified"               => 'No',
-			"DP - User status"                  => "pendAceptarInvitacion",
-			"DP - User suscription plan"        => "1",
-			"DP - User suscription plan deadline" => "0000-00-00"
-        ]);
+        if(config('app.env') == 'production') {
+            $this->mixPanel->people->set($user->id, [
+                '$first_name'                        => $user->first_name,
+                '$last_name'                         => $user->last_name,
+                '$created'                           => $user->created_at,
+                '$email'                             => $user->email,
+                'DP - User type'                    => $user->tipo_us_LI,
+                "DP - User id"                      => $user->id,
+                "DP - Email verified"               => 'No',
+                "DP - User status"                  => "pendAceptarInvitacion",
+                "DP - User suscription plan"        => "1",
+                "DP - User suscription plan deadline" => "0000-00-00"
+            ]);
+        }
     }
 
     protected function updateUser(User $user, array $data)
     {
-        $this->mixPanel->people->set($user->id, $data);
+        if(config('app.env') == 'production') {
+            $this->mixPanel->people->set($user->id, $data);
+        }
+    }
+
+    public function confirm(User $user)
+    {
+        $this->updateUser($user, [
+            "DP - Email verified"   => 'Si',
+            //"$last_login"           => new Date()
+        ]);
     }
 
     public function updateAdvertiser(User $advertiser)

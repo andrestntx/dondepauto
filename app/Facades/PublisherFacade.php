@@ -82,7 +82,7 @@ class PublisherFacade
         $publisher = $this->service->createModel($data);
         $confirmation = $this->confirmationService->generateConfirmation($publisher);
         $this->emailService->sendPublisherInvitation($publisher, $confirmation->code);
-        //$this->mixpanelService->registerUser($publisher);
+        $this->mixpanelService->registerUser($publisher);
         $this->mailchimpService->syncPublisher($publisher);
         
         return $publisher;
@@ -96,7 +96,7 @@ class PublisherFacade
     public function updateModel(array $data, Model $publisher)
     {
         $publisher = $this->service->updateModel($data, $publisher);
-        //$this->mixpanelService->updatePublisher($publisher);
+        $this->mixpanelService->updatePublisher($publisher);
         $this->mailchimpService->syncPublisher($publisher);
 
         return $publisher;
@@ -110,7 +110,7 @@ class PublisherFacade
     public function completeData(array $data, Model $publisher)
     {
         $publisher = $this->service->completeData($data, $publisher);
-        //$this->mixpanelService->updatePublisher($publisher);
+        $this->mixpanelService->updatePublisher($publisher);
         $this->mailchimpService->syncPublisher($publisher);
 
         return $publisher;
@@ -132,7 +132,7 @@ class PublisherFacade
         $publisher  = $this->service->register($data, $password);
         $user       = $this->userService->createPublisher($data, $password, $publisher);
         
-        //$this->mixpanelService->registerUser($user);
+        $this->mixpanelService->registerUser($publisher);
         $confirmation = $this->confirmationService->generateConfirmation($publisher);
         $this->emailService->sendPublisherInvitation($publisher, $confirmation->code);
         
@@ -165,6 +165,19 @@ class PublisherFacade
     public function confirm($code)
     {
         $publisher = $this->confirmationService->verifyAndConfirm($code);
+
+
+        //$this->mixpanelService->registerUser($publisher);
+
+       /* mixpanel.people.set({
+            "DP - Email verified": 'Si',
+            "$last_login": new Date()
+        });
+
+        mixpanel.track("ACTIVACION_DE_USUARIO",{"DP - User id": "<?php echo $_SESSION["usId"]; ?>","DP - User email": "<?php echo $_SESSION["usEmail"]; ?>"});
+
+        mixpanel.track("FORMULARIO_REGISTRO_COMPLEMENTARIO_DE_USUARIOS",{"DP - User id": "<?php echo $_SESSION["usId"]; ?>","DP - User email": "<?php echo $_SESSION["usEmail"]; ?>"}); */
+
         return $this->loginPublisher($publisher, true);
     }
 

@@ -53,52 +53,57 @@ class AdvertiserRepository extends BaseRepository
         $intentionsInit = '';
         $intentionsFinish = '';
         $advertiserQuery = null;
+        $columnsSearch = ['intention_at' => null, 'created_at' => null, 'city_id' => null, 'economic_activity_id' => null];
 
-        foreach ($columns as $column) {
-            if ($column['name'] == 'intention_at' && trim($column['search']['value'])) {
-
-                $dateRange = explode(',', $column['search']['value']);
-                if(trim($dateRange[0])) {
-                    $intentionsInit = Carbon::createFromFormat('d/m/Y', $dateRange[0])->toDateString();
-                }
-                if(trim($dateRange[1])) {
-                    $intentionsFinish = Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString();;
-                }
-
-                $advertiserQuery = $this->model->with(['intentions' => function($query) use($intentionsInit, $intentionsFinish) {
-                    $query->where(function($q) use ($intentionsInit, $intentionsFinish){
-                        if(! empty($intentionsInit)) {
-                            $q->whereDate('url_fecha_intencion_LI', '>=', $intentionsInit);
-                        }
-                        if(! empty($intentionsFinish)) {
-                            $q->whereDate('url_fecha_intencion_LI', '<=', $intentionsFinish)
-                                ->whereDate('url_fecha_intencion_LI', '!=', '0000-00-00');
-                        }
-                    })
-                        ->orWhere(function($q) use ($intentionsInit, $intentionsFinish){
-                            if(! empty($intentionsFinish)) {
-                                $q->whereDate('fecha_envio_intencion_LI', '>=', $intentionsInit);
-                            }
-                            if(! empty($intentionsFinish)) {
-                                $q->whereDate('fecha_envio_intencion_LI', '<=', $intentionsFinish)
-                                    ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
-                            }
-                        });
-                }, 'proposals', 'logs']);
-            }
-            else if($column['name'] == 'intention_at') {
-                $advertiserQuery = $this->model->with(['proposals', 'logs', 'intentions']);
-            }
-
-            $this->searchDateRange($column, 'created_at', 'created_at', $advertiserQuery);
-
-            if ($column['name'] == 'city_id' && trim($column['search']['value'])) {
-                $advertiserQuery->where('city_id', '=', $column['search']['value']);
-            }
-            if ($column['name'] == 'economic_activity_id' && trim($column['search']['value'])) {
-                $advertiserQuery->where('economic_activity_id', '=', $column['search']['value']);
+        foreach($columns as $column) {
+            if(array_key_exists($column['name'], $columnsSearch) && ! empty(trim($column['search']['value']))) {
+                $columnsSearch[$column['name']] = trim($column['search']['value']);
             }
         }
+
+        if (! is_null($columnsSearch['intention_at'])) {
+
+            $dateRange = explode(',', $columnsSearch['intention_at']);
+            if(trim($dateRange[0])) {
+                $intentionsInit = Carbon::createFromFormat('d/m/Y', $dateRange[0])->toDateString();
+            }
+            if(trim($dateRange[1])) {
+                $intentionsFinish = Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString();;
+            }
+
+            $advertiserQuery = $this->model->with(['intentions' => function($query) use($intentionsInit, $intentionsFinish) {
+                $query->where(function($q) use ($intentionsInit, $intentionsFinish){
+                    if(! empty($intentionsInit)) {
+                        $q->whereDate('url_fecha_intencion_LI', '>=', $intentionsInit);
+                    }
+                    if(! empty($intentionsFinish)) {
+                        $q->whereDate('url_fecha_intencion_LI', '<=', $intentionsFinish)
+                            ->whereDate('url_fecha_intencion_LI', '!=', '0000-00-00');
+                    }
+                })->orWhere(function($q) use ($intentionsInit, $intentionsFinish){
+                        if(! empty($intentionsFinish)) {
+                            $q->whereDate('fecha_envio_intencion_LI', '>=', $intentionsInit);
+                        }
+                        if(! empty($intentionsFinish)) {
+                            $q->whereDate('fecha_envio_intencion_LI', '<=', $intentionsFinish)
+                                ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
+                        }
+                    });
+            }, 'proposals', 'logs']);
+        }
+        else {
+            $advertiserQuery = $this->model->with(['proposals', 'logs', 'intentions']);
+        }
+
+        $this->searchDateRange($columnsSearch['created_at'], 'created_at', 'created_at', $advertiserQuery);
+
+        if (!is_null($columnsSearch['city_id'])) {
+            $advertiserQuery->where('city_id', '=', $columnsSearch['city_id']);
+        }
+        if (!is_null($columnsSearch['economic_activity_id'])) {
+            $advertiserQuery->where('economic_activity_id', '=', $columnsSearch['economic_activity_id']);
+        }
+
 
         if(trim($search['value'])) {
             $value = $search['value'];
@@ -124,16 +129,15 @@ class AdvertiserRepository extends BaseRepository
     }
 
     /**
-     * @param $column
+     * @param $dates
      * @param $search
      * @param $name
      * @param $advertiserQuery
      */
-    protected function searchDateRange($column, $search, $name, &$advertiserQuery)
+    protected function searchDateRange($dates, $search, $name, &$advertiserQuery)
     {
-
-        if ($column['name'] == $search && trim($column['search']['value'])) {
-            $dateRange = explode(',', $column['search']['value']);
+        if (! is_null($dates)) {
+            $dateRange = explode(',', $dates);
             if(trim($dateRange[0])) {
                 $advertiserQuery->where($name, '>=', Carbon::createFromFormat('d/m/Y', $dateRange[0])->toDateString());
             }
