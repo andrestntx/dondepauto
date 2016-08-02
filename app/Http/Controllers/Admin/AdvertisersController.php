@@ -68,7 +68,7 @@ class AdvertisersController extends ResourceController
      */
     public function search(Request $request)
     {
-          return \Datatables::of($this->facade->search(null, $request->get('columns'), $request->get('search'), $request->get('init'), $request->get('finish')))
+            return \Datatables::of($this->facade->search(null, $request->get('columns'), $request->get('search'), $request->get('init'), $request->get('finish')))
             ->filter(function ($instance) use ($request) {
                 $instance->collection = $instance->collection->filter(function ($advertiser) use ($request) {
                     $state = true;
