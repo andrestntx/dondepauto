@@ -53,14 +53,13 @@ class EmailService
      */
     public function sendLetter(User $publisher, $letterPath, $termsPath)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = self::$fromName;
-
-        Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $fromEmail, $fromName, $letterPath, $termsPath) {
-            $m->from($fromEmail, $fromName)
+        Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath, $termsPath) {
+            $m->from('alexander@dondepauto.co', 'Alexander Niño de DóndePauto')
                 ->to($publisher->email, $publisher->name)
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                ->subject('Aquí va la carta de DondePauto.co')
+                ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
+                ->cc('alexander@dondepauto.co', 'Alexander Niño')
+                ->subject('Carta de Incentivos DóndePauto')
                 ->attach($letterPath, [])
                 ->attach($termsPath, []);
         });
@@ -77,9 +76,9 @@ class EmailService
 
         Mail::send('emails.publisher.change-agreement', ['publisher' => $publisher, 'comments' => $comments], function ($m) use ($publisher, $fromEmail, $fromName) {
             $m->from($fromEmail, $fromName)
-                //->to('alexander@dondepauto.co', 'Alexander')
-                //->cc('nelson@dondepauto.co', 'Nelson')
-                ->to('andres@dondepauto.co', 'Andrés')
+                ->to('alexander@dondepauto.co', 'Alexander Niño')
+                ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
+                ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->subject($publisher->first_name . ' de ' . $publisher->company. ' solicita cambiar datos de acuerdo');
         });
     }
