@@ -51,7 +51,7 @@ class SpaceImagesRepository extends ImagesRepository
      */
     protected function saveThumbImage(Image $image, $name)
     {
-        $thumb = $this->generateThumbImage($image, $name, 45);
+        $thumb = $this->generateThumbImage($image, $name, 219);
         $this->saveImageMorePath($thumb, 'thumbs', $name);
     }
 
@@ -61,7 +61,7 @@ class SpaceImagesRepository extends ImagesRepository
      */
     protected function saveDetailThumbImage(Image $image, $name)
     {
-        $thumb = $this->generateThumbImage($image, $name, 219);
+        $thumb = $this->generateThumbImage($image, $name, 45);
         $this->saveImageMorePath($thumb, 'detailThumbs', $name);
     }
 

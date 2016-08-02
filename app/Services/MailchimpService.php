@@ -14,27 +14,48 @@ use Mailchimp\Mailchimp;
 class MailchimpService
 {
     protected $mailchimp;
-    protected $listId = '2139024e4d';
+    protected $listId   = 'd0d7798032';
+    protected $workflow = '3932261c4f';
     protected $groups = [
         'roles' => [
-            'publisher'        => 'eae14fa74e',
-            'advertiser'    => '29b615296a'
+            'publisher'     => '482f385d33',
+            'advertiser'    => '1a96a1589a'
         ],
         'type' => [
-            'client'    => 'f144fefcda',
-            'potential' => '924cd3820e'
+            'client'    => '786dfd4be5',
+            'potential' => 'c56aff9b9d'
         ],
         'activity' => '',
     ];
 
+    protected $automations = [
+        'letter' => '52f30620dc'
+    ];
+
+    /**
+     * @return string
+     */
     public function getBaseUrl()
     {
         return '/lists/' . $this->listId . '/members';
     }
 
+    /**
+     * @param User $user
+     * @return string
+     */
     public function getUserUrl(User $user)
     {
-            return $this->getBaseUrl() . '/' . $user->mailchimp_id;
+        return $this->getBaseUrl() . '/' . $user->mailchimp_id;
+    }
+
+    /**
+     * @param $automation_id
+     * @return string
+     */
+    public function getAutomationUrl($automation_id)
+    {
+        return 'automations/' . $this->workflow . '/emails/' . $automation_id . '/queue';
     }
 
     /**
@@ -86,5 +107,18 @@ class MailchimpService
             $this->groups['roles']['publisher'] => true,
             $this->groups['type']['client'] => true
         ]);
+    }
+
+    /**
+     * @param $automationKey
+     * @param User $user
+     */
+    public function putAutomation($automationKey, User $user)
+    {
+        /*$this->mailchimp->post($this->getAutomationUrl($this->automations[$automationKey]), [
+            'email_address' => $user->email
+        ]);*/
+
+        \Log::info($this->mailchimp->get("lists/d0d7798032/interest-categories/dcae808f2c/interests"));
     }
 }
