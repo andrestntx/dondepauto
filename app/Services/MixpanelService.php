@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Entities\Platform\User;
+use Carbon\Carbon;
 use GeneaLabs\LaravelMixpanel\LaravelMixpanel;
 
 class MixpanelService
@@ -49,7 +50,7 @@ class MixpanelService
     {
         $this->updateUser($user, [
             "DP - Email verified"   => 'Si',
-            //"$last_login"           => new Date()
+            '$last_login'           => Carbon::now()->toDateTimeString()
         ]);
     }
 

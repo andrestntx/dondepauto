@@ -55,7 +55,7 @@ class EmailService
     {
         Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath, $termsPath) {
             $m->from('alexander@dondepauto.co', 'Alexander Niño de DóndePauto')
-                ->to($publisher->email, $publisher->name)
+                ->to($publisher->representative->email, $publisher->representative->name)
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                 ->cc('alexander@dondepauto.co', 'Alexander Niño')

@@ -26,14 +26,18 @@ class SpaceRepository extends BaseRepository
 
     /**
      * @param User $publisher
+     * @param null $spaceId
      * @return mixed
      */
-    public function search(User $publisher = null)
+    public function search(User $publisher = null, $spaceId = null)
     {
         $query = $this->model->whereIsDelete(0)->with(['images']);
 
         if(!is_null($publisher)) {
             $query->wherePublisherId($publisher->id);
+        }
+        if(!is_null($spaceId)){
+            $query->whereId($spaceId);
         }
 
         return $query->orderBy('created_at', 'desc');

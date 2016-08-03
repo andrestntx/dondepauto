@@ -37,11 +37,12 @@ class SpaceService extends ResourceService
 
     /**
      * @param User $publisher
+     * @param null $spaceId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search(User $publisher = null)
+    public function search(User $publisher = null, $spaceId = null)
     {
-        return $this->viewRepository->search($publisher);
+        return $this->viewRepository->search($publisher, $spaceId);
     }
 
     /**

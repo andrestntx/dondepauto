@@ -273,6 +273,15 @@ class User extends EntityAuth
         return '';
     }
 
+    public function getRepresentativeFirstNameAttribute()
+    {
+        if($repre = $this->representative) {
+            return $repre->first_name;
+        }
+
+        return '';
+    }
+
     public function getRepresentativeDocAttribute()
     {
         if($repre = $this->representative) {

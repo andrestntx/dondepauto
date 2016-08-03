@@ -52,11 +52,18 @@ class SpacesController extends ResourceController
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->view('lists');
+        $space = null;
+
+        if($request->has('espacio')) {
+            $space = $this->facade->getSpace($request->get('espacio'));
+        }
+
+        return $this->view('lists', ['space' => $space]);
     }
 
     /**
@@ -67,7 +74,12 @@ class SpacesController extends ResourceController
      */
     public function search(Request $request)
     {
-        return \Datatables::of($this->facade->search())->make(true);
+        if($request->has('espacio')) {
+            return \Datatables::of($this->facade->search($request->get('espacio')))->make(true);
+        }
+        else {
+            return \Datatables::of($this->facade->search())->make(true);
+        }
     }
 
     /**

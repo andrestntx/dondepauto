@@ -165,15 +165,9 @@ class PublisherFacade
     public function confirm($code)
     {
         $publisher = $this->confirmationService->verifyAndConfirm($code);
+        $this->mixpanelService->confirm($publisher);
 
-
-        //$this->mixpanelService->registerUser($publisher);
-
-       /* mixpanel.people.set({
-            "DP - Email verified": 'Si',
-            "$last_login": new Date()
-        });
-
+       /*
         mixpanel.track("ACTIVACION_DE_USUARIO",{"DP - User id": "<?php echo $_SESSION["usId"]; ?>","DP - User email": "<?php echo $_SESSION["usEmail"]; ?>"});
 
         mixpanel.track("FORMULARIO_REGISTRO_COMPLEMENTARIO_DE_USUARIOS",{"DP - User id": "<?php echo $_SESSION["usId"]; ?>","DP - User email": "<?php echo $_SESSION["usEmail"]; ?>"}); */

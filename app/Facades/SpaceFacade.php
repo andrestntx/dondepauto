@@ -43,11 +43,12 @@ class SpaceFacade
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param null $spaceId
+     * @return Collection
      */
-    public function search()
+    public function search($spaceId = null)
     {
-        return $this->service->search();
+        return $this->service->search(null, $spaceId);
     }
 
     /**
@@ -193,5 +194,15 @@ class SpaceFacade
     public function activeSpace(Space $space, $active = true)
     {
         $this->service->activeSpace($space, $active);
+    }
+
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getSpace($id)
+    {
+        return $this->service->getModel($id);
     }
 }

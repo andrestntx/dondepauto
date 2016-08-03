@@ -5,24 +5,24 @@
 	<title>Carta de incentivos DóndePauto</title>
 </head>
 <body>
-	<div style="width: 75%; max-width: 750px; font-size: 16px; margin: 0 auto; font-family: sans-serif;">
+	<div style="width: 75%; max-width: 750px; min-width: 300px; font-size: 16px; margin: 0 auto; font-family: sans-serif;">
 		<img src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/3323b3c4-e7e0-4c17-a30d-32176fb45d97.png" alt="logo DóndePauto" style="width: 60%; margin: auto; display: block; max-width: 400px;">
 
 		<h1 style="text-align: center; font-size: 1.6em; margin-top: 1.2em;">
 			Hola 
-			<span style="text-transform: capitalize;">{{ $publisher->representative_name }} </span> 
+			<span style="text-transform: capitalize;">{{ $publisher->representative_first_name }} </span> 
 		</h1>
 
-		<h2 style="text-align: center; font-size: 1.2em; margin-bottom: 2em;">¿Cómo estás? Agradecemos su amable interés</h2>
+		<h2 style="text-align: center; font-size: 1.2em; margin-bottom: 2em;">Agradecemos su amable interés</h2>
 
 		<div style="text-align: justify; font-size: 1.05em;">
-			<p><span style="text-transform: capitalize;">{{ $publisher->name }}</span> acaba de ingresar información en nuestro sistema para la vinculación de <span style="text-transform: capitalize;">{{ $publisher->company }} </span> como proveedor de la Agencia DóndePauto.</p>
+			<p><span style="text-transform: capitalize; font-weight: bold;">{{ $publisher->name }}</span> acaba de ingresar información en nuestro sistema para la vinculación de <span style="text-transform: capitalize; font-weight: bold;">{{ $publisher->company }} </span> como proveedor de la Agencia DóndePauto.</p>
 
 			<p>Para formalizar tu activación como Proveedor, a continuación encuentras el borrador de la <strong>Carta de Incentivos</strong> y de aceptación de términos, que deberá ser firmada por un representante legal, y enviada a las oficinas de DóndePauto en físico y original. </p>
 
-			<p>Una vez verificada la información tus ofertas se activarán en la plataforma y podrán ser promocionadas y presentadas a potenciales clientes interesados. Si no han ingresado su inventario de ofertas a la Plataforma, no olvides hacerlo a través de la cuenta de usuario que a creado <span style="text-transform: capitalize;">{{ $publisher->name }}.</span></p>
+			<p>Una vez verificada la información tus ofertas se activarán en la plataforma y podrán ser promocionadas y presentadas a potenciales clientes interesados.</p>
 
-			<p style="font-size: 0.9em; font-style: italic; color: #4f4e4e;">*Nota: si no has autorizado a <span style="text-transform: capitalize;">{{ $publisher->name }}</span> para vincular a <span style="text-transform: capitalize;">{{ $publisher->company }}</span> como proveedor de medios de la Agencia DóndePauto, por favor notificar a alexander@dondepauto.co</p>
+			<p style="font-size: 0.9em; font-style: italic; color: #4f4e4e;">*Nota: si no has autorizado vincular a <span style="text-transform: capitalize;">{{ $publisher->company }}</span> como proveedor de medios de la Agencia DóndePauto, por favor notificar a alexander@dondepauto.co</p>
 
 			<p>Saludos.</p>
 		</div>
