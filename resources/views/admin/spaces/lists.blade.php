@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="col-md-12 list-space" id="urlSearch">
-        <div class="ibox" id="search-space" data-search="{{ $space->id }}">
+        <div class="ibox" id="search-space" data-search="{{ $spaceId }}">
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-12" id="table-intro">
@@ -71,7 +71,7 @@
             else {
                 SpaceService.init('/espacios/search');
             }
-            
+
         });
     </script>
 
