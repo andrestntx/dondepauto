@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="col-md-12 list-space" id="urlSearch">
-        <div class="ibox">
+        <div class="ibox" id="search-space" data-search="{{ $space->id }}">
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-12" id="table-intro">
@@ -62,7 +62,16 @@
     <script src="/assets/js/services/spaceService.js"></script>
     <script>
         $(document).ready(function() {
-            SpaceService.init('/espacios/search');
+            
+            var searchSpace = $("#search-space").data("search");
+            
+            if(searchSpace){
+                SpaceService.init('/espacios/search?espacio=' + searchSpace);
+            }
+            else {
+                SpaceService.init('/espacios/search');
+            }
+            
         });
     </script>
 

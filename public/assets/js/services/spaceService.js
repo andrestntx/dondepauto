@@ -17,7 +17,7 @@ var SpaceService = function() {
             "serverSide": true,
             "deferRender": true,
             "columns": [
-                { "data": null, "name": "id", "orderable": false},
+                { "data": null, "name": "id", "orderable": false, "searchable": false},
                 { "data": "publisher_company", "name": "publisher_company" },
                 { "data": "name", "name": "name" },
                 { "data": "category_name", "name": "category_name" },
@@ -98,6 +98,11 @@ var SpaceService = function() {
             "drawCallback": function(settings, json) {
                 $("#countDatatable").html(settings.fnRecordsDisplay());
                 $('[data-toggle="tooltip"]').tooltip();
+                var searchSpace = $("#search-space").data("search");
+                if(searchSpace){
+                    $(".spaceModal").click();
+                    $("#search-space").data("search", null);
+                }
             }
         });
 

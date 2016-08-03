@@ -48,4 +48,16 @@ class Representative extends Entity
     {
         return $this->belongsTo(User::class, 'publisher_id');
     }
+
+    /**
+     * @return string
+     */
+    public function getFirstNameAttribute()
+    {
+        if(! empty($this->name)) {
+            return explode(' ', $this->name)[0];
+        }
+
+        return '';
+    }
 }
