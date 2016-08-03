@@ -57,13 +57,16 @@ class SpacesController extends ResourceController
      */
     public function index(Request $request)
     {
-        $space = null;
+        $spaceId = null;
 
         if($request->has('espacio')) {
             $space = $this->facade->getSpace($request->get('espacio'));
+            if($space) {
+                $spaceId = $space->id;
+            }
         }
 
-        return $this->view('lists', ['space' => $space]);
+        return $this->view('lists', ['spaceId' => $spaceId]);
     }
 
     /**
