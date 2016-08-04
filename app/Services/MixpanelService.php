@@ -39,6 +39,16 @@ class MixpanelService
         }
     }
 
+    public function track($even, User $user)
+    {
+        $this->mixPanel->identify($user->id);
+
+        $this->mixPanel->track($even, [
+            "DP - User id"  => $user->id,
+            "DP - User email" => $user->email
+        ]);
+    }
+
     protected function updateUser(User $user, array $data)
     {
         if(config('app.env') == 'production') {
@@ -52,6 +62,9 @@ class MixpanelService
             "DP - Email verified"   => 'Si',
             '$last_login'           => Carbon::now()->toDateTimeString()
         ]);
+
+        $this->track("ACTIVACION_DE_USUARIO", $user);
+        $this->track("FORMULARIO_REGISTRO_COMPLEMENTARIO_DE_USUARIOS", $user);
     }
 
     public function updateAdvertiser(User $advertiser)

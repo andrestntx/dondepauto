@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\Publisher\CompleteRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
+use App\Services\MixpanelService;
 use App\Services\PublisherService;
 use Exception;
 use Illuminate\Http\Request;
@@ -42,17 +43,20 @@ class PublishersSpacesController extends ResourceController
      */
     protected $modelName = "publisher";
 
+    protected $mixpanelService;
+
     /**
      * AdvertisersController constructor.
      * @param PublisherFacade $facade
      * @param PublisherService $service
      * @param SpaceFacade $spaceFacade
      */
-    function __construct(PublisherFacade $facade, PublisherService $service, SpaceFacade $spaceFacade)
+    function __construct(PublisherFacade $facade, PublisherService $service, SpaceFacade $spaceFacade, MixpanelService $mixpanelService)
     {
         $this->facade = $facade;
         $this->service = $service;
         $this->spaceFacade = $spaceFacade;
+        $this->mixpanelService = $mixpanelService;
     }
 
     /**
@@ -81,6 +85,7 @@ class PublishersSpacesController extends ResourceController
      */
     public function create(User $user)
     {
+        $this->mixpanelService->track("FORMULARIO_PUBLICACION_ESPACIO", $user);
         $route = ['medios.espacios.store', $user];
         $type = 'POST';
 
@@ -140,8 +145,11 @@ class PublishersSpacesController extends ResourceController
         try {
             $space = $this->spaceFacade->createModel($request->all(), $request->file('images'), $user);
         } catch (Exception $e) {
+            \Log::info($e);
             return ['result' => 'false', 'route' => route('home')];
         }
+
+        $this->mixpanelService->track("ESPACIO_PUBLICITARIO_CREADO", $user);
 
         if($this->spaceFacade->countSpaces($user) == 1) {
             \Alert::success($user->company)->details('Haz creado una nueva oferta para presentar a clientes DóndePauto. Publica más ofertas y actívate como Proveedor!');

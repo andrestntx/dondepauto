@@ -35,7 +35,7 @@ class SpaceImagesRepository extends ImagesRepository
      * @param int $size
      * @return Image
      */
-    protected function generateThumbImage(Image $image, $name, $size = 45)
+    protected function generateThumbImage(Image $image, $name, $size = 219)
     {
         if($image->getWidth() >= $image->getHeight()) {
             return $this->resizeHeightProportional($image, $size);
@@ -76,12 +76,12 @@ class SpaceImagesRepository extends ImagesRepository
         $image = \Image::make($photoFile);
         $this->saveBigImage($image, $name);
 
+        $this->saveThumbImage($image, $name);
+
         if($detailThumb) {
             $this->saveDetailThumbImage($image, $name);
         }
 
-        $this->saveThumbImage($image, $name);
-        
         return $image;
     }
 
