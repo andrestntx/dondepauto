@@ -9,13 +9,97 @@
 namespace App\Services;
 
 use App\Entities\Platform\User;
+use Exception;
 use Mailchimp\Mailchimp;
 
 class MailchimpService
 {
     protected $mailchimp;
     protected $listId   = 'd0d7798032';
-    protected $workflow = '3932261c4f';
+
+    protected $workflows = [
+        'complete-data' => [
+            'id' => '4468b3f136',
+            'emails' => [
+                '6eb558fea5'
+            ]
+        ],
+        'create-offers' => [
+            'id' => 'afdbbe2e40',
+            'emails' => [
+                '94cc4340af'
+            ]
+        ],
+        'agreement' => [
+            'id' => '74225625fc',
+            'emails' => [
+                '0fbb79c997'
+            ]
+        ],
+        'documents' => [
+            'id' => '3678b8196f',
+            'emails' => [
+                '39741b4672'
+            ]
+        ]
+    ];
+
+    /**
+     * Pull the Mailchimp-instance from the IoC-container.
+     * @param Mailchimp $mailchimp
+     */
+    public function __construct(Mailchimp $mailchimp)
+    {
+        $this->mailchimp = $mailchimp;
+    }
+
+    /**
+     * @param $workflow
+     * @return mixed
+     */
+    public function getWorkflow($workflow)
+    {
+        return $this->workflows[$workflow];
+    }
+
+    /**
+     * @param $workflow
+     * @param $item
+     * @return mixed
+     */
+    public function getWorkflowItem($workflow, $item)
+    {
+        return $this->getWorkflow($workflow)[$item];
+    }
+
+    /**
+     * @param $workflow
+     * @return mixed
+     */
+    public function getWorkflowId($workflow)
+    {
+        return $this->getWorkflowItem($workflow, 'id');
+    }
+
+    /**
+     * @param $workflow
+     * @return mixed
+     */
+    public function getWorkflowEmails($workflow)
+    {
+        return $this->getWorkflowItem($workflow, 'emails');
+    }
+
+    /**
+     * @param $workflow
+     * @param $numberEmail
+     * @return mixed
+     */
+    public function getWorkflowEmail($workflow, $numberEmail = 0)
+    {
+        return $this->getWorkflowItem($workflow, 'emails')[$numberEmail];
+    }
+
     protected $groups = [
         'roles' => [
             'publisher'     => '482f385d33',
@@ -28,9 +112,6 @@ class MailchimpService
         'activity' => '',
     ];
 
-    protected $automations = [
-        'letter' => '52f30620dc'
-    ];
 
     /**
      * @return string
@@ -50,21 +131,22 @@ class MailchimpService
     }
 
     /**
-     * @param $automation_id
+     * @param $workflow
+     * @param int $numberEmail
      * @return string
      */
-    public function getAutomationUrl($automation_id)
+    public function getAutomationUrl($workflow, $numberEmail = 0)
     {
-        return 'automations/' . $this->workflow . '/emails/' . $automation_id . '/queue';
+        return 'automations/' . $this->getWorkflowId($workflow) . '/emails/' . $this->getWorkflowEmail($workflow, $numberEmail) . '/queue';
     }
 
     /**
-     * Pull the Mailchimp-instance from the IoC-container.
-     * @param Mailchimp $mailchimp
+     * @param $workflow
+     * @return string
      */
-    public function __construct(Mailchimp $mailchimp)
+    public function getRemoveUserAutomationUrl($workflow)
     {
-        $this->mailchimp = $mailchimp;
+        return 'automations/' . $this->getWorkflowId($workflow) . '/removed-subscribers';
     }
 
 
@@ -110,15 +192,30 @@ class MailchimpService
     }
 
     /**
-     * @param $automationKey
+     * @param $workflow
+     * @param User $user
+     * @param int $numberEmail
+     */
+    public function addUserAutomation($workflow, User $user, $numberEmail = 0)
+    {
+        try {
+            $this->mailchimp->post($this->getAutomationUrl($workflow, $numberEmail), [
+                'email_address' => $user->email
+            ]);
+        } catch (Exception $e) {
+            \Log::info('Mailchimp error');
+            \Log::info($e);
+        }
+    }
+
+    /**
+     * @param $workflow
      * @param User $user
      */
-    public function putAutomation($automationKey, User $user)
+    public function removeUserAutomation($workflow, User $user)
     {
-        /*$this->mailchimp->post($this->getAutomationUrl($this->automations[$automationKey]), [
+        $this->mailchimp->post($this->getRemoveUserAutomationUrl($workflow), [
             'email_address' => $user->email
-        ]);*/
-
-        \Log::info($this->mailchimp->get("lists/d0d7798032/interest-categories/dcae808f2c/interests"));
+        ]);
     }
 }

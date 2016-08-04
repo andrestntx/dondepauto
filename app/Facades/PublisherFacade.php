@@ -111,7 +111,11 @@ class PublisherFacade
     {
         $publisher = $this->service->completeData($data, $publisher);
         $this->mixpanelService->updatePublisher($publisher);
+        $this->mixpanelService->track("REGISTRO_COMPLEMENTARIO_DE_USUARIO", $publisher);
         $this->mailchimpService->syncPublisher($publisher);
+
+        $this->mailchimpService->removeUserAutomation('complete-data', $publisher);
+        $this->mailchimpService->addUserAutomation('create-offers', $publisher);
 
         return $publisher;
     }
@@ -166,12 +170,7 @@ class PublisherFacade
     {
         $publisher = $this->confirmationService->verifyAndConfirm($code);
         $this->mixpanelService->confirm($publisher);
-
-       /*
-        mixpanel.track("ACTIVACION_DE_USUARIO",{"DP - User id": "<?php echo $_SESSION["usId"]; ?>","DP - User email": "<?php echo $_SESSION["usEmail"]; ?>"});
-
-        mixpanel.track("FORMULARIO_REGISTRO_COMPLEMENTARIO_DE_USUARIOS",{"DP - User id": "<?php echo $_SESSION["usId"]; ?>","DP - User email": "<?php echo $_SESSION["usEmail"]; ?>"}); */
-
+        $this->mailchimpService->addUserAutomation('complete-data', $publisher);
         return $this->loginPublisher($publisher, true);
     }
 
@@ -196,6 +195,8 @@ class PublisherFacade
     public function saveDocuments(User $publisher, UploadedFile $commerceDocument, UploadedFile $rutDocument, UploadedFile $bankDocument, UploadedFile $letterDocument)
     {
         $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
+        $this->mailchimpService->removeUserAutomation('agreement', $publisher);
+        $this->mailchimpService->addUserAutomation('documents', $publisher);
     }
 
     /**

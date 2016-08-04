@@ -10,6 +10,7 @@ namespace App\Facades;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
+use App\Services\MailchimpService;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
@@ -29,9 +30,11 @@ class SpaceFacade
     protected $cityService;
     protected $publisherService;
     protected $spacePointsService;
+    protected $mailchimpService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
-        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService, SpacePointsService $spacePointsService)
+        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService,
+                                SpacePointsService $spacePointsService, MailchimpService $mailchimpService)
     {
         $this->service = $service;
         $this->subCategoryService = $subCategoryService;
@@ -40,6 +43,7 @@ class SpaceFacade
         $this->cityService = $cityService;
         $this->publisherService = $publisherService;
         $this->spacePointsService = $spacePointsService;
+        $this->mailchimpService = $mailchimpService;
     }
 
     /**
@@ -61,11 +65,16 @@ class SpaceFacade
     {
         $format = $this->formatService->getModel($data['format_id']);
         $space  = $this->service->createSpace($data, $format, $publisher);
-        
+
         if($images) {
             $imageNames = $this->service->saveImages($data['images'], $space);
         }
         $this->recalculatePoints($space);
+
+        if($publisher->spaces()->count() == 1) {
+            $this->mailchimpService->removeUserAutomation('create-offers', $publisher);
+            $this->mailchimpService->addUserAutomation('agreement', $publisher);
+        }
 
         return $space;
     }

@@ -234,6 +234,21 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Publisher\PublishersController@updateAccount',
             'as' => 'medios.update-account'
         ]);
+
+        Route::group(['prefix' => 'email'], function() {
+
+            Route::get('completar-registro', function(){
+               return redirect()->route('medios.account', auth()->user()->publisher);
+            });
+
+            Route::get('presentar-ofertas', function(){
+                return redirect()->route('medios.espacios.create', auth()->user()->publisher);
+            });
+
+            Route::get('firmar-acuerdo', function(){
+                return redirect()->route('medios.agreement.complete', auth()->user()->publisher);
+            });
+        });
     });
 });
 
