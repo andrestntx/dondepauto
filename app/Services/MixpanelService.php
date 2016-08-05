@@ -21,6 +21,18 @@ class MixpanelService
         $this->mixPanel = $mixPanel;
     }
 
+    /**
+     * @param User $user
+     */
+    public function trackLogin(User $user)
+    {
+        $this->track("LOGIN_DE_USUARIO", $user);
+
+        $this->updateUser($user, [
+            '$last_login' => Carbon::now()->toDateTimeString()
+        ]);
+    }
+
     public function registerUser(User $user)
     {
         if(config('app.env') == 'production') {

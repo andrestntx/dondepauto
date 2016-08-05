@@ -25,9 +25,11 @@
                                 <p>
                                     <span class="h5"> <span id="name">  </span> </span> <br>
                                     <span class="h5" id="email"> <i class="fa fa-envelope-o"></i> <a href=""> o </a></span> <br>
-                                        <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:567878" id="phone">  </a> -
-                                                            <i class="fa fa-mobile"></i> <a href="tel:+3142308171" id="cel">  </a>
-                                        </span>
+                                    <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:567878" id="phone">  </a> -
+                                        <i class="fa fa-mobile"></i> <a href="tel:+3142308171" id="cel">  </a> <br>
+                                    </span>
+                                    <span class="h5"> Fuente: <span id="source">  </span>  </span> 
+                                    
                                 </p>
                             </div>
                         </div>

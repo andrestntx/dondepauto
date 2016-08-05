@@ -37,11 +37,11 @@ var AdvertiserService = function() {
             ],
             "columnDefs": [
                 {
-                    "targets": [1,2,3,4,5],
+                    "targets": [1,2,4,6,7],
                     "searchable": false
                 },
                 {
-                    "targets": [6,7,12,14,15,16],
+                    "targets": [3,5,12,14,15,16],
                     "visible": false,
                     "searchable": false
                 },
@@ -51,7 +51,7 @@ var AdvertiserService = function() {
                 },
                 {
                     className: "text-small",
-                    "targets": [1,2,3,4,5]
+                    "targets": [1,2,3,4,5,6,7]
                 }
             ],
             "language": {

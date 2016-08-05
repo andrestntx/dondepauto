@@ -145,6 +145,7 @@ var UserService = function() {
 	        $('#' + inputId +' #email a').attr('href', 'mailto:' + user.email).text(user.email);
 	        $('#' + inputId +' a#phone').attr('href', 'tel:' + user.phone).text(user.phone);
 	        $('#' + inputId +' a#cel').attr('href', 'tel:' + user.cel).text(user.cel);
+	        $('#' + inputId +' #source').text(user.source);
 
 	        /** Data Detail **/
 	        $('#' + inputId +' #economic_activity').text(user.economic_activity_name);

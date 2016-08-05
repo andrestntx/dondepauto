@@ -23,7 +23,7 @@ class User extends EntityAuth
      *
      * @var array
      */
-    protected $appends = ['states' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
+    protected $appends = ['states', 'source' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
 
     /**
      * The table associated with the model.
@@ -91,7 +91,8 @@ class User extends EntityAuth
         'signed_agreement' => 'firmo_acuerdo_LI', 'signed_at' => 'fecha_firma_acuerdo_us_LI', 'commission_rate' => 'porc_comision_us_LI',
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
         'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI', 'company_legal' => 'razon_social_us_LI',
-        'private' => 'opcion_espacios_privados_LI', 'activated_at' => 'fecha_activacion_Us_LI', 'completed_at' => 'fecha_registro_completo_Us_LI'
+        'private' => 'opcion_espacios_privados_LI', 'activated_at' => 'fecha_activacion_Us_LI', 'completed_at' => 'fecha_registro_completo_Us_LI',
+        'source' => 'bd_form_fuente_LI'
     ];
 
     /**

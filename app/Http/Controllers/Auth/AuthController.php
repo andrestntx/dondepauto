@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Entities\User;
 use App\Facades\PublisherFacade;
+use App\Services\MixpanelService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -35,14 +36,17 @@ class AuthController extends Controller
 
     protected $publisherFacade;
 
+    protected $mixpanelService;
+
     /**
      * Create a new authentication controller instance.
      * @param PublisherFacade $publisherFacade
      */
-    public function __construct(PublisherFacade $publisherFacade)
+    public function __construct(PublisherFacade $publisherFacade, MixpanelService $mixpanelService)
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
         $this->publisherFacade = $publisherFacade;
+        $this->mixpanelService = $mixpanelService;
     }
 
     /**
@@ -127,10 +131,12 @@ class AuthController extends Controller
         $credentialsPlatform = $this->getCredentialsPlatform($request);
 
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            $this->mixpanelService->trackLogin(auth()->user()->publisher);
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
         elseif(Auth::guard('userPlatform')->attempt($credentialsPlatform, $request->has('remember'))) {
             $this->publisherFacade->loginPublisher(Auth::guard('userPlatform')->user(), $request->has('remember'));
+            $this->mixpanelService->trackLogin(auth()->user()->publisher);
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
