@@ -80,9 +80,7 @@ var AdvertiserService = function() {
                 if(!aData.company.trim()) {
                     $('td:eq(2)', nRow).html('--');
                 }
-                if(!aData.city_name) {
-                    $('td:eq(3)', nRow).html('--');
-                }
+                
                 $('td:eq(6)', nRow).html(
                     UserService.getHtmlTableStates(aData.states, 120)
                 );
