@@ -90,6 +90,16 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\AdvisersAdvertisersController@search'
         ]);
 
+        Route::get('anunciantes/{advertisers}/change', [
+            'as'    => 'anunciantes.change',
+            'uses' => 'Admin\AdvertisersController@changeRole'
+        ]);
+
+        Route::get('medios/{publishers}/change', [
+            'as'    => 'medios.change',
+            'uses' => 'Admin\PublishersController@changeRole'
+        ]);
+
         Route::resource('asesores.anunciantes', 'Admin\AdvisersAdvertisersController',  ['parameters' => [
             'asesores' => 'advisers',
             'anunciantes' => 'advertisers'

@@ -585,6 +585,14 @@ class User extends EntityAuth
     }
 
     /**
+     * @return bool
+     */
+    public function isPublisher()
+    {
+        return $this->isRole('publisher');
+    }
+
+    /**
      * @return string hash
      */
     public function getMailchimpIdAttribute()

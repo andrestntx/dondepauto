@@ -16,6 +16,7 @@ use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\MixpanelService;
 use App\Services\ProposalService;
+use App\Services\UserService;
 use Illuminate\Database\Eloquent\Model;
 
 class AdvertiserFacade
@@ -25,10 +26,11 @@ class AdvertiserFacade
     protected $confirmationService;
     protected $mixpanelService;
     protected $mailchimpService;
+    protected $userService;
 
     public function __construct(AdvertiserService $advertiserService, EmailService $emailService, 
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
-                                MailchimpService $mailchimpService, ProposalService $proposalService)
+                                MailchimpService $mailchimpService, ProposalService $proposalService, UserService $userService)
     {
         $this->advertiserService = $advertiserService;
         $this->emailService = $emailService;
@@ -36,6 +38,7 @@ class AdvertiserFacade
         $this->mixpanelService = $mixpanelService;
         $this->mailchimpService = $mailchimpService;
         $this->proposalService = $proposalService;
+        $this->userService = $userService;
      }
 
     /**
@@ -95,5 +98,21 @@ class AdvertiserFacade
         $this->mailchimpService->syncAdvertiser($advertiser);
 
         return $advertiser;
-    } 
+    }
+
+
+    /**
+     * @param Advertiser $advertiser
+     */
+    public function changeRole(Advertiser $advertiser)
+    {
+        $this->advertiserService->changeRole($advertiser);
+        $user = $advertiser->user;
+        if(is_null($advertiser->user)) {
+            $user = $this->userService->createUserOfAdvertiser($advertiser);
+        }
+        $this->userService->changeRole($user, 'advertiser');
+        $this->mixpanelService->updateRoleUser($advertiser);
+        $this->mailchimpService->updateRoleUser($advertiser);
+    }
 }

@@ -131,12 +131,17 @@ class AuthController extends Controller
         $credentialsPlatform = $this->getCredentialsPlatform($request);
 
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
-            $this->mixpanelService->trackLogin(auth()->user()->publisher);
+            if(auth()->user()->isPublisher() && auth()->user()->publisher) {
+                $this->mixpanelService->trackLogin(auth()->user()->publisher);
+            }
+
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
         elseif(Auth::guard('userPlatform')->attempt($credentialsPlatform, $request->has('remember'))) {
             $this->publisherFacade->loginPublisher(Auth::guard('userPlatform')->user(), $request->has('remember'));
-            $this->mixpanelService->trackLogin(auth()->user()->publisher);
+            if(auth()->user()->isPublisher() && auth()->user()->publisher) {
+                $this->mixpanelService->trackLogin(auth()->user()->publisher);
+            }
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 

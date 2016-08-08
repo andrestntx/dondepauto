@@ -218,4 +218,20 @@ class PublisherFacade
     {
         $this->emailService->changeAgreement($publisher, $comments);
     }
+
+
+    /**
+     * @param User $publisher
+     */
+    public function changeRole(User $publisher)
+    {
+        $this->service->changeRole($publisher);
+        $user = $publisher->user;
+        if(is_null($publisher->user)) {
+            $user = $this->userService->createUserOfAdvertiser($publisher);
+        }
+        $this->userService->changeRole($user, 'publisher');
+        $this->mixpanelService->updateRoleUser($publisher);
+        $this->mailchimpService->updateRoleUser($publisher);
+    }
 }

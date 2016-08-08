@@ -143,4 +143,13 @@ class PublisherService extends ResourceService
         dd($publisher->user);
     }
 
+    /**
+     * @param User $publisher
+     * @return bool
+     */
+    public function changeRole(User $publisher)
+    {
+        return $this->repository->changeRole($publisher, 'publisher');
+    }
+
 }

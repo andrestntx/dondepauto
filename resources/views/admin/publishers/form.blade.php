@@ -4,11 +4,19 @@
     {!!  Breadcrumbs::render('publishers.publisher', $publisher) !!}
 @endsection
 
+@section('extra-css')
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h4>Datos del Medio</h4>
+                <h5>Datos del Medio</h5>
+                <div class="ibox-tools">
+                    <button id="changeUser" data-url="{{ route('medios.change', $publisher) }}" class="btn btn-sm btn-info" title="Convertir en ANUNCIANTE"><i class="fa fa-user"></i> Convertir en ANUNCIANTE</button>
+                </div>
             </div>
             <div class="ibox-content">
                 <div class="row">
@@ -61,6 +69,9 @@
 @endsection
 
 @section('extra-js')
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
     <script>
         $('.datepicker').datepicker({
             todayBtn: "linked",
@@ -69,6 +80,29 @@
             calendarWeeks: true,
             autoclose: true,
             format: 'yyyy-mm-dd',
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#changeUser").click(function(){
+                var url = $(this).data('url');
+                
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El usuario ahora será una marca anunciante',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#21B9BB",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    html: true
+                },
+                function() {
+                    window.location.href = url;
+                });
+            });
         });
     </script>
 @endsection
