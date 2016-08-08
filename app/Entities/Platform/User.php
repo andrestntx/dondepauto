@@ -609,6 +609,14 @@ class User extends EntityAuth
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('App\Entities\Platform\Contact', 'user_id', 'id_us_LI');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function banks()

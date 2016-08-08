@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('action')
-   <a href="{{ route('anunciantes.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Crear Anunciante</a>
+   <button class="btn btn-primary" id="create-advertiser"><i class="fa fa-plus"> </i> Crear Anunciante</button>
 @endsection
 
 @section('breadcrumbs')
@@ -109,6 +109,7 @@
     </div>
 
     @include('admin.advertisers.modal')
+    @include('admin.advertisers.modal-create')
 @endsection
 
 @section('extra-js')
@@ -118,6 +119,46 @@
     <script>
         $(document).ready(function() {
             AdvertiserService.init('/anunciantes/search');
+
+            $("#create-advertiser").click(function(){
+                $("#advertiserCreateModal").modal();
+            });
+
+            $('.datepicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+            });
+
+            $("#form-create-advertiser").click(function() {
+                var url = $(this).data('url');
+                var parameters = {
+                    'first_name':   $("#modal_first_name").val(),
+                    'last_name':    $("#modal_last_name").val(),
+                    'email':        $("#modal_email").val(),
+                    'company':      $("#modal_company").val(),
+                    'action[id]':   $("#modal_action_id").val(),
+                    'action[action_at]': $("#modal_action_date").val(),
+                    'comments':     $("#modal_comments").val(),
+                    '_token':       $("#csrf_token").val()
+                };
+
+                console.log(parameters);
+
+                $.post(url, parameters, function( data ) {
+                    console.log(data);
+
+                    if(data.success) {
+                        AdvertiserService.reload();
+                    }
+                    else {
+                        console.log('error');
+                    }
+                });
+            });
         });
     </script>
 @endsection

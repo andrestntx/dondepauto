@@ -192,6 +192,9 @@ var AdvertiserService = function() {
             //UserService.initSearchDateRanges(13,14,15);
             initModalEvent();
             //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
+        },
+        reload: function() {
+            table.search(' ').draw();
         }
     };
 }();

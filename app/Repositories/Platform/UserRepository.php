@@ -178,5 +178,17 @@ class UserRepository extends BaseRepository
         $user->role = $role;
         return $user->save();
     }
+
+    /**
+     * @param UserPlatform $user
+     * @param null $comments
+     * @return mixed
+     */
+    public function createContact(UserPlatform $user, $comments = null)
+    {
+        return $user->contacts()->create(['comments' => $comments]);
+    }
+
+
     
 }

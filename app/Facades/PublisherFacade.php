@@ -230,7 +230,7 @@ class PublisherFacade
         if(is_null($publisher->user)) {
             $user = $this->userService->createUserOfAdvertiser($publisher);
         }
-        $this->userService->changeRole($user, 'publisher');
+        $this->userService->changeRole($user, 'advertiser');
         $this->mixpanelService->updateRoleUser($publisher);
         $this->mailchimpService->updateRoleUser($publisher);
     }

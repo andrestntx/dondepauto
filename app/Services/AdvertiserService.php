@@ -96,6 +96,16 @@ class AdvertiserService extends ResourceService
      */
     public function changeRole(UserPlatform $user)
     {
-        return $this->repository->changeRole($user, 'advertiser');
+        return $this->repository->changeRole($user, 'publisher');
+    }
+
+    /**
+     * @param UserPlatform $advertiser
+     * @param null $comments
+     * @return mixed
+     */
+    public function createContact(UserPlatform $advertiser, $comments = null)
+    {
+        return $this->repository->createContact($advertiser, $comments);
     }
 }
