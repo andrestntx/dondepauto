@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Entities\User;
+use App\Entities\Platform\User as UserPlatform;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\AdvertiserRepository;
 
@@ -80,12 +81,21 @@ class AdvertiserService extends ResourceService
     }
 
     /**
-     * @param \App\Entities\Platform\User $advertiser
+     * @param UserPlatform $advertiser
      * @param $mailchimpId
      * @return bool
      */
-    public function setMailchimpId(\App\Entities\Platform\User &$advertiser, $mailchimpId)
+    public function setMailchimpId(UserPlatform &$advertiser, $mailchimpId)
     {
         return $this->repository->setMailchimpId($advertiser, $mailchimpId);
+    }
+
+    /**
+     * @param UserPlatform $user
+     * @return bool
+     */
+    public function changeRole(UserPlatform $user)
+    {
+        return $this->repository->changeRole($user, 'advertiser');
     }
 }

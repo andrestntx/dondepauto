@@ -186,4 +186,14 @@ class AdvertisersController extends ResourceController
     {
         return $this->facade->advertisersWithOutAdviser();
     }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeRole(User $user)
+    {
+        $this->facade->changeRole($user);
+        return redirect()->route('medios.edit', $user);
+    }
 }

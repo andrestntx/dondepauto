@@ -63,6 +63,25 @@ class UserService extends ResourceService
     }
 
     /**
+     * @param RUser $advertiser
+     * @return mixed
+     */
+    public function createUserOfAdvertiser(\App\Entities\Platform\User $advertiser)
+    {
+        $user = $this->createPublisher([
+                'first_name' => $advertiser->first_name,
+                'last_name' => $advertiser->last_name,
+                'email' =>  $advertiser->email
+            ], $advertiser->password, $advertiser
+        );
+
+        $user->passwords = $advertiser->password;
+        $user->save();
+
+        return $user;
+    }
+
+    /**
      * @param array $data
      * @param null $password
      * @param RUser $publisher
@@ -111,6 +130,16 @@ class UserService extends ResourceService
         }
 
         return $data;
+    }
+
+    /**
+     * @param User $user
+     * @param $role
+     * @return bool
+     */
+    public function changeRole(User $user, $role)
+    {
+        return $this->repository->changeRole($user, $role);
     }
     
 }

@@ -44,6 +44,18 @@ class MailchimpService
         ]
     ];
 
+    protected $groups = [
+        'roles' => [
+            'publisher'     => '482f385d33',
+            'advertiser'    => '1a96a1589a'
+        ],
+        'type' => [
+            'client'    => '786dfd4be5',
+            'potential' => 'c56aff9b9d'
+        ],
+        'activity' => '',
+    ];
+
     /**
      * Pull the Mailchimp-instance from the IoC-container.
      * @param Mailchimp $mailchimp
@@ -99,19 +111,6 @@ class MailchimpService
     {
         return $this->getWorkflowItem($workflow, 'emails')[$numberEmail];
     }
-
-    protected $groups = [
-        'roles' => [
-            'publisher'     => '482f385d33',
-            'advertiser'    => '1a96a1589a'
-        ],
-        'type' => [
-            'client'    => '786dfd4be5',
-            'potential' => 'c56aff9b9d'
-        ],
-        'activity' => '',
-    ];
-
 
     /**
      * @return string
@@ -189,6 +188,48 @@ class MailchimpService
             $this->groups['roles']['publisher'] => true,
             $this->groups['type']['client'] => true
         ]);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function updateRoleUser(User $user)
+    {
+        if($user->isPublisher()) {
+            $this->syncPublisher($user);
+            $this->syncAutomationPublisher($user);
+        }
+        else {
+            $this->syncAdvertiser($user);
+            $this->stopActualAutomation($user);
+        }
+    }
+
+    /**
+     * @param User $user
+     */
+    public function syncAutomationPublisher(User $user)
+    {
+        if($user->complete_data && ! $user->has_offers) {
+            $this->removeUserAutomation('complete-data', $user);
+            $this->addUserAutomation('create-offers', $user);
+        }
+        else if( ! $user->complete_data) {
+            $this->addUserAutomation('complete-data', $user);
+        }
+    }
+
+    /**
+     * @param User $user
+     */
+    public function stopActualAutomation(User $user)
+    {
+        if($user->complete_data && $user->has_offers) {
+            $this->removeUserAutomation('create-offers', $user);
+        }
+        else {
+            $this->removeUserAutomation('complete-data', $user);
+        }
     }
 
     /**

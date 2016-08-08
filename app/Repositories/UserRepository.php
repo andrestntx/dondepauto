@@ -112,4 +112,14 @@ class UserRepository extends BaseRepository
     {
         return $this->listsSelectUsers('director');
     }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function changeRole(User $user, $role)
+    {
+        $user->role = $role;
+        return $user->save();
+    }
 }

@@ -33,6 +33,16 @@ class MixpanelService
         ]);
     }
 
+    /**
+     * @param User $user
+     */
+    public function updateRoleUser(User $user)
+    {
+        $this->updateUser($user, [
+            'DP - User type'  => $user->tipo_us_LI
+        ]);
+    }
+
     public function registerUser(User $user)
     {
         if(config('app.env') == 'production') {

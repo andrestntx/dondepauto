@@ -10,6 +10,7 @@ namespace App\Repositories\Platform;
 
 
 use App\Entities\User;
+use App\Entities\Platform\User as UserPlatform;
 use App\Repositories\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -166,6 +167,16 @@ class UserRepository extends BaseRepository
             ->filter(function ($publisher, $key) use($differenceDays) {
                 return Carbon::now()->diffInDays($publisher->completed_at) == $differenceDays;
             })->count();
+    }
+
+    /**
+     * @param UserPlatform $user
+     * @return bool
+     */
+    public function changeRole(UserPlatform $user, $role)
+    {
+        $user->role = $role;
+        return $user->save();
     }
     
 }
