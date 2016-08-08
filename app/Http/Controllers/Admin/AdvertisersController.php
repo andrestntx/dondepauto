@@ -124,6 +124,11 @@ class AdvertisersController extends ResourceController
     public function store(StoreRequest $request)
     {
         $this->facade->createModel($request->all());
+
+        if($request->ajax()){
+            return ['success' => 'true'];
+        }
+
         return $this->redirect('index');
     }
 
