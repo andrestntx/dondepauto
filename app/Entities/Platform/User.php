@@ -38,7 +38,7 @@ class User extends EntityAuth
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role', 'user_id',
+        'first_name', 'last_name', 'email', 'password', 'role', 'user_id', 'name',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
         'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal'
@@ -403,17 +403,23 @@ class User extends EntityAuth
     /**
      * @return bool
      */
-    public function getInVerificationAttribute()
+    public function getHasDocumentsAttribute()
     {
         $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFiles($this);
+    }
 
-        if(! $this->has_signed_agreement && $fileRepository->hasFiles($this)) {
+    /**
+     * @return bool
+     */
+    public function getInVerificationAttribute()
+    {
+        if(! $this->has_signed_agreement && $this->has_documents) {
             return true;
         }
 
         return false;
     }
-
 
     /**
      * @param $name
@@ -424,6 +430,24 @@ class User extends EntityAuth
         $fileRepository = new PublisherDocumentsRepository();
 
         return $fileRepository->getDocument($this, $name);
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getDocuments()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->getDocuments($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocumentsJsonAttribute()
+    {
+        return json_encode($this->getDocuments());
     }
 
     /**
@@ -459,6 +483,15 @@ class User extends EntityAuth
         }
     }
 
+    /**
+     * @param $value
+     */
+    public function setNameAttribute($value)
+    {
+        $names = explode(' ', $value);
+        $this->first_name = $names[0];
+        $this->last_name  = implode(' ', array_slice($names, 0));
+    }
 
     /**
      * @return mixed

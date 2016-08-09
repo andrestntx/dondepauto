@@ -9,6 +9,7 @@
 namespace App\Entities\Views;
 
 
+use App\Repositories\File\PublisherDocumentsRepository;
 use Carbon\Carbon;
 
 class Publisher extends PUser
@@ -33,7 +34,7 @@ class Publisher extends PUser
      * @var array
      */
     protected $appends = ['state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
-        'signed_agreement_lang', 'space_city_names', 'activated_at_datatable',
+        'signed_agreement_lang', 'space_city_names', 'activated_at_datatable', 'documents_json',
         'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans'
     ];
 
@@ -172,6 +173,23 @@ class Publisher extends PUser
     public function getCreatedAtHumansAttribute()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    /**
+     * @return array
+     */
+    public function getDocuments()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->getDocumentsId($this->id);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocumentsJsonAttribute()
+    {
+        return json_encode($this->getDocuments());
     }
 
 }

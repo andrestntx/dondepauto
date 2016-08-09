@@ -21,8 +21,8 @@ class StoreRequest extends Request
      */
     public function rules() {
         return [
-            'first_name'    => 'required',
-            'last_name'     => 'required',
+            'first_name'    => 'required_without:name',
+            'last_name'     => 'required_without:name',
             'email'         => 'required|unique:users',
             'password'      => 'required|confirmed'
         ];

@@ -4,12 +4,12 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-8">
                         <h2 class="modal-title h4" style="font-size: 15px;">
-                            Anunciante <br><span id="company_name"></span>
+                            <strong>Anunciante:</strong> <span id="company_name"></span>
                         </h2>
                     </div>
-                    <div class="col-xs-9 timeline" id="prueba">
+                    <div class="col-xs-3 timeline" id="prueba">
 
                     </div>
                 </div>
@@ -94,7 +94,10 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Comentarios
+                                <h4 style="float: left;">Comentarios</h4>
+                                <div class="ibox-tools">
+                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>    
+                                </div>
                             </div>
                             <div class="panel-body" id="comments">
                             </div>

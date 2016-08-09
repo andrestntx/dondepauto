@@ -53,15 +53,14 @@ class EmailService
      */
     public function sendLetter(User $publisher, $letterPath, $termsPath)
     {
-        Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath, $termsPath) {
+        Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath) {
             $m->from('alexander@dondepauto.co', 'Alexander Niño de DóndePauto')
                 ->to($publisher->representative->email, $publisher->representative->name)
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                 ->cc('alexander@dondepauto.co', 'Alexander Niño')
                 ->subject('Carta de Incentivos DóndePauto')
-                ->attach($letterPath, [])
-                ->attach($termsPath, []);
+                ->attach($letterPath, []);
         });
     }
 

@@ -201,4 +201,16 @@ class AdvertisersController extends ResourceController
         $this->facade->changeRole($user);
         return redirect()->route('medios.edit', $user);
     }
+
+
+    /**
+     * @param Request $request
+     * @param User $advertiser
+     * @return array
+     */
+    public function newContact(Request $request, User $advertiser)
+    {
+        $this->facade->createContact($advertiser, $request->all());
+        return ['success' => 'true'];
+    }
 }

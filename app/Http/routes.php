@@ -82,6 +82,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('anunciantes', 'Admin\AdvertisersController',  ['parameters' => [
             'anunciantes' => 'advertisers'
         ]]);
+
+        Route::post('anunciantes/{advertiser}/contacts', [
+            'as'    => 'anunciantes.contacts.store',
+            'uses' => 'Admin\AdvertisersController@newContact'
+        ]);
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser'], function() {

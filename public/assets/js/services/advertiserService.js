@@ -172,11 +172,13 @@ var AdvertiserService = function() {
         $('#advertiserModal a#link-proposals').attr('href', '/anunciantes/' + advertiser.id);
         $('#advertiserModal #count-proposals').text('(' + advertiser.count_proposals + ')');
         $('#advertiserModal #created_at').text(advertiser.created_at_humans);
+
+        /** Contacts **/
+        $('#advertiserModal #newContact').attr('data-url', '/anunciantes/' + advertiser.id + '/contacts');
     }
 
     function initReloadAjaxDate(inputInit, inputFinish, parameterInit, parameterFinish) {
         $(inputInit + ', ' + inputFinish).on('change', function() {
-            console.log('/anunciantes/search?' + parameterInit + '=' + $(inputInit).val() + '&' + parameterFinish + '=' + $(inputFinish).val());
             table.ajax
                 .url('/anunciantes/search?' + parameterInit + '=' + $(inputInit).val() + '&' + parameterFinish + '=' + $(inputFinish).val())
                 .load();
