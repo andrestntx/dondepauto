@@ -110,6 +110,7 @@
 
     @include('admin.advertisers.modal')
     @include('admin.advertisers.modal-create')
+    @include('admin.advertisers.modal-contact')
 @endsection
 
 @section('extra-js')
@@ -124,6 +125,12 @@
                 $("#advertiserCreateModal").modal();
             });
 
+            $("#newContact").click(function(){
+                $("#advertiserContactModal").modal();
+                $("#advertiserContactModal input").val("");
+                $("#advertiserContactModal textarea").val("");
+            });
+
             $('.datepicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -136,8 +143,8 @@
             $("#form-create-advertiser").click(function() {
                 var url = $(this).data('url');
                 var parameters = {
-                    'first_name':   $("#modal_first_name").val(),
-                    'last_name':    $("#modal_last_name").val(),
+                    'name':         $("#modal_name").val(),
+                    'cel':          $("#modal_cel").val(),
                     'email':        $("#modal_email").val(),
                     'company':      $("#modal_company").val(),
                     'action[id]':   $("#modal_action_id").val(),
@@ -146,10 +153,34 @@
                     '_token':       $("#csrf_token").val()
                 };
 
-                console.log(parameters);
-
                 $.post(url, parameters, function( data ) {
                     console.log(data);
+                    $("#advertiserCreateModal input").val("");
+                    $("#advertiserCreateModal textarea").val("");
+
+                    if(data.success) {
+                        AdvertiserService.reload();
+                    }
+                    else {
+                        console.log('error');
+                    }
+                });
+            });
+
+            $("#form-create-contact-advertiser").click(function() {
+                var url = $('#advertiserModal #newContact').data('url');
+
+                var parameters = {
+                    'action[id]':           $("#modal_contact_action_id").val(),
+                    'action[action_at]':    $("#modal_contact_action_date").val(),
+                    'comments':             $("#modal_contact_comments").val(),
+                    '_token':               $("#contact_csrf_token").val()
+                };
+
+                $.post(url, parameters, function( data ) {
+
+                    $("#advertiserContactModal input").val("");
+                    $("#advertiserContactModal textarea").val("");
 
                     if(data.success) {
                         AdvertiserService.reload();

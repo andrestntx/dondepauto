@@ -18,7 +18,7 @@
 		<div style="text-align: justify; font-size: 1.05em;">
 			<p><span style="text-transform: capitalize; font-weight: bold;">{{ $publisher->name }}</span> acaba de ingresar información en nuestro sistema para la vinculación de <span style="text-transform: capitalize; font-weight: bold;">{{ $publisher->company }} </span> como proveedor de la Agencia DóndePauto.</p>
 
-			<p>Para formalizar tu activación como Proveedor, a continuación encuentras el borrador de la <strong>Carta de Incentivos</strong> y de aceptación de términos, que deberá ser firmada por un representante legal, y enviada a las oficinas de DóndePauto en físico y original. </p>
+			<p>Para formalizar tu activación como Proveedor, a continuación encuentras el borrador de la <strong>Carta de Incentivos</strong> y de <a href="http://www.dondepauto.co/terminos-y-condiciones-de-servicio-medios-publicitarios" title="Terminos y condiciones">aceptación de términos</a>, que deberá ser firmada por un representante legal, y enviada a las oficinas de DóndePauto en físico y original. </p>
 
 			<p>Una vez verificada la información tus ofertas se activarán en la plataforma y podrán ser promocionadas y presentadas a potenciales clientes interesados.</p>
 

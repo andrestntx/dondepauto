@@ -55,8 +55,24 @@
   width: 33%;
 }
 
+.list-advertiser .table-state {
+    margin: 0 5px;
+}
+
 .list-advertiser .linea {
   margin-left: 15%;
   margin-right: 17%;
   width: 68%;
+}
+
+.modal .panel-body {
+    padding: 15px 10px 0 10px;
+}
+
+.modal .modal-header {
+    padding: 10px 10px 10px 15px;
+}
+
+.modal .modal-body {
+    padding: 15px;
 }

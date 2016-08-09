@@ -16,6 +16,17 @@ class PublisherDocumentsRepository extends BaseRepository
 {
     protected $path = "documents/publishers";
 
+    protected $documents = ['bank' => 'certificación bancaria', 'commerce' => 'cámara de comercio', 'letter' => 'acuerdo', 'rut' => 'rut'];
+
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function getPathId($id)
+    {
+        return $this->getPath() . '/' . $id;
+    }
 
     /**
      * @param User $publisher
@@ -23,7 +34,7 @@ class PublisherDocumentsRepository extends BaseRepository
      */
     public function getPathPublisher(User $publisher)
     {
-        return $this->getPath() . '/' . $publisher->id;
+        return $this->getPathId($publisher->id);
     }
 
     /**
@@ -32,6 +43,15 @@ class PublisherDocumentsRepository extends BaseRepository
     public function getTerms()
     {
         return $this->getPath() . '/terms.pdf';
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function hasFilesId($id)
+    {
+        return \File::exists($this->getPathId($id) . '/bank.pdf');
     }
 
     /**
@@ -44,13 +64,52 @@ class PublisherDocumentsRepository extends BaseRepository
     }
 
     /**
+     * @param $id
+     * @param $name
+     * @return string
+     */
+    public function getDocumentId($id, $name)
+    {
+        return $this->getPathId($id) . '/'. $name .'.pdf';
+    }
+
+    /**
      * @param User $publisher
      * @param $name
      * @return string
      */
     public function getDocument(User $publisher, $name)
     {
-        return $this->getPathPublisher($publisher) . '/'. $name .'.pdf';
+        return $this->getDocumentId($publisher->id, $name);
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getDocumentsId($id)
+    {
+        $files = [];
+
+        if($this->hasFilesId($id)) {
+            foreach($this->documents as $key => $name) {
+                $files[$key] = [
+                    'name' => $name,
+                    'url'  => $this->getDocumentId($id, $key)
+                ];
+            }
+        }
+
+        return $files;
+    }
+
+    /**
+     * @param User $publisher
+     * @return array
+     */
+    public function getDocuments(User $publisher)
+    {
+        return $this->getDocumentsId($publisher->id);
     }
 
     /**
@@ -63,7 +122,6 @@ class PublisherDocumentsRepository extends BaseRepository
     {
         return $this->isValidMove($document, $this->getPathPublisher($publisher), $name . '.pdf');
     }
-
 
     /**
      * @param User $publisher

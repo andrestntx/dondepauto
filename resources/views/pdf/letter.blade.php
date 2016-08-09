@@ -45,7 +45,7 @@
 
 		<p>Por medio de la presente carta de aceptación autorizo a {{ $publisher->company_legal }} para el uso de la
 		plataforma <a href="http://www.dondepauto.co">www.dondepauto.co</a> para la presentación de nuestros medios, de conformidad con los
-		“Términos y Condiciones de la Plataforma”, los cuales manifestamos conocer. De acuerdo con lo
+		<a href="http://www.dondepauto.co/terminos-y-condiciones-de-servicio-medios-publicitarios" title="Términos y condiciones">“Términos y Condiciones de la Plataforma”</a>, los cuales manifestamos conocer. De acuerdo con lo
 		anterior:</p>
 
 		<ul>

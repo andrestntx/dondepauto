@@ -11,13 +11,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            {!! Field::text('first_name', ['required', 'id' => 'modal_first_name']) !!}
-                        </div>
-                        <div class="col-md-6">
-                            {!! Field::text('last_name', ['required', 'id' => 'modal_last_name']) !!}
+                            {!! Field::text('name', ['required', 'id' => 'modal_name']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Field::text('company', ['required', 'id' => 'modal_company']) !!}
+                        </div>
+                         <div class="col-md-6">
+                            {!! Field::text('cel', ['required', 'id' => 'modal_cel']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Field::email('email', ['required', 'id' => 'modal_email']) !!}

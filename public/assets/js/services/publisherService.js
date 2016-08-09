@@ -221,6 +221,22 @@ var PublisherService = function() {
         $('#publisherModal a#link-spaces').attr('href', '/medios/' + publisher.id);
         $('#publisherModal #count-spaces').text('(' + publisher.count_spaces + ')');
         $('#publisherModal #created_at').text(publisher.created_at_humans);
+
+        var documents = $.parseJSON(publisher.documents_json);
+
+        $('#publisherModal #file-documents').html('');
+        $.each( documents, function( key, document ) {
+            var i = $('<i></i>').addClass('fa fa-file-pdf-o');
+            var a = $('<a></a>')
+                .attr('href', document.url)
+                .attr('target', '_blank')
+                .append(i)
+                .append(' ' + document.name);
+
+            var li = $('<li style="font-size:12px;"></li>').append(a);
+
+            $('#publisherModal #file-documents').append(li);
+        });
     }
 
     function drawShowPrices() {

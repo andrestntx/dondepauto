@@ -4,12 +4,12 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-7">
                         <h2 class="modal-title h4" style="font-size: 15px;">
-                            Medio <br><span id="company_name"></span>
+                            <strong>Medio:</strong> <span id="company_name"></span>
                         </h2>
                     </div>
-                    <div class="col-xs-9 timeline" id="prueba">
+                    <div class="col-xs-4 timeline" id="prueba">
 
                     </div>
                 </div>
@@ -17,7 +17,7 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Datos de contacto
@@ -32,6 +32,42 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Acuerdo <strong id="publisher_signed_agreement"></strong>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <p>
+                                            <span class="h5"> Porcentaje de comisión </span> <br>
+                                            <span class="h5"> Fecha firma de acuerdo </span> <br>
+                                            <span class="h5"> Descuento pronto pago </span> <br>
+                                            <span class="h5"> Retención en la fuente</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p>
+                                            <span class="h5" id="commission_rate">  </span> % <br>
+                                            <span class="h5" id="signed_at">  </span> <br>
+                                            <span class="h5" id="discount">  </span> % <br>
+                                            <span class="h5" id="retention"> </span> %
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h4>Documentos <strong id="publisher_documents"></strong></h4>   
+                                        <ul id="file-documents" class="list-unstyled file-list">
+                                        
+                                        </ul> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-7">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Detalle del medio - <strong>(Registrado <span id="created_at"></span>)</strong>
@@ -61,34 +97,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Acuerdo <strong id="publisher_signed_agreement"></strong>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <p>
-                                            <span class="h5"> Porcentaje de comisión </span> <br>
-                                            <span class="h5"> Fecha firma de acuerdo </span> <br>
-                                            <span class="h5"> Descuento pronto pago </span> <br>
-                                            <span class="h5"> Retención en la fuente</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p>
-                                            <span class="h5" id="commission_rate">  </span> % <br>
-                                            <span class="h5" id="signed_at">  </span> <br>
-                                            <span class="h5" id="discount">  </span> % <br>
-                                            <span class="h5" id="retention"> </span> %
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Comentarios
@@ -96,20 +104,15 @@
                             <div class="panel-body" id="comments">
                             </div>
                         </div>
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <a href="#" class="h5" id="link-spaces" style="font-size: 15px;" target="_blank"> 
-                                    <i class="fa fa-newspaper-o"></i> 
-                                    Espacios Publicitarios <span style="font-size:18px;" id="count-spaces">(0)</span>
-                                </a>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
+                <a href="#" class="btn btn-info" id="link-spaces" target="_blank"> 
+                    <i class="fa fa-newspaper-o"></i> 
+                    Espacios Publicitarios <span id="count-spaces">(0)</span>
+                </a>  
                 <a href="#" class="btn btn-warning" target="_blank" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
                 <a href="#" class="btn btn-danger" id="" data-toggle="tooltip" data-placement="top" title="Desactivar anunciante"><i class="fa fa-trash"></i></a>
             </div>

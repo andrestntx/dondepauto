@@ -22,7 +22,6 @@ var UserService = function() {
 	            	.column($(this).data('column'))
 	            	.search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
 	            	.draw();
-	            console.log('cambio fecha');
 	        }).on('clearDate', function(e) {
 	        	dataTable
 	            	.column($(this).data('column'))
@@ -136,7 +135,7 @@ var UserService = function() {
 	    },
 
 		drawModalUser: function (inputId, user, urlName) {
-			$("#prueba").html(UserService.getHtmlModalStates(user.states, ''));
+			$("#prueba").html(UserService.getHtmlTableStates(user.states, 200));
 	        $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + user.id + '/edit');
 
 	        /** Personal Data **/
@@ -196,8 +195,14 @@ var UserService = function() {
 
 	    	$.each( states, function( key, state ) {
 	    		var i 		= $('<i></i>').addClass(state.icon);
-	    		var text    = $('<p></p>').addClass('steps-name').text(state.text);
-	    		var button	= $('<button type="button"></button>').addClass('steps-img btn-circle btn btn-' + state.class).append(i);
+	    		var text    = $('<p></p>').addClass('steps-name');//.text(state.text);
+	    		var button	= $('<button type="button"></button>')
+	    						.addClass('steps-img btn-circle btn btn-' + state.class)
+	    						.attr('data-toggle', 'tooltip')
+	    						.attr('data-placement', 'top')
+	    						.attr('title', state.text)
+	    						.append(i);
+
 	    		var div 	= $('<div></div>').addClass('state text-center').append(button).append(text);
 	    		htmlStates.append(div);
 			});
