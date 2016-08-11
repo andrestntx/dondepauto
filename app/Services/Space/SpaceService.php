@@ -82,7 +82,9 @@ class SpaceService extends ResourceService
             }
         }
 
-        $this->repository->updateDetailThumb($space, $names[0]);
+        if($image = $space->images()->first()) {
+            $this->repository->updateDetailThumb($space, $image->url_thumb_LI);
+        }
 
         return $names;
     }
