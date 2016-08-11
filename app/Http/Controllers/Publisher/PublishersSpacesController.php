@@ -171,6 +171,7 @@ class PublishersSpacesController extends ResourceController
         try {
             $this->spaceFacade->updateModel($request->all(), $request->file('images'), $request->get('keep_images'), $space);
         } catch (Exception $e) {
+            \Log::info($e);
             return ['result' => 'false', 'route' => route('home')];
         }
 

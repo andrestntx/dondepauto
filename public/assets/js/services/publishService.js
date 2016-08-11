@@ -605,7 +605,7 @@ $(document).ready(function(){
         }
     });
 
-    var switchery = new Switchery($('.js-switch')[0], { color: '#00AEEF' });
+    //var switchery = new Switchery($('.js-switch')[0], { color: '#00AEEF' });
 
     var dataImages = $("#serverImages").data('images');
 
