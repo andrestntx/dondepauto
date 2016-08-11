@@ -66,6 +66,16 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
+                                <h4 style="float: left;">Comentarios</h4>
+                                <div class="ibox-tools">
+                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>    
+                                </div>
+                            </div>
+                            <div class="panel-body" id="comments">
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
                                 Intereses y Leads <strong>(<span id="count_intentions">0</span>)</strong> <span id="lead_dates"></span>
                             </div>
                             <div class="panel-body">
@@ -92,29 +102,15 @@
 
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 style="float: left;">Comentarios</h4>
-                                <div class="ibox-tools">
-                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>    
-                                </div>
-                            </div>
-                            <div class="panel-body" id="comments">
-                            </div>
-                        </div>
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <a href="#" class="h5" id="link-proposals" style="font-size: 15px;"> 
-                                    <i class="fa fa-newspaper-o"></i> 
-                                    Propuestas <span style="font-size:18px;" id="count-proposals">(0)</span>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
+                <a href="#" class="btn btn-info" id="link-proposals"> 
+                    <i class="fa fa-newspaper-o"></i> 
+                    Propuestas <span id="count-proposals">(0)</span>
+                </a>
                 <a href="#" id="modalEdit" class="btn btn-warning" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
                 <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Desactivar anunciante"><i class="fa fa-trash"></i></a>
             </div>

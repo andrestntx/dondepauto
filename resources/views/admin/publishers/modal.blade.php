@@ -35,6 +35,9 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Acuerdo <strong id="publisher_signed_agreement"></strong>
+                                <div id="publisher_sw_agreement" style="display: inline-block;">
+                                    
+                                </div>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -109,6 +112,9 @@
             </div>
 
             <div class="modal-footer">
+                <button class="btn btn-success" id="link-documents" disabled data-toggle="tooltip" data-placement="top" title="Habilitar cambios de documentos" style="margin-right: 10px;"> 
+                    <i class="fa fa-file-pdf-o"></i> 
+                </button>
                 <a href="#" class="btn btn-info" id="link-spaces" target="_blank"> 
                     <i class="fa fa-newspaper-o"></i> 
                     Espacios Publicitarios <span id="count-spaces">(0)</span>

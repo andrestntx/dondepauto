@@ -211,5 +211,16 @@ class PublishersController extends ResourceController
         $this->facade->changeRole($user);
         return redirect()->route('anunciantes.edit', $user);
     }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return array
+     */
+    public function checkAgreement(Request $request, User $user)
+    {
+        $this->facade->setAgreement($user, $request->get('agreement'));
+        return ['success' => 'true'];
+    }
     
 }

@@ -5,6 +5,8 @@
 var PublisherService = function() {
 
     var table;
+    var switchery;
+    var switcheryClass = ".js-switch";
 
     function initTable(urlSearch) {
         table = $('#publishers-datatable').DataTable({
@@ -103,7 +105,6 @@ var PublisherService = function() {
         var optionState = '';
 
         $('#signed_agreement').on('ifChecked', function(event){
-            console.log('true');
             $('#agreement_at_start').prop('disabled', false);
             $('#agreement_at_end').prop('disabled', false);
 
@@ -211,7 +212,30 @@ var PublisherService = function() {
         $('#publisherModal #discarded').text(publisher.count_discarded_intentions);
 
         /** Agreement **/
-        $('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
+        if(publisher.signed_agreement) {
+            var input = $("<input checked></input>")
+            $("#link-documents").prop('disabled', false);
+        }
+        else {
+            var input = $("<input></input>");
+            $("#link-documents").prop('disabled', true);
+        }
+
+        input.attr("type", "checkbox")
+            .addClass("js-switch js-switch-click")
+            .data("url", "/medios/" + publisher.id + "/agreement");
+
+        $('#publisherModal #publisher_sw_agreement').html("").append(input);
+
+        var elem = document.querySelector(switcheryClass);
+        switchery = new Switchery(elem, { 
+            color: '#1AB394',
+            size: 'small'
+        });
+
+        initChangeAgreement();
+
+        //$('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
         $('#publisherModal #commission_rate').text(publisher.commission_rate);
         $('#publisherModal #signed_at').text(publisher.signed_at_datatable);
         $('#publisherModal #discount').text(publisher.discount);
@@ -262,7 +286,65 @@ var PublisherService = function() {
         $.each(markupPers, function( index, div ) {
           $(this).text(numeral($(this).data('per')).format('0%'));
         });
-    };
+    }
+
+    function initChangeAgreement() {
+        var manual = false;
+        var changeCheckbox = document.querySelector('.js-switch-click');
+
+        changeCheckbox.onchange = function(e) {   
+            if(! manual) {
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El acuerdo será modificado',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#FFAC1A",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {     
+                        
+                        var parameters = {"agreement": "0"};
+                        var removeClass = "btn-primary";
+                        var addClass = "btn-danger";
+                        
+                        if(changeCheckbox.checked) {
+                            parameters = {"agreement": "1"};
+                            removeClass = "btn-danger";
+                            addClass = "btn-primary";
+                        }
+
+                        console.log(parameters); 
+                        
+                        $.post($("#publisher_sw_agreement input").data('url'), parameters, function( data ) {
+                            if(data.success) {
+                                console.log('bien');
+                                $("#publisherModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
+                                swal("Acuerdo actualizado", "", "success");
+                            }
+                            else{
+                                console.log('mal');
+                                manual = true;
+                                changeCheckbox.click();
+                                manual = false;
+                                swal("Hubo un error", "", "danger");
+                            }
+                        });
+                    } 
+                    else { 
+                        manual = true;
+                        changeCheckbox.click();
+                        manual = false;
+                    } 
+                });
+            } 
+        };
+    }
 
     return {
         init: function(urlSearch) {

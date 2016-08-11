@@ -29,7 +29,8 @@ class CompleteRequest extends Request
             'company_nit'	=> '',
             'company_role'	=> 'required',
             'city_id'		=> 'required',
-            'address'		=> 'required'
+            'address'		=> 'required',
+            'password'      => 'required|confirmed'
         ];
     }
 }

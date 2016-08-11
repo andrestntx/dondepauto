@@ -64,11 +64,28 @@
                         <div class="col-md-12">
                             {!! Form::model($publisher, $formData + ['id' => 'form-complete']) !!}
                                 {!! Field::text('company_role', ['ph' => 'Ejemplo: Director de ventas', 'required']) !!}
-                                {!! Field::number('phone', ['ph' => 'Ejemplo: 031 631 4163', 'required', 'label' => 'Télefono fijo corporativo']) !!}
-                                {!! Field::number('cel', ['ph' => 'Ejemplo: 305 244 6999', 'required']) !!}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {!! Field::number('phone', ['ph' => 'Ejemplo: 031 631 4163', 'required', 'label' => 'Télefono fijo corporativo']) !!}
+                                    </div>  
+                                    <div class="col-sm-6">
+                                        {!! Field::number('cel', ['ph' => 'Ejemplo: 305 244 6999', 'required']) !!}
+                                    </div>
+                                </div>
                                 {!! Field::select('city_id', $cities, ['empty' => 'Seleccione la ciudad de la empresa', 'class' => 'select2-cities', 'required']) !!}
                                 {!! Field::text('address', ['ph' => 'Ejemplo: carrera 11a # 119 - 35', 'label' => 'Dirección de la empresa', 'required']) !!}
+                                
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {!! Field::password('password', ['required', 'label' => 'Nueva contraseña']) !!}
+                                    </div>  
+                                    <div class="col-sm-6">
+                                        {!! Field::password('password_confirmation', ['required', 'label' => 'Repite la contraseña']) !!}
+                                    </div>
+                                </div>
+
                                 {{--  {!! Field::number('company_nit', ['ph' => 'Ejemplo: 900774988']) !!} --}}
+
                                 <div class="form-group">
                                     <div class="col-md-8 col-md-offset-4">
                                         <button type="submit" class="btn btn-warning btn-effect-ripple btn-lg">Finalizar registro</button>
@@ -151,7 +168,14 @@
                     },
                     company_nit: {
                         digits: true
+                    },
+                    password: {
+                        required: true
+                    },
+                    password_confirmation: {
+                        required: true
                     }
+
                 },
                 messages: {
                     company_role: "Ingresa el cargo que ocupas en la empresa",
@@ -165,7 +189,15 @@
                     },
                     city_id: "Selecciona la ciudad de la empresa",
                     address: "Ingresa la dirección de la empresa",
-                    company_nit: "Por favor ingresa sólo números"
+                    company_nit: "Por favor ingresa sólo números",
+                    password: {
+                      required: "Asigna una nueva contraseña"
+                    },
+                    password_confirmation: {
+                      required: "Repite la contraseña"
+                      
+                    }
+
                 }
              });
         });

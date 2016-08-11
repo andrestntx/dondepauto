@@ -87,6 +87,11 @@ Route::group(['middleware' => 'auth'], function(){
             'as'    => 'anunciantes.contacts.store',
             'uses' => 'Admin\AdvertisersController@newContact'
         ]);
+
+        Route::post('medios/{publishers}/agreement', [
+            'as'    => 'medios.agreement',
+            'uses' => 'Admin\PublishersController@checkAgreement'
+        ]);
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser'], function() {
