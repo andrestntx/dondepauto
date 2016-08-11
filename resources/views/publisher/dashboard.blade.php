@@ -328,6 +328,28 @@
                 </div>
             </div>
 
+            <hr class="hr-pencil">
+
+            <div class="row comercial-detail">
+                <div class="col-sm-12">
+                    <h1>Datos Comerciales DóndePauto</h1>
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="ibox ibox-dashboard float-e-margins">
+                            <div class="ibox-content" style="display: block;">
+                                <div class="row files-pauto">
+                                    <div class="col-xs-6">
+                                        <a href="/files/camara_comercio.pdf"  target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="/files/rut_donde_pauto.pdf" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>   
 

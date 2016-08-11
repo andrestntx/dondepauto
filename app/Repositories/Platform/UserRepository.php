@@ -189,6 +189,16 @@ class UserRepository extends BaseRepository
         return $user->contacts()->create(['comments' => $comments]);
     }
 
+    /**
+     * @param UserPlatform $publisher
+     * @param $agreement
+     * @return bool
+     */
+    public function setAgreement(UserPlatform $publisher, $agreement)
+    {
+        $publisher->signed_agreement = $agreement;
+        return $publisher->save();
+    }
 
     
 }

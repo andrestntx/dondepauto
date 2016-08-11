@@ -694,5 +694,4 @@ class User extends EntityAuth
 
         return null;
     }
-
 }

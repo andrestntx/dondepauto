@@ -82,6 +82,8 @@ class SpaceService extends ResourceService
             }
         }
 
+        $this->repository->updateDetailThumb($space, $names[0]);
+
         return $names;
     }
 

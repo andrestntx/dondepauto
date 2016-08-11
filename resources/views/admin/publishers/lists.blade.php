@@ -9,7 +9,10 @@
 @endsection
 
 @section('extra-css')
+    <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
     <link href="/assets/css/prueba.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -129,6 +132,10 @@
 @endsection
 
 @section('extra-js')
+    <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+    
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/publisherService.js"></script>
     <script>
@@ -145,5 +152,7 @@
                 radioClass: 'iradio_square-green',
             });
         });
+
+
     </script>
 @endsection

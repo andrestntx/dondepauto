@@ -192,6 +192,7 @@ class PublishersSpacesController extends ResourceController
         try {
             $space = $this->spaceFacade->duplicateModel($request->all(), $request->file('images'), $request->get('keep_images'), $user, $space);
         } catch (Exception $e) {
+            \Log::info($e);
             return ['result' => 'false', 'route' => route('home')];
         }
 

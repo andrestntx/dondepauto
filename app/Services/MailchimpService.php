@@ -41,6 +41,12 @@ class MailchimpService
             'emails' => [
                 '39741b4672'
             ]
+        ],
+        'verify_documents' => [
+            'id' => '2e19d2109e',
+            'emails' => [
+                '7cbaf43443'
+            ]
         ]
     ];
 

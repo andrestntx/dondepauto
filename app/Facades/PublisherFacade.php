@@ -19,6 +19,7 @@ use App\Services\UserService;
 use App\Services\PublisherService;
 use App\Services\MixpanelService;
 use App\Services\Space\SpaceService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -181,7 +182,7 @@ class PublisherFacade
      */
     public function completeAgreement(User $user, array $dataPublisher, array $dataRepresentative)
     {
-        $this->service->updateModel($dataPublisher, $user);
+        $this->service->updateModel($dataPublisher + ['signed_at' => Carbon::now()->toDateString()], $user);
         $this->representativeService->createOrUpdate($dataRepresentative, $user, $user->representative);
     }
 
@@ -233,5 +234,16 @@ class PublisherFacade
         $this->userService->changeRole($user, 'advertiser');
         $this->mixpanelService->updateRoleUser($publisher);
         $this->mailchimpService->updateRoleUser($publisher);
+    }
+
+    /**
+     * @param User $user
+     * @param $agreement
+     */
+    public function setAgreement(User $user, $agreement)
+    {
+        $this->service->setAgreement($user, $agreement);
+
+        $this->mailchimpService->addUserAutomation('verify_documents', $user);
     }
 }

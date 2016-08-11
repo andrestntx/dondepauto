@@ -26,7 +26,8 @@ class PublisherService extends ResourceService
      * @param UserRepository $repository
      * @param PublisherDocumentsRepository $publisherDocumentsRepository
      */
-    function __construct(PublisherRepository $viewRepository, UserRepository $repository, PublisherDocumentsRepository $publisherDocumentsRepository)
+    function __construct(PublisherRepository $viewRepository, UserRepository $repository,
+                         PublisherDocumentsRepository $publisherDocumentsRepository)
     {
         $this->viewRepository = $viewRepository;
         $this->repository = $repository;
@@ -150,6 +151,16 @@ class PublisherService extends ResourceService
     public function changeRole(User $publisher)
     {
         return $this->repository->changeRole($publisher, 'publisher');
+    }
+
+    /**
+     * @param User $user
+     * @param $agreement
+     * @return bool
+     */
+    public function setAgreement(User $user, $agreement)
+    {
+        return $this->repository->setAgreement($user, $agreement);
     }
 
 }

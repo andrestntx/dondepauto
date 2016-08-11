@@ -26,7 +26,7 @@
         <link href="/assets/css/plugins/chosen/chosen.css" rel="stylesheet">
         <link href="/assets/css/plugins/select2/select2.min.css" rel="stylesheet">
 
-        <link href="/assets/css/plugins/switchery/switchery.css" rel="stylesheet">
+        <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
 
         <link href="/assets/css/publisher.css" rel="stylesheet">
 
@@ -247,7 +247,7 @@
         <script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
 
         <!-- Switchery -->
-        <script src="/assets/js/plugins/switchery/switchery.js"></script>
+        <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
 
         <script src="/assets/js/plugins/tags_input/jquery.tagsinput.js"></script>
 
