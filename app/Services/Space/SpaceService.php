@@ -63,7 +63,10 @@ class SpaceService extends ResourceService
     public function saveImages($images = [], Space $space, $keep_images = [])
     {
         $names = array();
-        $space->images()->whereNotIn('id_imagen_LI', $keep_images)->delete();
+
+        if(!is_null($keep_images) && is_array($keep_images) && count($keep_images) > 0) {
+            $space->images()->whereNotIn('id_imagen_LI', $keep_images)->delete();
+        }
 
         if(!is_null($images)) {
             foreach ($images as $key => $image) {
