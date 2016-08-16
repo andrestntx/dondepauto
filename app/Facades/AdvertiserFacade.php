@@ -131,8 +131,9 @@ class AdvertiserFacade
         if(is_null($advertiser->user)) {
             $user = $this->userService->createUserOfAdvertiser($advertiser);
         }
-        $this->userService->changeRole($user, 'advertiser');
+        $this->userService->changeRole($user, 'publisher');
         $this->mixpanelService->updateRoleUser($advertiser);
         $this->mailchimpService->updateRoleUser($advertiser);
+        $this->emailService->notifyChangePublisherRole($advertiser);
     }
 }
