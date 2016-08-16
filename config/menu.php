@@ -19,6 +19,8 @@ return [
         'intentions'    => ['url' => 'intenciones', 'i' =>  'fa fa-rocket', 'title' => 'Intenciones', 'roles' => ['admin', 'director', 'adviser']],
         'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
 
+        
+        
         // Publishers
         'account'       => [
                             'route' => ['medios.account', ':user_platform_id'], 

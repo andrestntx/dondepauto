@@ -147,12 +147,12 @@ class EmailService
         $fromEmail = self::$fromEmail;
         $fromName = "Notificaciones DóndePauto";
 
-        Mail::send('emails.notifications.new-documents', ['publisher' => $publisher], function ($m) use ($fromEmail, $fromName, $publisher) {
+        /*Mail::send('emails.notifications.new-documents', ['publisher' => $publisher], function ($m) use ($fromEmail, $fromName, $publisher) {
             $m->from($fromEmail, $fromName)
                 ->to("nelson@dondepauto.co", "Nelson Hernandez")
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->subject($publisher->company . " acaba de enviar los documentos societarios");
-        });
+        });*/
     }
 
 }

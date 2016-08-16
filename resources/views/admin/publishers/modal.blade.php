@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <h4>Documentos <strong id="publisher_documents"></strong></h4>   
+                                        <a href="/" class="h5" style="color: #5555e8;" target="_blank" id="link-documents">Documentos <strong id="publisher_documents"></strong></a>   
                                         <ul id="file-documents" class="list-unstyled file-list">
                                         
                                         </ul> 

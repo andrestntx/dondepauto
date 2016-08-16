@@ -410,6 +410,17 @@ class User extends EntityAuth
     }
 
     /**
+     * @param $fileName
+     * @return mixed
+     */
+    public function hasDocument($fileName)
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFile($this, $fileName);
+    }
+
+
+    /**
      * @return bool
      */
     public function getInVerificationAttribute()
@@ -428,7 +439,6 @@ class User extends EntityAuth
     public function getDocument($name)
     {
         $fileRepository = new PublisherDocumentsRepository();
-
         return $fileRepository->getDocument($this, $name);
     }
 

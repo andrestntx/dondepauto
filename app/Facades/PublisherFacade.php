@@ -193,7 +193,7 @@ class PublisherFacade
      * @param UploadedFile $bankDocument
      * @param UploadedFile $letterDocument
      */
-    public function saveDocuments(User $publisher, UploadedFile $commerceDocument, UploadedFile $rutDocument, UploadedFile $bankDocument, UploadedFile $letterDocument)
+    public function saveDocuments(User $publisher, UploadedFile $commerceDocument = null, UploadedFile $rutDocument = null, UploadedFile $bankDocument = null, UploadedFile $letterDocument = null)
     {
         $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
         $this->mailchimpService->removeUserAutomation('agreement', $publisher);
