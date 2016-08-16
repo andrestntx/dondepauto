@@ -119,6 +119,8 @@ class SpaceFacade
 
         $this->recalculatePoints($space);
 
+        $this->emailService->notifyEditOffer($publisher, $space);
+
         return $space;
     }
 

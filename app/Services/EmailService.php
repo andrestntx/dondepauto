@@ -57,9 +57,9 @@ class EmailService
         Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath) {
             $m->from('alexander@dondepauto.co', 'Alexander Niño de DóndePauto')
                 ->to($publisher->representative->email, $publisher->representative->name)
-                ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
-                ->cc('alexander@dondepauto.co', 'Alexander Niño')
+                ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
+                ->bcc('nelson@dondepauto.co', 'Nelson Hernandez')
+                ->bcc('alexander@dondepauto.co', 'Alexander Niño')
                 ->subject('Carta de Incentivos DóndePauto')
                 ->attach($letterPath, []);
         });
@@ -101,6 +101,7 @@ class EmailService
             $m->from($fromEmail, $fromName)
                 ->to($to, $toName)
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
+                ->cc("alexander@dondepauto.co", "Alexander Niño")
                 ->subject($user->first_name . ' de ' . $user->company . ' ahora es ' . $newType);
         });
     }
@@ -135,6 +136,26 @@ class EmailService
                 ->to("leonardo@dondepauto.c", "Leonardo Rueda")
                 ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
+                ->cc("alexander@dondepauto.co", "Alexander Niño")
+                ->subject($publisher->company . " acaba de crear una nueva oferta");
+        });
+    }
+
+    /**
+     * @param User $publisher
+     * @param Space $space
+     */
+    public function notifyEditOffer(User $publisher, Space $space)
+    {
+        $fromEmail = self::$fromEmail;
+        $fromName = "Notificaciones DóndePauto";
+
+        Mail::send('emails.notifications.edit-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
+            $m->from($fromEmail, $fromName)
+                ->to("leonardo@dondepauto.c", "Leonardo Rueda")
+                ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
+                ->cc('alexander@dondepauto.co', 'Alexander Niño')
+                ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->subject($publisher->company . " acaba de crear una nueva oferta");
         });
     }
@@ -147,12 +168,13 @@ class EmailService
         $fromEmail = self::$fromEmail;
         $fromName = "Notificaciones DóndePauto";
 
-        /*Mail::send('emails.notifications.new-documents', ['publisher' => $publisher], function ($m) use ($fromEmail, $fromName, $publisher) {
+        Mail::send('emails.notifications.new-documents', ['publisher' => $publisher], function ($m) use ($fromEmail, $fromName, $publisher) {
             $m->from($fromEmail, $fromName)
                 ->to("nelson@dondepauto.co", "Nelson Hernandez")
+                ->cc("alexander@dondepauto.co", "Alexander Niño")
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->subject($publisher->company . " acaba de enviar los documentos societarios");
-        });*/
+        });
     }
 
 }
