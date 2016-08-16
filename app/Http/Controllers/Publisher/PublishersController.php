@@ -150,7 +150,15 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
     public function completeAgreement(User $publisher)
     {
         $this->authorize('agreement', $publisher);
-        return $this->view('agreement.form', ['publisher' => $publisher, 'representative' => $publisher->getRepresentativeOrNew()]);
+
+        if(auth()->user()->isPublisher()) {
+            return $this->view('agreement.form', ['publisher' => $publisher, 'representative' => $publisher->getRepresentativeOrNew()]);
+        }
+
+        return view('admin.publishers.agreement')->with([
+            'publisher' => $publisher,
+            'representative' => $publisher->getRepresentativeOrNew()
+        ]);
     }
 
     /**

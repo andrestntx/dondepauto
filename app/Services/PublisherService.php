@@ -109,7 +109,7 @@ class PublisherService extends ResourceService
      * @param UploadedFile $bankDocument
      * @param UploadedFile $letterDocument
      */
-    public function saveDocuments(User $publisher, UploadedFile $commerceDocument, UploadedFile $rutDocument, UploadedFile $bankDocument, UploadedFile $letterDocument)
+    public function saveDocuments(User $publisher, UploadedFile $commerceDocument = null, UploadedFile $rutDocument = null, UploadedFile $bankDocument = null, UploadedFile $letterDocument = null)
     {
         $this->publisherDocumentsRepository->saveCommerceDocument($publisher, $commerceDocument);
         $this->publisherDocumentsRepository->saveRutDocument($publisher, $rutDocument);

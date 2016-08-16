@@ -58,7 +58,16 @@
                                 DP+
                             </div>
                         </li>
-                        @include('layouts.publisher-menu')
+                        @if(auth()->user()->isPublisher())
+                            @include('layouts.publisher-menu')
+                        @else
+                            {!! Menu::make('menu.sidebar', 'nav metismenu')
+                                ->setParams([
+                                    'user_id' => auth()->user()->id,
+                                    'user_platform_id' => auth()->user()->user_platform_id
+                                ])->render()
+                            !!}
+                        @endif
                     </ul>
 
                 </div>

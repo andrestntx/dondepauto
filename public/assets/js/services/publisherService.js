@@ -233,8 +233,6 @@ var PublisherService = function() {
             size: 'small'
         });
 
-        initChangeAgreement();
-
         //$('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
         $('#publisherModal #commission_rate').text(publisher.commission_rate);
         $('#publisherModal #signed_at').text(publisher.signed_at_datatable);
@@ -245,6 +243,9 @@ var PublisherService = function() {
         $('#publisherModal a#link-spaces').attr('href', '/medios/' + publisher.id);
         $('#publisherModal #count-spaces').text('(' + publisher.count_spaces + ')');
         $('#publisherModal #created_at').text(publisher.created_at_humans);
+
+        var linkDocuments = '/medios/' + publisher.id + '/acuerdo/completar';
+        $('#link-documents').attr('href', linkDocuments);
 
         var documents = $.parseJSON(publisher.documents_json);
 
@@ -261,6 +262,8 @@ var PublisherService = function() {
 
             $('#publisherModal #file-documents').append(li);
         });
+
+        initChangeAgreement();
     }
 
     function drawShowPrices() {

@@ -47,11 +47,31 @@ class PublisherDocumentsRepository extends BaseRepository
 
     /**
      * @param $id
+     * @param string $fileName
+     * @return mixed
+     */
+    public function hasFileId($id, $fileName = "bank.pdf")
+    {
+        return \File::exists($this->getPathId($id) . '/' . $fileName);
+    }
+
+    /**
+     * @param $id
      * @return mixed
      */
     public function hasFilesId($id)
     {
-        return \File::exists($this->getPathId($id) . '/bank.pdf');
+        return $this->hasFileId($id);
+    }
+
+    /**
+     * @param User $publisher
+     * @param string $fileName
+     * @return mixed
+     */
+    public function hasFile(User $publisher, $fileName = "bank.pdf")
+    {
+        return \File::exists($this->getPathPublisher($publisher) . '/' . $fileName);
     }
 
     /**
@@ -60,8 +80,9 @@ class PublisherDocumentsRepository extends BaseRepository
      */
     public function hasFiles(User $publisher)
     {
-        return \File::exists($this->getPathPublisher($publisher) . '/bank.pdf');
+        return $this->hasFile($publisher);
     }
+
 
     /**
      * @param $id
@@ -118,7 +139,7 @@ class PublisherDocumentsRepository extends BaseRepository
      * @param $name
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
-    protected function saveDocument(User $publisher, UploadedFile $document, $name)
+    protected function saveDocument(User $publisher, UploadedFile $document = null, $name)
     {
         return $this->isValidMove($document, $this->getPathPublisher($publisher), $name . '.pdf');
     }
@@ -128,7 +149,7 @@ class PublisherDocumentsRepository extends BaseRepository
      * @param UploadedFile $document
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
-    public function saveCommerceDocument(User $publisher, UploadedFile $document)
+    public function saveCommerceDocument(User $publisher, UploadedFile $document = null)
     {
         return $this->saveDocument($publisher, $document, 'commerce');
     }
@@ -138,7 +159,7 @@ class PublisherDocumentsRepository extends BaseRepository
      * @param UploadedFile $document
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
-    public function saveBankDocument(User $publisher, UploadedFile $document)
+    public function saveBankDocument(User $publisher, UploadedFile $document = null)
     {
         return $this->saveDocument($publisher, $document, 'bank');
     }
@@ -148,7 +169,7 @@ class PublisherDocumentsRepository extends BaseRepository
      * @param UploadedFile $document
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
-    public function saveRutDocument(User $publisher, UploadedFile $document)
+    public function saveRutDocument(User $publisher, UploadedFile $document = null)
     {
         return $this->saveDocument($publisher, $document, 'rut');
     }
@@ -158,7 +179,7 @@ class PublisherDocumentsRepository extends BaseRepository
      * @param UploadedFile $document
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
-    public function saveLetterDocument(User $publisher, UploadedFile $document)
+    public function saveLetterDocument(User $publisher, UploadedFile $document = null)
     {
         return $this->saveDocument($publisher, $document, 'letter');
     }

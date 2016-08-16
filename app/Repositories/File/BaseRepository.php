@@ -39,9 +39,9 @@ class BaseRepository
      * @param $name
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
-    public function isValidMove(UploadedFile $file, $path, $name)
+    public function isValidMove(UploadedFile $file = null, $path, $name)
     {
-        if($file->isValid()){
+        if(! is_null($file) && $file->isValid()){
             return $file->move($path, $name);
         }
 
