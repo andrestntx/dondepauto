@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/User.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/PublisherFacade.php" afterPath="$PROJECT_DIR$/app/Facades/PublisherFacade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/File/BaseRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/File/BaseRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/File/PublisherDocumentsRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/File/PublisherDocumentsRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/SpaceFacade.php" afterPath="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/EmailService.php" afterPath="$PROJECT_DIR$/app/Services/EmailService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/PublisherService.php" afterPath="$PROJECT_DIR$/app/Services/PublisherService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/menu.php" afterPath="$PROJECT_DIR$/config/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +28,8 @@
       <file leaf-file-name="PublisherFacade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Facades/PublisherFacade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.791667">
-              <caret line="197" column="31" selection-start-line="197" selection-start-column="31" selection-end-line="197" selection-end-column="31" />
+            <state vertical-scroll-proportion="-12.666667">
+              <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmailService.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EmailService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.208334">
-              <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
+            <state vertical-scroll-proportion="1.0947205">
+              <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
               <folding>
                 <element signature="e#127#165#0#PHP" expanded="true" />
               </folding>
@@ -66,10 +57,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SpaceFacade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.7083333">
+              <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Entities/Platform/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72123176">
+            <state vertical-scroll-proportion="-81.960785">
               <caret line="440" column="61" selection-start-line="440" selection-start-column="61" selection-end-line="440" selection-end-column="61" />
               <folding>
                 <element signature="e#41#75#0#PHP" expanded="true" />
@@ -180,15 +181,15 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php" />
         <option value="$PROJECT_DIR$/app/Services/Space/SpaceService.php" />
         <option value="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" />
-        <option value="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersController.php" />
         <option value="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Facades/PublisherFacade.php" />
         <option value="$PROJECT_DIR$/app/Services/PublisherService.php" />
         <option value="$PROJECT_DIR$/app/Repositories/File/BaseRepository.php" />
-        <option value="$PROJECT_DIR$/app/Services/EmailService.php" />
         <option value="$PROJECT_DIR$/app/Repositories/File/PublisherDocumentsRepository.php" />
         <option value="$PROJECT_DIR$/app/Entities/Platform/User.php" />
+        <option value="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
+        <option value="$PROJECT_DIR$/app/Services/EmailService.php" />
       </list>
     </option>
   </component>
@@ -282,29 +283,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Entities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pauto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pauto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Platform" />
+              <option name="myItemId" value="Facades" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -711,14 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48913044">
-          <caret line="38" column="112" selection-start-line="38" selection-start-column="112" selection-end-line="38" selection-end-column="112" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/MailchimpService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="37.541668">
@@ -743,14 +714,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Facades/PublisherFacade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.791667">
-          <caret line="197" column="31" selection-start-line="197" selection-start-column="31" selection-end-line="197" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/File/BaseRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.0">
@@ -765,16 +728,6 @@
           <caret line="117" column="5" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
           <folding>
             <element signature="e#127#158#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.208334">
-          <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
-          <folding>
-            <element signature="e#127#165#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -797,10 +750,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Platform/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72123176">
+        <state vertical-scroll-proportion="-81.960785">
           <caret line="440" column="61" selection-start-line="440" selection-start-column="61" selection-end-line="440" selection-end-column="61" />
           <folding>
             <element signature="e#41#75#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Facades/PublisherFacade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.666667">
+          <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7083333">
+          <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0947205">
+          <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
+          <folding>
+            <element signature="e#127#165#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
