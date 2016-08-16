@@ -198,6 +198,7 @@ class PublisherFacade
         $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
         $this->mailchimpService->removeUserAutomation('agreement', $publisher);
         $this->mailchimpService->addUserAutomation('documents', $publisher);
+        $this->emailService->notifyDocuments($publisher);
     }
 
     /**
@@ -234,6 +235,7 @@ class PublisherFacade
         $this->userService->changeRole($user, 'advertiser');
         $this->mixpanelService->updateRoleUser($publisher);
         $this->mailchimpService->updateRoleUser($publisher);
+        $this->emailService->notifyChangeAdvertiserRole($publisher);
     }
 
     /**

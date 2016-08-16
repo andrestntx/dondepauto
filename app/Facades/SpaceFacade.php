@@ -10,6 +10,7 @@ namespace App\Facades;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
+use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
@@ -31,10 +32,11 @@ class SpaceFacade
     protected $publisherService;
     protected $spacePointsService;
     protected $mailchimpService;
+    protected $emailService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
         SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService,
-                                SpacePointsService $spacePointsService, MailchimpService $mailchimpService)
+                                SpacePointsService $spacePointsService, MailchimpService $mailchimpService, EmailService $emailService)
     {
         $this->service = $service;
         $this->subCategoryService = $subCategoryService;
@@ -44,6 +46,7 @@ class SpaceFacade
         $this->publisherService = $publisherService;
         $this->spacePointsService = $spacePointsService;
         $this->mailchimpService = $mailchimpService;
+        $this->emailService = $emailService;
     }
 
     /**
@@ -75,6 +78,8 @@ class SpaceFacade
             $this->mailchimpService->removeUserAutomation('create-offers', $publisher);
             $this->mailchimpService->addUserAutomation('agreement', $publisher);
         }
+
+        $this->emailService->notifyNewOffer($publisher, $space);
 
         return $space;
     }
