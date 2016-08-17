@@ -21,7 +21,10 @@
                     <div class="col-md-7">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Descripción
+                                Descripción - Activo
+                                <div id="space_sw_active" style="display: inline-block;">
+                                    
+                                </div>
                             </div>
                             <div class="panel-body scroll_content">
                                 <div class="row">

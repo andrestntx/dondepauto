@@ -9,7 +9,9 @@
 @endsection
 
 @section('extra-css')
-
+    <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -57,6 +59,9 @@
 
 @section('extra-js')
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+    <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/spaceService.js"></script>

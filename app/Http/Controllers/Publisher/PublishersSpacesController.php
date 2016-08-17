@@ -222,16 +222,40 @@ class PublishersSpacesController extends ResourceController
         return ['result' => 'true'];
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Space $space
+     * @return array
+     */
     public function active(Request $request, User $user, Space $space)
     {
         $this->spaceFacade->activeSpace($space, true);
         return ['result' => 'true'];
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Space $space
+     * @return array
+     */
     public function inactive(Request $request, User $user, Space $space)
     {
         $this->spaceFacade->activeSpace($space, false);
         return ['result' => 'true'];
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Space $space
+     * @return array
+     */
+    public function enable(Request $request, User $user, Space $space)
+    {
+        $this->spaceFacade->activeSpace($space, $request->get('active'));
+        return ['success' => 'true'];
     }
 
 
