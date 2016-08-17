@@ -265,7 +265,78 @@ var SpaceService = function() {
         $('#' + inputId +' #state i')
             .removeClass()
             .addClass('fa ' + space.state_icon);
+
+        /** Active **/
+        if(space.active) {
+            var input = $("<input checked></input>")
+        }
+        else {
+            var input = $("<input></input>");
+        }
+
+        input.attr("type", "checkbox")
+            .addClass("js-switch js-switch-click")
+            .data("url", "/medios/" + space.publisher_id + "/espacios/" + space.id + "/enable");
+
+        $('#spaceModal #space_sw_active').html("").append(input);
+
+        var elem = document.querySelector(".js-switch");
+        switchery = new Switchery(elem, { 
+            color: '#1AB394',
+            size: 'small'
+        });
+
+        initChangeAgreement();
     };
+
+    function initChangeAgreement() {
+        var manual = false;
+        var changeCheckbox = document.querySelector('.js-switch-click');
+
+        changeCheckbox.onchange = function(e) {   
+            if(! manual) {
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El espacio será modificado',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#FFAC1A",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {     
+                        
+                        var parameters = {"active": "0"};
+
+                        if(changeCheckbox.checked) {
+                            parameters = {"active": "1"};
+                        }
+                        
+                        $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
+                            if(data.success) {
+                                swal("Espacio actualizado", "", "success");
+                            }
+                            else{
+                                manual = true;
+                                changeCheckbox.click();
+                                manual = false;
+                                swal("Hubo un error", "", "warning");
+                            }
+                        });
+                    } 
+                    else { 
+                        manual = true;
+                        changeCheckbox.click();
+                        manual = false;
+                    } 
+                });
+            } 
+        };
+    }
 
     return {
         init: function(urlSearch) {

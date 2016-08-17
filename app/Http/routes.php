@@ -237,6 +237,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Publisher\PublishersSpacesController@inactive'
         ]);
 
+        Route::post('medios/{publishers}/espacios/{spaces}/enable', [
+            'as' => 'medios.espacios.enable',
+            'uses' => 'Publisher\PublishersSpacesController@enable'
+        ]);
+
         Route::post('medios/{publishers}/espacios/{spaces}', [
             'as' => 'medios.espacios.update',
             'uses' => 'Publisher\PublishersSpacesController@update'

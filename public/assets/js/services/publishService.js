@@ -938,6 +938,10 @@ $(document).ready(function(){
     }
 
     $('.summernote').summernote({
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['para', ['ul', 'ol', 'paragraph']],
+        ],
         height: 160,
         'placeholder': 'Brinda información completa de beneficios, tiempos, variaciones, horarios, ubicaciones, tamaños, frecuencias de salida, y cualquier información de interés para el anunciante y su agencia',
         callbacks: {
