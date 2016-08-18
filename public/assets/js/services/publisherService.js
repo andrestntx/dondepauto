@@ -212,14 +212,19 @@ var PublisherService = function() {
         $('#publisherModal #discarded').text(publisher.count_discarded_intentions);
 
         /** Agreement **/
+        console.log('signed: ' + publisher.signed_agreement);
+
         if(publisher.signed_agreement) {
-            var input = $("<input checked></input>")
+            var input = $("<input checked></input>");
             $("#link-documents").prop('disabled', false);
         }
         else {
             var input = $("<input></input>");
             $("#link-documents").prop('disabled', true);
         }
+
+        console.log(input);
+        
 
         input.attr("type", "checkbox")
             .addClass("js-switch js-switch-click")
