@@ -133,7 +133,7 @@ class EmailService
 
         Mail::send('emails.notifications.new-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
             $m->from($fromEmail, $fromName)
-                ->to("leonardo@dondepauto.c", "Leonardo Rueda")
+                ->to("leonardo@dondepauto.co", "Leonardo Rueda")
                 ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->cc("alexander@dondepauto.co", "Alexander Niño")
@@ -152,7 +152,7 @@ class EmailService
 
         Mail::send('emails.notifications.edit-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
             $m->from($fromEmail, $fromName)
-                ->to("leonardo@dondepauto.c", "Leonardo Rueda")
+                ->to("leonardo@dondepauto.co", "Leonardo Rueda")
                 ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                 ->cc('alexander@dondepauto.co', 'Alexander Niño')
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
