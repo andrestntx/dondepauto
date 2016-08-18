@@ -37,11 +37,12 @@ var SpaceService = function() {
                 { "data": "description", "name": "description" },
                 { "data": "address", "name": "address" },
                 { "data": "impact_scene_id", "name": "impact_scene_id" },
-                { "data": "publisher_email", "name": "publisher_email" }
+                { "data": "publisher_email", "name": "publisher_email" },
+                { "data": "active", "name": "active" }
             ],
             "columnDefs": [
                 {
-                    "targets": [11,12,13,14,15,16,17,18,19,20],
+                    "targets": [11,12,13,14,15,16,17,18,19,20,21],
                     "visible": false,
                     "searchable": true
                 },
@@ -94,6 +95,11 @@ var SpaceService = function() {
                 $('td:eq(10)', nRow).html(
                     numeral(aData.public_price).format('$ 0,0[.]00')
                 );
+
+                if(aData.active == 0) {
+                    $(nRow).addClass('warning');    
+                }
+                
             },
             "drawCallback": function(settings, json) {
                 $("#countDatatable").html(settings.fnRecordsDisplay());
@@ -124,6 +130,7 @@ var SpaceService = function() {
         UserService.initSimpleSearchSelect("#publishers",14);
         UserService.initSimpleSearchSelect("#cities",15);
         UserService.initSimpleSearchSelect("#scenes",19);
+        UserService.initSimpleSearchSelect("#active_state", 21);
     };
 
     function initModalEvent() {
@@ -319,6 +326,7 @@ var SpaceService = function() {
                         $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
                             if(data.success) {
                                 swal("Espacio actualizado", "", "success");
+                                table.search(' ').draw();
                             }
                             else{
                                 manual = true;
