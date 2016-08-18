@@ -216,7 +216,7 @@ var PublisherService = function() {
 
         var input = null;
 
-        if(publisher.signed_agreement) {
+        if(publisher.signed_agreement == 1) {
             var input = $("<input checked></input>");
             input.attr("checked", true);
 
