@@ -214,17 +214,25 @@ var PublisherService = function() {
         /** Agreement **/
         console.log('signed: ' + publisher.signed_agreement);
 
+        var input = null;
+
         if(publisher.signed_agreement) {
             var input = $("<input checked></input>");
+            input.attr("checked", true);
+
             $("#link-documents").prop('disabled', false);
+            console.log('si');
         }
         else {
             var input = $("<input></input>");
             $("#link-documents").prop('disabled', true);
+            input.attr("checked", false);
+
+            console.log('no');
         }
 
         console.log(input);
-        
+
 
         input.attr("type", "checkbox")
             .addClass("js-switch js-switch-click")
