@@ -92,6 +92,7 @@
                                             <span class="h5"> Markup</span> <br>
                                             <span class="h5"> Markup</span> <br>
                                             <span class="h5"> Precio Público</span>
+                                            <span class="h5"> Impactos</span>
                                         </p>
                                     </div>
                                     <div class="col-xs-7">
@@ -100,7 +101,8 @@
                                             <span class="h5" id="markup"> </span> <br>
                                             <span class="h5" id="markup_price"> </span> <br>
                                             <span class="h5 font-bold text-info" id="public_price"> </span>
-                                            / <span class="h5" id="period"> </span>
+                                            / <span class="h5" id="period"> </span> <br>
+                                            <span class="h5" id="impacts"> </span> 
                                         </p>
                                     </div>
                                 </div>
@@ -157,7 +159,7 @@
             
                 <a href="#" class="btn btn-info" id="modalPublisher" data-toggle="tooltip"><i class="fa fa-twitch"></i></a>
                 <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
-                <a href="#" class="btn btn-danger" id="" data-toggle="tooltip" data-placement="top" title="Desactivar anunciante"><i class="fa fa-trash"></i></a>
+                <a href="#" id="delete_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>

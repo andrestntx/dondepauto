@@ -259,4 +259,17 @@ class PublishersSpacesController extends ResourceController
     }
 
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param Space $space
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Request $request, User $user, Space $space)
+    {
+        $this->spaceFacade->deleteSpace($space);
+        return ['success' => 'true'];
+        //return redirect()->route("medios.espacios.index", $user);
+    }
+
 }

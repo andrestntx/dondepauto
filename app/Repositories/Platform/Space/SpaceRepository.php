@@ -134,5 +134,14 @@ class SpaceRepository extends BaseRepository
         $space->active = $active;
         return $space->save();
     }
+
+    /**
+     * @param Model $space
+     * @return mixed
+     */
+    public function delete($space)
+    {
+        return $space->setDelete();
+    }
     
 }

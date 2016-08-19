@@ -210,6 +210,9 @@ var SpaceService = function() {
             .attr('title', 'Ver Medio - ' + space.publisher_name);
 
         /** Space Data **/
+        $('#delete_space').data("spaceid", space.id);
+        $('#delete_space').attr("data-url", '/medios/' + space.publisher_id + '/espacios/' + space.id);
+
         $('#' + inputId +' #space_name').text(space.name);
         $('#' + inputId + ' a#publisher_company').attr('href', '/medios/' + space.publisher_id).text(space.publisher_company);
 
@@ -248,6 +251,7 @@ var SpaceService = function() {
         $('#' + inputId + ' #markup_price').text(numeral(space.markup_price).format('$ 0,0[.]00'));
         $('#' + inputId + ' #public_price').text(numeral(space.public_price).format('$ 0,0[.]00'));
         $('#' + inputId + ' #period').text(space.period);
+        $('#' + inputId + ' #impacts').text(space.impacts);
 
         /** Description **/
         $('#' + inputId + ' #space-description').html(space.description);
@@ -346,11 +350,61 @@ var SpaceService = function() {
         };
     }
 
+    function initDeleteSpace() {
+        console.log('inicio');
+
+        $("#delete_space").click(function(e) {   
+            swal({
+                title: '¿Estás seguro?',
+                text: 'El espacio será eliminado',
+                type: "warning",
+                confirmButtonText: "Eliminar",
+                confirmButtonColor: "#ed5565",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                html: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.ajax({
+                        url: $("#delete_space").data('url'),
+                        type: 'DELETE',
+                        success: function(data) {
+                            if(data.success) {
+                                swal({
+                                    "title": "Espacio eliminado", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+
+                                table.search(' ').draw();
+                                $('.modal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
+    };
+
     return {
         init: function(urlSearch) {
             initTable(urlSearch);
             initFilters();
             initModalEvent();
+            initDeleteSpace();
         },
         initModalEvent: function () {
             initModalEvent();

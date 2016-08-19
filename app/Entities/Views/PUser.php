@@ -10,15 +10,18 @@ namespace App\Entities\Views;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PUser  extends Model {
-    
+
+    use SoftDeletes;
+
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['created_at', 'activated_at'];
+    protected $dates = ['created_at', 'activated_at', 'deleted_at'];
 
     protected $classes = [
         'complete-data'   => 'primary',

@@ -112,7 +112,7 @@
                     Propuestas <span id="count-proposals">(0)</span>
                 </a>
                 <a href="#" id="modalEdit" class="btn btn-warning" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
-                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Desactivar anunciante"><i class="fa fa-trash"></i></a>
+                <a href="#" id="delete_advertiser" data-url="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar anunciante"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>

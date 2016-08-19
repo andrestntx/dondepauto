@@ -196,7 +196,9 @@
 
                         <div class="space-options">
                             <a href="{{ route('medios.espacios.edit', [$publisher, $space]) }}" class="btn btn-info"><i class="fa fa-pencil"></i> EDITAR OFERTA</a>
-                            <a href="/" class="btn btn-danger"><i class="fa fa-trash"></i> BORRAR</a>
+                            <button id="btn-delete" class="btn btn-danger" data-url="{{ route('medios.espacios.destroy', [$publisher, $space]) }}" data-reload="{{ route('medios.espacios.index', $publisher) }}" style="display: inline-block;">
+                                <i class="fa fa-trash"></i> BORRAR
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -208,6 +210,8 @@
 @section('extra-js')
     <!-- slick carousel-->
     <script src="/assets/js/plugins/slick/slick.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script>
         $('.product-images').slick({
@@ -215,7 +219,42 @@
         });
 
         $(document).ready(function(){
-            
+            $("#btn-delete").click(function() {
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El espacio será eliminado',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#FFAC1A",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {     
+                        $.ajax({
+                            url: $("#btn-delete").data('url'),
+                            type: 'DELETE',
+                            success: function(data) {
+                                if(data.success) {
+                                    swal({
+                                        "title": "Espacio eliminado", 
+                                        "type": "success"
+                                    },
+                                    function() {
+                                        window.location.replace($("#btn-delete").data('reload'));
+                                    });
+                                }
+                                else {
+                                    swal("Hubo un error", "", "warning");
+                                }
+                            }
+                        });
+                    } 
+                });
+            }); 
         });
     </script>
 @endsection

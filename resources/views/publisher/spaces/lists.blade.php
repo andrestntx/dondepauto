@@ -106,7 +106,7 @@
                                                     <label></label>
                                                 </div> 
                                             </td>
-                                            <td> <a href="{{ route('medios.espacios.show', [$publisher, $space]) }}" target="_blank"> {{ $space->name }} </a></td>
+                                            <td> <a href="{{ route('medios.espacios.show', [$publisher, $space]) }}"> {{ $space->name }} </a></td>
                                             <th class="text-center"> <a href="{{ route('medios.espacios.duplicate', [$publisher, $space]) }}" class="btn btn-sm btn-warning" style="font-size: 0.9em;">Crear oferta similar</a></th>
                                             <td> {{ $space->category_name }} / {{ $space->sub_category_name }} </td>
                                             <td> {{ $space->format_name }} </td>

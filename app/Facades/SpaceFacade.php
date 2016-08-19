@@ -119,7 +119,7 @@ class SpaceFacade
 
         $this->recalculatePoints($space);
 
-        $this->emailService->notifyEditOffer($publisher, $space);
+        $this->emailService->notifyEditOffer($space);
 
         return $space;
     }
@@ -220,5 +220,14 @@ class SpaceFacade
     public function getSpace($id)
     {
         return $this->service->getModel($id);
+    }
+
+    /**
+     * @param Space $space
+     * @return bool
+     */
+    public  function deleteSpace(Space $space)
+    {
+        return $this->service->deleteModel($space);
     }
 }

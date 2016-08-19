@@ -211,6 +211,8 @@ var PublisherService = function() {
         $('#publisherModal #sold').text(publisher.count_sold_intentions);
         $('#publisherModal #discarded').text(publisher.count_discarded_intentions);
 
+        $('#delete_publisher').attr("data-url", '/medios/' + publisher.id);
+
         /** Agreement **/
         console.log('signed: ' + publisher.signed_agreement);
 
@@ -304,6 +306,55 @@ var PublisherService = function() {
         });
     }
 
+    function initDeletePublisher() {
+        console.log('inicio');
+
+        $("#delete_publisher").click(function(e) {   
+            swal({
+                title: '¿Estás seguro?',
+                text: 'El medio será eliminado',
+                type: "warning",
+                confirmButtonText: "Eliminar",
+                confirmButtonColor: "#ed5565",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                html: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.ajax({
+                        url: $("#delete_publisher").attr('data-url'),
+                        type: 'DELETE',
+                        success: function(data) {
+                            if(data.success) {
+                                swal({
+                                    "title": "Medio eliminado", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+
+                                table.search(' ').draw();
+                                $('.modal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
+    };
+
     function initChangeAgreement() {
         var manual = false;
         var changeCheckbox = document.querySelector('.js-switch-click');
@@ -370,6 +421,7 @@ var PublisherService = function() {
             initModalEvent();
             initSearchAgreement();
             initSearchOffers();
+            initDeletePublisher();
         },
         drawShowPrices: function() {
             drawShowPrices();

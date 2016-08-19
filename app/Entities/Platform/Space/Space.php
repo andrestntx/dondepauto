@@ -221,6 +221,23 @@ class Space extends Entity
         $this->urlTag = $this->getSlug($value);
     }
 
+
+    /**
+     * @param bool $value
+     * @return bool
+     */
+    public function setDelete($value = true)
+    {
+        if($value) {
+            $this->espacio_eliminado_LI = "Si_el";
+        }
+        else {
+            $this->espacio_eliminado_LI = "Si_el";
+        }
+
+        return $this->save();
+    }
+
     /**
      * @return string
      */

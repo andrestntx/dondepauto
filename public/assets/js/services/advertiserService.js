@@ -158,6 +158,8 @@ var AdvertiserService = function() {
         $('#advertiserModal #sold').text(advertiser.count_sold_intentions);
         $('#advertiserModal #discarded').text(advertiser.count_discarded_intentions);
 
+        $('#delete_advertiser').attr("data-url", '/anunciantes/' + advertiser.id);
+
         var intention_at_start = $('#intention_at_start').val();
         var intention_at_end = $('#intention_at_end').val();
 
@@ -185,10 +187,60 @@ var AdvertiserService = function() {
         } );               
     }
 
+    function initDeleteAdvertiser() {
+        console.log('inicio');
+
+        $("#delete_advertiser").click(function(e) {   
+            swal({
+                title: '¿Estás seguro?',
+                text: 'El anunciante será eliminado',
+                type: "warning",
+                confirmButtonText: "Eliminar",
+                confirmButtonColor: "#ed5565",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                html: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.ajax({
+                        url: $("#delete_advertiser").attr('data-url'),
+                        type: 'DELETE',
+                        success: function(data) {
+                            if(data.success) {
+                                swal({
+                                    "title": "Anunciante eliminado", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+
+                                table.search(' ').draw();
+                                $('#advertiserModal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
+    };
+
     return {
         init: function(urlSearch) {
             initTable(urlSearch);
             UserService.initInputsDateRange();
+            initDeleteAdvertiser();
             //UserService.initSearchDateRanges(13,14,15);
             initModalEvent();
             //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
