@@ -248,4 +248,13 @@ class PublisherFacade
 
         $this->mailchimpService->addUserAutomation('verify_documents', $user);
     }
+
+    /**
+     * @param User $user
+     */
+    public function deletePublisher(User $user)
+    {
+        $this->emailService->notifyUserDelete($user);
+        $this->service->deleteModel($user);
+    }
 }

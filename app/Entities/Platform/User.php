@@ -8,9 +8,13 @@ use App\Repositories\File\PublisherDocumentsRepository;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends EntityAuth
 {
+    use SoftDeletes;
+
+
     /**
      * The primary key for the model.
      *
@@ -49,7 +53,7 @@ class User extends EntityAuth
      *
      * @var array
      */
-    protected $dates = ['fecha_activacion_Us_LI', 'fecha_registro_completo_Us_LI'];
+    protected $dates = ['fecha_activacion_Us_LI', 'fecha_registro_completo_Us_LI', 'deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -704,4 +708,5 @@ class User extends EntityAuth
 
         return null;
     }
+
 }

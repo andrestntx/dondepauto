@@ -181,7 +181,8 @@ class AdvertisersController extends ResourceController
      */
     public function destroy(User $user)
     {
-        $this->service->deleteModel($user);
+        $this->facade->deleteAdvertiser($user);
+        return ['success' => 'true'];
     }
 
     /**

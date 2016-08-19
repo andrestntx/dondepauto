@@ -15,7 +15,7 @@ class CreateViewAdvertisersView extends Migration
         DB::statement("
             CREATE VIEW bd_view_advertisers AS (
             select 
-                bd_us_reg_LIST.id_us_LI as id,
+                bd_us_reg_LIST.id_us_LI as id, bd_us_reg_LIST.deleted_at,
                 bd_form_fuente_LI as source,
                 comentarios_us_LI comments,
                 fecha_registro_Us_LI as created_at, bd_us_reg_LIST.fecha_activacion_Us_LI as activated_at,

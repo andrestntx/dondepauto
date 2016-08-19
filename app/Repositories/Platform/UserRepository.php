@@ -199,6 +199,4 @@ class UserRepository extends BaseRepository
         $publisher->signed_agreement = $agreement;
         return $publisher->save();
     }
-
-    
 }

@@ -15,7 +15,7 @@ class CraeteViewPublishersView extends Migration
         DB::statement("
             CREATE VIEW bd_view_publishers AS (
             select 
-                bd_us_reg_LIST.id_us_LI as id,
+                bd_us_reg_LIST.id_us_LI as id, bd_us_reg_LIST.deleted_at,
                 bd_form_fuente_LI as source,
                 bd_actividades_economicas_LIST.id as economic_activity_id,
                 bd_actividades_economicas_LIST.nombre as economic_activity_name,

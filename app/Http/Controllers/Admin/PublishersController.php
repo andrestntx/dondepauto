@@ -188,7 +188,8 @@ class PublishersController extends ResourceController
      */
     public function destroy(User $user)
     {
-        $this->service->deleteModel($user);
+        $this->facade->deletePublisher($user);
+        return ['success' => 'true'];
     }
 
 

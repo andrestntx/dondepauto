@@ -142,13 +142,13 @@ class EmailService
     }
 
     /**
-     * @param User $publisher
      * @param Space $space
      */
-    public function notifyEditOffer(User $publisher, Space $space)
+    public function notifyEditOffer(Space $space)
     {
         $fromEmail = self::$fromEmail;
         $fromName = "Notificaciones DóndePauto";
+        $publisher = $space->publisher;
 
         Mail::send('emails.notifications.edit-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
             $m->from($fromEmail, $fromName)
@@ -174,6 +174,21 @@ class EmailService
                 ->cc("alexander@dondepauto.co", "Alexander Niño")
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                 ->subject($publisher->company . " acaba de enviar los documentos societarios");
+        });
+    }
+
+    /**
+     * @param User $user
+     */
+    public function notifyUserDelete(User $user)
+    {
+        $fromEmail = self::$fromEmail;
+        $fromName = self::$fromName;
+
+        Mail::send('emails.notifications.delete-user', ['user' => $user], function ($m) use ($fromEmail, $fromName, $user) {
+            $m->from($fromEmail, $fromName)
+                ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
+                ->subject($user->first_name . ", hemos dado de baja tu cuenta en DóndePauto");
         });
     }
 

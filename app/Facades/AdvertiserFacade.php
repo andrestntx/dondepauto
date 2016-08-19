@@ -136,4 +136,14 @@ class AdvertiserFacade
         $this->mailchimpService->updateRoleUser($advertiser);
         $this->emailService->notifyChangePublisherRole($advertiser);
     }
+
+
+    /**
+     * @param Advertiser $advertiser
+     */
+    public function deleteAdvertiser(Advertiser $advertiser)
+    {
+        $this->emailService->notifyUserDelete($advertiser);
+        $this->advertiserService->deleteModel($advertiser);
+    }
 }

@@ -14,7 +14,7 @@ class CreateViewSpacesView extends Migration
     {
         DB::statement("
             CREATE VIEW bd_view_spaces AS (
-                select bd_espacios_ofrecidos_LIST.id_espacio_LI as id,
+                select bd_espacios_ofrecidos_LIST.id_espacio_LI as id, bd_espacios_ofrecidos_LIST.impacto_espacio_LI as impacts,
                 bd_cat_espacios_ofrecidos_LIST.id_cat_LI as category_id, bd_cat_espacios_ofrecidos_LIST.nombre_cat_LI as category_name,
                 bd_subcat_espacios_ofrecidos_LIST.id_subcat_LI as sub_category_id, bd_subcat_espacios_ofrecidos_LIST.nombre_subcat_LI as sub_category_name,
                 bd_formatos_espacios_ofrecidos_LIST.id_formato_LI as format_id, bd_formatos_espacios_ofrecidos_LIST.nombre_formato_LI as format_name,

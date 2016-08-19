@@ -10,6 +10,8 @@
 
 @section('extra-css')
     <link href="/assets/css/prueba.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -117,6 +119,10 @@
 
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/advertiserService.js"></script>
+
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             AdvertiserService.init('/anunciantes/search');
