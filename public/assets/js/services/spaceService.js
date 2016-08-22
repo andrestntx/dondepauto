@@ -260,8 +260,15 @@ var SpaceService = function() {
         var divImages = $('#' + inputId + ' #space-images');
         divImages.html('');
         $.each(space.images, function( index, image ) {
-          var img = $("<img style='width:100px; margin:5px;'></img>").attr('src', image.thumb);
-          divImages.append(img);
+
+            var img = $("<img style='width:100px; margin:5px;'></img>")
+                .attr('src', image.thumb);
+
+            var a = $('<a data-gallery=""></a>')
+                .attr('href', image.url)
+                .append(img);
+
+            divImages.append(a);
         });
 
         /** Comments **/

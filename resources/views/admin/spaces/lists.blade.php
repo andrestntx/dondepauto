@@ -12,6 +12,7 @@
     <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/assets/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -70,6 +71,10 @@
 
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/spaceService.js"></script>
+
+    <!-- blueimp gallery -->
+    <script src="/assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
     <script>
         $(document).ready(function() {
             
