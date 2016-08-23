@@ -594,7 +594,15 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <div style="text-align: center;"><span style="font-size:19px"><strong>{{ $user->first_name }},</strong> hemos dado de baja tu cuenta en DóndePauto</span></div>
+                            <div style="text-align: justify;">
+                            	<span style="font-size:19px"><strong>Hola {{ $user->first_name }},</strong> <br><br>
+									DóndePauto ha inactivado su cuenta toda vez que no pudimos verificar la autenticidad de la información que se registró, o no se acreditó autorización por parte de la empresa bajo la cual se registra, o por que usted ha solicitado su eliminación de nuestra base de datos. Agradecemos su interés inicial. <br> <br>
+
+									Si desea registrase de nuevo, podrá hacerlo a través de <a href="http://www.dondepauto.co/registro">nuestra página web</a> <br> <br>
+
+									Saludos,
+								</span>
+							</div>
 
                         </td>
                     </tr>
