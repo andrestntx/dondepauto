@@ -14,7 +14,7 @@ class CreateActionContactTable extends Migration
     {
         Schema::create('action_contact', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('action_at');
+            $table->datetime('action_at');
             $table->timestamps();
 
             $table->integer('action_id');

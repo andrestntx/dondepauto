@@ -18,6 +18,7 @@ use App\Services\MailchimpService;
 use App\Services\MixpanelService;
 use App\Services\ProposalService;
 use App\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class AdvertiserFacade
@@ -75,9 +76,11 @@ class AdvertiserFacade
         return $this->proposalService->search($advertiser);
     }
 
+
     /**
      * @param Advertiser $advertiser
      * @param array $data
+     * @return mixed|null
      */
     public function createContact(Advertiser $advertiser, array $data)
     {
@@ -87,7 +90,13 @@ class AdvertiserFacade
             if( ! empty($data['action']['id'])) {
                 $this->contactService->addAction($contact, $data['action']);
             }
+
+            $contact->load('actions');
+
+            return $contact;
         }
+
+        return null;
     }
 
     /**

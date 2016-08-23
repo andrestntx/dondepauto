@@ -211,7 +211,7 @@ class AdvertisersController extends ResourceController
      */
     public function newContact(Request $request, User $advertiser)
     {
-        $this->facade->createContact($advertiser, $request->all());
-        return ['success' => 'true'];
+        $contact = $this->facade->createContact($advertiser, $request->all());
+        return ['success' => 'true', 'contact' => $contact];
     }
 }

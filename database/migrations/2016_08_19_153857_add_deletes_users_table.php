@@ -13,7 +13,7 @@ class AddDeletesUsersTable extends Migration
     public function up()
     {
         Schema::table('us_reg_LIST', function (Blueprint $table) {
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 
@@ -25,7 +25,7 @@ class AddDeletesUsersTable extends Migration
     public function down()
     {
         Schema::table('us_reg_LIST', function (Blueprint $table) {
-            $table->dropColumn('deleted_at');
+            // $table->dropColumn('deleted_at');
         });
     }
 }

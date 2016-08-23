@@ -15,6 +15,8 @@ class AddAdviserOldUsersTable extends Migration
         Schema::table('us_reg_LIST', function (Blueprint $table) {
             $table->integer('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +30,8 @@ class AddAdviserOldUsersTable extends Migration
         Schema::table('us_reg_LIST', function (Blueprint $table) {
             $table->dropIndex('us_reg_list_user_id_foreign');
             $table->dropColumn('user_id');
+
+            $table->dropColumn('deleted_at');
         });
     }
 }
