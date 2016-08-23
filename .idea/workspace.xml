@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Action.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Action.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Contact.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Contact.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/Advertiser.php" afterPath="$PROJECT_DIR$/app/Entities/Views/Advertiser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" afterPath="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ContactService.php" afterPath="$PROJECT_DIR$/app/Services/ContactService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_13_162613_add_adviser_old_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_13_162613_add_adviser_old_users_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_08_08_171119_create_action_contact_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_08_08_171119_create_action_contact_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_08_19_153857_add_deletes_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_08_19_153857_add_deletes_users_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/advertiserService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/advertiserService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/userService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/userService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/advertisers/lists.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/advertisers/lists.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/advertisers/modal-contact.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/advertisers/modal-contact.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/advertisers/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/advertisers/modal.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/publisher.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/simple.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/simple.blade.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,8 +59,8 @@
       <file leaf-file-name="Contact.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Contact.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.7916667">
-              <caret line="41" column="75" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="75" />
+            <state vertical-scroll-proportion="-23.083334">
+              <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -117,8 +99,8 @@
       <file leaf-file-name="Action.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Action.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7670807">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7204969">
+              <caret line="50" column="98" selection-start-line="50" selection-start-column="98" selection-end-line="50" selection-end-column="98" />
               <folding />
             </state>
           </provider>
@@ -840,16 +822,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Contact.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.7916667">
-          <caret line="41" column="75" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="75" />
+        <state vertical-scroll-proportion="-23.083334">
+          <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Action.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7670807">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7204969">
+          <caret line="50" column="98" selection-start-line="50" selection-start-column="98" selection-end-line="50" selection-end-column="98" />
           <folding />
         </state>
       </provider>
