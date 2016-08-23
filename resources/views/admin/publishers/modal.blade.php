@@ -102,9 +102,12 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Comentarios
+                                <h4 style="float: left;">Contactos</h4>
+                                <div class="ibox-tools">
+                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-plus"></i></button>    
+                                </div>
                             </div>
-                            <div class="panel-body" id="comments">
+                            <div class="panel-body" id="comments" style="padding: 10px 10px 0 10px; height: 100px; overflow: auto;">
                             </div>
                         </div>
                     </div>

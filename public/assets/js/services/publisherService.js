@@ -279,6 +279,16 @@ var PublisherService = function() {
         });
 
         initChangeAgreement();
+
+        /** Contacts **/
+        $('#publisherModal #newContact').attr('data-url', '/anunciantes/' + publisher.id + '/contacts');
+
+        $('#publisherModal #comments').html('');
+
+        $.each(publisher.contacts, function( index, contact ) {
+            var socialContact = UserService.getSocialContact(contact);
+            $('#publisherModal #comments').append(socialContact);
+        });
     }
 
     function drawShowPrices() {
@@ -425,6 +435,12 @@ var PublisherService = function() {
         },
         drawShowPrices: function() {
             drawShowPrices();
+        },
+        getSocialContact: function(contact) {
+            return UserService.getSocialContact(contact);
+        },
+        reload: function() {
+            table.search(' ').draw();
         }
     };
 }();

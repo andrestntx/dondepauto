@@ -48,7 +48,7 @@ class Action extends Entity
     public function getActionAtAttribute()
     {
         if($this->pivot) {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->format('d-M-y h:i A');
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->format('d-M-y \- h:i A');
         }
 
         return null;
