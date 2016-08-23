@@ -40,7 +40,7 @@ class PublisherRepository extends BaseRepository
                 'economic_activity_name'
             ])->with(['spaces' => function($query) {
                     $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at', 'id_ciudad_LI as city_id');
-                }/*, 'spaces.city' => function($query) {
+                }, 'contacts.actions'/*, 'spaces.city' => function($query) {
                     $query->select('nombre_ciudad_LI as name', 'id_ciudad_LI');
                 }*/
             ]);
@@ -63,6 +63,7 @@ class PublisherRepository extends BaseRepository
                 $publisherQuery->where('signed_agreement', '=', $column['search']['value']);
             }
         }
+
         return $publisherQuery->get();
     }
 

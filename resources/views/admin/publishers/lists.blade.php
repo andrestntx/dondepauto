@@ -129,6 +129,7 @@
     </div>
 
     @include('admin.publishers.modal')
+    @include('admin.publishers.modal-contact')
 @endsection
 
 @section('extra-js')
@@ -151,6 +152,43 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
+
+            $("#newContact").click(function(){
+                $("#publisherContactModal").modal();
+                $("#publisherContactModal input").val("");
+                $("#publisherContactModal textarea").val("");
+            });
+
+            $('.datetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD hh:mm A'
+            });
+
+            $("#form-create-contact-publisher").click(function() {
+                var url = $('#publisherModal #newContact').data('url');
+
+                var parameters = {
+                    'action[id]':           $("#modal_contact_action_id").val(),
+                    'action[action_at]':    $("#modal_contact_action_date").val(),
+                    'comments':             $("#modal_contact_comments").val(),
+                    '_token':               $("#contact_csrf_token").val()
+                };
+
+                $.post(url, parameters, function( data ) {
+
+                    $("#publisherContactModal input").val("");
+                    $("#publisherContactModal textarea").val("");
+
+                    if(data.success) {
+                        PublisherService.reload();
+                        var socialContact = PublisherService.getSocialContact(data.contact);
+                        $('#publisherModal #comments').prepend(socialContact);
+                    }
+                    else {
+                        console.log('error');
+                    }
+                });
+            });
+
         });
 
 

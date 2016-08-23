@@ -55,6 +55,14 @@ class Publisher extends PUser
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('App\Entities\Platform\Contact', 'user_id', 'id');
+    }
+
+    /**
      * @return mixed
      */
     public function getCountSpacesAttribute()

@@ -147,36 +147,6 @@ var AdvertiserService = function() {
         return html;
     }
 
-    function getSocialContact(contact) {
-
-        var created_at  = $("<a></a>")
-                            .attr("href", "#")
-                            //.addClass("small")
-                            .text(contact.created_at_format);
-
-        var action_at   = $("<a></a>")
-                            .attr("href", "#")
-                            .text(contact.action.action_at);
-
-
-        var body        = $("<div></div>")
-                            .addClass("media-body")
-                            .append("Contacto: ")
-                            .append(created_at)
-                            .append(" " + contact.comments)
-                            .append("<br>")
-                            .append("Acción:    ")
-                            .append(action_at)
-                            .append(" ")
-                            .append($("<strong></strong>").text(contact.action.name));
-
-        var socialContact   = $("<div></div>")
-                                .addClass("social-comment")
-                                .append(body);
-
-        return socialContact;
-    }
-
     function drawModal(advertiser) {
         UserService.drawModalUser("advertiserModal", advertiser, "anunciantes");
         /** Commercial state **/
@@ -211,7 +181,7 @@ var AdvertiserService = function() {
         $('#advertiserModal #comments').html('');
 
         $.each(advertiser.contacts, function( index, contact ) {
-            var socialContact = getSocialContact(contact);
+            var socialContact = UserService.getSocialContact(contact);
             $('#advertiserModal #comments').append(socialContact);
         });
     }
@@ -286,7 +256,7 @@ var AdvertiserService = function() {
             table.search(' ').draw();
         },
         getSocialContact: function(contact) {
-            return getSocialContact(contact);
+            return UserService.getSocialContact(contact);
         }
     };
 }();

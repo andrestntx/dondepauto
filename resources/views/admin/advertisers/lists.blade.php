@@ -165,7 +165,6 @@
                 };
 
                 $.post(url, parameters, function( data ) {
-                    console.log(data);
                     $("#advertiserCreateModal input").val("");
                     $("#advertiserCreateModal textarea").val("");
 
