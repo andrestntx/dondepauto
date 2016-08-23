@@ -35,10 +35,51 @@ class Contact extends Entity
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['action', 'created_at_humans', 'created_at_format'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function actions()
     {
-        return $this->belongsToMany('App\Entities\Platform\Action', 'action_contact', 'contact_id', 'action_id');
+        return $this->belongsToMany('App\Entities\Platform\Action', 'action_contact', 'contact_id', 'action_id')
+            ->withPivot('action_at')
+            ->withTimestamps();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActionAttribute()
+    {
+        return $this->actions->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAtHumansAttribute()
+    {
+        return ucfirst($this->created_at->diffForHumans());
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedAtFormatAttribute()
+    {
+        return $this->created_at->format('d-M-y') . ' (' . $this->created_at_humans .')';
     }
 }

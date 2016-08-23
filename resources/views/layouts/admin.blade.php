@@ -27,6 +27,7 @@
 
         <!-- DataPicker -->
         <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+        <link href="/assets/css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
         <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
 
         <!-- Select Chosen -->
@@ -268,6 +269,8 @@
 
         <!-- Data picker -->
         <script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+         <script src="/assets/js/plugins/datapicker/moment.js"></script>
+        <script src="/assets/js/plugins/datapicker/bootstrap-datetimepicker.js"></script>
 
         <!-- Chosen -->
         <script src="/assets/js/plugins/chosen/chosen.jquery.js"></script>

@@ -42,6 +42,14 @@ class Advertiser extends PUser
     {
         return $this->hasMany('App\Entities\Proposal\Proposal', 'advertiser_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('App\Entities\Platform\Contact', 'user_id', 'id');
+    }
     
     /**
      * @return mixed

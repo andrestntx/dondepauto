@@ -89,10 +89,14 @@ class AdvertiserRepository extends BaseRepository
                                 ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
                         }
                     });
-            }, 'proposals', 'logs']);
+            }, 'proposals', 'logs', 'contacts' => function($query) {
+                $query->orderBy("created_at", "desc");
+            }, 'contacts.actions']);
         }
         else {
-            $advertiserQuery = $this->model->with(['proposals', 'logs', 'intentions']);
+            $advertiserQuery = $this->model->with(['proposals', 'logs', 'intentions', 'contacts' => function($query) {
+                $query->orderBy("created_at", "desc");
+            }, 'contacts.actions']);
         }
 
         $this->searchDateRange($columnsSearch['created_at'], 'created_at', 'created_at', $advertiserQuery);

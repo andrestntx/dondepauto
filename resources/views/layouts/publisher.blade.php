@@ -335,6 +335,19 @@
             <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=nutxt&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
         </noscript>
 
+        <script>
+          var p3chat = p3chat || [];
+          p3chat.push(['_setAccount', '094551266']);
+          p3chat.push(['_trackPage']);
+          (function (d, t, id) {
+            if (d.getElementById(id)) return;
+            var e = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            e.src = "//p3chat.com/dist/p3.js"; e.id = id;
+            s.parentNode.insertBefore(e, s);
+          }(document, 'script', 'p3chat-snippet'));
+        </script>
+
     </body>
 </html>
 

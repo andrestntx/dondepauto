@@ -10,6 +10,8 @@ namespace App\Services;
 
 use App\Entities\Platform\Contact;
 use App\Repositories\Platform\ContactRepository;
+use Carbon\Carbon;
+
 class ContactService extends ResourceService
 {
     function __construct(ContactRepository $repository)
@@ -24,7 +26,9 @@ class ContactService extends ResourceService
      */
     public function addAction(Contact $contact, $action)
     {
-        $contact->actions()->attach($action['id'], ['action_at' => $action['action_at']]);
+        $contact->actions()->attach($action['id'], [
+            'action_at' => Carbon::createFromFormat('Y-m-d h:i A', $action['action_at'])->toDateTimeString()
+        ]);
     }
 
     

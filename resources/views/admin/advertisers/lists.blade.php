@@ -146,6 +146,11 @@
                 format: 'yyyy-mm-dd',
             });
 
+            
+            $('.datetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD hh:mm A'
+            });
+
             $("#form-create-advertiser").click(function() {
                 var url = $(this).data('url');
                 var parameters = {
@@ -190,6 +195,8 @@
 
                     if(data.success) {
                         AdvertiserService.reload();
+                        var socialContact = AdvertiserService.getSocialContact(data.contact);
+                        $('#advertiserModal #comments').prepend(socialContact);
                     }
                     else {
                         console.log('error');
