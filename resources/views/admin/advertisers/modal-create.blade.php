@@ -26,7 +26,7 @@
                             <legend class="h4">Próxima acción</legend>
                         </div>
                         <div class="col-md-6">
-                            {!! Field::select('action_id', $actions, ['label' => 'Acción', 'id' => 'modal_action_id']) !!}
+                            {!! Field::select('action_id', $actionsAdvertiser, ['label' => 'Acción', 'id' => 'modal_action_id']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Field::text('action_date', ['label' => 'Fecha', 'class' => 'datepicker', 'id' => 'modal_action_date']) !!}
