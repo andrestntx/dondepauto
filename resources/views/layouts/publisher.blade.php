@@ -228,6 +228,10 @@
             </div>
         </div>
 
+        <div class="p3chat-launcher" data-tid="210277375">
+          <img src="//p3chat.com/widget/tid/210277375/img/inline/" alt=""/>
+        </div>
+
         <!-- Mainly scripts -->
         <script src="/assets/js/jquery-2.1.1.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>

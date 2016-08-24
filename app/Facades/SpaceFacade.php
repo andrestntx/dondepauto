@@ -111,6 +111,21 @@ class SpaceFacade
      * @param Space $space
      * @return Space|mixed
      */
+    public function updateSpace(array $data, $images = [], $keep_images = [], Space $space)
+    {
+        $space = $this->updateModel($data, $images, $keep_images, $space);
+        $this->emailService->notifyEditOffer($space);
+
+        return $space;
+    }
+
+    /**
+     * @param array $data
+     * @param array $images
+     * @param array $keep_images
+     * @param Space $space
+     * @return Space|mixed
+     */
     public function updateModel(array $data, $images = [], $keep_images = [], Space $space)
     {
         $format = $this->formatService->getModel($data['format_id']);
@@ -118,8 +133,6 @@ class SpaceFacade
         $this->service->saveImages($images, $space, $keep_images);
 
         $this->recalculatePoints($space);
-
-        $this->emailService->notifyEditOffer($space);
 
         return $space;
     }
