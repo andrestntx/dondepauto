@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            {!! Field::select('action_id', $actions, ['label' => 'Acción', 'id' => 'modal_contact_action_id', 'required']) !!}
+                            {!! Field::select('action_id', $actionsAdvertiser, ['label' => 'Acción', 'id' => 'modal_contact_action_id', 'required']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Field::text('action_date', ['label' => 'Fecha', 'class' => 'datetimepicker', 'id' => 'modal_contact_action_date', 'required']) !!}

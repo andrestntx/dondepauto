@@ -15,7 +15,7 @@
                                 <div class="col-md-3"> <h3 style="font-size: 20px; margin: 7px 0;">Contacto</h3> </div>
                             
                                 <div class="col-md-3" style="margin-bottom: 10px;">
-                                    {!! Form::select('type', ['call' => 'Llamada', 'chat' => 'Chat', 'skype' => 'Skype'], null, ['id' => 'modal_contact_type', 'class' => 'form-control']) !!}
+                                    {!! Form::select('type', ['call' => 'Llamada', 'chat' => 'Chat', 'email' => 'Email'], null, ['id' => 'modal_contact_type', 'class' => 'form-control']) !!}
                                 </div>
 
                                 <div class="col-md-12">
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            {!! Field::select('action_id', $actions, ['label' => 'Acción', 'id' => 'modal_contact_action_id', 'required']) !!}
+                            {!! Field::select('action_id', $actionsPublisher, ['label' => 'Acción', 'id' => 'modal_contact_action_id', 'required']) !!}
                         </div>
                         <div class="col-md-6">
                             {!! Field::text('action_date', ['label' => 'Fecha', 'class' => 'datetimepicker', 'id' => 'modal_contact_action_date', 'required']) !!}
