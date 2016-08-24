@@ -70,6 +70,15 @@ class Space extends Model
     }
 
     /**
+     * @param $value
+     * @return string
+     */
+    public function getDescriptionAttribute($value)
+    {
+        return strip_tags($value);
+    }
+
+    /**
      * Return the Company Name Uppercase
      * @param $value
      * @return string
