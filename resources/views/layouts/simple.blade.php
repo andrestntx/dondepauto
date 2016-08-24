@@ -207,7 +207,7 @@
             </div>
         </div>
 
-        <div class="p3chat-launcher" data-tid="210277375">
+        <div class="p3chat-launcher" data-tid="210277375" style="position:fixed;bottom:0px;left:0px;float:left;z-index:999999;">
           <img src="//p3chat.com/widget/tid/210277375/img/inline/" alt=""/>
         </div>
 
