@@ -293,7 +293,9 @@ var PublisherService = function() {
 
     function drawShowPrices() {
         var publisher = $("#publisher").data("publisher");
-        $("#prueba").html(UserService.getHtmlModalStates(publisher.states, ''));
+        var states = $("#publisher").data("states");
+
+        $("#prueba").html(UserService.getHtmlModalStates(states, ''));
 
         var minimalPrices = $(".minimal-price");
         $.each(minimalPrices, function( index, div ) {

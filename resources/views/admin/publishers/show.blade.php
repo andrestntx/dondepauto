@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')   
-    <div class="col-sm-12 m-b-md" id="publisher" data-publisher="{{ $publisher }}" data-datatable="{{ route('medios.espacios.search', $publisher) }}">
+    <div class="col-sm-12 m-b-md" id="publisher" data-publisher="{{ $publisher }}" data-states="{{ json_encode($publisher->states) }}" data-datatable="{{ route('medios.espacios.search', $publisher) }}">
         <div class="ibox-title">
             <h5>Detalle del Medio - Total Espacios ({{ $spaces->total() }})</h5>
             <div class="ibox-tools">

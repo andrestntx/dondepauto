@@ -118,6 +118,7 @@ class Space extends Entity
         return $databaseTranslate;
     }
 
+
     /**
      * Get the value of an attribute using its mutator.
      *
@@ -161,6 +162,7 @@ class Space extends Entity
     {
         return $this->belongsToMany(Audience::class, 'audience_space', 'space_id', 'audience_id');
     }
+
 
     /**
      * @return mixed
