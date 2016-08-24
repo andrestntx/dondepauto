@@ -87,15 +87,19 @@ var UserService = function() {
 
 
 		getSocialContact: function(contact) {
-
+			var action_at = '';
+	        var action_name = '';
 	        var created_at  = $("<a></a>")
 	                            .attr("href", "#")
 	                            .text(contact.created_at_format);
 
-	        var action_at   = $("<a></a>")
+	        if(contact.action) {
+	        	action_at   = $("<a></a>")
 	                            .attr("href", "#")
-	                            .text(contact.action.action_at);
+	                            .text(contact.action.action_at);	
 
+	            action_name	= $("<strong></strong>").text(contact.action.name);
+	        }
 
 	        var body        = $("<div></div>")
 	                            .addClass("media-body")
@@ -106,7 +110,7 @@ var UserService = function() {
 	                            .append("Acción:")
 	                            .append(action_at)
 	                            .append(" ")
-	                            .append($("<strong></strong>").text(contact.action.name));
+	                            .append(action_name);
 
 	        var socialContact   = $("<div></div>")
 	                                .addClass("social-comment")

@@ -26,10 +26,12 @@ class ContactService extends ResourceService
      */
     public function addAction(Contact $contact, $action)
     {
-        $contact->actions()->attach($action['id'], [
-            'action_at' => Carbon::createFromFormat('Y-m-d h:i A', $action['action_at'])->toDateTimeString()
-        ]);
+        if(array_key_exists('action_at', $action) && ! empty($action['action_at'])) {
+            $contact->actions()->attach($action['id'], [
+                'action_at' => Carbon::createFromFormat('Y-m-d h:i A', $action['action_at'])->toDateTimeString()
+            ]);
+        } else {
+            $contact->actions()->attach($action['id']);
+        }
     }
-
-    
 }
