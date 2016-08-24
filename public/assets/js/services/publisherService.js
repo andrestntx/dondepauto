@@ -10,7 +10,7 @@ var PublisherService = function() {
 
     function initTable(urlSearch) {
         table = $('#publishers-datatable').DataTable({
-            "order": [[6, "desc"]],
+            "order": [[1, "desc"]],
             'info': true,
             "ajax": urlSearch,
             "deferRender": true,

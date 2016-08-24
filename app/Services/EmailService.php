@@ -156,7 +156,7 @@ class EmailService
                 ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                 ->cc('alexander@dondepauto.co', 'Alexander Niño')
                 ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                ->subject($publisher->company . " acaba de crear una nueva oferta");
+                ->subject($publisher->company . " acaba de editar una oferta");
         });
     }
 

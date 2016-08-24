@@ -503,4 +503,12 @@ class Space extends Entity
             $this->attributes[$column] = 'N';
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFormats()
+    {
+        return $this->format->subCategory->formats->lists('name', 'id')->all();
+    }
 }

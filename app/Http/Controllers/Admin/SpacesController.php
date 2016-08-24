@@ -126,9 +126,14 @@ class SpacesController extends ResourceController
      */
     public function edit(Space $space)
     {
-        return $this->view('form', [
-            'space' => $space,
-            'formData' => $this->getFormDataUpdate($space->id)
+        $space->load('format.subCategory.formats');
+
+        return view('publisher.spaces.form')->with([
+            'publisher'     => $space->publisher,
+            'space'         => $space,
+            'spaceFormats'  => $space->getFormats(),
+            'route'         => ['espacios.update', $space],
+            'type'          => 'PUT'
         ]);
     }
 
@@ -141,8 +146,8 @@ class SpacesController extends ResourceController
      */
     public function update(UpdateRequest $request, Space $space)
     {
-        $this->facade->updateModel($request->all(), $space);
-        return $this->redirect('index');
+        $this->facade->updateModel($request->all(), [], [], $space);
+        return ['result' => 'true', 'route' => route('espacios.index')];
     }
     
     /**
