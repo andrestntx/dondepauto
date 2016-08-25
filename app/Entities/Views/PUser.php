@@ -61,11 +61,6 @@ class PUser  extends Model {
     public function getStatesAttribute()
     {
         return [
-            'initial' => [
-                'icon'  => 'fa fa-child',
-                'class' => $this->getClass(true),
-                'text'  => 'Registro inicial'
-            ],
             'email' => [
                 'icon'  => 'fa fa-envelope',
                 'class' => $this->getClass($this->email_validated),

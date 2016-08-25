@@ -46,6 +46,16 @@ class Publisher extends PUser
                 'class' => $this->getClass($this->has_offers),
                 'text'  => 'Ofertó'
             ],
+            'letter' => [
+                'icon'  => 'fa fa-file-o',
+                'class' => $this->getClass($this->has_letter || $this->has_documents),
+                'text'  => 'Carta'
+            ],
+            'docs' => [
+                'icon'  => 'fa fa-file-pdf-o',
+                'class' => $this->getClass($this->has_documents),
+                'text'  => 'Documentos'
+            ],
             'agreement' => [
                 'icon'  => 'fa fa-file-text-o',
                 'class' => $this->getClass($this->signed_agreement),
@@ -198,6 +208,24 @@ class Publisher extends PUser
     public function getDocumentsJsonAttribute()
     {
         return json_encode($this->getDocuments());
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasDocumentsAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFilesId($this->id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasLetterAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFileId($this->id,'letter-generated.pdf');
     }
 
 }
