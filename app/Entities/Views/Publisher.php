@@ -59,7 +59,7 @@ class Publisher extends PUser
             'agreement' => [
                 'icon'  => 'fa fa-file-text-o',
                 'class' => $this->getClass($this->signed_agreement),
-                'text'  => 'Firmó acuerdo'
+                'text'  => 'Activo Proveedor'
             ]
         ]);
     }
