@@ -108,7 +108,7 @@
                             <th>Nombre</th>
                             <th>Estado</th>
                             <th>Ofertas</th>
-                            <th>Comentarios</th>
+                            <th>Contactos</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -119,7 +119,7 @@
                             <th>Nombre</th>
                             <th>Estado</th>
                             <th>Ofertas</th>
-                            <th>Comentarios</th>
+                            <th>Contactos</th>
                         </tr>
                         </tfoot>
                     </table>
