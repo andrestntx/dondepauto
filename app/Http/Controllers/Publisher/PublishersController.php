@@ -210,6 +210,7 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
      */
     public function uploadDocuments(Request $request, User $user)
     {
+        \Log::info($request->all());
         $this->facade->saveDocuments($user, $request->file('commerce'), $request->file('rut'), $request->file('bank'),$request->file('letter'));
     }
 }

@@ -11,6 +11,8 @@
 |
 */
 
+ini_set('upload_max_filesize', '40M');
+
 use Carbon\Carbon;
 
 Carbon::setLocale('es');

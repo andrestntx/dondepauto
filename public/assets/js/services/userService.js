@@ -85,6 +85,45 @@ var UserService = function() {
 	        } );
 		},
 
+		getLastContact: function(contacts) {
+            var lastContact = contacts[0];
+            var action_name = $("<span>NA</span>").addClass("small"); 
+            var action_date = $("<a>NA</a>").addClass("small"); 
+
+            if(lastContact.action) {
+                action_name.text('').append($("<strong></strong>").text(lastContact.action.name)); 
+                action_date.text(lastContact.action.action_at_date)
+                            .attr('data-toggle', 'tooltip')
+                            .attr('data-placement', 'top')
+                            .attr('title', lastContact.action.action_at_humans); 
+            }
+
+            var date    = $("<a></a>")
+                            .attr('style', 'margin-left: 4px;')
+                            .attr('data-toggle', 'tooltip')
+                            .attr('data-placement', 'top')
+                            .attr('title', lastContact.comments)
+                            .addClass("small")
+                            .text(lastContact.created_at_humans);
+
+            var count   = $("<span></span>")
+                            .addClass("label label-default")
+                            .text(contacts.length);
+
+            var li      = $("<li></li>")
+                            .attr('style', 'border: 0px; padding: 5px 0; min-width: 320px;')
+                            .addClass("list-group-item")
+                            .append(count)
+                            .append(date)
+                            .append(" /   ")
+                            .append(action_name)
+                            .append(" - ")
+                            .append(action_date);
+
+            var div     = $("<div></div>").append(li);
+
+            return div;
+	    },
 
 		getSocialContact: function(contact) {
 			var action_at = '';

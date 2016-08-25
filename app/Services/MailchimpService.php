@@ -162,16 +162,18 @@ class MailchimpService
      */
     protected function syncMember(User $user, array $interests)
     {
-        $this->mailchimp->put($this->getUserUrl($user), [
-            'email_address' => $user->email,
-            //'status'      => 'subscribed',
-            "status_if_new" => "subscribed",
-            'merge_fields'  =>  [
-                'FNAME'     => $user->first_name,
-                'LNAME'     => $user->last_name
-            ],
-            'interests'      => $interests
-        ]);
+        if(env('APP_ENV') == 'production') {
+            $this->mailchimp->put($this->getUserUrl($user), [
+                'email_address' => $user->email,
+                //'status'      => 'subscribed',
+                "status_if_new" => "subscribed",
+                'merge_fields' => [
+                    'FNAME' => $user->first_name,
+                    'LNAME' => $user->last_name
+                ],
+                'interests' => $interests
+            ]);
+        }
     }
 
     /**
@@ -201,13 +203,14 @@ class MailchimpService
      */
     public function updateRoleUser(User $user)
     {
-        if($user->isPublisher()) {
-            $this->syncPublisher($user);
-            $this->syncAutomationPublisher($user);
-        }
-        else {
-            $this->syncAdvertiser($user);
-            $this->stopActualAutomation($user);
+        if(env('APP_ENV') == 'production') {
+            if ($user->isPublisher()) {
+                $this->syncPublisher($user);
+                $this->syncAutomationPublisher($user);
+            } else {
+                $this->syncAdvertiser($user);
+                $this->stopActualAutomation($user);
+            }
         }
     }
 
@@ -216,12 +219,13 @@ class MailchimpService
      */
     public function syncAutomationPublisher(User $user)
     {
-        if($user->complete_data && ! $user->has_offers) {
-            $this->removeUserAutomation('complete-data', $user);
-            $this->addUserAutomation('create-offers', $user);
-        }
-        else if( ! $user->complete_data) {
-            $this->addUserAutomation('complete-data', $user);
+        if(env('APP_ENV') == 'production') {
+            if ($user->complete_data && !$user->has_offers) {
+                $this->removeUserAutomation('complete-data', $user);
+                $this->addUserAutomation('create-offers', $user);
+            } else if (!$user->complete_data) {
+                $this->addUserAutomation('complete-data', $user);
+            }
         }
     }
 
@@ -230,11 +234,12 @@ class MailchimpService
      */
     public function stopActualAutomation(User $user)
     {
-        if($user->complete_data && $user->has_offers) {
-            $this->removeUserAutomation('create-offers', $user);
-        }
-        else {
-            $this->removeUserAutomation('complete-data', $user);
+        if(env('APP_ENV') == 'production') {
+            if ($user->complete_data && $user->has_offers) {
+                $this->removeUserAutomation('create-offers', $user);
+            } else {
+                $this->removeUserAutomation('complete-data', $user);
+            }
         }
     }
 
@@ -245,13 +250,15 @@ class MailchimpService
      */
     public function addUserAutomation($workflow, User $user, $numberEmail = 0)
     {
-        try {
-            $this->mailchimp->post($this->getAutomationUrl($workflow, $numberEmail), [
-                'email_address' => $user->email
-            ]);
-        } catch (Exception $e) {
-            \Log::info('Mailchimp error');
-            \Log::info($e);
+        if(env('APP_ENV') == 'production') {
+            try {
+                $this->mailchimp->post($this->getAutomationUrl($workflow, $numberEmail), [
+                    'email_address' => $user->email
+                ]);
+            } catch (Exception $e) {
+                \Log::info('Mailchimp error');
+                \Log::info($e);
+            }
         }
     }
 
@@ -261,8 +268,10 @@ class MailchimpService
      */
     public function removeUserAutomation($workflow, User $user)
     {
-        $this->mailchimp->post($this->getRemoveUserAutomationUrl($workflow), [
-            'email_address' => $user->email
-        ]);
+        if(env('APP_ENV') == 'production') {
+            $this->mailchimp->post($this->getRemoveUserAutomationUrl($workflow), [
+                'email_address' => $user->email
+            ]);
+        }
     }
 }

@@ -41,16 +41,16 @@ class Publisher extends PUser
     public function getStatesAttribute()
     {
         return  array_merge(parent::getStatesAttribute(), [
-            'agreement' => [
-                'icon'  => 'fa fa-file-text-o',
-                'class' => $this->getClass($this->signed_agreement),
-                'text'  => 'Firmó acuerdo'
-            ],
             'offers' => [
                 'icon'  => 'fa fa-tags',
                 'class' => $this->getClass($this->has_offers),
                 'text'  => 'Ofertó'
             ],
+            'agreement' => [
+                'icon'  => 'fa fa-file-text-o',
+                'class' => $this->getClass($this->signed_agreement),
+                'text'  => 'Firmó acuerdo'
+            ]
         ]);
     }
 
