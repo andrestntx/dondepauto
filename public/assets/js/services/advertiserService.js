@@ -96,7 +96,7 @@ var AdvertiserService = function() {
                     $('td:eq(8)', nRow).html(div.html());
                 }
                 else {
-                    $('td:eq(8)', nRow).html(div.html());    
+                    $('td:eq(8)', nRow).html('');    
                 }
 
             },
