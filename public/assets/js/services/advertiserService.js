@@ -27,6 +27,8 @@ var AdvertiserService = function() {
                 { "data": "cel"},
                 { "data": "state" },
                 { "data": "count_by_contact_intentions" },
+                { "data": "contacts" },
+
                 { "data": "state_id", "name": "state_id", "searchable": true, "visible": false },
                 { "data": "city_id", "name": "city_id", "searchable": false, "visible": false },
                 { "data": "address"},
@@ -41,7 +43,7 @@ var AdvertiserService = function() {
                     "searchable": false
                 },
                 {
-                    "targets": [3,5,12,14,15,16],
+                    "targets": [3,5,11,12,13,14,15,16,17],
                     "visible": false,
                     "searchable": false
                 },
@@ -51,7 +53,7 @@ var AdvertiserService = function() {
                 },
                 {
                     className: "text-small",
-                    "targets": [1,2,3,4,5,6,7]
+                    "targets": [1,2,4,6,7]
                 }
             ],
             "language": {
@@ -89,6 +91,14 @@ var AdvertiserService = function() {
                         getHtmlIntentionStates(aData)
                     );
                 }
+                if(aData.contacts && aData.contacts.length > 0) {
+                    div = UserService.getLastContact(aData.contacts);
+                    $('td:eq(8)', nRow).html(div.html());
+                }
+                else {
+                    $('td:eq(8)', nRow).html(div.html());    
+                }
+
             },
             "drawCallback": function(settings, json) {
                 $("#countDatatable").html(settings.fnRecordsDisplay());
@@ -97,9 +107,9 @@ var AdvertiserService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states",10);
-        UserService.initSimpleSearchSelect('#cities', 11);
-        UserService.initSimpleSearchSelect("#economic_activities", 13);
+        UserService.initSimpleSearchSelect("#registration_states",11);
+        UserService.initSimpleSearchSelect('#cities', 12);
+        UserService.initSimpleSearchSelect("#economic_activities", 14);
 
         $("#advertisers-datatable_filter input").unbind();
 

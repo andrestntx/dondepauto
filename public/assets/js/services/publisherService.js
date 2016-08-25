@@ -70,16 +70,24 @@ var PublisherService = function() {
                 $('td:eq(0)', nRow).html(
                     "<button class='btn btn-xs btn-success publisherModal' data-publisher='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#publisherModal'><i class='fa fa-search-plus'></i></button>"
                 );
+
                 if(!aData.company || !aData.company.trim()) {
                     $('td:eq(2)', nRow).html('--');
                 }
+
                 $('td:eq(4)', nRow).html(
-                    UserService.getHtmlTableStates(aData.states)
+                    UserService.getHtmlTableStates(aData.states, '170')
                 );
+
                 if(aData.count_spaces > 0){
                     $('td:eq(5)', nRow).html(
                         '<span class="badge badge-info">' + aData.count_spaces + '</span>'
                     );
+                }
+
+                if(aData.contacts && aData.contacts.length > 0) {
+                    div = UserService.getLastContact(aData.contacts);
+                    $('td:eq(6)', nRow).html(div.html());
                 }
             },
             "drawCallback": function(settings, json) {

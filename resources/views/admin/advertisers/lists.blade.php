@@ -88,6 +88,7 @@
                             <th>Celular</th>
                             <th>Estado</th>
                             <th>Inten.</th>
+                            <th>Contactos</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -102,6 +103,7 @@
                             <th>Celular</th>
                             <th>Estado</th>
                             <th>Inten.</th>
+                            <th>Contactos</th>
                         </tr>
                         </tfoot>
                     </table>

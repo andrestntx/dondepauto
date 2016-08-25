@@ -32,7 +32,7 @@ class Action extends Entity
      *
      * @var array
      */
-    protected $appends = ['action_at'];
+    protected $appends = ['action_at', 'action_at_date', 'action_at_humans'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -53,6 +53,38 @@ class Action extends Entity
             }
 
             return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->format('d-M-y \- h:i A');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getActionAtDateAttribute()
+    {
+        if($this->pivot) {
+            if($this->pivot->action_at == '0000-00-00 00:00:00') {
+                return '';
+            }
+
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->format('d-M-y');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getActionAtHumansAttribute()
+    {
+        if($this->pivot) {
+            if($this->pivot->action_at == '0000-00-00 00:00:00') {
+                return '';
+            }
+
+            return ucfirst(Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->diffForHumans());
         }
 
         return '';

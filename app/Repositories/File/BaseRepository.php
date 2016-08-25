@@ -41,7 +41,7 @@ class BaseRepository
      */
     public function isValidMove(UploadedFile $file = null, $path, $name)
     {
-        if(! is_null($file) && $file->isValid()){
+        if(! is_null($file) && $file->isValid()) {
             return $file->move($path, $name);
         }
 
