@@ -170,6 +170,7 @@
 
             $("#form-create-contact-publisher").click(function() {
                 var url = $('#publisherModal #newContact').data('url');
+                console.log(url);
 
                 var parameters = {
                     'action[id]':           $("#modal_contact_action_id").val(),

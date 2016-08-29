@@ -205,10 +205,10 @@
                 </div>
 
                 <div class="row wrapper border-bottom white-bg page-heading">
-                    <div class="col-lg-10">
+                    <div class="col-lg-10 col-sm-8 col-xs-6">
                         @yield('breadcrumbs', Breadcrumbs::render('home'))
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
                         <div class="title-action">
                             @yield('action')
                         </div>

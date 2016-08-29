@@ -20,29 +20,13 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-12" id="table-intro">
-                        <div class="col-sm-2">
+                        <div class="col-sm-3 col-md-2">
                             <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable">0</span></p>  
-                        </div>
-                        <div class="col-sm-10 timeline">
-                            <div class="linea"></div>
-                            <div class="states-table">
-                                <div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-child"></i></button>
-                                    <p class="steps-name">Registro inicial</p>
-                                </div>
-                                <div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-envelope"></i></button>
-                                    <p class="steps-name">Validación de email</p>
-                                </div><div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-edit"></i></button>
-                                    <p class="steps-name">Complementario</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro</label>
                             <div class="input-daterange input-group" id="datepicker" data-column="1">
@@ -52,10 +36,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         {!! Field::select('registration_states', $registrationStates, ['empty' => 'Todos']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="intention_created_at">
                             <label class="control-label">Fecha de Leads</label>
                             <div class="input-daterange input-group" id="datepicker" data-column="14">
@@ -67,10 +51,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         {!! Field::select('cities', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         {!! Field::select('economic_activities', $economicActivities, ['empty' => 'Todas las Actividades']) !!}
                     </div>
                 </div>
@@ -180,7 +164,8 @@
             });
 
             $("#form-create-contact-advertiser").click(function() {
-                var url = $('#advertiserModal #newContact').data('url');
+                var url = $('#advertiserModal #newContact').attr('data-url');
+                console.log(url);
 
                 var parameters = {
                     'action[id]':           $("#modal_contact_action_id").val(),
