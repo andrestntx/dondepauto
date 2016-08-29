@@ -6,9 +6,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entities\User;
+use App\Entities\Platform\User as UserPlatform;
 use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\StoreRequest;
 use App\Http\Requests\RUser\UpdateRequest;
+use App\Services\MailchimpService;
 use App\Services\UserService;
 
 class UsersController extends ResourceController
@@ -28,13 +30,18 @@ class UsersController extends ResourceController
      * @var string
      */
     protected $modelName = "user";
+
+    protected $mailchimpService;
+
     /**
      * UsersController constructor.
      * @param UserService $service
+     * @param MailchimpService $mailchimpService
      */
-    function __construct(UserService $service)
+    function __construct(UserService $service, MailchimpService $mailchimpService)
     {
         $this->service = $service;
+        $this->mailchimpService = $mailchimpService;
     }
     
     /**
@@ -113,5 +120,16 @@ class UsersController extends ResourceController
     public function destroy(User $user)
     {
         $this->service->deleteModel($user);
+    }
+
+
+    /**
+     * @param UserPlatform $user
+     * @return array
+     */
+    public function syncMailchimp(UserPlatform $user)
+    {
+        $this->mailchimpService->syncUser($user);
+        return ['success' => 'true'];
     }
 }

@@ -29,6 +29,11 @@ Route::post('medios/login/{publishers}', [
     'as' => 'medios.platform.login'
 ]);
 
+Route::post('mailchimp/sync/{publishers}', [
+    'uses' => 'Admin\UsersController@syncMailchimp',
+    'as' => 'mailchimp.sync'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 

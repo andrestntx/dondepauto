@@ -179,6 +179,21 @@ class MailchimpService
     /**
      * @param User $user
      */
+    function syncUser(User $user)
+    {
+        if($user->isPublisher()) {
+            \Log::info('medio');
+            $this->syncPublisher($user);
+        }
+        else {
+            \Log::info('anunciante');
+            $this->syncAdvertiser($user);
+        }
+    }
+
+    /**
+     * @param User $user
+     */
     function syncAdvertiser(User $user)
     {
         $this->syncMember($user,[
