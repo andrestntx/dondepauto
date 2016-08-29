@@ -18,10 +18,12 @@ use App\Services\MailchimpService;
 use App\Services\MixpanelService;
 use App\Services\ProposalService;
 use App\Services\UserService;
+use App\Services\Platform\UserService as UserPlatformService;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class AdvertiserFacade
+class AdvertiserFacade extends UserFacade
 {
     protected $advertiserService;
     protected $emailService;
@@ -29,12 +31,11 @@ class AdvertiserFacade
     protected $mixpanelService;
     protected $mailchimpService;
     protected $userService;
-    protected $contactService;
 
     public function __construct(AdvertiserService $advertiserService, EmailService $emailService, 
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, ProposalService $proposalService, UserService $userService,
-                                ContactService $contactService)
+                                ContactService $contactService, UserPlatformService $userPlatformService)
     {
         $this->advertiserService = $advertiserService;
         $this->emailService = $emailService;
@@ -42,8 +43,9 @@ class AdvertiserFacade
         $this->mixpanelService = $mixpanelService;
         $this->mailchimpService = $mailchimpService;
         $this->proposalService = $proposalService;
-        $this->userService = $userService;
-        $this->contactService = $contactService;
+        $this->userService = $userService;;
+
+        parent::__construct($userPlatformService, $contactService);
      }
 
     /**
@@ -76,29 +78,6 @@ class AdvertiserFacade
         return $this->proposalService->search($advertiser);
     }
 
-
-    /**
-     * @param Advertiser $advertiser
-     * @param array $data
-     * @return mixed|null
-     */
-    public function createContact(Advertiser $advertiser, array $data)
-    {
-        if(array_key_exists('action', $data) && array_key_exists('comments', $data)) {
-            $contact = $this->advertiserService->createContact($advertiser, $data['comments']);
-
-            if( ! empty($data['action']['id'])) {
-                $this->contactService->addAction($contact, $data['action']);
-            }
-
-            $contact->load('actions');
-
-            return $contact;
-        }
-
-        return null;
-    }
-
     /**
      * @param array $data
      * @return mixed
@@ -106,13 +85,21 @@ class AdvertiserFacade
     public function createModel(array $data)
     {
         $advertiser = $this->advertiserService->createModel($data);
-        $this->createContact($advertiser, $data);
         $confirmation = $this->confirmationService->generateConfirmation($advertiser);
         $this->emailService->sendAdvertiserInvitation($advertiser, $confirmation->code);
         $this->mixpanelService->registerUser($advertiser);
         $this->mailchimpService->syncAdvertiser($advertiser);
         
         return $advertiser;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function createAdvertiser(array $data)
+    {
+        $publisher = $this->createModel($data);
+        $this->createContact($publisher, $data);
     }
 
     /**

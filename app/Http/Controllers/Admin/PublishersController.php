@@ -135,8 +135,8 @@ class PublishersController extends ResourceController
      */
     public function store(StoreRequest $request)
     {
-        $this->facade->createModel($request->all());
-        return $this->redirect('index');
+        $this->facade->createPublisher($request->all());
+        return ['success' => 'true'];
     }
 
     /**

@@ -143,7 +143,25 @@ class PUser  extends Model {
     public function hasState($state)
     {
         if(trim($state)) {
-            if($this->state_id == $state) {
+            if($state == 'agreement' && $this->signed_agreement) {
+                return true;
+            }
+            else if($state == 'docs' && $this->has_documents) {
+                return true;
+            }
+            else if($state == 'letter' && ($this->has_letter || $this->has_documents)) {
+                return true;
+            }
+            else if($state == 'offers' && $this->has_offers) {
+                return true;
+            }
+            else if($state == 'complete-data' && $this->email_validated && $this->complete_data) {
+                return true;
+            }
+            else if($state == 'incomplete' && ! $this->complete_data && $this->email_validated) {
+                return true;
+            }
+            else if($state == 'email-no-validated' && ! $this->email_validated) {
                 return true;
             }
 

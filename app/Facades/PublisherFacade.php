@@ -10,6 +10,7 @@ namespace App\Facades;
 
 use App\Entities\Platform\User;
 use App\Services\ConfirmationService;
+use App\Services\ContactService;
 use App\Services\DateService;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
@@ -19,12 +20,14 @@ use App\Services\UserService;
 use App\Services\PublisherService;
 use App\Services\MixpanelService;
 use App\Services\Space\SpaceService;
+use App\Services\Platform\UserService as UserPlatformService;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
-class PublisherFacade
+class PublisherFacade extends UserFacade
 {
     protected $service;
     protected $emailService;
@@ -40,7 +43,8 @@ class PublisherFacade
     public function __construct(PublisherService $service, EmailService $emailService, UserService $userService,
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService,
-                                RepresentativeService $representativeService, DateService $dateService)
+                                RepresentativeService $representativeService, DateService $dateService,
+                                ContactService $contactService, UserPlatformService $userPlatformService)
     {
         $this->service = $service;
         $this->emailService = $emailService;
@@ -52,6 +56,8 @@ class PublisherFacade
         $this->userService = $userService;
         $this->representativeService = $representativeService;
         $this->dateService = $dateService;
+
+        parent::__construct($userPlatformService, $contactService);
     }
 
     /**
@@ -85,8 +91,17 @@ class PublisherFacade
         $this->emailService->sendPublisherInvitation($publisher, $confirmation->code);
         $this->mixpanelService->registerUser($publisher);
         $this->mailchimpService->syncPublisher($publisher);
-        
+
         return $publisher;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function createPublisher(array $data)
+    {
+        $publisher = $this->createModel($data);
+        $this->createContact($publisher, $data);
     }
 
     /**
