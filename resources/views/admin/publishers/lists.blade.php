@@ -89,6 +89,7 @@
                             <th>Nombre</th>
                             <th>Estado</th>
                             <th>Ofertas</th>
+                            <th>Sesiones</th>
                             <th>Contactos</th>
                         </tr>
                         </thead>
@@ -100,6 +101,7 @@
                             <th>Nombre</th>
                             <th>Estado</th>
                             <th>Ofertas</th>
+                            <th>Sesiones</th>
                             <th>Contactos</th>
                         </tr>
                         </tfoot>

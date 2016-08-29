@@ -25,7 +25,6 @@ class PublisherRepository extends BaseRepository
         return 'App\Entities\Views\Publisher';
     }
 
-
     /**
      * @param array $columns
      * @param array $search
@@ -42,7 +41,7 @@ class PublisherRepository extends BaseRepository
                     $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at', 'id_ciudad_LI as city_id');
                 }, 'contacts' => function($query) {
                     $query->orderBy("created_at", "desc");
-                },'contacts.actions'/*, 'spaces.city' => function($query) {
+                },'contacts.actions', 'logs'/*, 'spaces.city' => function($query) {
                     $query->select('nombre_ciudad_LI as name', 'id_ciudad_LI');
                 }*/
             ]);

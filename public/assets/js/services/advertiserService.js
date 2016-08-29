@@ -27,6 +27,7 @@ var AdvertiserService = function() {
                 { "data": "cel"},
                 { "data": "state" },
                 { "data": "count_by_contact_intentions" },
+                { "data": "count_logs" , "name": "count_logs" },
                 { "data": "contacts" },
 
                 { "data": "state_id", "name": "state_id", "searchable": true, "visible": false },
@@ -43,13 +44,13 @@ var AdvertiserService = function() {
                     "searchable": false
                 },
                 {
-                    "targets": [3,5,11,12,13,14,15,16,17],
+                    "targets": [3,5,12,13,14,15,16,17,18],
                     "visible": false,
                     "searchable": false
                 },
                 {
                     className: "text-center",
-                    "targets": [0,8,9]
+                    "targets": [0,8,9,10]
                 },
                 {
                     className: "text-small",
@@ -93,10 +94,10 @@ var AdvertiserService = function() {
                 }
                 if(aData.contacts && aData.contacts.length > 0) {
                     div = UserService.getLastContact(aData.contacts);
-                    $('td:eq(8)', nRow).html(div.html());
+                    $('td:eq(9)', nRow).html(div.html());
                 }
                 else {
-                    $('td:eq(8)', nRow).html('0');    
+                    $('td:eq(9)', nRow).html('0');    
                 }
 
             },
@@ -107,9 +108,9 @@ var AdvertiserService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states",11);
-        UserService.initSimpleSearchSelect('#cities', 12);
-        UserService.initSimpleSearchSelect("#economic_activities", 14);
+        UserService.initSimpleSearchSelect("#registration_states",12);
+        UserService.initSimpleSearchSelect('#cities', 13);
+        UserService.initSimpleSearchSelect("#economic_activities", 15);
 
         $("#advertisers-datatable_filter input").unbind();
 
@@ -128,7 +129,7 @@ var AdvertiserService = function() {
     }
 
     function getHtmlIntentionStates(aData) {
-        var html        = $('<div style="width:70px;"></div>').addClass('text-center');
+        var html        = $('<div style="width:70px; margin:0 auto;"></div>').addClass('text-center');
         var interest    = $('<span style="margin: 0 1px;"></span>')
                             .addClass('badge badge-default')
                             .text(aData.count_interest_intentions)
