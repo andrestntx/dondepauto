@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('action')
-    <a href="{{ route('medios.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Crear Medio</a>
+    <button class="btn btn-primary" id="create-publisher"><i class="fa fa-plus"> </i> Crear Medio</button>
 @endsection
 
 @section('breadcrumbs')
@@ -26,35 +26,11 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-12" id="table-intro">
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable"></span></p>  
                         </div>
-                        <div class="col-sm-10 timeline">
-                            <div class="linea"></div>
-                            <div class="states-table">
-                                <div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-child"></i></button>
-                                    <p class="steps-name">Registro inicial</p>
-                                </div>
-                                <div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-envelope"></i></button>
-                                    <p class="steps-name">Validación de email</p>
-                                </div><div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-edit"></i></button>
-                                    <p class="steps-name">Complementario</p>
-                                </div>
-                                <div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-file-text-o"></i></button>
-                                    <p class="steps-name">Firmó acuerdo</p>
-                                </div>
-                                <div class="state text-center">
-                                    <button type="button" class="steps-img btn-circle btn btn-default"><i class="fa fa-tags"></i></button>
-                                    <p class="steps-name">Ofertó</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro inicial</label>
                             <div class="input-daterange input-group" id="datepicker_created_at_start" data-column="1">
@@ -64,10 +40,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         {!! Field::select('registration_states', $registrationStates, ['empty' => 'Ver Todos']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label"> <input type="checkbox" class="i-checks" id="signed_agreement"> Firma de acuerdo</label>
                             <div class="input-daterange input-group" id="datepicker_agreement" data-column="10">
@@ -79,10 +55,10 @@
                     </div>                
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         {!! Field::select('with_spaces', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_offer_at">
                             <label class="control-label"> <input type="checkbox" class="i-checks" id="offer"> Ofertó</label>
                             <div class="input-daterange input-group" id="datepicker_offer" data-column="13">
@@ -92,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                   {{--  <div class="col-md-4">
+                   {{--  <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_last_login_at">
                             <label class="control-label">Fecha de último login</label>
                             <div class="input-daterange input-group" id="datepicker">
@@ -134,6 +110,7 @@
     </div>
 
     @include('admin.publishers.modal')
+    @include('admin.publishers.modal-create')
     @include('admin.publishers.modal-contact')
 @endsection
 
@@ -166,6 +143,63 @@
 
             $('.datetimepicker').datetimepicker({
                 format: 'YYYY-MM-DD hh:mm A'
+            });
+
+            $("#create-publisher").click(function(){
+                $("#publisherCreateModal").modal();
+            });
+
+            $("#form-create-publisher").click(function() {
+                var url = $(this).attr('data-url');
+
+                var parameters = {
+                    'name':         $("#modal_name").val(),
+                    'cel':          $("#modal_cel").val(),
+                    'email':        $("#modal_email").val(),
+                    'company':      $("#modal_company").val(),
+                    'action[id]':   $("#modal_publisher_contact_action_id").val(),
+                    'action[action_at]': $("#modal_publisher_contact_action_date").val(),
+                    'comments':     $("#modal_publisher_contact_comments").val(),
+                    '_token':       $("#csrf_token").val()
+                };
+
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El medio será creado',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#18A689",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {    
+                        $.post(url, parameters, function( data ) {
+                            $("#publisherCreateModal input").val("");
+                            $("#publisherCreateModal textarea").val("");
+
+                            if(data.success) {
+                                swal({
+                                    "title": "Medio creado", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+                                PublisherService.reload();
+                                $('#publisherCreateModal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        });
+                    }
+                });
             });
 
             $("#form-create-contact-publisher").click(function() {

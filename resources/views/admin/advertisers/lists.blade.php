@@ -138,27 +138,54 @@
             });
 
             $("#form-create-advertiser").click(function() {
-                var url = $(this).data('url');
+                var url = $(this).attr('data-url');
+
                 var parameters = {
                     'name':         $("#modal_name").val(),
                     'cel':          $("#modal_cel").val(),
                     'email':        $("#modal_email").val(),
                     'company':      $("#modal_company").val(),
-                    'action[id]':   $("#modal_action_id").val(),
-                    'action[action_at]': $("#modal_action_date").val(),
-                    'comments':     $("#modal_comments").val(),
+                    'action[id]':   $("#modal_advertiser_contact_action_id").val(),
+                    'action[action_at]': $("#modal_advertiser_contact_action_date").val(),
+                    'comments':     $("#modal_advertiser_contact_comments").val(),
                     '_token':       $("#csrf_token").val()
                 };
 
-                $.post(url, parameters, function( data ) {
-                    $("#advertiserCreateModal input").val("");
-                    $("#advertiserCreateModal textarea").val("");
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El anunciante será creado',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#18A689",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {    
+                        $.post(url, parameters, function( data ) {
+                            $("#advertiserCreateModal input").val("");
+                            $("#advertiserCreateModal textarea").val("");
 
-                    if(data.success) {
-                        AdvertiserService.reload();
-                    }
-                    else {
-                        console.log('error');
+                            if(data.success) {
+                                swal({
+                                    "title": "Anunciante creado", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+                                AdvertiserService.reload();
+                                $('#advertiserCreateModal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        });
                     }
                 });
             });

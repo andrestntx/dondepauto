@@ -23,7 +23,7 @@ class ListComposer extends BaseComposer
      */
     public function compose(View $view)
     {
-        $registrationStates = \Lang::get('states.registration');
+        $registrationStates = \Lang::get('states.publisher');
         $cities = $this->cityRepository->citiesWithSpaces();
 
         $view->with([
