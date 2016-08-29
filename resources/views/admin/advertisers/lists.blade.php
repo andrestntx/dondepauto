@@ -72,6 +72,7 @@
                             <th>Celular</th>
                             <th>Estado</th>
                             <th>Inten.</th>
+                            <th>Sesiones</th>
                             <th>Contactos</th>
                         </tr>
                         </thead>
@@ -87,6 +88,7 @@
                             <th>Celular</th>
                             <th>Estado</th>
                             <th>Inten.</th>
+                            <th>Sesiones</th>
                             <th>Contactos</th>
                         </tr>
                         </tfoot>

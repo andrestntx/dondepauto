@@ -23,6 +23,7 @@ var PublisherService = function() {
                 { "data": "first_name" , "name": "first_name" },
                 { "data": "state" , "name": "state" },
                 { "data": "count_spaces" , "name": "count_spaces" },
+                { "data": "count_logs" , "name": "count_logs" },
                 { "data": "comments" , "name": "comments" },
 
                 { "data": "state_id", "name": "state_id"},
@@ -36,18 +37,18 @@ var PublisherService = function() {
             ],
             "columnDefs": [
                 {
-                    "targets": [0,1,2,3,4,5,6],
+                    "targets": [0,1,2,3,4,5,6,7],
                     "searchable": false,
                     "visible": true
                 },
                 {
-                    "targets": [7,8,9,10,11,12,13],
+                    "targets": [8,9,10,11,12,13,14],
                     "searchable": false,
                     "visible": false
                 },
                 {
                     className: "text-center",
-                    "targets": [0,1,4,5]
+                    "targets": [0,1,4,5,6]
                 }
             ],
             "language": {
@@ -87,7 +88,7 @@ var PublisherService = function() {
 
                 if(aData.contacts && aData.contacts.length > 0) {
                     div = UserService.getLastContact(aData.contacts);
-                    $('td:eq(6)', nRow).html(div.html());
+                    $('td:eq(7)', nRow).html(div.html());
                 }
             },
             "drawCallback": function(settings, json) {
@@ -97,8 +98,8 @@ var PublisherService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states", 7);
-        UserService.initSimpleSearchSelect('#with_spaces', 8);
+        UserService.initSimpleSearchSelect("#registration_states", 8);
+        UserService.initSimpleSearchSelect('#with_spaces', 9);
 
         $("#publishers-datatable_filter input").unbind();
 
@@ -120,9 +121,9 @@ var PublisherService = function() {
             $('#registration_states option[value=complete-data]').prop('selected', true);
             $('#registration_states').prop('disabled', true);
 
-            table.column(11)
+            table.column(14)
                     .search('1')
-                .column(7)
+                .column(8)
                     .search('complete-data')
                 .draw();
         });
@@ -143,11 +144,11 @@ var PublisherService = function() {
 
             $('#registration_states').prop('disabled', false);
 
-            table.column(11)
+            table.column(12)
                     .search('0')
-                .column(7)
+                .column(8)
                     .search(optionState)
-                .column(12)
+                .column(13)
                     .search(' , ')
                 .draw();
         });
@@ -165,9 +166,9 @@ var PublisherService = function() {
             $('#registration_states option[value=complete-data]').prop('selected', true);
             $('#registration_states').prop('disabled', true);
 
-            table.column(9)
+            table.column(10)
                     .search('true')
-                .column(7)
+                .column(8)
                     .search(optionState)
                 .draw();
         });
@@ -189,9 +190,9 @@ var PublisherService = function() {
 
             $('#registration_states').prop('disabled', false);
 
-            table.column(9)
+            table.column(10)
                     .search('')
-                .column(7)
+                .column(8)
                     .search(optionState)
                 .draw();
             

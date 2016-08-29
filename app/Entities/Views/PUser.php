@@ -87,6 +87,14 @@ class PUser  extends Model {
     /**
      * @return mixed
      */
+    public function getCountLogsAttribute()
+    {
+        return $this->logs->count();
+    }
+
+    /**
+     * @return mixed
+     */
     public function getLastLog()
     {
         return $this->logs->max('fecha_login_LI');
