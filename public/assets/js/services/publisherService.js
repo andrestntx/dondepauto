@@ -357,7 +357,7 @@ var PublisherService = function() {
                                 });
 
                                 table.search(' ').draw();
-                                $('.modal').modal('toggle');
+                                $('#publisherModal').modal('toggle');
                             }
                             else {
                                 swal({
