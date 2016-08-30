@@ -65,8 +65,13 @@
                         <li class="nav-header">
                             <div class="dropdown profile-element"> <span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ $publisher->name }}</strong>
-                                     </span> <span class="text-muted text-xs block">{{ $publisher->company }} </span> </a>
+                                    <span class="clear"> 
+                                        <span class="block m-t-xs"> 
+                                            <strong class="font-bold">{{ $publisher->name }}</strong>
+                                        </span> 
+                                        <span class="text-muted text-xs block">{{ $publisher->company }} </span> 
+                                    </span>
+                                </a>
                             </div>
                             <div class="logo-element">
                                 DP+

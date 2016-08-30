@@ -199,6 +199,11 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.agreement.complete.upload'
         ]);
 
+        Route::post('medios/{publishers}/logo', [
+            'uses' => 'Publisher\PublishersController@uploadLogo',
+            'as' => 'medios.logo.upload'
+        ]);
+
         Route::get('medios/{publishers}/acuerdo/carta', [
             'uses' => 'Publisher\PublishersController@getLetter',
             'as' => 'medios.agreement.letter'

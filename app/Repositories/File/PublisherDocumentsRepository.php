@@ -137,11 +137,33 @@ class PublisherDocumentsRepository extends BaseRepository
      * @param User $publisher
      * @param UploadedFile $document
      * @param $name
+     * @param string $extension
+     * @return null|\Symfony\Component\HttpFoundation\File\File
+     */
+    protected function saveUploadedFile(User $publisher, UploadedFile $document = null, $name, $extension = 'pdf')
+    {
+        return $this->isValidMove($document, $this->getPathPublisher($publisher), $name . '.' . $extension);
+    }
+
+    /**
+     * @param User $publisher
+     * @param UploadedFile $document
+     * @return null|\Symfony\Component\HttpFoundation\File\File
+     */
+    protected function saveLogo(User $publisher, UploadedFile $document = null)
+    {
+        return $this->saveUploadedFile($publisher, $document, 'logo', 'jpg');
+    }
+
+    /**
+     * @param User $publisher
+     * @param UploadedFile $document
+     * @param $name
      * @return null|\Symfony\Component\HttpFoundation\File\File
      */
     protected function saveDocument(User $publisher, UploadedFile $document = null, $name)
     {
-        return $this->isValidMove($document, $this->getPathPublisher($publisher), $name . '.pdf');
+        return $this->saveUploadedFile($publisher, $document, $name);
     }
 
     /**

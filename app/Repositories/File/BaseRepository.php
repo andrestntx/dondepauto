@@ -82,4 +82,13 @@ class BaseRepository
 
         return '/' . $urlFile;
     }
+
+    /**
+     * @param $path
+     * @return mixed
+     */
+    public function hasUploadedFile($path)
+    {
+        return \File::exists($path);
+    }
 }

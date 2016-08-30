@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Entities\Platform\User;
+use App\Repositories\File\LogosRepository;
 use App\Repositories\File\PublisherDocumentsRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
@@ -19,19 +20,22 @@ class PublisherService extends ResourceService
 {
     protected $viewRepository;
     protected $publisherDocumentsRepository;
+    protected $logosRepository;
 
     /**
      * UserService constructor.
      * @param PublisherRepository $viewRepository
      * @param UserRepository $repository
      * @param PublisherDocumentsRepository $publisherDocumentsRepository
+     * @param LogosRepository $logosRepository
      */
     function __construct(PublisherRepository $viewRepository, UserRepository $repository,
-                         PublisherDocumentsRepository $publisherDocumentsRepository)
+                         PublisherDocumentsRepository $publisherDocumentsRepository, LogosRepository $logosRepository)
     {
         $this->viewRepository = $viewRepository;
         $this->repository = $repository;
         $this->publisherDocumentsRepository = $publisherDocumentsRepository;
+        $this->logosRepository = $logosRepository;
     }
     
     /**
@@ -161,6 +165,15 @@ class PublisherService extends ResourceService
     public function setAgreement(User $user, $agreement)
     {
         return $this->repository->setAgreement($user, $agreement);
+    }
+
+    /**
+     * @param User $user
+     * @param UploadedFile $logo
+     */
+    public function saveLogo(User $user, UploadedFile $logo)
+    {
+        $this->logosRepository->save($user, $logo);
     }
 
 }
