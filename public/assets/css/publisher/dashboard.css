@@ -173,6 +173,14 @@ hr.separator-dashbaord {
     border-color: rgba(187, 182, 182, 0.6);
 }
 
+.dashboard .ibox-content.ibox-logo {
+    padding: 5px 20px 0 20px;
+}
+
+.dashboard .ibox-content.ibox-logo h1 {
+    margin-bottom: 0;
+    margin-top: 4px;
+}
 
 .dashboard .ibox-dashboard .ibox-footer {
     border-style: solid;

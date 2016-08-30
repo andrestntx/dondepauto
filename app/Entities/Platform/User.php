@@ -4,6 +4,7 @@ namespace App\Entities\Platform;
 
 use App\Entities\Views\Advertiser;
 use App\Entities\Views\Publisher;
+use App\Repositories\File\LogosRepository;
 use App\Repositories\File\PublisherDocumentsRepository;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
@@ -402,6 +403,24 @@ class User extends EntityAuth
         }
 
         return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function hasLogo()
+    {
+        $logosRepository = new LogosRepository();
+        return $logosRepository->hasLogo($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogoAttribute()
+    {
+        $logosRepository = new LogosRepository();
+        return $logosRepository->getLogoUrl($this);
     }
 
     /**

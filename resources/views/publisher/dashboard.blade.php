@@ -14,10 +14,10 @@
     <div class="se-pre-con"></div>
     <div class="dashboard">
         <div class="ibox float-e-margins publihser-name">
-            <div class="ibox-content">
+            <div class="ibox-content ibox-logo">
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1 text-center">
-                        <h1 id="avgPoints" data-points="{{ $publisher->avg_points }}">{{ $publisher->company }}</h1>
+                    <div class="col-md-10 col-md-offset-1 text-center" id="avgPoints" data-points="{{ $publisher->avg_points }}">
+                        @include('publisher.upload-logo')
                     </div>
                 </div>  
             </div>          
@@ -424,6 +424,49 @@
 
         $(document).ready(function(){
             $('.pieProgress').asPieProgress('go', $("#avgPoints").data('points'));
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    
+                    reader.onload = function (e) {
+                        $('#image-upload-logo')
+                            .show()
+                            .attr('src', e.target.result);
+
+                        $("#publisher-company").hide();
+
+                        $("#sk-spinner-logo").hide();
+                    }
+                    
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+            $("#file-input-logo").change(function(){
+
+                var form = $("form.logo-upload");
+                var formData = new FormData(form[0]);
+                var input = this;
+
+                $("#sk-spinner-logo").show();
+
+                $.ajax({
+                    type:'POST',
+                    url: form.attr('action'),
+                    data:formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    success:function(data){
+                        readURL(input);
+                        console.log(data);
+                    },
+                    error: function(data){
+                        console.log("error");
+                    }
+                });
+            });
         });
     </script>
 @endsection

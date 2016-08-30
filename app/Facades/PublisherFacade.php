@@ -272,4 +272,13 @@ class PublisherFacade extends UserFacade
         $this->emailService->notifyUserDelete($user);
         $this->service->deleteModel($user);
     }
+
+    /**
+     * @param User $user
+     * @param UploadedFile $logo
+     */
+    public function saveLogo(User $user, UploadedFile $logo)
+    {
+        $this->service->saveLogo($user, $logo);
+    }
 }

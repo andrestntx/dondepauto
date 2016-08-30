@@ -213,4 +213,13 @@ class PublishersController extends \App\Http\Controllers\Admin\PublishersControl
         \Log::info($request->all());
         $this->facade->saveDocuments($user, $request->file('commerce'), $request->file('rut'), $request->file('bank'),$request->file('letter'));
     }
+
+
+    public function uploadLogo(Request $request, User $publisher)
+    {
+        $this->facade->saveLogo($publisher, $request->file('logo'));
+        return ['success' => 'true'];
+    }
+
+
 }
