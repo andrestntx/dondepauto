@@ -199,6 +199,22 @@
                                     closeOnConfirm: true,
                                 });
                             }
+                        }).fail(function(data) {
+                            if(data.status == 422) {
+                                swal({
+                                    "title": "El medio ya existe", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });    
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                            
                         });
                     }
                 });

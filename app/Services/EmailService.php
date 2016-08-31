@@ -25,7 +25,7 @@ class EmailService
         
         Mail::send('emails.' . $view, ['user' => $user, 'code' => $code], function ($m) use ($user, $fromEmail, $fromName) {
             $m->from($fromEmail, $fromName);
-            $m->to($user->email, $user->name)->subject('Te invitamos a unirte a DondePauto.co');
+            $m->to($user->email, $user->name)->subject($user->first_name .  ' activa tu cuenta en DóndePauto');
         });
     }
 
@@ -44,7 +44,7 @@ class EmailService
      */
     public function sendAdvertiserInvitation(User $advertiser, $code)
     {
-        $this->sendInvitation($advertiser, 'confirm_advertiser', $code);
+        $this->sendInvitation($advertiser, 'advertiser.confirm', $code);
     }
 
     /**
