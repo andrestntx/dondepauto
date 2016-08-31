@@ -199,4 +199,38 @@ class UserRepository extends BaseRepository
         $publisher->signed_agreement = $agreement;
         return $publisher->save();
     }
+
+
+    /**
+     * @param UserPlatform $user
+     * @return int
+     */
+    public function trackLogin(UserPlatform $user)
+    {
+        $code = rand(1,9000000000000);
+
+        $user->logs()->create([
+            'code_log_LI' => $code,
+            'fecha_login_LI' => Carbon::now()->toDateTimeString(),
+            'sesion_abandonada_LI' => true
+        ]);
+
+        return $code;
+    }
+
+    /**
+     * @param UserPlatform $user
+     * @param $code
+     */
+    public function trackLogout(UserPlatform $user, $code)
+    {
+        \Log::info('logout');
+        $log = $user->logs()->where('code_log_LI', $code)->first();
+
+        if($log) {
+            $log->logout_at = Carbon::now()->toDateTimeString();
+            $log->abandoned = false;
+            $log->save();
+        }
+    }
 }

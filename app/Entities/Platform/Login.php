@@ -26,14 +26,33 @@ class Login extends Entity
     protected $primaryKey = 'id_log_LI';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['fecha_login_LI'];
+    protected $dates = ['fecha_login_LI', 'fecha_logout_LI'];
 
-    protected $databaseTranslate  = ['logit_at' => 'fecha_login_LI'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'code_log_LI', 'fecha_login_LI', 'sesion_abandonada_LI'
+    ];
 
+    protected $databaseTranslate  = ['login_at' => 'fecha_login_LI', 'logout_at' => 'fecha_logout_LI', 'abandoned' => 'sesion_abandonada_LI'];
+
+    /**
+     * @return mixed
+     */
     public function getLoginAtDatatableAttribute()
     {
         return $this->login_at->format('d/m/Y');
