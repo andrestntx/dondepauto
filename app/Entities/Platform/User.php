@@ -209,6 +209,14 @@ class User extends EntityAuth
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function logs()
+    {
+        return $this->hasMany('App\Entities\Platform\Login', 'id_user_log_LI', 'id_us_LI');
+    }
+
+    /**
      * @return mixed
      */
     public function getCountSpacesAttribute()

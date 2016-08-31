@@ -35,4 +35,24 @@ class UserService extends ResourceService
     {
         return $this->repository->createContact($user, $comments);
     }
+
+
+    /**
+     * @param UserPlatform $user
+     * @return int
+     */
+    public function trackLogin(UserPlatform $user)
+    {
+        return $this->repository->trackLogin($user);
+    }
+
+
+    /**
+     * @param UserPlatform $user
+     * @param $code
+     */
+    public function trackLogout(UserPlatform $user, $code)
+    {
+        $this->repository->trackLogout($user, $code);
+    }
 }

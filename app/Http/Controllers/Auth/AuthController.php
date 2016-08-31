@@ -105,7 +105,6 @@ class AuthController extends Controller
         return 'userPlatform';
     }
 
-
     /**
      * Handle a login request to the application.
      *
@@ -132,7 +131,7 @@ class AuthController extends Controller
 
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
             if(auth()->user()->isPublisher() && auth()->user()->publisher) {
-                $this->mixpanelService->trackLogin(auth()->user()->publisher);
+                $this->publisherFacade->trackLogin(auth()->user()->publisher);
             }
 
             return $this->handleUserWasAuthenticated($request, $throttles);
@@ -140,7 +139,7 @@ class AuthController extends Controller
         elseif(Auth::guard('userPlatform')->attempt($credentialsPlatform, $request->has('remember'))) {
             $this->publisherFacade->loginPublisher(Auth::guard('userPlatform')->user(), $request->has('remember'));
             if(auth()->user()->isPublisher() && auth()->user()->publisher) {
-                $this->mixpanelService->trackLogin(auth()->user()->publisher);
+                $this->publisherFacade->trackLogin(auth()->user()->publisher);
             }
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
@@ -154,5 +153,21 @@ class AuthController extends Controller
         }
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        if(auth()->user()->isPublisher() && auth()->user()->publisher) {
+            $this->publisherFacade->trackLogout(auth()->user()->publisher);
+        }
+
+        Auth::guard($this->getGuard())->logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 }

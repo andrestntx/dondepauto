@@ -161,6 +161,17 @@ class PublisherFacade extends UserFacade
 
     /**
      * @param User $publisher
+     * @param $user
+     * @param bool $remember
+     */
+    protected function login(User $publisher, $user, $remember = false)
+    {
+        Auth::loginUsingId($user->id, $remember);
+        $this->trackLogin($publisher);
+    }
+
+    /**
+     * @param User $publisher
      * @param bool $remember
      * @return User
      */
@@ -172,7 +183,7 @@ class PublisherFacade extends UserFacade
             $user = $this->userService->createUserOfPublisher($publisher);
         }
 
-        Auth::loginUsingId($user->id, $remember);
+        $this->login($publisher, $user, $remember);
 
         return $publisher;
     }
@@ -280,5 +291,23 @@ class PublisherFacade extends UserFacade
     public function saveLogo(User $user, UploadedFile $logo)
     {
         $this->service->saveLogo($user, $logo);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function trackLogin(User $user)
+    {
+        $code = $this->userPlatformService->trackLogin($user);
+        $this->mixpanelService->trackLogin($user);
+        session(['login_code' => $code]);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function trackLogout(User $user)
+    {
+        $this->userPlatformService->trackLogout($user, session('login_code'));
     }
 }
