@@ -158,7 +158,15 @@
                                     </div>
 
                                     <div class="col-lg-12">
-                                        {!! Field::text('more_audiences', ['label' => 'Agrega más audiencias y etiquetas', 'ph' => 'Casados, Solteros, Constructores', 'required', 'class' => 'tags']) !!}
+                                        <div class="form-group">
+                                            {!! Form::label('more_audiences', 'Agrega más audiencias y etiquetas', ['class' => 'contro-label']) !!}
+
+                                            <div class="controls">
+                                                {!! Form::text('dummy', null, ['style' => 'height: 1px; width: 1px; border: 0px !important; margin:0; padding:0;']) !!}
+
+                                                {!! Form::text('more_audiences', null, ['ph' => 'Casados, Solteros, Constructores', 'class' => 'tags']) !!}
+                                            </div>
+                                        </div>
                                     </div>
                                    
                                     <div class="col-md-6">
