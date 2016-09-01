@@ -86,6 +86,17 @@ var PublisherService = function() {
                     );
                 }
 
+                if(aData.count_logs > 0) {
+                    var htmlLogs = $('<span></span>')
+                        .addClass('badge badge-info')
+                        .text(aData.count_logs)
+                        .attr('data-toggle', 'tooltip')
+                        .attr('data-placement', 'top')
+                        .attr('title', aData.last_login_at); 
+
+                    $('td:eq(6)', nRow).html(htmlLogs);
+                }
+
                 if(aData.contacts && aData.contacts.length > 0) {
                     div = UserService.getLastContact(aData.contacts);
                     $('td:eq(7)', nRow).html(div.html());

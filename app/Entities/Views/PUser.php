@@ -114,6 +114,19 @@ class PUser  extends Model {
     }
 
     /**
+     * @return string
+     */
+    public function getLastLoginAtAttribute()
+    {
+        if($lasLog = $this->getLastLog())
+        {
+            return $lasLog->format('d-M-y') . ' / ' . ucfirst($lasLog->diffForHumans());
+        }
+
+        return '';
+    }
+
+    /**
      * @return mixed
      */
     public function getCreatedAtDatatableAttribute()
