@@ -140,6 +140,11 @@ $(document).ready(function(){
       return this.optional( element ) || /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/.test( value );
     }
 
+    $.validator.methods.tagsinput = function(value, element) { //add custom method
+        console.log('check ' + $("#more_audiences_tagsinput").find(".tag").length);
+        return ($("#more_audiences_tagsinput").find(".tag").length > 2);
+    }
+
     $("#form-publish").steps({
         bodyTag: "fieldset",
         enableCancelButton: false,
@@ -329,6 +334,9 @@ $(document).ready(function(){
             audiences: {
                 required: true
             },
+            dummy: {
+                tagsinput: true
+            },
             cities: {
                 required: true
             },
@@ -367,6 +375,9 @@ $(document).ready(function(){
             },
             audiences: {
                 required: 'Selecciona al menos una audiencia'
+            },
+            dummy: {
+                tagsinput: 'Agrega al menos 3 audiencias adicionales o etiquetas'
             },
             cities: {
                 required: 'Selecciona al menos una ciudad'
