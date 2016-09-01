@@ -56,6 +56,18 @@ class PUser  extends Model {
     }
 
     /**
+     * @return string
+     */
+    public function getActivatedAtHumansAttribute()
+    {
+        if($this->activated_at) {
+            return $this->activated_at->format('d-M-y');
+        }
+
+        return '';
+    }
+
+    /**
      * @return array
      */
     public function getStatesAttribute()
@@ -64,12 +76,14 @@ class PUser  extends Model {
             'email' => [
                 'icon'  => 'fa fa-envelope',
                 'class' => $this->getClass($this->email_validated),
-                'text'  => 'Validación de email'
+                'text'  => 'Validación de email',
+                'date'  => $this->activated_at_humans
             ],
             'complete' => [
                 'icon'  => 'fa fa-edit',
                 'class' => $this->getClass($this->email_validated && $this->complete_data),
-                'text'  => 'Complementario'
+                'text'  => 'Complementario',
+                'date'  => 'sin fecha'
             ]
         ];
     }

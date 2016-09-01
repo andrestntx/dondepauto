@@ -273,7 +273,7 @@ var UserService = function() {
 	    						.addClass('steps-img btn-circle btn btn-' + state.class)
 	    						.attr('data-toggle', 'tooltip')
 	    						.attr('data-placement', 'top')
-	    						.attr('title', state.text)
+	    						.attr('title', state.text + ' / ' + state.date)
 	    						.append(i);
 
 	    		var div 	= $('<div></div>').addClass('state text-center').append(button).append(text);
@@ -297,7 +297,7 @@ var UserService = function() {
 	    						.addClass('steps-img btn-circle btn btn-' + state.class)
 	    						.attr('data-toggle', 'tooltip')
 	    						.attr('data-placement', 'top')
-	    						.attr('title', state.text)
+	    						.attr('title', state.text + ' / ' + state.date)
 	    						.append(i);
 
 	    		var div 	= $('<div></div>').addClass('text-center table-state').append(button);

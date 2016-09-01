@@ -45,22 +45,26 @@ class Publisher extends PUser
             'offers' => [
                 'icon'  => 'fa fa-tags',
                 'class' => $this->getClass($this->has_offers),
-                'text'  => 'Ofertó'
+                'text'  => 'Ofertó',
+                'date'  => $this->last_offer_at_humans
             ],
             'letter' => [
                 'icon'  => 'fa fa-file-o',
                 'class' => $this->getClass($this->has_letter || $this->has_documents),
-                'text'  => 'Carta'
+                'text'  => 'Carta',
+                'date'  => $this->letter_at
             ],
             'docs' => [
                 'icon'  => 'fa fa-file-pdf-o',
                 'class' => $this->getClass($this->has_documents),
-                'text'  => 'Documentos'
+                'text'  => 'Documentos',
+                'date'  => $this->documents_at
             ],
             'agreement' => [
                 'icon'  => 'fa fa-file-text-o',
                 'class' => $this->getClass($this->signed_agreement),
-                'text'  => 'Activo Proveedor'
+                'text'  => 'Activo Proveedor',
+                'date'  => $this->signed_at_humans
             ]
         ]);
     }
@@ -114,6 +118,19 @@ class Publisher extends PUser
         return '';
     }
 
+    /**
+     * @return string
+     */
+    public function getLastOfferAtHumansAttribute()
+    {
+        if($this->last_offer)
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->last_offer)->format('d-M-y');
+        }
+
+        return '';
+    }
+
     public function getSignedAgreementLangAttribute()
     {
         if($this->signed_agreement)
@@ -135,6 +152,19 @@ class Publisher extends PUser
 
         return '';
     }
+
+    /**
+     * @return string
+     */
+    public function getSignedAtHumansAttribute()
+    {
+        if($this->signed_at) {
+            return $this->signed_at->format('d-M-y');
+        }
+
+        return '';
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -227,6 +257,34 @@ class Publisher extends PUser
     {
         $fileRepository = new PublisherDocumentsRepository();
         return $fileRepository->hasFileId($this->id,'letter-generated.pdf');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getLetterAtAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+
+        if($this->has_letter) {
+            return Carbon::createFromTimestamp(filemtime($fileRepository->getDocumentId($this->id,'letter-generated')))->format('d-M-y');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDocumentsAtAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+
+        if($this->has_documents) {
+            return Carbon::createFromTimestamp(filemtime($fileRepository->getDocumentId($this->id, 'bank')))->format('d-M-y');
+        }
+
+        return '';
     }
 
 }
