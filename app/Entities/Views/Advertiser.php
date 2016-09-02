@@ -54,12 +54,11 @@ class Advertiser extends PUser
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function views()
     {
-        return $this->belongsToMany('App\Entities\Platform\Space\Space', 'visualizacion_espacios_ofrecidos_LIST', 'id_usuario_LI', 'idEspacio_LI')
-            ->withPivot('fechaVisualizacion_LI');
+        return $this->hasMany('App\Entities\Platform\View', 'id_usuario_LI', 'id');
     }
 
     /**
@@ -67,22 +66,22 @@ class Advertiser extends PUser
      */
     public function getStatesAttribute()
     {
-        /*$count_logs = $this->count_logs;
-        $count_views = $this->count_views;*/
+        $count_logs = $this->count_logs;
+        $count_views = $this->count_views;
 
         return  array_merge(parent::getStatesAttribute(), [
-            /*'logs' => [
-                'icon'  => 'fa fa-tags',
+            'logs' => [
+                'icon'  => 'fa fa-user',
                 'class' => $this->getClass($count_logs),
                 'text'  => 'Sesiones: ' . $count_logs,
                 'date'  => $this->last_login_at_humans
             ],
             'views' => [
-                'icon'  => 'fa fa-file-o',
+                'icon'  => 'fa fa-newspaper-o',
                 'class' => $this->getClass($count_views),
                 'text'  => 'Vistas de espacios: ' . $count_views,
                 'date'  => $this->last_view_at_humans
-            ]*/
+            ]
         ]);
     }
 
