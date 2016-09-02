@@ -67,11 +67,11 @@ class Advertiser extends PUser
      */
     public function getStatesAttribute()
     {
-        $count_logs = $this->count_logs;
-        $count_views = $this->count_views;
+        /*$count_logs = $this->count_logs;
+        $count_views = $this->count_views;*/
 
         return  array_merge(parent::getStatesAttribute(), [
-            'logs' => [
+            /*'logs' => [
                 'icon'  => 'fa fa-tags',
                 'class' => $this->getClass($count_logs),
                 'text'  => 'Sesiones: ' . $count_logs,
@@ -82,7 +82,7 @@ class Advertiser extends PUser
                 'class' => $this->getClass($count_views),
                 'text'  => 'Vistas de espacios: ' . $count_views,
                 'date'  => $this->last_view_at_humans
-            ]
+            ]*/
         ]);
     }
 
