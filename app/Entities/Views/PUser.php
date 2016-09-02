@@ -45,11 +45,15 @@ class PUser  extends Model {
 
     /**
      * @param $value
+     * @param bool $other
      * @return string
      */
-    public function getClass($value) {
+    public function getClass($value, $other = false) {
         if($value) {
             return 'primary';
+        }
+        else if($other) {
+            return 'info';
         }
 
         return 'danger';
@@ -60,8 +64,20 @@ class PUser  extends Model {
      */
     public function getActivatedAtHumansAttribute()
     {
-        if($this->activated_at) {
+        if($this->activated_at && $this->activated_at->format('d-M-y') != "30-Nov--1") {
             return $this->activated_at->format('d-M-y');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompletedAtHumansAttribute()
+    {
+        if($this->completed_at && $this->completed_at->format('d-M-y') != "30-Nov--1") {
+            return $this->completed_at->format('d-M-y');
         }
 
         return '';
@@ -83,7 +99,7 @@ class PUser  extends Model {
                 'icon'  => 'fa fa-edit',
                 'class' => $this->getClass($this->email_validated && $this->complete_data),
                 'text'  => 'Complementario',
-                'date'  => 'sin fecha'
+                'date'  => $this->completed_at_humans
             ]
         ];
     }
@@ -126,6 +142,20 @@ class PUser  extends Model {
     
         return '';
     }
+
+    /**
+     * @return string
+     */
+    public function getLastLoginAtHumansAttribute()
+    {
+        if($lasLog = $this->getLastLog())
+        {
+            return $lasLog->format('d-M-y');
+        }
+
+        return '';
+    }
+
 
     /**
      * @return string

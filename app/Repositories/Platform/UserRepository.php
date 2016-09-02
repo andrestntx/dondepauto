@@ -233,4 +233,17 @@ class UserRepository extends BaseRepository
             $log->save();
         }
     }
+
+
+    /**
+     * @param UserPlatform $user
+     * @return UserPlatform
+     */
+    public function confirm(UserPlatform $user)
+    {
+        $user->activated_at = Carbon::now()->toDateTimeString();
+        $user->save();
+
+        return $user;
+    }
 }

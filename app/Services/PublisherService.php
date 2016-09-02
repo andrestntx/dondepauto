@@ -13,6 +13,7 @@ use App\Repositories\File\LogosRepository;
 use App\Repositories\File\PublisherDocumentsRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
@@ -56,6 +57,8 @@ class PublisherService extends ResourceService
     public function completeData(array $data, Model $publisher)
     {
         $data['complete_data'] = true;
+        $data['completed_at'] = Carbon::now()->toDateTimeString();
+
         return $this->updateModel($data, $publisher);
     }
 
@@ -174,6 +177,15 @@ class PublisherService extends ResourceService
     public function saveLogo(User $user, UploadedFile $logo)
     {
         $this->logosRepository->save($user, $logo);
+    }
+
+    /**
+     * @param User $publisher
+     * @return mixed
+     */
+    public function confirm(User $publisher)
+    {
+        return $this->repository->confirm($publisher);
     }
 
 }

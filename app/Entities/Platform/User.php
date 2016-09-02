@@ -46,7 +46,7 @@ class User extends EntityAuth
         'first_name', 'last_name', 'email', 'password', 'role', 'user_id', 'name',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
-        'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal'
+        'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal', 'completed_at'
     ];
 
     /**
@@ -697,6 +697,16 @@ class User extends EntityAuth
     {
         return $this->belongsToMany('App\Entities\Platform\Bank', 'bank_user', 'publisher_id', 'bank_id')
             ->withPivot('account_number');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function views()
+    {
+        return $this->belongsToMany('App\Entities\Platform\Space\Space', 'visualizacion_espacios_ofrecidos_LIST', 'id_usuario_LI', 'idEspacio_LI')
+            ->withPivot('fechaVisualizacion_LI');
     }
 
 
