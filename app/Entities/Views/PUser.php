@@ -35,6 +35,8 @@ class PUser  extends Model {
         'email-no-validated' => 'fa fa-envelope'
     ];
 
+    protected $lasLog = null;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -127,7 +129,11 @@ class PUser  extends Model {
      */
     public function getLastLog()
     {
-        return $this->logs->max('fecha_login_LI');
+        if(is_null($this->lasLog)) {
+            $this->lasLog = $this->logs->max('fecha_login_LI');
+        }
+
+        return $this->lasLog;
     }
 
     /**

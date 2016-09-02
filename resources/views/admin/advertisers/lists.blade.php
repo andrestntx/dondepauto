@@ -12,6 +12,15 @@
     <link href="/assets/css/prueba.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <style type="text/css">
+        .table-state .btn-circle {
+            width:24px; height: 24px; padding: 2px 0; font-size: 10px;
+        }
+        .list-advertiser .text-center.table-state {
+            margin: 0 2px;
+        }
+    </style>
 @endsection
 
 @section('content')
