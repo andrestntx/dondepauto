@@ -8,6 +8,8 @@
 
 namespace App\Entities\Views;
 
+use Carbon\Carbon;
+
 class Advertiser extends PUser
 {
     /**
@@ -49,6 +51,69 @@ class Advertiser extends PUser
     public function contacts()
     {
         return $this->hasMany('App\Entities\Platform\Contact', 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function views()
+    {
+        return $this->belongsToMany('App\Entities\Platform\Space\Space', 'visualizacion_espacios_ofrecidos_LIST', 'id_usuario_LI', 'idEspacio_LI')
+            ->withPivot('fechaVisualizacion_LI');
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatesAttribute()
+    {
+        $count_logs = $this->count_logs;
+        $count_views = $this->count_views;
+
+        return  array_merge(parent::getStatesAttribute(), [
+            'logs' => [
+                'icon'  => 'fa fa-tags',
+                'class' => $this->getClass($count_logs),
+                'text'  => 'Sesiones: ' . $count_logs,
+                'date'  => $this->last_login_at_humans
+            ],
+            'views' => [
+                'icon'  => 'fa fa-file-o',
+                'class' => $this->getClass($count_views),
+                'text'  => 'Vistas de espacios: ' . $count_views,
+                'date'  => $this->last_view_at_humans
+            ]
+        ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastView()
+    {
+        return $this->views->max('view_at');
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getLastViewAtHumansAttribute()
+    {
+        if($lasView = $this->getLastView())
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $lasView)->format('d-M-y');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountViewsAttribute()
+    {
+        return $this->views->count();
     }
     
     /**

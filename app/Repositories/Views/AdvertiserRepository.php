@@ -89,12 +89,12 @@ class AdvertiserRepository extends BaseRepository
                                 ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
                         }
                     });
-            }, 'proposals', 'logs', 'contacts' => function($query) {
+            }, 'proposals', 'logs', 'views', 'contacts' => function($query) {
                 $query->orderBy("created_at", "desc");
             }, 'contacts.actions']);
         }
         else {
-            $advertiserQuery = $this->model->with(['proposals', 'logs', 'intentions', 'contacts' => function($query) {
+            $advertiserQuery = $this->model->with(['proposals', 'logs', 'views', 'intentions', 'contacts' => function($query) {
                 $query->orderBy("created_at", "desc");
             }, 'contacts.actions']);
         }

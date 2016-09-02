@@ -196,6 +196,7 @@ class PublisherFacade extends UserFacade
     public function confirm($code)
     {
         $publisher = $this->confirmationService->verifyAndConfirm($code);
+        $this->service->confirm($publisher);
         $this->mixpanelService->confirm($publisher);
         $this->mailchimpService->addUserAutomation('complete-data', $publisher);
         return $this->loginPublisher($publisher, true);

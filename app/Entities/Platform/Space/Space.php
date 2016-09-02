@@ -513,4 +513,16 @@ class Space extends Entity
     {
         return $this->format->subCategory->formats->lists('name', 'id')->all();
     }
+
+    /**
+     * @return string
+     */
+    public function getViewAtAttribute()
+    {
+        if($this->pivot) {
+            return $this->pivot->fechaVisualizacion_LI;
+        }
+
+        return '';
+    }
 }
