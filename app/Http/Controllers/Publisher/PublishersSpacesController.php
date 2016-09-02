@@ -254,7 +254,7 @@ class PublishersSpacesController extends ResourceController
      */
     public function enable(Request $request, User $user, Space $space)
     {
-        $this->spaceFacade->activeSpace($space, $request->get('active'));
+        $this->spaceFacade->activeSpace($space, $request->get('active'), $request->get('option'));
         return ['success' => 'true'];
     }
 

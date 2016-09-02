@@ -313,30 +313,24 @@ var SpaceService = function() {
 
         changeCheckbox.onchange = function(e) {   
             if(! manual) {
-                swal({
-                    title: '¿Estás seguro?',
-                    text: 'El espacio será modificado',
-                    type: "warning",
-                    confirmButtonText: "Confirmar",
-                    confirmButtonColor: "#FFAC1A",
-                    cancelButtonText: "Cancelar",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                    html: true
-                },
-                function(isConfirm) {
-                    if (isConfirm) {     
-                        
-                        var parameters = {"active": "0"};
 
-                        if(changeCheckbox.checked) {
-                            parameters = {"active": "1"};
-                        }
+                if(changeCheckbox.checked) {
+                    swal({
+                        title: '¿Estás seguro?',
+                        type: 'warning',
+                        text: 'El espacio será activado',
+                        confirmButtonText: "Confirmar",
+                        confirmButtonColor: "#FFAC1A",
+                        cancelButtonText: "Cancelar",
+                        showCancelButton: true,
+                        showLoaderOnConfirm: true,
+                    }).then(function() {
+                        
+                        var parameters = {"active": "1"};
                         
                         $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
                             if(data.success) {
-                                swal("Espacio actualizado", "", "success");
+                                swal("Espacio activado", "", "success");
                                 table.search(' ').draw();
                             }
                             else{
@@ -346,13 +340,57 @@ var SpaceService = function() {
                                 swal("Hubo un error", "", "warning");
                             }
                         });
-                    } 
-                    else { 
-                        manual = true;
-                        changeCheckbox.click();
-                        manual = false;
-                    } 
-                });
+                    }, function(dismiss) {
+                      if (dismiss === 'cancel') {
+                            manual = true;
+                            changeCheckbox.click();
+                            manual = false;
+                      }
+                    });    
+                }
+                else {
+                    swal({
+                        title: '¿Estás seguro?',
+                        input: 'select',
+                        inputOptions: {
+                            'none': 'No avisar al Medio Publicitario',
+                            'incomplete': 'Avisar sobre oferta incimpleta',
+                            'terms': 'Avisar sobre incumplimiento términos'
+                        },
+                        inputValue: 'none',
+                        inputPlaceholder: 'Seleccione una opción',
+                        text: 'El espacio será inactivado',
+                        confirmButtonText: "Confirmar",
+                        confirmButtonColor: "#FFAC1A",
+                        cancelButtonText: "Cancelar",
+                        showCancelButton: true,
+                        showLoaderOnConfirm: true,
+                    }).then(function(result) {
+                        
+                        var parameters = {"active": "0", "option": result};
+                        
+                        $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
+                            if(data.success) {
+                                swal("Espacio inactivo", "", "success");
+                                table.search(' ').draw();
+                            }
+                            else{
+                                manual = true;
+                                changeCheckbox.click();
+                                manual = false;
+                                swal("Hubo un error", "", "warning");
+                            }
+                        });
+                    }, function(dismiss) {
+                      if (dismiss === 'cancel') {
+                            manual = true;
+                            changeCheckbox.click();
+                            manual = false;
+                      }
+                    });    
+                }
+
+                
             } 
         };
     }

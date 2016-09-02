@@ -148,6 +148,7 @@ class EmailService
         }
     }
 
+
     /**
      * @param Space $space
      */
@@ -166,6 +167,36 @@ class EmailService
                     ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->subject($publisher->company . " acaba de editar una oferta");
             });
+        }
+    }
+
+    /**
+     * @param Space $space
+     */
+    public function notifyInactiveOffer(Space $space, $option)
+    {
+        $fromEmail = self::$fromEmail;
+        $fromName = "Notificaciones DóndePauto";
+        $publisher = $space->publisher;
+
+        if(env('APP_ENV') == 'production') {
+            if($option == 'incomplete') {
+                Mail::send('emails.notifications.inactive-incomplete-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
+                    $m->from($fromEmail, $fromName)
+                        ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
+                        ->cc('alexander@dondepauto.co', 'Alexander Niño')
+                        ->cc('andres@dondepauto.co', 'Andrés Pinzón')
+                        ->subject("Hemos inactivado una oferta tuya");
+                });
+            } else if($option == 'terms') {
+                Mail::send('emails.notifications.inactive-terms-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
+                    $m->from($fromEmail, $fromName)
+                        ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
+                        ->cc('alexander@dondepauto.co', 'Alexander Niño')
+                        ->cc('andres@dondepauto.co', 'Andrés Pinzón')
+                        ->subject("Hemos inactivado una oferta tuya");
+                });
+            }
         }
     }
 

@@ -219,10 +219,16 @@ class SpaceFacade
     /**
      * @param Space $space
      * @param bool $active
+     * @param string $option
      */
-    public function activeSpace(Space $space, $active = true)
+    public function activeSpace(Space $space, $active = true, $option = 'none')
     {
         $this->service->activeSpace($space, $active);
+
+        if(! $active && $option != 'none')
+        {
+            $this->emailService->notifyInactiveOffer($space, $option);
+        }
     }
 
 
