@@ -51,7 +51,7 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="intention_created_at">
                             <label class="control-label">Fecha de Leads</label>
-                            <div class="input-daterange input-group" id="datepicker" data-column="14">
+                            <div class="input-daterange input-group" id="datepicker" data-column="16">
                                 <input type="text" class="input-sm form-control" id="intention_at_start" name="intention_at_start"/>
                                 <span class="input-group-addon">a</span>
                                 <input type="text" class="input-sm form-control" id="intention_at_end" name="intention_at_end"/>
