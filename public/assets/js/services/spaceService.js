@@ -354,7 +354,7 @@ var SpaceService = function() {
                         input: 'select',
                         inputOptions: {
                             'none': 'No avisar al Medio Publicitario',
-                            'incomplete': 'Avisar sobre oferta incimpleta',
+                            'incomplete': 'Avisar sobre oferta incompleta',
                             'terms': 'Avisar sobre incumplimiento términos'
                         },
                         inputValue: 'none',

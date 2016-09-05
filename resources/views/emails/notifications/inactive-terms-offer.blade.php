@@ -578,11 +578,9 @@
                         
                             <div style="text-align: justify;"><span style="font-size:16px">Hola <strong>{{ $publisher->first_name }},</strong><br>
 <br>
-DóndePauto ha inactivado la oferta <strong><a href="{{ route('medios.espacios.show', [$publisher, $space]) }}" title="{{ $space->name}}">{{ $space->name }}</a></strong> toda vez que la información registrada no cumple con las políticas de la Plataforma referentes a:<br>
+DóndePauto ha inactivado la oferta <strong><a href="{{ route('medios.espacios.show', [$publisher, $space]) }}" title="{{ $space->name}}">{{ $space->name }}</a></strong> toda vez que la información registrada no cumple con las políticas de <em> no publicar información directa o indirecta que permita inferir su información de contacto; es decir, números de teléfono, direcciones, páginas web, etc.”</em><br>
 <br>
-<em>“El MEDIO PUBLICITARIO no podrá publicar información directa o indirecta que permita inferir su información de contacto; es decir, números de teléfono, direcciones, páginas web, etc.”</em><br>
-<br>
-Si deseas activarla de nuevo, deberá editar la información de tu oferta.&nbsp;</span></div>
+Si deseas activarla de nuevo, deberás <strong><a href="{{ route('medios.espacios.edit', [$publisher, $space]) }}" title="{{ $space->name }}">editar la información de tu oferta.</a></strong></span></div>
 
                         </td>
                     </tr>
