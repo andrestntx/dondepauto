@@ -308,7 +308,9 @@ var PublisherService = function() {
         var publisher = $("#publisher").data("publisher");
         var states = $("#publisher").data("states");
 
-        $("#prueba").html(UserService.getHtmlModalStates(states, ''));
+        console.log(states);
+
+        $("#prueba").html(UserService.getHtmlTableStates(states, '290'));
 
         var minimalPrices = $(".minimal-price");
         $.each(minimalPrices, function( index, div ) {
