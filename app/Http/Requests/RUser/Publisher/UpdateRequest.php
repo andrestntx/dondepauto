@@ -47,10 +47,10 @@ class UpdateRequest extends Request
         $rules['last_name']     = 'required';
         $rules['phone']			= 'required';
         $rules['cel']			= 'required';
-        $rules['company_nit']	= 'required';
+        //$rules['company_nit']	= 'required';
         $rules['company_role']	= 'required';
         $rules['city_id']		= 'required';
-        $rules['address']		= 'required';
+        //$rules['address']		= 'required';
 
         return $rules;
     }

@@ -28,6 +28,7 @@ var AdvertiserService = function() {
                 { "data": "state" },
                 { "data": "count_by_contact_intentions" },
                 { "data": "count_logs" , "name": "count_logs" },
+                { "data": "count_views" , "name": "count_views" }, // 11
                 { "data": "contacts" },
 
                 { "data": "state_id", "name": "state_id", "searchable": true, "visible": false },
@@ -36,7 +37,7 @@ var AdvertiserService = function() {
                 { "data": "economic_activity_id", "name": "economic_activity_id", "searchable": false, "visible": false },
                 { "data": "created_at_datatable", "name": "intention_at", "searchable": false, "visible": false},
                 { "data": "last_log_login_at_datatable"},
-                { "data": "activated_at_datatable"}
+                { "data": "activated_at_datatable"} // 19
             ],
             "columnDefs": [
                 {
@@ -44,13 +45,13 @@ var AdvertiserService = function() {
                     "searchable": false
                 },
                 {
-                    "targets": [3,5,12,13,14,15,16,17,18],
+                    "targets": [3,5,13,14,15,16,17,18,19],
                     "visible": false,
                     "searchable": false
                 },
                 {
                     className: "text-center",
-                    "targets": [0,8,9,10]
+                    "targets": [0,8,9,10,11]
                 },
                 {
                     className: "text-small",
@@ -87,17 +88,27 @@ var AdvertiserService = function() {
                 $('td:eq(6)', nRow).html(
                     UserService.getHtmlTableStates(aData.states, 120)
                 );
-                if(aData.count_intentions > 0){
+
+                if(aData.count_intentions > 0) {
                     $('td:eq(7)', nRow).html(
                         getHtmlIntentionStates(aData)
                     );
                 }
+
+                if(aData.count_logs > 0) {
+                    $('td:eq(8)', nRow).html(UserService.getHtmlLogs(aData.count_logs, aData.last_login_at_humans));                    
+                }
+
+                if(aData.count_views > 0) {
+                    $('td:eq(9)', nRow).html(UserService.getHtmlLogs(aData.count_views, aData.range_view_at_humans));                    
+                }
+
                 if(aData.contacts && aData.contacts.length > 0) {
                     div = UserService.getLastContact(aData.contacts);
-                    $('td:eq(9)', nRow).html(div.html());
+                    $('td:eq(10)', nRow).html(div.html());
                 }
                 else {
-                    $('td:eq(9)', nRow).html('0');    
+                    $('td:eq(10)', nRow).html('0');    
                 }
 
             },
@@ -108,9 +119,9 @@ var AdvertiserService = function() {
         });
 
         UserService.initDatatable(table);
-        UserService.initSimpleSearchSelect("#registration_states",12);
-        UserService.initSimpleSearchSelect('#cities', 13);
-        UserService.initSimpleSearchSelect("#economic_activities", 15);
+        UserService.initSimpleSearchSelect("#registration_states",13);
+        UserService.initSimpleSearchSelect('#cities', 14);
+        UserService.initSimpleSearchSelect("#economic_activities", 16);
 
         $("#advertisers-datatable_filter input").unbind();
 
@@ -264,7 +275,7 @@ var AdvertiserService = function() {
             //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
         },
         reload: function() {
-            table.search(' ').draw();
+            table.search(UserService.getFilterSearch()).draw();
         },
         getSocialContact: function(contact) {
             return UserService.getSocialContact(contact);

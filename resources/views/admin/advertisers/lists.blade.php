@@ -82,6 +82,7 @@
                             <th>Estado</th>
                             <th>Inten.</th>
                             <th>Sesiones</th>
+                            <th>Espacios</th>
                             <th>Contactos</th>
                         </tr>
                         </thead>
@@ -98,6 +99,7 @@
                             <th>Estado</th>
                             <th>Inten.</th>
                             <th>Sesiones</th>
+                            <th>Espacios</th>
                             <th>Contactos</th>
                         </tr>
                         </tfoot>
