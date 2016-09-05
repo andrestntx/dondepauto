@@ -20,6 +20,7 @@ class CreateViewAdvertisersView extends Migration
                 comentarios_us_LI comments,
                 fecha_registro_Us_LI as created_at, bd_us_reg_LIST.fecha_activacion_Us_LI as activated_at,
                 nombre_us_LI as first_name, apellido_us_LI as last_name,
+                bd_us_reg_LIST.fecha_registro_completo_Us_LI as completed_at, 
                 telefono_fijo_us_LI as phone, celular_us_LI as cel,
                 email_us_LI as email, direccion_us_LI as address,
                 empresa_us_LI as company, nit_empresa_us_LI as company_nit, cargo_us_LI as company_role, area_cargo_us_LI as company_area,

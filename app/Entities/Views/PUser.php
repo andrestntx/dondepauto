@@ -9,6 +9,7 @@
 namespace App\Entities\Views;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -67,7 +68,7 @@ class PUser  extends Model {
     public function getActivatedAtHumansAttribute()
     {
         if($this->activated_at && $this->activated_at->format('d-M-y') != "30-Nov--1") {
-            return $this->activated_at->format('d-M-y');
+            return $this->activated_at->format('d-M-y') . ' - ' . ucfirst($this->activated_at->diffForHumans());
         }
 
         return '';
@@ -79,7 +80,7 @@ class PUser  extends Model {
     public function getCompletedAtHumansAttribute()
     {
         if($this->completed_at && $this->completed_at->format('d-M-y') != "30-Nov--1") {
-            return $this->completed_at->format('d-M-y');
+            return $this->completed_at->format('d-M-y') . ' - ' . ucfirst($this->completed_at->diffForHumans());
         }
 
         return '';

@@ -54,7 +54,7 @@ class User extends EntityAuth
      *
      * @var array
      */
-    protected $dates = ['fecha_activacion_Us_LI', 'fecha_registro_completo_Us_LI', 'deleted_at'];
+    protected $dates = ['fecha_activacion_Us_LI', 'fecha_registro_completo_Us_LI', 'deleted_at', 'completed_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -278,6 +278,9 @@ class User extends EntityAuth
         return 'Sin actividad';
     }
 
+    /**
+     * @return string
+     */
     public function getRepresentativeNameAttribute()
     {
         if($repre = $this->representative) {
@@ -287,6 +290,9 @@ class User extends EntityAuth
         return '';
     }
 
+    /**
+     * @return string
+     */
     public function getRepresentativeFirstNameAttribute()
     {
         if($repre = $this->representative) {
@@ -296,6 +302,9 @@ class User extends EntityAuth
         return '';
     }
 
+    /**
+     * @return string
+     */
     public function getRepresentativeDocAttribute()
     {
         if($repre = $this->representative) {
@@ -305,6 +314,9 @@ class User extends EntityAuth
         return '';
     }
 
+    /**
+     * @return string
+     */
     public function getRepresentativePhoneAttribute()
     {
         if($repre = $this->representative) {
@@ -314,6 +326,9 @@ class User extends EntityAuth
         return '';
     }
 
+    /**
+     * @return string
+     */
     public function getRepresentativeEmailAttribute()
     {
         if($repre = $this->representative) {
@@ -321,6 +336,14 @@ class User extends EntityAuth
         }
 
         return '';
+    }
+
+    /**
+     * @param $value
+     */
+    public function setCompletedAtAttribute($value)
+    {
+        $this->fecha_registro_completo_Us_LI = $value;
     }
 
 
