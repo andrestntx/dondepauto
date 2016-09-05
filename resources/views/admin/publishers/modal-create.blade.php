@@ -29,7 +29,7 @@
                                 <div class="col-sm-3"> <h3 style="font-size: 17px; margin: 7px 0;">Contacto</h3> </div>
                             
                                 <div class="col-sm-3" style="margin-bottom: 10px;">
-                                    {!! Form::select('type', ['call' => 'Llamada', 'chat' => 'Chat', 'skype' => 'Skype'], null, ['id' => 'modal_contact_type', 'class' => 'form-control']) !!}
+                                    {!! Form::select('type', ['call' => 'Llamada', 'chat' => 'Chat', 'email' => 'Email', 'meet' => 'Reunión'], null, ['id' => 'modal_contact_type', 'class' => 'form-control']) !!}
                                 </div>
 
                                 <div class="col-sm-12">
