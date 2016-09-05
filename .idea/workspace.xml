@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/SpaceFacade.php" afterPath="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/EmailService.php" afterPath="$PROJECT_DIR$/app/Services/EmailService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/services/spaceService.js" afterPath="$PROJECT_DIR$/public/assets/js/services/spaceService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/spaces/lists.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/lists.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/User.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/PUser.php" afterPath="$PROJECT_DIR$/app/Entities/Views/PUser.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/Publisher.php" afterPath="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_20_135443_create_view_advertisers_view.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_20_135443_create_view_advertisers_view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_21_133919_craete_view_publishers_view.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_21_133919_craete_view_publishers_view.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,64 +28,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="Publisher.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Views/Publisher.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.1764708">
-              <caret line="251" column="65" selection-start-line="251" selection-start-column="59" selection-end-line="251" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.4741784">
+              <caret line="204" column="18" selection-start-line="204" selection-start-column="18" selection-end-line="204" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PUser.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Views/PUser.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.0588236">
+              <caret line="104" column="49" selection-start-line="104" selection-start-column="49" selection-end-line="104" selection-end-column="49" />
               <folding>
-                <element signature="e#7#392#0#PHP" expanded="true" />
+                <element signature="e#133#151#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PublishersSpacesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php">
+      <file leaf-file-name="PublisherFacade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Facades/PublisherFacade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.0">
-              <caret line="256" column="32" selection-start-line="256" selection-start-column="32" selection-end-line="256" selection-end-column="32" />
+            <state vertical-scroll-proportion="-10.25">
+              <caret line="127" column="43" selection-start-line="127" selection-start-column="43" selection-end-line="127" selection-end-column="43" />
+              <folding>
+                <element signature="e#126#157#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PublisherService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Services/PublisherService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.458333">
+              <caret line="59" column="27" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpaceFacade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Platform/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.0">
-              <caret line="230" column="9" selection-start-line="230" selection-start-column="9" selection-end-line="230" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmailService.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7183099">
-              <caret line="197" column="19" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpaceService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.125">
-              <caret line="176" column="5" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpacesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/SpacesController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-83.23529">
+              <caret line="283" column="31" selection-start-line="283" selection-start-column="31" selection-end-line="283" selection-end-column="31" />
+              <folding>
+                <element signature="e#41#75#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,14 +128,11 @@
         <option value="$PROJECT_DIR$/app/Services/MixpanelService.php" />
         <option value="$PROJECT_DIR$/app/Services/Platform/UserService.php" />
         <option value="$PROJECT_DIR$/app/Entities/Platform/Login.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
         <option value="$PROJECT_DIR$/app/Facades/PublisherFacade.php" />
         <option value="$PROJECT_DIR$/app/Services/ResourceService.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Platform/UserRepository.php" />
         <option value="$PROJECT_DIR$/app/Services/PublisherService.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/User.php" />
         <option value="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Views/PUser.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
         <option value="$PROJECT_DIR$/app/Entities/Platform/View.php" />
         <option value="$PROJECT_DIR$/app/Entities/Views/Advertiser.php" />
@@ -149,6 +140,9 @@
         <option value="$PROJECT_DIR$/app/Services/Space/SpaceService.php" />
         <option value="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
         <option value="$PROJECT_DIR$/app/Services/EmailService.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Views/PUser.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Platform/User.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
       </list>
     </option>
   </component>
@@ -169,7 +163,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="3" />
     <option name="y" value="27" />
-    <option name="width" value="1337" />
+    <option name="width" value="954" />
     <option name="height" value="787" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -198,7 +192,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -230,24 +223,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pauto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pauto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -263,7 +238,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
+              <option name="myItemId" value="Facades" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -281,11 +256,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
+              <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -303,46 +274,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
+              <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Publisher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pauto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pauto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admin" />
+              <option name="myItemId" value="Views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -407,11 +349,11 @@
     <option name="totallyTimeSpent" value="26792000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3" y="27" width="1337" height="787" extended-state="0" />
+    <frame x="3" y="27" width="954" height="787" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05908751" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12893082" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -577,7 +519,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33783785">
           <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -592,7 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.375">
           <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -614,7 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="41" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -629,7 +568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -644,7 +582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -673,7 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8423423">
           <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -681,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.125">
           <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -689,15 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.375">
           <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/PublisherService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.375">
-          <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -705,35 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.375">
           <caret line="246" column="21" selection-start-line="246" selection-start-column="21" selection-end-line="246" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Views/Publisher.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5">
-          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6756757">
-          <caret line="707" column="74" selection-start-line="707" selection-start-column="74" selection-end-line="707" selection-end-column="74" />
-          <folding>
-            <element signature="e#41#75#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Facades/PublisherFacade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2747748">
-          <caret line="218" column="39" selection-start-line="218" selection-start-column="39" selection-end-line="218" selection-end-column="39" />
-          <folding>
-            <element signature="e#126#157#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -741,15 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6846847">
           <caret line="91" column="42" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Views/PUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3615023">
-          <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -757,7 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.5">
           <caret line="519" column="29" selection-start-line="519" selection-start-column="29" selection-end-line="519" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -765,7 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -773,7 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33783785">
           <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -781,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15765765">
           <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -797,7 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6531532">
           <caret line="34" column="32" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -819,17 +702,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1764708">
+        <state vertical-scroll-proportion="0.0">
           <caret line="251" column="65" selection-start-line="251" selection-start-column="59" selection-end-line="251" selection-end-column="65" />
           <folding>
-            <element signature="e#7#392#0#PHP" expanded="true" />
+            <element signature="e#7#392#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Publisher/PublishersSpacesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="256" column="32" selection-start-line="256" selection-start-column="32" selection-end-line="256" selection-end-column="32" />
           <folding />
         </state>
@@ -837,7 +720,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/Space/SpaceService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.125">
+        <state vertical-scroll-proportion="3.6936936">
           <caret line="176" column="5" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
           <folding />
         </state>
@@ -845,7 +728,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Facades/SpaceFacade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="230" column="9" selection-start-line="230" selection-start-column="9" selection-end-line="230" selection-end-column="9" />
           <folding />
         </state>
@@ -853,8 +736,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7183099">
-          <caret line="197" column="19" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.7192192">
+          <caret line="190" column="19" selection-start-line="190" selection-start-column="19" selection-end-line="190" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Facades/PublisherFacade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.25">
+          <caret line="127" column="43" selection-start-line="127" selection-start-column="43" selection-end-line="127" selection-end-column="43" />
+          <folding>
+            <element signature="e#126#157#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/PublisherService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.458333">
+          <caret line="59" column="27" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-83.23529">
+          <caret line="283" column="31" selection-start-line="283" selection-start-column="31" selection-end-line="283" selection-end-column="31" />
+          <folding>
+            <element signature="e#41#75#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Views/PUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0588236">
+          <caret line="104" column="49" selection-start-line="104" selection-start-column="49" selection-end-line="104" selection-end-column="49" />
+          <folding>
+            <element signature="e#133#151#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Views/Publisher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4741784">
+          <caret line="204" column="18" selection-start-line="204" selection-start-column="18" selection-end-line="204" selection-end-column="18" />
           <folding />
         </state>
       </provider>

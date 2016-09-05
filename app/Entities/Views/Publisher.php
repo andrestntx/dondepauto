@@ -39,6 +39,9 @@ class Publisher extends PUser
         'count_logs', 'last_login_at'
     ];
 
+    /**
+     * @return array
+     */
     public function getStatesAttribute()
     {
         return  array_merge(parent::getStatesAttribute(), [
@@ -46,19 +49,19 @@ class Publisher extends PUser
                 'icon'  => 'fa fa-tags',
                 'class' => $this->getClass($this->has_offers),
                 'text'  => 'Ofertó',
-                'date'  => $this->last_offer_at_humans
+                'date'  => $this->range_offers_at_humans
             ],
             'letter' => [
                 'icon'  => 'fa fa-file-o',
-                'class' => $this->getClass($this->has_letter || $this->has_documents),
+                'class' => $this->getClass($this->has_letter, $this->has_documents),
                 'text'  => 'Carta',
-                'date'  => $this->letter_at
+                'date'  => $this->letter_at_humans
             ],
             'docs' => [
                 'icon'  => 'fa fa-file-pdf-o',
                 'class' => $this->getClass($this->has_documents),
                 'text'  => 'Documentos',
-                'date'  => $this->documents_at
+                'date'  => $this->documents_at_humans
             ],
             'agreement' => [
                 'icon'  => 'fa fa-file-text-o',
@@ -83,6 +86,14 @@ class Publisher extends PUser
     public function getCountSpacesAttribute()
     {
         return $this->spaces->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstOfferAttribute()
+    {
+        return $this->spaces->min('created_at');
     }
 
     /**
@@ -131,6 +142,35 @@ class Publisher extends PUser
         return '';
     }
 
+    /**
+     * @return string
+     */
+    public function getFirstOfferAtHumansAttribute()
+    {
+        if($this->first_offer)
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->first_offer)->format('d-M-y');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRangeOffersAtHumansAttribute()
+    {
+        if($this->first_offer && $this->spaces->count() >= 2)
+        {
+            return $this->first_offer_at_humans . ' - ' . $this->last_offer_at_humans;
+        }
+        else if($this->first_offer) {
+            return $this->first_offer_at_humans . ' - ' . ucfirst(Carbon::createFromFormat('Y-m-d H:i:s', $this->first_offer)->diffForHumans());
+        }
+
+        return '';
+    }
+
     public function getSignedAgreementLangAttribute()
     {
         if($this->signed_agreement)
@@ -158,8 +198,8 @@ class Publisher extends PUser
      */
     public function getSignedAtHumansAttribute()
     {
-        if($this->signed_at) {
-            return $this->signed_at->format('d-M-y');
+        if($this->signed_at && $this->signed_at->format('d-M-y') != '30-Nov--1') {
+            return $this->signed_at->format('d-M-y') . ' - ' . ucfirst($this->signed_at->diffForHumans());
         }
 
         return '';
@@ -259,29 +299,56 @@ class Publisher extends PUser
         return $fileRepository->hasFileId($this->id,'letter-generated.pdf');
     }
 
+
     /**
-     * @return bool
+     * @return null|static
      */
     public function getLetterAtAttribute()
     {
         $fileRepository = new PublisherDocumentsRepository();
 
         if($this->has_letter) {
-            return Carbon::createFromTimestamp(filemtime($fileRepository->getDocumentId($this->id,'letter-generated')))->format('d-M-y');
+            return Carbon::createFromTimestamp(filemtime($fileRepository->getDocumentId($this->id,'letter-generated')));
+        }
+
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLetterAtHumansAttribute()
+    {
+        if($this->letter_at) {
+            return $this->letter_at->format('d-M-y') . ' - ' . ucfirst($this->letter_at->diffForHumans());
         }
 
         return '';
     }
 
+
     /**
-     * @return bool
+     * @return null|static
      */
     public function getDocumentsAtAttribute()
     {
         $fileRepository = new PublisherDocumentsRepository();
 
         if($this->has_documents) {
-            return Carbon::createFromTimestamp(filemtime($fileRepository->getDocumentId($this->id, 'bank')))->format('d-M-y');
+            return Carbon::createFromTimestamp(filemtime($fileRepository->getDocumentId($this->id, 'bank')));
+        }
+
+        return null;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getDocumentsAtHumansAttribute()
+    {
+        if($this->documents_at) {
+            return $this->documents_at->format('d-M-y') . ' - ' . ucfirst($this->documents_at->diffForHumans());
         }
 
         return '';

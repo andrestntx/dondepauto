@@ -20,6 +20,7 @@ class CraeteViewPublishersView extends Migration
                 bd_actividades_economicas_LIST.id as economic_activity_id,
                 bd_actividades_economicas_LIST.nombre as economic_activity_name,
                 comentarios_us_LI comments,
+                bd_us_reg_LIST.fecha_registro_completo_Us_LI as completed_at, 
                 bd_ciudades.ciudad as city_name,
                 bd_ciudades.id_ciudad as city_id,
                 fecha_registro_Us_LI as created_at, bd_us_reg_LIST.fecha_activacion_Us_LI as activated_at,
