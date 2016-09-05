@@ -46,9 +46,6 @@
                             <div class="col-sm-4 col-md-2">
                                 {!! Form::select('avtive_state', ['' => 'Todos', '1' => 'Activos', '0' => 'Inactivos'], null, ['empty' => 'Ver Todos', 'class' => 'form-control', 'id' => 'active_state']) !!}
                             </div>
-                            <div class="col-sm-3 col-md-2">
-                                <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable"></span></p>  
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -97,6 +94,13 @@
     <script src="/assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
 
     <script>
+        var filter = $("<strong></strong>")
+            .text(" - Total filtro: ")
+            .addClass("text-success")
+            .append($("<span id='countDatatable'></span>"));
+
+        $(".page-heading h2").append(filter);
+        
         $(document).ready(function() {
             
             var searchSpace = $("#search-space").data("search");

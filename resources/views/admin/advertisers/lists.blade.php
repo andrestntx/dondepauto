@@ -28,13 +28,6 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-12" id="table-intro">
-                        <div class="col-sm-3 col-md-2">
-                            <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable">0</span></p>  
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro</label>
@@ -123,6 +116,13 @@
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
     
     <script>
+        var filter = $("<strong></strong>")
+            .text(" - Total filtro: ")
+            .addClass("text-success")
+            .append($("<span id='countDatatable'></span>"));
+
+        $(".page-heading h2").append(filter);
+
         $(document).ready(function() {
             AdvertiserService.init('/anunciantes/search');
 

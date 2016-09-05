@@ -25,11 +25,6 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-12" id="table-intro">
-                        <div class="col-sm-3">
-                            <p class="h4" style="font-size: 20px;">Total: <span id="countDatatable"></span></p>  
-                        </div>
-                    </div>
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro inicial</label>
@@ -131,6 +126,13 @@
     <!-- iCheck -->
     <script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
     <script>
+        var filter = $("<strong></strong>")
+            .text(" - Total filtro: ")
+            .addClass("text-success")
+            .append($("<span id='countDatatable'></span>"));
+
+        $(".page-heading h2").append(filter);
+
         $(document).ready(function () {
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
