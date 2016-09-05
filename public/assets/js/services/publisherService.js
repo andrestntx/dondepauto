@@ -13,6 +13,7 @@ var PublisherService = function() {
             "order": [[1, "desc"]],
             'info': true,
             "ajax": urlSearch,
+            "pageLength": 50,
             "deferRender": true,
             "processing": true,
             "serverSide": true,

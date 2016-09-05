@@ -13,6 +13,7 @@ var SpaceService = function() {
         table = $('#spaces-datatable').DataTable({
             "order": [[1, "desc"]],
             "ajax": urlSearch,
+            "pageLength": 50,
             "processing": true,
             "serverSide": true,
             "deferRender": true,
@@ -30,7 +31,6 @@ var SpaceService = function() {
                 { "data": "markup_price", "name": "markup_price" },
                 { "data": "public_price", "name": "public_price" },
 
-                
                 { "data": "category_id", "name": "category_id" }, // 12
                 { "data": "sub_category_id", "name": "sub_category_id" },
                 { "data": "format_id", "name": "format_id" },
@@ -87,9 +87,19 @@ var SpaceService = function() {
                     numeral(aData.minimal_price).format('$ 0,0[.]00')
                 );
 
-                $('td:eq(8)', nRow).html(
-                    numeral(aData.percentage_markdown).format('0%')
-                );
+                var percentage_markdown = $("<span></span>")
+                    .text(numeral(aData.percentage_markdown).format('0%'))
+                    .attr('data-toggle', 'tooltip')
+                    .attr('data-placement', 'top')
+
+                if(aData.discount == 0) {
+                    percentage_markdown.attr('title', 'Markup DP+').addClass('text-info'); 
+                }
+                else {
+                    percentage_markdown.attr('title', 'Descuento Anunciante').addClass('text-success');   
+                }
+
+                $('td:eq(8)', nRow).html(percentage_markdown);
 
                 $('td:eq(9)', nRow).html(
                     numeral(aData.markup_price).format('$ 0,0[.]00')
