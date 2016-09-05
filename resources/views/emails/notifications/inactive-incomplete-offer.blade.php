@@ -576,13 +576,13 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <div style="text-align: justify;"><span style="font-size:16px">Hola <strong>{{ $publisher->frist_name }},</strong><br>
+                            <div style="text-align: justify;"><span style="font-size:16px">Hola <strong>{{ $publisher->first_name }},</strong><br>
 <br>
-DóndePauto ha inactivado la oferta {{ $space->name}} toda vez que la información registrada esta incompleta o de alguna forma no es clara o precisa para nuestros clientes. &nbsp;<br>
+DóndePauto ha inactivado la oferta <strong><a href="{{ route('medios.espacios.show', [$publisher, $space]) }}" title="{{ $space->name}}">{{ $space->name }}</a></strong> toda vez que la información registrada esta incompleta o de alguna forma no es clara o precisa para nuestros clientes. &nbsp;<br>
 <br>
 Entre más completa, precisa y clara es la información registrada en la oferta, mayor valor, rapidez y seguridad a los Anunciantes en la toma de decisiones de compra.&nbsp;<br>
 <br>
-Si deseas activarlas de nuevo, deberás editar la información de su oferta.</span></div>
+Si deseas activarlas de nuevo, deberás editar la información de tu oferta.</span></div>
 
                         </td>
                     </tr>
@@ -604,13 +604,13 @@ Si deseas activarlas de nuevo, deberás editar la información de su oferta.</sp
                                 <td valign="top" id="templateFooter"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
     <tbody class="mcnImageBlockOuter">
             <tr>
-                <td valign="top" style="padding:0px" class="mcnImageBlockInner">
+                <td valign="top" style="padding:9px" class="mcnImageBlockInner">
                     <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
                         <tbody><tr>
-                            <td class="mcnImageContent" valign="top" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;">
+                            <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
                                 
                                     
-                                        <img align="center" alt="" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/274364fb-a1e0-4a54-8326-f3c91c5dee59.png" width="600" style="max-width:1014px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                        <img align="center" alt="" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/90754434-dcda-4f5b-a20d-461a043fe682.png" width="564" style="max-width:750px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
                                     
                                 
                             </td>
