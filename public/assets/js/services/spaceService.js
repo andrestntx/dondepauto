@@ -286,10 +286,16 @@ var SpaceService = function() {
 
         /** Active **/
         if(space.active) {
-            var input = $("<input checked></input>")
+            var input = $("<input checked></input>");
+            console.log(space.active);
+            console.log('activo');
+            console.log(input[0]);
         }
         else {
             var input = $("<input></input>");
+            console.log(space.active);
+            console.log('no activo');
+            console.log(input[0]);
         }
 
         input.attr("type", "checkbox")

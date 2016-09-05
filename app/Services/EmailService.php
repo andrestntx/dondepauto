@@ -59,7 +59,6 @@ class EmailService
                 $m->from('alexander@dondepauto.co', 'Alexander Niño de DóndePauto')
                     ->to($publisher->representative->email, $publisher->representative->name)
                     ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->bcc('nelson@dondepauto.co', 'Nelson Hernandez')
                     ->bcc('alexander@dondepauto.co', 'Alexander Niño')
                     ->subject('Carta de Incentivos DóndePauto')
                     ->attach($letterPath, []);
@@ -80,7 +79,6 @@ class EmailService
             Mail::send('emails.publisher.change-agreement', ['publisher' => $publisher, 'comments' => $comments], function ($m) use ($publisher, $fromEmail, $fromName) {
                 $m->from($fromEmail, $fromName)
                     ->to('alexander@dondepauto.co', 'Alexander Niño')
-                    ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                     ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->subject($publisher->first_name . ' de ' . $publisher->company . ' solicita cambiar datos de acuerdo');
             });
@@ -140,7 +138,6 @@ class EmailService
             Mail::send('emails.notifications.new-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
                 $m->from($fromEmail, $fromName)
                     ->to("leonardo@dondepauto.co", "Leonardo Rueda")
-                    ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                     ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->cc("alexander@dondepauto.co", "Alexander Niño")
                     ->subject($publisher->company . " acaba de crear una nueva oferta");
@@ -162,7 +159,6 @@ class EmailService
             Mail::send('emails.notifications.edit-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
                 $m->from($fromEmail, $fromName)
                     ->to("leonardo@dondepauto.co", "Leonardo Rueda")
-                    ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                     ->cc('alexander@dondepauto.co', 'Alexander Niño')
                     ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->subject($publisher->company . " acaba de editar una oferta");
@@ -183,7 +179,6 @@ class EmailService
             if($option == 'incomplete') {
                 Mail::send('emails.notifications.inactive-incomplete-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
                     $m->from($fromEmail, $fromName)
-                        ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                         ->cc('alexander@dondepauto.co', 'Alexander Niño')
                         ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                         ->subject("Hemos inactivado una oferta tuya");
@@ -191,7 +186,6 @@ class EmailService
             } else if($option == 'terms') {
                 Mail::send('emails.notifications.inactive-terms-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
                     $m->from($fromEmail, $fromName)
-                        ->cc('nelson@dondepauto.co', 'Nelson Hernandez')
                         ->cc('alexander@dondepauto.co', 'Alexander Niño')
                         ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                         ->subject("Hemos inactivado una oferta tuya");
@@ -211,7 +205,6 @@ class EmailService
         if(env('APP_ENV') == 'production') {
             Mail::send('emails.notifications.new-documents', ['publisher' => $publisher], function ($m) use ($fromEmail, $fromName, $publisher) {
                 $m->from($fromEmail, $fromName)
-                    ->to("nelson@dondepauto.co", "Nelson Hernandez")
                     ->cc("alexander@dondepauto.co", "Alexander Niño")
                     ->cc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->subject($publisher->company . " acaba de enviar los documentos societarios");
