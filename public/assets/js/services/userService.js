@@ -288,14 +288,14 @@ var UserService = function() {
 			return html.append(line).append(htmlStates);
 	    },
 
-	    getHtmlLogs: function(count_logs, last_login_at)
+	    getHtmlLogs: function(count, date)
 	    {
 	    	return $('<span></span>')
                         .addClass('badge badge-info')
-                        .text(count_logs)
+                        .text(count)
                         .attr('data-toggle', 'tooltip')
                         .attr('data-placement', 'top')
-                        .attr('title', last_login_at); 
+                        .attr('title', date); 
 
 	    },
 
