@@ -87,7 +87,7 @@ var PublisherService = function() {
                 }
 
                 if(aData.count_logs > 0) {
-                    $('td:eq(6)', nRow).html(UserService.getHtmlLogs(aData.last_login_at));                    
+                    $('td:eq(6)', nRow).html(UserService.getHtmlLogs(aData.count_logs, aData.last_login_at));                    
                 }
 
                 if(aData.contacts && aData.contacts.length > 0) {
