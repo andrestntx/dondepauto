@@ -14,7 +14,7 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['call', 'chat', 'email'])->default('call');
+            $table->enum('type', ['call', 'chat', 'email', 'meet'])->default('call');
             $table->text('comments')->nullable();
             $table->timestamps();
 

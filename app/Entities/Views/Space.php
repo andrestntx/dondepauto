@@ -102,16 +102,50 @@ class Space extends Model
      */
     public function getCommissionAttribute()
     {
-        return '0.15';
+        return ($this->publisher_commission_rate / 100);
     }
 
+    public function getDiscountAttribute($value)
+    {
+        return $value / 100;
+    }
+
+    /**
+     * @param $value
+     * @return float
+     */
     public function getPercentageMarkdownAttribute($value)
     {
+        if($value == 0) {
+            $value = $this->discount;
+        }
+
         return round($value, 3);
     }
 
+    /**
+     * @param $value
+     * @return float
+     */
+    public function getMinimalPriceAttribute($value)
+    {
+        if($this->discount > 0) {
+            $value = $value - ($value * $this->discount);
+        }
+
+        return round($value, 3);
+    }
+
+
+    /**
+     * @return float|mixed
+     */
     public function getMarkupPriceAttribute()
     {
+        if($this->percentage_markup == 0) {
+            return $this->attributes['minimal_price'] * $this->discount;
+        }
+
         return round($this->minimal_price * $this->percentage_markup);
     }
 

@@ -36,7 +36,7 @@ class PublisherRepository extends BaseRepository
                 'company', 'first_name', 'name', 'email', 'phone', 'cel', 'created_at', 'signed_at', 'comments',
                 'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data',
                 'commission_rate', 'discount', 'retention', 'city_name', 'company_nit', 'company_role', 'company_area',
-                'economic_activity_name'
+                'economic_activity_name', 'source'
             ])->with(['spaces' => function($query) {
                     $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at', 'id_ciudad_LI as city_id');
                 }, 'contacts' => function($query) {

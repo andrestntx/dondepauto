@@ -27,8 +27,9 @@
                                     <span class="h5"> <span id="name">  </span> </span> <br>
                                     <span class="h5" id="email"> <i class="fa fa-envelope-o"></i> <a href=""> </a></span> <br>
                                         <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:" id="phone">  </a> -
-                                                            <i class="fa fa-mobile"></i> <a href="tel:+" id="cel">  </a>
-                                        </span>
+                                                            <i class="fa fa-mobile"></i> <a href="tel:+" id="cel">  </a> 
+                                        </span> <br>
+                                    <span class="h5"> Fuente: <span id="source">  </span>  </span> 
                                 </p>
                             </div>
                         </div>

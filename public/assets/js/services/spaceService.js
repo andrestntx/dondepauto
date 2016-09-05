@@ -23,11 +23,14 @@ var SpaceService = function() {
                 { "data": "category_name", "name": "category_name" },
                 { "data": "sub_category_name", "name": "sub_category_name" },
                 { "data": "format_name", "name": "format_name" },
+
                 { "data": "publisher_commission_rate", "name": "publisher_commission_rate" },
                 { "data": "minimal_price", "data": "minimal_price" },
                 { "data": "percentage_markdown", "name": "percentage_markdown" },
                 { "data": "markup_price", "name": "markup_price" },
                 { "data": "public_price", "name": "public_price" },
+
+                
                 { "data": "category_id", "name": "category_id" }, // 12
                 { "data": "sub_category_id", "name": "sub_category_id" },
                 { "data": "format_id", "name": "format_id" },

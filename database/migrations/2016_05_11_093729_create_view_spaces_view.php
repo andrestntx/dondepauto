@@ -30,6 +30,7 @@ class CreateViewSpacesView extends Migration
                 bd_espacios_ofrecidos_LIST.nombre_espacio_LI as name, bd_espacios_ofrecidos_LIST.descripcion_espacio_LI as description,
                 bd_espacios_ofrecidos_LIST.tags_espacio_LI as tags, bd_espacios_ofrecidos_LIST.direccion_ubicacion_LI as address,
                 bd_espacios_ofrecidos_LIST.urlTag as url, bd_espacios_ofrecidos_LIST.dimensiones_espacio_LI as dimensions,
+                bd_espacios_ofrecidos_LIST.descuento_espacio_LI as discount,
                 (CASE WHEN bd_espacios_ofrecidos_LIST.espacio_activo_LI = 'Si_act' THEN TRUE ELSE FALSE END) as active,
                 (CASE WHEN bd_espacios_ofrecidos_LIST.restringeAlcohol_LI = 'S' THEN TRUE ELSE FALSE END) as alcohol_restriction,
                 (CASE WHEN bd_espacios_ofrecidos_LIST.restringeTabaco_LI = 'S' THEN TRUE ELSE FALSE END) as snuff_restriction,
