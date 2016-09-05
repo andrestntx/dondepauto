@@ -285,17 +285,11 @@ var SpaceService = function() {
             .addClass('fa ' + space.state_icon);
 
         /** Active **/
-        if(space.active) {
+        if(space.active == 1) {
             var input = $("<input checked></input>");
-            console.log(space.active);
-            console.log('activo');
-            console.log(input[0]);
         }
         else {
             var input = $("<input></input>");
-            console.log(space.active);
-            console.log('no activo');
-            console.log(input[0]);
         }
 
         input.attr("type", "checkbox")
