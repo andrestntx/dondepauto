@@ -27,7 +27,8 @@ class Advertiser extends PUser
     protected $appends = ['name', 'state', 'state_class', 'state_icon', 'state_id', 'count_intentions',
         'count_by_contact_intentions', 'count_sold_intentions', 'count_discarded_intentions', 'count_interest_intentions',
         'count_management_intentions', 'count_leads', 'created_at_humans', 'count_proposals', 'count_logs',
-        'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states', 'last_login_at'];
+        'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states', 'last_login_at',
+        'range_view_at_humans', 'count_views'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -80,7 +81,7 @@ class Advertiser extends PUser
                 'icon'  => 'fa fa-newspaper-o',
                 'class' => $this->getClass($count_views),
                 'text'  => 'Vistas de espacios: ' . $count_views,
-                'date'  => $this->last_view_at_humans
+                'date'  => $this->range_view_at_humans
             ]
         ]);
     }
@@ -93,19 +94,71 @@ class Advertiser extends PUser
         return $this->views->max('view_at');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFirstView()
+    {
+        return $this->views->min('view_at');
+    }
+
+
+    /**
+     * @return null|static
+     */
+    public function getFirstViewAtAttribute()
+    {
+        if($firstView = $this->getFirstView())
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $firstView);
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null|static
+     */
+    public function getLastViewAtAttribute()
+    {
+        if($lastView = $this->getLastView())
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $lastView);
+        }
+
+        return null;
+    }
 
     /**
      * @return string
      */
     public function getLastViewAtHumansAttribute()
     {
-        if($lasView = $this->getLastView())
+        if($lasViewAt = $this->last_view_at)
         {
-            return Carbon::createFromFormat('Y-m-d H:i:s', $lasView)->format('d-M-y');
+            return $lasViewAt->format('d-M-y') . ' - ' . ucfirst($lasViewAt);
         }
 
         return '';
     }
+
+    /**
+     * @return mixed|string
+     */
+    public function getRangeViewAtHumansAttribute()
+    {
+        if($this->last_view_at && $this->count_views >= 2)
+        {
+            return $this->first_view_at->format('d-M-y') . ' - ' . $this->last_view_at->format('d-M-y');
+        }
+        else if($this->last_view_at)
+        {
+            return $this->last_view_at_humans;
+        }
+
+        return '';
+    }
+
 
     /**
      * @return string

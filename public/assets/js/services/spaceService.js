@@ -307,6 +307,16 @@ var SpaceService = function() {
         initChangeAgreement();
     };
 
+    function getFilterSearch()
+    {
+        return $(".dataTables_filter input").val();
+    };
+
+    function reload()
+    {
+        table.search(getFilterSearch()).draw();
+    };
+
     function initChangeAgreement() {
         var manual = false;
         var changeCheckbox = document.querySelector('.js-switch-click');
@@ -331,7 +341,7 @@ var SpaceService = function() {
                         $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
                             if(data.success) {
                                 swal("Espacio activado", "", "success");
-                                table.search(' ').draw();
+                                reload();
                             }
                             else{
                                 manual = true;
@@ -372,7 +382,7 @@ var SpaceService = function() {
                         $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
                             if(data.success) {
                                 swal("Espacio inactivo", "", "success");
-                                table.search(' ').draw();
+                                reload();
                             }
                             else{
                                 manual = true;
@@ -424,7 +434,7 @@ var SpaceService = function() {
                                     closeOnConfirm: true,
                                 });
 
-                                table.search(' ').draw();
+                                reload();
                                 $('.modal').modal('toggle');
                             }
                             else {
@@ -459,6 +469,9 @@ var SpaceService = function() {
         },
         changeSelects: function(inputs) {
             changeSelects(inputs);
+        },
+        reload: function(){
+            reload();
         }
     };
 }();

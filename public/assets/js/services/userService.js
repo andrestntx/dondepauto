@@ -10,6 +10,11 @@ var UserService = function() {
 			dataTable = table;
 		},
 
+		getFilterSearch: function()
+		{
+			return $(".dataTables_filter input").val();
+		},
+
 		initInputsDateRange: function() {
 			console.log('initInputsDateRange');
 	        $('.input-daterange').datepicker({
@@ -281,6 +286,17 @@ var UserService = function() {
 			});
 			
 			return html.append(line).append(htmlStates);
+	    },
+
+	    getHtmlLogs: function(count_logs, last_login_at)
+	    {
+	    	return $('<span></span>')
+                        .addClass('badge badge-info')
+                        .text(count_logs)
+                        .attr('data-toggle', 'tooltip')
+                        .attr('data-placement', 'top')
+                        .attr('title', last_login_at); 
+
 	    },
 
 	    getHtmlTableStates: function (states, width) 
