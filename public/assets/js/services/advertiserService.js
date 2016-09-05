@@ -13,6 +13,7 @@ var AdvertiserService = function() {
         table = $('#advertisers-datatable').DataTable({
             "order": [[1, "desc"]],
             "ajax": urlSearch,
+            "pageLength": 50,
             "deferRender": true,
             "processing": true,
             "serverSide": true,
