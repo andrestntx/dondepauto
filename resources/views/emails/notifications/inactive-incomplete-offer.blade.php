@@ -582,7 +582,7 @@ DóndePauto ha inactivado la oferta <strong><a href="{{ route('medios.espacios.s
 <br>
 Entre más completa, precisa y clara es la información registrada en la oferta, mayor valor, rapidez y seguridad a los Anunciantes en la toma de decisiones de compra.&nbsp;<br>
 <br>
-Si deseas activarlas de nuevo, deberás editar la información de tu oferta.</span></div>
+Si deseas activarlas de nuevo, deberás <strong><a href="{{ route('medios.espacios.edit', [$publisher, $space]) }}" title="{{ $space->name }}">editar la información de tu oferta.</a></strong></span></div>
 
                         </td>
                     </tr>
