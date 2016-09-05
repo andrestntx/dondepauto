@@ -40,7 +40,7 @@ class Space extends Entity
             'more_audiences' => 'tags_espacio_LI', 'publisher_id' => 'id_us_reg_LI', 'religion_restriction' => 'restringeReligion_LI',
         'publisher_company' => 'nombre_empresa_proveedora_espacio_LI', 'public_price' => 'precio_margen_espacio_LI', 'margin' => 'porcentaje_precio_margen_espacio_LI',
         'category_id' => 'id_cat_LI', 'sub_category_id' => 'id_subcat_LI', 'percentage_markup' => 'porcentaje_precio_margen_espacio_LI',
-        'active' => 'espacio_activo_LI', 'private' => 'espacio_privado_LI', 'points' => 'puntaje_LI'];
+        'active' => 'espacio_activo_LI', 'private' => 'espacio_privado_LI', 'points' => 'puntaje_LI', 'created_at' => 'fecha_creacion_LI'];
 
     /**
      * The accessors to append to the model's array form.

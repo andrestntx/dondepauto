@@ -1,7 +1,34 @@
 @extends('layouts.admin')
 
 @section('extra-css')
+    <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.css" rel="stylesheet">
+    <link href="/assets/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+
     <link href="/assets/css/prueba.css" rel="stylesheet">
+
+    <style type="text/css">
+        .swal2-modal .swal2-select {
+            background-color: #FFFFFF;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+            color: inherit;
+            display: block;
+            padding: 6px 12px;
+            transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+            width: 100%;
+            font-size: 14px;
+            height: 34px;
+        }
+
+        .swal2-modal {
+            z-index: 10000;    
+        }
+        
+    </style>
+
 @endsection
 
 @section('breadcrumbs')
@@ -84,6 +111,13 @@
 
 @section('extra-js')
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+
+    <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.js"></script>
+    <!-- blueimp gallery -->
+    <script src="/assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/publisherService.js"></script>
     <script src="/assets/js/services/spaceService.js"></script>
