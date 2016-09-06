@@ -129,6 +129,8 @@ class UsersController extends ResourceController
      */
     public function syncMailchimp(UserPlatform $user)
     {
+        \Log::info('intentó guardar mailchimp');
+        \Log::info($user);
         $this->mailchimpService->syncUser($user);
         return ['success' => 'true'];
     }

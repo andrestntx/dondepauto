@@ -73,9 +73,9 @@
                             <th>Telefono</th>
                             <th>Celular</th>
                             <th>Estado</th>
-                            <th>Inten.</th>
-                            <th>Sesiones</th>
-                            <th>Espacios</th>
+                            <th>Int.</th>
+                            <th>Sesi.</th>
+                            <th>Esp.</th>
                             <th>Contactos</th>
                         </tr>
                         </thead>
@@ -90,9 +90,9 @@
                             <th>Teléfono</th>
                             <th>Celular</th>
                             <th>Estado</th>
-                            <th>Inten.</th>
-                            <th>Sesiones</th>
-                            <th>Espacios</th>
+                            <th>Int.</th>
+                            <th>Sesi.</th>
+                            <th>Esp.</th>
                             <th>Contactos</th>
                         </tr>
                         </tfoot>
