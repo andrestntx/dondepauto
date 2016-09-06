@@ -216,10 +216,58 @@ var PublisherService = function() {
             var publisher = $(this).data('publisher');
             drawModal(publisher);
         });
+
+        $("#change-documents").click(function(){
+            swal({
+                title: '¿Estás seguro?',
+                text: 'El medio podrá editar los datos',
+                type: "warning",
+                confirmButtonText: "Eliminar",
+                confirmButtonColor: "#ed5565",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                html: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.ajax({
+                        url: $("#delete_publisher").attr('data-url'),
+                        type: 'DELETE',
+                        success: function(data) {
+                            if(data.success) {
+                                swal({
+                                    "title": "Medio eliminado", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+
+                                table.search(' ').draw();
+                                $('#publisherModal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
     }
 
     function drawModal(publisher) {
         UserService.drawModalUser("publisherModal", publisher, "medios");
+
+        var documents = $.parseJSON(publisher.documents_json);
+
         /** Commercial state **/
         $('#publisherModal #by_contact').text(publisher.count_by_contact_intentions);
         $('#publisherModal #sold').text(publisher.count_sold_intentions);
@@ -236,19 +284,13 @@ var PublisherService = function() {
             var input = $("<input checked></input>");
             input.attr("checked", true);
 
-            $("#link-documents").prop('disabled', false);
-            console.log('si');
+            $("#change-documents").prop('disabled', false);
         }
         else {
             var input = $("<input></input>");
-            $("#link-documents").prop('disabled', true);
+            $("#change-documents").prop('disabled', true);
             input.attr("checked", false);
-
-            console.log('no');
         }
-
-        console.log(input);
-
 
         input.attr("type", "checkbox")
             .addClass("js-switch js-switch-click")
@@ -256,11 +298,46 @@ var PublisherService = function() {
 
         $('#publisherModal #publisher_sw_agreement').html("").append(input);
 
-        var elem = document.querySelector(switcheryClass);
-        switchery = new Switchery(elem, { 
-            color: '#1AB394',
-            size: 'small'
+        /** change Documents */
+        $('#publisherModal #publisher_sw_documents').html("");
+
+        if(documents.bank != null || documents.commerce != null || documents.bank != null) {
+            
+            var inputDocuments = null;
+
+            if(publisher.change_documents == 1) {
+                var inputDocuments = $("<input checked></input>");
+                inputDocuments.attr("checked", true);
+
+                //$("#change-documents").prop('disabled', false);
+            }
+            else {
+                var inputDocuments = $("<input></input>");
+                //$("#change-documents").prop('disabled', true);
+                inputDocuments.attr("checked", false);
+            }
+
+            inputDocuments.attr("type", "checkbox")
+                .addClass("js-switch js-switch-click")
+                .data("url", "/medios/" + publisher.id + "/agreement");
+                
+            $('#publisherModal #publisher_sw_documents').append(inputDocuments);
+        }
+        
+
+        var elems = Array.prototype.slice.call(document.querySelectorAll(switcheryClass));
+
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html, { 
+                color: '#1AB394',
+                size: 'small'
+            });
         });
+
+        $('#publisherModal #publisher_sw_documents .switchery')
+            .attr('data-toggle', 'tooltip')
+            .attr('data-placement', 'top')
+            .attr('title', 'Habilitar cambio de documentos');
 
         //$('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
         $('#publisherModal #commission_rate').text(publisher.commission_rate);
@@ -275,8 +352,6 @@ var PublisherService = function() {
 
         var linkDocuments = '/medios/' + publisher.id + '/acuerdo/completar';
         $('#link-documents').attr('href', linkDocuments);
-
-        var documents = $.parseJSON(publisher.documents_json);
 
         $('#publisherModal #file-documents').html('');
         $.each( documents, function( key, document ) {
@@ -293,6 +368,7 @@ var PublisherService = function() {
         });
 
         initChangeAgreement();
+        initChangeDocuments();
 
         /** Contacts **/
         $('#publisherModal #newContact').attr('data-url', '/anunciantes/' + publisher.id + '/contacts');
@@ -303,6 +379,8 @@ var PublisherService = function() {
             var socialContact = UserService.getSocialContact(contact);
             $('#publisherModal #comments').append(socialContact);
         });
+
+        $('[data-toggle="tooltip"]').tooltip();
     }
 
     function drawShowPrices() {
@@ -385,7 +463,7 @@ var PublisherService = function() {
 
     function initChangeAgreement() {
         var manual = false;
-        var changeCheckbox = document.querySelector('.js-switch-click');
+        var changeCheckbox = document.querySelector('#publisher_sw_agreement .js-switch-click');
 
         changeCheckbox.onchange = function(e) {   
             if(! manual) {
@@ -421,6 +499,70 @@ var PublisherService = function() {
                                 console.log('bien');
                                 $("#publisherModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
                                 swal("Acuerdo actualizado", "", "success");
+                            }
+                            else{
+                                console.log('mal');
+                                manual = true;
+                                changeCheckbox.click();
+                                manual = false;
+                                swal("Hubo un error", "", "danger");
+                            }
+                        });
+                    } 
+                    else { 
+                        manual = true;
+                        changeCheckbox.click();
+                        manual = false;
+                    } 
+                });
+            } 
+        };
+    }
+
+    function initChangeDocuments() {
+        var manual = false;
+        var changeCheckbox = document.querySelector('#publisher_sw_documents .js-switch-click');
+
+        changeCheckbox.onchange = function(e) {   
+            if(! manual) {
+                swal({
+                    title: '¿Estás seguro?',
+                    text: 'El medio podrá o no subir nuevos documentos',
+                    type: "warning",
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#FFAC1A",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {     
+                        
+                        var parameters = {"change_documents": "0"};
+                        var removeClass = "btn-primary";
+                        var addClass = "btn-danger";
+                        
+                        if(changeCheckbox.checked) {
+                            parameters = {"change_documents": "1"};
+                            removeClass = "btn-danger";
+                            addClass = "btn-primary";
+                        }
+
+                        console.log(parameters); 
+                        
+                        $.post($("#publisher_sw_documents input").data('url'), parameters, function( data ) {
+                            if(data.success) {
+                                console.log('bien');
+                                $("#publisherModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
+                                
+                                if(changeCheckbox.checked) {
+                                    swal("El medio podrá subir nuevos documentos", "", "success");
+                                }
+                                else {
+                                    swal("El medio ya no podrá subir nuevos documentos", "", "success");
+                                }
                             }
                             else{
                                 console.log('mal');

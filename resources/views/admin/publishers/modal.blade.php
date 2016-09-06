@@ -60,9 +60,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <a href="/" class="h5" style="color: #5555e8;" target="_blank" id="link-documents">Documentos <strong id="publisher_documents"></strong></a>   
-                                        <ul id="file-documents" class="list-unstyled file-list">
+                                    <div class="col-xs-12" style="margin-top: 10px;">
+                                        <a href="/" class="h5" style="color: #5555e8;" target="_blank" id="link-documents">Documentos <strong id="publisher_documents"></strong></a> 
+                                        <div id="publisher_sw_documents" style="display: inline-block;"></div>  
+                                        <ul id="file-documents" class="list-unstyled file-list" style="margin-top: 10px;">
                                         
                                         </ul> 
                                     </div>
@@ -116,7 +117,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-success" id="link-documents" disabled data-toggle="tooltip" data-placement="top" title="Habilitar cambios de documentos" style="margin-right: 10px;"> 
+                <button class="btn btn-success" id="change-documents" disabled data-toggle="tooltip" data-placement="top" title="Habilitar cambios de documentos" style="margin-right: 10px;"> 
                     <i class="fa fa-file-pdf-o"></i> 
                 </button>
                 <a href="#" class="btn btn-info" id="link-spaces" target="_blank"> 
