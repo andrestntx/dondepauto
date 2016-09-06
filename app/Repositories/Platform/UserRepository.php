@@ -200,6 +200,17 @@ class UserRepository extends BaseRepository
         return $publisher->save();
     }
 
+    /**
+     * @param UserPlatform $publisher
+     * @param $changeDocuments
+     * @return bool
+     */
+    public function setChangeDocuments(UserPlatform $publisher, $changeDocuments)
+    {
+        $publisher->change_documents = $changeDocuments;
+        return $publisher->save();
+    }
+
 
     /**
      * @param UserPlatform $user

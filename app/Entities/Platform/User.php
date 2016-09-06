@@ -46,7 +46,8 @@ class User extends EntityAuth
         'first_name', 'last_name', 'email', 'password', 'role', 'user_id', 'name',
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
-        'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal', 'completed_at'
+        'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal', 'completed_at',
+        'source', 'bd_form_fuente_LI'
     ];
 
     /**
@@ -97,7 +98,7 @@ class User extends EntityAuth
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
         'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI', 'company_legal' => 'razon_social_us_LI',
         'private' => 'opcion_espacios_privados_LI', 'activated_at' => 'fecha_activacion_Us_LI', 'completed_at' => 'fecha_registro_completo_Us_LI',
-        'source' => 'bd_form_fuente_LI'
+        'source' => 'bd_form_fuente_LI', 'change_documents' => 'cambio_documentos_us_LI'
     ];
 
     /**
@@ -479,7 +480,19 @@ class User extends EntityAuth
      */
     public function getInVerificationAttribute()
     {
-        if(! $this->has_signed_agreement && $this->has_documents) {
+        if(! $this->has_signed_agreement && $this->has_documents && ! $this->change_documents ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInUpdateDocumentsAttribute()
+    {
+        if( $this->has_documents && $this->change_documents ) {
             return true;
         }
 
