@@ -222,6 +222,10 @@ class PublisherFacade extends UserFacade
      */
     public function saveDocuments(User $publisher, UploadedFile $commerceDocument = null, UploadedFile $rutDocument = null, UploadedFile $bankDocument = null, UploadedFile $letterDocument = null)
     {
+        if(auth()->user()->isPublisher()) {
+            $this->service->setChangeDocuments($publisher, false);
+        }
+
         $this->service->saveDocuments($publisher, $commerceDocument, $rutDocument, $bankDocument, $letterDocument);
         $this->mailchimpService->removeUserAutomation('agreement', $publisher);
         $this->mailchimpService->addUserAutomation('documents', $publisher);
@@ -274,6 +278,15 @@ class PublisherFacade extends UserFacade
         $this->service->setAgreement($user, $agreement);
 
         $this->mailchimpService->addUserAutomation('verify_documents', $user);
+    }
+
+    /**
+     * @param User $publisher
+     * @param $changeDocuments
+     */
+    public function setChangeDocuments(User $publisher, $changeDocuments)
+    {
+        $this->service->setChangeDocuments($publisher, $changeDocuments);
     }
 
     /**

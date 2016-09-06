@@ -223,5 +223,18 @@ class PublishersController extends ResourceController
         $this->facade->setAgreement($user, $request->get('agreement'));
         return ['success' => 'true'];
     }
+
+    /**
+     * @param Request $request
+     * @param User $publisher
+     * @return array
+     */
+    public function changeDocuments(Request $request, User $publisher)
+    {
+        \Log::info('está llegando');
+        \Log::info($request->get('change_documents'));
+        $this->facade->setChangeDocuments($publisher, $request->get('change_documents'));
+        return ['success' => 'true'];
+    }
     
 }

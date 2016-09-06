@@ -39,7 +39,7 @@ class PlatformUserPolicy
      */
     public function agreement(User $user, PlatformUser $publisher)
     {
-        if($user->user_platform_id == $publisher->id && $publisher->complete_data && ! $publisher->has_signed_agreement && ! $publisher->in_verification) {
+        if($user->user_platform_id == $publisher->id && $publisher->complete_data && ! $publisher->in_verification && ( $publisher->in_update_documents || ! $publisher->has_documents) ) {
             return true;
         }
     }

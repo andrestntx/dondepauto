@@ -319,7 +319,9 @@ var PublisherService = function() {
 
             inputDocuments.attr("type", "checkbox")
                 .addClass("js-switch js-switch-click")
-                .data("url", "/medios/" + publisher.id + "/agreement");
+                .data("url", "/medios/" + publisher.id + "/change-documents");
+
+            console.log(inputDocuments.data('url'));
                 
             $('#publisherModal #publisher_sw_documents').append(inputDocuments);
         }

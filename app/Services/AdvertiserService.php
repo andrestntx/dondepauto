@@ -76,7 +76,9 @@ class AdvertiserService extends ResourceService
      */
     public function createModel(array $data)
     {
-        $data['role'] = 'advertiser';
+        $data['role']   = 'advertiser';
+        $data['source'] = 'CRM Interno';
+
         return $this->repository->create($data);
     }
 

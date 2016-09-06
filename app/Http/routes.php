@@ -145,6 +145,11 @@ Route::group(['middleware' => 'auth'], function(){
             'parameters' => ['medios' => 'publishers']
         ]);
 
+        Route::post('medios/{publishers}/change-documents', [
+            'uses' => 'Admin\PublishersController@changeDocuments',
+            'as' => 'medios.change-documents'
+        ]);
+
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {

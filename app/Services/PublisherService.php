@@ -68,8 +68,10 @@ class PublisherService extends ResourceService
      */
     public function createModel(array $data)
     {
+        $data['source'] = 'CRM Interno';
         $data['role'] = 'publisher';
         $data['complete_data'] = false;
+
         return $this->repository->create($data);
     }
 
@@ -168,6 +170,15 @@ class PublisherService extends ResourceService
     public function setAgreement(User $user, $agreement)
     {
         return $this->repository->setAgreement($user, $agreement);
+    }
+
+    /**
+     * @param User $publisher
+     * @param $changeDocuments
+     */
+    public function setChangeDocuments(User $publisher, $changeDocuments)
+    {
+        $this->repository->setChangeDocuments($publisher, $changeDocuments);
     }
 
     /**

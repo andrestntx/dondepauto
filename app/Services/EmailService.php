@@ -24,8 +24,10 @@ class EmailService
         $fromName = self::$fromName;
         
         Mail::send('emails.' . $view, ['user' => $user, 'code' => $code], function ($m) use ($user, $fromEmail, $fromName) {
-            $m->from($fromEmail, $fromName);
-            $m->to($user->email, $user->name)->subject($user->first_name .  ' activa tu cuenta en DóndePauto');
+            $m->from($fromEmail, $fromName)
+                ->to($user->email, $user->name)
+                ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
+                ->subject(ucfirst($user->company) .  ', bienvenido a la agencia DóndePauto');
         });
     }
 
