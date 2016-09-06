@@ -87,12 +87,12 @@
                         </div>
                         <div class="ibox-footer">
                             <div class="row text-center">
-                                <div class="col-sm-6">                                                           
+                                <div class="col-lg-6" style="padding: 0 5px;">                                                           
                                     <a href="{{ route('medios.espacios.first-create', $publisher) }}" class="btn btn-lg btn-warning btn-effect-ripple btn-sm btn-block">
                                         <i class="fa fa-plus-circle"></i> CREAR NUEVA OFERTA
                                     </a>    
                                 </div>
-                                <div class="col-sm-6">    
+                                <div class="col-lg-6" style="padding: 0 5px;">    
                                     <a href="{{ route('medios.espacios.index', $publisher) }}" class="btn btn-lg btn-info btn-effect-ripple btn-sm btn-block">
                                         <i class="fa fa-search"></i> VER MI INVENTARIO
                                     </a> 
@@ -180,75 +180,75 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div {!! Html::classes(['box-message-danger' => ! $publisher->has_offers, 'box-message-danger' => $publisher->expired_offers, 'box-message-warning' => ( (!$publisher->has_signed_agreement && !$publisher->expired_offers) || !$publisher->has_offers) , 'box-message']) !!}>
-                            <div class="icon-message">
-                                @if(! $publisher->has_offers || ! $publisher->has_signed_agreement)
-                                    <img src="/assets/img/dashboard/alertagris.png" class="img-icon">
-                                @else
-                                    <img src="/assets/img/dashboard/diamantegris.png" class="img-icon">
-                                @endif
-                            </div>
-                            @if($publisher->has_offers)
-                                @if($publisher->has_signed_agreement)
-                                    <h3>¡Tus ofertas se encuentran activas!</h3>
-                                    <p>Te invitamos a que ofertes nuevos productos y 
-                                    que aumentes tus posibilidades de ventas</p>
-                                @elseif($publisher->expired_offers)
-                                    <h3>¡Tu Medio Publicitario NO ha sido activado como Proveedor!</h3>
-                                    <p>Tus ofertas ya no será presentadas a nuestros clientes.
-                                    Formaliza tu vinculación radicando la carta de <strong>aceptación e incentivos</strong></p>
-                                @else
-                                    <h3>¡Tu Medio Publicitario NO ha sido activado como Proveedor!</h3>
-                                    <p>Tus ofertas estarán activas por <strong>{{ $publisher->expired_offers_days }} días</strong> en la Plataforma.
-                                    Formaliza tu vinculación radicando la carta de <strong>aceptación e incentivos</strong></p>
-                                @endif
+            <div class="row">
+                <div class="col-sm-6">
+                    <div {!! Html::classes(['box-message-danger' => ! $publisher->has_offers, 'box-message-danger' => $publisher->expired_offers, 'box-message-warning' => ( (!$publisher->has_signed_agreement && !$publisher->expired_offers) || !$publisher->has_offers) , 'box-message']) !!}>
+                        <div class="icon-message">
+                            @if(! $publisher->has_offers || ! $publisher->has_signed_agreement)
+                                <img src="/assets/img/dashboard/alertagris.png" class="img-icon">
                             @else
-                                <h3>¡NO has presentado Ofertas de Espacios publicitarios!</h3>
-                                <p>
-                                    Tenemos potenciales clientes para tu medio publicitario.
-                                    Presenta tu inventario de ofertas haciendo clic en 
-                                    <a href="{{ route('medios.espacios.first-create', $publisher)}}" title="Crear mi primera oferta">
-                                        Crear Oferta
-                                    </a>
-                                </p>
+                                <img src="/assets/img/dashboard/diamantegris.png" class="img-icon">
                             @endif
                         </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div {!! Html::classes(['box-message-danger' => ! $publisher->has_signed_agreement, 'box-message-warning' => $publisher->in_verification, 'box-message-info' => $publisher->has_signed_agreement, 'box-message']) !!}>
-                            <div class="icon-message">
-                                @if($publisher->has_signed_agreement) 
-                                    <img src="/assets/img/dashboard/iconoestrella.png" class="img-icon">
-                                @else
-                                    <img src="/assets/img/dashboard/alertagris.png" class="img-icon">
-                                @endif
-                            </div>
+                        @if($publisher->has_offers)
                             @if($publisher->has_signed_agreement)
-                                <h3>¡Tu Medio Publicitario se encuentra activo como Proveedor!</h3>
-                                <p>Tus ofertas de Espacios Publicitarios disponibles para la venta podrán
-                                ser presentado a clientes anunciantes interesados</p>
-                            @elseif($publisher->in_verification)
-                                <h3>¡La documentación se encuentra en verificación!</h3>
-                                <p>
-                                    Una vez se valide, DóndePauto te activará como Proveedor
-                                    y tus Espacios Publicitarios podrán ser presentados a clientes interesados.
-                                </p>
+                                <h3>¡Tus ofertas se encuentran activas!</h3>
+                                <p>Te invitamos a que ofertes nuevos productos y 
+                                que aumentes tus posibilidades de ventas</p>
+                            @elseif($publisher->expired_offers)
+                                <h3>¡Tu Medio Publicitario NO ha sido activado como Proveedor!</h3>
+                                <p>Tus ofertas ya no será presentadas a nuestros clientes.
+                                Formaliza tu vinculación radicando la carta de <strong>aceptación e incentivos</strong></p>
                             @else
-                                <h3>¡Tu medio publicitario no ha sido validado como proveedor!</h3>
-                                <p>
-                                    Activa y valida tu medio publicitario formalizando la carta de 
-                                    aceptación e inventivos que deberá ser firmada por tu Representante Legal.
-                                </p>
+                                <h3>¡Tu Medio Publicitario NO ha sido activado como Proveedor!</h3>
+                                <p>Tus ofertas estarán activas por <strong>{{ $publisher->expired_offers_days }} días</strong> en la Plataforma.
+                                Formaliza tu vinculación radicando la carta de <strong>aceptación e incentivos</strong></p>
                             @endif
-                        </div>
+                        @else
+                            <h3>¡NO has presentado Ofertas de Espacios publicitarios!</h3>
+                            <p>
+                                Tenemos potenciales clientes para tu medio publicitario.
+                                Presenta tu inventario de ofertas haciendo clic en 
+                                <a href="{{ route('medios.espacios.first-create', $publisher)}}" title="Crear mi primera oferta">
+                                    Crear Oferta
+                                </a>
+                            </p>
+                        @endif
                     </div>
                 </div>
-                
+
+                <div class="col-sm-6">
+                    <div {!! Html::classes(['box-message-danger' => ! $publisher->has_signed_agreement, 'box-message-warning' => $publisher->in_verification, 'box-message-info' => $publisher->has_signed_agreement, 'box-message']) !!}>
+                        <div class="icon-message">
+                            @if($publisher->has_signed_agreement) 
+                                <img src="/assets/img/dashboard/iconoestrella.png" class="img-icon">
+                            @else
+                                <img src="/assets/img/dashboard/alertagris.png" class="img-icon">
+                            @endif
+                        </div>
+                        @if($publisher->has_signed_agreement)
+                            <h3>¡Tu Medio Publicitario se encuentra activo como Proveedor!</h3>
+                            <p>Tus ofertas de Espacios Publicitarios disponibles para la venta podrán
+                            ser presentado a clientes anunciantes interesados</p>
+                        @elseif($publisher->in_verification)
+                            <h3>¡La documentación se encuentra en verificación!</h3>
+                            <p>
+                                Una vez se valide, DóndePauto te activará como Proveedor
+                                y tus Espacios Publicitarios podrán ser presentados a clientes interesados.
+                            </p>
+                        @else
+                            <h3>¡Tu medio publicitario no ha sido validado como proveedor!</h3>
+                            <p>
+                                Activa y valida tu medio publicitario formalizando la carta de 
+                                aceptación e inventivos que deberá ser firmada por tu Representante Legal.
+                            </p>
+                        @endif
+                    </div>
+                </div>
             </div>
+            
             <hr class="hr-pencil">
 
             <div class="row comercial-detail">
