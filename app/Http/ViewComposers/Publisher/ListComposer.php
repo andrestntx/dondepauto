@@ -34,7 +34,7 @@ class ListComposer extends BaseComposer
     {
         $registrationStates = \Lang::get('states.publisher');
 
-        $actions = $this->actionRepository->all();
+        $actions = $this->actionRepository->model->where('type', 'publisher')->orWhere('type', 'all')->get();
         $cities  = $this->cityRepository->citiesWithSpaces();
 
         $view->with([
