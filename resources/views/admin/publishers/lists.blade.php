@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label class="control-label" style="display: block;">Acciones</label>
                             <div class="btn-group" role="group" aria-label="Large button group">
-                                <button type="button" class="btn btn-white" data-action="0">Todas</button>
+                                <button type="button" class="btn btn-white active" data-action="0">Todas</button>
                                 @foreach($actions as $action)
                                     <button type="button" class="btn btn-white" data-action="{{ $action->id }}" title="{{ $action->name }}" data-toggle="tooltip" data-placement="bottom"><i class="{{ $action->logo }}"></i></button>
                                 @endforeach

@@ -76,13 +76,13 @@ class PublishersController extends ResourceController
                     $hasOffers = true;
                     $cities = true;
                     $dates = true;
-                    $hasActions = true;
 
                     /** @var $actions */
                     $actions = null;
                     $action_id = null;
                     $action_start = null;
                     $action_end = null;
+                    $hasActions = true;
 
                     foreach ($request->get('columns') as $column) {
                         if($column['name'] == 'state_id') {

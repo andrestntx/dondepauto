@@ -12,6 +12,8 @@
     <link href="/assets/css/prueba.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!-- Include Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     <style type="text/css">
         .table-state .btn-circle {
@@ -28,7 +30,7 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro</label>
                             <div class="input-daterange input-group" id="datepicker" data-column="1">
@@ -38,10 +40,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         {!! Field::select('registration_states', $registrationStates, ['empty' => 'Todos']) !!}
                     </div>
-                    <div class="col-md-4 col-sm-6">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="intention_created_at">
                             <label class="control-label">Fecha de Leads</label>
                             <div class="input-daterange input-group" id="datepicker" data-column="16">
@@ -51,15 +55,38 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         {!! Field::select('cities', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
-                    <div class="col-md-4 col-sm-6">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         {!! Field::select('economic_activities', $economicActivities, ['empty' => 'Todas las Actividades']) !!}
                     </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" style="display: block;">Acciones</label>
+                            <div class="btn-group" role="group" aria-label="Large button group">
+                                <button type="button" class="btn btn-white active" data-action="0">Todas</button>
+                                @foreach($actions as $action)
+                                    <button type="button" class="btn btn-white" data-action="{{ $action->id }}" title="{{ $action->name }}" data-toggle="tooltip" data-placement="bottom"><i class="{{ $action->logo }}"></i></button>
+                                @endforeach
+                            </div>  
+                        </div>  
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" style="display: block;">Rango acciones</label>
+                            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                <span></span> <b class="caret"></b>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="table-responsive">
                     <table id="advertisers-datatable" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
                         <thead>
@@ -114,6 +141,12 @@
 
     <!-- Sweet alert -->
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+     <!-- Include Required Prerequisites -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     
     <script>
         var filter = $("<strong></strong>")
