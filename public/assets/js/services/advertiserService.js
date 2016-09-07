@@ -38,7 +38,10 @@ var AdvertiserService = function() {
                 { "data": "economic_activity_id", "name": "economic_activity_id", "searchable": false, "visible": false },
                 { "data": "created_at_datatable", "name": "intention_at", "searchable": false, "visible": false},
                 { "data": "last_log_login_at_datatable"},
-                { "data": "activated_at_datatable"} // 19
+                { "data": "activated_at_datatable"}, // 19
+
+                { "data": null, "name": "action"},
+                { "data": null, "name": "action_range"} // 21
             ],
             "columnDefs": [
                 {
@@ -46,7 +49,7 @@ var AdvertiserService = function() {
                     "searchable": false
                 },
                 {
-                    "targets": [3,5,13,14,15,16,17,18,19],
+                    "targets": [3,5,13,14,15,16,17,18,19,20,21],
                     "visible": false,
                     "searchable": false
                 },
@@ -123,6 +126,8 @@ var AdvertiserService = function() {
         UserService.initSimpleSearchSelect("#registration_states",13);
         UserService.initSimpleSearchSelect('#cities', 14);
         UserService.initSimpleSearchSelect("#economic_activities", 16);
+        UserService.initActions(20);
+        UserService.initActionsRange(21);
 
         $("#advertisers-datatable_filter input").unbind();
 
