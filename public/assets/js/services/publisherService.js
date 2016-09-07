@@ -37,7 +37,9 @@ var PublisherService = function() {
                 { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}, // 14
 
                 { "data": null, "name": "action"},
-                { "data": null, "name": "action_range"} // 16
+                { "data": null, "name": "action_range"}, // 16
+
+                { "data": "has_logo", "name": "has_logo"} // 17
             ],
             "columnDefs": [
                 {
@@ -46,7 +48,7 @@ var PublisherService = function() {
                     "visible": true
                 },
                 {
-                    "targets": [8,9,10,11,12,13,14,15,16],
+                    "targets": [8,9,10,11,12,13,14,15,16,17],
                     "searchable": false,
                     "visible": false
                 },
@@ -110,6 +112,7 @@ var PublisherService = function() {
         UserService.initSimpleSearchSelect('#with_spaces', 9);
         UserService.initActions(15);
         UserService.initActionsRange(16);
+        UserService.initSimpleSearchSelect('#has_logo', 17);
 
         $("#publishers-datatable_filter input").unbind();
 

@@ -48,6 +48,15 @@ class LogosRepository extends ImagesRepository
     }
 
     /**
+     * @param $id
+     * @return string
+     */
+    public function getLogoId($id)
+    {
+        return $this->getPathId($id) . '/logo.jpg';
+    }
+
+    /**
      * @param User $publisher
      * @param UploadedFile $photoFile
      * @param int $size
@@ -80,5 +89,14 @@ class LogosRepository extends ImagesRepository
     public function hasLogo(User $publisher)
     {
         return $this->hasUploadedFile($this->getLogo($publisher));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function hasLogoId($id)
+    {
+        return $this->hasUploadedFile($this->getLogoId($id));
     }
 }
