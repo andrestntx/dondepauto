@@ -11,8 +11,13 @@
 @section('extra-css')
     <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
     <link href="/assets/css/prueba.css" rel="stylesheet">
+    
     <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+     
+    <!-- Include Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
     <style type="text/css">
         .table-state .btn-circle {
             width:24px; height: 24px; padding: 2px 0; font-size: 10px;
@@ -25,7 +30,7 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label">Fecha de registro inicial</label>
                             <div class="input-daterange input-group" id="datepicker_created_at_start" data-column="1">
@@ -35,10 +40,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         {!! Field::select('registration_states', $registrationStates, ['empty' => 'Ver Todos']) !!}
                     </div>
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
                             <label class="control-label"> <input type="checkbox" class="i-checks" id="signed_agreement"> Firma de acuerdo</label>
                             <div class="input-daterange input-group" id="datepicker_agreement" data-column="10">
@@ -48,12 +53,12 @@
                             </div>
                         </div>
                     </div>                
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         {!! Field::select('with_spaces', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
-                    <div class="col-md-4 col-sm-6">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_offer_at">
                             <label class="control-label"> <input type="checkbox" class="i-checks" id="offer"> Ofertó</label>
                             <div class="input-daterange input-group" id="datepicker_offer" data-column="13">
@@ -63,7 +68,8 @@
                             </div>
                         </div>
                     </div>
-                   {{--  <div class="col-md-4 col-sm-6">
+
+                   {{--  <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_last_login_at">
                             <label class="control-label">Fecha de último login</label>
                             <div class="input-daterange input-group" id="datepicker">
@@ -73,7 +79,31 @@
                             </div>
                         </div>
                     </div> --}}
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" style="display: block;">Acciones</label>
+                            <div class="btn-group" role="group" aria-label="Large button group">
+                                <button type="button" class="btn btn-white" data-action="0">Todas</button>
+                                @foreach($actions as $action)
+                                    <button type="button" class="btn btn-white" data-action="{{ $action->id }}" title="{{ $action->name }}" data-toggle="tooltip" data-placement="bottom"><i class="{{ $action->logo }}"></i></button>
+                                @endforeach
+                            </div>  
+                        </div>  
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" style="display: block;">Rango acciones</label>
+                            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                <span></span> <b class="caret"></b>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
                 <div class="table-responsive">
                     <table id="publishers-datatable" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
                         <thead>
@@ -115,6 +145,12 @@
     <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
     <!-- Sweet alert -->
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Include Required Prerequisites -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/publisherService.js"></script>
@@ -122,6 +158,7 @@
         $(document).ready(function() {
             PublisherService.init('/medios/search');
         });
+
     </script>
     <!-- iCheck -->
     <script src="/assets/js/plugins/iCheck/icheck.min.js"></script>

@@ -61,6 +61,22 @@ class Action extends Entity
     /**
      * @return null|string
      */
+    public function getActionAtDatetimeAttribute()
+    {
+        if($this->pivot) {
+            if($this->pivot->action_at == '0000-00-00 00:00:00') {
+                return '';
+            }
+
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->toDateTimeString();
+        }
+
+        return '';
+    }
+
+    /**
+     * @return null|string
+     */
     public function getActionAtDateAttribute()
     {
         if($this->pivot) {
@@ -88,6 +104,43 @@ class Action extends Entity
         }
 
         return '';
+    }
+
+    /**
+     * @param null $start
+     * @param null $end
+     * @return bool
+     */
+    public function isInRange($start = null, $end = null)
+    {
+        $action_at = $this->action_at_datetime;
+
+        if($start && $end) {
+            return strtotime($action_at) >= strtotime($start) && strtotime($action_at) <= strtotime($end);
+        }
+        else if($start) {
+            return strtotime($action_at) >= strtotime($start);
+        }
+        else if ($end) {
+            return strtotime($action_at) <= strtotime($end);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param null $id
+     * @param null $start
+     * @param null $end
+     * @return bool
+     */
+    public function isActionAndIsInRange($id = null, $start = null, $end = null)
+    {
+        if(!is_null($id)) {
+            return $this->id == $id && $this->isInRange($start, $end);
+        }
+
+        return $this->isInRange($start, $end);
     }
 
 }

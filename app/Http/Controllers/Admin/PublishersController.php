@@ -15,6 +15,7 @@ use App\Http\Requests\RUser\Publisher\StoreRequest;
 use App\Http\Requests\RUser\Publisher\UpdateRequest;
 use App\Services\PublisherService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -75,6 +76,13 @@ class PublishersController extends ResourceController
                     $hasOffers = true;
                     $cities = true;
                     $dates = true;
+                    $hasActions = true;
+
+                    /** @var $actions */
+                    $actions = null;
+                    $action_id = null;
+                    $action_start = null;
+                    $action_end = null;
 
                     foreach ($request->get('columns') as $column) {
                         if($column['name'] == 'state_id') {
@@ -96,8 +104,34 @@ class PublishersController extends ResourceController
                                 $dates = $dates && (strtotime($publisher->last_offer) <= strtotime(Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString()));
                             }
                         }
+                        if ($column['name'] == 'action' && trim($column['search']['value']) && trim($column['search']['value']) != "0") {
+                            $action_id = trim($column['search']['value']);
+                        }
+                        if ($column['name'] == 'action_range' && trim($column['search']['value'])) {
+                            $action_range = explode(',', $column['search']['value']);
+                            $action_start = trim($action_range[0]);
+                            $action_end   = trim($action_range[1]);
+                        }
                     }
-                    return $state && $hasOffers && $cities && $dates;
+
+                    if($action_id || $action_start || $action_end) {
+                        if($publisher->contacts->count() > 0) {
+                            $actions = $publisher->contacts->filter(function ($contact) use ($action_id, $action_start, $action_end) {
+                                if($action = $contact->actions->first()) {
+                                    return $action->isActionAndIsInRange($action_id, $action_start, $action_end);
+                                }
+                            });
+
+                            if($actions->count() == 0) {
+                                $hasActions = false;
+                            }
+                        }
+                        else {
+                            $hasActions = false;
+                        }
+                    }
+
+                    return $state && $hasOffers && $cities && $dates && $hasActions;
                 });
             })
             ->make(true);

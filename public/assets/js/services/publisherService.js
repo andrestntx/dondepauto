@@ -25,16 +25,19 @@ var PublisherService = function() {
                 { "data": "state" , "name": "state" },
                 { "data": "count_spaces" , "name": "count_spaces" },
                 { "data": "count_logs" , "name": "count_logs" },
-                { "data": "comments" , "name": "comments" },
+                { "data": "comments" , "name": "comments" }, // 7
 
                 { "data": "state_id", "name": "state_id"},
                 { "data": "space_city_names", "name": "space_city_names"},
-                { "data": "has_offers", "name": "has_offers"},
+                { "data": "has_offers", "name": "has_offers"}, // 10
 
                 { "data": "activated_at_datatable", "name": "activated_at_datatable"},
                 { "data": "signed_agreement", "name": "signed_agreement"},
                 { "data": "signed_at_datatable", "name": "signed_at_datatable"},
-                { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}
+                { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}, // 14
+
+                { "data": null, "name": "action"},
+                { "data": null, "name": "action_range"} // 16
             ],
             "columnDefs": [
                 {
@@ -43,7 +46,7 @@ var PublisherService = function() {
                     "visible": true
                 },
                 {
-                    "targets": [8,9,10,11,12,13,14],
+                    "targets": [8,9,10,11,12,13,14,15,16],
                     "searchable": false,
                     "visible": false
                 },
@@ -105,6 +108,8 @@ var PublisherService = function() {
         UserService.initDatatable(table);
         UserService.initSimpleSearchSelect("#registration_states", 8);
         UserService.initSimpleSearchSelect('#with_spaces', 9);
+        UserService.initActions(15);
+        UserService.initActionsRange(16);
 
         $("#publishers-datatable_filter input").unbind();
 
@@ -525,64 +530,67 @@ var PublisherService = function() {
         var manual = false;
         var changeCheckbox = document.querySelector('#publisher_sw_documents .js-switch-click');
 
-        changeCheckbox.onchange = function(e) {   
-            if(! manual) {
-                swal({
-                    title: '¿Estás seguro?',
-                    text: 'El medio podrá o no subir nuevos documentos',
-                    type: "warning",
-                    confirmButtonText: "Confirmar",
-                    confirmButtonColor: "#FFAC1A",
-                    cancelButtonText: "Cancelar",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                    html: true
-                },
-                function(isConfirm) {
-                    if (isConfirm) {     
-                        
-                        var parameters = {"change_documents": "0"};
-                        var removeClass = "btn-primary";
-                        var addClass = "btn-danger";
-                        
-                        if(changeCheckbox.checked) {
-                            parameters = {"change_documents": "1"};
-                            removeClass = "btn-danger";
-                            addClass = "btn-primary";
-                        }
+        if(changeCheckbox) {
+            changeCheckbox.onchange = function(e) {   
+                if(! manual) {
+                    swal({
+                        title: '¿Estás seguro?',
+                        text: 'El medio podrá o no subir nuevos documentos',
+                        type: "warning",
+                        confirmButtonText: "Confirmar",
+                        confirmButtonColor: "#FFAC1A",
+                        cancelButtonText: "Cancelar",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        html: true
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {     
+                            
+                            var parameters = {"change_documents": "0"};
+                            var removeClass = "btn-primary";
+                            var addClass = "btn-danger";
+                            
+                            if(changeCheckbox.checked) {
+                                parameters = {"change_documents": "1"};
+                                removeClass = "btn-danger";
+                                addClass = "btn-primary";
+                            }
 
-                        console.log(parameters); 
-                        
-                        $.post($("#publisher_sw_documents input").data('url'), parameters, function( data ) {
-                            if(data.success) {
-                                console.log('bien');
-                                $("#publisherModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
-                                
-                                if(changeCheckbox.checked) {
-                                    swal("El medio podrá subir nuevos documentos", "", "success");
+                            console.log(parameters); 
+                            
+                            $.post($("#publisher_sw_documents input").data('url'), parameters, function( data ) {
+                                if(data.success) {
+                                    console.log('bien');
+                                    $("#publisherModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
+                                    
+                                    if(changeCheckbox.checked) {
+                                        swal("El medio podrá subir nuevos documentos", "", "success");
+                                    }
+                                    else {
+                                        swal("El medio ya no podrá subir nuevos documentos", "", "success");
+                                    }
                                 }
-                                else {
-                                    swal("El medio ya no podrá subir nuevos documentos", "", "success");
+                                else{
+                                    console.log('mal');
+                                    manual = true;
+                                    changeCheckbox.click();
+                                    manual = false;
+                                    swal("Hubo un error", "", "danger");
                                 }
-                            }
-                            else{
-                                console.log('mal');
-                                manual = true;
-                                changeCheckbox.click();
-                                manual = false;
-                                swal("Hubo un error", "", "danger");
-                            }
-                        });
-                    } 
-                    else { 
-                        manual = true;
-                        changeCheckbox.click();
-                        manual = false;
-                    } 
-                });
-            } 
-        };
+                            });
+                        } 
+                        else { 
+                            manual = true;
+                            changeCheckbox.click();
+                            manual = false;
+                        } 
+                    });
+                } 
+            };    
+        }
+        
     }
 
     return {
