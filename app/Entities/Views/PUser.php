@@ -9,6 +9,7 @@
 namespace App\Entities\Views;
 
 
+use App\Repositories\File\LogosRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -265,6 +266,15 @@ class PUser  extends Model {
     public function getStateIconAttribute()
     {
         return $this->icons[$this->state_id];
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasLogoAttribute()
+    {
+        $logoRepository = new LogosRepository();
+        return $logoRepository->hasLogoId($this->id);
     }
 
 }

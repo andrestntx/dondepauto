@@ -28,7 +28,7 @@ class Advertiser extends PUser
         'count_by_contact_intentions', 'count_sold_intentions', 'count_discarded_intentions', 'count_interest_intentions',
         'count_management_intentions', 'count_leads', 'created_at_humans', 'count_proposals', 'count_logs',
         'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states', 'last_login_at',
-        'range_view_at_humans', 'count_views'];
+        'range_view_at_humans', 'count_views', 'has_logo'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -84,12 +84,23 @@ class PublishersController extends ResourceController
                     $action_end = null;
                     $hasActions = true;
 
+                    /** @var $hasLogo */
+                    $hasLogo = true;
+
                     foreach ($request->get('columns') as $column) {
                         if($column['name'] == 'state_id') {
                             $state = $publisher->hasState($column['search']['value']);
                         }
                         if($column['name'] == 'has_offers' && $column['search']['value'] == 'true') {
                             $hasOffers = $publisher->has_offers;
+                        }
+                        if($column['name'] == 'has_logo') {
+                            if($column['search']['value'] == 'true') {
+                                $hasLogo = $publisher->has_logo == true;
+                            }
+                            else if($column['search']['value'] == 'false') {
+                                $hasLogo = $publisher->has_logo == false;
+                            }
                         }
                         if($column['name'] == 'space_city_names' && trim($column['search']['value'])) {
                             $cities = $publisher->hasSpaceCity(intval($column['search']['value']));
@@ -131,7 +142,7 @@ class PublishersController extends ResourceController
                         }
                     }
 
-                    return $state && $hasOffers && $cities && $dates && $hasActions;
+                    return $state && $hasOffers && $cities && $dates && $hasActions && $hasLogo;
                 });
             })
             ->make(true);

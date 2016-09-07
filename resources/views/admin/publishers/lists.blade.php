@@ -102,6 +102,10 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        {!! Field::select('has_logo', ['' => 'Ver Todos', 'true' => 'Si', 'false' => 'No'], ['empty' => 'Ver Todos', 'label' => 'Con Logo']) !!}
+                    </div>
+
                 </div>
 
                 <div class="table-responsive">
