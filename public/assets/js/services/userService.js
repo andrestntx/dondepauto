@@ -15,6 +15,79 @@ var UserService = function() {
 			return $(".dataTables_filter input").val();
 		},
 
+		initActions: function(column) {
+			 $(".btn-group > .btn").click(function() {
+                $(this).addClass("active").siblings().removeClass("active");
+
+                dataTable
+                	.column(column)
+                	.search($(this).data('action'))
+                	.draw();
+            });
+		},
+
+		initActionsRange: function(column) {
+
+            var start = moment().subtract(3, 'years');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('D MMM, YYYY') + ' - ' + end.format('D MMM, YYYY'));
+                
+                dataTable
+                	.column(column)
+                	.search(start.format('YYYY-MM-DD') + ',' + end.format('YYYY-MM-DD'))
+                	.draw();
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                "locale": {
+                    "format": "DD MMM, YYYY",
+                    "separator": " - ",
+                    "applyLabel": "Buscar",
+                    "cancelLabel": "Cerrar",
+                    "fromLabel": "Hasta",
+                    "toLabel": "Desde",
+                    "customRangeLabel": "Seleccionar",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "Dom",
+                        "Lun",
+                        "Mar",
+                        "Mie",
+                        "Jue",
+                        "Vie",
+                        "Sab"
+                    ],
+                    "monthNames": [
+                        "Enero",
+                        "Febrero",
+                        "Marzo",
+                        "Abril",
+                        "Mayo",
+                        "Junio",
+                        "Julio",
+                        "Agosto",
+                        "Septiembre",
+                        "Octubre",
+                        "Noviembre",
+                        "Deciembre"
+                    ],
+                    "firstDay": 1
+                },
+                ranges: {
+                   'Vencidas': [moment().subtract(3, 'years'), moment().subtract(1, 'days')],
+                   'Hoy': [moment(), moment()],
+                   'Mañana': [moment().add(1, 'days'), moment().add(1, 'days')],
+                   'Esta semana': [moment().day(1), moment().day(7)],
+                   'Próxima semana': [moment().day(8), moment().day(14)]
+                }
+            }, cb); 
+
+		},
+
 		initInputsDateRange: function() {
 			console.log('initInputsDateRange');
 	        $('.input-daterange').datepicker({
