@@ -277,4 +277,13 @@ class PUser  extends Model {
         return $logoRepository->hasLogoId($this->id);
     }
 
+    /**
+     * @return string
+     */
+    public function getLogoAttribute()
+    {
+        $logoRepository = new LogosRepository();
+        return $logoRepository->getLogoId($this->id);
+    }
+
 }
