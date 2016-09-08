@@ -93,6 +93,22 @@ class Action extends Entity
     /**
      * @return null|string
      */
+    public function getActionAtSimpleDateAttribute()
+    {
+        if($this->pivot) {
+            if($this->pivot->action_at == '0000-00-00 00:00:00') {
+                return '';
+            }
+
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->toDateString();
+        }
+
+        return '';
+    }
+
+    /**
+     * @return null|string
+     */
     public function getActionAtHumansAttribute()
     {
         if($this->pivot) {
@@ -113,7 +129,7 @@ class Action extends Entity
      */
     public function isInRange($start = null, $end = null)
     {
-        $action_at = $this->action_at_datetime;
+        $action_at = $this->action_at_simple_date;
 
         if($start && $end) {
             return strtotime($action_at) >= strtotime($start) && strtotime($action_at) <= strtotime($end);

@@ -82,7 +82,7 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group">
-                            <label class="control-label" style="display: block;">Acciones</label>
+                            <label class="control-label" style="display: block;">Actividades Pendientes</label>
                             <div class="btn-group" role="group" aria-label="Large button group">
                                 <button type="button" class="btn btn-white active" data-action="0">Todas</button>
                                 @foreach($actions as $action)
@@ -94,7 +94,7 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group">
-                            <label class="control-label" style="display: block;">Rango acciones</label>
+                            <label class="control-label" style="display: block;">Fecha de Actividades</label>
                             <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
                                 <span></span> <b class="caret"></b>
