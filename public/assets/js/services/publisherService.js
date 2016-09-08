@@ -124,6 +124,12 @@ var PublisherService = function() {
         }); 
     }
 
+    function reload() {
+        table
+            .search(UserService.getFilterSearch())
+            .draw();
+    }
+
     function initSearchAgreement() {
         var optionState = '';
 
@@ -633,7 +639,7 @@ var PublisherService = function() {
             return UserService.getSocialContact(contact);
         },
         reload: function() {
-            table.search(UserService.getFilterSearch()).draw();
+            reload();
         }
     };
 }();

@@ -182,11 +182,9 @@ class MailchimpService
     function syncUser(User $user)
     {
         if($user->isPublisher()) {
-            \Log::info('medio');
             $this->syncPublisher($user);
         }
         else {
-            \Log::info('anunciante');
             $this->syncAdvertiser($user);
         }
     }
@@ -242,6 +240,20 @@ class MailchimpService
                 $this->addUserAutomation('complete-data', $user);
             }
         }
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Support\Collection
+     */
+    public function removeUser(User $user)
+    {
+        if(env('APP_ENV') == 'production') {
+            $this->stopActualAutomation($user);
+            return $this->mailchimp->delete($this->getUserUrl($user));
+        }
+
+        return null;
     }
 
     /**

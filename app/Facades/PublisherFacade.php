@@ -305,11 +305,13 @@ class PublisherFacade extends UserFacade
 
     /**
      * @param User $user
+     * @return bool
      */
     public function deletePublisher(User $user)
     {
         $this->emailService->notifyUserDelete($user);
-        $this->service->deleteModel($user);
+        $this->mailchimpService->removeUser($user);
+        return $this->service->deleteModel($user);
     }
 
     /**
