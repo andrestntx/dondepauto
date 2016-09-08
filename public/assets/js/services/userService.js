@@ -4,6 +4,23 @@ var UserService = function() {
 	var columnCreatedAt;
 	var columnLoginAt;
 
+	function drawPersonalData(inputId, user) {
+    	$('#' + inputId +' #company_name').text(user.company);
+        $('#' + inputId +' #name').text(user.name);
+        $('#' + inputId +' #email a').attr('href', 'mailto:' + user.email).text(user.email);
+        $('#' + inputId +' a#phone').attr('href', 'tel:' + user.phone).text(user.phone);
+        $('#' + inputId +' a#cel').attr('href', 'tel:' + user.cel).text(user.cel);
+    };
+    
+    function drawDetailData(inputId, user) {
+    	$('#' + inputId +' #economic_activity').text(user.economic_activity_name);
+        $('#' + inputId +' #city').text(user.city_name);
+        $('#' + inputId +' #address').text(user.address);
+        $('#' + inputId +' #company_nit').text(user.company_nit);
+        $('#' + inputId +' #company_role').text(user.company_role);
+        $('#' + inputId +' #company_area').text(user.company_area);
+    };
+
 	return {
 		initDatatable: function(table) 
 		{
@@ -285,25 +302,24 @@ var UserService = function() {
 	        return false;
 	    },
 
+	    drawPersonalData: function(inputId, user) {
+	    	drawPersonalData(inputId, user);
+	    },
+	    
+	    drawDetailData: function(inputId, user) {
+	    	drawDetailData(inputId, user);
+	    },
+
 		drawModalUser: function (inputId, user, urlName) {
 			$("#prueba").html(UserService.getHtmlTableStates(user.states, 200));
 	        $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + user.id + '/edit');
 
 	        /** Personal Data **/
-	        $('#' + inputId +' #company_name').text(user.company);
-	        $('#' + inputId +' #name').text(user.name);
-	        $('#' + inputId +' #email a').attr('href', 'mailto:' + user.email).text(user.email);
-	        $('#' + inputId +' a#phone').attr('href', 'tel:' + user.phone).text(user.phone);
-	        $('#' + inputId +' a#cel').attr('href', 'tel:' + user.cel).text(user.cel);
+	        drawPersonalData(inputId, user);
 	        $('#' + inputId +' #source').text(user.source);
 
-	        /** Data Detail **/
-	        $('#' + inputId +' #economic_activity').text(user.economic_activity_name);
-	        $('#' + inputId +' #city').text(user.city_name);
-	        $('#' + inputId +' #address').text(user.address);
-	        $('#' + inputId +' #company_nit').text(user.company_nit);
-	        $('#' + inputId +' #company_role').text(user.company_role);
-	        $('#' + inputId +' #company_area').text(user.company_area);
+	        /** Detail Data **/
+	        drawDetailData(inputId, user);
 
 	        /** Comments **/
 	        //$('#' + inputId +' #comments').text(user.comments);

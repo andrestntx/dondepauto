@@ -141,6 +141,12 @@ Route::group(['middleware' => 'auth'], function(){
             'espacios' => 'spaces'
         ]]);
 
+        Route::post('medios/{publishers}/ajax', [
+            'uses' => 'Admin\PublishersController@updateAjax',
+            'as' => 'medios.update.ajax'
+        ]);
+
+
         Route::resource('medios', 'Admin\PublishersController', [
             'parameters' => ['medios' => 'publishers']
         ]);

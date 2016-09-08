@@ -26,25 +26,40 @@ class PublisherRepository extends BaseRepository
     }
 
     /**
+     * @return mixed
+     */
+    protected function defaultSearch()
+    {
+        return $this->model->select([
+            'company', 'first_name', 'last_name', 'name', 'email', 'phone', 'cel', 'created_at', 'signed_at', 'comments',
+            'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data',
+            'commission_rate', 'discount', 'retention', 'city_name', 'city_id', 'company_nit', 'company_role', 'company_area',
+            'economic_activity_name', 'source'
+        ])->with(['spaces' => function($query) {
+                $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at', 'id_ciudad_LI as city_id');
+            }, 'contacts' => function($query) {
+                $query->orderBy("created_at", "desc");
+            },'contacts.actions', 'logs'
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getPublisher($id)
+    {
+        return $this->defaultSearch()->whereId($id)->get()->first();
+    }
+
+    /**
      * @param array $columns
      * @param array $search
      * @return mixed
      */
     public function search(array $columns, array $search)
     {
-        $publisherQuery = $this->model->select([
-                'company', 'first_name', 'name', 'email', 'phone', 'cel', 'created_at', 'signed_at', 'comments',
-                'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data',
-                'commission_rate', 'discount', 'retention', 'city_name', 'company_nit', 'company_role', 'company_area',
-                'economic_activity_name', 'source'
-            ])->with(['spaces' => function($query) {
-                    $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at', 'id_ciudad_LI as city_id');
-                }, 'contacts' => function($query) {
-                    $query->orderBy("created_at", "desc");
-                },'contacts.actions', 'logs'/*, 'spaces.city' => function($query) {
-                    $query->select('nombre_ciudad_LI as name', 'id_ciudad_LI');
-                }*/
-            ]);
+        $publisherQuery = $this->defaultSearch();
 
         if(trim($search['value'])) {
             $value = $search['value'];
@@ -65,7 +80,7 @@ class PublisherRepository extends BaseRepository
             }
         }
 
-        return $publisherQuery->get();
+        return $publisherQuery->take(20)->get();
     }
 
     protected function searchDateRange($column, $search, $name, &$publisherQuery)

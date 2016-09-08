@@ -7,6 +7,7 @@ var PublisherService = function() {
     var table;
     var switchery;
     var switcheryClass = ".js-switch";
+    var publisherEdit;
 
     function initTable(urlSearch) {
         table = $('#publishers-datatable').DataTable({
@@ -225,6 +226,57 @@ var PublisherService = function() {
             drawModal(publisher);
         });
 
+        $("#publisherEditDataContactModal #form-edit-data-contact-publisher").click(function() {
+            var parameters = {
+                'first_name':   $("#publisherEditDataContactModal #first_name").val(),
+                'last_name':    $("#publisherEditDataContactModal #last_name").val(),
+                'email':        $("#publisherEditDataContactModal #email").val(),
+                'phone':        $("#publisherEditDataContactModal #phone").val(),
+                'cel':          $("#publisherEditDataContactModal #cel").val()
+            };
+
+
+            postModal(
+                $("#publisherEditDataContactModal #publisher_company").data('url'),
+                parameters,
+                $("#publisherEditDataContactModal")
+            );
+        });
+
+        $("#publisherEditDataDetailModal #form-edit-data-detail-publisher").click(function() {
+            var parameters = {
+                'company':      $("#publisherEditDataDetailModal #company").val(),
+                'company_nit':  $("#publisherEditDataDetailModal #company_nit").val(),
+                'company_role': $("#publisherEditDataDetailModal #company_role").val(),
+                'company_area': $("#publisherEditDataDetailModal #company_area").val(),
+                'city_id':      $("#publisherEditDataDetailModal #city_id").val(),
+                'address':      $("#publisherEditDataDetailModal #address").val()
+            };
+
+            postModal(
+                $("#publisherEditDataDetailModal #publisher_company").data('url'),
+                parameters,
+                $("#publisherEditDataDetailModal")
+            );
+        });
+
+        $("#publisherEditDataAgreementModal #form-edit-data-agreement-publisher").click(function() {
+            var parameters = {
+                'signed_at':        $("#publisherEditDataAgreementModal #signed_at").val(),
+                'commission_rate':  $("#publisherEditDataAgreementModal #commission_rate").val(),
+                'retention':        $("#publisherEditDataAgreementModal #retention").val(),
+                'discount':         $("#publisherEditDataAgreementModal #discount").val()
+            };
+
+            console.log(parameters);
+
+            postModal(
+                $("#publisherEditDataAgreementModal #publisher_company").data('url'),
+                parameters,
+                $("#publisherEditDataAgreementModal")
+            );
+        });
+
         $("#change-documents").click(function(){
             swal({
                 title: '¿Estás seguro?',
@@ -271,8 +323,28 @@ var PublisherService = function() {
         });
     }
 
+    function drawAgreementData(publisher) {
+        $('#publisherModal #commission_rate').text(publisher.commission_rate);
+        $('#publisherModal #signed_at').text(publisher.signed_at_datatable);
+        $('#publisherModal #discount').text(publisher.discount);
+        $('#publisherModal #retention').text(publisher.retention);
+    };
+
     function drawModal(publisher) {
         UserService.drawModalUser("publisherModal", publisher, "medios");
+        publisherEdit = publisher;
+
+        $("#edit-data-contact").click(function(){
+            drawModalEditContact(publisherEdit, '/medios/' + publisher.id + '/ajax');
+        });
+
+        $("#edit-data-detail").click(function(){
+            drawModalEditDetail(publisherEdit, '/medios/' + publisher.id + '/ajax');
+        });
+
+        $("#edit-data-agreement").click(function(){
+            drawModalEditAgreement(publisherEdit, '/medios/' + publisher.id + '/ajax');
+        });
 
         var documents = $.parseJSON(publisher.documents_json);
 
@@ -350,10 +422,7 @@ var PublisherService = function() {
             .attr('title', 'Habilitar cambio de documentos');
 
         //$('#publisherModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
-        $('#publisherModal #commission_rate').text(publisher.commission_rate);
-        $('#publisherModal #signed_at').text(publisher.signed_at_datatable);
-        $('#publisherModal #discount').text(publisher.discount);
-        $('#publisherModal #retention').text(publisher.retention);
+        drawAgreementData(publisher);
 
         /** Spaces **/
         $('#publisherModal a#link-spaces').attr('href', '/medios/' + publisher.id);
@@ -393,11 +462,80 @@ var PublisherService = function() {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
+    function drawModalEditContact(publisher, url) {
+        $("#publisherEditDataContactModal #publisher_company").text(publisher.company);
+        $("#publisherEditDataContactModal #first_name").val(publisher.first_name);
+        $("#publisherEditDataContactModal #last_name").val(publisher.last_name);
+        $("#publisherEditDataContactModal #email").val(publisher.email);
+        $("#publisherEditDataContactModal #phone").val(publisher.phone);
+        $("#publisherEditDataContactModal #cel").val(publisher.cel);
+
+        $("#publisherEditDataContactModal #publisher_company").attr('data-url', url)
+
+        $("#publisherEditDataContactModal").modal();
+    }
+
+    function drawModalEditDetail(publisher, url) {
+        $("#publisherEditDataDetailModal #publisher_company").text(publisher.company);
+        $("#publisherEditDataDetailModal #company").val(publisher.company);
+        $("#publisherEditDataDetailModal #company_nit").val(publisher.company_nit);
+        $("#publisherEditDataDetailModal #company_role").val(publisher.company_role);
+        $("#publisherEditDataDetailModal #company_area").val(publisher.company_area);
+        $("#publisherEditDataDetailModal #city_id").val(publisher.city_id);
+        $("#publisherEditDataDetailModal #address").val(publisher.address);
+
+        $("#publisherEditDataDetailModal #publisher_company").attr('data-url', url)
+
+        $("#publisherEditDataDetailModal").modal();
+    }
+
+    function drawModalEditAgreement(publisher, url) {
+        $("#publisherEditDataAgreementModal #signed_at").val(publisher.signed_at_date);
+        $("#publisherEditDataAgreementModal #commission_rate").val(publisher.commission_rate);
+        $("#publisherEditDataAgreementModal #retention").val(publisher.retention);
+        $("#publisherEditDataAgreementModal #discount").val(publisher.discount);
+
+        $("#publisherEditDataAgreementModal #publisher_company").attr('data-url', url)
+
+        $("#publisherEditDataAgreementModal").modal();
+    }
+
+    function postModal(url, parameters, modal) {
+        modal.find("#sk-spinner-modal").show();
+        modal.find(".form-edit-data-publisher").prop("disabled", true);
+
+        $.post(url, parameters, function( data ) {
+            if(data.success) {
+                publisherEdit = data.publisher;
+                
+                UserService.drawPersonalData("publisherModal", data.publisher);
+                UserService.drawDetailData("publisherModal", data.publisher);
+                drawAgreementData(data.publisher);
+
+                modal.find("#sk-spinner-modal").hide();
+                table.search(UserService.getFilterSearch()).draw();
+
+                modal.modal('toggle');
+                modal.find(".form-edit-data-publisher").prop("disabled", false);
+
+            }
+            else {
+                modal.find("#sk-spinner-modal").hide();
+                swal("Hubo un error", "", "danger");
+                modal.modal('toggle');
+                modal.find(".form-edit-data-publisher").prop("disabled", false);
+            }
+        }).fail(function() {
+            modal.find("#sk-spinner-modal").hide();
+            swal("Hubo un error", "", "danger");
+            modal.modal('toggle');
+            modal.find(".form-edit-data-publisher").prop("disabled", false);
+        });
+    }
+
     function drawShowPrices() {
         var publisher = $("#publisher").data("publisher");
         var states = $("#publisher").data("states");
-
-        console.log(states);
 
         $("#prueba").html(UserService.getHtmlTableStates(states, '290'));
 

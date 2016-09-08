@@ -224,6 +224,21 @@ class PublishersController extends ResourceController
         $this->facade->updateModel($request->all(), $user);
         return $this->redirect('show', $user);
     }
+
+    /**
+     * @param Request $request
+     * @param User $publisher
+     * @return array
+     */
+    public function updateAjax(Request $request, User $publisher)
+    {
+        $publisher = $this->facade->updateModelView($request->all(), $publisher);
+
+        return [
+            'success' => 'true',
+            'publisher' => $publisher
+        ];
+    }
     
     /**
      * Remove the specified resource from storage.

@@ -20,7 +20,12 @@
                     <div class="col-md-5">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Datos de contacto
+                                <h5 style="float: left;">Datos de contacto</h5>
+                                <div class="ibox-tools">
+                                    <button class="btn btn-xs btn-warning" id="edit-data-contact">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="panel-body">
                                 <p>
@@ -35,9 +40,16 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Acuerdo <strong id="publisher_signed_agreement"></strong>
-                                <div id="publisher_sw_agreement" style="display: inline-block;">
-                                    
+                                <div style="float: left;">
+                                    Acuerdo <strong id="publisher_signed_agreement"></strong>
+                                    <div id="publisher_sw_agreement" style="display: inline-block;">
+                                        
+                                    </div>
+                                </div>
+                                <div class="ibox-tools">
+                                    <button class="btn btn-xs btn-warning" id="edit-data-agreement" target="_blank">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -75,7 +87,12 @@
                     <div class="col-md-7">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Detalle del medio - <strong>(Registrado <span id="created_at"></span>)</strong>
+                                <h5 style="float: left; width: 80%;">Detalle del medio - <strong>(Registrado <span id="created_at"></span>)</strong></h5>
+                                <div class="ibox-tools">
+                                    <button class="btn btn-xs btn-warning" id="edit-data-detail">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="panel-body">
                                 <div class="row">

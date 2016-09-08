@@ -199,4 +199,13 @@ class PublisherService extends ResourceService
         return $this->repository->confirm($publisher);
     }
 
+    /**
+     * @param User $publisher
+     * @return mixed
+     */
+    public function getPublisherView(User $publisher)
+    {
+        return $this->viewRepository->getPublisher($publisher->id);
+    }
+
 }
