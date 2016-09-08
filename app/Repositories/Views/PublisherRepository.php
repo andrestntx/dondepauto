@@ -80,7 +80,7 @@ class PublisherRepository extends BaseRepository
             }
         }
 
-        return $publisherQuery->take(20)->get();
+        return $publisherQuery->get();
     }
 
     protected function searchDateRange($column, $search, $name, &$publisherQuery)
