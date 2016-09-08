@@ -125,6 +125,10 @@ class PublisherFacade extends UserFacade
      */
     public function updateModelView(array $data, Model $publisher)
     {
+        if(array_key_exists('repre', $data)) {
+            $this->representativeService->createOrUpdate($data['repre'], $publisher, $publisher->representative);
+        }
+
         return $this->service->getPublisherView($this->updateModel($data, $publisher));
     }
 

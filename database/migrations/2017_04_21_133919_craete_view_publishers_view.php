@@ -28,7 +28,7 @@ class CraeteViewPublishersView extends Migration
                 telefono_fijo_us_LI as phone, celular_us_LI as cel,
                 CONCAT(nombre_us_LI, ' ', apellido_us_LI) as name,
                 empresa_us_LI as company, nit_empresa_us_LI as company_nit, cargo_us_LI as company_role, area_cargo_us_LI as company_area,
-                email_us_LI as email, direccion_us_LI as address,
+                email_us_LI as email, direccion_us_LI as address, razon_social_us_LI as company_legal,
                 (CASE WHEN bd_us_reg_LIST.firmo_acuerdo_LI = 'No_fir_ac' THEN FALSE ELSE TRUE END) as signed_agreement,
                 fecha_firma_acuerdo_us_LI as signed_at, porc_comision_us_LI as commission_rate, 
                 retencion_fuente_us_LI as retention, descuento_pronto_pago_us_LI as discount,

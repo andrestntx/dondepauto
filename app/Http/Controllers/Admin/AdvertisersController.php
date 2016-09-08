@@ -208,6 +208,21 @@ class AdvertisersController extends ResourceController
     }
 
     /**
+     * @param Request $request
+     * @param User $advertiser
+     * @return array
+     */
+    public function updateAjax(Request $request, User $advertiser)
+    {
+        $advertiser = $this->facade->updateModelView($request->all(), $advertiser);
+
+        return [
+            'success'   => 'true',
+            'user'      => $advertiser
+        ];
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  User  $user

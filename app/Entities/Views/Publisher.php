@@ -9,6 +9,7 @@
 namespace App\Entities\Views;
 
 
+use App\Entities\Platform\Representative;
 use App\Repositories\File\PublisherDocumentsRepository;
 use Carbon\Carbon;
 
@@ -36,7 +37,7 @@ class Publisher extends PUser
     protected $appends = ['state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
         'signed_agreement_lang', 'space_city_names', 'activated_at_datatable', 'documents_json',
         'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans',
-        'count_logs', 'last_login_at', 'has_logo', 'signed_at_date'
+        'count_logs', 'last_login_at', 'has_logo', 'signed_at_date', 'repre_name', 'repre_doc', 'repre_email', 'repre_phone'
     ];
 
     /**
@@ -235,6 +236,14 @@ class Publisher extends PUser
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function representative()
+    {
+        return $this->hasOne(Representative::class, 'publisher_id', 'id');
+    }
+
+    /**
      * @return mixed
      */
     public function getSpaceCityNamesAttribute()
@@ -309,6 +318,54 @@ class Publisher extends PUser
     {
         $fileRepository = new PublisherDocumentsRepository();
         return $fileRepository->hasFileId($this->id,'letter-generated.pdf');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRepreNameAttribute()
+    {
+        if($this->representative) {
+            return $this->representative->name;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRepreEmailAttribute()
+    {
+        if($this->representative) {
+            return $this->representative->email;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRepreDocAttribute()
+    {
+        if($this->representative) {
+            return $this->representative->doc;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReprePhoneAttribute()
+    {
+        if($this->representative) {
+            return $this->representative->phone;
+        }
+
+        return '';
     }
 
 

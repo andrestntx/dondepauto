@@ -1,10 +1,10 @@
-<div class="modal fade userEditDataAgreementModal" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade userEditDataDetailModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="padding: 16px 10px;">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title" style="font-size: 20px;">
-                    <span id="user_company"></span> - Datos de acuerdo 
+                    <span id="user_company"></span> - Detalles del Medio 
                     <div style="display: inline-block; vertical-align: middle;">
                     <div class="sk-spinner sk-spinner-circle" id="sk-spinner-modal" style="display: none;">
                         <div class="sk-circle1 sk-circle"></div>
@@ -27,25 +27,27 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            {!! Field::text('signed_at', ['class' => 'datepicker']) !!}
+                            {!! Field::text('company') !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::text('commission_rate') !!}
+                            {!! Field::text('company_nit') !!}
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! Field::select('city_id', $cities, ['empty' => 'Seleccione la ciudad']) !!}
                         </div>
                         <div class="col-md-6">
-                            {!! Field::text('retention') !!}
+                            {!! Field::text('address') !!}
                         </div>
-                        <div class="col-md-6">
-                            {!! Field::text('discount') !!}
-                        </div>
-                        <input type="hidden" id="agreement_csrf_token" name="_token" value="{{ csrf_token() }}">
+
+                        <input type="hidden" id="detail_csrf_token" name="_token" value="{{ csrf_token() }}">
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button id="form-edit-data-agreement-close" class="btn btn-effect-ripple btn-default" data-dismiss="modal">Cerrar</button>
-                <button id="form-edit-data-agreement" class="btn btn-effect-ripple btn-primary form-edit-data">Guardar</button>
+                <button id="form-edit-data-detail-close" class="btn btn-effect-ripple btn-default" data-dismiss="modal">Cerrar</button>
+                <button id="form-edit-data-detail" class="btn btn-effect-ripple btn-primary form-edit-data">Guardar</button>
             </div>
         </div>
     </div>
