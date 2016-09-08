@@ -43,7 +43,7 @@ class StoreRequest extends Request
     {
         $rules = $this->storeRequest->rules();
         $rules['password'] = 'confirmed';
-        $rules['email'] = 'required|unique:us_reg_LIST,email_us_LI';
+        $rules['email'] = 'required|unique:us_reg_LIST,email_us_LI,NULL,id_us_LI,deleted_at,NULL';
 
         return $rules;
     }

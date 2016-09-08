@@ -71,15 +71,35 @@ class ResourceService {
 
     /**
      * @param $entity
+     * @param bool $force
      * @return bool
      */
-    public function deleteModel($entity)
+    public function deleteModel($entity, $force = false)
     {
         try {
-            $this->repository->delete($entity);
+            $this->repository->delete($entity, $force);
         } catch (\Exception $e) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @param $entity
+     * @return mixed
+     */
+    public function restoreModel(&$entity)
+    {
+        return $entity->restore();
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public function findDelete($key, $value)
+    {
+        return $this->repository->findDelete($key, $value);
     }
 }

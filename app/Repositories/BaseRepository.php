@@ -180,12 +180,19 @@ abstract class  BaseRepository {
         }
         return $studies;
     }
-    
+
     /**
      * @param Model $entity
+     * @param bool $force
      * @return mixed
+     * @throws \Exception
      */
-    public function delete($entity) {
+    public function delete($entity, $force = false)
+    {
+        if($force) {
+            return $entity->forceDelete();
+        }
+
         return $entity->delete();
     }
     
@@ -245,6 +252,20 @@ abstract class  BaseRepository {
     {
         return $this->builder->where($attribute, '=', $value)->first($columns);
     }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public function findDelete($key, $value)
+    {
+        return $this->model->onlyTrashed()
+            ->where($key, $value)
+            ->first();
+    }
+
+
     
     /**
      * @param $attribute

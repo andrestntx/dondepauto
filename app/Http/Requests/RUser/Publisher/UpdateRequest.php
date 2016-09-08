@@ -42,7 +42,7 @@ class UpdateRequest extends Request
         $publisher = $this->route->getParameter('publishers');
         $rules = $this->storeRequest->rules();
 
-        $rules['email']         .= ',' . $publisher->id . ',id_us_LI';
+        $rules['email']         =  'required|unique:us_reg_LIST,email_us_LI,' . $publisher->id . ',id_us_LI';
         $rules['first_name']    = 'required';
         $rules['last_name']     = 'required';
         $rules['phone']			= 'required';

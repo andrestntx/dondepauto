@@ -137,9 +137,10 @@ class SpaceRepository extends BaseRepository
 
     /**
      * @param Model $space
+     * @param bool $force
      * @return mixed
      */
-    public function delete($space)
+    public function delete($space, $force = false)
     {
         return $space->setDelete();
     }

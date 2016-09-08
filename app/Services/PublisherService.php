@@ -72,6 +72,11 @@ class PublisherService extends ResourceService
         $data['role'] = 'publisher';
         $data['complete_data'] = false;
 
+        if($publisher = $this->findDelete('email_us_LI', $data['email'])) {
+            $this->restoreModel($publisher);
+            return $this->repository->update($data, $publisher);
+        }
+
         return $this->repository->create($data);
     }
 
