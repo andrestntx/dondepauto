@@ -490,6 +490,7 @@ var PublisherService = function() {
     }
 
     function drawModalEditAgreement(publisher, url) {
+        $("#publisherEditDataAgreementModal #publisher_company").text(publisher.company);
         $("#publisherEditDataAgreementModal #signed_at").val(publisher.signed_at_date);
         $("#publisherEditDataAgreementModal #commission_rate").val(publisher.commission_rate);
         $("#publisherEditDataAgreementModal #retention").val(publisher.retention);
