@@ -143,6 +143,11 @@
     @include('admin.publishers.modal')
     @include('admin.publishers.modal-create')
     @include('admin.publishers.modal-contact')
+
+    @include('admin.publishers.modals.edit-data-contact')
+    @include('admin.publishers.modals.edit-data-detail')
+    @include('admin.publishers.modals.edit-data-agreement')
+
 @endsection
 
 @section('extra-js')
@@ -161,6 +166,14 @@
     <script>
         $(document).ready(function() {
             PublisherService.init('/medios/search');
+                $('.datepicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+            });
         });
 
     </script>

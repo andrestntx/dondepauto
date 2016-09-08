@@ -36,7 +36,7 @@ class Publisher extends PUser
     protected $appends = ['state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
         'signed_agreement_lang', 'space_city_names', 'activated_at_datatable', 'documents_json',
         'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans',
-        'count_logs', 'last_login_at', 'has_logo'
+        'count_logs', 'last_login_at', 'has_logo', 'signed_at_date'
     ];
 
     /**
@@ -188,6 +188,18 @@ class Publisher extends PUser
     {
         if($this->signed_at) {
             return $this->signed_at->format('d/m/Y');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSignedAtDateAttribute()
+    {
+        if($this->signed_at) {
+            return $this->signed_at->format('Y-m-d');
         }
 
         return '';

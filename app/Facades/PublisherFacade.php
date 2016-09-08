@@ -121,6 +121,16 @@ class PublisherFacade extends UserFacade
     /**
      * @param array $data
      * @param Model $publisher
+     * @return mixed
+     */
+    public function updateModelView(array $data, Model $publisher)
+    {
+        return $this->service->getPublisherView($this->updateModel($data, $publisher));
+    }
+
+    /**
+     * @param array $data
+     * @param Model $publisher
      * @return Model|mixed
      */
     public function completeData(array $data, Model $publisher)
@@ -324,4 +334,5 @@ class PublisherFacade extends UserFacade
     {
         $this->userPlatformService->trackLogout($user, session('login_code'));
     }
+
 }
