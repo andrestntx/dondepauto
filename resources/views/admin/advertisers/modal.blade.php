@@ -1,4 +1,4 @@
-<div class="modal fade" id="advertiserModal" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg list-advertiser">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,11 +19,23 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Datos de contacto
-                            </div>
+                                <h5 style="float: left;">Datos de contacto</h5>
+                                    <div class="ibox-tools">
+                                        <button class="btn btn-xs btn-warning" id="edit-data-contact">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             <div class="panel-body">
                                 <p>
                                     <span class="h5"> <span id="name">  </span> </span> <br>
+                                    <span class="h5"> 
+                                        <i class="fa fa-user"></i> 
+                                        <span id="company_role"></span> 
+                                        -
+                                        <i class="fa fa-building-o"></i> 
+                                        <span id="company_area"></span> 
+                                    </span> <br>
                                     <span class="h5" id="email"> <i class="fa fa-envelope-o"></i> <a href=""> o </a></span> <br>
                                     <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:567878" id="phone">  </a> -
                                         <i class="fa fa-mobile"></i> <a href="tel:+3142308171" id="cel">  </a> <br>
@@ -35,7 +47,12 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Detalle del anunciante - <strong>(Registrado <span id="created_at"></span>)</strong>
+                                <h5 style="float: left; width: 80%;">Detalle del anunciante - <strong>(Registrado <span id="created_at"></span>)</strong></h5>
+                                <div class="ibox-tools">
+                                    <button class="btn btn-xs btn-warning" id="edit-data-detail">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -45,7 +62,6 @@
                                             <span class="h5"> Ciudad </span> <br>
                                             <span class="h5"> Dirección </span> <br> <br>
                                             <span class="h5"> NIT </span> <br>
-                                            <span class="h5"> Cargo </span> <br>
                                             <span class="h5"> Área </span> <br>
                                         </p>
                                     </div>
@@ -55,7 +71,6 @@
                                             <span class="h5" id="city">  </span> <br>
                                             <span class="h5" id="address"> </span> <br> <br>
                                             <span class="h5" id="company_nit">  </span> <br>
-                                            <span class="h5" id="company_role">  </span> <br>
                                             <span class="h5" id="company_area">  </span> <br>
                                         </p>
                                     </div>

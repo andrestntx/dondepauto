@@ -39,6 +39,15 @@ class AdvertiserRepository extends BaseRepository
             ->get();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function defaultSearch()
+    {
+        return $this->model->with(['proposals', 'logs', 'views', 'intentions', 'contacts' => function($query) {
+            $query->orderBy("created_at", "desc");
+        }, 'contacts.actions']);
+    }
 
     /**
      * @param User $user
@@ -94,9 +103,7 @@ class AdvertiserRepository extends BaseRepository
             }, 'contacts.actions']);
         }
         else {
-            $advertiserQuery = $this->model->with(['proposals', 'logs', 'views', 'intentions', 'contacts' => function($query) {
-                $query->orderBy("created_at", "desc");
-            }, 'contacts.actions']);
+            $advertiserQuery = $this->defaultSearch();
         }
 
         $this->searchDateRange($columnsSearch['created_at'], 'created_at', 'created_at', $advertiserQuery);
@@ -149,5 +156,14 @@ class AdvertiserRepository extends BaseRepository
                 $advertiserQuery->where($name, '<=', Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString());
             }
         }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getAdvertiser($id)
+    {
+        return $this->defaultSearch()->whereId($id)->get()->first();
     }
 }

@@ -117,6 +117,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@changeRole'
         ]);
 
+        Route::post('anunciantes/{publishers}/ajax', [
+            'uses' => 'Admin\AdvertisersController@updateAjax',
+            'as' => 'anunciantes.update.ajax'
+        ]);
+
         Route::resource('asesores.anunciantes', 'Admin\AdvisersAdvertisersController',  ['parameters' => [
             'asesores' => 'advisers',
             'anunciantes' => 'advertisers'
@@ -145,7 +150,6 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@updateAjax',
             'as' => 'medios.update.ajax'
         ]);
-
 
         Route::resource('medios', 'Admin\PublishersController', [
             'parameters' => ['medios' => 'publishers']

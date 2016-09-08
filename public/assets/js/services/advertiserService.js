@@ -80,7 +80,7 @@ var AdvertiserService = function() {
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 $('td:eq(0)', nRow).html(
-                    "<button class='btn btn-xs btn-success advertiserModal' data-advertiser='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#advertiserModal'><i class='fa fa-search-plus'></i></button>"
+                    "<button class='btn btn-xs btn-success advertiserModal' data-advertiser='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#userModal'><i class='fa fa-search-plus'></i></button>"
                 );
 
                 $('td:eq(1)', nRow).html(aData.created_at.substring(0,10));
@@ -176,15 +176,15 @@ var AdvertiserService = function() {
     }
 
     function drawModal(advertiser) {
-        UserService.drawModalUser("advertiserModal", advertiser, "anunciantes");
+        UserService.drawModalUser("userModal", advertiser, "anunciantes");
         /** Commercial state **/
-        $('#advertiserModal #count_intentions').text(advertiser.count_intentions);
-        $('#advertiserModal #count_leads').text(advertiser.count_leads);
-        $('#advertiserModal #interest').text(advertiser.count_interest_intentions);
-        $('#advertiserModal #by_contact').text(advertiser.count_by_contact_intentions);
-        $('#advertiserModal #management').text(advertiser.count_management_intentions);
-        $('#advertiserModal #sold').text(advertiser.count_sold_intentions);
-        $('#advertiserModal #discarded').text(advertiser.count_discarded_intentions);
+        $('#userModal #count_intentions').text(advertiser.count_intentions);
+        $('#userModal #count_leads').text(advertiser.count_leads);
+        $('#userModal #interest').text(advertiser.count_interest_intentions);
+        $('#userModal #by_contact').text(advertiser.count_by_contact_intentions);
+        $('#userModal #management').text(advertiser.count_management_intentions);
+        $('#userModal #sold').text(advertiser.count_sold_intentions);
+        $('#userModal #discarded').text(advertiser.count_discarded_intentions);
 
         $('#delete_advertiser').attr("data-url", '/anunciantes/' + advertiser.id);
 
@@ -192,25 +192,25 @@ var AdvertiserService = function() {
         var intention_at_end = $('#intention_at_end').val();
 
         if(intention_at_start || intention_at_end) {
-            $('#advertiserModal #lead_dates').text(' | De ' + intention_at_start + ' a ' + intention_at_end);  
+            $('#userModal #lead_dates').text(' | De ' + intention_at_start + ' a ' + intention_at_end);  
         }
         else {
-            $('#advertiserModal #lead_dates').text(' ');  
+            $('#userModal #lead_dates').text(' ');  
         }
 
         /** Proposals **/
-        $('#advertiserModal a#link-proposals').attr('href', '/anunciantes/' + advertiser.id);
-        $('#advertiserModal #count-proposals').text('(' + advertiser.count_proposals + ')');
-        $('#advertiserModal #created_at').text(advertiser.created_at_humans);
+        $('#userModal a#link-proposals').attr('href', '/anunciantes/' + advertiser.id);
+        $('#userModal #count-proposals').text('(' + advertiser.count_proposals + ')');
+        $('#userModal #created_at').text(advertiser.created_at_humans);
 
         /** Contacts **/
-        $('#advertiserModal #newContact').attr('data-url', '/anunciantes/' + advertiser.id + '/contacts');
+        $('#userModal #newContact').attr('data-url', '/anunciantes/' + advertiser.id + '/contacts');
 
-        $('#advertiserModal #comments').html('');
+        $('#userModal #comments').html('');
 
         $.each(advertiser.contacts, function( index, contact ) {
             var socialContact = UserService.getSocialContact(contact);
-            $('#advertiserModal #comments').append(socialContact);
+            $('#userModal #comments').append(socialContact);
         });
     }
 
@@ -252,7 +252,7 @@ var AdvertiserService = function() {
                                 });
 
                                 table.search(' ').draw();
-                                $('#advertiserModal').modal('toggle');
+                                $('#userModal').modal('toggle');
                             }
                             else {
                                 swal({

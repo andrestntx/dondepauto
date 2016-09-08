@@ -116,6 +116,16 @@ class AdvertiserFacade extends UserFacade
         return $advertiser;
     }
 
+    /**
+     * @param array $data
+     * @param Advertiser $advertiser
+     * @return mixed
+     */
+    public function updateModelView(array $data, Advertiser $advertiser)
+    {
+        return $this->advertiserService->getAdvertiserView($this->updateModel($data, $advertiser));
+    }
+
 
     /**
      * @param Advertiser $advertiser

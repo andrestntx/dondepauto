@@ -1,4 +1,4 @@
-<div class="modal fade" id="publisherModal" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg list-publisher">
         <div class="modal-content">
             <div class="modal-header">
@@ -30,6 +30,13 @@
                             <div class="panel-body">
                                 <p>
                                     <span class="h5"> <span id="name">  </span> </span> <br>
+                                    <span class="h5"> 
+                                        <i class="fa fa-user"></i> 
+                                        <span id="company_role"></span> 
+                                        -
+                                        <i class="fa fa-building-o"></i> 
+                                        <span id="company_area"></span> 
+                                    </span> <br>
                                     <span class="h5" id="email"> <i class="fa fa-envelope-o"></i> <a href=""> </a></span> <br>
                                         <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:" id="phone">  </a> -
                                                             <i class="fa fa-mobile"></i> <a href="tel:+" id="cel">  </a> 
@@ -40,13 +47,13 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div style="float: left;">
+                                <div style="display: inline-block; width: 46%;">
                                     Acuerdo <strong id="publisher_signed_agreement"></strong>
                                     <div id="publisher_sw_agreement" style="display: inline-block;">
                                         
                                     </div>
                                 </div>
-                                <div class="ibox-tools">
+                                <div class="ibox-tools" style="display: inline-block; width: 50%;">
                                     <button class="btn btn-xs btn-warning" id="edit-data-agreement" target="_blank">
                                         <i class="fa fa-pencil"></i>
                                     </button>
@@ -100,20 +107,31 @@
                                         <p>
                                             <span class="h5"> Actividad</span> <br>
                                             <span class="h5"> Ciudad </span> <br>
-                                            <span class="h5"> Dirección </span> <br><br>
+                                            <span class="h5"> Dirección </span> <br>
+
                                             <span class="h5"> NIT </span> <br>
-                                            <span class="h5"> Cargo </span> <br>
-                                            <span class="h5"> Área </span> <br>
+                                            <span class="h5"> Razón social </span> <br> <br>
+                                            
+                                            <span class="h5"> <strong>Repre. Legal</strong> </span> <br>
+                                            <span class="h5"> Nombre </span> <br>
+                                            <span class="h5"> Email </span> <br>
+                                            <span class="h5"> Documento </span> <br>
+                                            <span class="h5"> Teléfono </span> <br>
                                         </p>
                                     </div>
                                     <div class="col-xs-8">
                                         <p>
                                             <span class="h5" id="economic_activity"> </span> <br>
                                             <span class="h5" id="city">  </span> <br>
-                                            <span class="h5" id="address"> </span> <br> <br>
+                                            <span class="h5" id="address"> </span> <br>
+
                                             <span class="h5" id="company_nit">  </span> <br>
-                                            <span class="h5" id="company_role">  </span> <br>
-                                            <span class="h5" id="company_area"> </span> <br>
+                                            <span class="h5" id="company_legal">  </span> <br><br><br>
+
+                                            <span class="h5" id="repre_name">  </span> <br>
+                                            <span class="h5" id="repre_email">  </span> <br>
+                                            <span class="h5" id="repre_doc">  </span> <br>
+                                            <span class="h5" id="repre_phone">  </span> <br>
                                         </p>
                                     </div>
                                 </div>

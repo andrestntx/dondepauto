@@ -132,6 +132,9 @@
     @include('admin.advertisers.modal')
     @include('admin.advertisers.modal-create')
     @include('admin.advertisers.modal-contact')
+
+    @include('admin.publishers.modals.edit-data-contact')
+    @include('admin.advertisers.modals.edit-data-detail')
 @endsection
 
 @section('extra-js')

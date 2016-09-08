@@ -100,4 +100,13 @@ class AdvertiserService extends ResourceService
     {
         return $this->repository->changeRole($user, 'publisher');
     }
+
+    /**
+     * @param UserPlatform $advertiser
+     * @return mixed
+     */
+    public function getAdvertiserView(UserPlatform $advertiser)
+    {
+        return $this->viewRepository->getAdvertiser($advertiser->id);
+    }
 }

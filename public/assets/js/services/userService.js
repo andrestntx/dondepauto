@@ -3,33 +3,181 @@ var UserService = function() {
 	var dataTable;
 	var columnCreatedAt;
 	var columnLoginAt;
+	var userEdit;
 
 	function drawPersonalData(inputId, user) {
-    	$('#' + inputId +' #company_name').text(user.company);
-        $('#' + inputId +' #name').text(user.name);
-        $('#' + inputId +' #email a').attr('href', 'mailto:' + user.email).text(user.email);
-        $('#' + inputId +' a#phone').attr('href', 'tel:' + user.phone).text(user.phone);
-        $('#' + inputId +' a#cel').attr('href', 'tel:' + user.cel).text(user.cel);
+    	$('#' + inputId + ' #company_name').text(user.company);
+        $('#' + inputId + ' #name').text(user.name);
+        $('#' + inputId + ' #company_role').text(user.company_role);
+        $('#' + inputId + ' #email a').attr('href', 'mailto:' + user.email).text(user.email);
+        $('#' + inputId + ' #company_area').text(user.company_area);
+        $('#' + inputId + ' a#phone').attr('href', 'tel:' + user.phone).text(user.phone);
+        $('#' + inputId + ' a#cel').attr('href', 'tel:' + user.cel).text(user.cel);
     };
     
-    function drawDetailData(inputId, user) {
+    function drawDetailData(inputId, user, isPublisher) {
     	$('#' + inputId +' #economic_activity').text(user.economic_activity_name);
         $('#' + inputId +' #city').text(user.city_name);
         $('#' + inputId +' #address').text(user.address);
         $('#' + inputId +' #company_nit').text(user.company_nit);
-        $('#' + inputId +' #company_role').text(user.company_role);
-        $('#' + inputId +' #company_area').text(user.company_area);
+
+        if(isPublisher) {
+        	$('#' + inputId +' #company_legal').text(user.company_legal);
+	        $('#' + inputId +' #repre_name').text(user.repre_name);
+	        $('#' + inputId +' #repre_email').text(user.repre_email);
+	        $('#' + inputId +' #repre_doc').text(user.repre_doc);
+	        $('#' + inputId +' #repre_phone').text(user.repre_phone);	
+        }
     };
 
+    function drawAgreementData(inputId, user) {
+        $('#' + inputId + ' #commission_rate').text(user.commission_rate);
+        $('#' + inputId + ' #signed_at').text(user.signed_at_datatable);
+        $('#' + inputId + ' #discount').text(user.discount);
+        $('#' + inputId + ' #retention').text(user.retention);
+    };
+
+    function drawModalEditContact(user, url) {
+        $(".userEditDataContactModal #user_company").text(user.company);
+        $(".userEditDataContactModal #first_name").val(user.first_name);
+        $(".userEditDataContactModal #last_name").val(user.last_name);
+
+        $(".userEditDataContactModal #company_role").val(user.company_role);
+        $(".userEditDataContactModal #company_area").val(user.company_area);
+
+        $(".userEditDataContactModal #email").val(user.email);
+        $(".userEditDataContactModal #phone").val(user.phone);
+        $(".userEditDataContactModal #cel").val(user.cel);
+
+        $(".userEditDataContactModal #user_company").attr('data-url', url)
+
+        $(".userEditDataContactModal").modal();
+    };
+
+    function drawModalEditDetail(user, url, isPublisher) {
+        $(".userEditDataDetailModal #user_company").text(user.company);
+        $(".userEditDataDetailModal #company").val(user.company);
+        $(".userEditDataDetailModal #company_nit").val(user.company_nit);
+        $(".userEditDataDetailModal #city_id").val(user.city_id);
+        $(".userEditDataDetailModal #address").val(user.address);
+
+        $(".userEditDataDetailModal #user_company").attr('data-url', url);
+
+        if(isPublisher) {
+			$(".userEditDataDetailModal #company_legal").val(user.company_legal);
+			$(".userEditDataDetailModal #repre_name").val(user.repre_name);
+			$(".userEditDataDetailModal #repre_email").val(user.repre_email);
+			$(".userEditDataDetailModal #repre_doc").val(user.repre_doc);
+			$(".userEditDataDetailModal #repre_phone").val(user.repre_phone);        	
+        }
+
+        $(".userEditDataDetailModal").modal();
+    };
+
+    function getFilterSearch() {
+    	return $(".dataTables_filter input").val();
+    }
+
+    function initModalsEdit(isPublisher) {
+    	$(".userEditDataContactModal #form-edit-data-contact").click(function() {
+
+            postModal(
+                $(".userEditDataContactModal #user_company").data('url'), {
+	                'first_name':   $(".userEditDataContactModal #first_name").val(),
+	                'last_name':    $(".userEditDataContactModal #last_name").val(),
+	                'company_role': $(".userEditDataContactModal #company_role").val(),
+	                'company_area': $(".userEditDataContactModal #company_area").val(),
+	                'email':        $(".userEditDataContactModal #email").val(),
+	                'phone':        $(".userEditDataContactModal #phone").val(),
+	                'cel':          $(".userEditDataContactModal #cel").val()
+	            }, $(".userEditDataContactModal"), isPublisher
+            );
+        });
+
+        $(".userEditDataDetailModal #form-edit-data-detail").click(function() {
+            postModal(
+                $(".userEditDataDetailModal #user_company").data('url'), {
+	                'company':      $(".userEditDataDetailModal #company").val(),
+	                'company_nit':  $(".userEditDataDetailModal #company_nit").val(),
+	                'city_id':      $(".userEditDataDetailModal #city_id").val(),
+	                'address':      $(".userEditDataDetailModal #address").val(),
+	                'company_legal': 	$(".userEditDataDetailModal #company_legal").val(),
+	                'repre': {
+	                	'name':     $(".userEditDataDetailModal #repre_name").val(),
+						'email': 	$(".userEditDataDetailModal #repre_email").val(),
+						'doc': 		$(".userEditDataDetailModal #repre_doc").val(),
+						'phone': 	$(".userEditDataDetailModal #repre_phone").val()
+	                }
+
+	            }, $(".userEditDataDetailModal"), isPublisher
+            );
+        });
+    };
+
+    function postModal(url, parameters, modal, isPublisher) {
+        modal.find("#sk-spinner-modal").show();
+        modal.find(".form-edit-data").prop("disabled", true);
+
+        $.post(url, parameters, function( data ) {
+            if(data.success) {
+                userEdit = data.user;
+
+                console.log(userEdit);
+                
+                drawPersonalData("userModal", userEdit);
+                drawDetailData("userModal", userEdit, isPublisher);
+
+                if(isPublisher) {
+                	drawAgreementData("userModal", userEdit);
+                }
+
+                modal.find("#sk-spinner-modal").hide();
+
+                dataTable.search(getFilterSearch()).draw();
+
+                modal.modal('toggle');
+                modal.find(".form-edit-data").prop("disabled", false);
+
+            }
+            else {
+                modal.find("#sk-spinner-modal").hide();
+                swal("Hubo un error", "", "danger");
+                modal.modal('toggle');
+                modal.find(".form-edit-data").prop("disabled", false);
+            }
+        }).fail(function() {
+            modal.find("#sk-spinner-modal").hide();
+            swal("Hubo un error", "", "danger");
+            modal.modal('toggle');
+            modal.find(".form-edit-data").prop("disabled", false);
+        });
+    }
+
 	return {
-		initDatatable: function(table) 
+		initDatatable: function(table, isPublisher) 
 		{
 			dataTable = table;
+			initModalsEdit(isPublisher);
+		},
+
+		postModal: function(url, parameters, modal, isPublisher)
+		{
+			postModal(url, parameters, modal, isPublisher);
+		},
+
+		drawAgreementData: function(inputId, user) 
+		{
+			drawAgreementData(inputId, user);
+		},
+
+		setUserEdit: function(user) 
+		{
+			userEdit = user;
 		},
 
 		getFilterSearch: function()
 		{
-			return $(".dataTables_filter input").val();
+			getFilterSearch();
 		},
 
 		initActions: function(column) {
@@ -306,20 +454,25 @@ var UserService = function() {
 	    	drawPersonalData(inputId, user);
 	    },
 	    
-	    drawDetailData: function(inputId, user) {
-	    	drawDetailData(inputId, user);
+	    drawDetailData: function(inputId, user, isPublisher) {
+	    	drawDetailData(inputId, user, isPublisher);
 	    },
 
-		drawModalUser: function (inputId, user, urlName) {
-			$("#prueba").html(UserService.getHtmlTableStates(user.states, 200));
-	        $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + user.id + '/edit');
+		drawModalUser: function (inputId, user, urlName, isPublisher) {
+
+			console.log(' es publisher: ' + isPublisher);
+
+			userEdit = user;
+
+			$("#prueba").html(UserService.getHtmlTableStates(userEdit.states, 200));
+	        $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + userEdit.id + '/edit');
 
 	        /** Personal Data **/
-	        drawPersonalData(inputId, user);
-	        $('#' + inputId +' #source').text(user.source);
+	        drawPersonalData(inputId, userEdit, isPublisher);
+	        $('#' + inputId +' #source').text(userEdit.source);
 
 	        /** Detail Data **/
-	        drawDetailData(inputId, user);
+	        drawDetailData(inputId, userEdit, isPublisher);
 
 	        /** Comments **/
 	        //$('#' + inputId +' #comments').text(user.comments);
@@ -327,12 +480,21 @@ var UserService = function() {
 	        /** State **/
 	        $('#' + inputId +' #state')
 	            .removeClass()
-	            .addClass('btn btn-circle btn-' + user.state_class)
-	            .attr('data-original-title', user.state);
+	            .addClass('btn btn-circle btn-' + userEdit.state_class)
+	            .attr('data-original-title', userEdit.state);
 
 	        $('#' + inputId +' #state i')
 	            .removeClass()
-	            .addClass('fa ' + user.state_icon);
+	            .addClass('fa ' + userEdit.state_icon);
+
+
+	        $("#edit-data-contact").click(function() {
+            	drawModalEditContact(userEdit, '/' + urlName + '/' + userEdit.id + '/ajax', isPublisher);
+	        });
+
+	        $("#edit-data-detail").click(function(){
+	            drawModalEditDetail(userEdit, '/' + urlName + '/' + userEdit.id + '/ajax', isPublisher);
+	        });
 		},
 
 		initSearchDateRanges: function(columnCreatedAtP, columnLoginAtP, columnActivatedAtP)

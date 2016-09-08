@@ -236,7 +236,7 @@ class PublishersController extends ResourceController
 
         return [
             'success' => 'true',
-            'publisher' => $publisher
+            'user' => $publisher
         ];
     }
     
