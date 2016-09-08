@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-xs-7">
                         <h2 class="modal-title h4" style="font-size: 15px;">
-                            <strong>Medio:</strong> <span id="company_name"></span>
+                            <strong>Medio:</strong> <span id="company_name"></span> <span id="publisher_logo"></span>
                         </h2>
                     </div>
                     <div class="col-xs-4 timeline" id="prueba">

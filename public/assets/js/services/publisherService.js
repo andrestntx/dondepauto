@@ -172,7 +172,6 @@ var PublisherService = function() {
         var optionState = '';
 
         $('#offer').on('ifChecked', function(event){
-            console.log('ofertó');
             $('#offer_at_start').prop('disabled', false);
             $('#offer_at_end').prop('disabled', false);
 
@@ -188,7 +187,6 @@ var PublisherService = function() {
         });
 
         $('#offer').on('ifUnchecked', function(event){
-            console.log('no ofertó');
             $('#offer_at_start').prop('disabled', true);
             $('#offer_at_end').prop('disabled', true);
             $("#offer_at_start").datepicker("setDate", null);
@@ -285,7 +283,6 @@ var PublisherService = function() {
 
     function drawModal(publisher) {
         publisherEdit = publisher;
-        console.log(publisherEdit);
         UserService.drawModalUser("userModal", publisherEdit, "medios", true);
 
         $("#edit-data-agreement").click(function(){
@@ -293,6 +290,17 @@ var PublisherService = function() {
         });
 
         var documents = $.parseJSON(publisher.documents_json);
+        $('#userModal #publisher_logo').html('');
+
+        /** Logo */
+        if(publisherEdit.has_logo) {
+
+            var a = $("<img src='' />")
+                .attr('src', publisherEdit.logo)
+                .attr('style', 'max-height: 20px; margin-left: 10px;');
+
+            $('#userModal #publisher_logo').html(a);    
+        }
 
         /** Commercial state **/
         $('#userModal #by_contact').text(publisher.count_by_contact_intentions);
@@ -302,8 +310,6 @@ var PublisherService = function() {
         $('#delete_publisher').attr("data-url", '/medios/' + publisher.id);
 
         /** Agreement **/
-        console.log('signed: ' + publisher.signed_agreement);
-
         var input = null;
 
         if(publisher.signed_agreement == 1) {
@@ -346,8 +352,6 @@ var PublisherService = function() {
             inputDocuments.attr("type", "checkbox")
                 .addClass("js-switch js-switch-click")
                 .data("url", "/medios/" + publisher.id + "/change-documents");
-
-            console.log(inputDocuments.data('url'));
                 
             $('#userModal #publisher_sw_documents').append(inputDocuments);
         }
@@ -448,7 +452,6 @@ var PublisherService = function() {
     }
 
     function initDeletePublisher() {
-        console.log('inicio');
 
         $("#delete_publisher").click(function(e) {   
             swal({
@@ -526,17 +529,13 @@ var PublisherService = function() {
                             removeClass = "btn-danger";
                             addClass = "btn-primary";
                         }
-
-                        console.log(parameters); 
                         
                         $.post($("#publisher_sw_agreement input").data('url'), parameters, function( data ) {
                             if(data.success) {
-                                console.log('bien');
                                 $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
                                 swal("Acuerdo actualizado", "", "success");
                             }
                             else{
-                                console.log('mal');
                                 manual = true;
                                 changeCheckbox.click();
                                 manual = false;
@@ -585,12 +584,9 @@ var PublisherService = function() {
                                 removeClass = "btn-danger";
                                 addClass = "btn-primary";
                             }
-
-                            console.log(parameters); 
                             
                             $.post($("#publisher_sw_documents input").data('url'), parameters, function( data ) {
                                 if(data.success) {
-                                    console.log('bien');
                                     $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
                                     
                                     if(changeCheckbox.checked) {
@@ -601,7 +597,6 @@ var PublisherService = function() {
                                     }
                                 }
                                 else{
-                                    console.log('mal');
                                     manual = true;
                                     changeCheckbox.click();
                                     manual = false;
