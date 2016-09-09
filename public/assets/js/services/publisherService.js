@@ -125,9 +125,8 @@ var PublisherService = function() {
     }
 
     function reload() {
-        table
-            .search(UserService.getFilterSearch())
-            .draw();
+        table.search(UserService.getFilterSearch());
+        table.draw();
     }
 
     function initSearchAgreement() {

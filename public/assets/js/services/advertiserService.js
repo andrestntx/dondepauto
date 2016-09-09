@@ -137,6 +137,12 @@ var AdvertiserService = function() {
             }
         }); 
     }
+
+    function reload()
+    {
+        table.search(UserService.getFilterSearch());
+        table.draw();
+    }
     
     function initModalEvent() {
         $(document).on("click", ".advertiserModal", function () {
@@ -281,7 +287,7 @@ var AdvertiserService = function() {
             //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
         },
         reload: function() {
-            table.search(UserService.getFilterSearch()).draw();
+            reload();
         },
         getSocialContact: function(contact) {
             return UserService.getSocialContact(contact);

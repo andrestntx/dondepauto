@@ -256,7 +256,7 @@
             });
 
             $("#form-create-contact-advertiser").click(function() {
-                var url = $('#advertiserModal #newContact').attr('data-url');
+                var url = $('#userModal #newContact').attr('data-url');
                 console.log(url);
 
                 var parameters = {
@@ -274,7 +274,7 @@
                     if(data.success) {
                         AdvertiserService.reload();
                         var socialContact = AdvertiserService.getSocialContact(data.contact);
-                        $('#advertiserModal #comments').prepend(socialContact);
+                        $('#userModal #comments').prepend(socialContact);
                     }
                     else {
                         console.log('error');

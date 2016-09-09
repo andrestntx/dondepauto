@@ -277,7 +277,7 @@
             });
 
             $("#form-create-contact-publisher").click(function() {
-                var url = $('#publisherModal #newContact').data('url');
+                var url = $('#userModal #newContact').data('url');
                 console.log(url);
 
                 var parameters = {
@@ -295,7 +295,7 @@
                     if(data.success) {
                         PublisherService.reload();
                         var socialContact = PublisherService.getSocialContact(data.contact);
-                        $('#publisherModal #comments').prepend(socialContact);
+                        $('#userModal #comments').prepend(socialContact);
                     }
                     else {
                         console.log('error');
