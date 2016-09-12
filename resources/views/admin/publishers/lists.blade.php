@@ -277,7 +277,7 @@
             });
 
             $("#form-create-contact-publisher").click(function() {
-                var url = $('#userModal #newContact').data('url');
+                var url = $('#userModal #newContact').attr('data-url');
                 console.log(url);
 
                 var parameters = {
