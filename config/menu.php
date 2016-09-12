@@ -52,5 +52,11 @@ return [
                             'title' => 'Preguntas frecuentes', 
                             'roles' => ['publisher']
                         ],
+        'service'          => [
+                            'full_url' => 'http://www.dondepauto.co/modelo-de-negocio-medios-publicitarios', 
+                            'i' => 'fa fa-lightbulb-o', 
+                            'title' => 'Servicio DóndePauto', 
+                            'roles' => ['publisher']
+                        ],
     ]
 ];
