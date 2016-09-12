@@ -201,7 +201,7 @@ class UserRepository extends BaseRepository
         if($agreement) {
             $publisher->signed_at = Carbon::now()->toDateString();
         }
-        
+
         return $publisher->save();
     }
 
