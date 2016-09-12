@@ -197,6 +197,11 @@ class UserRepository extends BaseRepository
     public function setAgreement(UserPlatform $publisher, $agreement)
     {
         $publisher->signed_agreement = $agreement;
+
+        if($agreement) {
+            $publisher->signed_at = Carbon::now()->toDateString();
+        }
+        
         return $publisher->save();
     }
 
