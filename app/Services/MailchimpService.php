@@ -243,6 +243,19 @@ class MailchimpService
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    protected function deleteUser()
+    {
+        try {
+            return $this->mailchimp->delete($this->getUserUrl($user));
+        } catch (Exception $e) {
+            \Log::info('Mailchimp error');
+            \Log::info($e);
+        }
+    }
+
+    /**
      * @param User $user
      * @return \Illuminate\Support\Collection
      */
@@ -250,7 +263,7 @@ class MailchimpService
     {
         if(env('APP_ENV') == 'production') {
             $this->stopActualAutomation($user);
-            return $this->mailchimp->delete($this->getUserUrl($user));
+            $this->deleteUser();
         }
 
         return null;
@@ -296,9 +309,14 @@ class MailchimpService
     public function removeUserAutomation($workflow, User $user)
     {
         if(env('APP_ENV') == 'production') {
-            $this->mailchimp->post($this->getRemoveUserAutomationUrl($workflow), [
-                'email_address' => $user->email
-            ]);
+            try {
+                $this->mailchimp->post($this->getRemoveUserAutomationUrl($workflow), [
+                    'email_address' => $user->email
+                ]);
+            } catch (Exception $e) {
+                \Log::info('Mailchimp error');
+                \Log::info($e);
+            }
         }
     }
 }

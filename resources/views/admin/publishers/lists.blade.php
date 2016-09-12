@@ -9,8 +9,12 @@
 @endsection
 
 @section('extra-css')
-    <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
+    
+    <!-- Default -->
     <link href="/assets/css/prueba.css" rel="stylesheet">
+
+    <!-- Switchery -->
+    <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
     
     <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
@@ -23,6 +27,7 @@
             width:24px; height: 24px; padding: 2px 0; font-size: 10px;
         }
     </style>
+
 @endsection
 
 @section('content')
@@ -151,7 +156,13 @@
 @endsection
 
 @section('extra-js')
+
+    <!-- iCheck -->
+    <script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Switchery -->
     <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
+    
     <!-- Sweet alert -->
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -161,33 +172,20 @@
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     
+    <!-- Include Date Range Picker -->
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/publisherService.js"></script>
-    <script>
-        $(document).ready(function() {
-            PublisherService.init('/medios/search');
-                $('.datepicker').datepicker({
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true,
-                format: 'yyyy-mm-dd',
-            });
-        });
-
-    </script>
-    <!-- iCheck -->
-    <script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        var filter = $("<strong></strong>")
-            .text(" - Total filtro: ")
-            .addClass("text-success")
-            .append($("<span id='countDatatable'></span>"));
-
-        $(".page-heading h2").append(filter);
-
+    
+    <script>    
         $(document).ready(function () {
+            
+            var filter = $("<strong></strong>")
+                .text(" - Total filtro: ")
+                .addClass("text-success")
+                .append($("<span id='countDatatable'></span>"));
+
+            $(".page-heading h2").append(filter);
+
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
@@ -303,7 +301,16 @@
                 });
             });
 
-        });
+            PublisherService.init('/medios/search');
+                $('.datepicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+            });
+        }); 
 
 
     </script>
