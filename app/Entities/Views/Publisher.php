@@ -416,8 +416,8 @@ class Publisher extends PUser
      */
     public function getDocumentsAtHumansAttribute()
     {
-        if($this->documents_at) {
-            return $this->documents_at->format('d-M-y') . ' - ' . ucfirst($this->documents_at->diffForHumans());
+        if($documents_at = $this->documents_at) {
+            return $documents_at->format('d-M-y') . ' - ' . ucfirst($documents_at->diffForHumans());
         }
 
         return '';

@@ -7,23 +7,16 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>DodePauto.CO | Admin</title>
-
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-        <link href="/assets/css/animate.css" rel="stylesheet">
-        <link href="/assets/css/style.css" rel="stylesheet">
-        <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+        <link href="/assets/css/app.min.css" rel="stylesheet">
 
         <!-- Data Tables -->
         <link href="/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
         <link href="/assets/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
         <link href="/assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
-
+        <link href="/assets/css/plugins/dataTables/selected.css" rel="stylesheet">
+        
         <!-- Toastr style -->
         <link href="/assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
-        <link href="/assets/css/plugins/dataTables/selected.css" rel="stylesheet">
 
         <!-- DataPicker -->
         <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -234,6 +227,7 @@
             </div>
         </div>
 
+        
         <!-- Mainly scripts -->
         <script src="/assets/js/jquery-2.1.1.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
@@ -277,18 +271,7 @@
 
         <!-- Select2 -->
         <script src="/assets/js/plugins/select2/select2.full.min.js"></script>
-
         <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-        <script>
-            $(".chosen-select").chosen({disable_search_threshold: 10});
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        </script>
 
         @yield('extra-js')
 
@@ -299,5 +282,15 @@
             <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=nutxt&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
         </noscript>
 
+        <script>
+            $(".chosen-select").chosen({disable_search_threshold: 10});
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
+        
     </body>
 </html>
