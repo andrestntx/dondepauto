@@ -357,6 +357,10 @@
           }(document, 'script', 'p3chat-snippet'));
         </script>
 
+        <script type="text/javascript">
+            $("#menu_service a").attr("target", "_blank");
+        </script>
+
     </body>
 </html>
 

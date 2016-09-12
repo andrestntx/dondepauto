@@ -34,7 +34,10 @@ class CreateViewAdvertisersView extends Migration
             LEFT JOIN bd_ciudades ON bd_ciudades.id_ciudad = bd_us_reg_LIST.id_ciudad_LI
             LEFT JOIN bd_actividades_economicas_LIST ON bd_actividades_economicas_LIST.id = bd_us_reg_LIST.id_actividadEconomica_LI
             LEFT JOIN bd_us_reg_cod_LIST ON bd_us_reg_cod_LIST.id_us_LI = bd_us_reg_LIST.id_us_LI
-            WHERE tipo_us_LI = 'Co_tip_u')
+            WHERE tipo_us_LI = 'Co_tip_u'
+            GROUP BY bd_us_reg_LIST.id_us_LI
+            ORDER BY bd_us_reg_LIST.fecha_registro_Us_LI DESC, bd_us_reg_cod_LIST.id_LI DESC
+            )
         ");
     }
 
