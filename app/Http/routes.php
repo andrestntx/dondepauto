@@ -132,6 +132,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@search'
         ]);
 
+        Route::get('medios/search/{publisher}', [
+            'as'    => 'medios.search.user',
+            'uses' => 'Admin\PublishersController@searchUser'
+        ]);
+
         Route::get('espacios/ajax', [
             'as'    => 'espacios.ajax',
             'uses' => 'Admin\SpacesController@ajax'

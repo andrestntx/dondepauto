@@ -80,6 +80,11 @@ class PublisherFacade extends UserFacade
         return $this->service->search($columns, $search);
     }
 
+    public function getPublisher(User $publisher)
+    {
+        return $this->service->getPublisherView($publisher);
+    }
+
     /**
      * @param array $data
      * @return mixed
