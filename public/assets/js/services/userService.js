@@ -121,8 +121,6 @@ var UserService = function() {
         $.post(url, parameters, function( data ) {
             if(data.success) {
                 userEdit = data.user;
-
-                console.log(userEdit);
                 
                 drawPersonalData("userModal", userEdit);
                 drawDetailData("userModal", userEdit, isPublisher);
@@ -140,16 +138,25 @@ var UserService = function() {
 
             }
             else {
-                modal.find("#sk-spinner-modal").hide();
-                swal("Hubo un error", "", "danger");
+                modal.find("#sk-spinner-modal").hide(); 
                 modal.modal('toggle');
                 modal.find(".form-edit-data").prop("disabled", false);
+                
+                swal({
+                    title: 'Hubo un error',
+                    text: 'Error controlado',
+                    type: "warning",
+                });
             }
-        }).fail(function() {
+        }).fail(function(data) {
             modal.find("#sk-spinner-modal").hide();
-            swal("Hubo un error", "", "danger");
             modal.modal('toggle');
             modal.find(".form-edit-data").prop("disabled", false);
+            swal({
+                title: 'Hubo un error',
+                text: 'Código ' + data.status,
+                type: "warning",
+            });
         });
     }
 
