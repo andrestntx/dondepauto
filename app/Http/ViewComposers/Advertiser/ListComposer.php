@@ -46,7 +46,7 @@ class ListComposer extends BaseComposer
         $economicActivities = $this->economicActivityRepository->activitiesWithAdvertisers();
         $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->get();
         $actionsToday = $this->contactRepository->getActions('advertiser');
-        
+
         $view->with([
             'registrationStates'    => $registrationStates,
             'cities'                => $cities,
