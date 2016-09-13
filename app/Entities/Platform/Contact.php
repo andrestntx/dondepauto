@@ -54,9 +54,14 @@ class Contact extends Entity
      */
     public function actions()
     {
-        return $this->belongsToMany('App\Entities\Platform\Action', 'action_contact', 'contact_id', 'action_id')
+        return $this->belongsToMany(Action::class, 'action_contact', 'contact_id', 'action_id')
             ->withPivot('action_at')
             ->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**

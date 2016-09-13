@@ -61,6 +61,22 @@ class Action extends Entity
     /**
      * @return null|string
      */
+    public function getActionAtTimeAttribute()
+    {
+        if($this->pivot) {
+            if($this->pivot->action_at == '0000-00-00 00:00:00') {
+                return '';
+            }
+
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->action_at)->format('g:i A');
+        }
+
+        return '';
+    }
+
+    /**
+     * @return null|string
+     */
     public function getActionAtDatetimeAttribute()
     {
         if($this->pivot) {

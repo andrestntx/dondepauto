@@ -240,7 +240,7 @@ var PublisherService = function() {
             );
         });
 
-        $("#change-documents").click(function(){
+        $("#change-documents").click(function() {
             swal({
                 title: '¿Estás seguro?',
                 text: 'El medio podrá editar los datos',

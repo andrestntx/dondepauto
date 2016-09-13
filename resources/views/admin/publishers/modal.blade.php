@@ -152,7 +152,6 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-success" id="change-documents" disabled data-toggle="tooltip" data-placement="top" title="Habilitar cambios de documentos" style="margin-right: 10px;"> 
                     <i class="fa fa-file-pdf-o"></i> 
                 </button>
                 <a href="#" class="btn btn-info" id="link-spaces" target="_blank"> 
