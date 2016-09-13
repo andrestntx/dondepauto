@@ -15,7 +15,7 @@ class CreateLegalRepresentatitvesTable extends Migration
         Schema::create('legal_representatives', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('doc')->unique()->unsigned();
+            $table->integer('doc')->unique()->unsigned()->nullable();
             $table->string('email')->unique();
             
             $table->string('name');
