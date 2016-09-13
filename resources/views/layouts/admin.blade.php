@@ -226,7 +226,6 @@
                 </div>
             </div>
         </div>
-
         
         <!-- Mainly scripts -->
         <script src="/assets/js/jquery-2.1.1.js"></script>
@@ -273,6 +272,14 @@
         <script src="/assets/js/plugins/select2/select2.full.min.js"></script>
         <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
+
         @yield('extra-js')
 
         <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
@@ -284,12 +291,6 @@
 
         <script>
             $(".chosen-select").chosen({disable_search_threshold: 10});
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
         </script>
         
     </body>
