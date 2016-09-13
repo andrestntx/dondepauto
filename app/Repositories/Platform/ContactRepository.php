@@ -25,7 +25,7 @@ class ContactRepository extends BaseRepository
     }
 
 
-    public function getActions($role = 'publisher', $init = null, $finish = null)
+    public function getActions($role = 'publisher', $show_notification = true, $init = null, $finish = null)
     {
         if(is_null($init) && is_null($finish)) {
             $init = Carbon::today()->toDateString();
@@ -34,9 +34,10 @@ class ContactRepository extends BaseRepository
 
         return $this->model
             ->with(['actions', 'user'])
-            ->whereHas('actions', function($query) use ($init, $finish) {
+            ->whereHas('actions', function($query) use ($init, $finish, $show_notification) {
                 return $query->where('action_contact.action_at', '>=', $init)
-                    ->where('action_contact.action_at', '<', $finish);
+                    ->where('action_contact.action_at', '<', $finish)
+                    ->where('show_notifications', $show_notification);
             })
             ->whereHas('user', function($query) use ($role) {
                 return $query->role($role);
