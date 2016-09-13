@@ -26,8 +26,8 @@ class AddLegalRepresentativeIdUserPlaformTable extends Migration
     public function down()
     {
         Schema::table('us_reg_LIST', function (Blueprint $table) {
-            $table->dropIndex('us_reg_list_user_id_foreign');
-            $table->dropColumn('user_id');
+            $table->dropIndex('us_reg_list_legal_representative_id_foreign');
+            $table->dropColumn('legal_representative_id');
         });
     }
 }

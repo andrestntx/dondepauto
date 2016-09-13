@@ -26,8 +26,12 @@ class RepresentativeService extends ResourceService
      */
     protected function getData(array &$data, $publisher)
     {
-        if(empty($data['doc'])) {
-            $data['doc'] = $publisher->doc;
+        if(empty($data['name'])) {
+            $data['name'] = $publisher->full_name;
+        }
+
+        if(empty($data['phone'])) {
+            $data['phone'] = $publisher->cel;
         }
 
         if(empty($data['email'])) {
@@ -35,6 +39,15 @@ class RepresentativeService extends ResourceService
         }
 
         return $data;
+    }
+
+    protected function getEntity($email, $doc, $entity = null)
+    {
+        if(is_null($entity)) {
+            $entity = $this->repository->findRepre($email, $doc);
+        }
+
+        return $entity;
     }
 
     /**
@@ -45,7 +58,13 @@ class RepresentativeService extends ResourceService
      */
     public function createOrUpdate(array $data, User $publisher, Model $entity = null)
     {
-        return $this->createOrUpdateModel($this->getData($data, $publisher) + ['publisher_id' => $publisher->id], $entity);
+        if( ! empty($data['email']) || ! empty($data['doc']) || ! empty($data['phone']) || ! empty($data['name'])) {
+            $data = $this->getData($data, $publisher);
+            $entity = $this->getEntity($data['email'], $data['doc'], $entity);
+            $entity = $this->createOrUpdateModel($data, $entity);
+            $publisher->representative()->associate($entity);
+        }
+
+        return null;
     }
-    
 }

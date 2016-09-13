@@ -7,7 +7,7 @@ var DirectorService = function() {
     var unLinkTable;
     var linkTable;
     var directorId;
-    var urlSearch = $("#urlSearch").data('url');
+    var urlSearch = $("#urlSearch").attr('data-url');
 
     function initLinkTable() {
         linkTable = $('.advertisers-datatable').DataTable({

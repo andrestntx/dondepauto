@@ -82,7 +82,7 @@ var UserService = function() {
     	$(".userEditDataContactModal #form-edit-data-contact").click(function() {
 
             postModal(
-                $(".userEditDataContactModal #user_company").data('url'), {
+                $(".userEditDataContactModal #user_company").attr('data-url'), {
 	                'first_name':   $(".userEditDataContactModal #first_name").val(),
 	                'last_name':    $(".userEditDataContactModal #last_name").val(),
 	                'company_role': $(".userEditDataContactModal #company_role").val(),
@@ -96,7 +96,7 @@ var UserService = function() {
 
         $(".userEditDataDetailModal #form-edit-data-detail").click(function() {
             postModal(
-                $(".userEditDataDetailModal #user_company").data('url'), {
+                $(".userEditDataDetailModal #user_company").attr('data-url'), {
 	                'company':      $(".userEditDataDetailModal #company").val(),
 	                'company_nit':  $(".userEditDataDetailModal #company_nit").val(),
 	                'city_id':      $(".userEditDataDetailModal #city_id").val(),
