@@ -27,6 +27,12 @@
         <link href="/assets/css/plugins/chosen/chosen.css" rel="stylesheet">
         <link href="/assets/css/plugins/select2/select2.min.css" rel="stylesheet">
 
+        <style type="text/css">
+            ul.dropdown-menu.dropdown-alerts .tooltip {
+                position: fixed;
+            }
+        </style>
+
         @yield('extra-css')
 
         <script>
