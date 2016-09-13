@@ -9,6 +9,8 @@
 namespace App\Entities\Platform;
 
 
+use App\Entities\Views\Publisher;
+
 class Contact extends Entity
 {
     /**
@@ -59,9 +61,20 @@ class Contact extends Entity
             ->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class, 'user_id');
     }
 
     /**

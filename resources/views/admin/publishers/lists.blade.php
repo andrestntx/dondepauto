@@ -9,7 +9,7 @@
             <ul class="dropdown-menu dropdown-alerts">
                 @foreach($actionsToday as $contact)
                     <li>
-                        <a href="mailbox.html">
+                        <a href="javascript: void(0)" data-url="{{ route('medios.search.user', $contact->user) }}" class="notification-user">
                             <div>
                                 <i class="{{ $contact->action->logo }} fa-fw"></i> 
                                 <span data-toggle="tooltip" data-placemente="top" title="{{ $contact->created_at_humans }} - {{ $contact->comments }}">
@@ -344,6 +344,20 @@
                 autoclose: true,
                 format: 'yyyy-mm-dd',
             });
+
+            $(".notification-user").click(function() { 
+                $.get($(this).data('url'), null, function( data ) {
+                    if(data.publisher) {
+                        PublisherService.drawModal(data.publisher);
+                    }
+                    else {
+                        swal("Hubo un error", "", "danger");
+                    }
+                }).fail(function(){
+                    swal("Hubo un error", "", "danger");
+                });
+            });
+
         }); 
 
 

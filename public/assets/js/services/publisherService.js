@@ -290,6 +290,8 @@ var PublisherService = function() {
         publisherEdit = publisher;
         UserService.drawModalUser("userModal", publisherEdit, "medios", true);
 
+        console.log(publisherEdit);
+
         $("#edit-data-agreement").click(function(){
             drawModalEditAgreement(publisherEdit, '/medios/' + publisher.id + '/ajax');
         });
@@ -639,6 +641,10 @@ var PublisherService = function() {
         },
         reload: function() {
             reload();
+        },
+        drawModal: function(pulbihser) {
+            drawModal(pulbihser);
+            $("#userModal").modal();
         }
     };
 }();
