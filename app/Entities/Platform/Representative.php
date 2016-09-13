@@ -38,16 +38,18 @@ class Representative extends Entity
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'doc', 'publisher_id'
+        'name', 'email', 'phone', 'doc'
     ];
-    
+
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'publisher_id');
+        return $this->hasMany(User::class,   'legal_representative_id', 'id');
     }
+
 
     /**
      * @return string

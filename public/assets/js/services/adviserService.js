@@ -7,7 +7,7 @@ var AdviserService = function() {
     var unLinkTable;
     var linkTable;
     var adviserId;
-    var urlSearch = $("#urlSearch").data('url');
+    var urlSearch = $("#urlSearch").attr('data-url');
 
     function initLinkTable() {
         linkTable = $('.advertisers-datatable').DataTable({

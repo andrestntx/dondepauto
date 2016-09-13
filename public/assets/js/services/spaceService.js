@@ -307,7 +307,7 @@ var SpaceService = function() {
 
         input.attr("type", "checkbox")
             .addClass("js-switch js-switch-click")
-            .data("url", "/medios/" + space.publisher_id + "/espacios/" + space.id + "/enable");
+            .attr("data-url", "/medios/" + space.publisher_id + "/espacios/" + space.id + "/enable");
 
         $('#spaceModal #space_sw_active').html("").append(input);
 
@@ -351,7 +351,7 @@ var SpaceService = function() {
                         
                         var parameters = {"active": "1"};
                         
-                        $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
+                        $.post($("#space_sw_active input").attr('data-url'), parameters, function( data ) {
                             if(data.success) {
                                 swal("Espacio activado", "", "success");
                                 reload();
@@ -392,7 +392,7 @@ var SpaceService = function() {
                         
                         var parameters = {"active": "0", "option": result};
                         
-                        $.post($("#space_sw_active input").data('url'), parameters, function( data ) {
+                        $.post($("#space_sw_active input").attr('data-url'), parameters, function( data ) {
                             if(data.success) {
                                 swal("Espacio inactivo", "", "success");
                                 reload();
@@ -437,7 +437,7 @@ var SpaceService = function() {
             function(isConfirm) {
                 if (isConfirm) {     
                     $.ajax({
-                        url: $("#delete_space").data('url'),
+                        url: $("#delete_space").attr('data-url'),
                         type: 'DELETE',
                         success: function(data) {
                             if(data.success) {

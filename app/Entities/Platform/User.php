@@ -185,12 +185,13 @@ class User extends EntityAuth
         return $this->hasOne(Publisher::class, 'id', 'id_us_LI');
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function representative()
     {
-        return $this->hasOne(Representative::class, 'publisher_id', 'id_us_LI');
+        return $this->belongsTo(Representative::class, 'legal_representative_id');
     }
 
     /**
@@ -768,6 +769,14 @@ class User extends EntityAuth
     public function getLastOfferAttribute()
     {
         return $this->spaces->max('created_at');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->frist_name . ' ' . $this->last_name;
     }
 
     /**

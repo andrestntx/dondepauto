@@ -231,7 +231,7 @@ var PublisherService = function() {
 
         $(".userEditDataAgreementModal #form-edit-data-agreement").click(function() {            
             UserService.postModal(
-                $(".userEditDataAgreementModal #user_company").data('url'), {
+                $(".userEditDataAgreementModal #user_company").attr('data-url'), {
                     'signed_at':        $(".userEditDataAgreementModal #signed_at").val(),
                     'commission_rate':  $(".userEditDataAgreementModal #commission_rate").val(),
                     'retention':        $(".userEditDataAgreementModal #retention").val(),
@@ -333,7 +333,7 @@ var PublisherService = function() {
 
         input.attr("type", "checkbox")
             .addClass("js-switch js-switch-click")
-            .data("url", "/medios/" + publisher.id + "/agreement");
+            .attr("data-url", "/medios/" + publisher.id + "/agreement");
 
         $('#userModal #publisher_sw_agreement').html("").append(input);
 
@@ -358,7 +358,7 @@ var PublisherService = function() {
 
             inputDocuments.attr("type", "checkbox")
                 .addClass("js-switch js-switch-click")
-                .data("url", "/medios/" + publisher.id + "/change-documents");
+                .attr("data-url", "/medios/" + publisher.id + "/change-documents");
                 
             $('#userModal #publisher_sw_documents').append(inputDocuments);
         }
@@ -379,14 +379,14 @@ var PublisherService = function() {
             .attr('title', 'Habilitar cambio de documentos');
 
         //$('#userModal #publisher_signed_agreement').text('(' + publisher.signed_agreement_lang + ')');
-        UserService.drawAgreementData("userModal", publisher);
+        UserService.drawAgreementData("userModal", publisherEdit);
 
         /** Spaces **/
-        $('#userModal a#link-spaces').attr('href', '/medios/' + publisher.id);
-        $('#userModal #count-spaces').text('(' + publisher.count_spaces + ')');
-        $('#userModal #created_at').text(publisher.created_at_humans);
+        $('#userModal a#link-spaces').attr('href', '/medios/' + publisherEdit.id);
+        $('#userModal #count-spaces').text('(' + publisherEdit.count_spaces + ')');
+        $('#userModal #created_at').text(publisherEdit.created_at_humans);
 
-        var linkDocuments = '/medios/' + publisher.id + '/acuerdo/completar';
+        var linkDocuments = '/medios/' + publisherEdit.id + '/acuerdo/completar';
         $('#link-documents').attr('href', linkDocuments);
 
         $('#userModal #file-documents').html('');
@@ -537,9 +537,10 @@ var PublisherService = function() {
                             addClass = "btn-primary";
                         }
                         
-                        $.post($("#publisher_sw_agreement input").data('url'), parameters, function( data ) {
+                        $.post($("#publisher_sw_agreement input").attr('data-url'), parameters, function( data ) {
                             if(data.success) {
                                 $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
+                                reload();
                                 swal("Acuerdo actualizado", "", "success");
                             }
                             else{
@@ -592,7 +593,7 @@ var PublisherService = function() {
                                 addClass = "btn-primary";
                             }
                             
-                            $.post($("#publisher_sw_documents input").data('url'), parameters, function( data ) {
+                            $.post($("#publisher_sw_documents input").attr('data-url'), parameters, function( data ) {
                                 if(data.success) {
                                     $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
                                     

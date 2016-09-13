@@ -25,4 +25,17 @@ class RepresentativeRepository extends BaseRepository
     {
         return 'App\Entities\Platform\Representative';
     }
+
+    /**
+     * @param $email
+     * @param $doc
+     * @return mixed
+     */
+    function findRepre($email, $doc)
+    {
+        return $this->model
+            ->whereEmail($email)
+            ->orWhere('doc', $doc)
+            ->first();
+    }
 }

@@ -235,12 +235,13 @@ class Publisher extends PUser
         return $this->hasMany('App\Entities\Platform\Space\Space', 'id_us_reg_LI', 'id');
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function representative()
     {
-        return $this->hasOne(Representative::class, 'publisher_id', 'id');
+        return $this->belongsTo(Representative::class, 'legal_representative_id');
     }
 
     /**
