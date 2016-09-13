@@ -132,9 +132,9 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@search'
         ]);
 
-        Route::get('medios/search/{publisher}', [
-            'as'    => 'medios.search.user',
-            'uses' => 'Admin\PublishersController@searchUser'
+        Route::get('users/search/{publishers}', [
+            'as'    => 'users.search',
+            'uses' => 'Admin\UsersController@search'
         ]);
 
         Route::get('espacios/ajax', [

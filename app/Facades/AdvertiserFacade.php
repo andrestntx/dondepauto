@@ -70,6 +70,15 @@ class AdvertiserFacade extends UserFacade
     }
 
     /**
+     * @param Advertiser $user
+     * @return mixed
+     */
+    public function getAdvertiser(Advertiser $user)
+    {
+        return $this->advertiserService->getAdvertiserView($user);
+    }
+
+    /**
      * @param Advertiser $advertiser
      * @return \Illuminate\Database\Eloquent\Collection
      */

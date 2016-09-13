@@ -151,10 +151,6 @@ class PublishersController extends ResourceController
     }
 
 
-    public function searchUser(User $publisher)
-    {
-        return ['publisher' => $this->facade->getPublisher($publisher)];
-    }
 
     /**
      * Display a listing of the resource.

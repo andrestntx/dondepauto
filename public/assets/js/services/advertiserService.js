@@ -291,6 +291,10 @@ var AdvertiserService = function() {
         },
         getSocialContact: function(contact) {
             return UserService.getSocialContact(contact);
+        },
+        drawModal: function(advertiser) {
+            drawModal(advertiser);
+            $("#userModal").modal();
         }
     };
 }();
