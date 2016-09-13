@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="col-md-6"> 
-                            {!! Field::number('repre_doc', null, ['label' => 'Cédula Rep. Legal']) !!} 
+                            {!! Field::number('repre_doc', null, ['label' => 'Cédula Rep. Legal', 'ph' => 'SIN PUNTOS']) !!} 
                         </div>                                    
                         <div class="col-md-6"> 
                             {!! Field::text('repre_phone', null, ['label' => 'Teléfono Fijo Rep. Legal']) !!} 
