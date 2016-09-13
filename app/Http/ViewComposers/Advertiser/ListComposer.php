@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers\Advertiser;
 
 use App\Repositories\Platform\ActionRepository;
 use App\Repositories\Platform\CityRepository;
+use App\Repositories\Platform\ContactRepository;
 use App\Repositories\Platform\EconomicActivityRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
@@ -14,7 +15,7 @@ class ListComposer extends BaseComposer
     protected  $cityRepository;
     protected  $economicActivityRepository;
     protected $actionRepository;
-
+    protected $contactRepository;
 
     /**
      * ListComposer constructor.
@@ -24,12 +25,13 @@ class ListComposer extends BaseComposer
      * @param ActionRepository $actionRepository
      */
     function __construct(UserRepository $repository, CityRepository $cityRepository, EconomicActivityRepository $economicActivityRepository,
-                         ActionRepository $actionRepository)
+                         ActionRepository $actionRepository, ContactRepository $contactRepository)
     {
         $this->repository = $repository;
         $this->cityRepository = $cityRepository;
         $this->economicActivityRepository = $economicActivityRepository;
         $this->actionRepository = $actionRepository;
+        $this->contactRepository = $contactRepository;
     }
     
     /**
@@ -43,12 +45,14 @@ class ListComposer extends BaseComposer
         $cities = $this->cityRepository->citiesWithAdvertisers();
         $economicActivities = $this->economicActivityRepository->activitiesWithAdvertisers();
         $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->get();
-
+        $actionsToday = $this->contactRepository->getActions('advertiser');
+        
         $view->with([
-            'registrationStates' => $registrationStates,
-            'cities' => $cities,
-            'economicActivities' => $economicActivities,
-            'actions'           => $actions
+            'registrationStates'    => $registrationStates,
+            'cities'                => $cities,
+            'economicActivities'    => $economicActivities,
+            'actions'               => $actions,
+            'actionsToday'          => $actionsToday
         ]);
     }
 }

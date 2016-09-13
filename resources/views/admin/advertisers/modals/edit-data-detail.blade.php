@@ -4,7 +4,7 @@
             <div class="modal-header" style="padding: 16px 10px;">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title" style="font-size: 20px;">
-                    <span id="user_company"></span> - Detalles del Medio 
+                    <span id="user_company"></span> - Detalles del Anunciante 
                     <div style="display: inline-block; vertical-align: middle;">
                     <div class="sk-spinner sk-spinner-circle" id="sk-spinner-modal" style="display: none;">
                         <div class="sk-circle1 sk-circle"></div>

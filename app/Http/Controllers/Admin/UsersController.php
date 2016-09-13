@@ -7,6 +7,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entities\User;
 use App\Entities\Platform\User as UserPlatform;
+use App\Facades\AdvertiserFacade;
+use App\Facades\PublisherFacade;
 use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\StoreRequest;
 use App\Http\Requests\RUser\UpdateRequest;
@@ -32,16 +34,22 @@ class UsersController extends ResourceController
     protected $modelName = "user";
 
     protected $mailchimpService;
+    protected $publisherFacade;
+    protected $advertiserFacade;
 
     /**
      * UsersController constructor.
      * @param UserService $service
      * @param MailchimpService $mailchimpService
+     * @param PublisherFacade $publisherFacade
+     * @param AdvertiserFacade $advertiserFacade
      */
-    function __construct(UserService $service, MailchimpService $mailchimpService)
+    function __construct(UserService $service, MailchimpService $mailchimpService, PublisherFacade $publisherFacade, AdvertiserFacade $advertiserFacade)
     {
         $this->service = $service;
         $this->mailchimpService = $mailchimpService;
+        $this->advertiserFacade = $advertiserFacade;
+        $this->publisherFacade  = $publisherFacade;
     }
     
     /**
@@ -133,5 +141,19 @@ class UsersController extends ResourceController
         \Log::info($user);
         $this->mailchimpService->syncUser($user);
         return ['success' => 'true'];
+    }
+
+
+    /**
+     * @param UserPlatform $user
+     * @return array
+     */
+    public function search(UserPlatform $user)
+    {
+        if($user->isPublisher()) {
+            return ['publisher' => $this->publisherFacade->getPublisher($user)];
+        }
+
+        return ['advertiser' => $this->advertiserFacade->getAdvertiser($user)];
     }
 }

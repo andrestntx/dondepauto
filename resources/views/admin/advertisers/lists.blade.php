@@ -1,7 +1,12 @@
 @extends('layouts.admin')
 
 @section('action')
-   <button class="btn btn-primary" id="create-advertiser"><i class="fa fa-plus"> </i> Crear Anunciante</button>
+    <ul class="nav navbar-top-links navbar-right  ">
+        @include('admin.users.notifications')
+        <li style="vertical-align:middle;">
+            <button class="btn btn-primary" id="create-advertiser"><i class="fa fa-plus"> </i> Crear Anunciante</button>    
+        </li>
+    </ul>
 @endsection
 
 @section('breadcrumbs')
@@ -160,7 +165,6 @@
         $(".page-heading h2").append(filter);
 
         $(document).ready(function() {
-            AdvertiserService.init('/anunciantes/search');
 
             $("#create-advertiser").click(function(){
                 $("#advertiserCreateModal").modal();
@@ -279,6 +283,21 @@
                     else {
                         console.log('error');
                     }
+                });
+            });
+
+            AdvertiserService.init('/anunciantes/search');
+
+            $(".notification-user").click(function() { 
+                $.get($(this).data('url'), null, function( data ) {
+                    if(data.advertiser) {
+                        AdvertiserService.drawModal(data.advertiser);
+                    }
+                    else {
+                        swal("Hubo un error", "", "danger");
+                    }
+                }).fail(function(){
+                    swal("Hubo un error", "", "danger");
                 });
             });
         });
