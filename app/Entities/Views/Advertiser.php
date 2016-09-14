@@ -28,7 +28,7 @@ class Advertiser extends PUser
         'count_by_contact_intentions', 'count_sold_intentions', 'count_discarded_intentions', 'count_interest_intentions',
         'count_management_intentions', 'count_leads', 'created_at_humans', 'count_proposals', 'count_logs',
         'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states', 'last_login_at',
-        'range_view_at_humans', 'count_views', 'has_logo'];
+        'range_view_at_humans', 'count_views', 'has_logo', 'count_favorites'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -63,12 +63,22 @@ class Advertiser extends PUser
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Entities\Platform\Space\Space', 'intereses_anunciantes_LI', 'id_usuario_LI', 'id_espacio_LI')
+            ->withPivot('fecha_interes_LI');
+    }
+
+    /**
      * @return array
      */
     public function getStatesAttribute()
     {
         $count_logs = $this->count_logs;
         $count_views = $this->count_views;
+        $count_favorites = $this->count_favorites;
 
         return  array_merge(parent::getStatesAttribute(), [
             'logs' => [
@@ -82,6 +92,12 @@ class Advertiser extends PUser
                 'class' => $this->getClass($count_views),
                 'text'  => 'Vistas de espacios: ' . $count_views,
                 'date'  => $this->range_view_at_humans
+            ],
+            'favorites' => [
+                'icon'  => 'fa fa-star',
+                'class' => $this->getClass($count_favorites),
+                'text'  => 'Favoritos: ' . $count_favorites,
+                'date'  => $this->range_favorite_at_humans
             ]
         ]);
     }
@@ -102,6 +118,22 @@ class Advertiser extends PUser
         return $this->views->min('view_at');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLastFavorite()
+    {
+        return $this->favorites->max('favorite_at');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstFavorite()
+    {
+        return $this->favorites->min('favorite_at');
+    }
+
 
     /**
      * @return null|static
@@ -111,6 +143,19 @@ class Advertiser extends PUser
         if($firstView = $this->getFirstView())
         {
             return Carbon::createFromFormat('Y-m-d H:i:s', $firstView);
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null|static
+     */
+    public function getFirstFavoriteAtAttribute()
+    {
+        if($firstFavorite = $this->getFirstFavorite())
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $firstFavorite);
         }
 
         return null;
@@ -130,13 +175,39 @@ class Advertiser extends PUser
     }
 
     /**
+     * @return null|static
+     */
+    public function getLastFavoriteAtAttribute()
+    {
+        if($lastFavorite = $this->getLastFavorite())
+        {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $lastFavorite);
+        }
+
+        return null;
+    }
+
+    /**
      * @return string
      */
     public function getLastViewAtHumansAttribute()
     {
         if($lasViewAt = $this->last_view_at)
         {
-            return $lasViewAt->format('d-M-y') . ' - ' . ucfirst($lasViewAt);
+            return $lasViewAt->format('d-M-y') . ' - ' . ucfirst($lasViewAt->diffForHumans());
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastFavoriteAtHumansAttribute()
+    {
+        if($lasFavoriteAt = $this->last_favorite_at)
+        {
+            return $lasFavoriteAt->format('d-M-y') . ' - ' . ucfirst($lasFavoriteAt->diffForHumans());
         }
 
         return '';
@@ -159,6 +230,23 @@ class Advertiser extends PUser
         return '';
     }
 
+    /**
+     * @return mixed|string
+     */
+    public function getRangeFavoriteAtHumansAttribute()
+    {
+        if($this->last_favorite_at && $this->count_favorites >= 2)
+        {
+            return $this->first_favorite_at->format('d-M-y') . ' - ' . $this->last_favorite_at->format('d-M-y');
+        }
+        else if($this->last_favorite_at)
+        {
+            return $this->last_favorite_at_humans;
+        }
+
+        return '';
+    }
+
 
     /**
      * @return string
@@ -166,6 +254,14 @@ class Advertiser extends PUser
     public function getCountViewsAttribute()
     {
         return $this->views->count();
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountFavoritesAttribute()
+    {
+        return $this->favorites->count();
     }
     
     /**

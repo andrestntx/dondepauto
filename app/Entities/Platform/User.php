@@ -2,6 +2,7 @@
 
 namespace App\Entities\Platform;
 
+use App\Entities\Platform\Space\Space;
 use App\Entities\Views\Advertiser;
 use App\Entities\Views\Publisher;
 use App\Repositories\File\LogosRepository;
@@ -216,6 +217,16 @@ class User extends EntityAuth
     public function logs()
     {
         return $this->hasMany('App\Entities\Platform\Login', 'id_user_log_LI', 'id_us_LI');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Entities\Platform\Space\Space', 'intereses_anunciantes_LI', 'id_usuario_LI', 'id_espacio_LI')
+            ->withPivot('fecha_interes_LI');
     }
 
     /**
