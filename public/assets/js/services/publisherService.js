@@ -603,6 +603,8 @@ var PublisherService = function() {
                                     else {
                                         swal("El medio ya no podrá subir nuevos documentos", "", "success");
                                     }
+
+                                    reload();
                                 }
                                 else{
                                     manual = true;
