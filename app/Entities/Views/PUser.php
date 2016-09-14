@@ -23,7 +23,7 @@ class PUser  extends Model {
      *
      * @var array
      */
-    protected $dates = ['created_at', 'activated_at', 'deleted_at'];
+    protected $dates = ['created_at', 'activated_at', 'deleted_at', 'completed_at'];
 
     protected $classes = [
         'complete-data'   => 'primary',

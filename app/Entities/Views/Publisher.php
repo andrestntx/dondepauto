@@ -20,7 +20,7 @@ class Publisher extends PUser
      *
      * @var array
      */
-    protected $dates = ['created_at', 'activated_at', 'signed_at'];
+    protected $dates = ['created_at', 'activated_at', 'signed_at', 'completed_at'];
 
     /**
      * The table associated with the model.
