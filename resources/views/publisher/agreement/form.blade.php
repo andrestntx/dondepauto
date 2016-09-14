@@ -313,9 +313,7 @@
                         minlength: 3
                     },
                     "publisher[company_nit]": {
-                        required: true,
-                        minlength: 13,
-                        maxlength: 13
+                        required: true
                     },
                     "publisher[city_id]": {
                         required: true

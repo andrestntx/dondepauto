@@ -61,6 +61,10 @@ class MixpanelService
         }
     }
 
+    /**
+     * @param $even
+     * @param User $user
+     */
     public function track($even, User $user)
     {
         $this->mixPanel->identify($user->id);
