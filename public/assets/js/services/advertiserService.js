@@ -32,7 +32,7 @@ var AdvertiserService = function() {
                 { "data": "count_views" , "name": "count_views" }, // 11
                 { "data": "contacts" },
 
-                { "data": "state_id", "name": "state_id", "searchable": true, "visible": false },
+                { "data": "state_id", "name": "state_id", "searchable": false, "visible": false },
                 { "data": "city_id", "name": "city_id", "searchable": false, "visible": false },
                 { "data": "address"},
                 { "data": "economic_activity_id", "name": "economic_activity_id", "searchable": false, "visible": false },
