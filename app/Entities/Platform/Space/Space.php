@@ -525,4 +525,16 @@ class Space extends Entity
 
         return '';
     }
+
+    /**
+     * @return string
+     */
+    public function getFavoriteAtAttribute()
+    {
+        if($this->pivot) {
+            return $this->pivot->fecha_interes_LI;
+        }
+
+        return '';
+    }
 }
