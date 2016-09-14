@@ -97,7 +97,7 @@ class AdvertiserRepository extends BaseRepository
                                 ->whereDate('fecha_envio_intencion_LI', '!=', '0000-00-00');
                         }
                     });
-            }, 'proposals', 'logs', 'views', 'contacts' => function($query) {
+            }, 'proposals', 'logs', 'favorites', 'views', 'contacts' => function($query) {
                 $query->orderBy("created_at", "desc");
             }, 'contacts.actions']);
         }

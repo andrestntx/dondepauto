@@ -228,6 +228,12 @@ class PUser  extends Model {
             else if($state == 'offers' && $this->has_offers) {
                 return true;
             }
+            else if($state == 'has-views' && $this->count_views > 0) {
+                return true;
+            }
+            else if($state == 'has-favorites' && $this->count_favorites > 0) {
+                return true;
+            }
             else if($state == 'complete-data' && $this->email_validated && $this->complete_data) {
                 return true;
             }

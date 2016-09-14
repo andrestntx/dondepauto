@@ -68,62 +68,65 @@ class AdvertisersController extends ResourceController
      */
     public function search(Request $request)
     {
+            //abort('500');
+
+
             return \Datatables::of($this->facade->search(null, $request->get('columns'), $request->get('search'), $request->get('init'), $request->get('finish')))
-            ->filter(function ($instance) use ($request) {
-                $instance->collection = $instance->collection->filter(function ($advertiser) use ($request) {
-                    $state = true;
-                    $intentions = true;
+                ->filter(function ($instance) use ($request) {
+                    $instance->collection = $instance->collection->filter(function ($advertiser) use ($request) {
+                        $state = true;
+                        $intentions = true;
 
-                    /** @var $actions */
-                    $actions = null;
-                    $action_id = null;
-                    $action_start = null;
-                    $action_end = null;
-                    $hasActions = true;
+                        $actions = null;
+                        $action_id = null;
+                        $action_start = null;
+                        $action_end = null;
+                        $hasActions = true;
 
-                    foreach ($request->get('columns') as $column) {
-                        if($column['name'] == 'state_id') {
-                            $state = $advertiser->hasState($column['search']['value']);
-                        }
-
-                        if($column['name'] == 'intention_at' && trim($column['search']['value'])) {
-                            if($advertiser->intentions->count() == 0) {
-                                $intentions = false;
+                        foreach ($request->get('columns') as $column) {
+                            if($column['name'] == 'state_id') {
+                                $state = $advertiser->hasState($column['search']['value']);
                             }
-                        }
 
-                        if ($column['name'] == 'action' && trim($column['search']['value']) && trim($column['search']['value']) != "0") {
-                            $action_id = trim($column['search']['value']);
-                        }
-                        if ($column['name'] == 'action_range' && trim($column['search']['value'])) {
-                            $action_range = explode(',', $column['search']['value']);
-                            $action_start = trim($action_range[0]);
-                            $action_end   = trim($action_range[1]);
-                        }
-
-                    }
-
-                    if($action_id || $action_start || $action_end) {
-                        if($advertiser->contacts->count() > 0) {
-                            $actions = $advertiser->contacts->filter(function ($contact) use ($action_id, $action_start, $action_end) {
-                                if($action = $contact->actions->first()) {
-                                    return $action->isActionAndIsInRange($action_id, $action_start, $action_end);
+                            if($column['name'] == 'intention_at' && trim($column['search']['value'])) {
+                                if($advertiser->intentions->count() == 0) {
+                                    $intentions = false;
                                 }
-                            });
+                            }
 
-                            if($actions->count() == 0) {
+                            if ($column['name'] == 'action' && trim($column['search']['value']) && trim($column['search']['value']) != "0") {
+                                $action_id = trim($column['search']['value']);
+                            }
+                            if ($column['name'] == 'action_range' && trim($column['search']['value'])) {
+                                $action_range = explode(',', $column['search']['value']);
+                                $action_start = trim($action_range[0]);
+                                $action_end   = trim($action_range[1]);
+                            }
+
+                        }
+
+                        if($action_id || $action_start || $action_end) {
+                            if($advertiser->contacts->count() > 0) {
+                                $actions = $advertiser->contacts->filter(function ($contact) use ($action_id, $action_start, $action_end) {
+                                    if($action = $contact->actions->first()) {
+                                        return $action->isActionAndIsInRange($action_id, $action_start, $action_end);
+                                    }
+                                });
+
+                                if($actions->count() == 0) {
+                                    $hasActions = false;
+                                }
+                            }
+                            else {
                                 $hasActions = false;
                             }
                         }
-                        else {
-                            $hasActions = false;
-                        }
-                    }
 
-                    return $state && $intentions && $hasActions;
-                });
-            })
-            ->make(true);
+
+                        return $state && $intentions && $hasActions;
+                    });
+                })
+                ->make(true);
 
         //return view('home');
     }

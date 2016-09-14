@@ -41,7 +41,7 @@ class ListComposer extends BaseComposer
      */
     public function compose(View $view)
     {
-        $registrationStates = \Lang::get('states.registration');
+        $registrationStates = \Lang::get('states.advertiser');
         $cities = $this->cityRepository->citiesWithAdvertisers();
         $economicActivities = $this->economicActivityRepository->activitiesWithAdvertisers();
         $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->get();

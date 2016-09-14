@@ -20,5 +20,12 @@ return [
         'complete-data'     => 'Registro Completo',
         'incomplete'        => 'Registro Incompleto',
         'email-no-validated' => 'Sin validar email'
-    ]
+    ],
+    'advertiser' => [
+        'has-favorites'         => 'Con favoritos',
+        'has-views'             => 'Ha visto espacios',
+        'complete-data'         => 'Registro Completo',
+        'incomplete'            => 'Registro Incompleto',
+        'email-no-validated'    => 'Sin validar email'
+    ],
 ];
