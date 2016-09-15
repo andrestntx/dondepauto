@@ -173,6 +173,23 @@ class Space extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getAudiencesArray()
+    {
+        $array = [];
+        $audienceTypes = $this->audiences->groupBy('audience_type_id');
+
+        foreach($audienceTypes as $audiences) {
+            $array[$audiences->first()->type->name] = $audiences->implode('name', ', ');
+        }
+
+        \Log::info($array);
+
+        return $array;
+    }
+
+    /**
      * Return the Category and SubCategory
      * @return string
      */

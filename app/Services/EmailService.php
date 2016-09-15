@@ -235,12 +235,13 @@ class EmailService
     /**
      * @param Space $space
      * @param Collection $advertisers
+     * @param int $discount
      * @return bool
      */
-    public function suggest(Space $space, Collection $advertisers)
+    public function suggest(Space $space, Collection $advertisers, $discount = 0)
     {
         foreach($advertisers as $advertiser) {
-            Mail::send('emails.advertiser.suggest', ['space' => $space, 'advertiser' => $advertiser], function ($m) use ($advertiser) {
+            Mail::send('emails.advertiser.suggest', ['space' => $space, 'advertiser' => $advertiser, 'discount' => $discount], function ($m) use ($advertiser) {
                 $m->from("leonardo@dondepauto.co", "Leonardo Rueda")
                     ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->subject(ucfirst($advertiser->first_name) . ", me gusta este medio publicitario para tu empresa");

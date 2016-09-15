@@ -684,37 +684,44 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
     Content data space
 -->
 
-<div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
-    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
-        <div class="inner" style="margin: auto; display: table;">
-            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/f8b76510-940d-43bc-b889-b67e97c75ebc.png" alt="">
-            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
-                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">$40'000.000</span>
-                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Precio lista</span>    
-            </div>
-        </div>
-    </div>
-        
-    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
-        <div class="inner" style="margin: auto; display: table;">
-            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/cef9e50d-2e8e-4f82-8a4b-0fa2059a3e6d.png" alt="">
-            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
-                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">-10% <span class="small" style="display: inline-block; font-size: 15px;">($4'000.000)</span></span>
-                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Descuento</span>    
-            </div>
-        </div>
-    </div>
 
-    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
-        <div class="inner" style="margin: auto; display: table;">
-            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/684d3c01-8083-44f8-97e0-4f1c443dbb7f.png" alt="">
-            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
-                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">$40'000.000</span>
-                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Precio oferta</span>    
-            </div>
-        </div>
-    </div>
-</div>
+
+@if($discount > 0)
+	<div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
+	    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
+	        <div class="inner" style="margin: auto; display: table;">
+	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/f8b76510-940d-43bc-b889-b67e97c75ebc.png" alt="">
+	            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
+	                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">
+	                	${{ number_format($space->public_price, 0, ',', '.') }}
+	                </span>
+	                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Precio lista</span>    
+	            </div>
+	        </div>
+	    </div>
+	        
+	    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
+	        <div class="inner" style="margin: auto; display: table;">
+	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/cef9e50d-2e8e-4f82-8a4b-0fa2059a3e6d.png" alt="">
+	            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
+	                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">-{{ $discount }}% <span class="small" style="display: inline-block; font-size: 15px;">(${{ number_format($space->public_price * ($discount / 100), 0, ',', '.') }})</span></span>
+	                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Descuento</span>    
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
+	        <div class="inner" style="margin: auto; display: table;">
+	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/684d3c01-8083-44f8-97e0-4f1c443dbb7f.png" alt="">
+	            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
+	                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">
+	                	${{ number_format($space->public_price - ($space->public_price * ($discount / 100)), 0, ',', '.') }}</span>
+	                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Precio oferta</span>    
+	            </div>
+	        </div>
+	    </div>
+	</div>
+@endif
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
     <tbody class="mcnDividerBlockOuter">
@@ -739,9 +746,9 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
             <div class="text" style="width: 85%; font-size: 15px; float: left; padding: 10px 0px 0 10px;">
                 <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">Audicencias</span>
                 <ul style="margin: 0; padding: 2px 18px;">
-                    <li style="padding: 3px 0;">Adolescentes, Jovenes, Mayores / Masculino, Femenino</li>
-                    <li style="padding: 3px 0;">Estrato: 1,2,3,4,5 o más en toda Colombia</li>
-                    <li style="padding: 3px 0;">Escenarios de impacto: Bares, Restaurantes, Torres residenciales, apartamentos, radio</li>
+                	@foreach($space->getAudiencesArray() as $type => $audience)
+                    	<li style="padding: 3px 0;"><strong>{{ $type }}</strong>: {{ $audience }}</li>
+                    @endforeach
                 </ul>
             </div>
         </div>

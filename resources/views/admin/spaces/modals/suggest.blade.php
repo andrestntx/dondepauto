@@ -31,6 +31,9 @@
                     <div class="col-md-12" style="margin-bottom: 20px;">
                         <h3 id="suggestSpaceName" style="font-weight: 500; text-align: center;"></h3>
                     </div>
+                    <div class="col-md-12">
+                        {!! Field::number('discount', 0, ['label' => 'Descuento', 'placeholder' => 'Descuento', 'required', 'min' => '0', 'max' => '0']) !!}
+                    </div>
                     <div class="col-md-12" style="margin-bottom: 50px;">
                         {!! Form::select('advertisers', $advertisers, null, ['class' => 'advertisr-chosen-select', 'multiple', 'data-placeholder' => 'Anunciantes']) !!}
                     </div>
