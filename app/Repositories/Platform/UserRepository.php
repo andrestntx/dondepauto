@@ -262,4 +262,13 @@ class UserRepository extends BaseRepository
 
         return $user;
     }
+
+    /**
+     * @param $userIds
+     * @return mixed
+     */
+    public function getUsers(array $userIds)
+    {
+        return $this->model->whereIn('id_us_LI', $userIds)->get();
+    }
 }

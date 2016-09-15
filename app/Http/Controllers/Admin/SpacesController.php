@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entities\Platform\Space\Space;
 use App\Facades\SpaceFacade;
+use App\Http\Requests\Space\SuggestRequest;
 use App\Services\Space\SpaceService;
 
 use App\Http\Controllers\ResourceController;
@@ -172,6 +173,16 @@ class SpacesController extends ResourceController
             'inputs'  => $this->facade->ajax($request->get('category'), $request->get('sub_category'), $request->get('publisher'),
                 $request->get('format'), $request->get('city'))
         ];
+    }
+
+    /**
+     * @param SuggestRequest $request
+     * @param Space $space
+     * @return mixed
+     */
+    public function suggest(SuggestRequest $request, Space $space)
+    {
+        return ['success' => $this->facade->suggest($space, $request->get('advertisers'))];
     }
     
 }

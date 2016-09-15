@@ -55,4 +55,13 @@ class UserService extends ResourceService
     {
         $this->repository->trackLogout($user, $code);
     }
+
+    /**
+     * @param array $userIds
+     * @return mixed
+     */
+    public function getUsers(array $userIds)
+    {
+        return $this->repository->getUsers($userIds);
+    }
 }

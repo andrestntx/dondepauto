@@ -40,6 +40,6 @@ class SpaceRepository extends BaseRepository
             $query->whereId($spaceId);
         }
 
-        return $query->orderBy('created_at', 'desc');
+        return $query->orderBy('created_at', 'desc')->take(20);
     }
 }

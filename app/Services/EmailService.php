@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -229,6 +230,25 @@ class EmailService
                     ->subject($user->first_name . ", hemos dado de baja tu cuenta en DóndePauto");
             });
         }
+    }
+
+    /**
+     * @param Space $space
+     * @param Collection $advertisers
+     * @return bool
+     */
+    public function suggest(Space $space, Collection $advertisers)
+    {
+        \Log::info($advertisers);
+        foreach($advertisers as $advertiser) {
+            Mail::send('emails.advertiser.suggest', ['space' => $space, 'advertiser' => $advertiser], function ($m) use ($advertiser) {
+                $m->from("leonardo@dondepauto.co", "Leonardo Rueda")
+                    ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
+                    ->subject($advertiser->first_name . ", te recomiendo este espacio");
+            });
+        }
+
+        return true;
     }
 
 }
