@@ -17,7 +17,7 @@ class Audience extends Entity
      */
     public function type()
     {
-        return $this->belongsTo(AudienceType::class);
+        return $this->belongsTo(AudienceType::class, 'audience_type_id');
     }
 
     /**

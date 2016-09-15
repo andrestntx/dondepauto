@@ -256,12 +256,13 @@ class SpaceFacade
     /**
      * @param Space $space
      * @param array $advertiserIds
+     * @param int $discount
      * @return bool
      */
-    public function suggest(Space $space, array $advertiserIds)
+    public function suggest(Space $space, array $advertiserIds, $discount = 0)
     {
         $advertisers = $this->userService->getUsers($advertiserIds);
-        $space->load('images');
-        return $this->emailService->suggest($space, $advertisers);
+        $space->load(['images', 'audiences.type']);
+        return $this->emailService->suggest($space, $advertisers, $discount);
     }
 }

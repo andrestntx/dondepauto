@@ -499,7 +499,8 @@ var SpaceService = function() {
         button.click(function() {
             var url = modal.attr('data-url');
             var parameters = {
-                'advertisers': modal.find("select").val()
+                'advertisers':  modal.find("select").val(),
+                'discount':     modal.find("#discount").val()
             }
 
             console.log(url);

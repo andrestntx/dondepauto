@@ -182,7 +182,7 @@ class SpacesController extends ResourceController
      */
     public function suggest(SuggestRequest $request, Space $space)
     {
-        return ['success' => $this->facade->suggest($space, $request->get('advertisers'))];
+        return ['success' => $this->facade->suggest($space, $request->get('advertisers'), $request->get('discount'))];
     }
     
 }
