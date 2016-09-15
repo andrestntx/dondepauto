@@ -147,6 +147,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\SpacesController@search'
         ]);
 
+        Route::post('espacios/recomendar/{spaces}', [
+            'as'    => 'espacios.suggest',
+            'uses' => 'Admin\SpacesController@suggest'
+        ]);
+
         Route::resource('espacios', 'Admin\SpacesController', ['parameters' => [
             'espacios' => 'spaces'
         ]]);

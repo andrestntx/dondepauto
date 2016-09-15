@@ -802,4 +802,16 @@ class User extends EntityAuth
         return null;
     }
 
+    /**
+     * @return string
+     */
+    public function getSelectEmailAttribute()
+    {
+        if(! empty($this->company)) {
+            return $this->company . ' - ' . $this->first_name . ' ' . $this->last_name . ' - ' . $this->email;
+        }
+
+        return  $this->first_name . ' ' . $this->last_name . ' - ' .  $this->email;
+    }
+
 }

@@ -222,6 +222,11 @@ var SpaceService = function() {
         $('#' + inputId + ' #modalPublisher').attr('href', '/medios/' + space.publisher_id)
             .attr('title', 'Ver Medio - ' + space.publisher_name);
 
+        $('#' + inputId + ' #modalSuggestSpace')
+            .attr('data-space-id', space.id)
+            .attr('data-space-name', space.name)
+            .attr('data-publisher-company', space.publisher_company);
+            
         /** Space Data **/
         $('#delete_space').data("spaceid", space.id);
         $('#delete_space').attr("data-url", '/medios/' + space.publisher_id + '/espacios/' + space.id);
@@ -467,12 +472,82 @@ var SpaceService = function() {
         });
     };
 
+    function initSuggestModal() 
+    {
+        $("#modalSuggestSpace").click(function(){
+            console.log($(this));
+            console.log(this);
+
+            var space_id = $(this).attr('data-space-id');
+            var publisher_company = $(this).attr('data-publisher-company');
+            var space_name = $(this).attr('data-space-name');
+
+            $(".suggestSpaceModal #suggestSpacePublisher").text("Medio: " + publisher_company);
+            $(".suggestSpaceModal #suggestSpaceName").text("Espacio: " + space_name);
+            $(".suggestSpaceModal").attr('data-url', "/espacios/recomendar/" + space_id);
+
+            $(".suggestSpaceModal").modal();
+        });
+    }
+
+    function initPostSuggest() 
+    {
+        var modal = $(".suggestSpaceModal");
+        var button = modal.find("#form-suggest-space");
+        var spiner = modal.find("#sk-spinner-modal");
+
+        button.click(function() {
+            var url = modal.attr('data-url');
+            var parameters = {
+                'advertisers': modal.find("select").val()
+            }
+
+            console.log(url);
+            console.log(parameters);
+
+            spiner.show();
+            button.prop("disabled", true);
+
+            $.post(url, parameters, function( data ) {
+                if(data.success) {
+                    spiner.hide();
+                    //dataTable.search(getFilterSearch()).draw();
+                    modal.modal('toggle');
+                    button.prop("disabled", false);
+                }
+                else {
+                    spiner.hide(); 
+                    modal.modal('toggle');
+                    button.prop("disabled", false);
+                    
+                    swal({
+                        title: 'Hubo un error',
+                        text: 'Error controlado',
+                        type: "warning",
+                    });
+                }
+            }).fail(function(data) {
+                spiner.hide();
+                modal.modal('toggle');
+                button.prop("disabled", false);
+
+                swal({
+                    title: 'Hubo un error',
+                    text: 'Código ' + data.status,
+                    type: "warning",
+                });
+            });
+        });
+    }
+
     return {
         init: function(urlSearch) {
             initTable(urlSearch);
             initFilters();
             initModalEvent();
             initDeleteSpace();
+            initSuggestModal();
+            initPostSuggest();
         },
         initModalEvent: function () {
             initModalEvent();

@@ -156,7 +156,7 @@
             </div>
 
             <div class="modal-footer">
-            
+                <button class="btn btn-success" id="modalSuggesSpace" data-toggle="tooltip" data-placement="left" title="Recomendar espacio" style="margin-right: 8px;"><i class="fa fa-location-arrow"></i></button>
                 <a href="#" class="btn btn-info" id="modalPublisher" data-toggle="tooltip"><i class="fa fa-twitch"></i></a>
                 <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
                 <a href="#" id="delete_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio"><i class="fa fa-trash"></i></a>

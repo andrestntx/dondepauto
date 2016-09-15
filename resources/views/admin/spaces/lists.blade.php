@@ -79,6 +79,8 @@
     </div>
 
     @include('admin.spaces.modal')
+    @include('admin.spaces.modals.suggest')
+
 @endsection
 
 @section('extra-js')
@@ -111,6 +113,8 @@
             else {
                 SpaceService.init('/espacios/search');
             }
+
+            $('.advertisr-chosen-select').chosen({width: "100%"});
 
         });
     </script>

@@ -12,6 +12,7 @@ use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
 use App\Services\EmailService;
 use App\Services\MailchimpService;
+use App\Services\Platform\UserService;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
@@ -33,9 +34,10 @@ class SpaceFacade
     protected $spacePointsService;
     protected $mailchimpService;
     protected $emailService;
+    protected $userService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
-        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService,
+        SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService, UserService $userService,
                                 SpacePointsService $spacePointsService, MailchimpService $mailchimpService, EmailService $emailService)
     {
         $this->service = $service;
@@ -47,6 +49,7 @@ class SpaceFacade
         $this->spacePointsService = $spacePointsService;
         $this->mailchimpService = $mailchimpService;
         $this->emailService = $emailService;
+        $this->userService = $userService;
     }
 
     /**
@@ -248,5 +251,17 @@ class SpaceFacade
     public  function deleteSpace(Space $space)
     {
         return $this->service->deleteModel($space);
+    }
+
+    /**
+     * @param Space $space
+     * @param array $advertiserIds
+     * @return bool
+     */
+    public function suggest(Space $space, array $advertiserIds)
+    {
+        $advertisers = $this->userService->getUsers($advertiserIds);
+        $space->load('images');
+        return $this->emailService->suggest($space, $advertisers);
     }
 }

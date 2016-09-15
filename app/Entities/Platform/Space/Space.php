@@ -182,6 +182,19 @@ class Space extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getFirstImageUrlAttribute()
+    {
+        if($this->images->count() > 0) {
+            \Log::info($this->images->first()->url);
+            return $this->images->first()->url;
+        }
+
+        return '#';
+    }
+
+    /**
      * @return mixed
      */
     public function getImagesListAttribute()
