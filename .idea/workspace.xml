@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/spaces/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/modal.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" afterPath="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Space.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Space.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6078432">
-              <caret line="186" column="45" selection-start-line="186" selection-start-column="45" selection-end-line="186" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.35559008">
+              <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
               <folding>
                 <element signature="e#6#99#0#PHP" expanded="true" />
               </folding>
@@ -97,10 +96,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpaceRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SpaceRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.804769">
+            <state vertical-scroll-proportion="-22.5">
               <caret line="42" column="52" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
               <folding />
             </state>
@@ -184,8 +183,8 @@
         <option value="$PROJECT_DIR$/app/Services/UserService.php" />
         <option value="$PROJECT_DIR$/app/Services/Platform/UserService.php" />
         <option value="$PROJECT_DIR$/app/Facades/SpaceFacade.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Platform/Space/Space.php" />
       </list>
     </option>
   </component>
@@ -961,16 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6078432">
-          <caret line="186" column="45" selection-start-line="186" selection-start-column="45" selection-end-line="186" selection-end-column="45" />
-          <folding>
-            <element signature="e#6#99#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-57.958332">
@@ -989,9 +978,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.804769">
+        <state vertical-scroll-proportion="-22.5">
           <caret line="42" column="52" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Space/Space.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35559008">
+          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#99#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
