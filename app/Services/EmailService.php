@@ -239,12 +239,11 @@ class EmailService
      */
     public function suggest(Space $space, Collection $advertisers)
     {
-        \Log::info($advertisers);
         foreach($advertisers as $advertiser) {
             Mail::send('emails.advertiser.suggest', ['space' => $space, 'advertiser' => $advertiser], function ($m) use ($advertiser) {
                 $m->from("leonardo@dondepauto.co", "Leonardo Rueda")
                     ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->subject($advertiser->first_name . ", te recomiendo este espacio");
+                    ->subject(ucfirst($advertiser->first_name) . ", me gusta este medio publicitario para tu empresa");
             });
         }
 
