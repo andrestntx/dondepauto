@@ -101,87 +101,6 @@
             table-layout:fixed !important;
         }
 
-        /**
-         * Design data space
-         */
-        
-        .data-space {
-            padding: 10px 0px;
-            overflow: auto;
-            font-family: sans-serif;
-        }
-
-        .data-space .content {
-            float: left;
-            width: 33.333%;
-            margin: 0;
-            padding: 0;
-        }
-
-        .data-space .content.audiences {
-            width: 94%;
-            padding-left: 6%;
-        }
-
-        .data-space .content.audiences .inner {
-            display: block;
-        }
-
-        .data-space .content.audiences .inner .text {
-            width: 85%;
-            font-size: 15px;
-        }
-
-        .data-space  ul {
-            margin: 0;
-            padding: 2px 0;
-        }
-
-        .data-space  ul li {
-            list-style: none;
-            padding: 3px 0;
-        }
-
-        .data-space ul li:before {
-            content: "• ";
-            color: #00AEEF; 
-            font-size: 20px;
-        }
-
-        .data-space .content .inner {
-            margin: auto;
-            display: table;
-        }
-
-        .data-space .content .inner img {
-            max-width: 60px;
-            float: left;
-        }
-
-        .data-space .content .inner .text {
-            float: left;
-            padding: 10px 0px 0 10px;
-        }
-
-        .data-space .content .inner .text span {
-            display: block;
-        }
-
-        .data-space .content .inner .text span.value {
-            color: #00AEEF;
-            font-weight: 500;
-            font-size: 17px;
-        }
-
-        .data-space .content .inner .text span.value span.small {
-            font-size: 15px;
-            display: inline-block;
-        }
-
-        .data-space .content .inner .text span.description {
-            color: #a2a2a2;
-            font-size: 15px;
-        }
     /*
     --tab Page
     --section Background Style
@@ -765,33 +684,33 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
     Content data space
 -->
 
-<div class="data-space">
-    <div class="content">
-        <div class="inner">
-            <img src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/f8b76510-940d-43bc-b889-b67e97c75ebc.png" alt="">
-            <div class="text">
-                <span class="value">$40'000.000</span>
-                <span class="description">Precio lista</span>    
+<div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
+    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
+        <div class="inner" style="margin: auto; display: table;">
+            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/f8b76510-940d-43bc-b889-b67e97c75ebc.png" alt="">
+            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
+                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">$40'000.000</span>
+                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Precio lista</span>    
             </div>
         </div>
     </div>
         
-    <div class="content">
-        <div class="inner">
-            <img src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/cef9e50d-2e8e-4f82-8a4b-0fa2059a3e6d.png" alt="">
-            <div class="text">
-                <span class="value">-10% <span class="small">($4'000.000)</span></span>
-                <span class="description">Descuento</span>    
+    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
+        <div class="inner" style="margin: auto; display: table;">
+            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/cef9e50d-2e8e-4f82-8a4b-0fa2059a3e6d.png" alt="">
+            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
+                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">-10% <span class="small" style="display: inline-block; font-size: 15px;">($4'000.000)</span></span>
+                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Descuento</span>    
             </div>
         </div>
     </div>
 
-    <div class="content">
-        <div class="inner">
-            <img src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/684d3c01-8083-44f8-97e0-4f1c443dbb7f.png" alt="">
-            <div class="text">
-                <span class="value">$40'000.000</span>
-                <span class="description">Precio oferta</span>    
+    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
+        <div class="inner" style="margin: auto; display: table;">
+            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/684d3c01-8083-44f8-97e0-4f1c443dbb7f.png" alt="">
+            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
+                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">$40'000.000</span>
+                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Precio oferta</span>    
             </div>
         </div>
     </div>
@@ -813,16 +732,16 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
     </tbody>
 </table>
 
-<div class="data-space">
-    <div class="content audiences">
-        <div class="inner">
-            <img src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/4ab95e5f-d986-4523-8b2e-2a92437a1c52.png" alt="">
-            <div class="text">
-                <span class="value">Audicencias</span>
-                <ul>
-                    <li>Adolescentes, Jovenes, Mayores / Masculino, Femenino</li>
-                    <li>Estrato: 1,2,3,4,5 o más en toda Colombia</li>
-                    <li>Escenarios de impacto: Bares, Restaurantes, Torres residenciales, apartamentos, radio</li>
+<div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
+    <div class="content audiences" style="float: left; margin: 0; width: 94%; padding-left: 6%;">
+        <div class="inner" style="display: block; margin: auto;">
+            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/4ab95e5f-d986-4523-8b2e-2a92437a1c52.png" alt="">
+            <div class="text" style="width: 85%; font-size: 15px; float: left; padding: 10px 0px 0 10px;">
+                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">Audicencias</span>
+                <ul style="margin: 0; padding: 2px 18px;">
+                    <li style="padding: 3px 0;">Adolescentes, Jovenes, Mayores / Masculino, Femenino</li>
+                    <li style="padding: 3px 0;">Estrato: 1,2,3,4,5 o más en toda Colombia</li>
+                    <li style="padding: 3px 0;">Escenarios de impacto: Bares, Restaurantes, Torres residenciales, apartamentos, radio</li>
                 </ul>
             </div>
         </div>
@@ -830,7 +749,7 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
 </div>
 
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%; margin-top: 10px; margin-bottom: 10px">
     <tbody class="mcnButtonBlockOuter">
         <tr>
             <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
