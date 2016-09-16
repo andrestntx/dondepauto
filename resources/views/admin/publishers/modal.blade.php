@@ -152,12 +152,11 @@
             </div>
 
             <div class="modal-footer">
-                    <i class="fa fa-file-pdf-o"></i> 
-                </button>
                 <a href="#" class="btn btn-info" id="link-spaces" target="_blank"> 
                     <i class="fa fa-newspaper-o"></i> 
                     Espacios Publicitarios <span id="count-spaces">(0)</span>
                 </a>  
+                <a href="#" class="btn btn-success" target="_blank" id="modalShow" data-toggle="tooltip"><i class="fa fa-user"></i></a>
                 <a href="#" class="btn btn-warning" target="_blank" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
                 <a href="#" id="delete_publisher" data-url="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar Medio"><i class="fa fa-trash"></i></a>
             </div>

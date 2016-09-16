@@ -76,7 +76,11 @@
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
                                 <span class="m-r-sm text-muted welcome-message">
-                                    <a href="{{ route('home') }}" title="Menú Principal"> {{ ucfirst($publisher->company) }} </a>
+                                    @if(auth()->user()->isPublisher())
+                                        <a href="{{ route('home') }}" title="Menú Principal"> {{ ucfirst($publisher->company) }} </a>
+                                    @else
+                                        <a href="{{ route('medios.dashboard', $publisher) }}" title="Menú Principal"> {{ ucfirst($publisher->company) }} </a>
+                                    @endif
                                 </span>
                                 <span class="m-r-sm text-muted welcome-message">
                                     <a href="{{ route('medios.espacios.index', $publisher) }}" title="Mi Inventario">Mi Inventario</a>

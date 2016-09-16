@@ -52,6 +52,18 @@ class PublishersController extends ResourceController
     }
 
     /**
+     * @param User $publisher
+     * @return $this
+     */
+    public function dashboard(User $publisher)
+    {
+        $publisher->load(['spaces.audiences', 'spaces.impactScenes', 'spaces.images', 'spaces.cities']);
+        return view('publisher.dashboard')->with('publisher', $publisher);
+    }
+
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
