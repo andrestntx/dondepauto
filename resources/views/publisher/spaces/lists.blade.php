@@ -18,7 +18,13 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 text-center">
-                        <h1 id="avgPoints" data-points="{{ $publisher->avg_points }}">Mi inventario de Medios</h1>
+                        <h1 id="avgPoints" data-points="{{ $publisher->avg_points }}">
+                            @if(auth()->user()->isPublisher())
+                                Mi inventario de Medios
+                            @else
+                                {{ $publisher->company }} - Inventario de medios
+                            @endif
+                        </h1>
                     </div>
                 </div>  
             </div>          

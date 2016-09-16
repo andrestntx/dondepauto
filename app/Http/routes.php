@@ -170,10 +170,15 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.change-documents'
         ]);
 
+        Route::get('admin/medios/{publishers}', [
+            'as'    => 'medios.dashboard',
+            'uses' => 'Admin\PublishersController@dashboard'
+        ]);
+
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {
-        
+
         Route::get('medios/{publishers}/faqs', [
             'as'    => 'medios.faqs',
             'uses' => 'Publisher\PublishersController@faqs'
