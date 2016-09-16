@@ -37,8 +37,11 @@ class SuggestRequest extends Request
      */
     public function rules()
     {
+        $space = $this->route->getParameter('spaces');
+
         return [
-            'advertisers'  => 'required|array'
+            'advertisers'  => 'required|array',
+            'discount'     => 'integer|max:' . ($space->percentage_markdown * 100)
         ];
     }
 }

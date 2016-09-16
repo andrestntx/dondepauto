@@ -225,7 +225,8 @@ var SpaceService = function() {
         $('#' + inputId + ' #modalSuggestSpace')
             .attr('data-space-id', space.id)
             .attr('data-space-name', space.name)
-            .attr('data-publisher-company', space.publisher_company);
+            .attr('data-publisher-company', space.publisher_company)
+            .attr('data-max-discount', space.percentage_markdown * 100);
             
         /** Space Data **/
         $('#delete_space').data("spaceid", space.id);
@@ -475,18 +476,39 @@ var SpaceService = function() {
     function initSuggestModal() 
     {
         $("#modalSuggestSpace").click(function(){
-            console.log($(this));
-            console.log(this);
-
             var space_id = $(this).attr('data-space-id');
             var publisher_company = $(this).attr('data-publisher-company');
             var space_name = $(this).attr('data-space-name');
+            var max_discount = $(this).attr('data-max-discount');
 
             $(".suggestSpaceModal #suggestSpacePublisher").text("Medio: " + publisher_company);
             $(".suggestSpaceModal #suggestSpaceName").text("Espacio: " + space_name);
             $(".suggestSpaceModal").attr('data-url', "/espacios/recomendar/" + space_id);
+            $(".suggestSpaceModal #field_discount label").text("Descuento - (Máximo: " + max_discount + "%)");
+            
+            $(".suggestSpaceModal #field_discount input").attr({
+                "max": max_discount,
+                "data-msg-max" : "El descuento máximo es " + max_discount
+            });
 
             $(".suggestSpaceModal").modal();
+        });
+
+        $.validator.methods.selectavertisers = function(value, element) {
+            return ($(".form-select-advertisers ul.chosen-choices").find("li.search-choice").length > 0);
+        }
+
+        $("#sugesst_form").validate({
+            rules: {
+                dummy: {
+                    selectavertisers: true
+                }
+            },
+            messages: {
+                dummy: {
+                    selectavertisers: 'Debe seleccionar al menos un anunciante'
+                }
+            }
         });
     }
 
@@ -501,43 +523,56 @@ var SpaceService = function() {
             var parameters = {
                 'advertisers':  modal.find("select").val(),
                 'discount':     modal.find("#discount").val()
+            }   
+
+            if($("#sugesst_form").valid()) {
+                spiner.show();
+                button.prop("disabled", true);
+
+                $.post(url, parameters, function( data ) {
+                    if(data.success) {
+                        spiner.hide();
+                        //dataTable.search(getFilterSearch()).draw();
+                        modal.modal('toggle');
+                        button.prop("disabled", false);
+                        $('.advertisr-chosen-select').chosen("destroy");
+                        $('.advertisr-chosen-select').val(0);
+                        $('.advertisr-chosen-select').chosen({width: "100%"});
+                    }
+                    else {
+                        spiner.hide(); 
+                        modal.modal('toggle');
+                        button.prop("disabled", false);
+                        
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Error controlado',
+                            type: "warning",
+                        });
+                    }
+                }).fail(function(data) {
+                    spiner.hide();
+                    button.prop("disabled", false);
+
+                    if(data.status == 422) {
+                        swal({
+                            title: 'Hubo un error',
+                            text: data.responseText,
+                            type: "warning",
+                        });   
+                    }
+                    else {
+                        modal.modal('toggle');
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Código ' + data.status,
+                            type: "warning",
+                        });    
+                    }
+                    
+                });
             }
 
-            console.log(url);
-            console.log(parameters);
-
-            spiner.show();
-            button.prop("disabled", true);
-
-            $.post(url, parameters, function( data ) {
-                if(data.success) {
-                    spiner.hide();
-                    //dataTable.search(getFilterSearch()).draw();
-                    modal.modal('toggle');
-                    button.prop("disabled", false);
-                }
-                else {
-                    spiner.hide(); 
-                    modal.modal('toggle');
-                    button.prop("disabled", false);
-                    
-                    swal({
-                        title: 'Hubo un error',
-                        text: 'Error controlado',
-                        type: "warning",
-                    });
-                }
-            }).fail(function(data) {
-                spiner.hide();
-                modal.modal('toggle');
-                button.prop("disabled", false);
-
-                swal({
-                    title: 'Hubo un error',
-                    text: 'Código ' + data.status,
-                    type: "warning",
-                });
-            });
         });
     }
 

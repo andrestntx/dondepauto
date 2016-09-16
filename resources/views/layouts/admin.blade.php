@@ -278,6 +278,9 @@
         <script src="/assets/js/plugins/select2/select2.full.min.js"></script>
         <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+        <!-- Validation -->
+        <script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {

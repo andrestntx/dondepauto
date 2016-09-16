@@ -566,4 +566,19 @@ class Space extends Entity
 
         return '';
     }
+
+
+    /**
+     * @return float
+     */
+    public function getPercentageMarkdownAttribute()
+    {
+        $value = (((1 / (1 + $this->percentage_markup)) - 1) * -1);
+
+        if($value == 0) {
+            $value = $this->discount;
+        }
+
+        return round($value, 3);
+    }
 }

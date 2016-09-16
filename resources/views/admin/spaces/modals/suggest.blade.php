@@ -23,27 +23,30 @@
                 </div>
                 </h4>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12" style="margin-bottom: 10px;">
-                        <h3 id="suggestSpacePublisher" style="font-weight: 300; text-align: center;"></h3>
-                    </div>
-                    <div class="col-md-12" style="margin-bottom: 20px;">
-                        <h3 id="suggestSpaceName" style="font-weight: 500; text-align: center;"></h3>
-                    </div>
-                    <div class="col-md-12">
-                        {!! Field::number('discount', 0, ['label' => 'Descuento', 'placeholder' => 'Descuento', 'required', 'min' => '0', 'max' => '0']) !!}
-                    </div>
-                    <div class="col-md-12" style="margin-bottom: 50px;">
-                        {!! Form::select('advertisers', $advertisers, null, ['class' => 'advertisr-chosen-select', 'multiple', 'data-placeholder' => 'Anunciantes']) !!}
-                    </div>
-                </div>
-            </div>
+                <div class="modal-body">
+                    <form id="sugesst_form" accept-charset="utf-8">
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <h3 id="suggestSpacePublisher" style="font-weight: 300; text-align: center;"></h3>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 20px;">
+                                <h3 id="suggestSpaceName" style="font-weight: 500; text-align: center;"></h3>
+                            </div>
+                            <div class="col-md-12">
+                                {!! Field::number('discount', 0, ['label' => 'Descuento', 'placeholder' => 'Descuento']) !!}
+                            </div>
+                            <div class="col-md-12 form-select-advertisers" style="margin-bottom: 50px;">
+                                {!! Form::text('dummy', null, ['style' => 'height: 1px; width: 1px; border: 0px !important; margin:0; padding:0;']) !!}
 
-            <div class="modal-footer">
-                <button id="form-suggest-space-close" class="btn btn-effect-ripple btn-default" data-dismiss="modal">Cerrar</button>
-                <button id="form-suggest-space" class="btn btn-effect-ripple btn-primary form-edit-data">Recomendar</button>
-            </div>
+                                {!! Form::select('advertisers', $advertisers, null, ['class' => 'advertisr-chosen-select', 'multiple', 'data-placeholder' => 'Anunciantes']) !!}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="form-suggest-space-close" class="btn btn-effect-ripple btn-default" data-dismiss="modal">Cerrar</button>
+                    <button id="form-suggest-space" class="btn btn-effect-ripple btn-primary form-edit-data">Recomendar</button>
+                </div>
         </div>
     </div>
 </div>
