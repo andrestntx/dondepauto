@@ -745,7 +745,7 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
     <div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
         <div class="content audiences" style="float: left; margin: 0; width: 94%; padding-left: 6%;">
             <div class="inner" style="display: block; margin: auto;">
-                <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/4ab95e5f-d986-4523-8b2e-2a92437a1c52.png" alt="">
+                <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/d6ef6ff1-d4a6-40a3-8fbb-a82b705fd582.png" alt="">
                 <div class="text" style="width: 85%; font-size: 15px; float: left; padding: 10px 0px 0 10px;">
                     <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">Audicencias</span>
                     <ul style="margin: 0; padding: 2px 18px;">

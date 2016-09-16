@@ -106,23 +106,18 @@ class AdvertisersController extends ResourceController
                         }
 
                         if($action_id || $action_start || $action_end) {
-                            if($advertiser->contacts->count() > 0) {
-                                $actions = $advertiser->contacts->filter(function ($contact) use ($action_id, $action_start, $action_end) {
-                                    if($action = $contact->actions->first()) {
-                                        return $action->isActionAndIsInRange($action_id, $action_start, $action_end);
-                                    }
-                                });
+                            $lastContact = $advertiser->contacts->sortBy(function ($contact, $key) {
+                                return $contact->created_at;
+                            })->last();
 
-                                if($actions->count() == 0) {
-                                    $hasActions = false;
-                                }
+                            if($lastContact && $action = $lastContact->actions->first()) {
+                                $hasActions = $action->isActionAndIsInRange($action_id, $action_start, $action_end);
                             }
                             else {
                                 $hasActions = false;
                             }
                         }
-
-
+                        
                         return $state && $intentions && $hasActions;
                     });
                 })
