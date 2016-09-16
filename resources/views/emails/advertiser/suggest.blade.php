@@ -599,7 +599,9 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
                     <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
                         <tbody><tr>
                             <td class="mcnImageContent" valign="top" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;">
-                                    <img align="center" alt="" src="{{ $space->first_image_url }}" width="576" style="max-width:576px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                    <a href="{{ $space->url_marketplace }}" target="_blank">
+                                        <img align="center" alt="" src="{{ $space->first_image_url }}" width="576" style="max-width:576px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">    
+                                    </a>
                             </td>
                         </tr>
                     </tbody></table>
@@ -690,7 +692,7 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
 	<div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
 	    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
 	        <div class="inner" style="margin: auto; display: table;">
-	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/f8b76510-940d-43bc-b889-b67e97c75ebc.png" alt="">
+	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/edc7eb68-a5a6-4fc0-ae70-c247b4c2a5f9.png" alt="">
 	            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
 	                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">
 	                	${{ number_format($space->public_price, 0, ',', '.') }}
@@ -702,7 +704,7 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
 	        
 	    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
 	        <div class="inner" style="margin: auto; display: table;">
-	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/cef9e50d-2e8e-4f82-8a4b-0fa2059a3e6d.png" alt="">
+	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/66c90494-dffc-49ac-8c3c-bb7bb2c5c006.png" alt="">
 	            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
 	                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">-{{ $discount }}% <span class="small" style="display: inline-block; font-size: 15px;">(${{ number_format($space->public_price * ($discount / 100), 0, ',', '.') }})</span></span>
 	                <span class="description" style="display: block; color: #a2a2a2; font-size: 15px;">Descuento</span>    
@@ -712,7 +714,7 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
 
 	    <div class="content" style="float: left; width: 33.333%; margin: 0; padding: 0;">
 	        <div class="inner" style="margin: auto; display: table;">
-	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/684d3c01-8083-44f8-97e0-4f1c443dbb7f.png" alt="">
+	            <img style="max-width: 60px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/e6dcb14d-44f8-4900-8cbf-d78bc1e75401.png" alt="">
 	            <div class="text" style="float: left; padding: 10px 0px 0 10px;">
 	                <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 17px;">
 	                	${{ number_format($space->public_price - ($space->public_price * ($discount / 100)), 0, ',', '.') }}</span>
@@ -766,7 +768,7 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
-                                <a class="mcnButton " title="Ver medio publicitario" href="{{ $space->link }}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Ver medio publicitario</a>
+                                <a class="mcnButton " title="Ver medio publicitario" href="{{ $space->url_marketplace }}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Ver medio publicitario</a>
                             </td>
                         </tr>
                     </tbody>
