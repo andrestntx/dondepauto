@@ -141,7 +141,6 @@ $(document).ready(function(){
     }
 
     $.validator.methods.tagsinput = function(value, element) { //add custom method
-        console.log('check ' + $("#more_audiences_tagsinput").find(".tag").length);
         return ($("#more_audiences_tagsinput").find(".tag").length > 2);
     }
 
