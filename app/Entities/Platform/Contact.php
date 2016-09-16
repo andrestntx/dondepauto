@@ -10,6 +10,7 @@ namespace App\Entities\Platform;
 
 
 use App\Entities\Views\Publisher;
+use Carbon\Carbon;
 
 class Contact extends Entity
 {
@@ -99,5 +100,13 @@ class Contact extends Entity
     public function getCreatedAtFormatAttribute()
     {
         return $this->created_at->format('d-M-y') . ' (' . $this->created_at_humans .')';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsTodayAttribute()
+    {
+        return $this->created_at->isToday();
     }
 }
