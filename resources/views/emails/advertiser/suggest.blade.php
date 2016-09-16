@@ -723,6 +723,20 @@ Analizando las características y necesidades de {{ $advertiser->company }} iden
 	        </div>
 	    </div>
 	</div>
+@else
+    <div class="data-space" style="padding: 10px 0px; overflow: auto; font-family: sans-serif;">
+        <div class="content" style="float: left; width: 100%; margin: 0; padding: 0;">
+            <div class="inner" style="margin: auto; display: table;">
+                <img style="max-width: 80px; float: left;" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/edc7eb68-a5a6-4fc0-ae70-c247b4c2a5f9.png" alt="">
+                <div class="text" style="float: left; padding: 20px 0px 0 10px;">
+                    <span class="value" style="display: block; color: #00AEEF; font-weight: 500; font-size: 19px;">
+                        ${{ number_format($space->public_price, 0, ',', '.') }}
+                    </span>
+                    <span class="description" style="display: block; color: #a2a2a2; font-size: 17px;">Precio lista</span>    
+                </div>
+            </div>
+        </div>
+    </div>
 @endif
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
