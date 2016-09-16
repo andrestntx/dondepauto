@@ -28,7 +28,7 @@ class Advertiser extends PUser
         'count_by_contact_intentions', 'count_sold_intentions', 'count_discarded_intentions', 'count_interest_intentions',
         'count_management_intentions', 'count_leads', 'created_at_humans', 'count_proposals', 'count_logs',
         'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states', 'last_login_at',
-        'range_view_at_humans', 'count_views', 'has_logo', 'count_favorites', 'range_favorite_at_humans'];
+        'range_view_at_humans', 'count_views', 'has_logo', 'count_favorites', 'range_favorite_at_humans', 'has_contact_today'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -352,4 +352,35 @@ class Advertiser extends PUser
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLastContact()
+    {
+        return $this->contacts->sortBy(function ($contact, $key) {
+            return $contact->created_at;
+        })->last();
+    }
+
+    /**
+     * @return null
+     */
+    public function getLastAction()
+    {
+        if($lastContact = $this->getLastContact()) {
+            return $lastContact->actions->first();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasContactTodayAttribute()
+    {
+        return $this->contacts->filter(function ($contact, $key) {
+            return $contact->is_today;
+        })->count() > 0;
+    }
 }

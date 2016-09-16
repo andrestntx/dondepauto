@@ -79,6 +79,11 @@ var AdvertiserService = function() {
                 }
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                
+                if(aData.has_contact_today == 1) {
+                    $(nRow).addClass('success');
+                }
+
                 $('td:eq(0)', nRow).html(
                     "<button class='btn btn-xs btn-success advertiserModal' data-advertiser='" + JSON.stringify(aData) + "' title='Ver Anunciante' data-toggle='modal' data-target='#userModal'><i class='fa fa-search-plus'></i></button>"
                 );
