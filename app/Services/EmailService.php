@@ -243,6 +243,7 @@ class EmailService
         foreach($advertisers as $advertiser) {
             Mail::send('emails.advertiser.suggest', ['space' => $space, 'advertiser' => $advertiser, 'discount' => $discount], function ($m) use ($advertiser) {
                 $m->from("leonardo@dondepauto.co", "Leonardo Rueda")
+                    ->to($advertiser->email, ucfirst($advertiser->first_name))
                     ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
                     ->subject(ucfirst($advertiser->first_name) . ", me gusta este medio publicitario para tu empresa");
             });
