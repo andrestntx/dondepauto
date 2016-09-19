@@ -13,6 +13,7 @@ var UserService = function() {
         $('#' + inputId + ' #company_area').text(user.company_area);
         $('#' + inputId + ' a#phone').attr('href', 'tel:' + user.phone).text(user.phone);
         $('#' + inputId + ' a#cel').attr('href', 'tel:' + user.cel).text(user.cel);
+        $('#' + inputId + ' #text-comments').text(user.comments);
     };
     
     function drawDetailData(inputId, user, isPublisher) {
@@ -48,8 +49,9 @@ var UserService = function() {
         $(".userEditDataContactModal #email").val(user.email);
         $(".userEditDataContactModal #phone").val(user.phone);
         $(".userEditDataContactModal #cel").val(user.cel);
+        $(".userEditDataContactModal #comments").val(user.comments);
 
-        $(".userEditDataContactModal #user_company").attr('data-url', url)
+        $(".userEditDataContactModal #user_company").attr('data-url', url);
 
         $(".userEditDataContactModal").modal();
     };
@@ -89,7 +91,8 @@ var UserService = function() {
 	                'company_area': $(".userEditDataContactModal #company_area").val(),
 	                'email':        $(".userEditDataContactModal #email").val(),
 	                'phone':        $(".userEditDataContactModal #phone").val(),
-	                'cel':          $(".userEditDataContactModal #cel").val()
+	                'cel':          $(".userEditDataContactModal #cel").val(),
+                    'comments':     $(".userEditDataContactModal #comments").val()
 	            }, $(".userEditDataContactModal"), isPublisher
             );
         });

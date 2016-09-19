@@ -47,6 +47,9 @@
                         <div class="col-md-6">
                             {!! Field::text('company_area') !!}
                         </div>
+                        <div class="col-md-12">
+                            {!! Field::textarea('comments', ['rows' => '3']) !!}
+                        </div>
                         <input type="hidden" id="contact_csrf_token" name="_token" value="{{ csrf_token() }}">
                     </div>
                 </div>
