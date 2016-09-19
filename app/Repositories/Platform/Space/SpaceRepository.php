@@ -65,13 +65,26 @@ class SpaceRepository extends BaseRepository
     }
 
     /**
+     * @param Space $space
+     * @param $points
+     * @return bool
+     */
+    public function updatePoints(Space $space, $points)
+    {
+        $space->points = $points;
+        return $space->save();
+    }
+
+    /**
      * @param array $data
      * @param Model $entity
      * @return mixed
      */
     public function update(array $data, $entity)
     {
+        \Log::info('antes de update');
         parent::update($data, $entity);
+        \Log::info('update');
 
         if($entity->format && $entity->format->subCategory) {
             $entity->sub_category_id 	= $entity->format->subCategory->id;
@@ -79,7 +92,11 @@ class SpaceRepository extends BaseRepository
             $entity->save();
         }
 
+        \Log::info('formato y categoria');
+
         $this->sync($data, $entity);
+
+        \Log::info('sync');
         return $entity;
     }
 

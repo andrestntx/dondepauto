@@ -168,6 +168,8 @@ class PublishersSpacesController extends ResourceController
      */
     public function update(Request $request, User $user, Space $space)
     {
+        \Log::info($request->all());
+
         try {
             $this->spaceFacade->updateModel($request->all(), $request->file('images'), $request->get('keep_images'), $space);
         } catch (Exception $e) {

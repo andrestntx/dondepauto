@@ -148,7 +148,19 @@ class SpaceService extends ResourceService
      */
     public function updateSpace(array $data, SpaceFormat $format, Space $space)
     {
+        \Log::Info('repositorio update');
         return $this->repository->update($this->getData($data, $format, $space->publisher), $space);
+    }
+
+
+    /**
+     * @param Space $space
+     * @param $points
+     * @return bool
+     */
+    public function updatePoints(Space $space, $points)
+    {
+        return $this->repository->updatePoints($space, $points);
     }
 
     /**
