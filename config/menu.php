@@ -10,7 +10,7 @@ return [
     'sidebar'   => [
         // All users
         'home'          => ['url' => '/', 'i' =>  'fa fa-th-large', 'title' => 'Inicio'],
-        'directors'     => ['url' => 'directores', 'i' =>  'fa fa-user', 'title' => 'Directores', 'roles' => ['admin', 'director']],
+        //'directors'     => ['url' => 'directores', 'i' =>  'fa fa-user', 'title' => 'Directores', 'roles' => ['admin', 'director']],
         'advisers'      => ['url' => 'asesores', 'i' =>  'fa fa-slideshare', 'title' => 'Asesores', 'roles' => ['admin', 'director']],
         'advertisers'   => ['url' => 'anunciantes', 'i' =>  'fa fa-users', 'title' => 'Anunciantes', 'roles' => ['admin', 'director']],
         'mediums'       => ['url' => 'medios', 'i' =>  'fa fa-twitch', 'title' => 'Medios', 'roles' => ['admin', 'director', 'adviser']],

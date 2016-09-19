@@ -301,7 +301,7 @@
                             <div class="ibox-content" style="display: block;">
                                 <h2>Doc. de Validación de Cuenta</h2>
                                 <hr>
-                                @if($publisher->has_signed_agreement)
+                                @if($publisher->has_documents)
                                     <a href="{{ $publisher->getDocument('commerce') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
                                     <a href="{{ $publisher->getDocument('rut') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
                                     <a href="{{ $publisher->getDocument('bank') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> certificación bancaria</a>
