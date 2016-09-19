@@ -135,7 +135,9 @@ class SpaceFacade
         $space  = $this->service->updateSpace($data, $format, $space);
         $this->service->saveImages($images, $space, $keep_images);
 
+        \Log::Info('recalcualr');
         $this->recalculatePoints($space);
+        \Log::Info('calculado');
 
         return $space;
     }
@@ -186,7 +188,7 @@ class SpaceFacade
     public function recalculatePoints(Space $space) 
     {
         $points = $this->spacePointsService->calculatePoints($space);
-        return $this->service->updateModel(['points' => $points], $space);
+        return $this->service->updatePoints($space, $points);
     }
 
     /**

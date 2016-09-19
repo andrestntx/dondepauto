@@ -27,6 +27,7 @@ class Space extends Entity
 
     protected $pointsService;
 
+
     protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
         'city_id','format_id', 'sub_category_id', 'category_id', 'impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction', 'sex_restriction',
         'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id', 'religion_restriction', 'points'
@@ -184,7 +185,6 @@ class Space extends Entity
             $array[$audiences->first()->type->name] = $audiences->implode('name', ', ');
         }
 
-        \Log::info($array);
 
         return $array;
     }
@@ -474,6 +474,14 @@ class Space extends Entity
         $this->setRestriction($value, 'restringeSexo_LI');
     }
 
+    /**
+     * @param $value
+     */
+    public function setReligionRestrictionAttribute($value)
+    {
+        $this->setRestriction($value, 'restringeReligion_LI');
+    }
+
 
     /**
      * @param $column
@@ -522,11 +530,20 @@ class Space extends Entity
     }
 
     /**
+     * @return bool
+     */
+    public function getReligionRestrictionBoolAttribute()
+    {
+        return $this->isRestriction($this->religion_restriction);
+    }
+
+    /**
      * @param $value
      * @param $column
      */
     public function setRestriction($value, $column)
     {
+        \Log::info(' set ' . $value . ' - ' . $column);
         if($value) {
             $this->attributes[$column] = 'S';
         }
