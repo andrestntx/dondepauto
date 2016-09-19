@@ -106,6 +106,7 @@
      </div>
 
      @include('admin.spaces.modal')
+     @include('admin.spaces.modals.suggest')
 
 @endsection
 
@@ -127,6 +128,8 @@
             PublisherService.drawShowPrices();
             SpaceService.initDatatable($('#publisher').data('datatable'));
             SpaceService.initModalEvent();
+            SpaceService.initPostSuggest();
+            $('.advertisr-chosen-select').chosen({width: "100%"});
         });
     </script>
 @endsection
