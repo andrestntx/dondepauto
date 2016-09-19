@@ -77,7 +77,7 @@
                                 DP+
                             </div>
                         </li>
-                        @if(auth()->user()->isPublisher())
+                        @if(auth()->user()->isPublisher() || auth()->user()->isAdmin() || auth()->user()->isDirector())
                             @include('layouts.publisher-menu')
                         @else
                             {!! Menu::make('menu.sidebar', 'nav metismenu')
