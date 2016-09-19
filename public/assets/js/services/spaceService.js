@@ -210,8 +210,6 @@ var SpaceService = function() {
             $('#formats').val('');
             columns.push(13);
         }
-
-        console.log(columns);
         
         UserService.cleanColumnsSearch(columns); 
     };
@@ -425,7 +423,6 @@ var SpaceService = function() {
     }
 
     function initDeleteSpace() {
-        console.log('inicio');
 
         $("#delete_space").click(function(e) {   
             swal({
@@ -596,6 +593,10 @@ var SpaceService = function() {
         },
         reload: function(){
             reload();
+        },
+        initPostSuggest: function(){
+            initSuggestModal();
+            initPostSuggest();
         }
     };
 }();
