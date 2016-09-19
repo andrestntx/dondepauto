@@ -23,31 +23,31 @@ return [
         
         // Publishers
         'account'       => [
-                            'route' => ['medios.account', ':user_platform_id'], 
+                            'route' => ['medios.account', ':publisher'], 
                             'i' => 'fa fa-user', 
                             'title' => 'Mi cuenta', 
                             'allows' => ['account', ':publisher']
                         ],
         'inventory'     => [
-                            'route' => ['medios.espacios.index', ':user_platform_id'], 
+                            'route' => ['medios.espacios.index', ':publisher'], 
                             'i' => 'fa fa-shopping-cart', 
                             'title' => 'Inventario', 
                             'allows' => ['inventory', ':publisher']
                         ],
         'new_offert'     => [
-                            'route' => ['medios.espacios.first-create', ':user_platform_id'], 
+                            'route' => ['medios.espacios.first-create', ':publisher'], 
                             'i' => 'fa fa-plus-circle', 
                             'title' => 'Crear oferta', 
                             'allows' => ['inventory', ':publisher']
                         ],
         'agreement'     => [
-                            'route' => ['medios.agreement.complete', ':user_platform_id'], 
+                            'route' => ['medios.agreement.complete', ':publisher'], 
                             'i' => 'fa fa-file-text-o', 
                             'title' => 'Activación Proveedor', 
                             'allows' => ['agreement', ':publisher']
                         ],
         'faqs'          => [
-                            'route' => ['medios.faqs', ':user_platform_id'], 
+                            'route' => ['medios.faqs', ':publisher'], 
                             'i' => 'fa fa-question-circle', 
                             'title' => 'Preguntas frecuentes', 
                             'roles' => ['publisher']
