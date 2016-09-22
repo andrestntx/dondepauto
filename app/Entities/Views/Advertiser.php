@@ -8,6 +8,8 @@
 
 namespace App\Entities\Views;
 
+use App\Entities\Proposal\Proposal;
+use App\Entities\Proposal\Quote;
 use Carbon\Carbon;
 
 class Advertiser extends PUser
@@ -39,11 +41,11 @@ class Advertiser extends PUser
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function proposals()
     {
-        return $this->hasMany('App\Entities\Proposal\Proposal', 'advertiser_id', 'id');
+        return $this->hasManyThrough(Proposal::class, Quote::class, 'advertiser_id', 'quote_id', 'id');
     }
 
     /**

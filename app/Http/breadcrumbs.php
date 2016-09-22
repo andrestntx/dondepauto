@@ -109,3 +109,9 @@ Breadcrumbs::register('spaces', function ($breadcrumbs) {
     $breadcrumbs->push('Espacios', url('espacios'));
 });
 
+// Home > proposals
+Breadcrumbs::register('proposals', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Propuestas', url('propuestas'));
+});
+

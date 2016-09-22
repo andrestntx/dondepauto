@@ -6,16 +6,21 @@ use App\Repositories\Platform\ActionRepository;
 use App\Repositories\Platform\CityRepository;
 use App\Repositories\Platform\ContactRepository;
 use App\Repositories\Platform\EconomicActivityRepository;
+use App\Repositories\Platform\Space\AudienceRepository;
+use App\Repositories\Platform\Space\AudienceTypeRepository;
+use App\Repositories\Proposal\QuestionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
 use App\Http\ViewComposers\BaseComposer;
 
 class ListComposer extends BaseComposer
 {
-    protected  $cityRepository;
-    protected  $economicActivityRepository;
+    protected $cityRepository;
+    protected $economicActivityRepository;
     protected $actionRepository;
     protected $contactRepository;
+    protected $questionRepository;
+    protected $audienceTypeRepository;
 
     /**
      * ListComposer constructor.
@@ -23,15 +28,21 @@ class ListComposer extends BaseComposer
      * @param CityRepository $cityRepository
      * @param EconomicActivityRepository $economicActivityRepository
      * @param ActionRepository $actionRepository
+     * @param ContactRepository $contactRepository
+     * @param QuestionRepository $questionRepository
+     * @param AudienceTypeRepository $audienceTypeRepository
      */
     function __construct(UserRepository $repository, CityRepository $cityRepository, EconomicActivityRepository $economicActivityRepository,
-                         ActionRepository $actionRepository, ContactRepository $contactRepository)
+                         ActionRepository $actionRepository, ContactRepository $contactRepository, QuestionRepository $questionRepository,
+                         AudienceTypeRepository $audienceTypeRepository)
     {
         $this->repository = $repository;
         $this->cityRepository = $cityRepository;
         $this->economicActivityRepository = $economicActivityRepository;
         $this->actionRepository = $actionRepository;
         $this->contactRepository = $contactRepository;
+        $this->questionRepository = $questionRepository;
+        $this->audienceTypeRepository = $audienceTypeRepository;
     }
     
     /**
@@ -46,13 +57,18 @@ class ListComposer extends BaseComposer
         $economicActivities = $this->economicActivityRepository->activitiesWithAdvertisers();
         $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->get();
         $actionsToday = $this->contactRepository->getActions('advertiser');
+        $questions = $this->questionRepository->model->all();
+        $audiences = $this->audienceTypeRepository->selectAudiences();
+
 
         $view->with([
             'registrationStates'    => $registrationStates,
             'cities'                => $cities,
             'economicActivities'    => $economicActivities,
             'actions'               => $actions,
-            'actionsToday'          => $actionsToday
+            'actionsToday'          => $actionsToday,
+            'questions'             => $questions,
+            'audiences'             => $audiences
         ]);
     }
 }

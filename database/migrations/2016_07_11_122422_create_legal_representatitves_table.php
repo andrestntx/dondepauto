@@ -20,9 +20,6 @@ class CreateLegalRepresentatitvesTable extends Migration
             
             $table->string('name');
             $table->string('phone');
-
-            $table->integer('publisher_id')->unique();
-            $table->foreign('publisher_id')->references('id_us_LI')->on('us_reg_LIST');
             
             $table->timestamps();
         });

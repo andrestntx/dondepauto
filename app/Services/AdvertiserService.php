@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Entities\Proposal\Quote;
 use App\Entities\User;
 use App\Entities\Platform\User as UserPlatform;
 use App\Repositories\Platform\UserRepository;
@@ -70,6 +71,16 @@ class AdvertiserService extends ResourceService
         return $this->viewRepository->search($user, $columns, $search, $intentionsInit, $intentionsFinish);
     }
 
+    protected function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
     /**
      * @param array $data
      * @return mixed
@@ -78,6 +89,10 @@ class AdvertiserService extends ResourceService
     {
         $data['role']   = 'advertiser';
         $data['source'] = 'CRM Interno';
+
+        if(! array_key_exists('password', $data)) {
+            $data['password'] = $this->generateRandomString();
+        }
 
         return $this->repository->create($data);
     }
@@ -108,5 +123,16 @@ class AdvertiserService extends ResourceService
     public function getAdvertiserView(UserPlatform $advertiser)
     {
         return $this->viewRepository->getAdvertiser($advertiser->id);
+    }
+
+
+    /**
+     * @param UserPlatform $advertiser
+     * @param array $data
+     * @return Quote
+     */
+    public function createQuote(UserPlatform $advertiser, array $data)
+    {
+        return $advertiser->quotes()->create($data);
     }
 }

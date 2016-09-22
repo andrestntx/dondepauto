@@ -182,11 +182,12 @@ class UserRepository extends BaseRepository
     /**
      * @param UserPlatform $user
      * @param null $comments
+     * @param int $type
      * @return mixed
      */
-    public function createContact(UserPlatform $user, $comments = null)
+    public function createContact(UserPlatform $user, $comments = null, $type = 1)
     {
-        return $user->contacts()->create(['comments' => $comments]);
+        return $user->contacts()->create(['comments' => $comments, 'type' => $type]);
     }
 
     /**

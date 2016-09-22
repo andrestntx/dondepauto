@@ -25,7 +25,7 @@ class ProposalService extends ResourceService
      */
     public function search(User $advertiser = null)
     {
-        return ['data' => $this->repository->search($advertiser)];
+        return $this->repository->search($advertiser);
     }
     
 }

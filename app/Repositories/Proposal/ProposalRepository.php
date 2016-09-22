@@ -29,6 +29,6 @@ class ProposalRepository extends BaseRepository
      */
     public function search(User $advertiser = null)
     {
-        return collect([]);
+        return $this->model->with(['quote.advertiser'])->get();
     }
 }

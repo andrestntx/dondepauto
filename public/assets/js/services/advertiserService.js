@@ -6,6 +6,7 @@ var AdvertiserService = function() {
 
     var table;
     var urlSearch;
+    var actualAdvertiser;
 
     function initTable(urlSearch) {
         urlSearch = urlSearch;
@@ -156,6 +157,62 @@ var AdvertiserService = function() {
         });
     }
 
+    function initQuoteModalEvent()
+    {
+        $("#newQuote").click(function() {
+            $(".questionsModal #user_company").text(actualAdvertiser.company);
+            $(".questionsModal").modal();
+        });
+
+        $("#form-questions").click(function() {
+            var modal     = $(".questionsModal");
+            var button    = modal.find("#form-questions");
+            var loading   = modal.find("#sk-spinner-modal");
+            var url       = $('#userModal #newQuote').attr('data-url');
+            var questions = [];
+
+            loading.show();
+            button.prop("disabled", true);
+            modal.find("textarea").each(function(){
+                questions[$(this).attr('data-question-id')] = $(this).val();
+            });
+
+            var parameters = {
+                'title':        modal.find("#title").val(),
+                'action_date':  modal.find("#question_action_date").val(),
+                'contact_type': modal.find("#question_contact_type").val(),
+                'cities'    :   modal.find("#question_cities").val(),
+                'audiences':    modal.find("#question_audiences").val(),
+                'questions[]':  questions
+            };
+
+            $.post(url, parameters, function( data ) {
+                if(data.success) {
+                    loading.hide();
+                    reload();
+                    modal.modal('toggle');
+                    button.prop("disabled", false);
+                    var socialContact = UserService.getSocialContact(data.contact);
+                    $('#userModal #comments').prepend(socialContact);
+                }
+                else {
+                    console.log('error');
+                }
+
+            }).fail(function(data) {
+                loading.hide();
+                modal.modal('toggle');
+                button.prop("disabled", false);
+                
+                swal({
+                    title: 'Hubo un error',
+                    text: 'Código ' + data.status,
+                    type: "warning",
+                });
+            });
+        });
+    }
+
     function getHtmlIntentionStates(aData) {
         var html        = $('<div style="width:70px; margin:0 auto;"></div>').addClass('text-center');
         var interest    = $('<span style="margin: 0 1px;"></span>')
@@ -187,6 +244,7 @@ var AdvertiserService = function() {
     }
 
     function drawModal(advertiser) {
+        actualAdvertiser = advertiser;
         UserService.drawModalUser("userModal", advertiser, "anunciantes");
         /** Commercial state **/
         $('#userModal #count_intentions').text(advertiser.count_intentions);
@@ -216,6 +274,8 @@ var AdvertiserService = function() {
 
         /** Contacts **/
         $('#userModal #newContact').attr('data-url', '/anunciantes/' + advertiser.id + '/contacts');
+
+        $('#userModal #newQuote').attr('data-url', '/anunciantes/' + advertiser.id + '/quotes');
 
         $('#userModal #comments').html('');
 
@@ -289,6 +349,7 @@ var AdvertiserService = function() {
             initDeleteAdvertiser();
             //UserService.initSearchDateRanges(13,14,15);
             initModalEvent();
+            initQuoteModalEvent();
             //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
         },
         reload: function() {

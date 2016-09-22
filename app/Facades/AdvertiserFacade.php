@@ -8,6 +8,7 @@
 
 namespace App\Facades;
 
+use App\Entities\Proposal\Quote;
 use App\Entities\User;
 use App\Entities\Platform\User as Advertiser;
 use App\Services\AdvertiserService;
@@ -17,6 +18,7 @@ use App\Services\EmailService;
 use App\Services\MailchimpService;
 use App\Services\MixpanelService;
 use App\Services\ProposalService;
+use App\Services\QuoteService;
 use App\Services\UserService;
 use App\Services\Platform\UserService as UserPlatformService;
 
@@ -31,11 +33,14 @@ class AdvertiserFacade extends UserFacade
     protected $mixpanelService;
     protected $mailchimpService;
     protected $userService;
+    protected $quoteService;
+    protected $proposalService;
 
     public function __construct(AdvertiserService $advertiserService, EmailService $emailService, 
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, ProposalService $proposalService, UserService $userService,
-                                ContactService $contactService, UserPlatformService $userPlatformService)
+                                ContactService $contactService, UserPlatformService $userPlatformService, QuoteService $quoteService,
+                                ProposalService $proposalService)
     {
         $this->advertiserService = $advertiserService;
         $this->emailService = $emailService;
@@ -43,7 +48,9 @@ class AdvertiserFacade extends UserFacade
         $this->mixpanelService = $mixpanelService;
         $this->mailchimpService = $mailchimpService;
         $this->proposalService = $proposalService;
-        $this->userService = $userService;;
+        $this->userService = $userService;
+        $this->quoteService = $quoteService;
+        $this->proposalService = $proposalService;
 
         parent::__construct($userPlatformService, $contactService);
      }
@@ -70,21 +77,20 @@ class AdvertiserFacade extends UserFacade
     }
 
     /**
+     * @return mixed
+     */
+    public function searchProposals()
+    {
+        return $this->proposalService->search();
+    }
+
+    /**
      * @param Advertiser $user
      * @return mixed
      */
     public function getAdvertiser(Advertiser $user)
     {
         return $this->advertiserService->getAdvertiserView($user);
-    }
-
-    /**
-     * @param Advertiser $advertiser
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function searchProposals(Advertiser $advertiser)
-    {
-        return $this->proposalService->search($advertiser);
     }
 
     /**
@@ -160,5 +166,43 @@ class AdvertiserFacade extends UserFacade
     {
         $this->emailService->notifyUserDelete($advertiser);
         $this->advertiserService->deleteModel($advertiser);
+    }
+
+    /**
+     * @param Advertiser $advertiser
+     * @param $action_date
+     * @param $contact_type
+     * @param $title
+     * @return mixed|null
+     */
+    public function createQuoteContact(Advertiser $advertiser, $action_date, $contact_type, $title)
+    {
+        return $this->createSimpleContact($advertiser, env("APP_ACTION_LEAD", 1), $action_date, $contact_type, $title);
+    }
+
+
+    /**
+     * @param Advertiser $advertiser
+     * @param array $data
+     * @param array $questions
+     * @param $action_date
+     * @param $contact_type
+     * @return array
+     */
+    public function createQuote(Advertiser $advertiser, array $data, array $questions, $action_date, $contact_type)
+    {
+        if(array_key_exists('0', $questions)) {
+            unset($questions[0]);
+        }
+
+        $contact = $this->createQuoteContact($advertiser, $action_date, $contact_type, $data['title']);
+        $quote   = $this->advertiserService->createQuote($advertiser, $data + ['sent_at' => $contact->action->action_at_datetime]);
+        $this->quoteService->addQuestions($quote, $questions);
+        $this->quoteService->addCities($quote, $data['cities']);
+        $this->quoteService->addAudiences($quote, $data['audiences']);
+
+        $this->proposalService->createModel(['quote_id' => $quote->id, 'title' => $data['title']]);
+
+        return ['contact' => $contact, 'quote' => $quote];
     }
 }

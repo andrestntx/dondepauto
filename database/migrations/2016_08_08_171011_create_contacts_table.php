@@ -19,7 +19,7 @@ class CreateContactsTable extends Migration
             $table->timestamps();
 
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('us_reg_LIST');
+            $table->foreign('user_id')->references('id_us_LI')->on('us_reg_LIST');
         });
     }
 

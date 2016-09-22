@@ -129,7 +129,7 @@ class AdvertiserRepository extends BaseRepository
             $advertiserQuery->whereUserId($user->id);
         }
 
-        $advertisers = $advertiserQuery->orderBy('created_at', 'desc')->get();
+        $advertisers = $advertiserQuery->orderBy('created_at', 'desc')->take(10)->get();
 
         //abort('404');
 
