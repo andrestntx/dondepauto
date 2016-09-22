@@ -36,7 +36,13 @@ class UserFacade
     public function createContact(User $user, array $data)
     {
         if(array_key_exists('action', $data) && array_key_exists('comments', $data)) {
-            $contact = $this->userPlatformService->createContact($user, $data['comments'], $data["type"]);
+            if(array_key_exists("type", $data)) {
+                $contact = $this->userPlatformService->createContact($user, $data['comments'], $data["type"]);
+            }
+            else {
+                $contact = $this->userPlatformService->createContact($user, $data['comments'], "call");
+            }
+            
 
             if( ! empty($data['action']['id'])) {
                 $this->contactService->addAction($contact, $data['action']);

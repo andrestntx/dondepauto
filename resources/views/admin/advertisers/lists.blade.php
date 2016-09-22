@@ -269,6 +269,7 @@
                     'action[id]':           $("#modal_contact_action_id").val(),
                     'action[action_at]':    $("#modal_contact_action_date").val(),
                     'comments':             $("#modal_contact_comments").val(),
+                    'type':                 $("#modal_contact_type").val(),
                     '_token':               $("#contact_csrf_token").val()
                 };
 
