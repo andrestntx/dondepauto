@@ -29,7 +29,7 @@ class SpaceRepository extends BaseRepository
      * @param null $spaceId
      * @return mixed
      */
-    public function search(User $publisher = null, $spaceId = null)
+    public function search(User $publisher = null, $spaceId = null, array $columns)
     {
         $query = $this->model->whereIsDelete(0)->with(['images']);
 
@@ -40,6 +40,12 @@ class SpaceRepository extends BaseRepository
             $query->whereId($spaceId);
         }
 
+        foreach ($columns as $column) {
+            if ($column['name'] == 'impact_scene_id' && trim($column['search']['value'])) {
+                $query->where('impact_scene_id', '=', $column['search']['value']);
+            }
+        }
+        
         return $query->orderBy('created_at', 'desc');
     }
 }

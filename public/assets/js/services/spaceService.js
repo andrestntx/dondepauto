@@ -39,7 +39,7 @@ var SpaceService = function() {
                 { "data": "tags", "name": "tags" },
                 { "data": "description", "name": "description" },
                 { "data": "address", "name": "address" },
-                { "data": "impact_scene_id", "name": "impact_scene_id" },
+                { "data": "impact_scene_id", "name": "impact_scene_id", "searchable": false },
                 { "data": "publisher_email", "name": "publisher_email" },
                 { "data": "active", "name": "active" }
             ],
