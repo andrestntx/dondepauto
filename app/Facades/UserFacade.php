@@ -42,7 +42,7 @@ class UserFacade
             else {
                 $contact = $this->userPlatformService->createContact($user, $data['comments'], "call");
             }
-            
+
 
             if( ! empty($data['action']['id'])) {
                 $this->contactService->addAction($contact, $data['action']);
