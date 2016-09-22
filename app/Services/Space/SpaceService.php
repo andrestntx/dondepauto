@@ -41,7 +41,7 @@ class SpaceService extends ResourceService
      * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search(User $publisher = null, $spaceId = null, array $columns)
+    public function search(User $publisher = null, $spaceId = null, array $columns = [])
     {
         return $this->viewRepository->search($publisher, $spaceId, $columns);
     }

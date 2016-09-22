@@ -27,9 +27,10 @@ class SpaceRepository extends BaseRepository
     /**
      * @param User $publisher
      * @param null $spaceId
+     * @param array $columns
      * @return mixed
      */
-    public function search(User $publisher = null, $spaceId = null, array $columns)
+    public function search(User $publisher = null, $spaceId = null, array $columns = [])
     {
         $query = $this->model->whereIsDelete(0)->with(['images']);
 
@@ -45,7 +46,7 @@ class SpaceRepository extends BaseRepository
                 $query->where('impact_scene_id', '=', $column['search']['value']);
             }
         }
-        
+
         return $query->orderBy('created_at', 'desc');
     }
 }
