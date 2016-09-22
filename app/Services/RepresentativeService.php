@@ -62,7 +62,7 @@ class RepresentativeService extends ResourceService
             $data = $this->getData($data, $publisher);
             $entity = $this->getEntity($data['email'], $data['doc'], $entity);
             $entity = $this->createOrUpdateModel($data, $entity);
-            $publisher->representative()->associate($entity);
+            $publisher->setRepresentative($entity);
         }
 
         return null;

@@ -175,6 +175,26 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@dashboard'
         ]);
 
+        Route::get('propuestas', [
+            'as'    => 'proposals.index',
+            'uses'  => 'Admin\ProposalsController@index'
+        ]);
+
+        Route::get('propuestas/search', [
+            'as'    => 'proposals.search',
+            'uses'  => 'Admin\ProposalsController@search'
+        ]);
+
+        Route::post('propuestas/agregar/{spaces}', [
+            'as'    => 'proposals.spaces.add',
+            'uses'  => 'Admin\ProposalsController@add'
+        ]);
+
+        Route::post('anunciantes/{publishers}/quotes', [
+            'as'    => 'quotes.store',
+            'uses'  => 'Admin\QuotesController@store'
+        ]);
+
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {

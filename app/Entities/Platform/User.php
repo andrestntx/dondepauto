@@ -3,6 +3,7 @@
 namespace App\Entities\Platform;
 
 use App\Entities\Platform\Space\Space;
+use App\Entities\Proposal\Quote;
 use App\Entities\Views\Advertiser;
 use App\Entities\Views\Publisher;
 use App\Repositories\File\LogosRepository;
@@ -29,7 +30,7 @@ class User extends EntityAuth
      *
      * @var array
      */
-    protected $appends = ['states', 'source' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
+    protected $appends = [/*'states', 'source' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
 
     /**
      * The table associated with the model.
@@ -739,6 +740,14 @@ class User extends EntityAuth
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class, 'advertiser_id', 'id_us_LI');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function banks()
@@ -812,6 +821,16 @@ class User extends EntityAuth
         }
 
         return  $this->first_name . ' ' . $this->last_name . ' - ' .  $this->email;
+    }
+
+    /**
+     * @param Representative $representative
+     * @return bool
+     */
+    public function setRepresentative(Representative $representative)
+    {
+        $this->legal_representative_id = $representative->id;
+        return $this->save();
     }
 
 }

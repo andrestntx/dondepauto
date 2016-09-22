@@ -220,10 +220,12 @@ var SpaceService = function() {
         $('#' + inputId + ' #modalPublisher').attr('href', '/medios/' + space.publisher_id)
             .attr('title', 'Ver Medio - ' + space.publisher_name);
 
-        $('#' + inputId + ' #modalSuggestSpace')
+        $('#' + inputId + ' .actionSpaceModal')
             .attr('data-space-id', space.id)
             .attr('data-space-name', space.name)
-            .attr('data-publisher-company', space.publisher_company)
+            .attr('data-publisher-company', space.publisher_company);
+
+        $('#' + inputId + ' #modalSuggestSpace')
             .attr('data-max-discount', space.percentage_markdown * 100);
             
         /** Space Data **/
@@ -470,6 +472,97 @@ var SpaceService = function() {
         });
     };
 
+    function initProposalModal() 
+    {
+        $("#modalProposalSpace").click(function(){
+            var space_id = $(this).attr('data-space-id');
+            var publisher_company = $(this).attr('data-publisher-company');
+            var space_name = $(this).attr('data-space-name');
+
+            $(".proposalSpaceModal #proposalSpacePublisher").text(publisher_company);
+            $(".proposalSpaceModal #proposalSpaceName").text(space_name);
+            $(".proposalSpaceModal").attr('data-url', "/propuestas/agregar/" + space_id);
+
+            $(".proposalSpaceModal").modal();
+        });
+
+        $.validator.methods.selectavertisers = function(value, element) {
+            return ($(".form-select-proposals ul.chosen-choices").find("li.search-choice").length > 0);
+        }
+
+        $("#sugesst_form").validate({
+            rules: {
+                dummy: {
+                    selectproposals: true
+                }
+            },
+            messages: {
+                dummy: {
+                    selectproposals: 'Debe seleccionar al menos una propuesta'
+                }
+            }
+        });
+    }
+
+    function initPostProposal() 
+    {
+        var modal = $(".proposalSpaceModal");
+        var button = modal.find("#form-proposal-space");
+        var spiner = modal.find("#sk-spinner-modal");
+
+        button.click(function() {
+            var url = modal.attr('data-url');
+            var parameters = {
+                'proposals':  modal.find("select").val(),
+            }   
+
+            if($("#sugesst_form").valid()) {
+                spiner.show();
+                button.prop("disabled", true);
+
+                $.post(url, parameters, function( data ) {
+                    if(data.success) {
+                        spiner.hide();
+                        //dataTable.search(getFilterSearch()).draw();
+                        modal.modal('toggle');
+                        button.prop("disabled", false);
+                    }
+                    else {
+                        spiner.hide(); 
+                        modal.modal('toggle');
+                        button.prop("disabled", false);
+                        
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Error controlado',
+                            type: "warning",
+                        });
+                    }
+                }).fail(function(data) {
+                    spiner.hide();
+                    button.prop("disabled", false);
+
+                    if(data.status == 422) {
+                        swal({
+                            title: 'Hubo un error',
+                            text: data.responseText,
+                            type: "warning",
+                        });   
+                    }
+                    else {
+                        modal.modal('toggle');
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Código ' + data.status,
+                            type: "warning",
+                        });    
+                    }
+                    
+                });
+            }
+        });
+    }
+
     function initSuggestModal() 
     {
         $("#modalSuggestSpace").click(function(){
@@ -581,6 +674,8 @@ var SpaceService = function() {
             initDeleteSpace();
             initSuggestModal();
             initPostSuggest();
+            initProposalModal();
+            initPostProposal();
         },
         initModalEvent: function () {
             initModalEvent();

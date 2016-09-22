@@ -140,6 +140,8 @@
 
     @include('admin.publishers.modals.edit-data-contact')
     @include('admin.advertisers.modals.edit-data-detail')
+    @include('admin.advertisers.modals.questions')
+    
 @endsection
 
 @section('extra-js')
@@ -300,6 +302,8 @@
                     swal("Hubo un error", "", "danger");
                 });
             });
+
+            $('.question-chosen-select').chosen({width: "100%"});
         });
     </script>
 @endsection

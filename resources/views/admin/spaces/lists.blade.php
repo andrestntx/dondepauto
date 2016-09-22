@@ -41,20 +41,16 @@
         <div class="ibox" id="search-space" data-search="{{ $spaceId }}">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-12" id="table-intro">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-2">
-                                {!! Form::select('avtive_state', ['' => 'Todos', '1' => 'Activos', '0' => 'Inactivos'], null, ['empty' => 'Ver Todos', 'class' => 'form-control', 'id' => 'active_state']) !!}
-                            </div>
-                        </div>
+                    <div class="col-sm-3 col-xs-6">
+                        {!! Form::select('avtive_state', ['' => 'Todos', '1' => 'Activos', '0' => 'Inactivos'], null, ['empty' => 'Ver Todos', 'class' => 'form-control', 'id' => 'active_state']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-3 col-xs-6">
                         {!! Field::select('categories', $categories, ['empty' => 'Ver Todas']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-3 col-xs-6">
                         {!! Field::select('sub_categories', $subCategories, ['empty' => 'Ver Todas']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-3 col-xs-6">
                         {!! Field::select('formats', ['' => ''], ['empty' => 'Ver Todos', 'disabled']) !!}
                     </div> 
                 </div>
@@ -80,6 +76,7 @@
 
     @include('admin.spaces.modal')
     @include('admin.spaces.modals.suggest')
+    @include('admin.spaces.modals.proposal')
 
 @endsection
 
@@ -115,6 +112,7 @@
             }
 
             $('.advertisr-chosen-select').chosen({width: "100%"});
+            $('.proposal-chosen-select').chosen({width: "100%"});
 
         });
     </script>

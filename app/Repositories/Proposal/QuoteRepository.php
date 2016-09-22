@@ -11,7 +11,7 @@ namespace App\Repositories\Proposal;
 use App\Entities\Platform\User;
 use App\Repositories\BaseRepository;
 
-class ProposalRepository extends BaseRepository
+class QuoteRepository extends BaseRepository
 {
     /**
      * Specify Model class name
@@ -20,15 +20,14 @@ class ProposalRepository extends BaseRepository
      */
     function model()
     {
-        return 'App\Entities\Proposal\Proposal';
+        return 'App\Entities\Proposal\Quote';
     }
 
     /**
-     * @param User $advertiser
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return mixed
      */
-    public function search(User $advertiser = null)
+    public function search()
     {
-        return $this->model->with(['quote.advertiser'])->get();
+        return $this->model->get();
     }
 }

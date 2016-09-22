@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLegalRepresentatitvesTable extends Migration
+class CreateQuotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,14 @@ class CreateLegalRepresentatitvesTable extends Migration
      */
     public function up()
     {
-        Schema::create('legal_representatives', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->integer('doc')->unique()->unsigned()->nullable();
-            $table->string('email')->unique();
-            
-            $table->string('name');
-            $table->string('phone');
+            $table->timestamp('sent_at');
             
             $table->timestamps();
+
+            $table->integer('advertiser_id');
+            $table->foreign('advertiser_id')->references('id_us_LI')->on('us_reg_LIST');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateLegalRepresentatitvesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('legal_representatives');
+        Schema::drop('quotes');
     }
 }
