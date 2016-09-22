@@ -82,7 +82,7 @@ class SpacesController extends ResourceController
             return \Datatables::of($this->facade->search($request->get('espacio')))->make(true);
         }
         else {
-            return \Datatables::of($this->facade->search())->make(true);
+            return \Datatables::of($this->facade->search(null, $request->get('columns')))->make(true);
         }
     }
 

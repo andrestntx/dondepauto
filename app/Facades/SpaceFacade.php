@@ -54,11 +54,12 @@ class SpaceFacade
 
     /**
      * @param null $spaceId
+     * @param array $columns
      * @return Collection
      */
-    public function search($spaceId = null)
+    public function search($spaceId = null, array $columns = [])
     {
-        return $this->service->search(null, $spaceId);
+        return $this->service->search(null, $spaceId, $columns);
     }
 
     /**
