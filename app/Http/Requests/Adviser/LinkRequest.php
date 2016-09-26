@@ -21,6 +21,7 @@ class LinkRequest extends Request
     {
         return true;
     }
+
     /**
      * Get validation rules to create a Occupation
      * @return array

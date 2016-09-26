@@ -311,6 +311,16 @@ var UserService = function() {
                 .draw();
 		},
 
+        initActionNotifications: function(column) 
+        {
+            $("#action-notifications").click(function() {
+                dataTable
+                    .column(column)
+                    .search(moment().format("YYYY-MM-DD") + "," + moment().format("YYYY-MM-DD"))
+                    .draw();    
+            });
+        },
+
 		cleanColumnsSearch: function (columns) 
 		{            
             dataTable

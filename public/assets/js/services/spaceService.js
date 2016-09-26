@@ -486,11 +486,12 @@ var SpaceService = function() {
             $(".proposalSpaceModal").modal();
         });
 
-        $.validator.methods.selectavertisers = function(value, element) {
+        $.validator.methods.selectproposals = function(value, element) {
+            console.log('proposals');
             return ($(".form-select-proposals ul.chosen-choices").find("li.search-choice").length > 0);
         }
 
-        $("#sugesst_form").validate({
+        $("#proposal_form").validate({
             rules: {
                 dummy: {
                     selectproposals: true
