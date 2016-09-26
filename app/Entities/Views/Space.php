@@ -36,7 +36,7 @@ class Space extends Model
      * @var array
      */
     protected $appends = ['publisher_name', 'category_sub_category', 'commission', 'markup_price', 'public_price',
-        'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans'
+        'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans', 'created_at_date'
     ];
     
     /**
@@ -202,6 +202,14 @@ class Space extends Model
     public function getCreatedAtHumansAttribute()
     {
         return $this->created_at->diffForHumans();    
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAtDateAttribute()
+    {
+        return $this->created_at->format('d-M-y');
     }
 
     /**

@@ -233,6 +233,8 @@ var SpaceService = function() {
         $('#delete_space').attr("data-url", '/medios/' + space.publisher_id + '/espacios/' + space.id);
 
         $('#' + inputId +' #space_name').text(space.name);
+        $('#' + inputId +' #space_crated_at_date').text(space.created_at_date);
+        
         $('#' + inputId + ' a#publisher_company').attr('href', '/medios/' + space.publisher_id).text(space.publisher_company);
 
         /** Publisher Personal Data **/
