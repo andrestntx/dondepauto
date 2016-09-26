@@ -278,17 +278,20 @@ var SpaceService = function() {
         /** Images **/
         var divImages = $('#' + inputId + ' #space-images');
         divImages.html('');
-        $.each(space.images, function( index, image ) {
 
-            var img = $("<img style='width:100px; margin:5px;'></img>")
-                .attr('src', image.thumb);
+        if(space.images) {
+            $.each(space.images, function( index, image ) {
 
-            var a = $('<a data-gallery=""></a>')
-                .attr('href', image.url)
-                .append(img);
+                var img = $("<img style='width:100px; margin:5px;'></img>")
+                    .attr('src', image.thumb);
 
-            divImages.append(a);
-        });
+                var a = $('<a data-gallery=""></a>')
+                    .attr('href', image.url)
+                    .append(img);
+
+                divImages.append(a);
+            });    
+        }
 
         /** Comments **/
         $('#' + inputId +' #comments').text(space.comments);
