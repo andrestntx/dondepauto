@@ -7,7 +7,8 @@
                     <div class="col-xs-8">
                         <h2 class="modal-title h4" style="font-size: 15px;">
                             <strong>Medio:</strong> <a id="publisher_company" href="#" target="_blank"></a><br>
-                            <strong>Espacio:</strong>  <span id="space_name" class="h5" style="font-size:15px;"></span>
+                            <strong>Espacio:</strong>  <span id="space_name" class="h5" style="font-size:15px;"></span><br>
+                            Creado el:  <span id="space_crated_at_date" class="h5" style="font-size:14px;"></span>
                         </h2>
                     </div>
                     <div class="col-xs-4 timeline" id="prueba">
