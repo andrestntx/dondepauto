@@ -635,6 +635,7 @@ var PublisherService = function() {
             initSearchAgreement();
             initSearchOffers();
             initDeletePublisher();
+            UserService.initActionNotifications(16);
         },
         drawShowPrices: function() {
             drawShowPrices();

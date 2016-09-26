@@ -61,7 +61,7 @@ class AdvertiserRepository extends BaseRepository
         $intentionsInit = '';
         $intentionsFinish = '';
         $advertiserQuery = null;
-        $columnsSearch = ['intention_at' => null, 'created_at' => null, 'city_id' => null, 'economic_activity_id' => null];
+        $columnsSearch = ['intention_at' => null, 'created_at' => null, 'city_id' => null, 'economic_activity_id' => null, 'action_notifications' => null];
 
         foreach($columns as $column) {
             if(array_key_exists($column['name'], $columnsSearch) && ! empty(trim($column['search']['value']))) {

@@ -41,7 +41,7 @@ class ListComposer extends BaseComposer
 
         $actions = $this->actionRepository->model->where('type', 'publisher')->orWhere('type', 'all')->get();
         $cities  = $this->cityRepository->citiesWithSpaces();
-        $actionsToday = $this->contactRepository->getActions();
+        $actionsToday = $this->contactRepository->getCountActions();
 
         $view->with([
             'registrationStates' => $registrationStates,

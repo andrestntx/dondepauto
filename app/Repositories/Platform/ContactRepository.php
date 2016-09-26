@@ -24,8 +24,14 @@ class ContactRepository extends BaseRepository
         return 'App\Entities\Platform\Contact';
     }
 
-
-    public function getActions($role = 'publisher', $show_notification = true, $init = null, $finish = null)
+    /**
+     * @param string $role
+     * @param bool $show_notification
+     * @param null $init
+     * @param null $finish
+     * @return mixed
+     */
+    protected function getDefaultActions($role = 'publisher', $show_notification = true, $init = null, $finish = null)
     {
         if(is_null($init) && is_null($finish)) {
             $init = Carbon::today()->toDateString();
@@ -42,6 +48,36 @@ class ContactRepository extends BaseRepository
             ->whereHas('user', function($query) use ($role) {
                 return $query->role($role);
             })
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->groupBy('user_id');
     }
+
+
+    /**
+     * @param string $role
+     * @param bool $show_notification
+     * @param null $init
+     * @param null $finish
+     * @return mixed
+     */
+    public function getActions($role = 'publisher', $show_notification = true, $init = null, $finish = null)
+    {
+        return $this->getDefaultActions($role, $show_notification, $init, $finish)->get();
+    }
+
+    /**
+     * @param string $role
+     * @param bool $show_notification
+     * @param null $init
+     * @param null $finish
+     * @return mixed
+     */
+    public function getCountActions($role = 'publisher', $show_notification = true, $init = null, $finish = null)
+    {
+        return $this->getActions($role, $show_notification, $init, $finish)->count();
+    }
+
+
+
+
 }
