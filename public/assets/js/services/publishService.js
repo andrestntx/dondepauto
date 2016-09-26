@@ -989,6 +989,10 @@ $(document).ready(function(){
                 var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
                 e.preventDefault();
                 document.execCommand('insertText', false, bufferText);
+            },
+            onKeyup: function(e) {
+              console.log('Key is released:', e.keyCode);
+              calculate("description", $(".note-editable.panel-body").text().length);
             }
         }
     });
