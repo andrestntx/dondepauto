@@ -42,7 +42,7 @@ class Space extends Model
         'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans', 'created_at_date',
         'sub_category_name_format_name', 'commission_price', 'pivot_discount', 'pivot_discount_price', 'pivot_with_markup',
         'pivot_commission_price', 'pivot_markup', 'pivot_markup_price', 'pivot_commission_price', 'pivot_public_price',
-        'pivot_minimal_price', 'pivot_title', 'pivot_description'
+        'pivot_minimal_price', 'pivot_title', 'pivot_description', 'percentage_markdown'
     ];
     
     /**
@@ -187,7 +187,7 @@ class Space extends Model
      */
     public function getPercentageMarkdownAttribute($value)
     {
-        if($value == 0) {
+        if($value <= 0) {
             $value = $this->discount;
         }
 

@@ -35,7 +35,7 @@ class SpaceRepository extends BaseRepository
             "category_id", "category_name", "sub_category_id", "sub_category_name", "format_id", "format_name",
             "publisher_commission_rate", "minimal_price", "percentage_markdown", "markup_price", "public_price",
 
-            "id", "created_at", "active", "tags", "description", "address", // space
+            "id", "created_at", "active", "tags", "description", "address", "discount", // space
 
             "publisher_id", "publisher_email", "publisher_phone", "publisher_cel", "publisher_economic_activity_name", // publisher
             "publisher_company_nit", "publisher_company_role", "publisher_company_area", "publisher_first_name", "publisher_last_name"
