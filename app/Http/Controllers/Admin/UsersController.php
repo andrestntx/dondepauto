@@ -11,6 +11,7 @@ use App\Facades\AdvertiserFacade;
 use App\Facades\PublisherFacade;
 use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\StoreRequest;
+use App\Http\Requests\RUser\TagRequest;
 use App\Http\Requests\RUser\UpdateRequest;
 use App\Services\MailchimpService;
 use App\Services\UserService;
@@ -137,8 +138,6 @@ class UsersController extends ResourceController
      */
     public function syncMailchimp(UserPlatform $user)
     {
-        \Log::info('intentó guardar mailchimp');
-        \Log::info($user);
         $this->mailchimpService->syncUser($user);
         return ['success' => 'true'];
     }
@@ -155,5 +154,16 @@ class UsersController extends ResourceController
         }
 
         return ['advertiser' => $this->advertiserFacade->getAdvertiser($user)];
+    }
+
+    /**
+     * @param TagRequest $request
+     * @param UserPlatform $user
+     * @return mixed
+     */
+    public function tag(TagRequest $request, UserPlatform $user)
+    {
+        $this->service->updateModel(['tag_id' => $request->get('tag_id')], $user);
+        return ['success' => 'true'];
     }
 }

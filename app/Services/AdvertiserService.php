@@ -14,6 +14,7 @@ use App\Entities\User;
 use App\Entities\Platform\User as UserPlatform;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\AdvertiserRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class AdvertiserService extends ResourceService
 {
@@ -61,12 +62,12 @@ class AdvertiserService extends ResourceService
     /**
      * @param User|null $user
      * @param array $columns
-     * @param array $search
-     * @param null $intentionsInit
-     * @param null $intentionsFinish
-     * @return mixed
+     * @param $search
+     * @param $intentionsInit
+     * @param $intentionsFinish
+     * @return Collection
      */
-    public function search(User $user = null, array $columns, array $search, $intentionsInit = null, $intentionsFinish = null)
+    public function search(User $user = null, array $columns, $search = '', $intentionsInit = '', $intentionsFinish = '')
     {   
         return $this->viewRepository->search($user, $columns, $search, $intentionsInit, $intentionsFinish);
     }

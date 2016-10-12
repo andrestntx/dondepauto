@@ -179,15 +179,17 @@ class UserRepository extends BaseRepository
         return $user->save();
     }
 
+
     /**
      * @param UserPlatform $user
      * @param null $comments
      * @param int $type
-     * @return mixed
+     * @param array|null $data
+     * @return Model
      */
-    public function createContact(UserPlatform $user, $comments = null, $type = 1)
+    public function createContact(UserPlatform $user, $comments = null, $type = 1, array $data = null)
     {
-        return $user->contacts()->create(['comments' => $comments, 'type' => $type]);
+        return $user->contacts()->create(array_merge(['comments' => $comments, 'type' => $type], $data));
     }
 
     /**

@@ -23,34 +23,35 @@ var AdvertiserService = function() {
                 { "data": "created_at", name:"created_at"},
                 { "data": "company" },
                 { "data": "city_name" },
-                { "data": "name" },
-                { "data": "email" },
-                { "data": "phone"},
-                { "data": "cel"},
-                { "data": "state" },
-                { "data": "count_by_contact_intentions" },
-                { "data": "count_logs" , "name": "count_logs" },
+                { "data": "name" }, // 4
+                { "data": "email" }, // 5
+                { "data": "phone"}, // 6
+                { "data": "cel"}, // 7
+                { "data": "state" }, // 8
+                { "data": "count_by_contact_intentions" }, // 9
+                { "data": "count_logs" , "name": "count_logs" }, // 19
                 { "data": "count_views" , "name": "count_views" }, // 11
-                { "data": "contacts" },
+                { "data": "contacts" }, // 12
 
-                { "data": "state_id", "name": "state_id", "searchable": false, "visible": false },
-                { "data": "city_id", "name": "city_id", "searchable": false, "visible": false },
-                { "data": "address"},
+                { "data": "state_id", "name": "state_id", "searchable": false, "visible": false }, // 13
+                { "data": "city_id", "name": "city_id", "searchable": false, "visible": false }, // 14
+                { "data": "address"}, // 15
                 { "data": "economic_activity_id", "name": "economic_activity_id", "searchable": false, "visible": false },
                 { "data": "created_at_datatable", "name": "intention_at", "searchable": false, "visible": false},
                 { "data": "last_log_login_at_datatable"},
                 { "data": "activated_at_datatable"}, // 19
 
                 { "data": null, "name": "action"},
-                { "data": null, "name": "action_range"} // 21
+                { "data": null, "name": "action_range"}, // 21
+                { "data": "tag_id", "name": "tag_id"} // 22
             ],
             "columnDefs": [
                 {
-                    "targets": [1,2,4,6,7],
+                    "targets": [0,1,2,4,6,7,8,9,10,11,12],
                     "searchable": false
                 },
                 {
-                    "targets": [3,5,13,14,15,16,17,18,19,20,21],
+                    "targets": [3,5,13,14,15,16,17,18,19,20,21,22],
                     "visible": false,
                     "searchable": false
                 },
@@ -134,6 +135,7 @@ var AdvertiserService = function() {
         UserService.initSimpleSearchSelect("#economic_activities", 16);
         UserService.initActions(20);
         UserService.initActionsRange(21);
+        UserService.initSimpleSearchSelect("#tag_id", 22);
 
         $("#advertisers-datatable_filter input").unbind();
 
@@ -351,6 +353,7 @@ var AdvertiserService = function() {
             initModalEvent();
             initQuoteModalEvent();
             UserService.initActionNotifications(21);
+            UserService.initChangeTag();
             //initReloadAjaxDate('#intention_at_start', '#intention_at_end', 'init', 'finish');
         },
         reload: function() {

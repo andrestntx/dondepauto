@@ -13,6 +13,7 @@ use App\Services\ConfirmationService;
 use App\Services\ContactService;
 use App\Services\DateService;
 use App\Services\EmailService;
+use App\Services\FilterCollectionService;
 use App\Services\MailchimpService;
 use App\Services\PasswordService;
 use App\Services\RepresentativeService;
@@ -23,6 +24,7 @@ use App\Services\Space\SpaceService;
 use App\Services\Platform\UserService as UserPlatformService;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -39,12 +41,13 @@ class PublisherFacade extends UserFacade
     protected $userService;
     protected $representativeService;
     protected $dateService;
+    protected $filterCollectionService;
 
     public function __construct(PublisherService $service, EmailService $emailService, UserService $userService,
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, SpaceService $spaceService, PasswordService $passwordService,
                                 RepresentativeService $representativeService, DateService $dateService,
-                                ContactService $contactService, UserPlatformService $userPlatformService)
+                                ContactService $contactService, UserPlatformService $userPlatformService, FilterCollectionService $filterCollectionService)
     {
         $this->service = $service;
         $this->emailService = $emailService;
@@ -56,6 +59,7 @@ class PublisherFacade extends UserFacade
         $this->userService = $userService;
         $this->representativeService = $representativeService;
         $this->dateService = $dateService;
+        $this->filterCollectionService = $filterCollectionService;
 
         parent::__construct($userPlatformService, $contactService);
     }
@@ -72,17 +76,32 @@ class PublisherFacade extends UserFacade
 
     /**
      * @param array $columns
-     * @param array $search
+     * @param $search
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search(array $columns, array $search)
+    public function search(array $columns, $search)
     {
         return $this->service->search($columns, $search);
+    }
+
+    /**
+     * @param array $columns
+     * @param $search
+     * @return Collection
+     */
+    public function searchAndFilter(array $columns, $search)
+    {
+        return $this->filterCollectionService->filterPublisherCollection($this->search($columns, $search), $columns);
     }
 
     public function getPublisher(User $publisher)
     {
         return $this->service->getPublisherView($publisher);
+    }
+
+    public function getPublisherId($id)
+    {
+        return $this->service->getPublisherViewId($id);
     }
 
     /**
@@ -344,6 +363,15 @@ class PublisherFacade extends UserFacade
     public function trackLogout(User $user)
     {
         $this->userPlatformService->trackLogout($user, session('login_code'));
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getStates($id)
+    {
+        return $this->service->getStates($id);
     }
 
 }

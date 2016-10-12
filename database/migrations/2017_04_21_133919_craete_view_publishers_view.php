@@ -36,7 +36,7 @@ class CraeteViewPublishersView extends Migration
                 retencion_fuente_us_LI as retention, descuento_pronto_pago_us_LI as discount,
                 (CASE WHEN bd_us_reg_cod_LIST.usuario_act_LI = 'usActnO' THEN FALSE ELSE TRUE END) as email_validated,
                 (CASE WHEN bd_us_reg_LIST.es_us_activo_LI = 'act_Sta' THEN TRUE ELSE FALSE END) as complete_data,
-                user_id,
+                user_id, bd_us_reg_LIST.tag_id, bd_tags.name as tag_name,
                 bd_legal_representatives.name as representative_name, bd_legal_representatives.email as representative_email, 
                 bd_legal_representatives.phone as representative_phone, bd_legal_representatives.doc as representative_doc
                 
@@ -45,6 +45,7 @@ class CraeteViewPublishersView extends Migration
             LEFT JOIN bd_actividades_economicas_LIST ON bd_actividades_economicas_LIST.id = bd_us_reg_LIST.id_actividadEconomica_LI
             LEFT JOIN bd_ciudades ON bd_ciudades.id_ciudad = bd_us_reg_LIST.id_ciudad_LI
             LEFT JOIN bd_legal_representatives ON bd_legal_representatives.id = bd_us_reg_LIST.id_us_LI
+            LEFT JOIN bd_tags ON bd_tags.id = bd_us_reg_LIST.tag_id
             WHERE tipo_us_LI = 'Ve_tip_u'
             GROUP BY bd_us_reg_LIST.id_us_LI
             ORDER BY bd_us_reg_LIST.fecha_registro_Us_LI DESC, bd_us_reg_cod_LIST.id_LI DESC

@@ -5,6 +5,7 @@ namespace App\Http\ViewComposers\Publisher;
 use App\Repositories\Platform\ActionRepository;
 use App\Repositories\Platform\ContactRepository;
 use App\Repositories\Platform\Space\SpaceCityRepository as CityRepository;
+use App\Repositories\Platform\TagRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
@@ -15,19 +16,24 @@ class ListComposer extends BaseComposer
     protected $cityRepository;
     protected $actionRepository;
     protected $contactRepository;
+    protected $tagRepository;
 
     /**
      * ListComposer constructor.
      * @param UserRepository $repository
      * @param CityRepository $cityRepository
      * @param ActionRepository $actionRepository
+     * @param ContactRepository $contactRepository
+     * @param TagRepository $tagRepository
      */
-    function __construct(UserRepository $repository, CityRepository $cityRepository, ActionRepository $actionRepository, ContactRepository $contactRepository)
+    function __construct(UserRepository $repository, CityRepository $cityRepository, ActionRepository $actionRepository,
+                         ContactRepository $contactRepository, TagRepository $tagRepository)
     {
         $this->repository = $repository;
         $this->cityRepository = $cityRepository;
         $this->actionRepository = $actionRepository;
         $this->contactRepository = $contactRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -39,15 +45,17 @@ class ListComposer extends BaseComposer
     {
         $registrationStates = \Lang::get('states.publisher');
 
-        $actions = $this->actionRepository->model->where('type', 'publisher')->orWhere('type', 'all')->get();
-        $cities  = $this->cityRepository->citiesWithSpaces();
-        $actionsToday = $this->contactRepository->getCountActions();
+        $actions        = $this->actionRepository->model->where('type', 'publisher')->orWhere('type', 'all')->get();
+        $tags           = $this->tagRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->lists('name', 'id')->all();
+        $cities         = $this->cityRepository->citiesWithSpaces();
+        $actionsToday   = $this->contactRepository->getCountActions();
 
         $view->with([
-            'registrationStates' => $registrationStates,
-            'cities'  => $cities,
-            'actions' => $actions,
-            'actionsToday' => $actionsToday
+            'registrationStates'    => $registrationStates,
+            'cities'                => $cities,
+            'actions'               => $actions,
+            'actionsToday'          => $actionsToday,
+            'tags'                  => $tags
         ]);
     }
 }

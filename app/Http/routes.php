@@ -142,6 +142,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\SpacesController@ajax'
         ]);
 
+        Route::get('espacios/{spaces}/show', [
+            'as'    => 'espacios.space',
+            'uses' => 'Admin\SpacesController@getSpace'
+        ]);
+
         Route::get('espacios/search', [
             'as'    => 'espacios.search',
             'uses' => 'Admin\SpacesController@search'
@@ -152,9 +157,19 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\SpacesController@suggest'
         ]);
 
+        Route::post('users/{publishers}/tag', [
+            'as'    => 'users.tag',
+            'uses' => 'Admin\UsersController@tag'
+        ]);
+
         Route::resource('espacios', 'Admin\SpacesController', ['parameters' => [
             'espacios' => 'spaces'
         ]]);
+
+        Route::get('medios/{publisher_id}/states', [
+            'uses' => 'Admin\PublishersController@getStates',
+            'as' => 'medios.states'
+        ]);
 
         Route::post('medios/{publishers}/ajax', [
             'uses' => 'Admin\PublishersController@updateAjax',
@@ -185,16 +200,30 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@search'
         ]);
 
+        Route::get('propuestas/{proposals}/search', [
+            'as'    => 'proposals.spaces.search',
+            'uses'  => 'Admin\ProposalsController@searchSpaces'
+        ]);
+
+        Route::get('propuestas/{proposals}', [
+            'as'    => 'proposals.show',
+            'uses'  => 'Admin\ProposalsController@show'
+        ]);
+
         Route::post('propuestas/agregar/{spaces}', [
             'as'    => 'proposals.spaces.add',
             'uses'  => 'Admin\ProposalsController@add'
+        ]);
+
+        Route::post('propuestas/{proposals}/discount/{spaces}', [
+            'as'    => 'proposals.spaces.discount',
+            'uses'  => 'Admin\ProposalsController@discount'
         ]);
 
         Route::post('anunciantes/{publishers}/quotes', [
             'as'    => 'quotes.store',
             'uses'  => 'Admin\QuotesController@store'
         ]);
-
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {

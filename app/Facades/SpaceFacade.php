@@ -10,13 +10,16 @@ namespace App\Facades;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
+use App\Entities\Proposal\Proposal;
 use App\Services\EmailService;
+use App\Services\FilterCollectionService;
 use App\Services\MailchimpService;
 use App\Services\Platform\UserService;
 use App\Services\PublisherService;
 use App\Services\Space\SpaceCategoryService;
 use App\Services\Space\SpaceCityService;
 use App\Services\Space\SpaceFormatService;
+use App\Services\Space\SpaceImpactSceneService;
 use App\Services\Space\SpacePointsService;
 use App\Services\Space\SpaceService;
 use App\Services\Space\SpaceSubCategoryService;
@@ -35,10 +38,13 @@ class SpaceFacade
     protected $mailchimpService;
     protected $emailService;
     protected $userService;
+    protected $sceneService;
+    protected $filterCollectionService;
 
     public function __construct(SpaceService $service, SpaceSubCategoryService $subCategoryService, SpaceFormatService $formatService,
         SpaceCategoryService $categoryService, SpaceCityService $cityService, PublisherService $publisherService, UserService $userService,
-                                SpacePointsService $spacePointsService, MailchimpService $mailchimpService, EmailService $emailService)
+        SpacePointsService $spacePointsService, MailchimpService $mailchimpService, EmailService $emailService,
+        SpaceImpactSceneService $sceneService, FilterCollectionService $filterCollectionService)
     {
         $this->service = $service;
         $this->subCategoryService = $subCategoryService;
@@ -50,16 +56,34 @@ class SpaceFacade
         $this->mailchimpService = $mailchimpService;
         $this->emailService = $emailService;
         $this->userService = $userService;
+        $this->sceneService = $sceneService;
+        $this->filterCollectionService = $filterCollectionService;
     }
 
     /**
-     * @param null $spaceId
      * @param array $columns
+     * @param $search
+     * @param null $spaceId
+     * @param User $publisher
+     * @param Proposal $proposal
      * @return Collection
      */
-    public function search($spaceId = null, array $columns = [])
+    public function search(array $columns, $search, $spaceId = null, User $publisher = null, Proposal $proposal = null)
     {
-        return $this->service->search(null, $spaceId, $columns);
+        return $this->service->search($columns, $search, $spaceId, $publisher, $proposal);
+    }
+
+    public function searchAndFilter(array $columns, $search, $spaceId = null, User $publisher = null, Proposal $proposal = null)
+    {
+        $spaces = $this->search($columns, $search, $spaceId, $publisher, $proposal);
+
+        if(is_null($spaceId) && is_null($publisher) && is_null($proposal)) {
+            return $this->filterCollectionService->filterSpaceCollection($spaces, $columns);
+        }
+
+        return $spaces;
+
+
     }
 
     /**
@@ -135,13 +159,11 @@ class SpaceFacade
         $format = $this->formatService->getModel($data['format_id']);
         $space  = $this->service->updateSpace($data, $format, $space);
         $this->service->saveImages($images, $space, $keep_images);
-
-        \Log::Info('recalcualr');
         $this->recalculatePoints($space);
-        \Log::Info('calculado');
 
         return $space;
     }
+
 
     /**
      * @param null $category_id
@@ -149,26 +171,33 @@ class SpaceFacade
      * @param null $publisher_id
      * @param null $format_id
      * @param null $city_id
+     * @param null $scene_id
      * @return array
      */
-    public function ajax($category_id = null, $subCategory_id = null, $publisher_id = null, $format_id = null, $city_id = null)
+    public function ajax($category_id = null, $subCategory_id = null, $publisher_id = null, $format_id = null, $city_id = null, $scene_id = null)
     {
         $result = [];
 
         if(is_null($format_id) || empty($format_id)) {
             if( is_null($subCategory_id) || empty($subCategory_id)) {
-                $result['sub_categories'] = $this->subCategoryService->searchWithSpaces($category_id, $publisher_id);
+                $result['sub_categories'] = $this->subCategoryService->searchWithSpaces($category_id, $publisher_id, $city_id, $scene_id);
             }
             else {
-                $result['formats'] = $this->formatService->searchWithSpaces($subCategory_id);
+                $result['formats'] = $this->formatService->searchWithSpaces($subCategory_id, $publisher_id, $city_id, $scene_id);
             }
         }
 
         if(is_null($city_id) || empty($city_id)) {
-            $result['cities'] = $this->cityService->searchWithSpaces($category_id, $subCategory_id, $format_id);
+            $result['cities'] = $this->cityService->searchWithSpaces($category_id, $subCategory_id, $format_id, $publisher_id, $scene_id);
         }
 
-        $result['publishers']        = $this->publisherService->searchWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
+        if(is_null($publisher_id) || empty($publisher_id)) {
+            $result['publishers'] = $this->publisherService->searchWithSpaces($category_id, $subCategory_id, $format_id, $city_id, $scene_id);
+        }
+
+        if(is_null($scene_id) || empty($scene_id)) {
+            $result['scenes'] = $this->sceneService->searchWithSpaces($category_id, $subCategory_id, $format_id, $publisher_id, $city_id);
+        }
 
         return $result;
     }
@@ -245,6 +274,16 @@ class SpaceFacade
     public function getSpace($id)
     {
         return $this->service->getModel($id);
+    }
+
+    /**
+     * @param $id
+     * @return mixed|null
+     */
+    public function getViewSpace($id)
+    {
+        $space = $this->service->getViewSpace($id);
+        return ['space' => $space, 'states' => $space->states];
     }
 
     /**

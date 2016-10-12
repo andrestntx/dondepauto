@@ -15,6 +15,7 @@ use App\Services\AdvertiserService;
 use App\Services\ConfirmationService;
 use App\Services\ContactService;
 use App\Services\EmailService;
+use App\Services\FilterCollectionService;
 use App\Services\MailchimpService;
 use App\Services\MixpanelService;
 use App\Services\ProposalService;
@@ -35,12 +36,13 @@ class AdvertiserFacade extends UserFacade
     protected $userService;
     protected $quoteService;
     protected $proposalService;
+    protected $filterCollectionService;
 
     public function __construct(AdvertiserService $advertiserService, EmailService $emailService, 
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, ProposalService $proposalService, UserService $userService,
                                 ContactService $contactService, UserPlatformService $userPlatformService, QuoteService $quoteService,
-                                ProposalService $proposalService)
+                                ProposalService $proposalService, FilterCollectionService $filterCollectionService)
     {
         $this->advertiserService = $advertiserService;
         $this->emailService = $emailService;
@@ -51,6 +53,7 @@ class AdvertiserFacade extends UserFacade
         $this->userService = $userService;
         $this->quoteService = $quoteService;
         $this->proposalService = $proposalService;
+        $this->filterCollectionService = $filterCollectionService;
 
         parent::__construct($userPlatformService, $contactService);
      }
@@ -67,13 +70,26 @@ class AdvertiserFacade extends UserFacade
      * @param User|null $user
      * @param array $columns
      * @param array $search
-     * @param null $intentionsInit
-     * @param null $intentionsFinish
+     * @param $intentionsInit
+     * @param $intentionsFinish
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function search(User $user = null, array $columns, array $search, $intentionsInit = null, $intentionsFinish = null)
+    public function search(User $user = null, array $columns, $search, $intentionsInit = '', $intentionsFinish = '')
     {
         return $this->advertiserService->search($user, $columns, $search, $intentionsInit, $intentionsFinish);
+    }
+
+    /**
+     * @param User|null $user
+     * @param array $columns
+     * @param string $search
+     * @param string $intentionsInit
+     * @param string $intentionsFinish
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function searchAndFilter(User $user = null, array $columns, $search = '', $intentionsInit = '', $intentionsFinish = '')
+    {
+        return $this->filterCollectionService->filterAdvertiserCollection($this->search($user, $columns, $search, $intentionsInit, $intentionsFinish), $columns);
     }
 
     /**

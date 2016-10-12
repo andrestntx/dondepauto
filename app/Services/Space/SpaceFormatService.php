@@ -25,8 +25,15 @@ class SpaceFormatService extends ResourceService
         $this->repository = $repository;
     }
 
-    public function searchWithSpaces($subCategory_id = null)
+    /**
+     * @param null $subCategory_id
+     * @param null $publisher_id
+     * @param null $city_id
+     * @param null $scene_id
+     * @return mixed
+     */
+    public function searchWithSpaces($subCategory_id = null, $publisher_id = null, $city_id = null, $scene_id = null)
     {
-        return $this->repository->formatsWithSpaces($subCategory_id);
+        return $this->repository->formatsWithSpaces($subCategory_id, $publisher_id, $city_id, $scene_id);
     }
 }

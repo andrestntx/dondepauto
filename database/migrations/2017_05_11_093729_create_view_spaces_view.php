@@ -43,7 +43,8 @@ class CreateViewSpacesView extends Migration
                 (CASE WHEN bd_espacios_ofrecidos_LIST.espacio_eliminado_LI = 'Si_el' THEN TRUE ELSE FALSE END) as is_delete
                 from bd_espacios_ofrecidos_LIST
                 JOIN bd_view_publishers ON
-                    bd_view_publishers.id = bd_espacios_ofrecidos_LIST.id_us_reg_LI
+                    bd_view_publishers.id = bd_espacios_ofrecidos_LIST.id_us_reg_LI AND 
+                    bd_view_publishers.deleted_at IS NULL
                 LEFT JOIN bd_formatos_espacios_ofrecidos_LIST ON 
                     bd_formatos_espacios_ofrecidos_LIST.id_formato_LI = bd_espacios_ofrecidos_LIST.id_formato_LI
                 LEFT JOIN bd_subcat_espacios_ofrecidos_LIST ON 

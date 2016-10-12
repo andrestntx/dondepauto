@@ -8,6 +8,7 @@
                         <h2 class="modal-title h4" style="font-size: 15px;">
                             <strong>Anunciante:</strong> <span id="company_name"></span>
                         </h2>
+                        {!! Form::select('tag_id', $tags, null, ['placeholder' => 'Sin marca', 'class' => 'select-tags']) !!}
                     </div>
                     <div class="col-xs-3 timeline" id="prueba">
 

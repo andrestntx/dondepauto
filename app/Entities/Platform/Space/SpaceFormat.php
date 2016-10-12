@@ -10,6 +10,7 @@ namespace App\Entities\Platform\Space;
 
 
 use App\Entities\Platform\Entity;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class SpaceFormat extends Entity
@@ -70,5 +71,67 @@ class SpaceFormat extends Entity
     public function getCategorySubCategoryNameAttribute()
     {
         return $this->subCategory->name . ' - ' . $this->category_name . ' - ' . $this->name;
+    }
+
+    /**
+     * @param Builder $query
+     * @param null $publisher_id
+     * @return mixed
+     */
+    public function scopeJoinSpaces(Builder $query, $publisher_id = null)
+    {
+        if(! is_null($publisher_id)  && ! empty($publisher_id)) {
+            return $query->join('espacios_ofrecidos_LIST', function ($join) use($publisher_id) {
+                $join->on('formatos_espacios_ofrecidos_LIST.id_formato_LI', '=', 'formatos_espacios_ofrecidos_LIST.id_formato_LI')
+                    ->where('espacios_ofrecidos_LIST.id_us_reg_LI', '=', $publisher_id);
+            });
+        }
+
+        return $query->join('espacios_ofrecidos_LIST', 'espacios_ofrecidos_LIST.id_formato_LI', '=', 'formatos_espacios_ofrecidos_LIST.id_formato_LI');
+    }
+
+    /**
+     * @param Builder $query
+     * @param $scene_id
+     * @return mixed
+     */
+    public function scopeJoinScenes(Builder $query, $scene_id)
+    {
+        return $query->join('impact_scene_space', function ($join) use($scene_id) {
+            $join->on('impact_scene_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+                ->where('impact_scene_space.impact_scene_id', '=', $scene_id);
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @param $city_id
+     * @return mixed
+     */
+    public function scopeJoinCities(Builder $query, $city_id)
+    {
+        return $query->join('city_space', function ($join) use($city_id) {
+            $join->on('city_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+                ->where('city_space.city_id', '=', $city_id);
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeGroupById(Builder $query)
+    {
+        return $query->groupBy('formatos_espacios_ofrecidos_LIST.id_formato_LI');
+    }
+
+    /**
+     * @param Builder $query
+     * @param $category_id
+     * @return $this
+     */
+    public function scopeOfSubCategory(Builder $query, $category_id)
+    {
+        return $query->where('formatos_espacios_ofrecidos_LIST.id_subcat_LI', $category_id);
     }
 }

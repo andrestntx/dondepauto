@@ -29,9 +29,10 @@ class CreateViewAdvertisersView extends Migration
                 bd_actividades_economicas_LIST.nombre as economic_activity_name,
                 (CASE WHEN bd_us_reg_cod_LIST.usuario_act_LI = 'usActnO' THEN FALSE ELSE TRUE END) as email_validated,
                 (CASE WHEN bd_us_reg_LIST.es_us_activo_LI = 'act_Sta' THEN TRUE ELSE FALSE END) as complete_data,
-                user_id
+                user_id, bd_us_reg_LIST.tag_id, bd_tags.name as tag_name
             from bd_us_reg_LIST
             LEFT JOIN bd_ciudades ON bd_ciudades.id_ciudad = bd_us_reg_LIST.id_ciudad_LI
+            LEFT JOIN bd_tags ON bd_tags.id = bd_us_reg_LIST.tag_id
             LEFT JOIN bd_actividades_economicas_LIST ON bd_actividades_economicas_LIST.id = bd_us_reg_LIST.id_actividadEconomica_LI
             LEFT JOIN bd_us_reg_cod_LIST ON bd_us_reg_cod_LIST.id_us_LI = bd_us_reg_LIST.id_us_LI
             WHERE tipo_us_LI = 'Co_tip_u'

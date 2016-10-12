@@ -8,6 +8,7 @@ use App\Repositories\Platform\ContactRepository;
 use App\Repositories\Platform\EconomicActivityRepository;
 use App\Repositories\Platform\Space\AudienceRepository;
 use App\Repositories\Platform\Space\AudienceTypeRepository;
+use App\Repositories\Platform\TagRepository;
 use App\Repositories\Proposal\QuestionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
@@ -21,6 +22,7 @@ class ListComposer extends BaseComposer
     protected $contactRepository;
     protected $questionRepository;
     protected $audienceTypeRepository;
+    protected $tagRepository;
 
     /**
      * ListComposer constructor.
@@ -34,7 +36,7 @@ class ListComposer extends BaseComposer
      */
     function __construct(UserRepository $repository, CityRepository $cityRepository, EconomicActivityRepository $economicActivityRepository,
                          ActionRepository $actionRepository, ContactRepository $contactRepository, QuestionRepository $questionRepository,
-                         AudienceTypeRepository $audienceTypeRepository)
+                         AudienceTypeRepository $audienceTypeRepository, TagRepository $tagRepository)
     {
         $this->repository = $repository;
         $this->cityRepository = $cityRepository;
@@ -43,6 +45,7 @@ class ListComposer extends BaseComposer
         $this->contactRepository = $contactRepository;
         $this->questionRepository = $questionRepository;
         $this->audienceTypeRepository = $audienceTypeRepository;
+        $this->tagRepository = $tagRepository;
     }
     
     /**
@@ -56,6 +59,7 @@ class ListComposer extends BaseComposer
         $cities = $this->cityRepository->citiesWithAdvertisers();
         $economicActivities = $this->economicActivityRepository->activitiesWithAdvertisers();
         $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->get();
+        $tags           = $this->tagRepository->model->where('type', 'publisher')->orWhere('type', 'all')->lists('name', 'id')->all();
         $actionsToday = $this->contactRepository->getCountActions('advertiser');
         $questions = $this->questionRepository->model->all();
         $audiences = $this->audienceTypeRepository->selectAudiences();
@@ -68,7 +72,8 @@ class ListComposer extends BaseComposer
             'actions'               => $actions,
             'actionsToday'          => $actionsToday,
             'questions'             => $questions,
-            'audiences'             => $audiences
+            'audiences'             => $audiences,
+            'tags'                  => $tags
         ]);
     }
 }

@@ -37,12 +37,11 @@ class UserFacade
     {
         if(array_key_exists('action', $data) && array_key_exists('comments', $data)) {
             if(array_key_exists("type", $data)) {
-                $contact = $this->userPlatformService->createContact($user, $data['comments'], $data["type"]);
+                $contact = $this->userPlatformService->createContact($user, $data['comments'], $data["type"], $data);
             }
             else {
-                $contact = $this->userPlatformService->createContact($user, $data['comments'], "call");
+                $contact = $this->userPlatformService->createContact($user, $data['comments'], "call", $data);
             }
-
 
             if( ! empty($data['action']['id'])) {
                 $this->contactService->addAction($contact, $data['action']);

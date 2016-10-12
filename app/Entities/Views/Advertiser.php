@@ -355,28 +355,6 @@ class Advertiser extends PUser
     }
 
     /**
-     * @return mixed
-     */
-    public function getLastContact()
-    {
-        return $this->contacts->sortBy(function ($contact, $key) {
-            return $contact->created_at;
-        })->last();
-    }
-
-    /**
-     * @return null
-     */
-    public function getLastAction()
-    {
-        if($lastContact = $this->getLastContact()) {
-            return $lastContact->actions->first();
-        }
-
-        return null;
-    }
-
-    /**
      * @return bool
      */
     public function getHasContactTodayAttribute()

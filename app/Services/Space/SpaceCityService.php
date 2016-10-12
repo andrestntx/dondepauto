@@ -25,15 +25,18 @@ class SpaceCityService extends ResourceService
         $this->repository = $repository;
     }
 
+
     /**
      * @param null $category_id
      * @param null $subCategory_id
      * @param null $format_id
+     * @param null $publisher_id
+     * @param null $scene_id
      * @return mixed
      */
-    public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null)
+    public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $publisher_id = null, $scene_id = null)
     {
-        return $this->repository->citiesWithSpaces($category_id, $subCategory_id, $format_id);
+        return $this->repository->citiesWithSpaces($category_id, $subCategory_id, $format_id, $publisher_id, $scene_id);
     }
     
 }

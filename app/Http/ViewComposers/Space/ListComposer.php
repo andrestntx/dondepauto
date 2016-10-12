@@ -6,10 +6,10 @@ use App\Repositories\Platform\Space\SpaceCityRepository;
 use App\Repositories\Platform\Space\SpaceCategoryRepository;
 use App\Repositories\Platform\Space\SpaceFormatRepository;
 use App\Repositories\Platform\Space\SpaceImpactSceneRepository;
-use App\Repositories\Platform\Space\SpaceSubCategoryRepository;
 use App\Repositories\Proposal\ProposalRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
+use App\Services\Space\SpaceSubCategoryService;
 use Illuminate\Contracts\View\View;
 use App\Http\ViewComposers\BaseComposer;
 
@@ -17,7 +17,7 @@ class ListComposer extends BaseComposer
 {
     protected  $cityRepository;
     protected  $spaceCategoryRepository;
-    protected  $spaceSubCategoryRepository;
+    protected  $spaceSubCategoryService;
     protected  $publisherRepository;
     protected  $spaceFormatRepository;
     protected  $impactSceneRepository;
@@ -25,13 +25,13 @@ class ListComposer extends BaseComposer
     protected $proposalRepository;
 
     function __construct(SpaceCityRepository $cityRepository, SpaceCategoryRepository $spaceCategoryRepository,
-                         SpaceSubCategoryRepository $spaceSubCategoryRepository, PublisherRepository $publisherRepository,
+                         SpaceSubCategoryService $spaceSubCategoryService, PublisherRepository $publisherRepository,
                         SpaceFormatRepository $spaceFormatRepository, SpaceImpactSceneRepository $impactSceneRepository,
                         UserRepository $userRepository, ProposalRepository $proposalRepository)
     {
         $this->cityRepository = $cityRepository;
         $this->spaceCategoryRepository = $spaceCategoryRepository;
-        $this->spaceSubCategoryRepository = $spaceSubCategoryRepository;
+        $this->spaceSubCategoryService = $spaceSubCategoryService;
         $this->publisherRepository = $publisherRepository;
         $this->spaceFormatRepository = $spaceFormatRepository;
         $this->impactSceneRepository = $impactSceneRepository;
@@ -49,7 +49,7 @@ class ListComposer extends BaseComposer
         $publishers = $this->publisherRepository->publishersWithSpaces();
         $cities = $this->cityRepository->citiesWithSpaces();
         $categories = $this->spaceCategoryRepository->categoriesWithSpaces();
-        $subCategories = $this->spaceSubCategoryRepository->subCategoriesWithSpaces();
+        $subCategories = $this->spaceSubCategoryService->searchWithSpaces();
         $formats =  $this->spaceFormatRepository->formatsWithSpaces();
         $scenes = $this->impactSceneRepository->scenesWithSpaces();
         $proposals = $this->proposalRepository->model
@@ -61,9 +61,9 @@ class ListComposer extends BaseComposer
 
         $advertisers = $this->userRepository->model
             ->select("id_us_LI", "email_us_LI", "empresa_us_LI", "nombre_us_LI", "apellido_us_LI", "tipo_us_LI")
-            ->role("advertiser")
+            ->orderBy("tipo_us_LI", "asc")
             ->get()
-            ->lists("select_email", "id")
+            ->lists("role_select_email", "id")
             ->all();
 
         $view->with([

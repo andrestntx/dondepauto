@@ -11,6 +11,7 @@ namespace App\Entities\Proposal;
 use App\Entities\Platform\Space\SpaceCity as City;
 use App\Entities\Platform\Space\Audience;
 use App\Entities\Platform\User;
+use App\Entities\Views\Advertiser;
 use Illuminate\Database\Eloquent\Model;
 
 class Quote extends Model
@@ -52,6 +53,14 @@ class Quote extends Model
     public function advertiser()
     {
         return $this->belongsTo(User::class, 'advertiser_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function viewAdvertiser()
+    {
+        return $this->belongsTo(Advertiser::class, 'advertiser_id');
     }
 
     /**

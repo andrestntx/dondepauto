@@ -56,11 +56,11 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_created_at">
-                            <label class="control-label"> <input type="checkbox" class="i-checks" id="signed_agreement"> Firma de acuerdo</label>
-                            <div class="input-daterange input-group" id="datepicker_agreement" data-column="10">
-                                <input type="text" class="input-sm form-control" disabled id="agreement_at_start" name="agreement_at_start"/>
+                            <label class="control-label">Fecha de firma de acuerdo</label>
+                            <div class="input-daterange input-group" id="datepicker_agreement" data-column="13">
+                                <input type="text" class="input-sm form-control" id="agreement_at_start" name="agreement_at_start"/>
                                 <span class="input-group-addon">a</span>
-                                <input type="text" class="input-sm form-control" disabled id="agreement_at_end" name="agreement_at_end"/>
+                                <input type="text" class="input-sm form-control" id="agreement_at_end" name="agreement_at_end"/>
                             </div>
                         </div>
                     </div>                
@@ -71,11 +71,11 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="form-group" id="data_offer_at">
-                            <label class="control-label"> <input type="checkbox" class="i-checks" id="offer"> Ofertó</label>
-                            <div class="input-daterange input-group" id="datepicker_offer" data-column="13">
-                                <input type="text" class="input-sm form-control" disabled id="offer_at_start" name="offer_at_start"/>
+                            <label class="control-label">Fecha de última oferta</label>
+                            <div class="input-daterange input-group" id="datepicker_offer" data-column="14">
+                                <input type="text" class="input-sm form-control" id="offer_at_start" name="offer_at_start"/>
                                 <span class="input-group-addon">a</span>
-                                <input type="text" class="input-sm form-control" disabled id="offer_at_end" name="offer_at_end"/>
+                                <input type="text" class="input-sm form-control" id="offer_at_end" name="offer_at_end"/>
                             </div>
                         </div>
                     </div>
@@ -115,6 +115,10 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         {!! Field::select('has_logo', ['' => 'Ver Todos', 'true' => 'Si', 'false' => 'No'], ['empty' => 'Ver Todos', 'label' => 'Con Logo']) !!}
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        {!! Field::select('tag_id', $tags, ['empty' => 'Todos los tags', 'required', 'label' => 'Tags']) !!}
                     </div>
 
                 </div>
@@ -308,7 +312,7 @@
             });
 
             PublisherService.init('/medios/search');
-                $('.datepicker').datepicker({
+            $('.datepicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,

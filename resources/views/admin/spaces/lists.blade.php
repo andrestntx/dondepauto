@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('action')
-    <a href="{{ route('espacios.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Crear Espacio</a>
+    {{-- <a href="{{ route('espacios.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Crear Espacio</a> --}}
 @endsection
 
 @section('breadcrumbs')
@@ -13,6 +13,7 @@
     <!-- Sweet Alert -->
     <link href="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.css" rel="stylesheet">
     <link href="/assets/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+    <link href="/assets/css/prueba.css" rel="stylesheet">
 
     <style type="text/css">
         .swal2-modal .swal2-select {
@@ -120,32 +121,16 @@
     <script type="text/javascript">
 
         $("#categories").on('change', function () {
-            console.log('cambio categoria');
-
             var parameters = {
                 'category': $("#categories").val()
             };
 
             $.get("/espacios/ajax", parameters, function( data ) {
                 if(data.success) {
-                    SpaceService.changeSelects(data.inputs);
+                    SpaceService.changeSelects(data.inputs, 11, parameters.category);
                 }
             });
         } );
-
-        $("#sub_categories, #formats, #cities").on('change', function () {
-            var parameters = {
-                'sub_category': $("#sub_categories").val(),
-                'format': $("#formats").val(),
-                'city': $("#cities").val(),
-            };
-
-            $.get("/espacios/ajax", parameters, function( data ) {
-                if(data.success) {
-                    SpaceService.changeSelects(data.inputs);
-                }
-            });
-        });
 
     </script>
 @endsection

@@ -90,6 +90,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        {!! Field::select('tag_id', $tags, ['empty' => 'Todos los tags', 'required', 'label' => 'Tags']) !!}
+                    </div>
+
+                    
                 </div>
 
                 <div class="table-responsive">
