@@ -30,11 +30,12 @@ class UserService extends ResourceService
      * @param UserPlatform $user
      * @param null $comments
      * @param null $type
+     * @param array $data
      * @return mixed
      */
-    public function createContact(UserPlatform $user, $comments = null, $type = null)
+    public function createContact(UserPlatform $user, $comments = null, $type = null, array $data = null)
     {
-        return $this->repository->createContact($user, $comments, $type);
+        return $this->repository->createContact($user, $comments, $type, $data);
     }
 
 

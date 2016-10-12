@@ -9,6 +9,7 @@
 namespace App\Entities\Platform\Space;
 
 use App\Entities\Platform\Entity;
+use Illuminate\Database\Eloquent\Builder;
 
 class SpaceCategory extends Entity
 {
@@ -52,5 +53,56 @@ class SpaceCategory extends Entity
         return $this->hasManyThrough(Space::class, SpaceSubCategory::class, 'id_subcat_LI', 'id_cat_LI');
     }
 
+    /**
+     * @param Builder $query
+     * @param null $publisher_id
+     * @return mixed
+     */
+    public function scopeJoinSpaces(Builder $query, $publisher_id = null)
+    {
+        if(! is_null($publisher_id)  && ! empty($publisher_id)) {
+            return $query->join('espacios_ofrecidos_LIST', function ($join) use($publisher_id) {
+                $join->on('subcat_espacios_ofrecidos_LIST.id_subcat_LI', '=', 'espacios_ofrecidos_LIST.id_subcat_LI')
+                    ->where('espacios_ofrecidos_LIST.id_us_reg_LI', '=', $publisher_id);
+            });
+        }
+
+        return $query->join('espacios_ofrecidos_LIST', 'espacios_ofrecidos_LIST.id_subcat_LI', '=', 'subcat_espacios_ofrecidos_LIST.id_subcat_LI');
+    }
+
+    /**
+     * @param Builder $query
+     * @param $scene_id
+     * @return mixed
+     */
+    public function scopeJoinScenes(Builder $query, $scene_id)
+    {
+        return $query->join('impact_scene_space', function ($join) use($scene_id) {
+            $join->on('impact_scene_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+                ->where('impact_scene_space.scene_id', '=', $scene_id);
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @param $city_id
+     * @return mixed
+     */
+    public function scopeJoinCities(Builder $query, $city_id)
+    {
+        return $query->join('city_space', function ($join) use($city_id) {
+            $join->on('city_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+                ->where('city_space.city_id', '=', $city_id);
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeGroupById(Builder $query)
+    {
+        return $query->groupBy('subcat_espacios_ofrecidos_LIST.id_subcat_LI');
+    }
 
 }

@@ -9,6 +9,7 @@
 namespace App\Entities\Views;
 
 
+use App\Entities\Platform\Tag;
 use App\Repositories\File\LogosRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -45,6 +46,14 @@ class PUser  extends Model {
     public function logs()
     {
         return $this->hasMany('App\Entities\Platform\Login', 'id_user_log_LI', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
 
     /**
@@ -124,6 +133,28 @@ class PUser  extends Model {
     public function getCountLogsAttribute()
     {
         return $this->logs->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastContact()
+    {
+        return $this->contacts->sortBy(function ($contact, $key) {
+            return $contact->created_at;
+        })->last();
+    }
+
+    /**
+     * @return null
+     */
+    public function getLastAction()
+    {
+        if($lastContact = $this->getLastContact()) {
+            return $lastContact->actions->first();
+        }
+
+        return null;
     }
 
     /**

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entities\Platform\Space\Space;
+use App\Facades\DatatableFacade;
 use App\Facades\SpaceFacade;
 use App\Http\Requests\Space\SuggestRequest;
 use App\Services\Space\SpaceService;
@@ -21,6 +22,7 @@ use Illuminate\Http\Request;
 class SpacesController extends ResourceController
 {
     protected $facade;
+    protected $datatableFacade;
 
     /**
      * [$routePrefix prefix route in more one response view]
@@ -44,10 +46,11 @@ class SpacesController extends ResourceController
      * @param SpaceFacade $facade
      * @param SpaceService $service
      */
-    function __construct(SpaceFacade $facade, SpaceService $service)
+    function __construct(SpaceFacade $facade, SpaceService $service, DatatableFacade $datatableFacade)
     {
         $this->facade = $facade;
         $this->service = $service;
+        $this->datatableFacade = $datatableFacade;
     }
 
     /**
@@ -71,6 +74,15 @@ class SpacesController extends ResourceController
     }
 
     /**
+     * @param Space $space
+     * @return mixed|null
+     */
+    public function getSpace(Space $space)
+    {
+        return $this->facade->getViewSpace($space->id);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param Request $request
@@ -79,10 +91,10 @@ class SpacesController extends ResourceController
     public function search(Request $request)
     {
         if($request->has('espacio')) {
-            return \Datatables::of($this->facade->search($request->get('espacio')))->make(true);
+            return $this->datatableFacade->searchSpaces(null, null, $request->get('espacio'), null, null, $request->all());
         }
         else {
-            return \Datatables::of($this->facade->search(null, $request->get('columns')))->make(true);
+            return $this->datatableFacade->searchSpaces($request->get('columns'), $request->get('search')['value'], null, null, null, $request->all());
         }
     }
 
@@ -171,7 +183,7 @@ class SpacesController extends ResourceController
         return [
             'success' => true,
             'inputs'  => $this->facade->ajax($request->get('category'), $request->get('sub_category'), $request->get('publisher'),
-                $request->get('format'), $request->get('city'))
+                $request->get('format'), $request->get('city'), $request->get('scene'))
         ];
     }
 

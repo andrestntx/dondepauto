@@ -9,6 +9,7 @@
 namespace App\Entities\Platform;
 
 
+use App\Entities\Proposal\Proposal;
 use App\Entities\Views\Publisher;
 use Carbon\Carbon;
 
@@ -34,7 +35,7 @@ class Contact extends Entity
      * @var array
      */
     protected $fillable = [
-        'comments'
+        'comments', 'proposal_id'
     ];
 
     /**
@@ -68,6 +69,14 @@ class Contact extends Entity
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class);
     }
 
     /**

@@ -43,19 +43,19 @@ class SpaceImage extends Entity
 
     public function getThumbAttribute($value)
     {
-        if(\File::exists('images/marketplace/thumbs/' . $this->url_thumb_LI)) {
+        //if(\File::exists('images/marketplace/thumbs/' . $this->url_thumb_LI)) {
             return url('/images/marketplace/thumbs/' . $this->url_thumb_LI);
-        }
+        //}
 
-        return 'http://dondepauto.co/images/marketplace/thumbs/' . $this->url_thumb_LI;
+        // return 'http://dondepauto.co/images/marketplace/thumbs/' . $this->url_thumb_LI;
     }
 
     public function getUrlAttribute($value)
     {
-        if(\File::exists('images/marketplace/big/' . $this->url_thumb_LI)) {
+        //if(\File::exists('images/marketplace/big/' . $this->url_thumb_LI)) {
             return url('/images/marketplace/big/' . $this->url_thumb_LI);
-        }
-        return 'http://dondepauto.co/images/marketplace/big/' . $this->url_imagen_LI;
+        //}
+        //return 'http://dondepauto.co/images/marketplace/big/' . $this->url_imagen_LI;
     }
 
 }

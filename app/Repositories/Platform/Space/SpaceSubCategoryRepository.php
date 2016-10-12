@@ -22,24 +22,36 @@ class SpaceSubCategoryRepository extends BaseRepository
         return 'App\Entities\Platform\Space\SpaceSubCategory';
     }
 
+
     /**
      * @param null $category_id
      * @param null $publisher_id
+     * @param null $city_id
+     * @param null $scene_id
      * @param string $column
      * @param string $id
+     * @param null $select
      * @return mixed
      */
-    public function subCategoriesWithSpaces($category_id = null, $publisher_id = null, $column = "name_category_name", $id = "id")
+    public function subCategoriesWithSpaces($category_id = null, $publisher_id = null, $city_id = null, $scene_id = null, $column = "name_category_name", $id = "id", $select = null)
     {
-        $query = $this->model->with('category')
-            ->join('espacios_ofrecidos_LIST', 'espacios_ofrecidos_LIST.id_subcat_LI', '=', 'subcat_espacios_ofrecidos_LIST.id_subcat_LI')
-            ->groupBy('subcat_espacios_ofrecidos_LIST.id_subcat_LI');
-        
-        if(! is_null($category_id) && !empty($category_id) ){
-            $query->where('subcat_espacios_ofrecidos_LIST.id_cat_LI', $category_id);
+        if(is_null($select)) {
+            $select = [$column, $id];
         }
-        if(! is_null($publisher_id) && !empty($publisher_id) ){
-            $query->where('id_us_reg_LI', $publisher_id);
+
+        $query = $this->model->with('category')
+            ->select($select)
+            ->joinSpaces($publisher_id)
+            ->groupById();
+
+        if(! is_null($city_id) && !empty($city_id) ){
+            $query->joinCities($city_id);
+        }
+        if(! is_null($scene_id) && !empty($scene_id) ){
+            $query->joinScenes($scene_id);
+        }
+        if(! is_null($category_id) && !empty($category_id) ){
+            $query->ofCategory($category_id);
         }
 
         return $query->get()

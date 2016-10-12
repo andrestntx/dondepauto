@@ -7,6 +7,149 @@ var SpaceService = function() {
     var table;
     var urlSearch;
 
+    function initTableProposal(urlSearch) {
+        urlSearch = urlSearch;
+
+        table = $('#spaces-datatable').DataTable({
+            "order": [[1, "desc"]],
+            "ajax": urlSearch,
+            "pageLength": 50,
+            "processing": true,
+            "serverSide": true,
+            "deferRender": true,
+            "columns": [
+                { "data": null, "name": "id", "orderable": false, "searchable": false},
+                { "data": "publisher_company", "name": "publisher_company" },
+                { "data": "name", "name": "name" }, // 2
+                { "data": "sub_category_name_format_name", "name": "sub_category_name_format_name" }, // 3
+
+                { "data": "pivot_minimal_price", "data": "pivot_minimal_price" }, // 4
+                { "data": "pivot_markup_price", "name": "pivot_markup_price" },
+                { "data": "pivot_discount", "name": "pivot_discount" }, // 6
+                { "data": "pivot_commission_price", "name": "pivot_commission_price" }, // 7
+                { "data": "public_price", "name": "public_price" }, // 8
+                
+                { "data": "category_id", "name": "category_id" }, // 9
+                { "data": "sub_category_id", "name": "sub_category_id" },
+                { "data": "format_id", "name": "format_id" },
+                { "data": "publisher_id", "name": "publisher_id" },
+                { "data": "city_id", "name": "city_id" },
+                { "data": "tags", "name": "tags" },
+                { "data": "description", "name": "description" }, // 15
+                { "data": "address", "name": "address" },
+                { "data": "impact_scene_id", "name": "impact_scene_id", "searchable": false }, // 17
+                { "data": "publisher_email", "name": "publisher_email" },
+                { "data": "active", "name": "active" } // 19
+            ],
+            "columnDefs": [
+                {
+                    "targets": [9,10,11,12,13,14,15,16,17,18,19],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    className: "text-center text-small",
+                    "targets": [0,4,5,6,7,8]
+                },
+                {
+                    className: "text-small",
+                    "targets": [1,2,3]
+                }
+            ],
+            "language": {
+                "lengthMenu": "Ver _MENU_ por página",
+                "zeroRecords": "Lo siento, no se enontraron espacios",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay espacios",
+                "infoFiltered": "(Filtrado de _MAX_ asignados)",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primera",
+                    "last": "Última",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                $('td:eq(0)', nRow).html(
+                    "<button class='btn btn-xs btn-success spaceModal' data-space='" + JSON.stringify(aData) + "' title='Ver Espacio' data-toggle='modal' data-target='#spaceModal'><i class='fa fa-search-plus'></i></button>"
+                );
+
+                var commission = $("<div></div>")
+                    .append(numeral(aData.pivot_commission_price).format('$ 0,0'))
+                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.commission).format('0%') + ')'));
+
+                $('td:eq(7)', nRow).html(commission);
+
+                $('td:eq(4)', nRow).html(
+                    numeral(aData.pivot_minimal_price).format('$ 0,0')
+                );
+
+                var pivot_markup = $("<span style='font-size:10px;'></span>")
+                    .text(' (' + numeral(aData.pivot_markup).format('0%') + ')')
+                    .attr('data-toggle', 'tooltip')
+                    .attr('data-placement', 'top');
+
+                if(aData.discount == 0) {
+                    pivot_markup.attr('title', 'Markup DP+').addClass('text-info'); 
+                }
+                else {
+                    pivot_markup.attr('title', 'Descuento Anunciante').addClass('text-success');   
+                }
+
+                if(aData.pivot_with_markup == 1) {
+                    withMarkup = "DP";
+                }
+                else {
+                    withMarkup = "Medio";
+                }
+
+                var markup = $("<div></div>")
+                    .append(numeral(aData.pivot_markup_price).format('$ 0,0'))
+                    .append(pivot_markup)
+                    .append(" - " + withMarkup);
+
+                $('td:eq(5)', nRow).html(markup);
+
+                var pivot_public_price = $("<strong></strong>").addClass("text-info").text(numeral(aData.pivot_public_price).format('$ 0,0'));
+
+                $('td:eq(8)', nRow).html(pivot_public_price);
+
+                var discount = $("<div></div>")
+                    .append(numeral(aData.pivot_discount_price).format('$ 0,0'))
+                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.pivot_discount).format('0%') + ')'));
+
+                $('td:eq(6)', nRow).html(discount);
+
+                if(aData.active == 0) {
+                    $(nRow).addClass('warning');    
+                }
+                
+            },
+            "drawCallback": function(settings, json) {
+                $("#countDatatable").html(settings.fnRecordsDisplay());
+                $('[data-toggle="tooltip"]').tooltip();
+                var searchSpace = $("#search-space").data("search");
+                if(searchSpace){
+                    $(".spaceModal").click();
+                    $("#search-space").data("search", null);
+                }
+            }
+        });
+
+        UserService.initDatatable(table);
+
+        $("#spaces-datatable_filter input").unbind();
+
+        $("#spaces-datatable_filter input").bind('keyup', function(e) {
+            if(e.keyCode == 13) {
+                table.search(this.value).draw();   
+            }
+        }); 
+    }
+
     function initTable(urlSearch) {
         urlSearch = urlSearch;
 
@@ -23,31 +166,36 @@ var SpaceService = function() {
                 { "data": "name", "name": "name" },
                 { "data": "category_name", "name": "category_name" },
                 { "data": "sub_category_name", "name": "sub_category_name" },
-                { "data": "format_name", "name": "format_name" },
+                { "data": "format_name", "name": "format_name" }, // 5
 
-                { "data": "publisher_commission_rate", "name": "publisher_commission_rate" },
+                { "data": "publisher_commission_rate", "name": "publisher_commission_rate" }, // 6
                 { "data": "minimal_price", "data": "minimal_price" },
                 { "data": "percentage_markdown", "name": "percentage_markdown" },
                 { "data": "markup_price", "name": "markup_price" },
-                { "data": "public_price", "name": "public_price" },
+                { "data": "public_price", "name": "public_price" }, // 10
 
-                { "data": "category_id", "name": "category_id" }, // 12
-                { "data": "sub_category_id", "name": "sub_category_id" },
-                { "data": "format_id", "name": "format_id" },
-                { "data": "publisher_id", "name": "publisher_id" },
-                { "data": "city_id", "name": "city_id" },
+                { "data": "category_id", "name": "category_id" }, // 11
+                { "data": "sub_category_id", "name": "sub_category_id" }, // 12
+                { "data": "format_id", "name": "format_id" }, // 13
+                { "data": "publisher_id", "name": "publisher_id" }, // 14
+                { "data": null, "name": "city_id" }, // 15
                 { "data": "tags", "name": "tags" },
                 { "data": "description", "name": "description" },
                 { "data": "address", "name": "address" },
-                { "data": "impact_scene_id", "name": "impact_scene_id", "searchable": false },
+                { "data": null, "name": "impact_scene_id", "searchable": false }, // 19
                 { "data": "publisher_email", "name": "publisher_email" },
-                { "data": "active", "name": "active" }
+                { "data": "active", "name": "active" } // 21
             ],
             "columnDefs": [
                 {
-                    "targets": [11,12,13,14,15,16,17,18,19,20,21],
+                    "targets": [16,17,18,20,21],
                     "visible": false,
                     "searchable": true
+                },
+                {
+                    "targets": [11, 12, 13, 14, 15, 19, 21],
+                    "visible": false,
+                    "searchable": false
                 },
                 {
                     className: "text-center text-small",
@@ -78,6 +226,8 @@ var SpaceService = function() {
                 $('td:eq(0)', nRow).html(
                     "<button class='btn btn-xs btn-success spaceModal' data-space='" + JSON.stringify(aData) + "' title='Ver Espacio' data-toggle='modal' data-target='#spaceModal'><i class='fa fa-search-plus'></i></button>"
                 );
+
+                $('td:eq(2)', nRow).attr('style', "font-weight: bold; color: #4949a0; min-width: 220px;");
 
                 $('td:eq(6)', nRow).html(
                     numeral(aData.commission).format('0%')
@@ -137,19 +287,19 @@ var SpaceService = function() {
     };
 
     function initFilters() {
-        UserService.initSimpleSearchSelect("#categories",11);
-        UserService.initSimpleSearchSelect("#sub_categories",12);
-        UserService.initSimpleSearchSelect("#formats",13);
-        UserService.initSimpleSearchSelect("#publishers",14);
-        UserService.initSimpleSearchSelect("#cities",15);
-        UserService.initSimpleSearchSelect("#scenes",19);
+        initChangeSelect("#sub_categories",12);
+        initChangeSelect("#formats",13);
+        initChangeSelect("#cities",15);
+        initChangeSelect("#publishers",14);
+        initChangeSelect("#scenes",19);
+
         UserService.initSimpleSearchSelect("#active_state", 21);
     };
 
-    function initModalEvent() {
+    function initModalEvent(showStates) {
         $(document).on("click", ".spaceModal", function () {
             var space = $(this).data('space');
-            drawModal("spaceModal", space, "espacios");
+            drawModal("spaceModal", space, "espacios", showStates);
         });
 
         // Add slimscroll to element
@@ -161,8 +311,29 @@ var SpaceService = function() {
         });
     };
 
-    function changeSelects(inputs) {
+    function initChangeSelect(input, column) {
+        $(input).on('change', function () {
+            
+            var parameters = {
+                'category': $("#category").val(),
+                'sub_category': $("#sub_categories").val(),
+                'format': $("#formats").val(),
+                'city': $("#cities").val(),
+                'publisher': $("#publishers").val(),
+                'scene': $("#scenes").val()
+            };
 
+            value = $(this).val();
+
+            $.get("/espacios/ajax", parameters, function( data ) {
+                if(data.success) {
+                    SpaceService.changeSelects(data.inputs, column, value);
+                }
+            });
+        });
+    }
+
+    function changeSelects(inputs, column, searchValue) {
         var columns = [];
 
         if(inputs.sub_categories) {
@@ -183,6 +354,16 @@ var SpaceService = function() {
                 );
             });  
             columns.push(14);
+        }
+
+        if(inputs.scenes) {
+            $('#scenes option:gt(0)').remove();
+            $.each(inputs.scenes, function(value,text) {
+                $('#scenes').append(
+                    $("<option></option>").attr("value", value).text(text)
+                );
+            });  
+            columns.push(19);
         }
 
         if(inputs.cities) {                
@@ -210,12 +391,35 @@ var SpaceService = function() {
             $('#formats').val('');
             columns.push(13);
         }
+
+        console.log(column);
+        console.log(searchValue);
+
+        table.columns(columns)
+            .search('')
+            .column(column)
+            .search(searchValue);
         
-        UserService.cleanColumnsSearch(columns); 
+        table.draw();
     };
 
-    function drawModal(inputId, space, urlName) {
-        //$("#prueba").html(UserService.getHtmlModalStates(space.states, ''));
+    function drawModal(inputId, space, urlName, showStates) {
+
+        if(showStates) {
+            var modal = $("#spaceModal");
+            var spiner = modal.find("#sk-spinner-modal");
+
+            spiner.show();
+            $("#prueba").html("");
+
+            $.get('/medios/' + space.publisher_id + '/states', {}, function( data ) {
+                spiner.hide();
+                $("#prueba").html(UserService.getHtmlTableStates(data.states, 230));
+                $('[data-toggle="tooltip"]').tooltip();
+            });    
+        }
+        
+
         $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + space.id + '/edit');
         $('#' + inputId + ' #modalPublisher').attr('href', '/medios/' + space.publisher_id)
             .attr('title', 'Ver Medio - ' + space.publisher_name);
@@ -262,8 +466,26 @@ var SpaceService = function() {
         $('#' + inputId + ' #category_name').text(space.category_name);
         $('#' + inputId + ' #sub_category_name').text(space.sub_category_name);
         $('#' + inputId + ' #format_name').text(space.format_name);
-        $('#' + inputId + ' #city_name').text(space.city_name);
-        $('#' + inputId + ' #impact_scene_name').text(space.impact_scene_name);
+        
+
+        $('#' + inputId + ' #city_name').text("");
+        if(space.cities) {
+            $.each(space.cities, function( index, city ) {
+                $('#' + inputId + ' #city_name')
+                    .append(city.nombre_ciudad_LI)
+                    .append(" - ");
+            });
+        }
+
+        $('#' + inputId + ' #impact_scene_name').text("");
+        if(space.impact_scenes) {
+            $.each(space.impact_scenes, function( index, scene ) {
+                $('#' + inputId + ' #impact_scene_name')
+                    .append(scene.nombre_tipo_lugar_LI)
+                    .append(" - ");
+            });
+        }
+
         $('#' + inputId + ' #address').text(space.address);
 
         /** Prices **/   
@@ -323,12 +545,17 @@ var SpaceService = function() {
         $('#spaceModal #space_sw_active').html("").append(input);
 
         var elem = document.querySelector(".js-switch");
-        switchery = new Switchery(elem, { 
-            color: '#1AB394',
-            size: 'small'
-        });
 
-        initChangeAgreement();
+        if(elem) {
+            switchery = new Switchery(elem, { 
+                color: '#1AB394',
+                size: 'small'
+            });   
+
+            initChangeAgreement(); 
+        }
+
+        
     };
 
     function getFilterSearch()
@@ -492,7 +719,6 @@ var SpaceService = function() {
         });
 
         $.validator.methods.selectproposals = function(value, element) {
-            console.log('proposals');
             return ($(".form-select-proposals ul.chosen-choices").find("li.search-choice").length > 0);
         }
 
@@ -676,21 +902,25 @@ var SpaceService = function() {
         init: function(urlSearch) {
             initTable(urlSearch);
             initFilters();
-            initModalEvent();
+            initModalEvent(true);
             initDeleteSpace();
             initSuggestModal();
             initPostSuggest();
             initProposalModal();
             initPostProposal();
         },
-        initModalEvent: function () {
-            initModalEvent();
+        initProposal: function(urlSearch) {
+            initTableProposal(urlSearch);
+            initModalEvent(true);
+        },
+        initModalEvent: function (showStates) {
+            initModalEvent(showStates);
         },
         initDatatable: function(urlSearch) {
             initTable(urlSearch); 
         },
-        changeSelects: function(inputs) {
-            changeSelects(inputs);
+        changeSelects: function(inputs, column, searchValue) {
+            changeSelects(inputs, column, searchValue);
         },
         reload: function(){
             reload();
@@ -698,6 +928,9 @@ var SpaceService = function() {
         initPostSuggest: function(){
             initSuggestModal();
             initPostSuggest();
+        },
+        drawModal: function(inputId, space, urlName) {
+            drawModal(inputId, space, urlName);
         }
     };
 }();

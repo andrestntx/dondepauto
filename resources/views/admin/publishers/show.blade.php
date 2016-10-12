@@ -127,7 +127,7 @@
         $(document).ready(function () {
             PublisherService.drawShowPrices();
             SpaceService.initDatatable($('#publisher').data('datatable'));
-            SpaceService.initModalEvent();
+            SpaceService.initModalEvent(false);
             SpaceService.initPostSuggest();
             $('.advertisr-chosen-select').chosen({width: "100%"});
         });

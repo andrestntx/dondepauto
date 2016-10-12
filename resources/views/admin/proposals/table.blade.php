@@ -9,6 +9,7 @@
                 <th>Días transcurridos</th>
                 <th>Titulo Propuesta</th>
                 <th>Anunciante</th>
+                <th>Espacios</th>
             </tr>
         </thead>
         <tfoot>
@@ -20,6 +21,7 @@
             <th>Días transcurridos</th>
             <th>Titulo Propuesta</th>
             <th>Anunciante</th>
+            <th>Espacios</th>
         </tr>
         </tfoot>
     </table>

@@ -30,8 +30,6 @@
                         <div class="col-md-6">
                             {!! Field::text('action_date', ['label' => 'Fecha', 'class' => 'datetimepicker', 'id' => 'modal_contact_action_date', 'required']) !!}
                         </div>
-
-                        <input type="hidden" id="contact_csrf_token" name="_token" value="{{ csrf_token() }}">
                     </div>
                 </div>
             </div>

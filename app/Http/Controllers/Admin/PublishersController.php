@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entities\Platform\User;
+use App\Facades\DatatableFacade;
 use App\Facades\PublisherFacade;
 use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\Publisher\StoreRequest;
@@ -22,6 +23,7 @@ use Illuminate\Support\Str;
 class PublishersController extends ResourceController
 {
     protected $facade;
+    protected $datatableFacade;
 
     /**
      * [$routePrefix prefix route in more one response view]
@@ -40,15 +42,18 @@ class PublishersController extends ResourceController
      */
     protected $modelName = "publisher";
 
+
     /**
-     * AdvertisersController constructor.
+     * PublishersController constructor.
      * @param PublisherFacade $facade
      * @param PublisherService $service
+     * @param DatatableFacade $datatableFacade
      */
-    function __construct(PublisherFacade $facade, PublisherService $service)
+    function __construct(PublisherFacade $facade, PublisherService $service, DatatableFacade $datatableFacade)
     {
         $this->facade = $facade;
         $this->service = $service;
+        $this->datatableFacade = $datatableFacade;
     }
 
     /**
@@ -62,7 +67,6 @@ class PublishersController extends ResourceController
     }
 
 
-
     /**
      * Display a listing of the resource.
      *
@@ -74,6 +78,15 @@ class PublishersController extends ResourceController
     }
 
     /**
+     * @param $id
+     * @return array
+     */
+    public function getStates($id)
+    {
+        return ['states' => $this->facade->getStates($id)];
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param Request $request
@@ -81,87 +94,8 @@ class PublishersController extends ResourceController
      */
     public function search(Request $request)
     {
-        return \Datatables::of($this->facade->search($request->get('columns'), $request->get('search')))
-            ->filter(function ($instance) use ($request) {
-                $instance->collection = $instance->collection->filter(function ($publisher) use ($request) {
-                    $state = true;
-                    $hasOffers = true;
-                    $cities = true;
-                    $dates = true;
-
-                    /** @var $actions */
-                    $actions = null;
-                    $action_id = null;
-                    $action_start = null;
-                    $action_end = null;
-                    $hasActions = true;
-
-                    /** @var $hasLogo */
-                    $hasLogo = true;
-
-                    foreach ($request->get('columns') as $column) {
-                        if($column['name'] == 'state_id') {
-                            $state = $publisher->hasState($column['search']['value']);
-                        }
-                        if($column['name'] == 'has_offers' && $column['search']['value'] == 'true') {
-                            $hasOffers = $publisher->has_offers;
-                        }
-                        if($column['name'] == 'has_logo') {
-                            if($column['search']['value'] == 'true') {
-                                $hasLogo = $publisher->has_logo == true;
-                            }
-                            else if($column['search']['value'] == 'false') {
-                                $hasLogo = $publisher->has_logo == false;
-                            }
-                        }
-                        if($column['name'] == 'space_city_names' && trim($column['search']['value'])) {
-                            $cities = $publisher->hasSpaceCity(intval($column['search']['value']));
-                        }
-                        if ($column['name'] == 'last_offer_at_datatable' && trim($column['search']['value'])) {
-                            $dateRange = explode(',', $column['search']['value']);
-
-                            if(trim($dateRange[0])) {
-                                $dates = strtotime($publisher->last_offer) >= strtotime(Carbon::createFromFormat('d/m/Y', $dateRange[0])->toDateString());
-                            }
-                            if(trim($dateRange[1])) {
-                                $dates = $dates && (strtotime($publisher->last_offer) <= strtotime(Carbon::createFromFormat('d/m/Y', $dateRange[1])->toDateString()));
-                            }
-                        }
-                        if ($column['name'] == 'action' && trim($column['search']['value']) && trim($column['search']['value']) != "0") {
-                            $action_id = trim($column['search']['value']);
-                        }
-                        if ($column['name'] == 'action_range' && trim($column['search']['value'])) {
-                            $action_range = explode(',', $column['search']['value']);
-                            $action_start = trim($action_range[0]);
-                            $action_end   = trim($action_range[1]);
-                        }
-                    }
-
-                    if($action_id || $action_start || $action_end) {
-                        if($publisher->contacts->count() > 0) {
-                            $actions = $publisher->contacts->filter(function ($contact) use ($action_id, $action_start, $action_end) {
-                                if($action = $contact->actions->first()) {
-                                    return $action->isActionAndIsInRange($action_id, $action_start, $action_end);
-                                }
-                            });
-
-                            if($actions->count() == 0) {
-                                $hasActions = false;
-                            }
-                        }
-                        else {
-                            $hasActions = false;
-                        }
-                    }
-
-                    return $state && $hasOffers && $cities && $dates && $hasActions && $hasLogo;
-                });
-            })
-            ->make(true);
-
-       // return view('home');
+        return $this->datatableFacade->searchPublishers($request->get('columns'), $request->get('search')['value'], $request->all());
     }
-
 
 
     /**
@@ -173,7 +107,7 @@ class PublishersController extends ResourceController
      */
     public function searchSpaces(Request $request, User $publisher)
     {
-        return \Datatables::of($this->facade->searchSpaces($publisher))->make(true);
+        return $this->datatableFacade->searchSpaces($request->get('columns'), $request->get('search')['value'], null, $publisher, null, $request->all());
     }
 
     /**
@@ -305,8 +239,6 @@ class PublishersController extends ResourceController
      */
     public function changeDocuments(Request $request, User $publisher)
     {
-        \Log::info('está llegando');
-        \Log::info($request->get('change_documents'));
         $this->facade->setChangeDocuments($publisher, $request->get('change_documents'));
         return ['success' => 'true'];
     }

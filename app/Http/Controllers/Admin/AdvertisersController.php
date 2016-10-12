@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entities\Platform\User;
 use App\Facades\AdvertiserFacade;
+use App\Facades\DatatableFacade;
 use App\Http\Controllers\ResourceController;
 use App\Http\Requests\RUser\Advertiser\StoreRequest;
 use App\Http\Requests\RUser\Advertiser\UpdateRequest;
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
 class AdvertisersController extends ResourceController
 {
     protected $facade;
+    protected $datatableFacade;
 
     /**
      * [$routePrefix prefix route in more one response view]
@@ -43,11 +45,13 @@ class AdvertisersController extends ResourceController
      * AdvertisersController constructor.
      * @param AdvertiserFacade $facade
      * @param AdvertiserService $service
+     * @param DatatableFacade $datatableFacade
      */
-    function __construct(AdvertiserFacade $facade, AdvertiserService $service)
+    function __construct(AdvertiserFacade $facade, AdvertiserService $service, DatatableFacade $datatableFacade)
     {
         $this->facade = $facade;
         $this->service = $service;
+        $this->datatableFacade = $datatableFacade;
     }
 
     /**
@@ -68,58 +72,7 @@ class AdvertisersController extends ResourceController
      */
     public function search(Request $request)
     {
-            //abort('500');
-
-
-            return \Datatables::of($this->facade->search(null, $request->get('columns'), $request->get('search'), $request->get('init'), $request->get('finish')))
-                ->filter(function ($instance) use ($request) {
-                    $instance->collection = $instance->collection->filter(function ($advertiser) use ($request) {
-                        $state = true;
-                        $intentions = true;
-
-                        $actions = null;
-                        $action_id = null;
-                        $action_start = null;
-                        $action_end = null;
-                        $hasActions = true;
-
-                        foreach ($request->get('columns') as $column) {
-                            if($column['name'] == 'state_id') {
-                                $state = $advertiser->hasState($column['search']['value']);
-                            }
-
-                            if($column['name'] == 'intention_at' && trim($column['search']['value'])) {
-                                if($advertiser->intentions->count() == 0) {
-                                    $intentions = false;
-                                }
-                            }
-
-                            if ($column['name'] == 'action' && trim($column['search']['value']) && trim($column['search']['value']) != "0") {
-                                $action_id = trim($column['search']['value']);
-                            }
-                            if ($column['name'] == 'action_range' && trim($column['search']['value'])) {
-                                $action_range = explode(',', $column['search']['value']);
-                                $action_start = trim($action_range[0]);
-                                $action_end   = trim($action_range[1]);
-                            }
-
-                        }
-
-                        if($action_id || $action_start || $action_end) {
-                            if($lastAction = $advertiser->getLastAction()) {
-                                $hasActions = $lastAction->isActionAndIsInRange($action_id, $action_start, $action_end);
-                            }
-                            else {
-                                $hasActions = false;
-                            }
-                        }
-
-                        return $state && $intentions && $hasActions;
-                    });
-                })
-                ->make(true);
-
-        //return view('home');
+        return $this->datatableFacade->searchAdvertisers(null, $request->get('columns'), $request->get('search')['value'], $request->get('init'), $request->get('finish'), $request->all());
     }
 
     /**

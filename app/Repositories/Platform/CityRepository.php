@@ -25,6 +25,10 @@ class CityRepository extends BaseRepository
         return 'App\Entities\Platform\City';
     }
 
+    /**
+     * @param $role
+     * @return mixed
+     */
     protected function citiesWithUsers($role)
     {
         return $this->model

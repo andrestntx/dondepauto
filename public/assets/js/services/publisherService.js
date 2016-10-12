@@ -20,7 +20,7 @@ var PublisherService = function() {
             "serverSide": true,
             "columns": [
                 { "data": null, "name": "company", "orderable": false },
-                { "data": "created_at_datatable", "name": "created_at_datatable"},
+                { "data": "created_at_datatable", "name": "created_at_datatable"}, // 1
                 { "data": "company" , "name": "company" },
                 { "data": "first_name" , "name": "first_name" },
                 { "data": "state" , "name": "state" },
@@ -32,15 +32,16 @@ var PublisherService = function() {
                 { "data": "space_city_names", "name": "space_city_names"},
                 { "data": "has_offers", "name": "has_offers"}, // 10
 
-                { "data": "activated_at_datatable", "name": "activated_at_datatable"},
-                { "data": "signed_agreement", "name": "signed_agreement"},
-                { "data": "signed_at_datatable", "name": "signed_at_datatable"},
+                { "data": "activated_at_datatable", "name": "activated_at_datatable"}, // 11
+                { "data": "signed_agreement", "name": "signed_agreement"}, // 12
+                { "data": "signed_at_datatable", "name": "signed_at_datatable"}, // 13
                 { "data": "last_offer_at_datatable", "name": "last_offer_at_datatable"}, // 14
 
                 { "data": null, "name": "action"},
                 { "data": null, "name": "action_range"}, // 16
 
-                { "data": "has_logo", "name": "has_logo"} // 17
+                { "data": "has_logo", "name": "has_logo"}, // 17
+                { "data": "tag_id", "name": "tag_id"} // 18
             ],
             "columnDefs": [
                 {
@@ -49,7 +50,7 @@ var PublisherService = function() {
                     "visible": true
                 },
                 {
-                    "targets": [8,9,10,11,12,13,14,15,16,17],
+                    "targets": [8,9,10,11,12,13,14,15,16,17,18],
                     "searchable": false,
                     "visible": false
                 },
@@ -81,6 +82,8 @@ var PublisherService = function() {
 
                 if(!aData.company || !aData.company.trim()) {
                     $('td:eq(2)', nRow).html('--');
+                } else {
+                    $('td:eq(2)', nRow).attr('style', 'font-weight: bold; min-width: 170px;');
                 }
 
                 $('td:eq(4)', nRow).html(
@@ -114,6 +117,7 @@ var PublisherService = function() {
         UserService.initActions(15);
         UserService.initActionsRange(16);
         UserService.initSimpleSearchSelect('#has_logo', 17);
+        UserService.initSimpleSearchSelect('#tag_id', 18);
 
         $("#publishers-datatable_filter input").unbind();
 
@@ -128,93 +132,6 @@ var PublisherService = function() {
         table.search(UserService.getFilterSearch());
         table.draw();
     }
-
-    function initSearchAgreement() {
-        var optionState = '';
-
-        $('#signed_agreement').on('ifChecked', function(event){
-            $('#agreement_at_start').prop('disabled', false);
-            $('#agreement_at_end').prop('disabled', false);
-
-            optionState = $('#registration_states').val();
-            $('#registration_states option[value=complete-data]').prop('selected', true);
-            $('#registration_states').prop('disabled', true);
-
-            table.column(14)
-                    .search('1')
-                .column(8)
-                    .search('complete-data')
-                .draw();
-        });
-
-        $('#signed_agreement').on('ifUnchecked', function(event) {
-            $('#agreement_at_start').prop('disabled', true);
-            $('#agreement_at_end').prop('disabled', true);
-            /*$("#agreement_at_start").datepicker("setDate", null);
-            $("#agreement_at_end").datepicker("setDate", null); */
-
-
-            if(optionState == '') {
-                $('#registration_states :nth-child(1)').prop('selected', true);
-            }
-            else {
-                $('#registration_states option[value=' + optionState + ']').prop('selected', true);    
-            }
-
-            $('#registration_states').prop('disabled', false);
-
-            table.column(12)
-                    .search('0')
-                .column(8)
-                    .search(optionState)
-                .column(13)
-                    .search(' , ')
-                .draw();
-        });
-    }
-
-    function initSearchOffers() {
-        var optionState = '';
-
-        $('#offer').on('ifChecked', function(event){
-            $('#offer_at_start').prop('disabled', false);
-            $('#offer_at_end').prop('disabled', false);
-
-            optionState = $('#registration_states').val();
-            $('#registration_states option[value=complete-data]').prop('selected', true);
-            $('#registration_states').prop('disabled', true);
-
-            table.column(10)
-                    .search('true')
-                .column(8)
-                    .search(optionState)
-                .draw();
-        });
-
-        $('#offer').on('ifUnchecked', function(event){
-            $('#offer_at_start').prop('disabled', true);
-            $('#offer_at_end').prop('disabled', true);
-            $("#offer_at_start").datepicker("setDate", null);
-            $("#offer_at_end").datepicker("setDate", null);
-
-
-            if(optionState == '') {
-                $('#registration_states :nth-child(1)').prop('selected', true);
-            }
-            else {
-                $('#registration_states option[value=' + optionState + ']').prop('selected', true);    
-            }
-
-            $('#registration_states').prop('disabled', false);
-
-            table.column(10)
-                    .search('')
-                .column(8)
-                    .search(optionState)
-                .draw();
-            
-        });
-    }        
 
     function initSearchDateRanges()
     {
@@ -289,8 +206,6 @@ var PublisherService = function() {
     function drawModal(publisher) {
         publisherEdit = publisher;
         UserService.drawModalUser("userModal", publisherEdit, "medios", true);
-
-        console.log(publisherEdit);
 
         $("#edit-data-agreement").click(function(){
             drawModalEditAgreement(publisherEdit, '/medios/' + publisher.id + '/ajax');
@@ -410,6 +325,9 @@ var PublisherService = function() {
         $('#userModal #newContact').attr('data-url', '/anunciantes/' + publisher.id + '/contacts');
 
         $('#userModal #comments').html('');
+
+        console.log('DIBUJANDO');
+        console.log(publisher.contacts);
 
         $.each(publisher.contacts, function( index, contact ) {
             var socialContact = UserService.getSocialContact(contact);
@@ -632,10 +550,9 @@ var PublisherService = function() {
             UserService.initInputsDateRange();
             initSearchDateRanges();
             initModalEvent();
-            initSearchAgreement();
-            initSearchOffers();
             initDeletePublisher();
             UserService.initActionNotifications(16);
+            UserService.initChangeTag();
         },
         drawShowPrices: function() {
             drawShowPrices();

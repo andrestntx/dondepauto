@@ -30,8 +30,11 @@ class AddSpaceRequest extends Request
      */
     public function rules()
     {
+        $space = $this->route('spaces');
+
         return [
             'proposals'     => 'required|array',
+            'proposals.*'   => 'required|exists:proposals,id|unique:proposal_space,proposal_id,NULL,id,space_id,' . $space->id
         ];
     }
 }

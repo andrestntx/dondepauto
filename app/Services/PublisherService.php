@@ -14,6 +14,7 @@ use App\Repositories\File\PublisherDocumentsRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
@@ -41,10 +42,10 @@ class PublisherService extends ResourceService
     
     /**
      * @param array $columns
-     * @param array $search
+     * @param $search
      * @return mixed
      */
-    public function search(array $columns, array $search)
+    public function search(array $columns, $search)
     {
         return $this->viewRepository->search($columns, $search);
     }
@@ -80,16 +81,18 @@ class PublisherService extends ResourceService
         return $this->repository->create($data);
     }
 
+
     /**
      * @param null $category_id
      * @param null $subCategory_id
      * @param null $format_id
      * @param null $city_id
+     * @param null $scene_id
      * @return mixed
      */
-    public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null)
+    public function searchWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $city_id = null, $scene_id = null)
     {
-        return $this->viewRepository->publishersWithSpaces($category_id, $subCategory_id, $format_id, $city_id);
+        return $this->viewRepository->publishersWithSpaces($category_id, $subCategory_id, $format_id, $city_id, $scene_id);
     }
 
     /**
@@ -210,7 +213,27 @@ class PublisherService extends ResourceService
      */
     public function getPublisherView(User $publisher)
     {
-        return $this->viewRepository->getPublisher($publisher->id);
+        return $this->getPublisherViewId($publisher->id);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getPublisherViewId($id)
+    {
+        return $this->viewRepository->getPublisher($id);
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getStates($id)
+    {
+        return $this->viewRepository->getStates($id);
+    }
+
+
 
 }

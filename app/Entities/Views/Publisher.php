@@ -12,6 +12,7 @@ namespace App\Entities\Views;
 use App\Entities\Platform\Representative;
 use App\Repositories\File\PublisherDocumentsRepository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class Publisher extends PUser
 {
@@ -34,10 +35,11 @@ class Publisher extends PUser
      *
      * @var array
      */
-    protected $appends = ['state', 'state_class', 'state_icon', 'state_id', 'created_at_datatable',
+    protected $appends = ['created_at_datatable',
         'signed_agreement_lang', 'space_city_names', 'activated_at_datatable', 'documents_json', 'logo',
-        'signed_at_datatable', 'states', 'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans',
-        'count_logs', 'last_login_at', 'has_logo', 'signed_at_date', 'repre_name', 'repre_doc', 'repre_email', 'repre_phone'
+        'signed_at_datatable',  'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans',
+        'count_logs', 'last_login_at', 'has_logo', 'signed_at_date', 'repre_name', 'repre_doc', 'repre_email', 'repre_phone',
+        'states', 'state', 'state_class', 'state_icon', 'state_id'
     ];
 
     /**
@@ -103,6 +105,18 @@ class Publisher extends PUser
     public function getLastOfferAttribute()
     {
         return $this->spaces->max('created_at');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastOfferDateAttribute()
+    {
+        if($this->last_offer) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->last_offer)->toDateString();
+        }
+
+        return '';
     }
 
     /**
@@ -259,7 +273,9 @@ class Publisher extends PUser
      */
     public function hasSpaceCity($cityId = 0)
     {
-        if($cityId > 0 && $this->spaces->where('city_id', $cityId)->count() > 0) {
+        if($cityId > 0 && $this->spaces->filter(function ($space, $key) use ($cityId) {
+                return $space->hasCity($cityId);
+            })->count() > 0) {
             return true;
         }
         
@@ -422,6 +438,41 @@ class Publisher extends PUser
         }
 
         return '';
+    }
+
+    /**
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeJoinSpaces(Builder $query)
+    {
+        return $query->join('espacios_ofrecidos_LIST', 'id_us_reg_LI', '=', 'id');
+    }
+
+    /**
+     * @param Builder $query
+     * @param $scene_id
+     * @return mixed
+     */
+    public function scopeJoinScenes(Builder $query, $scene_id)
+    {
+        return $query->join('impact_scene_space', function ($join) use($scene_id) {
+            $join->on('impact_scene_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+                ->where('impact_scene_space.impact_scene_id', '=', $scene_id);
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @param $city_id
+     * @return mixed
+     */
+    public function scopeJoinCities(Builder $query, $city_id)
+    {
+        return $query->join('city_space', function ($join) use($city_id) {
+            $join->on('city_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+                ->where('city_space.city_id', '=', $city_id);
+        });
     }
 
 }

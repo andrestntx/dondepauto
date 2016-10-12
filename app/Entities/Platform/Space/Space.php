@@ -11,6 +11,7 @@ namespace App\Entities\Platform\Space;
 
 use App\Entities\Platform\Entity;
 use App\Entities\Platform\User;
+use App\Entities\Proposal\Proposal;
 use App\Services\Space\SpacePointsService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -143,6 +144,14 @@ class Space extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+    public function proposals()
+    {
+        return $this->belongsToMany(Proposal::class)->withPivot('copy');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function cities()
     {
         return $this->belongsToMany(SpaceCity::class, 'city_space', 'space_id', 'city_id');
@@ -154,6 +163,11 @@ class Space extends Entity
     public function getCitiesListAttribute()
     {
         return $this->cities->lists('id')->all();
+    }
+
+    public function hasCity($cityId)
+    {
+        return $this->cities->where('id_ciudad_LI', $cityId)->count() > 0;
     }
 
     /**
@@ -277,6 +291,13 @@ class Space extends Entity
         return 'http://www.dondepauto.co/espacio-publicitario/' . $this->urlTag;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function copy()
+    {
+        return $this->hasOne(Space::class, 'copy_id', 'id_espacio_LI');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -9,6 +9,9 @@
 namespace App\Entities\Views;
 
 use App\Entities\Platform\Space\SpaceCity;
+use App\Entities\Platform\Space\SpaceImpactScene;
+use App\Entities\Views\Publisher;
+use App\Entities\Views\Simple\Publisher as SimplePublisher;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Platform\Space\SpaceImage;
@@ -36,7 +39,10 @@ class Space extends Model
      * @var array
      */
     protected $appends = ['publisher_name', 'category_sub_category', 'commission', 'markup_price', 'public_price',
-        'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans', 'created_at_date'
+        'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans', 'created_at_date',
+        'sub_category_name_format_name', 'commission_price', 'pivot_discount', 'pivot_discount_price', 'pivot_with_markup',
+        'pivot_commission_price', 'pivot_markup', 'pivot_markup_price', 'pivot_commission_price', 'pivot_public_price',
+        'pivot_minimal_price', 'pivot_title', 'pivot_description'
     ];
     
     /**
@@ -48,11 +54,58 @@ class Space extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cities()
+    {
+        return $this->belongsToMany(SpaceCity::class, 'city_space', 'space_id', 'city_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function city()
+    public function publisher()
     {
-        return $this->belongsTo(SpaceCity::class, 'city_id');
+        return $this->belongsTo(Publisher::class, 'publisher_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function simplePublisher()
+    {
+        return $this->belongsTo(SimplePublisher::class, 'publisher_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function impactScenes()
+    {
+        return $this->belongsToMany(SpaceImpactScene::class, 'impact_scene_space', 'space_id', 'impact_scene_id');
+    }
+
+    /**
+     * @param $cityId
+     * @return bool
+     */
+    public function hasCity($cityId)
+    {
+        return $this->cities->where('id_ciudad_LI', $cityId)->count() > 0;
+    }
+
+    public function hasImpactScene($impactSceneId)
+    {
+        return $this->impactScenes->where('id_tipo_lugar_LI', $impactSceneId)->count() > 0;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getStatesAttribute()
+    {
+        return $this->simplePublisher->states;
     }
 
     public function getFirstImage()
@@ -73,10 +126,10 @@ class Space extends Model
      * @param $value
      * @return string
      */
-    public function getDescriptionAttribute($value)
+    /*public function getDescriptionAttribute($value)
     {
         return strip_tags($value);
-    }
+    }*/
 
     /**
      * Return the Company Name Uppercase
@@ -92,17 +145,35 @@ class Space extends Model
      * Return the Category and SubCategory
      * @return string
      */
+    public function getSubCategoryNameFormatNameAttribute()
+    {
+        return ucwords(strtolower($this->sub_category_name . ' - ' . $this->format_name));
+    }
+
+    /**
+     * Return the Category and SubCategory
+     * @return string
+     */
     public function getCategorySubCategoryAttribute()
     {
         return ucwords(strtolower($this->category_name . ' - ' . $this->sub_category_name));
     }
 
+
     /**
-     * @return string
+     * @return float
      */
     public function getCommissionAttribute()
     {
         return ($this->publisher_commission_rate / 100);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommissionPriceAttribute()
+    {
+        return $this->minimal_price * $this->commission;
     }
 
     public function getDiscountAttribute($value)
@@ -222,5 +293,122 @@ class Space extends Model
         }
         
         return 'http://www.dondepauto.co/images/marketplace/marketplaceItemDefaultThumb_219.jpg';
+    }
+
+    /**
+     * @return null
+     */
+    public function getPivotDiscountAttribute()
+    {
+        if($this->pivot && $this->pivot->discount) {
+            return $this->pivot->discount;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getPivotDescriptionAttribute()
+    {
+        if($this->pivot) {
+            return $this->pivot->description;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getPivotTitleAttribute()
+    {
+        if($this->pivot) {
+            return $this->pivot->title;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getPivotDiscountPriceAttribute()
+    {
+        if($discount = $this->pivot_discount) {
+            return $this->public_price * $discount;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getPivotMarkupAttribute()
+    {
+        if($this->pivot_discount) {
+            return $this->percentage_markdown - $this->pivot_discount;
+        }
+
+        return $this->percentage_markdown;
+    }
+
+    /**
+     * @return null
+     */
+    public function getPivotMarkupPriceAttribute()
+    {
+        if($this->pivot_discount) {
+            return $this->markup_price - $this->pivot_discount_price;
+        }
+
+        return $this->markup_price;
+    }
+
+
+    /**
+     * @return null
+     */
+    public function getPivotWithMarkupAttribute()
+    {
+        if($this->pivot && $this->pivot->with_markup >= 0) {
+            return $this->pivot->with_markup;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotCommissionPriceAttribute()
+    {
+        return $this->pivot_minimal_price * $this->commission;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotPublicPriceAttribute()
+    {
+        if($this->pivot_discount) {
+            return $this->public_price - $this->pivot_discount_price;
+        }
+
+        return $this->public_price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotMinimalPriceAttribute()
+    {
+        if($this->pivot_with_markup) {
+            return $this->minimal_price;
+        }
+
+        return $this->minimal_price + $this->pivot_markup_price;
     }
 }

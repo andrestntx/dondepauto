@@ -30,7 +30,7 @@ class User extends EntityAuth
      *
      * @var array
      */
-    protected $appends = [/*'states', 'source' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
+    protected $appends = ['id' /*'states', 'source' /*'name', 'space_city_names', 'space_city_ids', 'states'*/];
 
     /**
      * The table associated with the model.
@@ -49,7 +49,7 @@ class User extends EntityAuth
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
         'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal', 'completed_at',
-        'source', 'bd_form_fuente_LI'
+        'source', 'bd_form_fuente_LI', 'tag_id'
     ];
 
     /**
@@ -748,6 +748,14 @@ class User extends EntityAuth
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class, 'tag_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function banks()
@@ -822,6 +830,17 @@ class User extends EntityAuth
 
         return  $this->first_name . ' ' . $this->last_name . ' - ' .  $this->email;
     }
+
+    public function getRoleSelectEmailAttribute()
+    {
+        if($this->isPublisher()){
+            return 'MEDIO - ' . $this->select_email;
+        }
+
+        return 'ANUNCIANTE - ' . $this->select_email;
+    }
+
+
 
     /**
      * @param Representative $representative

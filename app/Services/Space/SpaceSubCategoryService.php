@@ -23,9 +23,17 @@ class SpaceSubCategoryService extends ResourceService
         $this->repository = $repository;
     }
 
-    public function searchWithSpaces($category_id = null, $publisher_id = null)
+    /**
+     * @param null $category_id
+     * @param null $publisher_id
+     * @param null $city_id
+     * @param null $scene_id
+     * @return mixed
+     */
+    public function searchWithSpaces($category_id = null, $publisher_id = null, $city_id = null, $scene_id = null)
     {
-        return $this->repository->subCategoriesWithSpaces($category_id, $publisher_id);
+        return $this->repository->subCategoriesWithSpaces($category_id, $publisher_id, $city_id, $scene_id, $column = "name_category_name", $id = "id",
+            ["subcat_espacios_ofrecidos_LIST.nombre_subcat_LI", "subcat_espacios_ofrecidos_LIST.id_subcat_LI", "subcat_espacios_ofrecidos_LIST.id_cat_LI"]);
     }
 
     /**

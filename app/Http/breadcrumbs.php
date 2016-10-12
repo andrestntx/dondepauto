@@ -115,3 +115,9 @@ Breadcrumbs::register('proposals', function ($breadcrumbs) {
     $breadcrumbs->push('Propuestas', url('propuestas'));
 });
 
+// Home > proposals
+Breadcrumbs::register('proposals.show', function ($breadcrumbs, $proposal) {
+    $breadcrumbs->parent('proposals');
+    $breadcrumbs->push($proposal->title, route('proposals.show', $proposal));
+});
+

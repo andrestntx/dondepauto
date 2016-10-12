@@ -264,7 +264,7 @@ var UserService = function() {
 		},
 
 		initInputsDateRange: function() {
-			console.log('initInputsDateRange');
+
 	        $('.input-daterange').datepicker({
 	        	format: 'dd/mm/yyyy',
 	            keyboardNavigation: false,
@@ -487,6 +487,9 @@ var UserService = function() {
 			$("#prueba").html(UserService.getHtmlTableStates(userEdit.states, 200));
 	        $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + userEdit.id + '/edit');
             $('#' + inputId + ' #modalShow').attr('href', '/admin/' + urlName + '/' + userEdit.id);
+            $('#' + inputId + ' .select-tags')
+                .val(userEdit.tag_id)
+                .attr('data-url', '/users/' + userEdit.id + '/tag');
 
 	        /** Personal Data **/
 	        drawPersonalData(inputId, userEdit, isPublisher);
@@ -517,6 +520,34 @@ var UserService = function() {
 	            drawModalEditDetail(userEdit, '/' + urlName + '/' + userEdit.id + '/ajax', isPublisher);
 	        });
 		},
+
+        initChangeTag: function () {
+            $(".select-tags").change(function() {
+                var url = $(this).attr('data-url');
+                var parameters = {
+                    'tag_id': $(this).val()
+                };
+
+                $.post(url, parameters, function( data ) {
+                    if(data.success) {
+                        dataTable.search(getFilterSearch()).draw();
+                    }
+                    else {
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Error controlado',
+                            type: "warning",
+                        });
+                    }
+                }).fail(function(data) {
+                    swal({
+                        title: 'Hubo un error',
+                        text: 'Código ' + data.status,
+                        type: "warning",
+                    });
+                });
+            });    
+        },
 
 		initSearchDateRanges: function(columnCreatedAtP, columnLoginAtP, columnActivatedAtP)
 	    {

@@ -23,21 +23,34 @@ class SpaceCityRepository extends BaseRepository
         return 'App\Entities\Platform\Space\SpaceCity';
     }
 
+
     /**
      * @param null $category_id
      * @param null $subCategory_id
      * @param null $format_id
+     * @param null $publisher_id
+     * @param null $scene_id
      * @param string $column
      * @param string $id
+     * @param null $select
      * @return mixed
      */
-    public function citiesWithSpaces($category_id = null, $subCategory_id = null, $format_id = null,
-                                     $column = "nombre_ciudad_LI", $id = "ciudades_LIST.id_ciudad_LI")
+    public function citiesWithSpaces($category_id = null, $subCategory_id = null, $format_id = null, $publisher_id = null, $scene_id = null,
+                                     $column = "nombre_ciudad_LI", $id = "ciudades_LIST.id_ciudad_LI", $select = null)
     {
+        if(is_null($select)) {
+            $select = [$column, $id];
+        }
+
         $query = $this->model
-            ->join('espacios_ofrecidos_LIST', 'espacios_ofrecidos_LIST.id_ciudad_LI', '=', 'ciudades_LIST.id_ciudad_LI')
-            ->groupBy('ciudades_LIST.id_ciudad_LI')
+            ->select($select)
+            ->joinSpaces($publisher_id)
+            ->groupById()
             ->orderBy('nombre_ciudad_LI', 'asc');
+
+        if(! is_null($scene_id) && !empty($scene_id) ){
+            $query->joinScenes($scene_id);
+        }
 
         if(! is_null($format_id) && ! empty($format_id)) {
             $query->where("id_formato_LI", $format_id);

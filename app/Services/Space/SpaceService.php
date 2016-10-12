@@ -12,6 +12,7 @@ use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\Space\SpaceFormat;
 use App\Entities\Platform\Space\SpaceImage;
 use App\Entities\Platform\User;
+use App\Entities\Proposal\Proposal;
 use App\Repositories\File\SpaceImagesRepository;
 use App\Repositories\Platform\Space\SpaceRepository;
 use App\Repositories\Views\SpaceRepository as ViewSpaceRepository;
@@ -36,14 +37,23 @@ class SpaceService extends ResourceService
     }
 
     /**
-     * @param User $publisher
-     * @param null $spaceId
-     * @param array $columns
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param $spaceId
+     * @param Proposal|null $proposal
+     * @return mixed|null
      */
-    public function search(User $publisher = null, $spaceId = null, array $columns = [])
+    public function getViewSpace($spaceId, Proposal $proposal = null)
     {
-        return $this->viewRepository->search($publisher, $spaceId, $columns);
+        if($spaces = $this->search(null, $spaceId, $proposal)) {
+            return $spaces->first();
+        }
+
+        return null;
+    }
+
+
+    public function search(array $columns, $search = '', $spaceId = null, User $publisher = null, Proposal $proposal = null)
+    {
+        return $this->viewRepository->search($columns, $search, $spaceId, $publisher, $proposal);
     }
 
     /**
@@ -149,7 +159,6 @@ class SpaceService extends ResourceService
      */
     public function updateSpace(array $data, SpaceFormat $format, Space $space)
     {
-        \Log::Info('repositorio update');
         return $this->repository->update($this->getData($data, $format, $space->publisher), $space);
     }
 
