@@ -317,7 +317,7 @@ class Proposal extends Model
      */
     public function getTotalMarkupAttribute()
     {
-        if($this->total >= 0) {
+        if($this->total > 0) {
             return round($this->total_markup_price / $this->total, 3);
         }
 
@@ -329,7 +329,7 @@ class Proposal extends Model
      */
     public function getPivotTotalMarkupAttribute()
     {
-        if($this->total >= 0) {
+        if($this->total > 0) {
             return round($this->pivot_total_markup_price / $this->total, 3);
         }
 
@@ -341,7 +341,7 @@ class Proposal extends Model
      */
     public function getTotalCommissionAttribute()
     {
-        if($this->total_cost >= 0) {
+        if($this->total_cost > 0) {
             return round($this->total_commission_price / $this->total_cost, 3);
         }
 
@@ -361,7 +361,7 @@ class Proposal extends Model
      */
     public function getPivotTotalCommissionAttribute()
     {
-        if($this->pivot_total_cost >= 0) {
+        if($this->pivot_total_cost > 0) {
             return round($this->pivot_total_commission_price / $this->pivot_total_cost, 3);
         }
 
