@@ -43,7 +43,7 @@ class SpaceService extends ResourceService
      */
     public function getViewSpace($spaceId, Proposal $proposal = null)
     {
-        if($spaces = $this->search(null, $spaceId, $proposal)) {
+        if($spaces = $this->search([], null, $spaceId, null, $proposal)) {
             return $spaces->first();
         }
 
@@ -51,7 +51,15 @@ class SpaceService extends ResourceService
     }
 
 
-    public function search(array $columns, $search = '', $spaceId = null, User $publisher = null, Proposal $proposal = null)
+    /**
+     * @param array|null $columns
+     * @param string $search
+     * @param null $spaceId
+     * @param User|null $publisher
+     * @param Proposal|null $proposal
+     * @return mixed
+     */
+    public function search(array $columns = null, $search = '', $spaceId = null, User $publisher = null, Proposal $proposal = null)
     {
         return $this->viewRepository->search($columns, $search, $spaceId, $publisher, $proposal);
     }

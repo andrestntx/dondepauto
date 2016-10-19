@@ -82,6 +82,35 @@ class Proposal extends Model
     /**
      * @return mixed
      */
+    public function getAudiences()
+    {
+        return $this->quote->audiences;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAudiencesArray()
+    {
+        $array = [];
+
+        if($audienceTypes = $this->getAudiences()) {
+            $audienceTypes = $audienceTypes->groupBy('audience_type_id');
+
+            foreach($audienceTypes as $audiences) {
+                $array[$audiences->first()->type->name] = [
+                    'names' => $audiences->sortBy('name')->implode('name', ', '),
+                    'img'       => $audiences->first()->type->image
+                ];
+            }
+        }
+
+        return $array;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getViewAdvertiser()
     {
         return $this->quote->viewAdvertiser;
@@ -180,7 +209,11 @@ class Proposal extends Model
      */
     public function getTotalDiscountAttribute()
     {
-        return round($this->total_discount_price / $this->total, 3);
+        if($this->total > 0) {
+            return round($this->total_discount_price / $this->total, 3);
+        }
+
+        return 0;
     }
 
     /**
@@ -197,6 +230,22 @@ class Proposal extends Model
     public function getPivotTotalAttribute()
     {
         return $this->viewSpaces->sum('pivot_public_price');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotTotalIvaAttribute()
+    {
+        return $this->pivot_total * env('IVA');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotTotalWithIvaAttribute()
+    {
+        return $this->pivot_total + $this->pivot_total_iva;
     }
 
     /**
@@ -220,7 +269,11 @@ class Proposal extends Model
      */
     public function getTotalIncomeAttribute()
     {
-        return round($this->total_income_price / $this->total, 3);
+        if($this->total > 0) {
+            return round($this->total_income_price / $this->total, 3);
+        }
+
+        return 0;
     }
 
     /**
@@ -236,7 +289,11 @@ class Proposal extends Model
      */
     public function getPivotTotalIncomeAttribute()
     {
-        return round($this->pivot_total_income_price / $this->pivot_total, 3);
+        if($this->pivot_total > 0) {
+            return round($this->pivot_total_income_price / $this->pivot_total, 3);
+        }
+
+        return 0;
     }
 
     /**
@@ -260,7 +317,11 @@ class Proposal extends Model
      */
     public function getTotalMarkupAttribute()
     {
-        return round($this->total_markup_price / $this->total, 3);
+        if($this->total >= 0) {
+            return round($this->total_markup_price / $this->total, 3);
+        }
+
+        return 0;
     }
 
     /**
@@ -268,7 +329,11 @@ class Proposal extends Model
      */
     public function getPivotTotalMarkupAttribute()
     {
-        return round($this->pivot_total_markup_price / $this->total, 3);
+        if($this->total >= 0) {
+            return round($this->pivot_total_markup_price / $this->total, 3);
+        }
+
+        return 0;
     }
 
     /**
@@ -276,7 +341,11 @@ class Proposal extends Model
      */
     public function getTotalCommissionAttribute()
     {
-        return round($this->total_commission_price / $this->total_cost, 3);
+        if($this->total_cost >= 0) {
+            return round($this->total_commission_price / $this->total_cost, 3);
+        }
+
+        return 0;
     }
 
     /**
@@ -292,7 +361,11 @@ class Proposal extends Model
      */
     public function getPivotTotalCommissionAttribute()
     {
-        return round($this->pivot_total_commission_price / $this->pivot_total_cost, 3);
+        if($this->pivot_total_cost >= 0) {
+            return round($this->pivot_total_commission_price / $this->pivot_total_cost, 3);
+        }
+
+        return 0;
     }
 
     /**
