@@ -401,6 +401,14 @@ class Space extends Model
     }
 
     /**
+     * @return string
+     */
+    protected function getUrlMarketplaceAttribute()
+    {
+        return 'http://www.dondepauto.co/espacio-publicitario/' . $this->url;
+    }
+
+    /**
      * @return mixed
      */
     public function getPivotMinimalPriceAttribute()

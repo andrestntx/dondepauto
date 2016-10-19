@@ -205,6 +205,16 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@searchSpaces'
         ]);
 
+        Route::get('propuestas/{proposals}/preview/pdf', [
+            'as'    => 'proposals.preview-pdf',
+            'uses'  => 'Admin\ProposalsController@previewPdf'
+        ]);
+
+        Route::get('propuestas/{proposals}/preview/html', [
+            'as'    => 'proposals.preview-html',
+            'uses'  => 'Admin\ProposalsController@previewHtml'
+        ]);
+
         Route::get('propuestas/{proposals}', [
             'as'    => 'proposals.show',
             'uses'  => 'Admin\ProposalsController@show'

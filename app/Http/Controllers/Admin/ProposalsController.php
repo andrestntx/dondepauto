@@ -63,6 +63,36 @@ class ProposalsController extends Controller
     }
 
     /**
+     * @param Proposal $proposal
+     * @return $this
+     */
+    public function previewPdf(Proposal $proposal)
+    {
+        $proposal->load(['quote.advertiser', 'viewSpaces']);
+
+        return \PDF::loadView('admin.proposals.preview.pdf', [
+            'proposal' => $proposal,
+            'advertiser' => $proposal->getViewAdvertiser()
+        ])->setPaper('a4')
+            ->stream('pdf.pdf');
+
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @return $this
+     */
+    public function previewHtml(Proposal $proposal)
+    {
+        $proposal->load(['quote.advertiser', 'viewSpaces']);
+
+        return view('admin.proposals.preview.html')->with([
+            'proposal' => $proposal,
+            'advertiser' => $proposal->getViewAdvertiser()
+        ]);
+    }
+
+    /**
      * @return mixed
      */
     public function search()
