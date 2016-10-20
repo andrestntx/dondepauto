@@ -1,0 +1,687 @@
+.affix {
+  position: relative;
+}
+
+body {
+	font-size: 16px;
+}
+
+h1 {
+	color: #14abe4;
+	font-size: 1.2em;
+	font-weight: 400;
+	margin: 0;
+	text-align: center;
+}
+
+header {
+	background-image: url("/assets/img/proposal/bannerprincipal.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 200px;
+	padding-bottom: 1em;
+	width: 100%;
+	background-position: center center;
+}
+
+header figure.logo img {
+	max-width: 250px;
+}
+
+header nav {
+	background-color: rgba(68, 68, 68, 0.56);
+	padding: 0.8em 3%;
+}
+
+header nav ul {
+    margin: 0;
+    overflow: auto;
+    padding: 0.3em 0;
+    width: 100%;
+}
+
+header nav ul li { 
+    display: block;
+    float: right;
+    font-size: 1em;
+    list-style: none;
+    margin-right: 5%;
+}
+
+header nav ul li a {
+	color: white;
+}
+
+header nav ul li a:hover {
+    color: white;
+}
+
+header nav ul li a:active {
+    color: #14ABE4;
+}
+
+header section#quote_title {
+    display: block;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    margin: 2em auto;
+    padding: 1.4em 5%;
+    text-align: center;
+    width: 90%;
+}
+
+header section#quote_title h1 {
+    margin: 0;
+}
+
+header section#quote_title h1 span {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+
+figure img {
+	width: 100%;
+}
+
+figure#logo-blue {
+    width: 40%;
+    margin: auto;
+}
+
+main {
+	background-color: white;
+}
+
+main .container {
+    padding-right: 0; 
+    padding-left: 0;
+}
+
+main section {
+	padding: 1.2em 5%;
+}
+
+main section.quote {
+    padding-top: 0;
+}
+
+p.notes {
+    font-size: 0.92em;
+    color: #a7a7a7;
+    font-weight: 400;
+}
+
+section#contact {
+	background-image: url("/assets/img/proposal/imagencontacto.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	padding: 0;
+}
+
+
+
+section#contact #data h1 {
+    text-align: left;
+    color: #404040;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+section#contact #data h2 {
+	font-size: 1em;
+	margin: 0.5em 0;
+	font-weight: 200;
+	color: #4a4949;
+}
+
+section#contact #data p {
+	color: #505050;
+    font-size: 0.85em;
+    font-weight: 400;
+    margin: 0.5em 1em 0 0;
+    float: left;
+}
+
+section#contact #data i.fa {
+	font-size: 1.4em;	
+}
+
+section#contact .row {
+    margin-top: 1.5em;
+}
+
+section#contact .white-cap {
+	padding: 1.5em 2%;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+section.content {
+	text-align: center;
+}
+
+section.content h1 {
+	margin-bottom: 1em;
+}
+
+section.content p {
+	font-size: 1em;
+}
+
+section#publishers .publisher {
+	border-bottom: 2px solid #d2d2d2;
+	margin: 1em 0;
+	padding-bottom: 1em;
+}
+
+section#publishers article.publisher {
+	margin-top: 0;
+}
+
+section#publishers .publishers-title {
+	margin-bottom: 1em;
+}
+
+section#publishers article:first-of-type {
+	padding-top: 1em;
+    border-top: 2px solid #d2d2d2;
+}
+
+section#publishers .publisher figure {
+    
+}
+
+section#publishers .publisher figure.publisher-check {
+    width: 22px;
+    float: right;
+    margin-bottom: 0.4em;
+    display: none;
+    margin-top: 0;
+}
+
+section#publishers .publisher span.publisher-check-text {
+    float: right;
+    margin-right: 0.25em;
+    font-size: 0.76em;
+    margin-top: 0.55em;
+    color: #449D44;
+    display: none;
+}
+
+section#publishers .publisher.publisher-selected span.publisher-check-text {
+	display: block;
+}
+
+
+section#publishers .publisher.publisher-selected figure.publisher-check {
+    display: block;
+     margin-top: 0;
+}
+
+section#publishers .publisher button#btn-select {
+	background-color: gray;
+    border-color: gray;
+}
+
+section#publishers .publisher.publisher-selected button#btn-select {
+	background-color: #5cb85c;
+    border-color: #5cb85c; 
+}
+
+section#publishers .publisher .publisher-content {
+	padding-top: 0.7em;
+}
+
+section#publishers .publisher .publisher-content .btn {
+    color: white;
+    float: left;
+    margin-right: 0.6em;
+    font-weight: bold;
+}
+
+section#publishers .publisher .publisher-content h1 {
+	color:#3a3a3a;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+	text-align: left;
+}
+
+section#publishers .publisher.publisher-selected .publisher-content h1 {
+    color: #449D44;
+}
+
+section#publishers .publisher .publisher-content p {
+	text-align: justify;
+	font-size: 0.9em;
+}
+
+section#publishers .publisher .publisher-content p.publisher-format {
+	font-size: 0.83em;
+    color: #848484;
+    font-weight: 400;
+    margin: 0;
+}
+
+section#publishers .publisher .publisher-content p.publisher-description {
+	margin-top: 0.7em;
+}
+
+section#publishers .publisher .publisher-content p.publisher-price {
+	display: block;
+    font-size: 1em;
+    font-weight: 300;
+    color: #616060;
+    margin: 0.25em 0 0.5em 0;
+}
+
+section#publishers .publisher .publisher-content p.publisher-price span {
+    font-weight: 500;
+    color: #14abe4;
+}
+
+section.quote {
+    margin-bottom: 2em;
+    text-align: left;
+}
+
+section.quote h1 {
+    color: #909090;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+    font-size: 1.1em;
+}
+
+section.quote h2 {
+    margin: 0 0 1em 0;
+    padding: 0.7em 0;
+    border-top: 2px solid #bbb8b8;
+    border-bottom: 2px solid #bbb8b8;
+    font-size: 1.13em;
+    color: #44BC52;
+}
+
+section.quote.modal-quote {
+	background: rgba(242,242,242,0.93);
+	display: none;
+    padding: 1em 4%;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+section.quote.modal-quote .btn#quote-close {
+	border-radius: 25px;	
+    color: #505050;
+	float: right;
+    margin: 0
+}
+
+
+section.quote.modal-quote h2 {
+    border: none;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    padding: 0;
+}
+
+section.quote.modal-quote #quote-total p {
+    display: inline;
+    font-size: 1em;
+    margin-right: 0.5em;
+}
+
+section.quote.modal-quote #quote-total p {
+    display: inline;
+    margin-right: 0.5em;
+}
+
+section.quote.modal-quote #quote-total p#quote-price {
+	display: inline;
+	font-size: 1em;
+}
+
+section.quote.modal-quote button {
+	display: inline;
+    margin-top: 0.7em;	
+}
+
+section.quote #quote-total p {
+    color: gray;
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+section.quote #quote-total p#quote-price {
+    font-size: 1.1em;
+    color: #abaaaa;
+    margin-bottom: 0.4em;
+}
+
+section.quote #quote-total p#quote-price span{
+    color: #14abe4;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+section.quote #quote-total p.notes {
+    font-size: 0.92em;
+    color: #a7a7a7;
+    margin-bottom: 1em;
+}
+
+section.quote button {
+    margin: auto;
+    display: block;
+}
+
+section.quote .quote-content {
+    background: #f2f2f2;
+    padding: 1em;
+}
+
+section#rigths {
+	background-color: #14abe4;
+	color: white;
+	text-align: right;
+	font-size: 0.85em;
+	padding: 0.6em 1em;
+}
+
+section#target {
+	background-image: url("/assets/img/proposal/imagentarget.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
+	padding: 0;
+}
+
+section#target .target {
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 2%;
+    width: 47%;
+}
+
+section#target .target .audience-content {
+    display: inline-block;
+    vertical-align: top;
+    width: 68%;
+}
+
+section#target .target figure {
+    width: 25%;
+    display: inline-block;
+    margin-right: 2%;
+    vertical-align: top;
+}
+
+section#target .target h1,
+section#target .target p {
+    text-align: left;
+}
+
+section#target .target h1 {
+    color: gray;
+    font-size: 1em;
+    margin: 0;
+    font-weight: 500;
+}
+
+section#target .target p.audience-name {
+    color: #00aff1;
+    font-weight: 400;
+    margin: 0.2em 0 0 0;
+}
+
+section#target, section#target .white-cap {
+	min-height: 200px; 
+	background-color: rgba(255, 255, 255, 0.92);
+}
+
+section#target h1 {
+	margin-bottom: 1em;
+}
+
+
+span.border-title {
+	border-bottom: 2px solid #14abe4;
+	display: block;
+	margin: auto;
+	padding-bottom: 0.3em;
+	width: 45%;
+}
+
+ul.publisher-dimensions {
+	list-style: none;
+	padding-left: 0;
+}
+
+ul.publisher-dimensions li {
+    font-size: 0.85em;
+    text-align: left;
+}
+
+ul.publisher-dimensions li:before {
+    content: "*";
+    color: #14abe4;
+    padding-right: 0.3em;
+    font-size: 1.5em;
+}
+
+.white-cap {
+	background-color: rgba(255, 255, 255, 0.85);
+	padding: 1em 5%;
+}
+
+@media only screen and (min-width: 700px) {
+
+    h1 {
+	    font-size: 1.4em;
+	}
+
+	header section#quote_title {
+	    margin: 4em auto;
+	    padding: 1.5em 5%;
+	}
+
+	main section {
+	    padding: 2.5em 5%;
+	}
+
+
+	section#contact #data h1 {
+	    font-size: 1.4em;
+	}
+
+	section#contact #data h2 {
+	    font-size: 1.2em;
+	}
+
+	section#contact #data p {
+	    font-size: 1em;
+	}
+
+	section#contact .row {
+	    margin-top: 2.2em;
+	}
+
+	section.content h1 {
+	    margin-bottom: 1.4em;
+	}
+
+	section.content p {
+	    font-size: 1.1em;
+	}
+
+	section#publishers .publisher {
+	    margin-bottom: 1em;
+	    padding-bottom: 1em;
+	}
+
+	section#publishers .publisher .publisher-content {
+	    padding-top: 0;
+	}
+
+	section#publishers .publisher .publisher-content .btn {
+	    font-size: 0.9em;
+	}
+
+	section#publishers .publisher .publisher-content h1 {
+	    font-size: 1.15em;
+	}
+
+	section#publishers .publisher .publisher-content p.publisher-format {
+	    font-size: 0.9em;
+	}
+
+	section#publishers .publisher .publisher-content p.publisher-price {
+	    font-size: 1.1em;
+	}
+
+    section#target .target {
+	    margin-right: 1%;
+	    width: 31%;
+	}
+
+	ul.publisher-dimensions li {
+	    font-size: 0.9em;
+	}
+
+	.text-content {
+		max-width: 1200px;
+		margin: auto;
+	}
+
+	.white-cap {
+	    padding: 2em 5%;
+	}
+}
+
+@media only screen and (min-width: 850px) {
+    
+    header section#quote_title {
+	    margin: 6em auto;
+	    padding: 2em 5%;
+	}
+
+	main section {
+	    padding: 3.2em 6%;
+	}
+}
+
+@media only screen and (min-width: 900px) {
+	header nav ul {
+	    padding: 0.5em 0;
+	}
+
+    section#contact #data {
+	    margin-top: 0;
+	}
+
+	section#contact #data p {
+	    margin-top: 0;
+	    margin-bottom: 0.4em;
+	}
+
+	section#contact .white-cap {
+	    padding: 3em 2% 1em 2%;
+	    background-color: rgba(255, 255, 255, 0.9);
+	}
+
+	section#rigths {
+	    font-size: 1em;
+	    padding: 1em;
+	}
+
+	section#target h1 {
+	    margin-bottom: 2.5em;
+	}
+
+	section#target .target {
+	    margin-right: 1%;
+	    width: 23%;
+	}
+
+	section#target .target h1 {
+	    font-size: 1.1em;
+	    font-weight: 600;
+	}
+
+	section#target .target p.audience-name {
+	    color: #049cd6;
+	    font-weight: 400;
+	}
+
+    .white-cap {
+	    padding: 2.5em 5%;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	.affix {
+		max-width: 390px;
+		position: fixed;
+		top: 20px;
+		width: 25%;
+	}
+
+	h1 {
+	    font-size: 1.5em;
+	}
+
+	header nav ul li {
+	    font-size: 1.05em;
+	}
+
+	header section#quote_title {
+	    max-width: 700px;
+	    width: 60%;
+	    margin: 12em auto;
+		padding: 1.5em 5%;
+	}
+
+	header section#quote_title h1 span.border-title {
+	    width: 33%;
+	}
+
+	section#contact #data p {
+	    margin: 0 12% 0.5em 0;
+	}
+
+	section#contact .white-cap {
+	    padding: 4em 2% 1em 2%;
+	}
+
+	section#contact figure#photo img {
+		width: 80%;
+		margin: 0 10%;
+	}
+
+	section#publishers .publishers-title {
+	    margin-bottom: 1.5em;
+	}
+
+	section#target h1 {
+	    margin-bottom: 3em;
+	    font-size: 1.5em;
+	}
+
+	section#target .target h1 {
+	    font-size: 1.2em;
+	}
+
+	section#target .target p.audience-name {
+	    font-size: 1.1em;
+	}
+
+	span.border-title {
+	    border-bottom: 3px solid #14abe4;
+	    padding-bottom: 0.4em;
+	    width: 15%;
+	}
+    
+}
