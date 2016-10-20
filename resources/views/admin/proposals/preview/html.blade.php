@@ -1,494 +1,35 @@
 @extends('layouts.public')
 
 @section('extra-css')
-	<style type="text/css">
-		
-		body {
-			font-size: 16px;
-		}
-
-		h1 {
-			color: #14abe4;
-			font-size: 1.2em;
-			font-weight: 400;
-			margin: 0;
-			text-align: center;
-		}
-
-		header {
-			background-image: url("/assets/img/proposal/bannerprincipal.png");
-			background-repeat: no-repeat;
-    		background-size: cover;
-    		min-height: 200px;
-			padding-bottom: 1em;
-			width: 100%;
-			background-position: center center;
-		}
-
-		header nav {
-			background-color: rgba(68, 68, 68, 0.56);
-			padding: 0.8em 3%;
-		}
-
-		header section#quote_title {
-		    display: block;
-		    background: rgba(255, 255, 255, 0.9);
-		    font-size: 16px;
-		    margin: 2em auto;
-		    padding: 1.4em 5%;
-		    text-align: center;
-		    width: 90%;
-		}
-
-		header section#quote_title h1 {
-		    margin: 0;
-		}
-
-		header section#quote_title h1 span {
-		    font-size: 1.4em;
-		    font-weight: bold;
-		}
-
-		header figure.logo {
-			width: 170px;
-		}
-
-		figure img {
-			width: 100%;
-		}
-
-		figure#logo-blue {
-		    width: 40%;
-		    margin: auto;
-		}
-
-		main {
-			background-color: white;
-		}
-
-		main section {
-			padding: 1.2em 5%;
-		}
-
-		section#contact {
-			background-image: url("/assets/img/proposal/imagencontacto.jpg");
-			background-repeat: no-repeat;
-    		background-size: cover;
-    		background-position: center center;
-    		padding: 0;
-		}
-
-
-
-		section#contact #data h1 {
-		    text-align: left;
-		    color: #404040;
-		    font-weight: bold;
-		    font-size: 1em;
-		}
-
-		section#contact #data h2 {
-			font-size: 1em;
-			margin: 0.5em 0;
-			font-weight: 200;
-			color: #4a4949;
-		}
-
-		section#contact #data p {
-			color: #505050;
-		    font-size: 0.85em;
-		    font-weight: 400;
-		    margin: 0.5em 1em 0 0;
-		    float: left;
-		}
-
-		section#contact #data i.fa {
-			font-size: 1.4em;	
-		}
-
-		section#contact .row {
-		    margin-top: 1.5em;
-		}
-
-		section#contact .white-cap {
-			padding: 1.5em 2%;
-			background-color: rgba(255, 255, 255, 0.9);
-		}
-
-		section.content {
-			text-align: center;
-		}
-
-		section.content h1 {
-			margin-bottom: 1em;
-		}
-
-		section.content p {
-			font-size: 1em;
-		}
-
-		section#publishers .publisher {
-			border-bottom: 2px solid #d2d2d2;
-			margin: 1em 0;
-			padding-bottom: 1em;
-		}
-
-		section#publishers article:first-of-type {
-			margin-top: 2em;
-		}
-		
-
-		section#publishers .publisher figure, 
-		section#publishers .publisher .publisher-content {
-			display: inline-block;
-			vertical-align: top;
-		}
-
-		section#publishers .publisher figure{
-			width: 39%;
-			display: inline-block;
-			vertical-align: top;
-		}
-
-		section#publishers .publisher .publisher-content {
-			width: 59%;
-			display: inline-block;
-			vertical-align: top;
-		}
-
-		section#publishers .publisher .publisher-content .btn {
-		    float: left;
-		    margin-left: 1em;
-		    font-weight: bold;
-		}
-
-		section#publishers .publisher .publisher-content h1 {
-			color:#3a3a3a;
-			font-size: 0.95em;
-			font-weight: bold;
-			margin-bottom: 0.5em;
-			text-align: left;
-		}
-
-		section#publishers .publisher .publisher-content p {
-			text-align: justify;
-			font-size: 0.9em;
-		}
-
-		section#publishers .publisher .publisher-content p.publisher-format {
-			font-size: 0.83em;
-		    color: #848484;
-		    font-weight: 400;
-		    margin: 0;
-		}
-
-		section#publishers .publisher .publisher-content p.publisher-description {
-			margin-top: 0.7em;
-		}
-
-		section#publishers .publisher .publisher-content p.publisher-price {
-		    font-size: 1em;
-		    font-weight: 500;
-		    color: #616060;
-		    float: left;
-		    margin: 0.25em 0 0 0;
-		}
-
-		ul.publisher-dimensions {
-			list-style: none;
-			padding-left: 0;
-		}
-
-		ul.publisher-dimensions li {
-		    font-size: 0.85em;
-		    text-align: left;
-		}
-
-		ul.publisher-dimensions li:before {
-		    content: "•";
-		    color: #14abe4;
-		    padding-right: 0.3em;
-		    font-size: 1.5em;
-		}
-
-		section#rigths {
-			background-color: #14abe4;
-			color: white;
-			text-align: right;
-			font-size: 0.85em;
-			padding: 0.6em 1em;
-		}
-
-		section#target {
-			background-image: url("/assets/img/proposal/imagentarget.jpg");
-			background-repeat: no-repeat;
-    		background-size: cover;
-    		background-position: center top;
-    		padding: 0;
-		}
-
-		section#target .target {
-		    display: inline-block;
-		    margin-bottom: 1em;
-		    margin-right: 2%;
-		    width: 47%;
-		}
-
-		section#target .target .audience-content {
-		    display: inline-block;
-		    vertical-align: top;
-		    width: 68%;
-		}
-
-		section#target .target figure {
-		    width: 25%;
-		    display: inline-block;
-		    margin-right: 2%;
-		    vertical-align: top;
-		}
-
-		section#target .target h1,
-		section#target .target p {
-		    text-align: left;
-		}
-
-		section#target .target h1 {
-		    color: gray;
-		    font-size: 1em;
-		    margin: 0;
-		    font-weight: 500;
-		}
-
-		section#target .target p.audience-name {
-		    color: #00aff1;
-		    font-weight: 400;
-		    margin: 0.2em 0 0 0;
-		}
-
-		section#target, section#target .white-cap {
-    		min-height: 200px; 
-		}
-
-		section#target h1 {
-			margin-bottom: 1em;
-		}
-
-
-		span.border-title {
-			border-bottom: 2px solid #14abe4;
-			display: block;
-			margin: auto;
-			padding-bottom: 0.3em;
-			width: 45%;
-		}
-
-		.white-cap {
-			background-color: rgba(255, 255, 255, 0.85);
-			padding: 1em 5%;
-		}
-
-		@media only screen and (min-width: 700px) {
-		    h1 {
-			    font-size: 1.4em;
-			}
-
-			header figure.logo {
-			    width: 220px;
-			}
-
-			header nav {
-			    padding: 1.2em 3%;
-			}
-
-			header section#quote_title {
-			    margin: 4em auto;
-			    padding: 1.5em 5%;
-			}
-
-			main section {
-			    padding: 2.5em 5%;
-			}
-
-
-			section#contact #data h1 {
-			    font-size: 1.4em;
-			}
-
-			section#contact #data h2 {
-			    font-size: 1.2em;
-			}
-
-			section#contact #data p {
-			    font-size: 1em;
-			}
-
-			section#contact .row {
-			    margin-top: 2.2em;
-			}
-
-			section.content h1 {
-			    margin-bottom: 1.4em;
-			}
-
-			section.content p {
-			    font-size: 1.1em;
-			}
-
-			section#publishers .publisher {
-			    margin: 2em 0;
-			    padding-bottom: 2em;
-			}
-
-			section#publishers .publisher .publisher-content .btn {
-			    font-size: 0.9em;
-			}
-
-			section#publishers .publisher .publisher-content p.publisher-format {
-			    font-size: 0.9em;
-			}
-
-			section#publishers .publisher .publisher-content p.publisher-price {
-			    font-size: 1.1em;
-			}
-
-			section#publishers .publisher .publisher-content h1 {
-			    font-size: 1.15em;
-			}
-
-		    section#target .target {
-			    margin-right: 1%;
-			    width: 31%;
-			}
-
-			ul.publisher-dimensions li {
-			    font-size: 0.9em;
-			}
-
-			.text-content {
-				max-width: 1200px;
-				margin: auto;
-			}
-
-			.white-cap {
-			    padding: 2em 5%;
-			}
-		}
-
-		@media only screen and (min-width: 850px) {
-		    header section#quote_title {
-			    margin: 6em auto;
-			    padding: 2em 5%;
-			}
-
-			main section {
-			    padding: 3.2em 6%;
-			}
-		}
-
-		@media only screen and (min-width: 900px) {
-		    
-		    section#contact #data {
-			    margin-top: 0;
-			}
-
-			section#contact #data p {
-			    margin-top: 0;
-			    margin-bottom: 0.4em;
-			}
-
-			section#contact .white-cap {
-			    padding: 3em 2% 1em 2%;
-			    background-color: rgba(255, 255, 255, 0.9);
-			}
-
-			section#rigths {
-			    font-size: 1em;
-			    padding: 1em;
-			}
-
-			section#target h1 {
-			    margin-bottom: 2.5em;
-			}
-
-			section#target .target {
-			    margin-right: 1%;
-			    width: 23%;
-			}
-
-			section#target .target h1 {
-			    font-size: 1.1em;
-			    font-weight: 600;
-			}
-
-			section#target .target p.audience-name {
-			    color: #049cd6;
-			    font-weight: 400;
-			}
-
-		    .white-cap {
-			    padding: 2.5em 5%;
-			}
-		}
-
-		@media only screen and (min-width: 1000px) {
-			h1 {
-			    font-size: 1.5em;
-			}
-
-			header section#quote_title {
-			    max-width: 700px;
-			    width: 60%;
-			    margin: 12em auto;
-    			padding: 1.5em 5%;
-			}
-
-			header section#quote_title h1 span.border-title {
-			    width: 33%;
-			}
-
-			section#contact #data p {
-			    margin: 0 12% 0.5em 0;
-			}
-
-			section#contact .white-cap {
-			    padding: 4em 2% 1em 2%;
-			}
-
-			section#contact figure#photo img {
-				width: 80%;
-   				margin: 0 10%;
-			}
-
-			section#target h1 {
-			    margin-bottom: 3em;
-			    font-size: 1.5em;
-			}
-
-			section#target .target h1 {
-			    font-size: 1.2em;
-			}
-
-			section#target .target p.audience-name {
-			    font-size: 1.1em;
-			}
-
-			span.border-title {
-			    border-bottom: 3px solid #14abe4;
-			    padding-bottom: 0.4em;
-			    width: 15%;
-			}
-		    
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="/assets/css/proposal/style.css">
 @endsection
 
 @section('content')
+	<section class="quote modal-quote">
+		<button class="btn btn-xs btn-default" id="quote-close"><i class="fa fa-times"></i></button>
+		<h2>0 Medios seleccionados</h2>
+		<div id="quote-total">
+			<p>Total</p>
+			<p id="quote-price"><span>0</span> + IVA</p>
+		</div>
+		<button class="btn btn-sm btn-danger"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
+	</section> 
+
 	<header>
 		<nav>
-			<figure class="logo">
-				<img src="/assets/img/proposal/logotodoblanco.png" alt="">
-			</figure>
+			<div class="row">
+				<figure class="logo col-xs-6 col-sm-3">
+					<img src="/assets/img/proposal/logotodoblanco.png" alt="">
+				</figure>
+				<div class="col-xs-6 col-sm-9 hidden-xs">
+					<ul>
+						<li><a href="#contact" class="arctic_scroll">Contacto</a></li>
+						<li><a href="#publishers" class="arctic_scroll">Medios para campaña</a></li>
+						<li><a href="#justification" class="arctic_scroll">Justificación de propuesta</a></li>
+					</ul>		
+				</div>
+			</div>
+			
 		</nav>
 		<section id="quote_title">
 			<h1>
@@ -540,41 +81,73 @@
 				</div>
 			</div>
 		</section>
-		<section id="publishers" class="content text-content">
-			<h1><strong>Medios</strong> para la campaña
-				<span class="border-title"></span>
-			</h1>
-			<p>
-				Según el tipo de producto, el perfil del cliente y su presupuesto; proponemos los siguientes medios:
-			</p>
-			@foreach($proposal->viewSpaces as $space)
-				<article class="publisher">
-					<figure>
-						<img src="http://system.dondepauto.co/images/marketplace/big/1147755221461611361.png" alt="">
-					</figure>
-					<div class="publisher-content">
-						<h1>{{ $space->pivot_title }}</h1>
-						<p class="publisher-format">
-							{{ $space->sub_category_name }} / {{ $space->format_name }}
-						</p>
-						@if($space->dimensions)
-							<ul class="publisher-dimensions">
-								<li>
-									{{ $space->dimensions }}
-								</li>
-							</ul>
-						@endif
-						<p class="publisher-description">
-							{!! $space->pivot_description !!}
-						</p>
-						<p class="publisher-price">
-							$ {{ number_format($space->pivot_public_price, 0, ',', '.') }} 
-						</p>
-						<a href="{{ $space->url_marketplace }}" target="_blank" class="btn btn-sm btn-warning">Ver más</a>
+		
+		<div class="container">
+			<section id="publishers" class="content">
+				<div class="col-xs-12 publishers-title">
+					<h1><strong>Medios</strong> para la campaña
+						<span class="border-title"></span>
+					</h1>
+					<p>
+						Según el tipo de producto, el perfil del cliente y su presupuesto; proponemos los siguientes medios:
+					</p>
+				</div>
+				<div class="col-xs-12 col-md-8">
+					@foreach($proposal->viewSpaces as $space)
+						<article class="publisher publisher-selected">
+							<div class="row">
+								<div class="col-xs-12">
+									<figure class="publisher-check">
+										<img src="/assets/img/proposal/seleccionar.png" alt="">
+									</figure>
+									<span class="publisher-check-text">
+										seleccionado
+									</span>
+								</div>	
+								<figure class="col-xs-12 col-sm-5 col-md-4">
+									<img src="http://system.dondepauto.co/images/marketplace/big/1083_33539758064.jpg" alt="">
+								</figure>
+								<div class="publisher-content col-xs-12 col-sm-7 col-md-8">
+									<h1>{{ $space->pivot_title }}</h1>
+									<p class="publisher-format">
+										{{ $space->sub_category_name }} / {{ $space->format_name }}
+									</p>
+									@if($space->dimensions)
+										<ul class="publisher-dimensions">
+											<li>
+												<strong>Dimensiones: </strong>{{ $space->dimensions }}
+											</li>
+										</ul>
+									@endif
+									<p class="publisher-description">
+										{!! $space->pivot_description !!}
+									</p>
+									<p class="publisher-price">
+										<span>$ {{ number_format($space->pivot_public_price, 0, ',', '.') }} </span> por {{ $space->period }} 
+									</p>
+									<button id="btn-select" class="btn btn-sm btn-success"><i class="fa fa-check-square-o"></i> Seleccionar</button>
+									<a href="{{ $space->url_marketplace }}" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i> Ver más</a>
+								</div>	
+							</div>
+							
+						</article>
+					@endforeach
+				</div>
+			</section>
+
+			<section class="quote content col-xs-12 col-md-4 scrollspy">
+				<div id="dinamic-quote" class="quote-content" data-spy="top-affix">
+					<h1>Medios seleccionados</h1>
+					<h2>0 Medios seleccionados</h2>
+					<div id="quote-total">
+						<p>Total</p>
+						<p id="quote-price"><span>0</span> + IVA</p>
+						<p class="notes">* Para recibir más información y realizar la compra comunicate con nuestra área encargada</p>
 					</div>
-				</article>
-			@endforeach
-		</section>
+					<button class="btn btn-sm btn-danger"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
+				</div>	
+			</section> 	
+		</div>
 	</main>
 
 	<footer>
@@ -585,10 +158,10 @@
 						<img src="/assets/img/logodonde.png" alt="Logo DóndePauto">	
 					</figure>
 					<div class="row">
-						<figure id="photo" class="col-xs-offset-1 col-xs-3 col-md-2">
+						<figure id="photo" class="col-xs-offset-1 col-sm-offset-2 col-md-offset-1 col-xs-3 col-md-2">
 							<img src="/assets/img/proposal/imagenleo.png" alt="">	
 						</figure>
-						<div id="data" class="col-xs-7 col-sm-offset-1 col-sm-6 col-md-offset-0 col-md-8">
+						<div id="data" class="col-xs-8 col-sm-6 col-md-8">
 							<div id="contact-role" class="col-xs-12 col-md-6">
 								<h1>Leonardo Rueda Plazas</h1>	
 								<h2>Director General de Marketing</h2>
@@ -611,4 +184,43 @@
 		</section>	
 	</footer>
 
+	<script src="/assets/js/jquery-2.1.1.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	<script>
+	    $.fn.arcticScroll = function (options) {
+
+	        var defaults = {
+	            elem: $(this),
+	            speed: 500
+	        };
+
+	        var options = $.extend(defaults, options);
+
+	        options.elem.click(function(event){    
+	            event.preventDefault();
+	            var offset = ($(this).attr('data-offset')) ? $(this).attr('data-offset') : false,
+	                position = ($(this).attr('data-position')) ? $(this).attr('data-position') : false;         
+	            if (offset) {
+	                var toMove = parseInt(offset);
+	              $('html,body').stop(true, false).animate({scrollTop: ($(this.hash).offset().top + toMove) }, options.speed);
+	            } else if (position) {
+	              var toMove = parseInt(position);
+	              $('html,body').stop(true, false).animate({scrollTop: toMove }, options.speed);
+	            } else {
+	              $('html,body').stop(true, false).animate({scrollTop: ($(this.hash).offset().top) }, options.speed);
+	            }
+	        });
+
+	    };
+
+		$('#dinamic-quote').affix({
+		    offset: {
+		        top: $('#dinamic-quote').offset().top
+		    }
+		});	
+
+		$(".arctic_scroll").arcticScroll({
+            speed: 800
+        });      
+	</script>
 @endsection
