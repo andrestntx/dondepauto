@@ -6,13 +6,13 @@
 
 @section('content')
 	<section class="quote modal-quote">
-		<button class="btn btn-xs btn-default" id="quote-close"><i class="fa fa-times"></i></button>
+		<a class="btn btn-xs btn-default arctic_scroll" href="#dinamic-quote" id="quote-close"><i class="fa fa-times"></i></a>
 		<h2>0 Medios seleccionados</h2>
 		<div id="quote-total">
 			<p>Total</p>
 			<p id="quote-price"><span>0</span> + IVA</p>
 		</div>
-		<button class="btn btn-sm btn-danger"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
+		<button class="btn btn-sm btn-danger "><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
 	</section> 
 
 	<header>
@@ -94,7 +94,7 @@
 				</div>
 				<div class="col-xs-12 col-md-8">
 					@foreach($proposal->viewSpaces as $space)
-						<article class="publisher publisher-selected">
+						<article class="publisher" data-price="{{ $space->pivot_public_price }}" data-publisherId="{{ $space->id }}">
 							<div class="row">
 								<div class="col-xs-12">
 									<figure class="publisher-check">
@@ -123,9 +123,9 @@
 										{!! $space->pivot_description !!}
 									</p>
 									<p class="publisher-price">
-										<span>$ {{ number_format($space->pivot_public_price, 0, ',', '.') }} </span> por {{ $space->period }} 
+										<span>$ {{ number_format($space->pivot_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
 									</p>
-									<button id="btn-select" class="btn btn-sm btn-success"><i class="fa fa-check-square-o"></i> Seleccionar</button>
+									<button class="btn btn-sm btn-success btn-select"><i class="fa fa-check-square-o"></i> Seleccionar</button>
 									<a href="{{ $space->url_marketplace }}" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i> Ver más</a>
 								</div>	
 							</div>
@@ -144,7 +144,7 @@
 						<p id="quote-price"><span>0</span> + IVA</p>
 						<p class="notes">* Para recibir más información y realizar la compra comunicate con nuestra área encargada</p>
 					</div>
-					<button class="btn btn-sm btn-danger"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
+					<button class="btn btn-sm btn-danger" data-url="{{ route('proposals.preview-pdf', $proposal) }}"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
 				</div>	
 			</section> 	
 		</div>
@@ -186,41 +186,14 @@
 
 	<script src="/assets/js/jquery-2.1.1.js"></script>
 	<script src="/assets/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+	<script src="/assets/js/plugins/number/jquery.number.min.js"></script>
+	<script src="/assets/js/services/proposal/preview.js"></script>
+	
 	<script>
-	    $.fn.arcticScroll = function (options) {
-
-	        var defaults = {
-	            elem: $(this),
-	            speed: 500
-	        };
-
-	        var options = $.extend(defaults, options);
-
-	        options.elem.click(function(event){    
-	            event.preventDefault();
-	            var offset = ($(this).attr('data-offset')) ? $(this).attr('data-offset') : false,
-	                position = ($(this).attr('data-position')) ? $(this).attr('data-position') : false;         
-	            if (offset) {
-	                var toMove = parseInt(offset);
-	              $('html,body').stop(true, false).animate({scrollTop: ($(this.hash).offset().top + toMove) }, options.speed);
-	            } else if (position) {
-	              var toMove = parseInt(position);
-	              $('html,body').stop(true, false).animate({scrollTop: toMove }, options.speed);
-	            } else {
-	              $('html,body').stop(true, false).animate({scrollTop: ($(this.hash).offset().top) }, options.speed);
-	            }
-	        });
-
-	    };
-
-		$('#dinamic-quote').affix({
-		    offset: {
-		        top: $('#dinamic-quote').offset().top
-		    }
-		});	
-
-		$(".arctic_scroll").arcticScroll({
-            speed: 800
-        });      
+	    $(document).ready(function() {
+            PreviewService.init();
+        });
 	</script>
+
 @endsection

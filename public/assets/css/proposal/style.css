@@ -56,6 +56,10 @@ header nav ul li a:hover {
     color: white;
 }
 
+header nav ul li a:focus {
+	color: #14ABE5;
+}
+
 header nav ul li a:active {
     color: #14ABE4;
 }
@@ -85,7 +89,7 @@ figure img {
 }
 
 figure#logo-blue {
-    width: 40%;
+    width: 50%;
     margin: auto;
 }
 
@@ -219,12 +223,12 @@ section#publishers .publisher.publisher-selected figure.publisher-check {
      margin-top: 0;
 }
 
-section#publishers .publisher button#btn-select {
+section#publishers .publisher button.btn-select {
 	background-color: gray;
     border-color: gray;
 }
 
-section#publishers .publisher.publisher-selected button#btn-select {
+section#publishers .publisher.publisher-selected button.btn-select {
 	background-color: #5cb85c;
     border-color: #5cb85c; 
 }
@@ -310,6 +314,14 @@ section.quote.modal-quote {
     position: fixed;
     width: 100%;
     z-index: 1;
+}
+
+section.quote.modal-quote.modal-show {
+	display: block;
+}
+
+section.quote.modal-quote.modal-show.modal-close, section.quote.modal-quote.modal-close  {
+	display: none;
 }
 
 section.quote.modal-quote .btn#quote-close {
@@ -483,6 +495,10 @@ ul.publisher-dimensions li:before {
 	    font-size: 1.4em;
 	}
 
+	figure#logo-blue {
+	    width: 40%;
+	}
+
 	header section#quote_title {
 	    margin: 4em auto;
 	    padding: 1.5em 5%;
@@ -490,6 +506,10 @@ ul.publisher-dimensions li:before {
 
 	main section {
 	    padding: 2.5em 5%;
+	}
+
+	section.quote.modal-quote.modal-show {
+		display: none;
 	}
 
 
@@ -563,6 +583,10 @@ ul.publisher-dimensions li:before {
 
 @media only screen and (min-width: 850px) {
     
+    figure#logo-blue {
+	    width: 35%;
+	}
+
     header section#quote_title {
 	    margin: 6em auto;
 	    padding: 2em 5%;
@@ -571,6 +595,8 @@ ul.publisher-dimensions li:before {
 	main section {
 	    padding: 3.2em 6%;
 	}
+
+
 }
 
 @media only screen and (min-width: 900px) {

@@ -207,6 +207,51 @@ var QuoteService = function() {
         return "(" + number + "%)";
     }
 
+    function initSendProposal() {
+        $("#sendProposal").click(function(e) {   
+            swal({
+                text: '¿Está seguro de enviar esta propuesta?',
+                title: 'Enviar propuesta',
+                type: "warning",
+                confirmButtonText: "Confirmar",
+                confirmButtonColor: "#f8ac59",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.post("/propuestas/" + proposal.id + "/send", {}, function( data ) {
+                        if(data.success) {
+                            swal({
+                                "title": "Propuesta enviada", 
+                                "type": "success",
+                                closeOnConfirm: true,
+                            });
+                        }
+                        else {
+                            swal({
+                                "title": "Hubo un error", 
+                                "type": "warning",
+                                closeOnConfirm: true,
+                            });
+                        }
+                    }).fail(function(data) {
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Código ' + data.status,
+                            type: "warning",
+                        });
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
+    }
+
     function getHtmlValue(price, per)
     {
         return  $("<span></span").append(
@@ -410,6 +455,7 @@ var QuoteService = function() {
             initTable(urlSearch);
         },
         initProposal: function(){
+            initSendProposal();
             initContacts();
             initDrawAdvertiser();
             initModalDiscount();
