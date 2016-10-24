@@ -3,7 +3,7 @@
 @section('extra-css')
     <link href="/assets/css/plugins/switchery/switchery.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.css" rel="stylesheet">
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="/assets/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
 
     <link href="/assets/css/prueba.css" rel="stylesheet">
@@ -69,6 +69,14 @@
         <li><a href="#">Anunciantes</a></li>
         <li class="active"><strong>{{ ucfirst($advertiser->company) }}</strong></li>
     </ol>
+@endsection
+
+@section('action')
+    <div style="padding: 1em;">
+        <a href="{{ route('proposals.preview-html', $proposal) }}" class="btn btn-success" target="_blank" title="HTML"><i class="fa fa-list-alt"></i></a>
+        <a href="{{ route('proposals.preview-pdf', $proposal) }}" class="btn btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i></a>
+        <button class="btn btn-primary" title="Enviar propuesta" id="sendProposal"><i class="fa fa-paper-plane"></i> Enviar propuesta</button>
+    </div>
 @endsection
 
 @section('content')   
@@ -205,8 +213,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
 
     <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
+
     <!-- Sweet alert -->
-    <script src="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.js"></script>
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
     <!-- blueimp gallery -->
     <script src="/assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
     <script src="/assets/js/plugins/number/jquery.number.min.js"></script>

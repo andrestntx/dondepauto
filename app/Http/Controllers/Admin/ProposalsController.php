@@ -63,12 +63,13 @@ class ProposalsController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param Proposal $proposal
      * @return $this
      */
-    public function previewPdf(Proposal $proposal)
+    public function previewPdf(Request $request, Proposal $proposal)
     {
-        $proposal->load(['quote.advertiser', 'viewSpaces']);
+        $proposal = $this->proposalFacade->select($proposal, $request->get("spaces"));
 
         return \PDF::loadView('admin.proposals.preview.pdf', [
             'proposal' => $proposal,
@@ -136,4 +137,10 @@ class ProposalsController extends Controller
         $this->proposalFacade->addProposalsSpace($space, $request->get('proposals'));
         return ['success' => 'true'];
     }
+
+    public function send(Request $request, Proposal $proposal)
+    {
+        return ['success' => 'true'];
+    }
+
 }

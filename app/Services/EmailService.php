@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
+use App\Entities\Proposal\Proposal;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Mail;
 
@@ -250,6 +251,23 @@ class EmailService
         }
 
         return true;
+    }
+
+    public function notifyProposalSelected(Proposal $proposal)
+    {
+        $fromEmail = self::$fromEmail;
+        $fromName = "Notificaciones DóndePauto";
+
+        Mail::send('emails.notifications.proposal-selected', [
+            'proposal'      => $proposal,
+            'advertiser'    => $proposal->getAdvertiser(),
+            'spaces'        => $proposal->viewSpaces],
+            function ($m) use ($fromEmail, $fromName, $proposal) {
+                $m->from($fromEmail, $fromName)
+                    ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
+                    //->bcc('leonardo@dondepauto.co', 'Leonardo Rueda')
+                    ->subject($proposal->getAdvertiser()->company . ", ha seleccionado " . $proposal->viewSpaces->count() . " espacios de la propuesta");
+            });
     }
 
 }

@@ -40,5 +40,26 @@ class ProposalService extends ResourceService
     {
         return $this->repository->sync($proposal, $space, $data);
     }
+
+    /**
+     * @param Proposal $proposal
+     * @return $this
+     */
+    public function loadProposal(Proposal $proposal)
+    {
+        return $proposal->load(['quote.advertiser', 'viewSpaces']);
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @param array $spacesId
+     * @return $this
+     */
+    public function loadProposalSpaces(Proposal $proposal, array $spacesId)
+    {
+        return $proposal->load(['quote.advertiser', 'viewSpaces' => function($query) use ($spacesId) {
+            $query->whereIn("view_spaces.id", $spacesId);
+        }]);
+    }
     
 }

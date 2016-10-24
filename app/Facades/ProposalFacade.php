@@ -11,6 +11,7 @@ namespace App\Facades;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Proposal\Proposal;
+use App\Services\EmailService;
 use App\Services\ProposalService;
 use App\Services\Space\SpaceService;
 
@@ -23,11 +24,13 @@ class ProposalFacade
      * ProposalFacade constructor.
      * @param ProposalService $service
      * @param SpaceService $spaceService
+     * @param EmailService $emailService
      */
-    public function __construct(ProposalService $service, SpaceService $spaceService)
+    public function __construct(ProposalService $service, SpaceService $spaceService, EmailService $emailService)
     {
         $this->service = $service;
         $this->spaceService = $spaceService;
+        $this->emailService = $emailService;
     }
 
     /**
@@ -64,5 +67,24 @@ class ProposalFacade
     {
         $this->service->discount($proposal, $space, $data);
         return $this->spaceService->getViewSpace($space->id, $proposal);
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @param null $spaces
+     * @return $this
+     */
+    public function select(Proposal $proposal, $spaces = null)
+    {
+        if(is_array($spaces) && count($spaces) > 0) {
+            $proposal = $this->service->loadProposalSpaces($proposal, array_map("intval", $spaces));
+        }
+        else {
+            $proposal = $this->service->loadProposal($proposal);
+        }
+
+        $this->emailService->notifyProposalSelected($proposal);
+
+        return $proposal;
     }
 }
