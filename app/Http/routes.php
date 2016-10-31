@@ -44,6 +44,11 @@ Route::get('propuestas/{proposals}/preview/html', [
     'uses'  => 'Admin\ProposalsController@previewHtml'
 ]);
 
+Route::post('propuestas/{proposals}/select', [
+    'as'    => 'proposals.select',
+    'uses'  => 'Admin\ProposalsController@select'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
@@ -218,11 +223,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('propuestas/{proposals}/send', [
             'as'    => 'proposals.send',
             'uses'  => 'Admin\ProposalsController@send'
-        ]);
-
-        Route::post('propuestas/{proposals}/select', [
-            'as'    => 'proposals.select',
-            'uses'  => 'Admin\ProposalsController@select'
         ]);
 
         Route::get('propuestas/{proposals}', [
