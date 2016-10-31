@@ -212,29 +212,31 @@
                                     </div>
                                 </div>
                             @endforeach 
-                                <div class="col-xs-12 col-sm-6 col-md-5">
-                                    <div class="row">
-                                        <figure class="col-xs-2 col-sm-3 col-md-2">
-                                            <img src="/assets/img/proposal/ciudades.png" alt="Ciudades" class="img-responsive">
-                                        </figure>
-                                        <div class="col-xs-10 col-sm-9 col-md-10">
-                                            <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Ciudades</h1>
-                                            <p class="text-success">
-                                                {{ $proposal->cities->implode('name', ', ') }}
-                                            </p>
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-6 col-md-5">
+                                        <div class="row">
+                                            <figure class="col-xs-2 col-sm-3 col-md-2">
+                                                <img src="/assets/img/proposal/ciudades.png" alt="Ciudades" class="img-responsive">
+                                            </figure>
+                                            <div class="col-xs-10 col-sm-9 col-md-10">
+                                                <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Ciudades</h1>
+                                                <p class="text-success">
+                                                    {{ $proposal->cities->implode('name', ', ') }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
-                                    <div class="row">
-                                        <figure class="col-xs-2 col-sm-3 col-md-2">
-                                            <img src="/assets/img/proposal/intereses.png" alt="Escenarios de impacto" class="img-responsive">
-                                        </figure>
-                                        <div class="col-xs-10 col-sm-9 col-md-10">
-                                            <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Escenarios de impacto</h1>
-                                            <p class="text-success">
-                                                {{ $proposal->impactScenes->implode('name', ', ') }}
-                                            </p>
+                                    <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
+                                        <div class="row">
+                                            <figure class="col-xs-2 col-sm-3 col-md-2">
+                                                <img src="/assets/img/proposal/intereses.png" alt="Escenarios de impacto" class="img-responsive">
+                                            </figure>
+                                            <div class="col-xs-10 col-sm-9 col-md-10">
+                                                <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Escenarios de impacto</h1>
+                                                <p class="text-success">
+                                                    {{ $proposal->impactScenes->implode('name', ', ') }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
