@@ -29,6 +29,15 @@ class Audience extends Entity
     }
 
     /**
+     * @param $value
+     * @return mixed
+     */
+    public function getNameAttribute($value)
+    {
+        return str_replace("'", ".", $value);
+    }
+
+    /**
      * @return string
      */
     public function getNameTypeNameAttribute()
