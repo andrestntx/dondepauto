@@ -5,13 +5,16 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <div class="row">
                     <div class="col-xs-8">
-                        <h2 class="modal-title h4" style="font-size: 15px;">
+                        <h2 class="modal-title h4" style="font-size: 17px;">
                             <strong>Medio:</strong> <a id="publisher_company" href="#" target="_blank"></a><br>
-                            <strong>Espacio:</strong>  <span id="space_name" class="h5" style="font-size:15px;"></span>
+                            <strong>Espacio:</strong>  <span id="space_name" class="h5 text-succcess" style="font-size:20px;"></span>
                         </h2>
                     </div>
-                    <div class="col-xs-4 timeline" id="prueba">
-
+                    <div class="col-xs-4">
+                        <div id="prueba">
+                            
+                        </div>
+                        <p>Precio de oferta: <span id="space-public-price"></span></p>
                     </div>
                 </div>
             </div>

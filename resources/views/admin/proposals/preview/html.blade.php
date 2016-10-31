@@ -10,12 +10,12 @@
 		<h2>0 Medios seleccionados</h2>
 		<div id="quote-total">
 			<p>Total</p>
-			<p id="quote-price"><span>0</span> + IVA</p>
+			<p id="quote-price"><span>0</span> IVA incluido</p>
 		</div>
-		<button class="btn btn-sm btn-danger "><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
+		<button class="btn btn-sm btn-danger" data-url="{{ route('proposals.select', $proposal) }}" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Generando cotización"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
 	</section> 
 
-	<header>
+	<header id="iva" data-iva="{{ env('IVA') }}">
 		<nav>
 			<div class="row">
 				<figure class="logo col-xs-6 col-sm-3">
@@ -65,19 +65,42 @@
 					<h1> <strong>Target</strong> para la campaña
 						<span class="border-title"></span>
 					</h1>
-					@foreach($proposal->getAudiencesArray() as $type => $audiences)
+					@foreach($proposal->spaceAudiences->groupBy("type_name") as $type => $audiences)
 						<div class="target">
 							<figure>
-								<img src="{{ $audiences['img'] }}" alt="{{ $type }}">
+								<img src="{{ $audiences->first()->type_img }}" alt="{{ $type }}">
 							</figure>
 							<div class="audience-content">
 								<h1>{{ $type }}</h1>
 								<p class="audience-name">
-									{{ $audiences['names'] }}
+									{{ $audiences->implode('name', ', ') }}
 								</p>
 							</div>
 						</div>
 					@endforeach	
+						<div class="target">
+							<figure>
+								<img src="/assets/img/proposal/ciudades.png" alt="Ciudades">
+							</figure>
+							<div class="audience-content">
+								<h1>Ciudades</h1>
+								<p class="audience-name">
+									{{ $proposal->cities->implode('name', ', ') }}
+								</p>
+							</div>
+						</div>
+
+						<div class="target">
+							<figure>
+								<img src="/assets/img/proposal/intereses.png" alt="Escenarios de impacto">
+							</figure>
+							<div class="audience-content">
+								<h1>Escenarios de impacto</h1>
+								<p class="audience-name">
+									{{ $proposal->impactScenes->implode('name', ', ') }}
+								</p>
+							</div>
+						</div>
 				</div>
 			</div>
 		</section>
@@ -139,12 +162,43 @@
 				<div id="dinamic-quote" class="quote-content" data-spy="top-affix">
 					<h1>Medios seleccionados</h1>
 					<h2>0 Medios seleccionados</h2>
-					<div id="quote-total">
-						<p>Total</p>
-						<p id="quote-price"><span>0</span> + IVA</p>
-						<p class="notes">* Para recibir más información y realizar la compra comunicate con nuestra área encargada</p>
+					
+					<div id="quote-subtotal" class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
+								<p>Subtotal</p>
+							</div>
+							<div class="col-xs-5 col-md-6">
+								<p id="quote-subtotal-price">0</p>
+							</div>
+						</div>
+					</div>	
+					
+					<div id="quote-iva" class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
+								<p>IVA</p>
+							</div>
+							<div class="col-xs-5 col-md-6">
+								<p id="quote-iva-price">0</p>
+							</div>
+							</div>
+					</div>	
+					
+					<div id="quote-total" class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
+								<p>Total</p>
+							</div>
+							<div class="col-xs-5 col-md-6">
+								<p id="quote-price">0</p>
+							</div>
+						</div>
 					</div>
-					<button class="btn btn-sm btn-danger" data-url="{{ route('proposals.preview-pdf', $proposal) }}"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
+					
+					<p class="notes">* Para recibir más información y realizar la compra comunicate con nuestra área encargada</p>
+					
+					<button class="btn btn-sm btn-danger" data-url="{{ route('proposals.select', $proposal) }}" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Generando cotización"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
 				</div>	
 			</section> 	
 		</div>

@@ -60,6 +60,8 @@ class ProposalRepository extends BaseRepository
     }
 
     /**
+     * Edit the pivot attributes of proposal_space table
+     *
      * @param Proposal $proposal
      * @param Space $space
      * @param array $data
@@ -70,5 +72,36 @@ class ProposalRepository extends BaseRepository
         return $proposal->spaces()->updateExistingPivot($space->id, $data);
     }
 
+    /**
+     * @param Proposal $proposal
+     * @param array $spaceIds
+     * @param array $data
+     * @return mixed
+     */
+    public function syncSpaces(Proposal $proposal, array $spaceIds, array $data)
+    {
+        foreach($spaceIds as $id) {
+            $proposal->spaces()->updateExistingPivot($id, $data);
+        }
+
+        return $proposal->spaces;
+    }
+
+
+    /**
+     * @param Proposal $proposal
+     * @param array $spacesId
+     * @return array
+     */
+    public function getSpacesIdNotIn(Proposal $proposal, array $spacesId)
+    {
+        $ids = [];
+        $collection = $proposal->viewSpaces()->whereNotIn("view_spaces.id", $spacesId)->select("view_spaces.id")->get("id");
+        foreach ($collection as $item) {
+            array_push($ids, $item->id);
+        }
+
+        return $ids;
+    }
 
 }

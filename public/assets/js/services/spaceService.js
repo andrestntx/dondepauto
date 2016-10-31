@@ -7,6 +7,21 @@ var SpaceService = function() {
     var table;
     var urlSearch;
 
+    function truncate(string, max, defaultValue) {
+        if(string && string.length > max) {
+            return $.trim(string)
+            .substring(0, max)
+            .split(" ")
+            .slice(0, -1)
+            .join(" ") + " ...";    
+        }
+        else if(string && string.length > 0) {
+            return string;
+        }
+        
+        return defaultValue;
+    }
+
     function initTableProposal(urlSearch) {
         urlSearch = urlSearch;
 
@@ -19,41 +34,42 @@ var SpaceService = function() {
             "deferRender": true,
             "columns": [
                 { "data": null, "name": "id", "orderable": false, "searchable": false},
-                { "data": "publisher_company", "name": "publisher_company" },
-                { "data": "name", "name": "name" }, // 2
-                { "data": "sub_category_name_format_name", "name": "sub_category_name_format_name" }, // 3
+                { "data": "publisher_company", "name": "publisher_company" }, // 1
+                { "data": "pivot_title", "name": "pivot_title" }, // 2
+                { "data": "pivot_description", "name": "pivot_description" }, // 3
+                { "data": "sub_category_name_format_name", "name": "sub_category_name_format_name" }, // 4
 
-                { "data": "pivot_minimal_price", "data": "pivot_minimal_price" }, // 4
-                { "data": "pivot_markup_price", "name": "pivot_markup_price" },
-                { "data": "pivot_discount", "name": "pivot_discount" }, // 6
-                { "data": "pivot_commission_price", "name": "pivot_commission_price" }, // 7
+                { "data": "pivot_minimal_price", "data": "pivot_minimal_price" }, // 5
+                { "data": "pivot_markup_price", "name": "pivot_markup_price" }, // 6
+                { "data": "pivot_discount", "name": "pivot_discount" }, // 7
                 { "data": "public_price", "name": "public_price" }, // 8
+                { "data": "pivot_commission_price", "name": "pivot_commission_price" }, // 9
                 
-                { "data": "category_id", "name": "category_id" }, // 9
-                { "data": "sub_category_id", "name": "sub_category_id" },
-                { "data": "format_id", "name": "format_id" },
-                { "data": "publisher_id", "name": "publisher_id" },
+                { "data": "category_id", "name": "category_id" }, // 10
+                { "data": "sub_category_id", "name": "sub_category_id" }, // 11
+                { "data": "format_id", "name": "format_id" }, // 12
+                { "data": "publisher_id", "name": "publisher_id" }, 
                 { "data": "city_id", "name": "city_id" },
                 { "data": "tags", "name": "tags" },
-                { "data": "description", "name": "description" }, // 15
+                { "data": "description", "name": "description" }, // 16
                 { "data": "address", "name": "address" },
-                { "data": "impact_scene_id", "name": "impact_scene_id", "searchable": false }, // 17
+                { "data": "impact_scene_id", "name": "impact_scene_id", "searchable": false }, // 18
                 { "data": "publisher_email", "name": "publisher_email" },
-                { "data": "active", "name": "active" } // 19
+                { "data": "active", "name": "active" } // 20
             ],
             "columnDefs": [
                 {
-                    "targets": [9,10,11,12,13,14,15,16,17,18,19],
+                    "targets": [0, 10,11,12,13,14,15,16,17,18,19,20],
                     "visible": false,
                     "searchable": true
                 },
                 {
                     className: "text-center text-small",
-                    "targets": [0,4,5,6,7,8]
+                    "targets": [5,6,7,8,9]
                 },
                 {
                     className: "text-small",
-                    "targets": [1,2,3]
+                    "targets": [1,2,3,4]
                 }
             ],
             "language": {
@@ -73,31 +89,16 @@ var SpaceService = function() {
                 }
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                $('td:eq(0)', nRow).html(
-                    "<button class='btn btn-xs btn-success spaceModal' data-space='" + JSON.stringify(aData) + "' title='Ver Espacio' data-toggle='modal' data-target='#spaceModal'><i class='fa fa-search-plus'></i></button>"
-                );
-
                 var commission = $("<div></div>")
                     .append(numeral(aData.pivot_commission_price).format('$ 0,0'))
                     .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.commission).format('0%') + ')'));
-
-                $('td:eq(7)', nRow).html(commission);
-
-                $('td:eq(4)', nRow).html(
-                    numeral(aData.pivot_minimal_price).format('$ 0,0')
-                );
 
                 var pivot_markup = $("<span style='font-size:10px;'></span>")
                     .text(' (' + numeral(aData.pivot_markup).format('0%') + ')')
                     .attr('data-toggle', 'tooltip')
                     .attr('data-placement', 'top');
 
-                if(aData.discount == 0) {
-                    pivot_markup.attr('title', 'Markup DP+').addClass('text-info'); 
-                }
-                else {
-                    pivot_markup.attr('title', 'Descuento Anunciante').addClass('text-success');   
-                }
+                pivot_markup.attr('title', 'Descuento Anunciante').addClass('text-success');   
 
                 if(aData.pivot_with_markup == 1) {
                     withMarkup = "DP";
@@ -111,17 +112,54 @@ var SpaceService = function() {
                     .append(pivot_markup)
                     .append(" - " + withMarkup);
 
-                $('td:eq(5)', nRow).html(markup);
-
-                var pivot_public_price = $("<strong></strong>").addClass("text-info").text(numeral(aData.pivot_public_price).format('$ 0,0'));
-
-                $('td:eq(8)', nRow).html(pivot_public_price);
-
                 var discount = $("<div></div>")
                     .append(numeral(aData.pivot_discount_price).format('$ 0,0'))
                     .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.pivot_discount).format('0%') + ')'));
 
+                $('td:eq(0)', nRow).html(
+                    $("<div style='cursor:pointer'></div>")
+                        .addClass("spaceModal")
+                        .attr('data-toggle', 'modal')
+                        .attr('data-target', '#spaceModal')
+                        .attr('data-space', JSON.stringify(aData))
+                        .text(aData.publisher_company, 40)
+                );    
+
+                $('td:eq(1)', nRow).html(
+                    $("<div style='min-width:200px; cursor:pointer; font-weight:bold;'></div>")
+                        .attr('data-toggle', 'tooltip')
+                        .attr('data-placement', 'bottom')
+                        .attr('title', aData.pivot_title)
+                        .append(
+                            $("<span></span>")
+                                .addClass("spaceModal text-success")
+                                .attr('data-toggle', 'modal')
+                                .attr('data-target', '#spaceModal')
+                                .attr('data-space', JSON.stringify(aData))
+                                .text(truncate(aData.pivot_title, 40))
+                        )
+                );  
+                
+                $('td:eq(2)', nRow).html(
+                    $("<div style='min-width:200px; cursor:pointer'></div>")
+                        .attr('data-toggle', 'tooltip')
+                        .attr('data-placement', 'left')
+                        .attr('title', aData.pivot_description)
+                        .append(
+                            $("<span></span>")
+                                .addClass("spaceModal")
+                                .attr('data-toggle', 'modal')
+                                .attr('data-target', '#spaceModal')
+                                .attr('data-space', JSON.stringify(aData))
+                                .text(truncate(aData.pivot_description, 40))
+                        )
+                );    
+
+                $('td:eq(4)', nRow).html($("<strong></strong>").text(numeral(aData.pivot_minimal_price).format('$ 0,0')));
+                $('td:eq(5)', nRow).html(markup);
                 $('td:eq(6)', nRow).html(discount);
+                $('td:eq(7)', nRow).html($("<strong></strong>").text(numeral(aData.pivot_public_price).format('$ 0,0')));
+                $('td:eq(8)', nRow).html(commission);
 
                 if(aData.active == 0) {
                     $(nRow).addClass('warning');    
@@ -438,6 +476,8 @@ var SpaceService = function() {
 
         $('#' + inputId +' #space_name').text(space.name);
         $('#' + inputId +' #space_crated_at_date').text(space.created_at_date);
+
+        $('#' + inputId +' #space_public_price').text(numeral(space.public_price).format('$ 0,0') + ' / ' + space.period);
         
         $('#' + inputId + ' a#publisher_company').attr('href', '/medios/' + space.publisher_id).text(space.publisher_company);
 
@@ -468,23 +508,8 @@ var SpaceService = function() {
         $('#' + inputId + ' #format_name').text(space.format_name);
         
 
-        $('#' + inputId + ' #city_name').text("");
-        if(space.cities) {
-            $.each(space.cities, function( index, city ) {
-                $('#' + inputId + ' #city_name')
-                    .append(city.nombre_ciudad_LI)
-                    .append(" - ");
-            });
-        }
-
-        $('#' + inputId + ' #impact_scene_name').text("");
-        if(space.impact_scenes) {
-            $.each(space.impact_scenes, function( index, scene ) {
-                $('#' + inputId + ' #impact_scene_name')
-                    .append(scene.nombre_tipo_lugar_LI)
-                    .append(" - ");
-            });
-        }
+        $('#' + inputId + ' #city_name').text(space.city_names);
+        $('#' + inputId + ' #impact_scene_name').text(space.impact_scene_names);
 
         $('#' + inputId + ' #address').text(space.address);
 
@@ -498,6 +523,40 @@ var SpaceService = function() {
 
         /** Description **/
         $('#' + inputId + ' #space-description').html(space.description);
+
+        /**
+         * Audiences
+         */
+
+        if(space.audiences_array) {
+            var audiences = $("<div></div>").append($("<hr>"));
+            
+            $.each(space.audiences_array, function(typeName, type) {
+                audiences.append($("<div></div>")
+                    .addClass("col-xs-12 col-sm-6 col-md-4")
+                    .append($("<div></div>")
+                        .addClass("row")
+                        .append($("<figure></figure>")
+                            .addClass("col-xs-2 col-sm-4")
+                            .append($("<img src='" + type.image + "'></img>")
+                                .addClass("img-responsive")
+                            )
+                        ).append($("<div></div>")
+                            .addClass("col-xs-10 col-sm-8")
+                            .append($("<h1></h1>").addClass("h3")
+                                .attr("style", "margin-top: 0; font-size: 1.2em;")
+                                .text(typeName)
+                            )
+                            .append($("<p></p>").addClass("text-success")
+                                .text(type.audiences)
+                            )
+                        )
+                    )
+                )
+            });
+
+            $('#' + inputId +' #space-audiences').html(audiences);
+        }
 
         /** Images **/
         var divImages = $('#' + inputId + ' #space-images');

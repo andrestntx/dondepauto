@@ -69,14 +69,23 @@ class ProposalsController extends Controller
      */
     public function previewPdf(Request $request, Proposal $proposal)
     {
-        $proposal = $this->proposalFacade->select($proposal, $request->get("spaces"));
+        $proposal = $this->proposalFacade->getSelected($proposal);
 
         return \PDF::loadView('admin.proposals.preview.pdf', [
-            'proposal' => $proposal,
-            'advertiser' => $proposal->getViewAdvertiser()
-        ])->setPaper('a4')
-            ->stream('pdf.pdf');
+            'proposal'      => $proposal,
+            'advertiser'    => $proposal->getViewAdvertiser()
+        ])->setPaper('a4')->stream('cotizacion_dondepauto.pdf');
+    }
 
+    /**
+     * @param Request $request
+     * @param Proposal $proposal
+     * @return $this
+     */
+    public function select(Request $request, Proposal $proposal)
+    {
+        $proposal = $this->proposalFacade->select($proposal, $request->get("spaces"));
+        return ['success' => 'true', 'file' => route('proposals.preview-pdf', $proposal)];
     }
 
     /**
@@ -88,7 +97,7 @@ class ProposalsController extends Controller
         $proposal->load(['quote.advertiser', 'viewSpaces']);
 
         return view('admin.proposals.preview.html')->with([
-            'proposal' => $proposal,
+            'proposal'   => $proposal,
             'advertiser' => $proposal->getViewAdvertiser()
         ]);
     }
@@ -113,6 +122,8 @@ class ProposalsController extends Controller
 
 
     /**
+     * Edit the discount, title, description and more attributes of "proposal-space" relation
+     *
      * @param Request $request
      * @param Proposal $proposal
      * @param Space $space
@@ -138,8 +149,14 @@ class ProposalsController extends Controller
         return ['success' => 'true'];
     }
 
+    /**
+     * @param Request $request
+     * @param Proposal $proposal
+     * @return array
+     */
     public function send(Request $request, Proposal $proposal)
     {
+        $this->proposalFacade->send($proposal);
         return ['success' => 'true'];
     }
 

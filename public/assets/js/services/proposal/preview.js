@@ -36,6 +36,9 @@ var PreviewService = function() {
 	function initSelect() {
 		
 		var classSelect = "publisher-selected";
+		var iva = $("#iva").data("iva");
+		var ivaPrice = 0;
+		var subtotal = 0;
 		var total = 0;
 		var count = 0;
 
@@ -51,16 +54,19 @@ var PreviewService = function() {
 				
 				article.removeClass(classSelect);
 				$(this).html(i).append(" Seleccionar");
-				total -= article.data("price");
+				subtotal -= article.data("price");
 				count --;
 			}	
 			else {
 				selectedPublishers.push(id);
 				article.addClass(classSelect);	
 				$(this).html("Seleccionado");
-				total += article.data("price");
+				subtotal += article.data("price");
 				count ++;
 			}
+
+			ivaPrice = subtotal * iva;
+			total = subtotal + ivaPrice;
 
 			if(count > 0 && ! $(".quote.modal-quote").hasClass("modal-show")) {
 				$(".quote.modal-quote").addClass("modal-show");
@@ -68,7 +74,11 @@ var PreviewService = function() {
 				$(".quote.modal-quote").removeClass("modal-show");
 			}
 
+			$("#dinamic-quote #quote-subtotal-price").text(numeral(subtotal).format('$ 0,0') );
+			$("#dinamic-quote #quote-iva-price").text(numeral(ivaPrice).format('$ 0,0') );
+			$("#dinamic-quote #quote-price").text(numeral(total).format('$ 0,0') );
 			$("#quote-price span").text(numeral(total).format('$ 0,0') );
+
 			$("#dinamic-quote h2").text(count + " Medios seleccionados");
 			$(".quote.modal-quote h2").text(count + " Medios seleccionados");
 		});
@@ -78,7 +88,21 @@ var PreviewService = function() {
 		});
 
 		$("#dinamic-quote button, .quote.modal-quote button").click(function() {
-			window.open($(this).attr("data-url") + "?" + getParams(), 'cotización');
+			var $this = $(this);
+			$this.button('loading');
+
+			$.post($(this).attr("data-url"), {"spaces[]": selectedPublishers}, function( data ) {
+                if(data.file.length > 0) {
+                    var link = document.createElement("a");
+                    link.download = 'cotizacion.pdf';
+                    link.href = data.file;
+                    link.click();
+                }
+                $this.button('reset');
+            }).fail(function(data) {
+            	$this.button('reset');
+                alert('falló');
+            });
 		});
 	}
 

@@ -10,6 +10,9 @@ namespace App\Entities\Proposal;
 
 use App\Entities\Platform\Contact;
 use App\Entities\Platform\Space\Space;
+use App\Entities\Views\Audience;
+use App\Entities\Views\City;
+use App\Entities\Views\ImpactScene;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,14 +23,21 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'quote_id'];
+    protected $fillable = ['title', 'quote_id', 'send_at'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['send_at'];
 
     /**
      * The accessors to append to the model's array form.
      *
      * @var array
      */
-    protected $appends = ['days', 'advertiser_name', 'created_at_datatable', 'expires_at_datatable', 'expires_at_days', 'count_spaces',
+    protected $appends = ['days', 'advertiser_name', 'advertiser_company', 'created_at_datatable', 'send_at_datatable', 'expires_at_datatable', 'expires_at_days', 'count_spaces',
         "pivot_total", "pivot_total_cost", "total_discount_price", "total_discount", "pivot_total_income_price", "pivot_total_income",
         "pivot_total_markup_price", "pivot_total_markup", "pivot_total_commission_price", "pivot_total_commission"];
 
@@ -52,7 +62,7 @@ class Proposal extends Model
      */
     public function viewSpaces()
     {
-        return $this->belongsToMany(\App\Entities\Views\Space::class)->withPivot(['discount', 'with_markup', 'title', 'description']);
+        return $this->belongsToMany(\App\Entities\Views\Space::class)->withPivot(['discount', 'with_markup', 'title', 'description', 'selected']);
     }
 
     /**
@@ -61,6 +71,30 @@ class Proposal extends Model
     public function contacts()
     {
         return $this->hasMany(Contact::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function spaceAudiences()
+    {
+        return $this->hasMany(Audience::class, 'proposal_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cities()
+    {
+        return $this->hasMany(City::class, 'proposal_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function impactScenes()
+    {
+        return $this->hasMany(ImpactScene::class, 'proposal_id');
     }
 
     /**
@@ -135,9 +169,21 @@ class Proposal extends Model
     /**
      * @return mixed
      */
+    public function getAdvertiserCompanyAttribute()
+    {
+        return ucfirst($this->getAdvertiser()->company);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getDaysAttribute()
     {
-        return $this->created_at->diffInDays();
+        if($this->send_at) {
+            return $this->send_at->diffInDays();
+        }
+
+        return '';
     }
 
     /**
@@ -146,6 +192,18 @@ class Proposal extends Model
     public function getCreatedAtDatatableAttribute()
     {
         return $this->created_at->format('d-M');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSendAtDatatableAttribute()
+    {
+        if($this->send_at) {
+            return $this->send_at->format('d-M');
+        }
+
+        return '';
     }
 
     /**
@@ -161,7 +219,11 @@ class Proposal extends Model
      */
     public function getExpiresAtAttribute()
     {
-        return $this->created_at->addDays(25);
+        if($this->send_at) {
+            return $this->send_at->addDays(25);
+        }
+
+        return null;
     }
 
     /**
@@ -169,7 +231,11 @@ class Proposal extends Model
      */
     public function getExpiresAtDatetimeAttribute()
     {
-        return $this->expires_at->toDateTimeString();
+        if($this->expires_at) {
+            return $this->expires_at->toDateTimeString();
+        }
+
+        return '';
     }
 
     /**
@@ -177,7 +243,11 @@ class Proposal extends Model
      */
     public function getExpiresAtDatatableAttribute()
     {
-        return $this->expires_at->format('d-M');
+        if($this->expires_at) {
+            return $this->expires_at->format('d-M');
+        }
+
+        return '';
     }
 
     /**
@@ -185,7 +255,11 @@ class Proposal extends Model
      */
     public function getExpiresAtDaysAttribute()
     {
-        return $this->expires_at->diffInDays();
+        if($this->expires_at) {
+            return $this->expires_at->diffInDays(null, false) * -1;
+        }
+
+        return '';
     }
 
     /**
@@ -375,7 +449,5 @@ class Proposal extends Model
     {
         return $this->viewSpaces->sum('pivot_commission_price');
     }
-
-
 
 }

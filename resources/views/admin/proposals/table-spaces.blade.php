@@ -4,26 +4,28 @@
             <tr class="info">
                 <th></th>
                 <th>Medio</th>
-                <th>Espacio</th>
+                <th>Título</th>
+                <th>Descripción</th>
                 <th>Formato</th>
                 <th>Costo</th>
                 <th>Markup</th>
-                <th>Descuento</th>
-                <th>Comisión</th>
+                <th>Desc.</th>
                 <th>Oferta</th>
+                <th>Comisión</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th></th>
                 <th>Medio</th>
-                <th>Espacio</th>
+                <th>Título</th>
+                <th>Descripción</th>
                 <th>Formato</th>
                 <th>Costo</th>
                 <th>Markup</th>
-                <th>Descuento</th>
-                <th>Comisión</th>
+                <th>Desc.</th>
                 <th>Oferta</th>
+                <th>Comisión</th>
             </tr>
         </tfoot>
     </table>

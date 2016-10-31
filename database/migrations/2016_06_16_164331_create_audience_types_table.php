@@ -15,6 +15,7 @@ class CreateAudienceTypesTable extends Migration
         Schema::create('audience_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('image')->default('/assets/img/default.png');
             $table->timestamps();
         });
     }

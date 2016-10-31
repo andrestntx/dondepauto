@@ -21,17 +21,18 @@ var QuoteService = function() {
             "deferRender": true,
             "columns": [
                 { "data": null, "name": "id", "orderable": false, "searchable": false},
-                { "data": "created_at_datatable", "name": "created_at_datatable" },
+                { "data": "send_at_datatable", "name": "send_at_datatable" },
+                { "data": "days", "name": "days" },
                 { "data": "expires_at_datatable", "name": "expires_at_datatable" },
                 { "data": "expires_at_days", "name": "expires_at_days" },
-                { "data": "days", "name": "days" },
+                { "data": "advertiser_company", "name": "advertiser_company" },
                 { "data": "title", "name": "title" },
-                { "data": "advertiser_name", "name": "advertiser_name" },
-                { "data": "count_spaces", "name": "count_spaces" }
+                { "data": "pivot_total", "name": "pivot_total" },
+                { "data": "pivot_total_income_price", "name": "pivot_total_income_price" }
             ],
             "columnDefs": [
                 {
-                    "targets": [1,2,3,4,5,6,7],
+                    "targets": [1,2,3,4,5,6,7,8],
                     "visible": true,
                     "searchable": true,
                     className: "text-small text-center",
@@ -65,7 +66,35 @@ var QuoteService = function() {
                     //"<button class='btn btn-xs btn-success quoteModal' data-quote='" + JSON.stringify(aData) + "' title='Ver Propuesta' data-toggle='modal' data-target='#quoteModal'><i class='fa fa-search-plus'></i></button>"
                 );
 
-                $('td:eq(3)', nRow).html(aData.expires_at_days + " días");
+                if(aData.expires_at_days) {
+                    var expires = $("<strong></strong>").text(aData.expires_at_days + " días");
+                    if(aData.expires_at_days < 0) {
+                        expires.addClass("text-danger");
+                    }
+
+                    $('td:eq(4)', nRow).html(expires);    
+                }
+
+                $('td:eq(5)', nRow).html($("<strong></strong>").text(aData.advertiser_company));
+
+                var spaces = aData.view_spaces.length + ' ESPACIOS // ';
+                $.each(aData.view_spaces, function( index, space ) {                    
+                    if(space.pivot_title) {
+                        spaces = spaces + ' - ' + space.pivot_title;    
+                    }
+                });
+
+                
+                $('td:eq(6)', nRow).html(
+                    $("<span></span>")
+                        .text(aData.title)
+                        .attr('data-toggle', 'tooltip')
+                        .attr('data-placement', 'left')
+                        .attr('title', spaces)
+                );
+                
+                $('td:eq(7)', nRow).html(numeral(aData.pivot_total).format('$ 0,0'));
+                $('td:eq(8)', nRow).html(numeral(aData.pivot_total_income_price).format('$ 0,0'));
             },
             "drawCallback": function(settings, json) {
                 $("#countDatatable").html(settings.fnRecordsDisplay());
@@ -99,7 +128,7 @@ var QuoteService = function() {
 
         $.each(contacts, function( index, contact ) {
             var socialContact = UserService.getSocialContact(contact);
-            $("#modalContacts #proposal-contacts").prepend(socialContact);
+            $("#tabContacts #proposal-contacts").prepend(socialContact);
         });
 
         $("#newContact").click(function(){
@@ -110,8 +139,6 @@ var QuoteService = function() {
 
         $("#form-create-contact-advertiser").click(function() {
             var url = '/anunciantes/' + advertiser.id + '/contacts';
-
-            console.log(url);
 
             var parameters = {
                 'action[id]':           $("#modal_contact_action_id").val(),
@@ -181,12 +208,12 @@ var QuoteService = function() {
         if(withMarkup == '0') {
             prices.commission_price         = prices.public_price * prices.commission;
             prices.discount_income_price    = prices.commission_price;
-            prices.markup_publisher.per     = space.percentage_markdown - (discount / 100);
+            prices.markup_publisher.per     = space.pivot_markup - (discount / 100);
             prices.markup_publisher.price   = space.markup_price - prices.discount_price;
             prices.minimal_price            = prices.minimal_price + prices.markup_publisher.price;
         }
         else {
-            prices.markup_company.per       = space.percentage_markdown - (discount / 100);
+            prices.markup_company.per       = space.pivot_markup - (discount / 100);
             prices.markup_company.price     = space.markup_price - prices.discount_price;
             prices.discount_income_price    = prices.markup_company.price + prices.commission_price;
         }   
@@ -266,20 +293,24 @@ var QuoteService = function() {
     function drawModalDiscount(pre, space, discount, withMarkup)
     {
         var prices              = calculatePrices(space, discount, withMarkup);
-        var markup_publisher    = getHtmlValue(prices.markup_publisher.price, prices.markup_publisher.per);
         var markup_company      = getHtmlValue(prices.markup_company.price, prices.markup_company.per);
+        var markup_publisher    = getHtmlValue(prices.markup_publisher.price, prices.markup_publisher.per);
+        var discount_val        = getHtmlValue(prices.discount_price, discount / 100);
         var commission          = getHtmlValue(prices.commission_price, prices.commission);
         var income              = getHtmlValue(prices.discount_income_price, prices.discount_income);
-
+    
         $( pre + " #discount_public_price").text(getNumberPrice(prices.public_price));
-        $( pre + " #discount_markup_publisher").html(markup_publisher);
-        $( pre + " #discount_markup_company").html(markup_company);
         $( pre + " #discount_minimal_price").text(getNumberPrice(prices.minimal_price));
+        $( pre + " #discount_markup_company").html(markup_company);
+        $( pre + " #discount_markup_publisher").html(markup_publisher);
+        $( pre + " #discount_val").html(discount_val);
         $( pre + " #discount_commission").html(commission);
         $( pre + " #discount_income").html(income);
-        
+
         $("#field_discount label").attr("style", "font-size: 15px; font-weight: 400;")
-            .text("Descuento: " + getNumberPrice(prices.discount_price));
+            .html("")
+            .append("Descuento: ")
+            .append(getHtmlValue(prices.discount_price, discount / 100));
     }
 
     function validAndDrawModalDiscount()
@@ -287,7 +318,7 @@ var QuoteService = function() {
         var discount = $(".space_form_discount #discount").val();
         var withMarkup = $(".space_form_discount #markup").val();
 
-        if(discount >= 0 && discount <= (space.percentage_markdown * 100)) {
+        if(discount >= 0 && discount <= (space.pivot_markup * 100)) {
             drawModalDiscount("#new-values", space, discount, withMarkup);    
             $("#discount_error").text(""); 
         }
