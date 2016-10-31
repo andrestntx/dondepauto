@@ -8,6 +8,7 @@
 
 namespace App\Entities\Views;
 
+use App\Entities\Platform\Space\Audience;
 use App\Entities\Platform\Space\SpaceCity;
 use App\Entities\Platform\Space\SpaceImpactScene;
 use App\Entities\Views\Publisher;
@@ -42,7 +43,8 @@ class Space extends Model
         'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans', 'created_at_date',
         'sub_category_name_format_name', 'commission_price', 'pivot_discount', 'pivot_discount_price', 'pivot_with_markup',
         'pivot_commission_price', 'pivot_markup', 'pivot_markup_price', 'pivot_commission_price', 'pivot_public_price',
-        'pivot_minimal_price', 'pivot_title', 'pivot_description', 'percentage_markdown'
+        'pivot_minimal_price', 'pivot_title', 'pivot_description', 'percentage_markdown', 'city_names', 'impact_scene_names',
+        'audiences_array'
     ];
     
     /**
@@ -51,6 +53,14 @@ class Space extends Model
     public function images()
     {
         return $this->hasMany(SpaceImage::class, 'id_espacio_LI', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function audiences()
+    {
+        return $this->belongsToMany(Audience::class, 'audience_space', 'space_id', 'audience_id');
     }
 
     /**
@@ -99,6 +109,16 @@ class Space extends Model
         return $this->impactScenes->where('id_tipo_lugar_LI', $impactSceneId)->count() > 0;
     }
 
+    public function getCityNamesAttribute()
+    {
+
+        return $this->cities->implode('nombre_ciudad_LI', ', ');
+    }
+
+    public function getImpactSceneNamesAttribute()
+    {
+        return $this->impactScenes->implode('nombre_tipo_lugar_LI', ', ');
+    }
 
     /**
      * @return array
@@ -120,6 +140,24 @@ class Space extends Model
     public function getPublisherNameAttribute()
     {
         return ucwords(strtolower($this->publisher_first_name . ' ' . $this->publisher_last_name));
+    }
+
+    /**
+     * @return string
+     */
+    public function getAudiencesArrayAttribute()
+    {
+        $array = [];
+        $audienceTypes = $this->audiences->groupBy('audience_type_id');
+
+        foreach($audienceTypes as $audiences) {
+            $type = $audiences->first()->type;
+            $array[$type->name]['audiences'] = $audiences->implode('name', ', ');
+            $array[$type->name]['image'] = $type->image;
+        }
+
+
+        return $array;
     }
 
     /**

@@ -77,14 +77,28 @@ class ProposalFacade
     public function select(Proposal $proposal, $spaces = null)
     {
         if(is_array($spaces) && count($spaces) > 0) {
-            $proposal = $this->service->loadProposalSpaces($proposal, array_map("intval", $spaces));
+            $this->service->selectSpaces($proposal, array_map("intval", $spaces));
+            $this->emailService->notifyProposalSelected($proposal);
         }
-        else {
-            $proposal = $this->service->loadProposal($proposal);
-        }
-
-        $this->emailService->notifyProposalSelected($proposal);
 
         return $proposal;
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @param null $spaces
+     * @return $this
+     */
+    public function getSelected(Proposal $proposal, $spaces = null)
+    {
+        return $this->service->loadProposalSelected($proposal);
+    }
+
+    /**
+     * @param Proposal $proposal
+     */
+    public function send(Proposal $proposal)
+    {
+        $this->emailService->sendProposal($proposal, $proposal->getAdvertiser());
     }
 }

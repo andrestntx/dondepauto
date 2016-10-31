@@ -12,25 +12,115 @@ namespace App\Services;
 use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
+use App\Entities\Views\Advertiser;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
 {
-    protected static $fromEmail = 'noresponder@dondepauto.co';
-    protected static $fromName = 'Equipo DóndePauto.CO';
+    protected $bccAdmin = ['email' => 'andres@dondepauto.co', 'name' => 'Andrés Pinzón'];
+    protected $advertiserEmail = ['email' => 'leonardo@dondepauto.co', 'name' => 'Leonardo Rueda'];
+    protected $publisherEmail = ['email' => 'alexander@dondepauto.co', 'name' => 'Alexander Niño'];
 
+    /**
+     * @param $toEmail
+     * @param $toName
+     * @param $template
+     * @param array $parameters
+     * @param $subject
+     * @param string $fromEmail
+     * @param string $fromName
+     * @param array|null $bcc
+     */
+    protected function send($toEmail, $toName, $template, array $parameters, $subject, $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto", array $bcc = [])
+    {
+        if(env('APP_ENV') == 'production') {
+            Mail::send($template, $parameters, function ($m) use ($fromEmail, $fromName, $toEmail, $toName, $subject, $bcc) {
+                $m->from($fromEmail, $fromName)
+                    ->to($toEmail, $toName)
+                    ->bcc($this->bccAdmin['email'], $this->bccAdmin['name'])
+                    ->subject($subject);
+
+                foreach ($bcc as $b) {
+                    $m->bbc($b['email'], $b['name']);
+                }
+            });
+        }
+        else {
+            Mail::send($template, $parameters, function ($m) use ($fromEmail, $fromName, $toEmail, $toName, $subject, $bcc) {
+                $m->from($fromEmail, $fromName)
+                    ->to($this->bccAdmin['email'], $this->bccAdmin['name'])
+                    ->subject($subject);
+            });
+        }
+    }
+
+
+    /**
+     * @param array $to
+     * @param $template
+     * @param array $parameters
+     * @param $subject
+     * @param string $fromEmail
+     * @param string $fromName
+     * @param array $bcc
+     */
+    protected function sendDefault(array $to, $template, array $parameters, $subject, $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto", array $bcc = [])
+    {
+        $this->send($to['email'], $to['name'], $template, $parameters, $subject, $fromEmail, $fromName, $bcc);
+    }
+
+
+    /**
+     * @param $user
+     * @param $template
+     * @param array $parameters
+     * @param $subject
+     * @param null $fromEmail
+     * @param null $fromName
+     * @param array $bcc
+     */
+    protected function sendUser($user, $template, array $parameters, $subject, $fromEmail = null, $fromName = null, array $bcc = [])
+    {
+        $this->send($user->email, ucfirst($user->first_name), $template, $parameters, $subject, $fromEmail, $fromName, $bcc);
+    }
+
+    /**
+     * @param $advertiser
+     * @param $template
+     * @param array $parameters
+     * @param $subject
+     * @param array $bcc
+     */
+    protected function sendAdvertiser($advertiser, $template, array $parameters, $subject, array $bcc = [])
+    {
+        $this->sendUser($advertiser, $template, $parameters, $subject, $this->advertiserEmail['email'], $this->advertiserEmail['name'], $bcc);
+    }
+
+    /**
+     * @param $publisher
+     * @param $template
+     * @param array $parameters
+     * @param $subject
+     * @param array $bcc
+     */
+    protected function sendPublisher($publisher, $template, array $parameters, $subject, array $bcc = [])
+    {
+        $this->sendUser($publisher, $template, $parameters, $subject, $this->publisherEmail['email'], $this->publisherEmail['name'], $bcc);
+    }
+
+
+    /**
+     * @param User $user
+     * @param $view
+     * @param $code
+     */
     public function sendInvitation(User $user, $view, $code)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = self::$fromName;
-        
-        Mail::send('emails.' . $view, ['user' => $user, 'code' => $code], function ($m) use ($user, $fromEmail, $fromName) {
-            $m->from($fromEmail, $fromName)
-                ->to($user->email, $user->name)
-                ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                ->subject(ucfirst($user->company) .  ', bienvenido a la agencia DóndePauto');
-        });
+        $this->sendUser($user, 'emails.' . $view, [
+            'user' => $user,
+            'code' => $code
+        ], ucfirst($user->company) .  ', bienvenido a la agencia DóndePauto');
     }
 
     /**
@@ -54,20 +144,17 @@ class EmailService
     /**
      * @param User $publisher
      * @param $letterPath
-     * @param $termsPath
      */
-    public function sendLetter(User $publisher, $letterPath, $termsPath)
+    public function sendLetter(User $publisher, $letterPath)
     {
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath) {
-                $m->from('alexander@dondepauto.co', 'Alexander Niño de DóndePauto')
-                    ->to($publisher->representative->email, $publisher->representative->name)
-                    ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->bcc('alexander@dondepauto.co', 'Alexander Niño')
-                    ->subject('Carta de Incentivos DóndePauto')
-                    ->attach($letterPath, []);
-            });
-        }
+        Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath) {
+            $m->from($this->publisherEmail['email'], $this->publisherEmail['name'])
+                ->to($publisher->representative->email, $publisher->representative->name)
+                ->bcc($this->bccAdmin['email'], $this->bccAdmin['name'])
+                ->bcc($this->publisherEmail['email'], $this->publisherEmail['name'])
+                ->subject('Carta de Incentivos DóndePauto')
+                ->attach($letterPath, []);
+        });
     }
 
     /**
@@ -76,41 +163,25 @@ class EmailService
      */
     public function changeAgreement(User $publisher, $comments)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = self::$fromName;
-
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.publisher.change-agreement', ['publisher' => $publisher, 'comments' => $comments], function ($m) use ($publisher, $fromEmail, $fromName) {
-                $m->from($fromEmail, $fromName)
-                    ->to('alexander@dondepauto.co', 'Alexander Niño')
-                    ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->subject($publisher->first_name . ' de ' . $publisher->company . ' solicita cambiar datos de acuerdo');
-            });
-        }
+        $this->sendDefault($this->publisherEmail, 'emails.publisher.change-agreement', [
+            'publisher' => $publisher,
+            'comments' => $comments
+        ], $publisher->first_name . ' de ' . $publisher->company . ' solicita cambiar datos de acuerdo');
     }
-
 
     /**
      * @param User $user
      * @param string $newType
-     * @param string $to
-     * @param string $toName
+     * @param array $to
+     * @param array $bcc
      */
-    public function notifyChangeRole(User $user, $newType = 'Anunciante', $to = "leonardo@dondepauto.co", $toName = "Leonardo Rueda")
+    public function notifyChangeRole(User $user, $newType = 'Anunciante', array $to, array $bcc = [])
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = "Notificaciones DóndePauto";
-        $timestamp = \Carbon\Carbon::now()->toDateTimeString();
-
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.notifications.change-user-role', ['user' => $user, 'newType' => $newType, 'timestamp' => $timestamp], function ($m) use ($to, $toName, $user, $newType, $fromEmail, $fromName) {
-                $m->from($fromEmail, $fromName)
-                    ->to($to, $toName)
-                    ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->cc("alexander@dondepauto.co", "Alexander Niño")
-                    ->subject($user->first_name . ' de ' . $user->company . ' ahora es ' . $newType);
-            });
-        }
+        $this->sendDefault($to, 'emails.notifications.change-user-role', [
+            'user'      => $user,
+            'newType'   => $newType,
+            'timestamp' => \Carbon\Carbon::now()->toDateTimeString()
+        ], $user->first_name . ' de ' . $user->company . ' ahora es ' . $newType, $bcc);
     }
 
     /**
@@ -118,7 +189,7 @@ class EmailService
      */
     public function notifyChangeAdvertiserRole(User $advertiser)
     {
-        $this->notifyChangeRole($advertiser, 'Anunciante', "leonardo@dondepauto.co", "Leonardo Rueda");
+        $this->notifyChangeRole($advertiser, 'Anunciante', $this->advertiserEmail, [$this->publisherEmail]);
     }
 
     /**
@@ -126,7 +197,7 @@ class EmailService
      */
     public function notifyChangePublisherRole(User $publisher)
     {
-        $this->notifyChangeRole($publisher, 'Medio Publicitario', "nelson@dondepauto.co", "Nelson Hernandez");
+        $this->notifyChangeRole($publisher, 'Medio Publicitario', $this->publisherEmail);
     }
 
     /**
@@ -135,18 +206,10 @@ class EmailService
      */
     public function notifyNewOffer(User $publisher, Space $space)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = "Notificaciones DóndePauto";
-
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.notifications.new-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
-                $m->from($fromEmail, $fromName)
-                    ->to("leonardo@dondepauto.co", "Leonardo Rueda")
-                    ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->cc("alexander@dondepauto.co", "Alexander Niño")
-                    ->subject($publisher->company . " acaba de crear una nueva oferta");
-            });
-        }
+        $this->sendDefault($this->advertiserEmail, 'emails.notifications.new-offer', [
+            'publisher' => $publisher,
+            'space' => $space
+        ], $publisher->company . " acaba de crear una nueva oferta", [$this->publisherEmail]);
     }
 
 
@@ -155,47 +218,22 @@ class EmailService
      */
     public function notifyEditOffer(Space $space)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = "Notificaciones DóndePauto";
-        $publisher = $space->publisher;
-
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.notifications.edit-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
-                $m->from($fromEmail, $fromName)
-                    ->to("leonardo@dondepauto.co", "Leonardo Rueda")
-                    ->cc('alexander@dondepauto.co', 'Alexander Niño')
-                    ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->subject($publisher->company . " acaba de editar una oferta");
-            });
-        }
+        $this->sendDefault($this->advertiserEmail, 'emails.notifications.edit-offer', [
+            'publisher' => $space->publisher,
+            'space'     => $space
+        ], $space->publisher->company . " acaba de editar una oferta", [$this->publisherEmail]);
     }
 
     /**
      * @param Space $space
+     * @param $option
      */
     public function notifyInactiveOffer(Space $space, $option)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = "Notificaciones DóndePauto";
-        $publisher = $space->publisher;
-
-        if(env('APP_ENV') == 'production') {
-            if($option == 'incomplete') {
-                Mail::send('emails.notifications.inactive-incomplete-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
-                    $m->from($fromEmail, $fromName)
-                        ->cc('alexander@dondepauto.co', 'Alexander Niño')
-                        ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                        ->subject("Hemos inactivado una oferta tuya");
-                });
-            } else if($option == 'terms') {
-                Mail::send('emails.notifications.inactive-terms-offer', ['publisher' => $publisher, 'space' => $space], function ($m) use ($fromEmail, $fromName, $publisher) {
-                    $m->from($fromEmail, $fromName)
-                        ->cc('alexander@dondepauto.co', 'Alexander Niño')
-                        ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                        ->subject("Hemos inactivado una oferta tuya");
-                });
-            }
-        }
+        $this->sendPublisher($space->publisher, 'emails.notifications.inactive-'. $option . '-offer', [
+            'publisher' => $space->publisher,
+            'space'     => $space
+        ], "Hemos inactivado una oferta tuya");
     }
 
     /**
@@ -203,17 +241,9 @@ class EmailService
      */
     public function notifyDocuments(User $publisher)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = "Notificaciones DóndePauto";
-
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.notifications.new-documents', ['publisher' => $publisher], function ($m) use ($fromEmail, $fromName, $publisher) {
-                $m->from($fromEmail, $fromName)
-                    ->cc("alexander@dondepauto.co", "Alexander Niño")
-                    ->cc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->subject($publisher->company . " acaba de enviar los documentos societarios");
-            });
-        }
+        $this->sendDefault($this->publisherEmail, 'emails.notifications.new-documents', [
+            'publisher' => $publisher
+        ], $publisher->company . " acaba de enviar los documentos societarios", [$this->publisherEmail]);
     }
 
     /**
@@ -221,16 +251,9 @@ class EmailService
      */
     public function notifyUserDelete(User $user)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = self::$fromName;
-
-        if(env('APP_ENV') == 'production') {
-            Mail::send('emails.notifications.delete-user', ['user' => $user], function ($m) use ($fromEmail, $fromName, $user) {
-                $m->from($fromEmail, $fromName)
-                    ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->subject($user->first_name . ", hemos dado de baja tu cuenta en DóndePauto");
-            });
-        }
+        $this->sendUser($user, 'emails.notifications.delete-user', [
+            'user' => $user
+        ], $user->first_name . ", hemos dado de baja tu cuenta en DóndePauto");
     }
 
     /**
@@ -242,32 +265,37 @@ class EmailService
     public function suggest(Space $space, Collection $advertisers, $discount = 0)
     {
         foreach($advertisers as $advertiser) {
-            Mail::send('emails.advertiser.suggest', ['space' => $space, 'advertiser' => $advertiser, 'discount' => $discount], function ($m) use ($advertiser) {
-                $m->from("leonardo@dondepauto.co", "Leonardo Rueda")
-                    ->to($advertiser->email, ucfirst($advertiser->first_name))
-                    ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                    ->subject(ucfirst($advertiser->first_name) . ", me gusta este medio publicitario para tu empresa");
-            });
+            $this->sendAdvertiser($advertiser, 'emails.advertiser.suggest', [
+                'space' => $space,
+                'advertiser' => $advertiser,
+                'discount' => $discount
+            ], ucfirst($advertiser->first_name) . ", me gusta este medio publicitario para tu empresa");
         }
 
         return true;
     }
 
+    /**
+     * @param Proposal $proposal
+     */
     public function notifyProposalSelected(Proposal $proposal)
     {
-        $fromEmail = self::$fromEmail;
-        $fromName = "Notificaciones DóndePauto";
-
-        Mail::send('emails.notifications.proposal-selected', [
+        $this->sendDefault($this->advertiserEmail, 'emails.notifications.proposal-selected', [
             'proposal'      => $proposal,
             'advertiser'    => $proposal->getAdvertiser(),
-            'spaces'        => $proposal->viewSpaces],
-            function ($m) use ($fromEmail, $fromName, $proposal) {
-                $m->from($fromEmail, $fromName)
-                    ->bcc('andres@dondepauto.co', 'Andrés Pinzón')
-                    //->bcc('leonardo@dondepauto.co', 'Leonardo Rueda')
-                    ->subject($proposal->getAdvertiser()->company . ", ha seleccionado " . $proposal->viewSpaces->count() . " espacios de la propuesta");
-            });
+            'spaces'        => $proposal->viewSpaces
+        ], $proposal->getAdvertiser()->company . ", ha seleccionado " . $proposal->viewSpaces->count() . " espacios de la propuesta");
     }
 
+    /**
+     * @param Proposal $proposal
+     * @param User $advertiser
+     */
+    public function sendProposal(Proposal $proposal, User $advertiser)
+    {
+        $this->sendAdvertiser($advertiser, 'emails.proposal.send', [
+            'proposal'      => $proposal,
+            'advertiser'    => $advertiser
+        ], "nueva propuesta");
+    }
 }

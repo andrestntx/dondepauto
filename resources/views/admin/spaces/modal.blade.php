@@ -43,53 +43,55 @@
                                     
                                 </div>
                             </div>
-                            <div class="panel-body scroll_content">
+                            <div class="panel-body" style="max-height: 493px; overflow: scroll;">
                                 <div class="row">
+                                    <div class="col-xs-12">
+                                        <p><strong>Título</strong> <br> <span id="proposal_space_title"></span></p>
+                                        <p><strong>Descripción</strong> <br> <span id="proposal_space_description"></span> </p>
+                                        <hr>
+                                    </div>
+                                    
+
                                     <div class="col-xs-12" id="space-description">
                                         
                                     </div>
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Imagenes
-                            </div>
-                            <div class="panel-body scroll_content_image">
-                                <div class="row">
-                                    <div class="col-xs-12 lightBoxGallery" id="space-images">
+                                    <div class="col-xs-12" id="space-audiences">
                                         
                                     </div>
-                                </div>
+                                </div> <br>
 
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Detalles del Espacio - <strong>(Creado <span id="created_at"></span>)</strong>
-                            </div>
-                            <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-xs-4">
-                                        <p>
-                                            <span class="h5 font-bold"> Categoría </span> <br>
-                                            <span class="h5 font-bold"> Sub Categoría </span> <br>
-                                            <span class="h5 font-bold"> Formato </span> <br><br>
-                                            <span class="h5 font-bold"> Escenario </span> <br>
-                                            <span class="h5 font-bold"> Ciudad </span> <br>
-                                            <span class="h5 font-bold"> Dirección </span>
-                                        </p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <p>
-                                            <span class="h5" id="category_name">  </span> <br>
-                                            <span class="h5" id="sub_category_name">  </span> <br>
-                                            <span class="h5" id="format_name">  </span> <br><br>
-                                            <span class="h5" id="impact_scene_name">  </span> <br>
-                                            <span class="h5" id="city_name">  </span> <br>
-                                            <span class="h5" id="address">  </span>
-                                        </p>
+                                    <div class="col-xs-12">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="min-width: 130px;"><span class="h5 font-bold"> Categoría </span></td>
+                                                    <td><span class="h5" id="category_name">  </span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Sub Categoría </span></td>
+                                                    <td><span class="h5" id="sub_category_name">  </span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Formato </span> </td>
+                                                    <td><span class="h5" id="format_name">  </span> <br></td>
+                                                </tr>
+                                                <tr style="padding: 0.5em; display: block;"></tr>
+                                                <tr>
+                                                    <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Escenarios </span></td>
+                                                    <td><span class="h5" id="impact_scene_name">  </span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Ciudades </span></td>
+                                                    <td><span class="h5" id="city_name">  </span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Dirección </span></td>
+                                                    <td><span class="h5" id="address">  </span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
@@ -99,17 +101,22 @@
                     <div class="col-md-5">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Precios del Espacio
+                                <h4 style="float: left;"> Precios del Espacio </h4>
+                                <div class="ibox-tools">
+                                    <button id="newDiscount" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-usd"></i></button>    
+                                </div>
                             </div>
+
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-5">
-                                        <p>
+                                        <p style="margin-bottom: 0;">
                                             <span class="h5"> Precio Mínimo</span> <br>
                                             <span class="h5"> Markup</span> <br>
                                             <span class="h5"> Markup</span> <br>
-                                            <span class="h5"> Precio Público</span>
-                                            <span class="h5"> Impactos</span>
+                                            <span class="h5"> Precio Público</span> <br>
+                                            <span class="h5"> Impactos</span> <br>
+                                            <span class="h5"> Comisión</span>
                                         </p>
                                     </div>
                                     <div class="col-xs-7">
@@ -119,49 +126,34 @@
                                             <span class="h5" id="markup_price"> </span> <br>
                                             <span class="h5 font-bold text-info" id="public_price"> </span>
                                             / <span class="h5" id="period"> </span> <br>
-                                            <span class="h5" id="impacts"> </span> 
+                                            <span class="h5" id="impacts"> </span> <br>
+                                            <span class="h5" id="publisher_commission_rate">  </span> % 
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <hr>
+                                        <p>
+                                            <span class="h5 font-bold"> <span id="publisher_name">  </span> </span> <br>
+                                            <span class="h5"> <span id="publisher_company_role">  </span> </span> <br>
+                                            <span class="h5" id="publisher_email"> <i class="fa fa-envelope-o"></i> <a href=""> </a></span> <br>
+                                                <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:" id="publisher_phone">  </a> -
+                                                                    <i class="fa fa-mobile"></i> <a href="tel:" id="publisher_cel">  </a>
+                                                </span>
                                         </p>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Datos de contacto
+                                Imagenes
                             </div>
-                            <div class="panel-body">
-                                <p>
-                                    <span class="h5 font-bold"> <span id="publisher_name">  </span> </span> <br>
-                                    <span class="h5"> <span id="publisher_company_role">  </span> </span> <br>
-                                    <span class="h5" id="publisher_email"> <i class="fa fa-envelope-o"></i> <a href=""> </a></span> <br>
-                                        <span class="h5">   <i class="fa fa-phone"></i> <a href="tel:" id="publisher_phone">  </a> -
-                                                            <i class="fa fa-mobile"></i> <a href="tel:" id="publisher_cel">  </a>
-                                        </span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Acuerdo con el Medio <strong id="publisher_signed_agreement"></strong>
-                            </div>
-                            <div class="panel-body">
+                            <div class="panel-body scroll_content_image">
                                 <div class="row">
-                                    <div class="col-xs-8">
-                                        <p>
-                                            <span class="h5"> Porcentaje de comisión </span> <br>
-                                            <span class="h5"> Fecha firma de acuerdo </span> <br>
-                                            <span class="h5"> Descuento pronto pago </span> <br>
-                                            <span class="h5"> Retención en la fuente</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <p>
-                                            <span class="h5" id="publisher_commission_rate">  </span> % <br>
-                                            <span class="h5" id="publisher_signed_at">  </span> <br>
-                                            <span class="h5" id="publisher_discount">  </span> % <br>
-                                            <span class="h5" id="publisher_retention"> </span> %
-                                        </p>
+                                    <div class="col-xs-12 lightBoxGallery" id="space-images">
+                                        
                                     </div>
                                 </div>
 

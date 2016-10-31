@@ -210,6 +210,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@send'
         ]);
 
+        Route::post('propuestas/{proposals}/select', [
+            'as'    => 'proposals.select',
+            'uses'  => 'Admin\ProposalsController@select'
+        ]);
+
         Route::get('propuestas/{proposals}/preview/pdf', [
             'as'    => 'proposals.preview-pdf',
             'uses'  => 'Admin\ProposalsController@previewPdf'

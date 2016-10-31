@@ -42,6 +42,7 @@
                                     <p>Precio costo</p>
                                     <p>Markup DP</p>
                                     <p>Markup Medio</p>
+                                    <p>Descuento</p>
                                     <p>Comisión</p>
                                     <p><strong>Ingreso DóndePauto</strong></p>
                                 </div>
@@ -51,6 +52,7 @@
                                     <p id="discount_minimal_price"></p>
                                     <p id="discount_markup_company"></p>
                                     <p id="discount_markup_publisher"></p>
+                                    <p id="discount_val"></p>
                                     <p id="discount_commission"></p>
                                     <p id="discount_income"></p>
                                 </div>
@@ -60,6 +62,7 @@
                                     <p id="discount_minimal_price"></p>
                                     <p id="discount_markup_company"></p>
                                     <p id="discount_markup_publisher"></p>
+                                    <p id="discount_val"></p>
                                     <p id="discount_commission"></p>
                                     <p id="discount_income" style="font-weight: bold;"></p>
                                 </div>

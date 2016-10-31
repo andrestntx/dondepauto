@@ -52,14 +52,25 @@ class ProposalService extends ResourceService
 
     /**
      * @param Proposal $proposal
-     * @param array $spacesId
      * @return $this
      */
-    public function loadProposalSpaces(Proposal $proposal, array $spacesId)
+    public function loadProposalSelected(Proposal $proposal)
     {
-        return $proposal->load(['quote.advertiser', 'viewSpaces' => function($query) use ($spacesId) {
-            $query->whereIn("view_spaces.id", $spacesId);
+        return $proposal->load(['quote.advertiser', 'viewSpaces' => function($query) {
+            $query->where("selected", true);
         }]);
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @param array $spaceIds
+     * @return mixed
+     */
+    public function selectSpaces(Proposal $proposal, array $spaceIds)
+    {
+        $spacesNotIn = $this->repository->getSpacesIdNotIn($proposal, $spaceIds);
+        $this->repository->syncSpaces($proposal, $spacesNotIn, ['selected' => 0]);
+        $this->repository->syncSpaces($proposal, $spaceIds, ['selected' => 1]);
     }
     
 }

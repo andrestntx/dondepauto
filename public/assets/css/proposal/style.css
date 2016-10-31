@@ -110,11 +110,7 @@ main section.quote {
     padding-top: 0;
 }
 
-p.notes {
-    font-size: 0.92em;
-    color: #a7a7a7;
-    font-weight: 400;
-}
+
 
 section#contact {
 	background-image: url("/assets/img/proposal/imagencontacto.jpg");
@@ -290,6 +286,38 @@ section.quote {
     text-align: left;
 }
 
+section.quote #dinamic-quote p {
+  	color: gray;
+    font-size: 1em;
+    font-weight: 200;
+    margin: 0;
+    text-align: right;
+}
+
+section.quote #dinamic-quote p.notes {
+    font-size: 0.92em;
+    color: #a7a7a7;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+section.quote #dinamic-quote #quote-iva {
+    border-bottom: 2px solid #bbb8b8;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+section.quote #dinamic-quote #quote-iva p {
+    color: #909090;
+    font-size: 0.9em;
+}
+
+section.quote #dinamic-quote #quote-subtotal p {
+    font-size: 1.1em;
+    font-weight: 400;
+}
+
 section.quote h1 {
     color: #909090;
     font-weight: 500;
@@ -299,7 +327,7 @@ section.quote h1 {
 }
 
 section.quote h2 {
-    margin: 0 0 1em 0;
+    margin: 0 0 0.7em 0;
     padding: 0.7em 0;
     border-top: 2px solid #bbb8b8;
     border-bottom: 2px solid #bbb8b8;
@@ -351,8 +379,13 @@ section.quote.modal-quote #quote-total p {
 }
 
 section.quote.modal-quote #quote-total p#quote-price {
+	color: gray;
 	display: inline;
 	font-size: 1em;
+}
+
+section.quote.modal-quote #quote-total p#quote-price span {
+	color: #14abe4;
 }
 
 section.quote.modal-quote button {
@@ -361,16 +394,13 @@ section.quote.modal-quote button {
 }
 
 section.quote #quote-total p {
-    color: gray;
-    font-size: 1.1em;
-    font-weight: 400;
-    margin-bottom: 0;
+    margin-bottom: 0.7em;
 }
 
 section.quote #quote-total p#quote-price {
-    font-size: 1.1em;
-    color: #abaaaa;
-    margin-bottom: 0.4em;
+    color: #14abe4;
+    font-size: 1.15em;
+    font-weight: 500;
 }
 
 section.quote #quote-total p#quote-price span{

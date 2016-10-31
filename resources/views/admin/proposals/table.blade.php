@@ -3,25 +3,27 @@
         <thead>
             <tr class="info">
                 <th></th>
-                <th>Fecha de creación</th>
-                <th>Fecha de cierre estimada</th>
+                <th>F. envío</th>
+                <th>Días trans.</th>
+                <th>Caduca</th>
                 <th>Vence en</th>
-                <th>Días transcurridos</th>
-                <th>Titulo Propuesta</th>
                 <th>Anunciante</th>
-                <th>Espacios</th>
+                <th>Titulo Propuesta</th>
+                <th>Total $$</th>
+                <th>DóndePauto $$</th>
             </tr>
         </thead>
         <tfoot>
         <tr>
             <th></th>
-            <th>Fecha de creación</th>
-            <th>Fecha de cierre estimada</th>
+            <th>F. envío</th>
+            <th>Días trans.</th>
+            <th>Caduca</th>
             <th>Vence en</th>
-            <th>Días transcurridos</th>
-            <th>Titulo Propuesta</th>
             <th>Anunciante</th>
-            <th>Espacios</th>
+            <th>Titulo Propuesta</th>
+            <th>Total $$</th>
+            <th>DóndePauto $$</th>
         </tr>
         </tfoot>
     </table>

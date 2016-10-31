@@ -18,6 +18,7 @@ class CreateProposalSpaceTable extends Migration
             $table->boolean('with_markup')->default(true);
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('selected')->default(false);
 
             $table->timestamps();
             

@@ -67,7 +67,7 @@ class SpaceRepository extends BaseRepository
                     "proposal_space.title as pivot_title",
                     "proposal_space.description as pivot_description"
                 ])
-                ->with(['images', 'publisher.spaces'])
+                ->with(['images', 'publisher.spaces', 'audiences.type'])
                 ->whereIsDelete(0);
         }
         else {
