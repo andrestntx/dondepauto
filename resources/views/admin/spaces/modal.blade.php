@@ -5,9 +5,9 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <div class="row">
                     <div class="col-xs-8">
-                        <h2 class="modal-title h4" style="font-size: 15px;">
-                            <strong>Medio:</strong> <a id="publisher_company" href="#" target="_blank"></a><br>
-                            <strong>Espacio:</strong>  <span id="space_name" class="h5" style="font-size:15px;"></span><br>
+                        <h2 class="modal-title h4" style="font-size: 17px;">
+                            <span style="font-weight: 300;">Medio:</span> <a id="publisher_company" class="text-success" href="#" target="_blank"></a><br>
+                            <span style="font-weight: 300;">Espacio:</span>  <span id="space_name" class="h5 text-success" style="font-size:17px;"></span><br>
                             Creado el:  <span id="space_crated_at_date" class="h5" style="font-size:14px;"></span>
                         </h2>
                     </div>
@@ -71,11 +71,11 @@
                                                     <td><span class="h5" id="format_name">  </span> <br></td>
                                                 </tr>
                                                 <tr style="padding: 0.5em; display: block;"></tr>
-                                                <tr>
+                                                <tr style="border-bottom: 1px solid rgba(189, 189, 189, 0.47);">
                                                     <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Escenarios </span></td>
                                                     <td><span class="h5" id="impact_scene_name">  </span> </td>
                                                 </tr>
-                                                <tr>
+                                                <tr style="border-bottom: 1px solid rgba(189, 189, 189, 0.47);">
                                                     <td style="padding: 0.2em 0;"><span class="h5 font-bold"> Ciudades </span></td>
                                                     <td><span class="h5" id="city_name">  </span> </td>
                                                 </tr>
@@ -107,7 +107,7 @@
                                             <span class="h5"> Precio Mínimo</span> <br>
                                             <span class="h5"> Markup</span> <br>
                                             <span class="h5"> Markup</span> <br>
-                                            <span class="h5"> Precio Público</span> <br>
+                                            <span class="h5 font-bold text-success"> Precio Público</span> <br>
                                             <span class="h5"> Impactos</span> <br>
                                             <span class="h5"> Comisión</span>
                                         </p>
@@ -117,8 +117,8 @@
                                             <span class="h5" id="minimal_price"> </span> <br>
                                             <span class="h5" id="markup"> </span> <br>
                                             <span class="h5" id="markup_price"> </span> <br>
-                                            <span class="h5 font-bold text-info" id="public_price"> </span>
-                                            / <span class="h5" id="period"> </span> <br>
+                                            <span class="h5 font-bold text-success" id="public_price"> </span>
+                                            / <span class="h5 font-bold text-success" id="period"> </span> <br>
                                             <span class="h5" id="impacts"> </span> <br>
                                             <span class="h5" id="publisher_commission_rate">  </span> % 
                                         </p>

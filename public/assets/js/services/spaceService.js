@@ -114,16 +114,7 @@ var SpaceService = function() {
 
                 var discount = $("<div></div>")
                     .append(numeral(aData.pivot_discount_price).format('$ 0,0'))
-                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.pivot_discount).format('0%') + ')'));
-
-                $('td:eq(0)', nRow).html(
-                    $("<div style='cursor:pointer'></div>")
-                        .addClass("spaceModal")
-                        .attr('data-toggle', 'modal')
-                        .attr('data-target', '#spaceModal')
-                        .attr('data-space', JSON.stringify(aData))
-                        .text(aData.publisher_company, 40)
-                );    
+                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.pivot_discount).format('0%') + ')'));  
 
                 $('td:eq(1)', nRow).html(
                     $("<div style='min-width:200px; cursor:pointer; font-weight:bold;'></div>")
@@ -161,9 +152,31 @@ var SpaceService = function() {
                 $('td:eq(7)', nRow).html($("<strong></strong>").text(numeral(aData.pivot_public_price).format('$ 0,0')));
                 $('td:eq(8)', nRow).html(commission);
 
+                var publisher_name = $("<div style='cursor:pointer'></div>")
+                        .addClass("spaceModal")
+                        .attr('data-toggle', 'modal')
+                        .attr('data-target', '#spaceModal')
+                        .attr('data-space', JSON.stringify(aData));  
+
                 if(aData.active == 0) {
                     $(nRow).addClass('warning');    
                 }
+
+                if(aData.pivot.selected && aData.pivot.selected == 1) {
+                    $(nRow).addClass('success');
+
+                    publisher_name.append(
+                        $("<strong></strong>")
+                            .addClass("text-info")
+                            .append($("<i></i>").addClass("fa fa-check-circle"))
+                    ).append($("<span></span>").text(" " + aData.publisher_company));       
+                } 
+                else {
+                    publisher_name.text(aData.publisher_company);        
+                }
+
+                $('td:eq(0)', nRow).html(publisher_name);
+
                 
             },
             "drawCallback": function(settings, json) {
@@ -443,15 +456,6 @@ var SpaceService = function() {
 
     function drawModal(inputId, space, urlName, showStates) {
 
-        console.log(inputId);
-        console.log(space);
-
-        if($.type( space ) === "string") {
-            console.log('is string');
-            space = $.parseJSON(space);
-        }
-
-
         if(showStates) {
 
             var modal = $("#spaceModal");
@@ -460,17 +464,24 @@ var SpaceService = function() {
             spiner.show();
             $("#prueba").html("");
 
-
-            console.log(space.publisher_id);
-
             $.get('/medios/' + space.publisher_id + '/states', {}, function( data ) {
                 spiner.hide();
                 $("#prueba").html(UserService.getHtmlTableStates(data.states, 230));
                 $('[data-toggle="tooltip"]').tooltip();
-                console.log('show states');
             }).fail(function(){
                 alert('fallo los estados');
             });    
+        }
+
+        if(space.pivot && space.pivot.selected && space.pivot.selected == 1) {
+            $('#' + inputId + ' #space_selected').html(
+                $("<strong></strong>")
+                    .append($("<i></i>").addClass("fa fa-check-circle"))
+                    .append(" seleccionado")
+            );
+        } 
+        else {
+            $('#' + inputId + ' #space_selected').html("");
         }
         
 
@@ -485,8 +496,6 @@ var SpaceService = function() {
 
         $('#' + inputId + ' #modalSuggestSpace')
             .attr('data-max-discount', space.percentage_markdown * 100);
-
-        console.log('show botones');
             
         /** Space Data **/
         $('#delete_space').data("spaceid", space.id);
@@ -513,8 +522,6 @@ var SpaceService = function() {
         $('#' + inputId + ' #publisher_company_role').text(space.publisher_company_role);
         $('#' + inputId + ' #publisher_company_area').text(space.publisher_company_area);
 
-        console.log('show data tetail');
-
         /** Agreement **/
         $('#' + inputId + ' #publisher_signed_agreement').text('(' + space.publisher_signed_agreement_lang + ')');
         $('#' + inputId + ' #publisher_commission_rate').text(space.publisher_commission_rate);
@@ -535,13 +542,11 @@ var SpaceService = function() {
 
         /** Prices **/   
         $('#' + inputId + ' #minimal_price').text(numeral(space.minimal_price).format('$ 0,0[.]00'));
-        $('#' + inputId + ' #markup').text(numeral(space.percentage_markdown).format('0%'));
+        $('#' + inputId + ' #markup').text(numeral(space.pivot_markup).format('0%'));
         $('#' + inputId + ' #markup_price').text(numeral(space.markup_price).format('$ 0,0[.]00'));
         $('#' + inputId + ' #public_price').text(numeral(space.public_price).format('$ 0,0[.]00'));
         $('#' + inputId + ' #period').text(space.period);
         $('#' + inputId + ' #impacts').text(space.impacts);
-
-        console.log('show prices');
 
         /** Description **/
         $('#' + inputId + ' #space-description').html(space.description);
@@ -576,8 +581,6 @@ var SpaceService = function() {
                     )
                 )
             });
-
-            console.log('show audiences');
 
             $('#' + inputId +' #space-audiences').html(audiences);
         }
@@ -637,10 +640,6 @@ var SpaceService = function() {
 
             initChangeAgreement(); 
         }
-
-        console.log('show final');
-
-        
     };
 
     function getFilterSearch()
