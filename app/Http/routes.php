@@ -34,6 +34,16 @@ Route::post('mailchimp/sync/{publishers}', [
     'as' => 'mailchimp.sync'
 ]);
 
+Route::get('propuestas/{proposals}/preview/pdf', [
+    'as'    => 'proposals.preview-pdf',
+    'uses'  => 'Admin\ProposalsController@previewPdf'
+]);
+
+Route::get('propuestas/{proposals}/preview/html', [
+    'as'    => 'proposals.preview-html',
+    'uses'  => 'Admin\ProposalsController@previewHtml'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
@@ -213,16 +223,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('propuestas/{proposals}/select', [
             'as'    => 'proposals.select',
             'uses'  => 'Admin\ProposalsController@select'
-        ]);
-
-        Route::get('propuestas/{proposals}/preview/pdf', [
-            'as'    => 'proposals.preview-pdf',
-            'uses'  => 'Admin\ProposalsController@previewPdf'
-        ]);
-
-        Route::get('propuestas/{proposals}/preview/html', [
-            'as'    => 'proposals.preview-html',
-            'uses'  => 'Admin\ProposalsController@previewHtml'
         ]);
 
         Route::get('propuestas/{proposals}', [
