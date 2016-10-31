@@ -45,13 +45,6 @@
                             </div>
                             <div class="panel-body" style="max-height: 493px; overflow: scroll;">
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <p><strong>Título</strong> <br> <span id="proposal_space_title"></span></p>
-                                        <p><strong>Descripción</strong> <br> <span id="proposal_space_description"></span> </p>
-                                        <hr>
-                                    </div>
-                                    
-
                                     <div class="col-xs-12" id="space-description">
                                         
                                     </div>

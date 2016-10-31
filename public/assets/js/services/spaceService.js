@@ -443,17 +443,33 @@ var SpaceService = function() {
 
     function drawModal(inputId, space, urlName, showStates) {
 
+        console.log(inputId);
+        console.log(space);
+
+        if($.type( space ) === "string") {
+            console.log('is string');
+            space = $.parseJSON(space);
+        }
+
+
         if(showStates) {
+
             var modal = $("#spaceModal");
             var spiner = modal.find("#sk-spinner-modal");
 
             spiner.show();
             $("#prueba").html("");
 
+
+            console.log(space.publisher_id);
+
             $.get('/medios/' + space.publisher_id + '/states', {}, function( data ) {
                 spiner.hide();
                 $("#prueba").html(UserService.getHtmlTableStates(data.states, 230));
                 $('[data-toggle="tooltip"]').tooltip();
+                console.log('show states');
+            }).fail(function(){
+                alert('fallo los estados');
             });    
         }
         
@@ -469,6 +485,8 @@ var SpaceService = function() {
 
         $('#' + inputId + ' #modalSuggestSpace')
             .attr('data-max-discount', space.percentage_markdown * 100);
+
+        console.log('show botones');
             
         /** Space Data **/
         $('#delete_space').data("spaceid", space.id);
@@ -495,6 +513,8 @@ var SpaceService = function() {
         $('#' + inputId + ' #publisher_company_role').text(space.publisher_company_role);
         $('#' + inputId + ' #publisher_company_area').text(space.publisher_company_area);
 
+        console.log('show data tetail');
+
         /** Agreement **/
         $('#' + inputId + ' #publisher_signed_agreement').text('(' + space.publisher_signed_agreement_lang + ')');
         $('#' + inputId + ' #publisher_commission_rate').text(space.publisher_commission_rate);
@@ -520,6 +540,8 @@ var SpaceService = function() {
         $('#' + inputId + ' #public_price').text(numeral(space.public_price).format('$ 0,0[.]00'));
         $('#' + inputId + ' #period').text(space.period);
         $('#' + inputId + ' #impacts').text(space.impacts);
+
+        console.log('show prices');
 
         /** Description **/
         $('#' + inputId + ' #space-description').html(space.description);
@@ -554,6 +576,8 @@ var SpaceService = function() {
                     )
                 )
             });
+
+            console.log('show audiences');
 
             $('#' + inputId +' #space-audiences').html(audiences);
         }
@@ -613,6 +637,8 @@ var SpaceService = function() {
 
             initChangeAgreement(); 
         }
+
+        console.log('show final');
 
         
     };
