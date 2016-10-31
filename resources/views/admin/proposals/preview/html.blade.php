@@ -117,7 +117,7 @@
 				</div>
 				<div class="col-xs-12 col-md-8">
 					@foreach($proposal->viewSpaces as $space)
-						<article class="publisher" data-price="{{ $space->pivot_public_price }}" data-publisherId="{{ $space->id }}">
+						<article {!! Html::classes(['publisher', 'publisher-selected' => $space->pivot->selected]) !!} data-price="{{ $space->pivot_public_price }}" data-publisherId="{{ $space->id }}">
 							<div class="row">
 								<div class="col-xs-12">
 									<figure class="publisher-check">

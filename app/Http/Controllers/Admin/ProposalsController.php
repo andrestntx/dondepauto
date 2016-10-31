@@ -54,6 +54,9 @@ class ProposalsController extends Controller
     {
         $proposal->load([
             'viewSpaces.audiences.type', 'viewSpaces.cities', 'viewSpaces.impactScenes',
+            'quote.viewAdvertiser.proposals.viewSpaces.audiences.type',
+            'quote.viewAdvertiser.proposals.viewSpaces.cities',
+            'quote.viewAdvertiser.proposals.viewSpaces.impactScenes',
             'contacts.actions',
             'quote.advertiser.contacts.actions'
         ]);
