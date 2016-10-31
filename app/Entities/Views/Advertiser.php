@@ -26,11 +26,11 @@ class Advertiser extends PUser
      *
      * @var array
      */
-    protected $appends = ['name', 'state', 'state_class', 'state_icon', 'state_id', 'count_intentions',
+    protected $appends = [/*'name', 'state', 'state_class', 'state_icon', 'state_id', 'count_intentions',
         'count_by_contact_intentions', 'count_sold_intentions', 'count_discarded_intentions', 'count_interest_intentions',
         'count_management_intentions', 'count_leads', 'created_at_humans', 'count_proposals', 'count_logs',
         'created_at_datatable', 'activated_at_datatable', 'last_log_login_at_datatable', 'states', 'last_login_at',
-        'range_view_at_humans', 'count_views', 'has_logo', 'count_favorites', 'range_favorite_at_humans', 'has_contact_today'];
+        'range_view_at_humans', 'count_views', 'has_logo', 'count_favorites', 'range_favorite_at_humans', 'has_contact_today'*/];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
