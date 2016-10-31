@@ -52,7 +52,12 @@ class ProposalsController extends Controller
      */
     public function show(Proposal $proposal)
     {
-        $proposal->load(['contacts.actions', 'quote.advertiser.contacts.actions']);
+        $proposal->load([
+            'viewSpaces.audiences.type', 'viewSpaces.cities', 'viewSpaces.impactScenes',
+            'contacts.actions',
+            'quote.advertiser.contacts.actions'
+        ]);
+
         $contacts = $proposal->contacts->sortByDesc('created_at')->all();
 
         return view('admin.proposals.show')->with([
