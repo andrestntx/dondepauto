@@ -473,7 +473,7 @@ var SpaceService = function() {
             });    
         }
 
-        if(QuoteService) {
+        if(typeof QuoteService !== 'undefined') {
             $('#' + inputId + ' #space_selected').attr('data-space-id', space.id);
             QuoteService.changeSpaceSelectButton($('#' + inputId + ' #space_selected'), space);    
         }
