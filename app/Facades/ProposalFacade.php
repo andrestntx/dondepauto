@@ -96,9 +96,28 @@ class ProposalFacade
 
     /**
      * @param Proposal $proposal
+     * @return $this
+     */
+    public function getProposal(Proposal $proposal)
+    {
+        return $this->service->loadProposal($proposal);
+    }
+
+    /**
+     * @param Proposal $proposal
      */
     public function send(Proposal $proposal)
     {
         $this->emailService->sendProposal($proposal, $proposal->getAdvertiser());
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @param Space $space
+     * @param int $select
+     */
+    public function selectSpace(Proposal $proposal, Space $space, $select)
+    {
+        $this->service->selectSpace($proposal, $space, $select);
     }
 }

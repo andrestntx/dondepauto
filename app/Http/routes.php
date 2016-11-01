@@ -39,6 +39,12 @@ Route::get('propuestas/{proposals}/preview/pdf', [
     'uses'  => 'Admin\ProposalsController@previewPdf'
 ]);
 
+Route::get('propuestas/{proposals}/preview/all-pdf', [
+    'as'    => 'proposals.preview-all-pdf',
+    'uses'  => 'Admin\ProposalsController@previewAllPdf'
+]);
+
+
 Route::get('propuestas/{proposals}/preview/html', [
     'as'    => 'proposals.preview-html',
     'uses'  => 'Admin\ProposalsController@previewHtml'
@@ -233,6 +239,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('propuestas/agregar/{spaces}', [
             'as'    => 'proposals.spaces.add',
             'uses'  => 'Admin\ProposalsController@add'
+        ]);
+
+        Route::post('propuestas/{proposals}/spaces/{spaces}/select', [
+            'as'    => 'proposals.spaces.select',
+            'uses'  => 'Admin\ProposalsController@selectSpace'
         ]);
 
         Route::post('propuestas/{proposals}/discount/{spaces}', [

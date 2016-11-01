@@ -8,7 +8,9 @@
                         <h2 class="modal-title h4" style="font-size: 17px;">
                             <span style="font-weight: 300;">Medio:</span> <a id="publisher_company" class="text-success" href="#" target="_blank"></a><br>
                             <span style="font-weight: 300;">Espacio:</span>  <span id="space_name" class="h5 text-success" style="font-size:17px;"></span><br>
-                            <span id="space_selected" class="text-info"></span>
+                            <button id="space_selected" class="btn btn-sm">
+                                
+                            </button>
                         </h2>
                     </div>
                     <div class="col-xs-4">

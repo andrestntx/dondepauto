@@ -71,7 +71,7 @@
     <div style="padding: 1em 0;">
         <a href="{{ route('proposals.preview-html', $proposal) }}" class="btn btn-sm btn-success" target="_blank" title="HTML"><i class="fa fa-list-alt"></i> Previsualizar</a>
 
-        <a href="{{ route('proposals.preview-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Cotización</a>
+        <a href="{{ route('proposals.preview-all-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Cotización</a>
 
         <button class="btn btn-sm btn-primary" title="Enviar propuesta" id="sendProposal"><i class="fa fa-paper-plane"></i> Enviar propuesta</button>
     </div>
@@ -123,19 +123,17 @@
                             </p>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-5" id="tabContacts">
-                            <div class="panel panel-default" style="margin-bottom: 0;">
-                                <div class="panel-heading">
-                                    <h4 style="float: left;">Contactos</h4>
-                                    <div class="ibox-tools">
-                                        <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-plus"></i></button>    
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h4 style="margin: 0;">
+                                        Contactos
+                                        <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;">
+                                            <i class="fa fa-plus"></i>
+                                        </button>    
+                                    </h4>
                                 </div>
-                                <div class="panel-body" style="max-height: 150px; overflow: auto; padding: 0.7em 1em;">
-                                    <div class="row">
-                                        <div class="col-xs-12" id="proposal-contacts">
-                                            
-                                        </div>
-                                    </div>
+                                <div class="col-xs-12" id="proposal-contacts" style="max-height: 120px; overflow: auto; padding: 0.7em 1em;">
+
                                 </div>
                             </div>
                         </div>

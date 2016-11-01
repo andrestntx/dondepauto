@@ -72,5 +72,15 @@ class ProposalService extends ResourceService
         $this->repository->syncSpaces($proposal, $spacesNotIn, ['selected' => 0]);
         $this->repository->syncSpaces($proposal, $spaceIds, ['selected' => 1]);
     }
+
+    /**
+     * @param Proposal $proposal
+     * @param Space $space
+     * @param int $select
+     */
+    public function selectSpace(Proposal $proposal, Space $space, $select)
+    {
+        $this->repository->selectSpace($proposal, $space, $select);
+    }
     
 }
