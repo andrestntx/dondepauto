@@ -90,6 +90,21 @@ class ProposalsController extends Controller
      * @param Proposal $proposal
      * @return $this
      */
+    public function previewAllPdf(Request $request, Proposal $proposal)
+    {
+        $proposal = $this->proposalFacade->getProposal($proposal);
+
+        return \PDF::loadView('admin.proposals.preview.pdf', [
+            'proposal'      => $proposal,
+            'advertiser'    => $proposal->getViewAdvertiser()
+        ])->setPaper('a4')->stream('cotizacion_dondepauto.pdf');
+    }
+
+    /**
+     * @param Request $request
+     * @param Proposal $proposal
+     * @return $this
+     */
     public function select(Request $request, Proposal $proposal)
     {
         $proposal = $this->proposalFacade->select($proposal, $request->get("spaces"));
@@ -166,6 +181,24 @@ class ProposalsController extends Controller
     {
         $this->proposalFacade->send($proposal);
         return ['success' => 'true'];
+    }
+
+    /**
+     * @param Request $request
+     * @param Proposal $proposal
+     * @param Space $space
+     * @return array
+     */
+    public function selectSpace(Request $request, Proposal $proposal, Space $space)
+    {
+        $this->proposalFacade->selectSpace($proposal, $space, $request->get('select'));
+
+        if($request->get('select')) {
+            return ['success' => 'true', 'message' => 'Espacio seleccionado'];
+        }
+
+        return ['success' => 'true', 'message' => 'Espacio desseleccionado'];
+
     }
 
 }

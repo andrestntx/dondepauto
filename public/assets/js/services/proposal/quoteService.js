@@ -155,7 +155,7 @@ var QuoteService = function() {
 
                 if(data.success) {
                     var socialContact = AdvertiserService.getSocialContact(data.contact);
-                    $('#modalContacts #proposal-contacts').prepend(socialContact);
+                    $('#proposal-contacts').prepend(socialContact);
                 }
                 else {
                     console.log('error');
@@ -481,6 +481,67 @@ var QuoteService = function() {
         });
     }
 
+    function changeToSelectButton(button)
+    {
+        button.html("")
+            .removeClass("btn-default")
+            .addClass("btn-info")
+            .append($("<i></i>").addClass("fa fa-check-circle"))
+            .append(" seleccionado");
+    }
+
+    function changeToDeselectButton(button)
+    {
+        button.html("")
+            .removeClass("btn-info")
+            .addClass("btn-default")
+            .append($("<i></i>").addClass("fa fa-check-circle"))
+            .append(" seleccionar");
+    }
+
+    function changeSelectButton(button, selected)
+    {
+        if(selected == 1) {
+            changeToSelectButton(button);
+        } 
+        else {
+            changeToDeselectButton(button)
+        }
+    }
+
+    function changeSpaceSelectButton(button, space)
+    {
+        console.log(space);
+        if(space.pivot) {
+            changeSelectButton(button, space.pivot.selected);
+        } 
+    }
+
+    function initSpaceSelect(){
+        $("#space_selected").click(function(e){
+            button = $(this);
+            var url = '/propuestas/' + proposal.id + '/spaces/' + $(this).attr('data-space-id') + '/select';
+
+            var parameters = { select: 1 };
+            if(button.hasClass("btn-info")) {
+                parameters.select = 0;
+            }
+
+            $.post(url, parameters, function( data ) {
+                if(data.success) {
+                    changeSelectButton(button, parameters.select);
+                    swal(data.message, "", "success");
+                    SpaceService.reload();
+                }
+                else{
+                    swal("Hubo un error", "", "warning");
+                }
+            }).fail(function(){
+                swal("Algo ocurrió. Hubo un error", "", "warning");
+            });
+        });
+    }
+
     return {
         init: function(urlSearch) {
             initTable(urlSearch);
@@ -490,12 +551,16 @@ var QuoteService = function() {
             initContacts();
             initDrawAdvertiser();
             initModalDiscount();
+            initSpaceSelect();
         },
         initContacts: function(){
             initContacts();
         },
         reload: function(){
             reload();
+        },
+        changeSpaceSelectButton: function(button, space) {
+            changeSpaceSelectButton(button, space);
         }
     };
 }();

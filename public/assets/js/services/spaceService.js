@@ -473,15 +473,9 @@ var SpaceService = function() {
             });    
         }
 
-        if(space.pivot && space.pivot.selected && space.pivot.selected == 1) {
-            $('#' + inputId + ' #space_selected').html(
-                $("<strong></strong>")
-                    .append($("<i></i>").addClass("fa fa-check-circle"))
-                    .append(" seleccionado")
-            );
-        } 
-        else {
-            $('#' + inputId + ' #space_selected').html("");
+        if(QuoteService) {
+            $('#' + inputId + ' #space_selected').attr('data-space-id', space.id);
+            QuoteService.changeSpaceSelectButton($('#' + inputId + ' #space_selected'), space);    
         }
         
 

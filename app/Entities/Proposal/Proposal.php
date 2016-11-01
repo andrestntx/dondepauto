@@ -54,7 +54,7 @@ class Proposal extends Model
      */
     public function spaces()
     {
-        return $this->belongsToMany(Space::class)->withPivot(['discount', 'with_markup', 'title', 'description']);
+        return $this->belongsToMany(Space::class)->withPivot(['discount', 'with_markup', 'title', 'description', 'selected']);
     }
 
     /**

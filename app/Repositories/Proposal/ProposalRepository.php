@@ -72,6 +72,18 @@ class ProposalRepository extends BaseRepository
         return $proposal->spaces()->updateExistingPivot($space->id, $data);
     }
 
+
+    /**
+     * @param Proposal $proposal
+     * @param Space $space
+     * @param int $select
+     */
+    public function selectSpace(Proposal $proposal, Space $space, $select = 0)
+    {
+        $this->sync($proposal, $space, ['selected' => $select]);
+    }
+
+
     /**
      * @param Proposal $proposal
      * @param array $spaceIds
@@ -81,7 +93,7 @@ class ProposalRepository extends BaseRepository
     public function syncSpaces(Proposal $proposal, array $spaceIds, array $data)
     {
         foreach($spaceIds as $id) {
-            $proposal->spaces()->updateExistingPivot($id, $data);
+            $this->updateSpace($proposal, $id, $data);
         }
 
         return $proposal->spaces;
