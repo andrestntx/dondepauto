@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-sm-4 m-t-sm">
                     <p>
-                        <span class="h5 font-bold"> Comentarios </span> <br>
+                        <span class="h5 font-bold"> Descripción actividad </span> <br>
                         <span class="h5"> {{ $advertiser->comments }} </span> <br>
                     </p>
                 </div>

@@ -42,7 +42,7 @@
                                         <i class="fa fa-mobile"></i> <a href="tel:+3142308171" id="cel">  </a> <br>
                                     </span>
                                     <span class="h5"> Fuente: <span id="source">  </span>  </span> <br>
-                                    <span class="h5"> Comentarios: <span id="text-comments" style="font-weight: 400;"> </span>  </span> 
+                                    <span class="h5"> Descripción actividad: <span id="text-comments" style="font-weight: 400;"> </span>  </span> 
                                     
                                 </p>
                             </div>
@@ -131,8 +131,8 @@
                     <i class="fa fa-newspaper-o"></i> 
                     Propuestas <span id="count-proposals">(0)</span>
                 </a>
-                <a href="#" id="modalEdit" class="btn btn-warning" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
-                <a href="#" id="delete_advertiser" data-url="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar anunciante"><i class="fa fa-trash"></i></a>
+                <a href="#" id="modalEdit" class="btn btn-warning" data-toggle="tooltip"><i class="fa fa-pencil"></i> Editar</a>
+                <a href="#" id="delete_advertiser" data-url="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar anunciante"><i class="fa fa-trash"></i> Borrar</a>
             </div>
         </div>
     </div>
