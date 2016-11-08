@@ -86,14 +86,13 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/advertiserService.js"></script>
-    <script src="/assets/js/services/proposalService.js"></script>
+    <script src="/assets/js/services/proposal/quoteService.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            AdvertiserService.drawShowPrices();
-            ProposalService.initDatatable($('#advertiser').data('datatable'));
-            ProposalService.initModalEvent();
-
+            //AdvertiserService.drawShowPrices();
+            QuoteService.init($('#advertiser').data('datatable'));
+            //QuoteService.initModalEvent();
         });
     </script>
 @endsection

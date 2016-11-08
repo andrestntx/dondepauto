@@ -150,6 +150,7 @@ class EmailService
         Mail::send('emails.publisher.letter', ['publisher' => $publisher], function ($m) use ($publisher, $letterPath) {
             $m->from($this->publisherEmail['email'], $this->publisherEmail['name'])
                 ->to($publisher->representative->email, $publisher->representative->name)
+                ->cc($publisher->email, $publisher->name)
                 ->bcc($this->bccAdmin['email'], $this->bccAdmin['name'])
                 ->bcc($this->publisherEmail['email'], $this->publisherEmail['name'])
                 ->subject('Carta de Incentivos DóndePauto')
