@@ -117,7 +117,7 @@
 				</div>
 				<div class="col-xs-12 col-md-8">
 					@foreach($proposal->viewSpaces as $space)
-						<article {!! Html::classes(['publisher', 'publisher-selected' => $space->pivot->selected]) !!} data-price="{{ $space->pivot_public_price }}" data-publisherId="{{ $space->id }}">
+						<article {!! Html::classes(['publisher', 'publisher-selected' => $space->pivot->selected]) !!} data-price="{{ $space->proposal_prices_public_price }}" data-publisherId="{{ $space->id }}">
 							<div class="row">
 								<div class="col-xs-12">
 									<figure class="publisher-check">
@@ -128,7 +128,7 @@
 									</span>
 								</div>	
 								<figure class="col-xs-12 col-sm-5 col-md-4">
-									<img src="http://system.dondepauto.co/images/marketplace/big/1083_33539758064.jpg" alt="">
+									<img src="{{ $space->first_image }}" alt="">
 								</figure>
 								<div class="publisher-content col-xs-12 col-sm-7 col-md-8">
 									<h1>{{ $space->pivot_title }}</h1>
@@ -146,7 +146,7 @@
 										{!! $space->pivot_description !!}
 									</p>
 									<p class="publisher-price">
-										<span>$ {{ number_format($space->pivot_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+										<span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
 									</p>
 									<button class="btn btn-sm btn-success btn-select"><i class="fa fa-check-square-o"></i> Seleccionar</button>
 									<a href="{{ $space->url_marketplace }}" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i> Ver más</a>

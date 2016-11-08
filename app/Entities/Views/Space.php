@@ -321,6 +321,18 @@ class Space extends Model
     /**
      * @return string
      */
+    public function getFirstImageAttribute()
+    {
+        if($this->getFirstImage()) {
+            return $this->getFirstImage()->url;
+        }
+
+        return 'http://www.dondepauto.co/images/marketplace/marketplaceItemDefaultThumb_219.jpg';
+    }
+
+    /**
+     * @return string
+     */
     protected function getUrlMarketplaceAttribute()
     {
         return 'http://www.dondepauto.co/espacio-publicitario/' . $this->url;

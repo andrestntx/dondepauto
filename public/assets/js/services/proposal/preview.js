@@ -89,7 +89,9 @@ var PreviewService = function() {
 
 	function verificModalPrices()
 	{
+		console.log("count " + count);
 		if(count > 0 && ! $(".quote.modal-quote").hasClass("modal-show")) {
+
 			$(".quote.modal-quote").addClass("modal-show");
 		} else if(count == 0) {
 			$(".quote.modal-quote").removeClass("modal-show");
@@ -156,6 +158,7 @@ var PreviewService = function() {
 	function initSelect() {
 		$(".btn-select").click(function() {
 			clickPrice($(this).closest(".publisher"), $(this));
+			verificModalPrices();
 		});
 
 		$("#quote-close").click(function(){
@@ -181,6 +184,7 @@ var PreviewService = function() {
 		});
 
 		reloadPrices();
+		verificModalPrices();
 	}
 
 	return {
