@@ -476,11 +476,13 @@ hr.hr-pencil {
     display: block;
     margin: auto;
     cursor: pointer;
+    background: rgba(255, 255, 255, 0.63);
+    border-radius: 1em;
 }
 
 .publisher-content .agreement-form .btn-save-agreement img:hover {
     width: 91%;
-    background: rgba(200, 234, 241, 0.28);
+    background: rgba(200, 234, 241, 0.63);
 }
 
 .horizontal-line {

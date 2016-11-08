@@ -136,7 +136,13 @@
                                     <div class="col-md-12">
                                         <div class="col-md-6"> 
                                             {!! Field::number('publisher[commission_rate]', $publisher->commission_rate, ['label' => 'Comisión', 'required']) !!} 
-                                        </div>                                    
+                                        </div>  
+
+                                        <div class="col-md-6">
+                                            <a href="/assets/img/ejemplo_carta_borrador.pdf" title="Ver ejemplo de carta borrador" target="_blank" style="font-size: 1.4em; margin: 1.6em 0 1em 0; text-align: center; text-decoration: underline; display: block;">
+                                                Ver ejemplo de carta borrador
+                                            </a>
+                                        </div>                                  
                                     </div>
 
                                 </div>
