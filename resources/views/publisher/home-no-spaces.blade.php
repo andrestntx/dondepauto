@@ -57,7 +57,7 @@
     <div class="col-xs-12 text-center" style="margin-top:20px;">
         
         <img src="/assets/img/question.png" style="max-width:70px;">
-        <h4 class="text-lg" style="margin-bottom:10px;">¡Quiero conocer <a href="#" target="_blank" class="theme-color" >cómo funciona DóndePauto!</a> </h4>
+        <h4 class="text-lg" style="margin-bottom:10px;">¡Quiero conocer <a href="http://www.dondepauto.co/modelo-de-negocio-medios-publicitarios" target="_blank" class="theme-color" >cómo funciona DóndePauto!</a> </h4>
         <p class="text-lg" style="font-size: 15.3px;"> (modalidades de ventas, oblicaciones de DóndePauto, precios de oferta al público, formas de pagos por tus servicios)</p>
         <div class="col-md-10 col-md-offset-1 sponsors">
             <div style="border: 1px dotted #C7C3C3; max-width: 1000px; display: block; margin: 48px auto 0 auto;"></div>
