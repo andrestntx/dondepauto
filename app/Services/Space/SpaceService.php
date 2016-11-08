@@ -133,17 +133,11 @@ class SpaceService extends ResourceService
      * @return array
      */
     protected function getData(array $data, SpaceFormat $format, User $publisher, $active = true) {
-        $activeString = 'Si_act';
-        
-        if( ! $active) {
-            $activeString = 'No_act';
-        }
-        
         return $data + [
             'sub_category_id'   => $format->subCategory->id,
             'category_id'       => $format->getCategory()->id,
             'publisher_company' => $publisher->company,
-            'active'            => $activeString,
+            'active'            => $active,
             'publisher_id'      => $publisher->id
         ];
     }
@@ -152,11 +146,12 @@ class SpaceService extends ResourceService
      * @param array $data
      * @param SpaceFormat $format
      * @param User $publisher
+     * @param bool $active
      * @return mixed
      */
-    public function createSpace(array $data, SpaceFormat $format, User $publisher)
+    public function createSpace(array $data, SpaceFormat $format, User $publisher, $active = true)
     {
-        return $this->repository->create($this->getData($data, $format, $publisher));
+        return $this->repository->create($this->getData($data, $format, $publisher, $active));
     }
 
     /**

@@ -145,7 +145,7 @@ class ProposalFacade
     public function duplicateSpace(array $data, $images = [], $keep_images = [], Proposal $proposal, Space $copySpace)
     {
         $format = $this->formatService->getModel($data['format_id']);
-        $space  = $this->spaceService->createSpace($data, $format, $copySpace->publisher);
+        $space  = $this->spaceService->createSpace($data, $format, $copySpace->publisher, false);
         $this->spaceService->saveAndCopyImages($images, $space, $copySpace, $keep_images);
         $this->spaceFacade->recalculatePoints($space);
 

@@ -168,9 +168,6 @@ var SpaceService = function() {
                         .attr('data-target', '#spaceModal')
                         .attr('data-space', JSON.stringify(aData));  
 
-                if(aData.active == 0) {
-                    $(nRow).addClass('warning');    
-                }
 
                 if(aData.pivot.selected && aData.pivot.selected == 1) {
                     $(nRow).addClass('success');
