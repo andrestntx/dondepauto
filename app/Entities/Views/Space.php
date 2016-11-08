@@ -11,14 +11,18 @@ namespace App\Entities\Views;
 use App\Entities\Platform\Space\Audience;
 use App\Entities\Platform\Space\SpaceCity;
 use App\Entities\Platform\Space\SpaceImpactScene;
-use App\Entities\Views\Publisher;
+use App\Entities\Proposal\SpacePrice as ProposalSpacePrice;
+
 use App\Entities\Views\Simple\Publisher as SimplePublisher;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Platform\Space\SpaceImage;
+use Illuminate\Support\Str;
 
 class Space extends Model
 {
+    protected $prices;
+    protected $proposalPrices;
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -39,14 +43,61 @@ class Space extends Model
      *
      * @var array
      */
-    protected $appends = ['publisher_name', 'category_sub_category', 'commission', 'markup_price', 'public_price',
+    protected $appends = ['publisher_name', 'category_sub_category',
         'publisher_signed_agreement_lang', 'publisher_signed_at_datatable', 'created_at_humans', 'created_at_date',
-        'sub_category_name_format_name', 'commission_price', 'pivot_discount', 'pivot_discount_price', 'pivot_with_markup',
-        'pivot_commission_price', 'pivot_markup', 'pivot_markup_price', 'pivot_commission_price', 'pivot_public_price',
-        'pivot_minimal_price', 'pivot_title', 'pivot_description', 'percentage_markdown', 'city_names', 'impact_scene_names',
-        'audiences_array'
+        'sub_category_name_format_name',  'audiences_array', 'pivot_title', 'pivot_description', 'city_names', 'impact_scene_names',
+
+        'prices_markup_price', 'prices_public_price', 'prices_markup_per', 'prices_commission_price', 'prices_commission_per',
+        'prices_minimal_price', 'prices_initial_price',
+
+        'proposal_prices_discount', 'proposal_prices_discount_price', 'proposal_prices_with_markup',
+        'proposal_prices_commission_price', 'proposal_prices_markup', 'proposal_prices_markup_price',
+        'proposal_prices_public_price', 'proposal_prices_minimal_price', 'proposal_prices_gain_price'
     ];
-    
+
+    /**
+     * Space constructor.
+     */
+    public function __construct()
+    {
+        $this->prices = new SpacePrice($this);
+        $this->proposalPrices = new ProposalSpacePrice($this, $this->prices);
+    }
+
+    /**
+     * Determine if a get mutator exists for an attribute.
+     *
+     * @param  string  $key
+     * @return bool
+     */
+    public function hasGetMutator($key)
+    {
+        return (
+            Str::startsWith($key, 'prices_') ||
+            Str::startsWith($key, 'proposal_prices_') ||
+            method_exists($this, 'get'.Str::studly($key).'Attribute')
+        );
+    }
+
+    /**
+     * Get the value of an attribute using its mutator.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function mutateAttribute($key, $value)
+    {
+        if(Str::startsWith($key, 'prices_')) {
+            return $this->prices->{'get'.Str::studly(Str::replaceFirst('prices_', '', $key))}($value);
+        }
+        else if(Str::startsWith($key, 'proposal_prices_')) {
+            return $this->proposalPrices->{'get'.Str::studly(Str::replaceFirst('proposal_prices_', '', $key))}($value);
+        }
+
+        return $this->{'get'.Str::studly($key).'Attribute'}($value);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -111,7 +162,6 @@ class Space extends Model
 
     public function getCityNamesAttribute()
     {
-
         return $this->cities->implode('nombre_ciudad_LI', ', ');
     }
 
@@ -199,71 +249,6 @@ class Space extends Model
 
 
     /**
-     * @return float
-     */
-    public function getCommissionAttribute()
-    {
-        return ($this->publisher_commission_rate / 100);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCommissionPriceAttribute()
-    {
-        return $this->minimal_price * $this->commission;
-    }
-
-    public function getDiscountAttribute($value)
-    {
-        return $value / 100;
-    }
-
-    /**
-     * @param $value
-     * @return float
-     */
-    public function getPercentageMarkdownAttribute($value)
-    {
-        if($value <= 0) {
-            $value = $this->discount;
-        }
-
-        return round($value, 3);
-    }
-
-    /**
-     * @param $value
-     * @return float
-     */
-    public function getMinimalPriceAttribute($value)
-    {
-        if($this->discount > 0) {
-            $value = $value - ($value * $this->discount);
-        }
-
-        return round($value, 3);
-    }
-
-
-    /**
-     * @return float|mixed
-     */
-    public function getMarkupPriceAttribute()
-    {
-        if($this->percentage_markup == 0) {
-            return $this->attributes['minimal_price'] * $this->discount;
-        }
-
-        return round($this->minimal_price * $this->percentage_markup);
-    }
-
-    public function getPublicPriceAttribute()
-    {
-        return $this->minimal_price + $this->markup_price;
-    }
-
-    /**
      * @return string
      */
     public function getPublisherEconomicActivityNameAttribute($value)
@@ -334,15 +319,11 @@ class Space extends Model
     }
 
     /**
-     * @return null
+     * @return string
      */
-    public function getPivotDiscountAttribute()
+    protected function getUrlMarketplaceAttribute()
     {
-        if($this->pivot && $this->pivot->discount) {
-            return $this->pivot->discount;
-        }
-
-        return null;
+        return 'http://www.dondepauto.co/espacio-publicitario/' . $this->url;
     }
 
     /**
@@ -369,92 +350,5 @@ class Space extends Model
         return null;
     }
 
-    /**
-     * @return null
-     */
-    public function getPivotDiscountPriceAttribute()
-    {
-        if($discount = $this->pivot_discount) {
-            return $this->public_price * $discount;
-        }
 
-        return null;
-    }
-
-    /**
-     * @return null
-     */
-    public function getPivotMarkupAttribute()
-    {
-        if($this->pivot_discount) {
-            return $this->percentage_markdown - $this->pivot_discount;
-        }
-
-        return $this->percentage_markdown;
-    }
-
-    /**
-     * @return null
-     */
-    public function getPivotMarkupPriceAttribute()
-    {
-        if($this->pivot_discount) {
-            return $this->markup_price - $this->pivot_discount_price;
-        }
-
-        return $this->markup_price;
-    }
-
-
-    /**
-     * @return null
-     */
-    public function getPivotWithMarkupAttribute()
-    {
-        if($this->pivot && $this->pivot->with_markup >= 0) {
-            return $this->pivot->with_markup;
-        }
-
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPivotCommissionPriceAttribute()
-    {
-        return $this->pivot_minimal_price * $this->commission;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPivotPublicPriceAttribute()
-    {
-        if($this->pivot_discount) {
-            return $this->public_price - $this->pivot_discount_price;
-        }
-
-        return $this->public_price;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUrlMarketplaceAttribute()
-    {
-        return 'http://www.dondepauto.co/espacio-publicitario/' . $this->url;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPivotMinimalPriceAttribute()
-    {
-        if($this->pivot_with_markup) {
-            return $this->minimal_price;
-        }
-
-        return $this->minimal_price + $this->pivot_markup_price;
-    }
 }

@@ -38,32 +38,32 @@
                             <div class="row" style="margin-bottom: 20px;">
                                 <div class="col-xs-4">
                                     <p>.</p>
-                                    <p>Precio oferta</p>
-                                    <p>Precio costo</p>
+                                    <p>Precio Cliente</p>
+                                    <p>Descuento</p>
+                                    <p>Precio Proveedor</p>
+                                    <p>Comisión</p>
                                     <p>Markup DP</p>
                                     <p>Markup Medio</p>
-                                    <p>Descuento</p>
-                                    <p>Comisión</p>
                                     <p><strong>Ingreso DóndePauto</strong></p>
                                 </div>
                                 <div class="col-xs-4 values" id="old-values">
                                     <p> <strong>Inicial</strong> </p>
                                     <p id="discount_public_price"></p>
+                                    <p id="discount_val"></p>
                                     <p id="discount_minimal_price"></p>
+                                    <p id="discount_commission"></p>
                                     <p id="discount_markup_company"></p>
                                     <p id="discount_markup_publisher"></p>
-                                    <p id="discount_val"></p>
-                                    <p id="discount_commission"></p>
                                     <p id="discount_income"></p>
                                 </div>
                                 <div class="col-xs-4 values" id="new-values">
                                     <p> <strong>Actual</strong> </p>
                                     <p id="discount_public_price" class="text-info" style="font-weight: bold;"></p>
+                                    <p id="discount_val"></p>
                                     <p id="discount_minimal_price"></p>
+                                    <p id="discount_commission"></p>
                                     <p id="discount_markup_company"></p>
                                     <p id="discount_markup_publisher"></p>
-                                    <p id="discount_val"></p>
-                                    <p id="discount_commission"></p>
                                     <p id="discount_income" style="font-weight: bold;"></p>
                                 </div>
                             </div>

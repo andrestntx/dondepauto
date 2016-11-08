@@ -136,6 +136,73 @@ $(document).ready(function(){
          $(".period_value").html(' / ' + period);
     }
 
+    function finishSave(form) {
+        var name        = $("input#name").val();
+        var period      = $("select#period").val();
+        var category    = $("#category_id option:selected").text();
+        var impacts     = $.number($("input#impact").val(), 0, ',', '.' );
+
+        bootbox.dialog({
+            title: "Estás a punto de publicar este espacio publicitario", 
+            message: '<table>' +
+                    '    <tr>' +
+                    '        <td style="width: 110px;"><strong>Título</strong></td>' +
+                    '        <td>' + name + '</td>' +
+                    '    </tr>' +
+                    '    <tr>' +
+                    '        <td><strong>Categoria</strong></td>' +
+                    '        <td>' + category + '</td>' +
+                    '    </tr>' +
+                    '    <tr>' +
+                    '        <td><strong>Precio de Oferta</strong></td>' +
+                    '        <td>' + $("#public_price").text() + '</td>' +
+                    '    </tr>' +
+                    '    <tr>' +
+                    '        <td><strong>Impactos</strong></td>' +
+                    '        <td>' + impacts + ' / ' + period + '</td>' +
+                    '    </tr>' +
+                    '</table>',
+            buttons: {
+                danger: {
+                  label: "Volver",
+                  className: "btn-default",
+                  callback: function() {
+                    
+                  }
+                },
+                success: {
+                  label: "Aceptar",
+                  className: "btn-success",
+                  callback: function() {
+                    $(".se-pre-con").delay(700).show(0);
+                    if (myDropzone.getQueuedFiles().length > 0) {
+                        myDropzone.processQueue();
+                    }
+                    else {
+                        var data = {};
+
+                        $.each($(".dz-success-server img"), function(key,value) {
+                            $(data).attr("keep_images[" + key + "]", $(value).attr('alt'));
+                        });
+
+                        $(data).attr("impact_scenes", $("select[name='impact_scenes']").val().toString());
+                        $(data).attr("audiences", $("select[name='audiences']").val().toString());
+                        $(data).attr("cities", $("select[name='cities']").val().toString());
+                        $(data).attr("description", $(".note-editable").html());
+
+                        $('form').ajaxSubmit({
+                            data: data,
+                            success: function (data) {
+                                window.location.replace(data.route);
+                            }
+                        });
+                    }
+                  }
+                }
+            }
+        }); 
+    }
+
     $.validator.methods.youtube = function( value, element ) {
       return this.optional( element ) || /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/.test( value );
     }
@@ -240,72 +307,12 @@ $(document).ready(function(){
         },
         onFinished: function (event, currentIndex)
         {
-            var form = $(this);
-
-            var name        = $("input#name").val();
-            var period      = $("select#period").val();
-            var category    = $("#category_id option:selected").text();
-            var impacts     = $.number($("input#impact").val(), 0, ',', '.' );
-
-            bootbox.dialog({
-                title: "Estás a punto de publicar este espacio publicitario", 
-                message: '<table>' +
-                        '    <tr>' +
-                        '        <td style="width: 110px;"><strong>Título</strong></td>' +
-                        '        <td>' + name + '</td>' +
-                        '    </tr>' +
-                        '    <tr>' +
-                        '        <td><strong>Categoria</strong></td>' +
-                        '        <td>' + category + '</td>' +
-                        '    </tr>' +
-                        '    <tr>' +
-                        '        <td><strong>Precio de Oferta</strong></td>' +
-                        '        <td>' + $("#public_price").text() + '</td>' +
-                        '    </tr>' +
-                        '    <tr>' +
-                        '        <td><strong>Impactos</strong></td>' +
-                        '        <td>' + impacts + ' / ' + period + '</td>' +
-                        '    </tr>' +
-                        '</table>',
-                buttons: {
-                    danger: {
-                      label: "Volver",
-                      className: "btn-default",
-                      callback: function() {
-                        
-                      }
-                    },
-                    success: {
-                      label: "Aceptar",
-                      className: "btn-success",
-                      callback: function() {
-                        $(".se-pre-con").delay(700).show(0);
-                        if (myDropzone.getQueuedFiles().length > 0) {
-                            myDropzone.processQueue();
-                        }
-                        else {
-                            var data = {};
-
-                            $.each($(".dz-success-server img"), function(key,value) {
-                                $(data).attr("keep_images[" + key + "]", $(value).attr('alt'));
-                            });
-
-                            $(data).attr("impact_scenes", $("select[name='impact_scenes']").val().toString());
-                            $(data).attr("audiences", $("select[name='audiences']").val().toString());
-                            $(data).attr("cities", $("select[name='cities']").val().toString());
-                            $(data).attr("description", $(".note-editable").html());
-
-                            $('form').ajaxSubmit({
-                                data: data,
-                                success: function (data) {
-                                    window.location.replace(data.route);
-                                }
-                            });
-                        }
-                      }
-                    }
-                }
-            }); 
+            if(typeof QuoteService !== 'undefined') {
+                QuoteService.finishSave($(this), myDropzone, $("#proposal").attr('data-proposal-id'), $("#space").attr('data-space-id'));    
+            }
+            else {
+                finishSave($(this));    
+            }
         }
     }).validate({
         errorPlacement: function (error, element)
@@ -733,9 +740,6 @@ $(document).ready(function(){
             });
 
             this.on("removedfile", function(file) {
-
-                console.log(this.getAcceptedFiles().length + existingFileCount);
-
                 if (file.size == "100001") { 
                     existingFileCount --;
                     thisDropzone.options.maxFiles = thisDropzone.options.maxFiles + 1;

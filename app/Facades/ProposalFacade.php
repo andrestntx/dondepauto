@@ -13,24 +13,32 @@ use App\Entities\Platform\Space\Space;
 use App\Entities\Proposal\Proposal;
 use App\Services\EmailService;
 use App\Services\ProposalService;
+use App\Services\Space\SpaceFormatService;
 use App\Services\Space\SpaceService;
 
 class ProposalFacade
 {
     private $service;
     protected $spaceService;
+    protected $formatService;
+    protected $spaceFacade;
 
     /**
      * ProposalFacade constructor.
      * @param ProposalService $service
      * @param SpaceService $spaceService
      * @param EmailService $emailService
+     * @param SpaceFormatService $formatService
+     * @param SpaceFacade $spaceFacade
      */
-    public function __construct(ProposalService $service, SpaceService $spaceService, EmailService $emailService)
+    public function __construct(ProposalService $service, SpaceService $spaceService, EmailService $emailService,
+        SpaceFormatService $formatService, SpaceFacade $spaceFacade)
     {
         $this->service = $service;
         $this->spaceService = $spaceService;
         $this->emailService = $emailService;
+        $this->formatService = $formatService;
+        $this->spaceFacade = $spaceFacade;
     }
 
     /**
@@ -54,6 +62,11 @@ class ProposalFacade
     public function addProposalsSpace(Space $space, array $proposalIds)
     {
         $space->proposals()->attach($proposalIds);
+    }
+
+    public function removeProposalsSpace(Space $space, array $proposalIds)
+    {
+        $space->proposals()->detach($proposalIds);
     }
 
 
@@ -119,5 +132,42 @@ class ProposalFacade
     public function selectSpace(Proposal $proposal, Space $space, $select)
     {
         $this->service->selectSpace($proposal, $space, $select);
+    }
+
+    /**
+     * @param array $data
+     * @param array $images
+     * @param array $keep_images
+     * @param Proposal $proposal
+     * @param Space $copySpace
+     * @return mixed
+     */
+    public function duplicateSpace(array $data, $images = [], $keep_images = [], Proposal $proposal, Space $copySpace)
+    {
+        $format = $this->formatService->getModel($data['format_id']);
+        $space  = $this->spaceService->createSpace($data, $format, $copySpace->publisher);
+        $this->spaceService->saveAndCopyImages($images, $space, $copySpace, $keep_images);
+        $this->spaceFacade->recalculatePoints($space);
+
+        $copySpace = $proposal->spaces->where('id', $copySpace->id)->first();
+
+        $this->removeProposalsSpace($copySpace, [$proposal->id]);
+        $this->addProposalsSpace($space, [$proposal->id => [
+            'selected' => $copySpace->pivot->selected,
+            'title' => $copySpace->pivot->title,
+            'description' => $copySpace->pivot->description,
+        ]]);
+
+        return $space;
+    }
+
+    /**
+     * @param Proposal $proposal
+     * @return ProposalFacade
+     */
+    public function getProposalWithSelectedSpaces(Proposal $proposal)
+    {
+        $proposalWithSelectedSpaces = clone $proposal;
+        return $this->getSelected($proposalWithSelectedSpaces);
     }
 }

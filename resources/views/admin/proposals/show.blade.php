@@ -69,11 +69,20 @@
 
 @section('action')
     <div style="padding: 1em 0;">
-        <a href="{{ route('proposals.preview-html', $proposal) }}" class="btn btn-sm btn-success" target="_blank" title="HTML"><i class="fa fa-list-alt"></i> Previsualizar</a>
+        <div class="row">
+            <div class="col-xs-12" style="margin-bottom: 0.5em;">
+                <a href="{{ route('proposals.preview-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Inicial</a>
 
-        <a href="{{ route('proposals.preview-all-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Cotización</a>
+                <a href="{{ route('proposals.preview-all-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Seleccionados</a>
+            </div>
 
-        <button class="btn btn-sm btn-primary" title="Enviar propuesta" id="sendProposal"><i class="fa fa-paper-plane"></i> Enviar propuesta</button>
+            <div class="col-xs-12">   
+                <a href="{{ route('proposals.preview-html', $proposal) }}" class="btn btn-sm btn-success" target="_blank" title="HTML"><i class="fa fa-list-alt"></i> Previsualizar</a>
+
+                <button class="btn btn-sm btn-primary" title="Enviar propuesta" id="sendProposal"><i class="fa fa-paper-plane"></i> Enviar propuesta</button>
+            </div>
+        </div>
+        
     </div>
 @endsection
 
@@ -83,7 +92,8 @@
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-prices">Cifras del negocio</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-initial-prices">Balance inicial</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-final-prices">Balance final</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-target">Audiencias</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-quote">Ficha técnica</a></li>
             </ul>
@@ -145,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="tab-prices" class="tab-pane">
+                <div id="tab-initial-prices" class="tab-pane">
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
@@ -192,11 +202,58 @@
                         </div>
                     </div>
                 </div>
+                <div id="tab-final-prices" class="tab-pane">
+                    <div class="panel-body">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <p>
+                                <span class="h5 font-bold text-success"> CIFRAS DEL NEGOCIO </span> <br><br>
+                                <span class="h5"> 
+                                    <span style="font-weight: 200;">Total propuesta:</span>  ${{ number_format($finalProposal->total, 0, ',', '.') }} 
+                                </span> <br> 
+                                <span class="h5"> 
+                                    <span style="font-weight: 200;">Total costo:</span>  ${{ number_format($finalProposal->total_cost, 0, ',', '.') }} 
+                                </span> <br> <br> <br>
+                                <span class="h5"> 
+                                    <span style="font-weight: 200;">Ingresos DóndePauto:</span>  ${{ number_format($finalProposal->total_income_price, 0, ',', '.') }}   <span class="percentage">({{ $finalProposal->total_income * 100}}%)</span>
+                                </span> <br>
+                                <span class="h5 subprices"> 
+                                    <span style="font-weight: 200;">Markup:</span>  ${{ number_format($finalProposal->total_markup_price, 0, ',', '.') }} <span class="percentage">({{ $finalProposal->total_markup * 100 }}%)</span>
+                                </span> <br>
+                                <span class="h5 subprices"> 
+                                    <span style="font-weight: 200;">Comisión:</span>  ${{ number_format($finalProposal->total_commission_price, 0, ',', '.') }} <span class="percentage">({{ $finalProposal->total_commission * 100 }}%)</span>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <p>
+                                <span class="h5 font-bold text-success"> DESCUENTOS Y BONIFICADOS </span> <br><br>
+                                <span class="h5"> 
+                                    <span style="font-weight: 200;">Total propuesta:</span>  <span id="pivot_total"> ${{ number_format($finalProposal->pivot_total, 0, ',', '.') }} </span>
+                                </span> <br> 
+                                <span class="h5"> 
+                                    <span style="font-weight: 200;">Total costo:</span>  <span id="pivot_total_cost"> ${{ number_format($finalProposal->pivot_total_cost, 0, ',', '.') }} </span>
+                                </span> <br> <br>
+                                <span class="h5 text-warning"> 
+                                    <span style="font-weight: 200;">Total descuento:</span>  <span id="total_discount_price"> -${{ number_format($finalProposal->total_discount_price, 0, ',', '.') }} </span> <span id="total_discount" class="percentage text-warning">({{ $finalProposal->total_discount * 100 }}%)</span>
+                                </span> <br>
+                                <span class="h5"> 
+                                    <span style="font-weight: 200;">Ingresos DóndePauto:</span>  <span id="pivot_total_income_price"> ${{ number_format($finalProposal->pivot_total_income_price, 0, ',', '.') }} </span>   <span id="pivot_total_income" class="percentage">({{ $finalProposal->pivot_total_income * 100}}%)</span>
+                                </span> <br>
+                                <span class="h5 subprices"> 
+                                    <span style="font-weight: 200;">Markup:</span>  <span id="pivot_total_markup_price"> ${{ number_format($finalProposal->pivot_total_markup_price, 0, ',', '.') }} </span> <span id="pivot_total_markup" class="percentage">({{ $finalProposal->pivot_total_markup * 100 }}%)</span>
+                                </span> <br>
+                                <span class="h5 subprices"> 
+                                    <span style="font-weight: 200;">Comisión:</span>  <span id="pivot_total_commission_price"> ${{ number_format($finalProposal->pivot_total_commission_price, 0, ',', '.') }} </span> <span id="pivot_total_commission" class="percentage">({{ $finalProposal->pivot_total_commission * 100 }}%)</span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <div id="tab-target" class="tab-pane">
                     <div class="panel-body">
                         <div class="row">
                             @foreach($proposal->spaceAudiences->groupBy("type_name") as $type => $audiences)
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="min-height: 100px;">
                                     <div class="row">
                                         <figure class="col-xs-2 col-sm-3">
                                             <img src="{{ $audiences->first()->type_img }}" alt="{{ $type }}" class="img-responsive">
@@ -210,35 +267,34 @@
                                     </div>
                                 </div>
                             @endforeach 
-                                <div cl>
-                                    
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-5">
-                                    <div class="row">
-                                        <figure class="col-xs-2 col-sm-3 col-md-2">
-                                            <img src="/assets/img/proposal/ciudades.png" alt="Ciudades" class="img-responsive">
-                                        </figure>
-                                        <div class="col-xs-10 col-sm-9 col-md-10">
-                                            <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Ciudades</h1>
-                                            <p class="text-success">
-                                                {{ $proposal->cities->implode('name', ', ') }}
-                                            </p>
-                                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-5">
+                                <div class="row">
+                                    <figure class="col-xs-2 col-sm-3 col-md-2">
+                                        <img src="/assets/img/proposal/ciudades.png" alt="Ciudades" class="img-responsive">
+                                    </figure>
+                                    <div class="col-xs-10 col-sm-9 col-md-10">
+                                        <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Ciudades</h1>
+                                        <p class="text-success">
+                                            {{ $proposal->cities->implode('name', ', ') }}
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
-                                    <div class="row">
-                                        <figure class="col-xs-2 col-sm-3 col-md-2">
-                                            <img src="/assets/img/proposal/intereses.png" alt="Escenarios de impacto" class="img-responsive">
-                                        </figure>
-                                        <div class="col-xs-10 col-sm-9 col-md-10">
-                                            <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Escenarios de impacto</h1>
-                                            <p class="text-success">
-                                                {{ $proposal->impactScenes->implode('name', ', ') }}
-                                            </p>
-                                        </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-5">
+                                <div class="row">
+                                    <figure class="col-xs-2 col-sm-3 col-md-2">
+                                        <img src="/assets/img/proposal/intereses.png" alt="Escenarios de impacto" class="img-responsive">
+                                    </figure>
+                                    <div class="col-xs-10 col-sm-9 col-md-10">
+                                        <h1 class="h3" style="margin-top: 0; font-size: 1.5em;">Escenarios de impacto</h1>
+                                        <p class="text-success">
+                                            {{ $proposal->impactScenes->implode('name', ', ') }}
+                                        </p>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>

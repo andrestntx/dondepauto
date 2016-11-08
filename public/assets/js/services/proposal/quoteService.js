@@ -185,10 +185,10 @@ var QuoteService = function() {
     function calculatePrices(space, discount, withMarkup)
     {
         var prices = {
-            "minimal_price":    space.minimal_price,
-            "public_price":     space.public_price,
-            "commission":       space.commission,
-            "commission_price": space.commission_price,
+            "minimal_price":    space.prices_minimal_price,
+            "public_price":     space.prices_public_price,
+            "commission":       space.prices_commission_per,
+            "commission_price": space.prices_commission_price,
             "markup_publisher": {
                 "per": 0,
                 "price": 0
@@ -198,27 +198,31 @@ var QuoteService = function() {
                 "price": 0
             },
             "discount":         discount / 100, 
-            "discount_price":   space.public_price * (discount / 100),
+            "discount_price":   space.prices_public_price * (discount / 100),
             "discount_income":  0,
             "discount_income_price":  0
         };
 
-        prices.public_price     = prices.public_price - prices.discount_price;
+        prices.public_price             = prices.public_price       - prices.discount_price;
+        var markupWithDiscount          = space.prices_markup_per   - prices.discount;
+        var markupPriceWithDiscount     = space.prices_markup_price - prices.discount_price;
     
         if(withMarkup == '0') {
-            prices.commission_price         = prices.public_price * prices.commission;
+            prices.markup_publisher.per     = markupWithDiscount;
+            prices.markup_publisher.price   = markupPriceWithDiscount;
+            prices.minimal_price            = prices.minimal_price + markupPriceWithDiscount;
+            prices.commission_price         = prices.minimal_price * prices.commission;
             prices.discount_income_price    = prices.commission_price;
-            prices.markup_publisher.per     = space.pivot_markup - (discount / 100);
-            prices.markup_publisher.price   = space.markup_price - prices.discount_price;
-            prices.minimal_price            = prices.minimal_price + prices.markup_publisher.price;
         }
         else {
-            prices.markup_company.per       = space.pivot_markup - (discount / 100);
-            prices.markup_company.price     = space.markup_price - prices.discount_price;
-            prices.discount_income_price    = prices.markup_company.price + prices.commission_price;
+            prices.markup_company.per       = markupWithDiscount;
+            prices.markup_company.price     = markupPriceWithDiscount;
+            prices.discount_income_price    = markupPriceWithDiscount + prices.commission_price;
         }   
 
         prices.discount_income = prices.discount_income_price / prices.public_price;
+
+        console.log(prices);
 
         return prices;
     };
@@ -318,13 +322,21 @@ var QuoteService = function() {
         var discount = $(".space_form_discount #discount").val();
         var withMarkup = $(".space_form_discount #markup").val();
 
-        if(discount >= 0 && discount <= (space.pivot_markup * 100)) {
+        if(discount >= 0 && discount <= (space.prices_markup_per * 100)) {
+            
             drawModalDiscount("#new-values", space, discount, withMarkup);    
             $("#discount_error").text(""); 
         }
         else {
             drawModalDiscount("#new-values", space, 0, withMarkup);   
             $("#discount_error").text("El descuento debe ser menor al markup"); 
+        }
+
+        if(discount > 0 && discount <= (space.prices_markup_per * 100)) {
+            $("#old-values").attr("style", "color: rgba(128, 128, 128, 0.5);");
+        }
+        else {
+            $("#old-values").attr("style", "color: #6C7A7A;");
         }
     }
 
@@ -341,18 +353,18 @@ var QuoteService = function() {
         SpaceService.reload();
     }
 
-    function drawTotalsProposal(proposal)
+    function drawTotalsProposal(input, proposal)
     {
-        $("#pivot_total").text(getNumberPrice(proposal.pivot_total));
-        $("#pivot_total_cost").text(getNumberPrice(proposal.pivot_total_cost));
-        $("#total_discount_price").text(" -" + getNumberPrice(proposal.total_discount_price));
-        $("#total_discount").text(getNumberPercentage(proposal.total_discount));
-        $("#pivot_total_income_price").text(getNumberPrice(proposal.pivot_total_income_price));
-        $("#pivot_total_income").text(getNumberPercentage(proposal.pivot_total_income));
-        $("#pivot_total_markup_price").text(getNumberPrice(proposal.pivot_total_markup_price));
-        $("#pivot_total_markup").text(getNumberPercentage(proposal.pivot_total_markup));
-        $("#pivot_total_commission_price").text(getNumberPrice(proposal.pivot_total_commission_price));
-        $("#pivot_total_commission").text(getNumberPercentage(proposal.pivot_total_commission));
+        $(input + " #pivot_total").text(getNumberPrice(proposal.pivot_total));
+        $(input + " #pivot_total_cost").text(getNumberPrice(proposal.pivot_total_cost));
+        $(input + " #total_discount_price").text(" -" + getNumberPrice(proposal.total_discount_price));
+        $(input + " #total_discount").text(getNumberPercentage(proposal.total_discount));
+        $(input + " #pivot_total_income_price").text(getNumberPrice(proposal.pivot_total_income_price));
+        $(input + " #pivot_total_income").text(getNumberPercentage(proposal.pivot_total_income));
+        $(input + " #pivot_total_markup_price").text(getNumberPrice(proposal.pivot_total_markup_price));
+        $(input + " #pivot_total_markup").text(getNumberPercentage(proposal.pivot_total_markup));
+        $(input + " #pivot_total_commission_price").text(getNumberPrice(proposal.pivot_total_commission_price));
+        $(input + " #pivot_total_commission").text(getNumberPercentage(proposal.pivot_total_commission));
     }
 
     function initModalDiscount()
@@ -367,8 +379,8 @@ var QuoteService = function() {
         });
 
         $(document).on("click", "#newDiscount", function () {
-            $(".space_form_discount #discount").val(space.pivot_discount * 100);
-            $(".space_form_discount #markup").val(space.pivot_with_markup);
+            $(".space_form_discount #discount").val(space.proposal_prices_discount * 100);
+            $(".space_form_discount #markup").val(space.proposal_prices_with_markup);
 
             drawModalDiscount("#old-values", space, 0, 1);
             validAndDrawModalDiscount();
@@ -403,11 +415,14 @@ var QuoteService = function() {
                 with_markup: $(".space_form_discount #markup").val()
             };
 
+            console.log(parameters);
+
             $.post("/propuestas/" + proposal.id + "/discount/" + space.id, parameters, function( data ) {
                 if(data.success) {
                     space = data.space;
                     drawModalSpace(space);
-                    drawTotalsProposal(data.proposal);
+                    drawTotalsProposal("#tab-initial-prices", data.proposal);
+                    drawTotalsProposal("#tab-final-prices", data.finalProposal);
                     modal.find("#sk-spinner-modal").hide();
                     reloadTable();
 
@@ -511,11 +526,16 @@ var QuoteService = function() {
 
     function changeSpaceSelectButton(button, space)
     {
-        console.log(space);
         if(space.pivot) {
             changeSelectButton(button, space.pivot.selected);
         } 
     }
+
+    function drawModalProposalSpace(inputId, space) 
+    {
+        $('#' + inputId + ' #modalProposalEdit').attr('href', '/propuestas/' + proposal.id + '/spaces/' + space.id + '/edit');    
+    }
+    
 
     function initSpaceSelect(){
         $("#space_selected").click(function(e){
@@ -542,6 +562,140 @@ var QuoteService = function() {
         });
     }
 
+    function getDatafinishSave()
+    {
+        var data = {};
+
+        $.each($(".dz-success-server img"), function(key,value) {
+            $(data).attr("keep_images[" + key + "]", $(value).attr('alt'));
+        });
+
+        $(data).attr("impact_scenes", $("select[name='impact_scenes']").val().toString());
+        $(data).attr("audiences", $("select[name='audiences']").val().toString());
+        $(data).attr("cities", $("select[name='cities']").val().toString());
+        $(data).attr("description", $(".note-editable").html());
+
+        return data;
+    }
+
+    function redirectToProposal(proposal_id)
+    {
+        window.location.replace('/propuestas/' + proposal_id);
+    }
+
+    function swalEditOrExit(proposal_id)
+    {
+        $(".se-pre-con").delay(700).hide();
+        swal({
+            title: 'Espacio publicitario actualizado',
+            text: '¿Deseas seguir editando?',
+            type: "info",
+            confirmButtonText: "Seguir editando",
+            confirmButtonColor: "#1C84C6",
+            cancelButtonText: "Salir",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+        },
+        function(isConfirm) {
+            if (! isConfirm) {     
+                redirectToProposal(proposal_id);
+            }
+        });
+    }
+
+    function finishSave(form, myPublishDropzone, proposal_id, space_id) {
+        var name        = $("input#name").val();
+        var period      = $("select#period").val();
+        var category    = $("#category_id option:selected").text();
+        var impacts     = $.number($("input#impact").val(), 0, ',', '.' );
+
+        bootbox.dialog({
+            title: "Estás a punto de publicar este espacio publicitario", 
+            message: '<table>' +
+                    '    <tr>' +
+                    '        <td style="width: 110px;"><strong>Título</strong></td>' +
+                    '        <td>' + name + '</td>' +
+                    '    </tr>' +
+                    '    <tr>' +
+                    '        <td><strong>Categoria</strong></td>' +
+                    '        <td>' + category + '</td>' +
+                    '    </tr>' +
+                    '    <tr>' +
+                    '        <td><strong>Precio de Oferta</strong></td>' +
+                    '        <td>' + $("#public_price").text() + '</td>' +
+                    '    </tr>' +
+                    '    <tr>' +
+                    '        <td><strong>Impactos</strong></td>' +
+                    '        <td>' + impacts + ' / ' + period + '</td>' +
+                    '    </tr>' +
+                    '</table>',
+            buttons: {
+                danger: {
+                  label: "Volver",
+                  className: "btn-default",
+                  callback: function() {
+                    console.log('cancela');  
+                  }
+                },
+                info: {
+                  label: "Actualizar original",
+                  className: "btn-success",
+                  callback: function() {
+                        myPublishDropzone.on("successmultiple", function(files, response) {
+                            swalEditOrExit(proposal_id);
+                        });
+
+                        $(".se-pre-con").delay(700).show(0);
+
+                        if (myPublishDropzone.getQueuedFiles().length > 0) {
+                            myPublishDropzone.processQueue();
+                        }
+                        else {
+                            $('form').ajaxSubmit({
+                                data: getDatafinishSave(),
+                                success: function (data) {
+                                    swalEditOrExit(proposal_id);
+                                }
+                            });
+                        }
+                  }
+                },
+                success: {
+                  label: "Duplicar y finalizar",
+                  className: "btn-info",
+                  callback: function() {
+
+                    myPublishDropzone.options.url = '/propuestas/' + proposal_id + '/spaces/' + space_id + '/duplicate';
+
+                    myPublishDropzone.on("successmultiple", function(files, response) {
+                        redirectToProposal(proposal_id);
+                    });
+
+                    $(".se-pre-con").delay(700).show(0);
+                    
+                    if (myPublishDropzone.getQueuedFiles().length > 0) {
+                        myPublishDropzone.processQueue();
+                    }
+                    else {
+                        
+                        $('form').ajaxSubmit({
+                            data: getDatafinishSave(),
+                            url: myPublishDropzone.options.url,
+                            success: function (data) {
+                                redirectToProposal(proposal_id);
+                            },
+                            fail: function(){
+                                alert('error');
+                            }
+                        });
+                    }
+                  }
+                }
+            }
+        }); 
+    }
+
     return {
         init: function(urlSearch) {
             initTable(urlSearch);
@@ -561,6 +715,12 @@ var QuoteService = function() {
         },
         changeSpaceSelectButton: function(button, space) {
             changeSpaceSelectButton(button, space);
+        },
+        drawModalProposalSpace: function(inputId, space) {
+            drawModalProposalSpace(inputId, space);
+        },
+        finishSave: function(form, myPublishDropzone, proposal_id, space_id) {
+            finishSave(form, myPublishDropzone, proposal_id, space_id);
         }
     };
 }();

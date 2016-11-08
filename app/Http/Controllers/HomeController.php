@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Proposal\Proposal;
+use App\Entities\Views\Space;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -36,5 +38,11 @@ class HomeController extends Controller
         }
 
         return view('home');
+    }
+
+    public function spaces(Space $space)
+    {
+        $space = Proposal::with('viewSpaces')->find(1)->viewSpaces->first();
+        return dd($space->toArray());
     }
 }
