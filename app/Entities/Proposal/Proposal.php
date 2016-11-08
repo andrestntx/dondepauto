@@ -39,7 +39,10 @@ class Proposal extends Model
      */
     protected $appends = ['days', 'advertiser_name', 'advertiser_company', 'created_at_datatable', 'send_at_datatable', 'expires_at_datatable', 'expires_at_days', 'count_spaces',
         "pivot_total", "pivot_total_cost", "total_discount_price", "total_discount", "pivot_total_income_price", "pivot_total_income",
-        "pivot_total_markup_price", "pivot_total_markup", "pivot_total_commission_price", "pivot_total_commission"];
+        "pivot_total_markup_price", "pivot_total_markup", "pivot_total_commission_price", "pivot_total_commission",
+
+        "total", "total_cost", "total_income_price", "total_markup_price", "total_commission_price", "total_commission"
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -267,7 +270,7 @@ class Proposal extends Model
      */
     public function getTotalAttribute()
     {
-        return $this->viewSpaces->sum('public_price');
+        return $this->viewSpaces->sum('prices_public_price');
     }
 
     /**
@@ -275,7 +278,7 @@ class Proposal extends Model
      */
     public function getTotalCostAttribute()
     {
-        return $this->viewSpaces->sum('minimal_price');
+        return $this->viewSpaces->sum('prices_minimal_price');
     }
 
     /**
@@ -295,7 +298,7 @@ class Proposal extends Model
      */
     public function getTotalDiscountPriceAttribute()
     {
-        return $this->viewSpaces->sum('pivot_discount_price');
+        return $this->viewSpaces->sum('proposal_prices_discount_price');
     }
 
     /**
@@ -303,7 +306,7 @@ class Proposal extends Model
      */
     public function getPivotTotalAttribute()
     {
-        return $this->viewSpaces->sum('pivot_public_price');
+        return $this->viewSpaces->sum('proposal_prices_public_price');
     }
 
     /**
@@ -327,7 +330,7 @@ class Proposal extends Model
      */
     public function getPivotTotalCostAttribute()
     {
-        return $this->viewSpaces->sum('pivot_minimal_price');
+        return $this->viewSpaces->sum('proposal_prices_minimal_price');
     }
 
     /**
@@ -375,7 +378,7 @@ class Proposal extends Model
      */
     public function getTotalMarkupPriceAttribute()
     {
-        return $this->viewSpaces->sum('markup_price');
+        return $this->viewSpaces->sum('prices_markup_price');
     }
 
     /**
@@ -383,7 +386,7 @@ class Proposal extends Model
      */
     public function getPivotTotalMarkupPriceAttribute()
     {
-        return $this->viewSpaces->sum('pivot_markup_price');
+        return $this->viewSpaces->sum('proposal_prices_markup_price');
     }
 
     /**
@@ -427,7 +430,7 @@ class Proposal extends Model
      */
     public function getTotalCommissionPriceAttribute()
     {
-        return $this->viewSpaces->sum('commission_price');
+        return $this->viewSpaces->sum('prices_commission_price');
     }
 
     /**
@@ -447,7 +450,7 @@ class Proposal extends Model
      */
     public function getPivotTotalCommissionPriceAttribute()
     {
-        return $this->viewSpaces->sum('pivot_commission_price');
+        return $this->viewSpaces->sum('proposal_prices_commission_price');
     }
 
 }

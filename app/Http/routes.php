@@ -24,6 +24,12 @@ Route::get('medios/confirmar/{code}', [
     'uses' => 'Publisher\PublishersController@confirm'
 ]);
 
+Route::get('test/{viewSpaces}', [
+    'as'    => 'test.space',
+    'uses'  => 'HomeController@spaces'
+]);
+
+
 Route::post('medios/login/{publishers}', [
     'uses' => 'Auth\PublisherController@platformLogin',
     'as' => 'medios.platform.login'
@@ -244,6 +250,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('propuestas/{proposals}/spaces/{spaces}/select', [
             'as'    => 'proposals.spaces.select',
             'uses'  => 'Admin\ProposalsController@selectSpace'
+        ]);
+
+        Route::get('propuestas/{proposals}/spaces/{spaces}/edit', [
+            'as' => 'proposals.spaces.edit',
+            'uses' => 'Admin\ProposalSpacesController@edit'
+        ]);
+
+        Route::post('propuestas/{proposals}/spaces/{spaces}/duplicate', [
+            'as' => 'proposals.spaces.duplicate',
+            'uses' => 'Admin\ProposalSpacesController@postDuplicate'
         ]);
 
         Route::post('propuestas/{proposals}/discount/{spaces}', [

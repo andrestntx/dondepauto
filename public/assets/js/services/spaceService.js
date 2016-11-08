@@ -39,11 +39,11 @@ var SpaceService = function() {
                 { "data": "pivot_description", "name": "pivot_description" }, // 3
                 { "data": "sub_category_name_format_name", "name": "sub_category_name_format_name" }, // 4
 
-                { "data": "pivot_minimal_price", "data": "pivot_minimal_price" }, // 5
-                { "data": "pivot_markup_price", "name": "pivot_markup_price" }, // 6
-                { "data": "pivot_discount", "name": "pivot_discount" }, // 7
+                { "data": "proposal_prices_minimal_price", "data": "proposal_prices_minimal_price" }, // 5
+                { "data": "proposal_prices_markup_price", "name": "proposal_prices_markup_price" }, // 6
+                { "data": "proposal_prices_discount", "name": "proposal_prices_discount" }, // 7
                 { "data": "public_price", "name": "public_price" }, // 8
-                { "data": "pivot_commission_price", "name": "pivot_commission_price" }, // 9
+                { "data": "proposal_prices_commission_price", "name": "proposal_prices_commission_price" }, // 9
                 
                 { "data": "category_id", "name": "category_id" }, // 10
                 { "data": "sub_category_id", "name": "sub_category_id" }, // 11
@@ -89,32 +89,32 @@ var SpaceService = function() {
                 }
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                var commission = $("<div></div>")
-                    .append(numeral(aData.pivot_commission_price).format('$ 0,0'))
-                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.commission).format('0%') + ')'));
+                var commission = $("<div style='min-width:80px;'></div>")
+                    .append(numeral(aData.proposal_prices_commission_price).format('$ 0,0'))
+                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.prices_commission_per).format('0%') + ')'));
 
-                var pivot_markup = $("<span style='font-size:10px;'></span>")
-                    .text(' (' + numeral(aData.pivot_markup).format('0%') + ')')
+                var proposal_prices_markup = $("<span style='font-size:10px;'></span>")
+                    .text(' (' + numeral(aData.proposal_prices_markup).format('0%') + ')')
                     .attr('data-toggle', 'tooltip')
                     .attr('data-placement', 'top');
 
-                pivot_markup.attr('title', 'Descuento Anunciante').addClass('text-success');   
+                proposal_prices_markup.attr('title', 'Descuento Anunciante').addClass('text-success');   
 
-                if(aData.pivot_with_markup == 1) {
+                if(aData.proposal_prices_with_markup == 1) {
                     withMarkup = "DP";
                 }
                 else {
                     withMarkup = "Medio";
                 }
 
-                var markup = $("<div></div>")
-                    .append(numeral(aData.pivot_markup_price).format('$ 0,0'))
-                    .append(pivot_markup)
+                var markup = $("<div style='min-width: 125px;'></div>")
+                    .append(numeral(aData.proposal_prices_markup_price).format('$ 0,0'))
+                    .append(proposal_prices_markup)
                     .append(" - " + withMarkup);
 
-                var discount = $("<div></div>")
-                    .append(numeral(aData.pivot_discount_price).format('$ 0,0'))
-                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.pivot_discount).format('0%') + ')'));  
+                var discount = $("<div style='min-width: 115px;'></div>")
+                    .append(numeral(aData.proposal_prices_discount_price).format('$ 0,0'))
+                    .append($("<span style='font-size:10px;'></span>").addClass("text-success").text(' (' + numeral(aData.proposal_prices_discount).format('0%') + ')'));  
 
                 $('td:eq(1)', nRow).html(
                     $("<div style='min-width:200px; cursor:pointer; font-weight:bold;'></div>")
@@ -146,10 +146,20 @@ var SpaceService = function() {
                         )
                 );    
 
-                $('td:eq(4)', nRow).html($("<strong></strong>").text(numeral(aData.pivot_minimal_price).format('$ 0,0')));
+                $('td:eq(4)', nRow).html(
+                    $("<div style='min-width:70px;'></div>").append(
+                        $("<strong></strong>").text(numeral(aData.proposal_prices_minimal_price).format('$ 0,0'))
+                    )
+                );
+
                 $('td:eq(5)', nRow).html(markup);
                 $('td:eq(6)', nRow).html(discount);
-                $('td:eq(7)', nRow).html($("<strong></strong>").text(numeral(aData.pivot_public_price).format('$ 0,0')));
+                $('td:eq(7)', nRow).html(
+                    $("<div style='min-width:70px;'></div>").append(
+                        $("<strong></strong>").text(numeral(aData.proposal_prices_public_price).format('$ 0,0'))
+                    )
+                );
+
                 $('td:eq(8)', nRow).html(commission);
 
                 var publisher_name = $("<div style='cursor:pointer'></div>")
@@ -158,9 +168,6 @@ var SpaceService = function() {
                         .attr('data-target', '#spaceModal')
                         .attr('data-space', JSON.stringify(aData));  
 
-                if(aData.active == 0) {
-                    $(nRow).addClass('warning');    
-                }
 
                 if(aData.pivot.selected && aData.pivot.selected == 1) {
                     $(nRow).addClass('success');
@@ -476,6 +483,7 @@ var SpaceService = function() {
         if(typeof QuoteService !== 'undefined') {
             $('#' + inputId + ' #space_selected').attr('data-space-id', space.id);
             QuoteService.changeSpaceSelectButton($('#' + inputId + ' #space_selected'), space);    
+            QuoteService.drawModalProposalSpace(inputId, space);    
         }
         
 
@@ -535,12 +543,12 @@ var SpaceService = function() {
         $('#' + inputId + ' #address').text(space.address);
 
         /** Prices **/   
-        $('#' + inputId + ' #minimal_price').text(numeral(space.minimal_price).format('$ 0,0[.]00'));
-        $('#' + inputId + ' #markup').text(numeral(space.pivot_markup).format('0%'));
-        $('#' + inputId + ' #markup_price').text(numeral(space.markup_price).format('$ 0,0[.]00'));
-        $('#' + inputId + ' #public_price').text(numeral(space.public_price).format('$ 0,0[.]00'));
+        $('#' + inputId + ' #minimal_price').text(numeral(space.prices_minimal_price).format('$ 0,0[.]00'));
+        $('#' + inputId + ' #markup').text(numeral(space.prices_markup_per).format('0%'));
+        $('#' + inputId + ' #markup_price').text(numeral(space.prices_markup_price).format('$ 0,0[.]00'));
+        $('#' + inputId + ' #public_price').text(numeral(space.prices_public_price).format('$ 0,0[.]00'));
         $('#' + inputId + ' #period').text(space.period);
-        $('#' + inputId + ' #impacts').text(space.impacts);
+        $('#' + inputId + ' #impacts').text(numeral(space.impacts).format('0,0[.]00'));
 
         /** Description **/
         $('#' + inputId + ' #space-description').html(space.description);
