@@ -297,6 +297,6 @@ class EmailService
         $this->sendAdvertiser($advertiser, 'emails.proposal.send', [
             'proposal'      => $proposal,
             'advertiser'    => $advertiser
-        ], "nueva propuesta");
+        ], "Hola " . $advertiser->first_name . ", aquí está la propuesta que solicitaste", [$this->advertiserEmail]);
     }
 }

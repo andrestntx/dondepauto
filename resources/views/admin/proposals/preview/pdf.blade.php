@@ -209,8 +209,8 @@
 							<td>{{ $space->pivot_title }}</td>
 							<td>{{ $space->pivot_description }}</td>
 							<td>{{ $space->impacts }} / {{ $space->period }}</td>
-							<td> $ {{ number_format($space->public_price, 0, ',', '.') }} </td>
-							<td class="text-info"> $ {{ number_format($space->pivot_public_price, 0, ',', '.') }} </td>
+							<td> $ {{ number_format($space->prices_public_price, 0, ',', '.') }} </td>
+							<td class="text-info"> $ {{ number_format($space->proposal_prices_public_price, 0, ',', '.') }} </td>
 						</tr>
 					@endforeach
 						<tr id="table-subtotal">
