@@ -251,6 +251,16 @@
             
             <hr class="hr-pencil">
 
+            <div class="row">
+                <div class="col-xs-12 text-center" style="margin-top:20px;">
+                    <img src="/assets/img/question.png" style="max-width:70px;">
+                    <h4 class="text-lg" style="margin-bottom:10px;">¡Quiero conocer <a href="http://www.dondepauto.co/modelo-de-negocio-medios-publicitarios" target="_blank" class="theme-color" >cómo funciona DóndePauto!</a> </h4>
+                    <p class="text-lg" style="font-size: 15.3px;"> (modalidades de ventas, oblicaciones de DóndePauto, precios de oferta al público, formas de pagos por tus servicios)</p>
+                </div>
+            </div>
+
+            <hr class="hr-pencil">
+
             <div class="row comercial-detail">
                 <div class="col-sm-12">
                     <h1>Datos Comerciales</h1>

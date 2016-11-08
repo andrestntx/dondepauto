@@ -79,7 +79,7 @@
                 <label for="signed_agreement">
                     Acepto 
                 </label>
-                <span style="font-size: 1.15em; font-weight: 600;">los <a href="#" style="color: #2cbaf8;">términos y condiciones</a> del acuerdo servicio</span>
+                <span style="font-size: 1.15em; font-weight: 600;">los <a href="http://www.dondepauto.co/terminos-y-condiciones-de-servicio-medios-publicitarios" style="color: #2cbaf8;">términos y condiciones</a> del acuerdo servicio</span>
             </div>
         </div>
         <div class="col-md-12">
