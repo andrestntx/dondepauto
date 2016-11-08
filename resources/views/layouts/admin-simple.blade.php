@@ -61,7 +61,7 @@
                                     <img alt="image" class="img-circle" src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/e7344d5d-1a38-4ddc-88fd-feaaf5f3ed20.png" style="max-width: 70px;" />
                                      </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Leonardo Reuda</strong>
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Leonardo Rueda</strong>
                                      </span> <span class="text-muted text-xs block"> Director de marketing </span> </span> </a>
                             </div>
                             <div class="logo-element">
