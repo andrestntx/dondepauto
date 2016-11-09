@@ -23,6 +23,23 @@ class SpacePrice
     }
 
     /**
+     * Markup ideal si el medio no da descuento
+     * @return mixed
+     */
+    public function getTargetDiscount()
+    {
+        return env("target_discount", 0.15);
+    }
+
+    /**
+     * @return float
+     */
+    public function getTargetMarkup()
+    {
+        return (1 / (1  - $this->getTargetDiscount() )) - 1;
+    }
+
+    /**
      * Si el medio asginó un descuento
      *
      * @return bool
@@ -119,7 +136,7 @@ class SpacePrice
             return $this->getDiscount();
         }
 
-        return $this->space->percentage_markup;
+        return $this->getTargetDiscount();
     }
 
     /**
@@ -127,6 +144,10 @@ class SpacePrice
      */
     public function getMarkupPrice()
     {
-        return $this->getInitialPrice() * $this->getMarkupPer();
+        if($this->hasDiscount()) {
+            return $this->getInitialPrice() * $this->getMarkupPer();
+        }
+
+        return $this->getInitialPrice() * $this->getTargetMarkup();
     }
 }

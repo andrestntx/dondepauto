@@ -94,10 +94,7 @@
                     <div class="col-md-5">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 style="float: left;"> Precios del Espacio </h4>
-                                <div class="ibox-tools">
-                                    <button id="newDiscount" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-usd"></i></button>    
-                                </div>
+                                <h4> Precios del Espacio </h4>
                             </div>
 
                             <div class="panel-body">

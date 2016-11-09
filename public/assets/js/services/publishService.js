@@ -105,12 +105,17 @@ $(document).ready(function(){
                 var html = '<p id="text_discount" style="margin-bottom: 1.5em; color: rgb(29, 49, 148);">Si no estableces un Descuento, la plataforma incrementará un <strong>margen de negociación</strong> al <strong>precio base</strong>, y ajustará el <strong>precio de oferta al público</strong>. Este margen se ofrecerá como Descuento al anunciante, en privado, para persuadir el cierre de la venta y/o el pago anticipado del espacio publicitario</p>';
                 $("#text_discount").html(html).css('color', 'rgb(29, 49, 148)').show();  
 
-                var our_discount = 15;
-                var discount_price = price * our_discount / 100;
+
+                var target_discount = 0.15;
+                var our_discount = (1 / (1  - target_discount )) - 1;
+                var discount_price = price * our_discount;
                 var public_price = price + discount_price;
 
+                console.log(target_discount);
+                console.log(our_discount);
+
                 $("input[name='public_price']").val(public_price);
-                $("input[name='margin']").val(our_discount / 100);
+                $("input[name='margin']").val(our_discount);
                 
                 $("#minimal_price span").text($.number( price, 0, ',', '.' ));
                 $("#label_discount strong").text('Descuento de ' + $("#publisher_name").text() + ':');
