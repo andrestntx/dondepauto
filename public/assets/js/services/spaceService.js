@@ -227,9 +227,9 @@ var SpaceService = function() {
                 { "data": "format_name", "name": "format_name" }, // 5
 
                 { "data": "publisher_commission_rate", "name": "publisher_commission_rate" }, // 6
-                { "data": "minimal_price", "data": "minimal_price" },
-                { "data": "percentage_markdown", "name": "percentage_markdown" },
-                { "data": "markup_price", "name": "markup_price" },
+                { "data": "prices_minimal_price", "data": "prices_minimal_price" },
+                { "data": "prices_markup_per", "name": "prices_markup_per" },
+                { "data": "prices_markup_price", "name": "prices_markup_price" },
                 { "data": "public_price", "name": "public_price" }, // 10
 
                 { "data": "category_id", "name": "category_id" }, // 11
@@ -288,33 +288,33 @@ var SpaceService = function() {
                 $('td:eq(2)', nRow).attr('style', "font-weight: bold; color: #4949a0; min-width: 220px;");
 
                 $('td:eq(6)', nRow).html(
-                    numeral(aData.commission).format('0%')
+                    numeral(aData.prices_commission_per).format('0%')
                 );
 
                 $('td:eq(7)', nRow).html(
-                    numeral(aData.minimal_price).format('$ 0,0[.]00')
+                    numeral(aData.prices_minimal_price).format('$ 0,0[.]00')
                 );
 
-                var percentage_markdown = $("<span></span>")
-                    .text(numeral(aData.percentage_markdown).format('0%'))
+                var prices_markup_per = $("<span></span>")
+                    .text(numeral(aData.prices_markup_per).format('0%'))
                     .attr('data-toggle', 'tooltip')
                     .attr('data-placement', 'top')
 
                 if(aData.discount == 0) {
-                    percentage_markdown.attr('title', 'Markup DP+').addClass('text-info'); 
+                    prices_markup_per.attr('title', 'Markup DP+').addClass('text-info'); 
                 }
                 else {
-                    percentage_markdown.attr('title', 'Descuento Anunciante').addClass('text-success');   
+                    prices_markup_per.attr('title', 'Descuento Anunciante').addClass('text-success');   
                 }
 
-                $('td:eq(8)', nRow).html(percentage_markdown);
+                $('td:eq(8)', nRow).html(prices_markup_per);
 
                 $('td:eq(9)', nRow).html(
-                    numeral(aData.markup_price).format('$ 0,0[.]00')
+                    numeral(aData.prices_markup_price).format('$ 0,0')
                 );
 
                 $('td:eq(10)', nRow).html(
-                    numeral(aData.public_price).format('$ 0,0[.]00')
+                    numeral(aData.prices_public_price).format('$ 0,0')
                 );
 
                 if(aData.active == 0) {
@@ -497,7 +497,7 @@ var SpaceService = function() {
             .attr('data-publisher-company', space.publisher_company);
 
         $('#' + inputId + ' #modalSuggestSpace')
-            .attr('data-max-discount', space.percentage_markdown * 100);
+            .attr('data-max-discount', space.prices_markup_per * 100);
             
         /** Space Data **/
         $('#delete_space').data("spaceid", space.id);
