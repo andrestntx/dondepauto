@@ -8,6 +8,9 @@
 
     <link href="/assets/css/prueba.css" rel="stylesheet">
 
+    <!-- orris -->
+    <link href="/assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
     <style type="text/css">
         .swal2-modal .swal2-select {
             background-color: #FFFFFF;
@@ -71,9 +74,9 @@
     <div style="padding: 1em 0;">
         <div class="row">
             <div class="col-xs-12" style="margin-bottom: 0.5em;">
-                <a href="{{ route('proposals.preview-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Inicial</a>
+                <a href="{{ route('proposals.preview-all-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Inicial</a>
 
-                <a href="{{ route('proposals.preview-all-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Seleccionados</a>
+                <a href="{{ route('proposals.preview-pdf', $proposal) }}" class="btn btn-sm btn-warning" target="_blank" title="PDF"><i class="fa fa-file-pdf-o"></i> Seleccionados</a>
             </div>
 
             <div class="col-xs-12">   
@@ -93,7 +96,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-initial-prices">Balance inicial</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-final-prices">Balance final</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-final-prices">Balance seleccionados</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-target">Audiencias</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-quote">Ficha técnica</a></li>
             </ul>
@@ -159,7 +162,8 @@
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
-                                <span class="h5 font-bold text-success"> CIFRAS DEL NEGOCIO </span> <br><br>
+                                
+                                <span class="h5 font-bold text-success"> CIFRAS INICIALES DEL NEGOCIO </span> <br><br>
                                 <span class="h5"> 
                                     <span style="font-weight: 200;">Total propuesta:</span>  ${{ number_format($proposal->total, 0, ',', '.') }} 
                                 </span> <br> 
@@ -179,7 +183,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
-                                <span class="h5 font-bold text-success"> DESCUENTOS Y BONIFICADOS </span> <br><br>
+                                <span class="h5 font-bold text-success"> CIFRAS CON DCTOS Y BONIFICADOS </span> <br><br>
                                 <span class="h5"> 
                                     <span style="font-weight: 200;">Total propuesta:</span>  <span id="pivot_total"> ${{ number_format($proposal->pivot_total, 0, ',', '.') }} </span>
                                 </span> <br> 
@@ -200,13 +204,25 @@
                                 </span>
                             </p>
                         </div>
+                        
+                        {{-- <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div id="bar-init-prices"
+                                        data-cost="{{ $proposal->pivot_total_cost }}" data-markup="{{ $proposal->pivot_total_markup_price }}" 
+                                        data-commision="{{ $proposal->pivot_total_commission_price }}">
+                                    </div>
+                                </div>
+                            </div>    
+                        </div> --}}
+                        
                     </div>
                 </div>
                 <div id="tab-final-prices" class="tab-pane">
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
-                                <span class="h5 font-bold text-success"> CIFRAS DEL NEGOCIO </span> <br><br>
+                                <span class="h5 font-bold text-success"> CIFRAS INICIALES DEL NEGOCIO </span> <br><br>
                                 <span class="h5"> 
                                     <span style="font-weight: 200;">Total propuesta:</span>  ${{ number_format($finalProposal->total, 0, ',', '.') }} 
                                 </span> <br> 
@@ -226,7 +242,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
-                                <span class="h5 font-bold text-success"> DESCUENTOS Y BONIFICADOS </span> <br><br>
+                                <span class="h5 font-bold text-success"> CIFRAS CON DCTOS Y BONIFICADOS </span> <br><br>
                                 <span class="h5"> 
                                     <span style="font-weight: 200;">Total propuesta:</span>  <span id="pivot_total"> ${{ number_format($finalProposal->pivot_total, 0, ',', '.') }} </span>
                                 </span> <br> 
@@ -312,7 +328,7 @@
                 </div>
             </div>
         </div> 
-    </div>
+    </div> 
 
     <div class="col-sm-12">
         <div class="ibox-title">
@@ -340,6 +356,10 @@
 
     <script src="/assets/js/plugins/switchery/switchery.min.js"></script>
 
+    <!-- Morris -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+
     <!-- Sweet alert -->
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -355,12 +375,31 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            // PublisherService.drawShowPrices();
+            /*
+             * Play with this code and it'll update in the panel opposite.
+             *
+             * Why not try some of the options above?
+             */
+            Morris.Bar({
+              element: 'bar-init-prices',
+              data: [
+                { y: 'Propuesta Cliente', a: 0, b: Math.round($("#bar-init-prices").data("cost")), c: Math.round($("#bar-init-prices").data("markup")) },
+                { y: 'Ingreso Agencia', a: Math.round($("#bar-init-prices").data("commision")),  b: 0, c: Math.round($("#bar-init-prices").data("markup")) }
+              ],
+              xkey: 'y',
+              ykeys: ['a', 'b', 'c'],
+              labels: ['Comisión', 'Total Costo', 'Markup'],
+              barColors: ['#CCC', '#FFAC1A', '#00AEEF'],
+              stacked: true,
+              numLines: 5,
+              hideHover: true
+            });
             
-            SpaceService.initProposal($('#proposal').attr('data-datatable'));
+
+            /*SpaceService.initProposal($('#proposal').attr('data-datatable'));
             QuoteService.initProposal();
             
-            $('.advertisr-chosen-select').chosen({width: "100%"});
+            $('.advertisr-chosen-select').chosen({width: "100%"});*/
         });
     </script>
 @endsection

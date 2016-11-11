@@ -22,17 +22,18 @@ class EmailService
     protected $advertiserEmail = ['email' => 'leonardo@dondepauto.co', 'name' => 'Leonardo Rueda'];
     protected $publisherEmail = ['email' => 'alexander@dondepauto.co', 'name' => 'Alexander Niño'];
 
+
     /**
      * @param $toEmail
      * @param $toName
      * @param $template
      * @param array $parameters
      * @param $subject
+     * @param array $bcc
      * @param string $fromEmail
      * @param string $fromName
-     * @param array|null $bcc
      */
-    protected function send($toEmail, $toName, $template, array $parameters, $subject, $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto", array $bcc = [])
+    protected function send($toEmail, $toName, $template, array $parameters, $subject, array $bcc = [], $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto")
     {
         if(env('APP_ENV') == 'production') {
             Mail::send($template, $parameters, function ($m) use ($fromEmail, $fromName, $toEmail, $toName, $subject, $bcc) {
@@ -61,13 +62,13 @@ class EmailService
      * @param $template
      * @param array $parameters
      * @param $subject
+     * @param array $bcc
      * @param string $fromEmail
      * @param string $fromName
-     * @param array $bcc
      */
-    protected function sendDefault(array $to, $template, array $parameters, $subject, $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto", array $bcc = [])
+    protected function sendDefault(array $to, $template, array $parameters, $subject, array $bcc = [], $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto")
     {
-        $this->send($to['email'], $to['name'], $template, $parameters, $subject, $fromEmail, $fromName, $bcc);
+        $this->send($to['email'], $to['name'], $template, $parameters, $subject, $bcc, $fromEmail, $fromName);
     }
 
 
@@ -76,14 +77,15 @@ class EmailService
      * @param $template
      * @param array $parameters
      * @param $subject
-     * @param null $fromEmail
-     * @param null $fromName
      * @param array $bcc
+     * @param string $fromEmail
+     * @param string $fromName
      */
-    protected function sendUser($user, $template, array $parameters, $subject, $fromEmail = null, $fromName = null, array $bcc = [])
+    protected function sendUser($user, $template, array $parameters, $subject, array $bcc = [], $fromEmail = "noresponder@dondepauto.co", $fromName = "Notificaciones DóndePauto")
     {
-        $this->send($user->email, ucfirst($user->first_name), $template, $parameters, $subject, $fromEmail, $fromName, $bcc);
+        $this->send($user->email, ucfirst($user->first_name), $template, $parameters, $subject, $bcc, $fromEmail, $fromName);
     }
+
 
     /**
      * @param $advertiser
@@ -94,8 +96,9 @@ class EmailService
      */
     protected function sendAdvertiser($advertiser, $template, array $parameters, $subject, array $bcc = [])
     {
-        $this->sendUser($advertiser, $template, $parameters, $subject, $this->advertiserEmail['email'], $this->advertiserEmail['name'], $bcc);
+        $this->sendUser($advertiser, $template, $parameters, $subject, $bcc, $this->advertiserEmail['email'], $this->advertiserEmail['name']);
     }
+
 
     /**
      * @param $publisher
@@ -106,21 +109,26 @@ class EmailService
      */
     protected function sendPublisher($publisher, $template, array $parameters, $subject, array $bcc = [])
     {
-        $this->sendUser($publisher, $template, $parameters, $subject, $this->publisherEmail['email'], $this->publisherEmail['name'], $bcc);
+        $this->sendUser($publisher, $template, $parameters, $subject, $bcc, $this->publisherEmail['email'], $this->publisherEmail['name']);
     }
-
 
     /**
      * @param User $user
      * @param $view
      * @param $code
+     * @param string $type
      */
-    public function sendInvitation(User $user, $view, $code)
+    protected function sendInvitation(User $user, $view, $code, $type = 'advertiser')
     {
-        $this->sendUser($user, 'emails.' . $view, [
-            'user' => $user,
-            'code' => $code
-        ], ucfirst($user->company) .  ', bienvenido a la agencia DóndePauto');
+        $subject = ucfirst($user->company) .  ', bienvenido a la agencia DóndePauto';
+        $parameters = ['user' => $user, 'code' => $code];
+
+        if($type == 'advertiser') {
+            $this->sendAdvertiser($user, 'emails.' . $view, $parameters, $subject);
+        }
+        else {
+            $this->sendPublisher($user, 'emails.' . $view, $parameters, $subject);
+        }
     }
 
     /**
@@ -129,7 +137,7 @@ class EmailService
      */
     public function sendPublisherInvitation(User $publisher, $code)
     {
-        $this->sendInvitation($publisher, 'publisher.confirm', $code);
+        $this->sendInvitation($publisher, 'publisher.confirm', $code, 'publisher');
     }
 
     /**
@@ -138,7 +146,7 @@ class EmailService
      */
     public function sendAdvertiserInvitation(User $advertiser, $code)
     {
-        $this->sendInvitation($advertiser, 'advertiser.confirm', $code);
+        $this->sendInvitation($advertiser, 'advertiser.confirm', $code, 'advertiser');
     }
 
     /**
@@ -176,7 +184,7 @@ class EmailService
      * @param array $to
      * @param array $bcc
      */
-    public function notifyChangeRole(User $user, $newType = 'Anunciante', array $to, array $bcc = [])
+    protected function notifyChangeRole(User $user, $newType = 'Anunciante', array $to, array $bcc = [])
     {
         $this->sendDefault($to, 'emails.notifications.change-user-role', [
             'user'      => $user,
@@ -270,7 +278,7 @@ class EmailService
                 'space' => $space,
                 'advertiser' => $advertiser,
                 'discount' => $discount
-            ], ucfirst($advertiser->first_name) . ", me gusta este medio publicitario para tu empresa");
+            ], ucfirst($advertiser->first_name) . ", recomendamos este medio publicitario para tu empresa");
         }
 
         return true;

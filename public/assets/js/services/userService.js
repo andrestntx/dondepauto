@@ -484,6 +484,9 @@ var UserService = function() {
 
 			userEdit = user;
 
+            console.log(userEdit);
+            console.log(userEdit.states);
+
 			$("#prueba").html(UserService.getHtmlTableStates(userEdit.states, 200));
 	        $('#' + inputId + ' #modalEdit').attr('href', '/' + urlName + '/' + userEdit.id + '/edit');
             $('#' + inputId + ' #modalShow').attr('href', '/admin/' + urlName + '/' + userEdit.id);
