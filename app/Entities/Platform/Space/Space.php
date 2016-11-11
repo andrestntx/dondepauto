@@ -57,6 +57,13 @@ class Space extends Entity
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['descripcion_espacio_LI'];
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -619,4 +626,5 @@ class Space extends Entity
 
         return round($value, 3);
     }
+
 }

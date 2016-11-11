@@ -32,14 +32,14 @@
                         {!! Field::text('action_date', ['label' => 'Fecha', 'class' => 'datetimepicker', 'id' => 'question_action_date', 'required']) !!}
                     </div>
                     <div class="col-sm-12">
-                        {!! Field::text('title', ['label' => 'Titulo', 'required']) !!}
+                        {!! Field::text('title', ['label' => 'Titulo de propuesta', 'required']) !!}
                     </div>
                     <div class="col-sm-12">
                         {!! Field::select('cities', $cities, ['label' => 'Ciudades', 'id' => 'question_cities', 'required', 'empty' => 'Seleccione las ciudades', 'class' => 'question-chosen-select', 'multiple', 'data-placeholder' => 'Ciudades']) !!}
                     </div>
-                    <div class="col-sm-12">
+                    {{-- <div class="col-sm-12">
                         {!! Field::select('audiences', $audiences, ['label' => 'Audiencias', 'id' => 'question_audiences', 'required', 'empty' => 'Seleccione las audiencias', 'class' => 'question-chosen-select', 'multiple', 'data-placeholder' => 'Audiencias']) !!}
-                    </div>
+                    </div> --}}
 
                     
                     @foreach($questions as $question)

@@ -85,9 +85,9 @@
                             <div class="panel-heading">
                                 <h4 style="float: left;">Contactos</h4>
                                 <div class="ibox-tools">
-                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-plus"></i></button>
+                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-plus"></i> Contacto</button>
                                     <button id="newQuote" data-url="-" class="btn btn-xs btn-info" id="new-quote">
-                                        <i class="fa fa-space-shuttle"></i>
+                                        <i class="fa fa-space-shuttle"></i> Solicitud Cotización
                                     </button>    
                                 </div>
                             </div>
