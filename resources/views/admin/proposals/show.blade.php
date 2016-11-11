@@ -94,15 +94,15 @@
     <div class="col-xs-12" id="proposal" data-advertiser="{{ $advertiser }}" data-states="{{ json_encode($advertiser->states) }}" data-contacts="{{ json_encode($contacts) }}" data-proposal="{{ $proposal }}" data-datatable="{{ route('proposals.spaces.search', $proposal) }}" style="margin-bottom: 1em;">
         <div class="tabs-container">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-initial-prices">Balance inicial</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
+                <li class="active"><a data-toggle="tab" href="#tab-initial-prices">Balance inicial</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-final-prices">Balance seleccionados</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-target">Audiencias</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-quote">Ficha técnica</a></li>
             </ul>
             <div class="tab-content">
-                <div id="tab-tracing" class="tab-pane active">
-                    <div class="panel-body">
+                <div id="tab-tracing" class="tab-pane">
+                    <div class="panel-body" style="padding: 2em 0;">
                         <div class="col-xs-12 col-sm-6 col-md-3">   
                             <p>
                                 <span class="h5"> 
@@ -155,10 +155,11 @@
                                 <span style="font-weight: 200;">Fecha solicitud:</span> 
                                 {{ ucfirst($proposal->created_at_date) }} 
                             </span> <br>
-                        </div>
+                        </div> 
+
                     </div>
                 </div>
-                <div id="tab-initial-prices" class="tab-pane">
+                <div id="tab-initial-prices" class="tab-pane active">
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
@@ -204,17 +205,13 @@
                                 </span>
                             </p>
                         </div>
-                        
-                        {{-- <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-content">
-                                    <div id="bar-init-prices"
-                                        data-cost="{{ $proposal->pivot_total_cost }}" data-markup="{{ $proposal->pivot_total_markup_price }}" 
-                                        data-commision="{{ $proposal->pivot_total_commission_price }}">
-                                    </div>
-                                </div>
-                            </div>    
-                        </div> --}}
+
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div id="bar-init-prices"
+                                data-cost="{{ $proposal->pivot_total_cost }}" data-markup="{{ $proposal->pivot_total_markup_price }}" 
+                                data-commision="{{ $proposal->pivot_total_commission_price }}">
+                            </div>
+                        </div> 
                         
                     </div>
                 </div>
@@ -375,12 +372,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            /*
-             * Play with this code and it'll update in the panel opposite.
-             *
-             * Why not try some of the options above?
-             */
-            Morris.Bar({
+            var morrisBar = Morris.Bar({
               element: 'bar-init-prices',
               data: [
                 { y: 'Propuesta Cliente', a: 0, b: Math.round($("#bar-init-prices").data("cost")), c: Math.round($("#bar-init-prices").data("markup")) },
@@ -389,17 +381,43 @@
               xkey: 'y',
               ykeys: ['a', 'b', 'c'],
               labels: ['Comisión', 'Total Costo', 'Markup'],
-              barColors: ['#CCC', '#FFAC1A', '#00AEEF'],
+              barColors: ['#a5a3a3', '#FFAC1A', '#00AEEF'],
               stacked: true,
               numLines: 5,
-              hideHover: true
-            });
-            
+              hoverCallback: function (index, options, content, row) {
+                console.log(options);
+                console.log(options.ykeys);
 
-            /*SpaceService.initProposal($('#proposal').attr('data-datatable'));
+                data = options.data[index];
+                content = $("<div></div>").addClass("morris-hover-row-label").text(data.y);
+                for (var i = options.ykeys.length - 1; i >= 0; i--) {
+                    value = data[options.ykeys[i]];
+                    label = options.labels[i];
+
+                    if(value > 0) {
+                        content.append(
+                            $("<div></div>")
+                                .addClass("morris-hover-point")
+                                .text( label + ": $" + $.number(value, 0, ',', '.' ))
+                                .attr("style", "color: " + options.barColors[i] + ";")
+                        );    
+                    }
+                    
+                }
+
+                return content;
+              }
+              //hideHover: true
+            });    
+
+            $("#bar-init-prices").hover(function(){
+                $(".morris-hover-point:contains('  0')").hide();    
+            })
+            
+            SpaceService.initProposal($('#proposal').attr('data-datatable'));
             QuoteService.initProposal();
             
-            $('.advertisr-chosen-select').chosen({width: "100%"});*/
+            $('.advertisr-chosen-select').chosen({width: "100%"});
         });
     </script>
 @endsection
