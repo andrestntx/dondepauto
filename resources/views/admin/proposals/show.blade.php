@@ -320,7 +320,7 @@
                         <div class="col-xs-12" id="space-description">
                             @foreach($proposal->quote->questions as $key => $question)
                                 <div class="col-xs-6 col-md-4" style="height: 70px;">   
-                                    <h4> <span class="badge badge-info">{{ $key + 1 }}</span> {{ $question->text }}: <span style="font-weight: 300;"> {{ $question->pivot->answer }} </span></h4>
+                                    <h4> <span class="badge badge-info">{{ $key + 1 }}</span> {{ $question->small }}: <span style="font-weight: 300;"> {{ $question->pivot->answer }} </span></h4>
                                 </div>
                             @endforeach
                         </div>
