@@ -58,7 +58,7 @@ class ListComposer extends BaseComposer
         $registrationStates = \Lang::get('states.advertiser');
         $cities = $this->cityRepository->citiesWithAdvertisers();
         $economicActivities = $this->economicActivityRepository->activitiesWithAdvertisers();
-        $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->get();
+        $actions = $this->actionRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->orWhere('type', 'users')->get();
         $tags           = $this->tagRepository->model->where('type', 'advertiser')->orWhere('type', 'all')->lists('name', 'id')->all();
         $actionsToday = $this->contactRepository->getCountActions('advertiser');
         $questions = $this->questionRepository->model->all();
