@@ -71,7 +71,7 @@
 @section('breadcrumbs')
     <h2 style="color:#dc780b; font-weight: 300; font-size: 26px;">{{ $proposal->title }}</h2>
     <h3 style="font-size: 20px;">{{ ucfirst($advertiser->company) }}</h3>
-    <h4 style="font-size: 20px;">{{ ucfirst($proposal->state) }}</h4>
+    <h4 style="font-size: 18px; color:#44bc52;"> <i class="fa fa-exclamation-circle"></i> {{ ucfirst($proposal->state) }}</h4>
 @endsection
 
 @section('action')
