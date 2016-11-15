@@ -43,7 +43,7 @@ class EmailService
                     ->subject($subject);
 
                 foreach ($bcc as $b) {
-                    $m->bbc($b['email'], $b['name']);
+                    $m->bcc($b['email'], $b['name']);
                 }
             });
         }

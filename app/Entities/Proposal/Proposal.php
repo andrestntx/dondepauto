@@ -101,6 +101,18 @@ class Proposal extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getStateAttribute()
+    {
+        if($this->contacts->count() > 0) {
+            return $this->contacts->sortByDesc('created_at')->first()->action->state;
+        }
+
+        return 'En construcción';
+    }
+
+    /**
      * @return mixed
      */
     public function getCountSpacesAttribute()
