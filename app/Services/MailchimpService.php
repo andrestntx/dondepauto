@@ -243,9 +243,10 @@ class MailchimpService
     }
 
     /**
+     * @param User $user
      * @return \Illuminate\Support\Collection
      */
-    protected function deleteUser()
+    protected function deleteUser(User $user)
     {
         try {
             return $this->mailchimp->delete($this->getUserUrl($user));
@@ -263,7 +264,7 @@ class MailchimpService
     {
         if(env('APP_ENV') == 'production') {
             $this->stopActualAutomation($user);
-            $this->deleteUser();
+            $this->deleteUser($user);
         }
 
         return null;
