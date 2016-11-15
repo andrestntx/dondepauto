@@ -167,7 +167,7 @@ class PublisherService extends ResourceService
      */
     public function changeRole(User $publisher)
     {
-        return $this->repository->changeRole($publisher, 'publisher');
+        return $this->repository->changeRole($publisher, 'advertiser');
     }
 
     /**
