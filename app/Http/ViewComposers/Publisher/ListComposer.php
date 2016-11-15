@@ -51,8 +51,6 @@ class ListComposer extends BaseComposer
                 ->orWhere('type', 'users');
         })->get();
 
-        dd($actions);
-
         $tags           = $this->tagRepository->model->where('type', 'publisher')->orWhere('type', 'all')->lists('name', 'id')->all();
         $cities         = $this->cityRepository->citiesWithSpaces();
         $actionsToday   = $this->contactRepository->getCountActions();
