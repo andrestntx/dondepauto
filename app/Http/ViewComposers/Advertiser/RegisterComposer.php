@@ -22,11 +22,18 @@ class RegisterComposer
 
     public function compose(View $view)
     {
-        $actions = $this->actionRepository->all();
-
         $view->with([
-            'actionsPublisher'  => $actions->where('type', 'publisher')->lists('name', 'id')->all(),
-            'actionsAdvertiser'  => $actions->where('type', 'advertiser')->lists('name', 'id')->all()
+            'actionsPublisher' => $this->actionRepository->model->where(function($query){
+                $query->where('type', 'publisher')
+                    ->orWhere('type', 'all')
+                    ->orWhere('type', 'users');
+            })->lists('name', 'id')->all(),
+
+            'actionsAdvertiser'  => $this->actionRepository->model->where(function($query){
+                $query->where('type', 'advertiser')
+                    ->orWhere('type', 'all')
+                    ->orWhere('type', 'users');
+            })->lists('name', 'id')->all()
         ]);
     }
 }
