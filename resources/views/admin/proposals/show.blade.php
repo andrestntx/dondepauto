@@ -8,8 +8,11 @@
 
     <link href="/assets/css/prueba.css" rel="stylesheet">
 
-    <!-- orris -->
+    <!-- Morris -->
     <link href="/assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Ladda -->
+    <link href="/assets/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
 
     <style type="text/css">
         .swal2-modal .swal2-select {
@@ -99,6 +102,7 @@
                 <li class=""><a data-toggle="tab" href="#tab-final-prices">Balance seleccionados</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-target">Audiencias</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-quote">Ficha técnica</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-justification">Justificación</a></li>
             </ul>
             <div class="tab-content">
                 <div id="tab-tracing" class="tab-pane">
@@ -206,8 +210,8 @@
                             </p>
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div id="bar-init-prices"
+                        <div class="col-xs-12 col-sm-6 col-md-4" style="max-height: 210px;">
+                            <div id="bar-init-prices" style="max-height: 210px; max-width: 260px; margin: auto; display: block;" 
                                 data-cost="{{ $proposal->pivot_total_cost }}" data-markup="{{ $proposal->pivot_total_markup_price }}" 
                                 data-commision="{{ $proposal->pivot_total_commission_price }}">
                             </div>
@@ -314,12 +318,21 @@
                 <div id="tab-quote" class="tab-pane">
                     <div class="panel-body">
                         <div class="col-xs-12" id="space-description">
-                            @foreach($proposal->quote->questions as $question)
-                                <div class="col-xs-6 col-md-4">   
-                                    <h4 style="font-weight: 300">{{ $question->text }}</h3>
-                                    <h3> <strong> {{ $question->pivot->answer }} </strong></h4>
+                            @foreach($proposal->quote->questions as $key => $question)
+                                <div class="col-xs-6 col-md-4" style="height: 70px;">   
+                                    <h4> <span class="badge badge-info">{{ $key + 1 }}</span> {{ $question->text }}: <span style="font-weight: 300;"> {{ $question->pivot->answer }} </span></h4>
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-justification" class="tab-pane">
+                    <div class="panel-body">
+                        <div class="col-xs-12 col-sm-6 col-md-5">   
+                            <div class="form-group" style="margin-bottom: 5px;">
+                              <textarea class="form-control" rows="5" id="justification">{{ $proposal->observations }}</textarea>
+                            </div>
+                            <button class="btn btn-success ladda-button" style="float: right;" data-style="zoom-in">Actualizar</button>
                         </div>
                     </div>
                 </div>
@@ -360,6 +373,11 @@
     <!-- Sweet alert -->
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+    <!-- Ladda -->
+    <script src="/assets/js/plugins/ladda/spin.min.js"></script>
+    <script src="/assets/js/plugins/ladda/ladda.min.js"></script>
+    <script src="/assets/js/plugins/ladda/ladda.jquery.min.js"></script>
+
     <!-- blueimp gallery -->
     <script src="/assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
     <script src="/assets/js/plugins/number/jquery.number.min.js"></script>
@@ -380,10 +398,12 @@
               ],
               xkey: 'y',
               ykeys: ['a', 'b', 'c'],
+              axes: false,
               labels: ['Comisión', 'Total Costo', 'Markup'],
               barColors: ['#a5a3a3', '#FFAC1A', '#00AEEF'],
               stacked: true,
               numLines: 5,
+              resize: true,
               hoverCallback: function (index, options, content, row) {
                 console.log(options);
                 console.log(options.ykeys);
@@ -418,6 +438,24 @@
             QuoteService.initProposal();
             
             $('.advertisr-chosen-select').chosen({width: "100%"});
+
+            var justificationBtn = $('#tab-justification button').ladda();
+            
+            justificationBtn.click(function() {
+                justificationBtn.ladda('start');
+                $.ajax({
+                    url: '/propuestas/' + $("#proposal").data("proposal").id, 
+                    method: 'PUT',
+                    data: {
+                        'observations': $("#tab-justification textarea").val() 
+                    }
+                }).done(function(data){
+                    toastr["success"]("Justificación de propuesta actualizada!");
+                }).always(function(){
+                    justificationBtn.ladda('stop');
+                });
+
+            });
         });
     </script>
 @endsection

@@ -237,6 +237,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@send'
         ]);
 
+        Route::put('propuestas/{proposals}', [
+            'as'    => 'proposals.update',
+            'uses'  => 'Admin\ProposalsController@update'
+        ]);
+
         Route::get('propuestas/{proposals}', [
             'as'    => 'proposals.show',
             'uses'  => 'Admin\ProposalsController@show'

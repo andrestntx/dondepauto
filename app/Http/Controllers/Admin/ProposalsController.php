@@ -47,6 +47,18 @@ class ProposalsController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return string
+     */
+    public function update(Request $request, Proposal $proposal)
+    {
+        $proposal->fill($request->all());
+        $proposal->save();
+
+        return ['success' => 'true', 'proposal' => $proposal];
+    }
+
+    /**
      * @param Proposal $proposal
      * @return $this
      */
@@ -67,9 +79,7 @@ class ProposalsController extends Controller
         );
 
         $proposal->load($load);
-
         $proposal->viewSpaces->first()->proposal_prices_public_price;
-
         $contacts = $proposal->contacts->sortByDesc('created_at')->all();
 
         return view('admin.proposals.show')->with([

@@ -23,7 +23,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'quote_id', 'send_at'];
+    protected $fillable = ['title', 'quote_id', 'send_at', 'observations'];
 
     /**
      * The attributes that should be mutated to dates.
