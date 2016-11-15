@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/ViewComposers/Advertiser/ListComposer.php" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Advertiser/ListComposer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ListComposer.php" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ListComposer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/proposals/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/show.blade.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,8 +87,8 @@
       <file leaf-file-name="ListComposer.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ListComposer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73454">
-              <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.6666667">
+              <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -864,8 +862,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ListComposer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73454">
-          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.6666667">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
           <folding />
         </state>
       </provider>
