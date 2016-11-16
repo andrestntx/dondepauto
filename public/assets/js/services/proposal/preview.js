@@ -110,6 +110,8 @@ var PreviewService = function() {
 
 	function addSelectPublisherId(id)
 	{	
+		console.log("adddd");
+		console.log($.inArray(id, selectedPublishers));
 		if($.inArray(id, selectedPublishers) != 1) {
 			console.log('inicio');
 			console.log($.inArray(id, selectedPublishers));
