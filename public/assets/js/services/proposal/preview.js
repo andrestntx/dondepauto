@@ -1,7 +1,6 @@
 var PreviewService = function() {
 
-	var selectedPublishers = new Array(); 
-	
+	var selectedPublishers; 
 	var classSelect = "publisher-selected";
 	var iCheck;
 	var iva;
@@ -89,7 +88,6 @@ var PreviewService = function() {
 
 	function verificModalPrices()
 	{
-		console.log("count " + count);
 		if(count > 0 && ! $(".quote.modal-quote").hasClass("modal-show")) {
 
 			$(".quote.modal-quote").addClass("modal-show");
@@ -111,10 +109,15 @@ var PreviewService = function() {
 	}
 
 	function addSelectPublisherId(id)
-	{
-		selectedPublishers = $.grep(selectedPublishers, function( n, i ) {
-			return id != n ;
-		});
+	{	
+		if($.inArray(id, selectedPublishers) != 1) {
+			console.log('inicio');
+			console.log($.inArray(id, selectedPublishers));
+			console.log(selectedPublishers);
+			selectedPublishers.push(id);
+			console.log(selectedPublishers);
+			console.log('final');
+		}
 	}
 
 	function removeSelectPublisherId(id)
@@ -129,7 +132,7 @@ var PreviewService = function() {
 
 		if( article.hasClass(classSelect)) {
 			subtractPrices(article, id);
-			deselectArticle(article, button);
+			removeSelectPublisherId(id);
 		}	
 		else {
 			sumPrices(article, id);
@@ -183,6 +186,7 @@ var PreviewService = function() {
             });
 		});
 
+		selectedPublishers = new Array();
 		reloadPrices();
 		verificModalPrices();
 	}
