@@ -234,7 +234,11 @@ class Proposal extends Model
      */
     public function getSendAtDateAttribute()
     {
-        return $this->send_at->format('d-M-y');
+        if($this->send_at) {
+            return $this->send_at->format('d-M-y');
+        }
+
+        return null;
     }
 
     /**
