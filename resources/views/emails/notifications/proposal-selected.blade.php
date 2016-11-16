@@ -594,11 +594,34 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <span style="display: block; font-size:19px; text-align:center;">
-                            	<strong>{{ ucfirst($advertiser->company) }}</strong> ha seleccionado {{ $spaces->count() }} espacios de la propuesta {{ $proposal->title }}</span><br>
-                            <span style="display: block; font-size:19px; text-align:center; font-weight: bold;">
-                            	{{ $spaces->implode("pivot_title", ", ") }}
-                            </span>
+                            <span style="display: block; font-size:19px; text-align:center; color:#666666;">
+                            	<strong style="color:#00AEEF;">{{ ucfirst($advertiser->company) }}</strong> ha seleccionado <strong>{{ $spaces->count() }}</strong> espacios de la propuesta {{ $proposal->title }}</span><br>
+                            
+                            <ol style="margin-bottom: 10px; display: block;">
+	                            @foreach($spaces as $space)
+	                            	<li style="font-size: 17px; margin-bottom: 20px;">
+	                            		<span style="color:#00AEEF; font-weight: 500;">{{ $space->publisher_company }}</span> <br>
+	                            		{{ $space->pivot_title }}
+	                            	</li>
+	                            @endforeach
+                            </ol>
+
+                            <div style="display: block; margin: 55px 0; width: 100%;">
+                            	<a href="{{ route('proposals.preview-html', $proposal) }}" 
+                            	style="background:#00AEEF; color:white; padding: 15px; font-size: 18px; text-align: center; text-decoration: none; display: block; margin: auto; width: 270px;">
+                            		VER SELECCIÓN DE MEDIOS
+                            	</a>
+                            </div>
+
+                            <div style="padding: 16px; border: 3px dashed #00AEEF; display: block;">
+                            	<h1 style="color:#666; text-align: center;">Datos de contacto</h1>
+                            	<ul style="font-size: 17px;">
+                            		<li style="display: inline-block; width: 49%; margin: 10px 0;">Nombre: <strong>{{ $advertiser->name }}</strong></li>
+                            		<li style="display: inline-block; width: 49%; margin: 10px 0;">Email: <strong>{{ $advertiser->email }}</strong></li>
+                            		<li style="display: inline-block; width: 49%; margin: 10px 0;">Teléfono: <strong>{{ $advertiser->tel }}</strong></li>
+                            		<li style="display: inline-block; width: 49%; margin: 10px 0;">Celular: <strong>{{ $advertiser->cel }}</strong></li>
+                            	</ul>
+                            </div>
                         </td>
                     </tr>
                 </tbody></table>
