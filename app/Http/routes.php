@@ -61,6 +61,11 @@ Route::post('propuestas/{proposals}/select', [
     'uses'  => 'Admin\ProposalsController@select'
 ]);
 
+Route::post('propuestas/{proposals}/spaces/{spaces}/select', [
+    'as'    => 'proposals.spaces.select',
+    'uses'  => 'Admin\ProposalsController@selectSpace'
+]);
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
@@ -250,11 +255,6 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('propuestas/agregar/{spaces}', [
             'as'    => 'proposals.spaces.add',
             'uses'  => 'Admin\ProposalsController@add'
-        ]);
-
-        Route::post('propuestas/{proposals}/spaces/{spaces}/select', [
-            'as'    => 'proposals.spaces.select',
-            'uses'  => 'Admin\ProposalsController@selectSpace'
         ]);
 
         Route::get('propuestas/{proposals}/spaces/{spaces}/edit', [
