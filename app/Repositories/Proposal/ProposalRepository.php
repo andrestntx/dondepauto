@@ -59,6 +59,18 @@ class ProposalRepository extends BaseRepository
         return $query->orderBy('created_at', 'desc');
     }
 
+
+    /**
+     * @param Proposal $proposal
+     * @param $id
+     * @param array $data
+     * @return int
+     */
+    protected function updateSpace(Proposal $proposal, $id, array $data)
+    {
+        return $proposal->spaces()->updateExistingPivot($id, $data);
+    }
+
     /**
      * Edit the pivot attributes of proposal_space table
      *
@@ -69,7 +81,7 @@ class ProposalRepository extends BaseRepository
      */
     public function sync(Proposal $proposal, Space $space, array $data)
     {
-        return $proposal->spaces()->updateExistingPivot($space->id, $data);
+        return $this->updateSpace($proposal, $space->id, $data);
     }
 
 
