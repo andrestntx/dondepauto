@@ -33,7 +33,6 @@ class StoreRequest extends Request
         return [
             'questions'     => 'required|array',
             'cities'        => 'required|array',
-            'audiences'     => 'required|array',
         ];
     }
 }

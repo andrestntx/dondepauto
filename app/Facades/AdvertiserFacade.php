@@ -193,7 +193,7 @@ class AdvertiserFacade extends UserFacade
      */
     public function createQuoteContact(Advertiser $advertiser, $action_date, $contact_type, $title)
     {
-        return $this->createSimpleContact($advertiser, env("APP_ACTION_LEAD", 1), $action_date, $contact_type, $title);
+        return $this->createSimpleContact($advertiser, env("APP_ACTION_LEAD", 4), $action_date, $contact_type, $title);
     }
 
 
