@@ -154,9 +154,11 @@ var QuoteService = function() {
                 $("#advertiserContactModal textarea").val("");
 
                 if(data.success) {
+                    console.log(data);
+                    console.log(data.contact.action.state);
                     var socialContact = AdvertiserService.getSocialContact(data.contact);
                     $('#proposal-contacts').prepend(socialContact);
-                    $("#proposal-state-text").text(data.contact.state);
+                    $(".proposal-state-text").text(data.contact.action.state);
                 }
                 else {
                     console.log('error');

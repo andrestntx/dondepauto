@@ -71,7 +71,12 @@
 @section('breadcrumbs')
     <h2 style="color:#dc780b; font-weight: 300; font-size: 26px;">{{ $proposal->title }}</h2>
     <h3 style="font-size: 20px;">{{ ucfirst($advertiser->company) }}</h3>
-    <h4 style="font-size: 18px; color:#44bc52;"> <i class="fa fa-exclamation-circle"></i> {{ ucfirst($proposal->state) }}</h4>
+
+    <h4 style="font-size: 18px; color:#44bc52;"> 
+        <i class="fa fa-exclamation-circle"></i> 
+        <span class="proposal-state-text">{{ ucfirst($proposal->state) }}</span> 
+    </h4>
+    
 @endsection
 
 @section('action')
@@ -167,7 +172,7 @@
                             <h4 style="font-size: 14px; color:#44bc52; font-weight: 400;"> 
                                 <i class="fa fa-exclamation-circle"></i> 
                                 <span style="color:rgb(103, 106, 108);">Estado de propuesta: </span> 
-                                <span id="proposal-state-text">{{ ucfirst($proposal->state) }}</span>
+                                <span class="proposal-state-text">{{ ucfirst($proposal->state) }}</span>
                             </h4>
                         </div> 
 
