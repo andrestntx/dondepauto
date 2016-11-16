@@ -124,17 +124,30 @@ var PreviewService = function() {
 
 	function clickPrice(article, button) {
 		var id = getPublisherId(article);
+		var select;
 
 		if( article.hasClass(classSelect)) {
 			subtractPrices(article, id);
+			deselectArticle(article, button);
 			removeSelectPublisherId(id);
+			select = 0;
 		}	
 		else {
 			sumPrices(article, id);
 			selectArticle(article, button);
+			addSelectPublisherId(id);
+			select = 1;
 		}
 
+		console.log(select);
+
 		changeTextPrices();
+
+		$.post(button.attr("data-url"), {'select': select}, function( data ) {
+            console.log(data);
+        }).fail(function(data) {
+            alert('falló');
+        });
 	}
 
 	function reloadPrices() 

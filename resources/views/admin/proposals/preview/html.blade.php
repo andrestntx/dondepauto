@@ -140,7 +140,14 @@
 									<p class="publisher-price">
 										<span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
 									</p>
-									<button class="btn btn-sm btn-success btn-select"><i class="fa fa-check-square-o"></i> Seleccionar</button>
+									
+									<button data-url="{{ route('proposals.spaces.select', [$proposal, $space]) }}" class="btn btn-sm btn-success btn-select"> 		@if($space->pivot->selected) 
+											Seleccionado 
+										@else 
+											<i class="fa fa-check-square-o"></i> Seleccionar
+										@endif
+									</button>
+
 									<a href="{{ $space->url_marketplace }}" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i> Ver más</a>
 								</div>	
 							</div>
