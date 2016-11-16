@@ -20,20 +20,14 @@ class RegisterComposer
         $this->actionRepository = $actionRepository;
     }
 
+    /**
+     * @param View $view
+     */
     public function compose(View $view)
     {
         $view->with([
-            'actionsPublisher' => $this->actionRepository->model->where(function($query){
-                $query->where('type', 'publisher')
-                    ->orWhere('type', 'all')
-                    ->orWhere('type', 'users');
-            })->lists('name', 'id')->all(),
-
-            'actionsAdvertiser'  => $this->actionRepository->model->where(function($query){
-                $query->where('type', 'advertiser')
-                    ->orWhere('type', 'all')
-                    ->orWhere('type', 'users');
-            })->lists('name', 'id')->all()
+            'actionsPublisher'      => $this->actionRepository->listsPublisher(),
+            'actionsAdvertiser'     => $this->actionRepository->listsAdvertiser()
         ]);
     }
 }

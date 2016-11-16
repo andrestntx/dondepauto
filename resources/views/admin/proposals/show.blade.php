@@ -160,6 +160,15 @@
                                 <span style="font-weight: 200;">Fecha solicitud:</span> 
                                 {{ ucfirst($proposal->created_at_date) }} 
                             </span> <br>
+                            <span class="h5"> 
+                                <span style="font-weight: 200;">Fecha envío:</span> 
+                                {{ ucfirst($proposal->send_at_date) }} 
+                            </span> <br>
+                            <h4 style="font-size: 14px; color:#44bc52; font-weight: 400;"> 
+                                <i class="fa fa-exclamation-circle"></i> 
+                                <span style="color:rgb(103, 106, 108);">Estado de propuesta: </span> 
+                                <span id="proposal-state-text">{{ ucfirst($proposal->state) }}</span>
+                            </h4>
                         </div> 
 
                     </div>
@@ -168,7 +177,6 @@
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
-                                
                                 <span class="h5 font-bold text-success"> CIFRAS INICIALES DEL NEGOCIO </span> <br><br>
                                 <span class="h5"> 
                                     <span style="font-weight: 200;">Total propuesta:</span>  ${{ number_format($proposal->total, 0, ',', '.') }} 

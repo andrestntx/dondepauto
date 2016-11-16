@@ -12,6 +12,7 @@ use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
 use App\Repositories\Proposal\ProposalRepository;
+use Carbon\Carbon;
 
 class ProposalService extends ResourceService
 {
@@ -19,6 +20,16 @@ class ProposalService extends ResourceService
     function __construct(ProposalRepository $repository)
     {
         $this->repository = $repository;
+    }
+
+    /**
+     * @param Proposal $proposal
+     */
+    public function send(Proposal $proposal)
+    {
+        $this->updateModel([
+            'send_at' => Carbon::now()->toDateTimeString()
+        ], $proposal);
     }
 
     /**

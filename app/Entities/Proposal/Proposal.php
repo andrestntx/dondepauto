@@ -232,6 +232,14 @@ class Proposal extends Model
     /**
      * @return mixed
      */
+    public function getSendAtDateAttribute()
+    {
+        return $this->send_at->format('d-M-y');
+    }
+
+    /**
+     * @return mixed
+     */
     public function getExpiresAtAttribute()
     {
         if($this->send_at) {

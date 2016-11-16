@@ -156,6 +156,7 @@ var QuoteService = function() {
                 if(data.success) {
                     var socialContact = AdvertiserService.getSocialContact(data.contact);
                     $('#proposal-contacts').prepend(socialContact);
+                    $("#proposal-state-text").text(data.contact.state);
                 }
                 else {
                     console.log('error');
