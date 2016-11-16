@@ -79,7 +79,6 @@ class ProposalsController extends Controller
         );
 
         $proposal->load($load);
-        $proposal->viewSpaces->first()->proposal_prices_public_price;
         $contacts = $proposal->contacts->sortByDesc('created_at')->all();
 
         return view('admin.proposals.show')->with([
