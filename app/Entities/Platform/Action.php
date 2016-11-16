@@ -175,4 +175,18 @@ class Action extends Entity
         return $this->isInRange($start, $end);
     }
 
+    /**
+     * @param $query
+     * @param string $type
+     * @return mixed
+     */
+    public function scopeOfUser($query, $type = 'advertiser')
+    {
+        return $query->where(function($query) use ($type) {
+            return $query->where('type', $type)
+                ->orWhere('type', 'all')
+                ->orWhere('type', 'users');
+            });
+    }
+
 }

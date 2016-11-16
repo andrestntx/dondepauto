@@ -59,11 +59,19 @@ class ProposalFacade
         return $this->spaceService->search(null, null, $proposal, $columns);
     }
 
+    /**
+     * @param Space $space
+     * @param array $proposalIds
+     */
     public function addProposalsSpace(Space $space, array $proposalIds)
     {
         $space->proposals()->attach($proposalIds);
     }
 
+    /**
+     * @param Space $space
+     * @param array $proposalIds
+     */
     public function removeProposalsSpace(Space $space, array $proposalIds)
     {
         $space->proposals()->detach($proposalIds);
@@ -121,6 +129,7 @@ class ProposalFacade
      */
     public function send(Proposal $proposal)
     {
+        $this->service->send($proposal);
         $this->emailService->sendProposal($proposal, $proposal->getAdvertiser());
     }
 

@@ -24,4 +24,25 @@ class ActionRepository extends BaseRepository
     {
         return 'App\Entities\Platform\Action';
     }
+
+    protected function listsOfType($type = 'advertiser')
+    {
+        return $this->model->ofUser($type)->lists('name', 'id')->all();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function listsAdvertiser()
+    {
+        return $this->listsOfType();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function listsPublisher()
+    {
+        return $this->listsOfType('publisher');
+    }
 }
