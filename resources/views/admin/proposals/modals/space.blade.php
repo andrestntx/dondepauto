@@ -164,9 +164,9 @@
                 <button class="btn btn-success actionSpaceModal" id="modalSuggestSpace" data-toggle="tooltip" data-placement="top" title="Recomendar espacio" style="margin-right: 8px;"><i class="fa fa-location-arrow"></i></button>
 
                 <a href="#" class="btn btn-info" id="modalPublisher" data-toggle="tooltip" data-placement="top" title="Ver espacios del Medio" style="margin-right: 8px;"><i class="fa fa-twitch"></i></a>
-
+                --}}
                 
-                <a href="#" id="delete_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio"><i class="fa fa-trash"></i></a> --}}
+                <button id="delete_proposal_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio de Propuesta"><i class="fa fa-trash"></i> Borrar de lista</button> 
             </div>
         </div>
     </div>

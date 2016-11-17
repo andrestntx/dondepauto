@@ -61,10 +61,11 @@ var QuoteService = function() {
                 }
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                $('td:eq(0)', nRow).html(
-                    "<a href='/propuestas/" + aData.id + "' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></a>"
+                $('td:eq(0)', nRow).html($("<div style='min-width: 55px;'></div>").append(
+                    "<a href='/propuestas/" + aData.id + "' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></a>" +
+                    " <button class='btn btn-xs btn-danger' data-proposal='" + aData.id + "' title='Borrar propuesta' data-toggle='modal' data-target='#dropProposal'><i class='fa fa-trash'></i></button>"
                     //"<button class='btn btn-xs btn-success quoteModal' data-quote='" + JSON.stringify(aData) + "' title='Ver Propuesta' data-toggle='modal' data-target='#quoteModal'><i class='fa fa-search-plus'></i></button>"
-                );
+                ));
 
                 if(aData.expires_at_days) {
                     var expires = $("<strong></strong>").text(aData.expires_at_days + " días");

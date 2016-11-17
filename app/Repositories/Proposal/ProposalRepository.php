@@ -31,7 +31,14 @@ class ProposalRepository extends BaseRepository
      */
     public function search(User $advertiser = null)
     {
-        return $this->model->with(['quote.advertiser', 'spaces'])->get();
+        return $this->model->with([
+            'quote.advertiser',
+            'viewSpaces',
+            'viewSpaces.audiences.type',
+            'viewSpaces.impactScenes',
+            'viewSpaces.cities',
+            'spaces'
+        ])->get();
     }
 
     /**

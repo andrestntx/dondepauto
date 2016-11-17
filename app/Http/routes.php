@@ -262,6 +262,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\ProposalSpacesController@edit'
         ]);
 
+        Route::delete('propuestas/{proposals}/spaces/{spaces}', [
+            'as' => 'proposals.spaces.delete',
+            'uses' => 'Admin\ProposalSpacesController@delete'
+        ]);
+
         Route::post('propuestas/{proposals}/spaces/{spaces}/duplicate', [
             'as' => 'proposals.spaces.duplicate',
             'uses' => 'Admin\ProposalSpacesController@postDuplicate'
