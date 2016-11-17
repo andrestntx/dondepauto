@@ -125,7 +125,7 @@ class SpaceFacade
         $format = $this->formatService->getModel($data['format_id']);
         $space  = $this->service->createSpace($data, $format, $publisher);
         $this->service->saveAndCopyImages($images, $space, $copySpace, $keep_images);
-        
+
         $this->recalculatePoints($space);
 
         return $space;

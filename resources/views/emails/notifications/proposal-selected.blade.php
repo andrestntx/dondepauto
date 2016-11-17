@@ -607,7 +607,7 @@
                             </ol>
 
                             <div style="display: block; margin: 55px 0; width: 100%;">
-                            	<a href="{{ route('proposals.preview-html', $proposal) }}" 
+                            	<a href="{{ route('proposals.show', $proposal) }}" 
                             	style="background:#00AEEF; color:white; padding: 15px; font-size: 18px; text-align: center; text-decoration: none; display: block; margin: auto; width: 270px;">
                             		VER SELECCIÓN DE MEDIOS
                             	</a>
