@@ -34,7 +34,7 @@ class ShowComposer extends BaseComposer
      */
     public function compose(View $view)
     {
-        $actions    = $this->actionRepository->model->with('contacts')->where('type', 'proposal')->orWhere('type', 'all')->lists('name', 'id')->all();
+        $actions    = $this->actionRepository->listsOfProposal();
         $tags       = $this->tagRepository->model->where('type', 'publisher')->orWhere('type', 'all')->lists('name', 'id')->all();
         $cities     = $this->cityRepository->citiesWithAdvertisers();
 

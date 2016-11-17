@@ -27,7 +27,24 @@ class ActionRepository extends BaseRepository
 
     protected function listsOfType($type = 'advertiser')
     {
-        return $this->model->ofUser($type)->lists('name', 'id')->all();
+        return $this->model
+            ->ofUser($type)
+            ->orderBy('order')
+            ->lists('name', 'id')
+            ->all();
+    }
+
+    public function listsOfProposal()
+    {
+        return $this->model
+            ->with('contacts')
+            ->where(function($query) {
+                return $query->where('type', 'proposal')
+                    ->orWhere('type', 'all');
+            })
+            ->orderBy('order')
+            ->lists('name', 'id')
+            ->all();
     }
 
     /**
