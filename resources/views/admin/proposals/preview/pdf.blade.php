@@ -10,7 +10,7 @@
 
 		header {
 			padding: 0 1em;
-			margin-bottom: 30px;
+			margin-bottom: 22px;
 		}
 
 		header, header #title {
@@ -23,15 +23,15 @@
 
 		header #description #advertiser {
 			font-weight: 100;
-    		font-size: 1.05em;
+    		font-size: 1.02em;
     		color: #383838;
-    		margin-bottom: 15px;
+    		margin-bottom: 10px;
 		}
 
 		header #description #proposal {
     		color: #636363;
     		font-weight: 100;
-    		font-size: 1.1em;
+    		font-size: 1.05em;
     		margin-bottom: 0px;
 		}
 
@@ -53,7 +53,7 @@
 
 		header #title .text-title h1 {
     		font-weight: 400;
-    		font-size: 1.3em;
+    		font-size: 1.15em;
 		}
 
 		header #title .text-title h1, header #title .text-title p {
@@ -79,7 +79,7 @@
 			padding: 6px 10px 15px 6px;
     		background: #f7f7f7;
     		display: block;
-    		margin-bottom: 30px;
+    		margin-bottom: 0px;
 		}
 
 		#observations h1 {
@@ -110,7 +110,7 @@
 		}
 
 		#signatures #company #company_data p {
-			font-size: 0.95em;
+			font-size: 0.85em;
 			margin: 0;
 		}
 
@@ -126,13 +126,13 @@
 		}
 
 		.sincerely {
-			font-size: 1.1em;
+			font-size: 1.04em;
 			margin-bottom: 15px;
 			color: #5f5f5f;
 		}
 
 		#spaces {
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 
 		#spaces table tr th {
@@ -148,7 +148,7 @@
 		#subtotal {
 			width: 25%;
 			margin-left: 75%;
-			margin-bottom: 25px;
+			margin-bottom: 0px;
 		}
 
 		#subtotal table tr th, #subtotal table tr td {
@@ -170,6 +170,8 @@
 @endsection
 
 @section('container')
+	<?php 
+	?>
 	<header id="header" class="">
 		<figure id="logo">
 			<img src="https://gallery.mailchimp.com/dbb48a0358025693456baa4d9/images/b04040e6-57f4-4e52-9e3f-dff135c69378.png?_ga=1.258707594.1259824755.1470844641" alt="Logo DóndePauto">
@@ -200,6 +202,9 @@
 						<th>Descripción</th>
 						<th>Impactos</th>
 						<th>Precio Oferta</th>
+						@if($proposal->total_discount > 0)
+							<th style="text-align: center;">Desc.</th>
+						@endif
 						<th>Precio Final</th>
 					</tr>
 				</thead>
@@ -208,8 +213,11 @@
 						<tr>
 							<td>{{ $space->pivot_title }}</td>
 							<td>{{ $space->pivot_description }}</td>
-							<td>{{ $space->impacts }} / {{ $space->period }}</td>
+							<td>{{ number_format($space->impacts, 0, ',', '.') }} / {{ $space->period }}</td>
 							<td> $ {{ number_format($space->prices_public_price, 0, ',', '.') }} </td>
+							@if($proposal->total_discount > 0)
+								<td style="text-align: center;">-{{ $space->proposal_prices_discount * 100 }}%</td>
+							@endif
 							<td class="text-info"> $ {{ number_format($space->proposal_prices_public_price, 0, ',', '.') }} </td>
 						</tr>
 					@endforeach
@@ -217,7 +225,10 @@
 							<td></td>
 							<td></td>
 							<td>Subtotales</td>
-							<td> $ {{ number_format($proposal->pivot_total_cost, 0, ',', '.') }} </td>
+							<td> $ {{ number_format($proposal->total, 0, ',', '.') }} </td>
+							@if($proposal->total_discount > 0)
+								<td style="text-align: center;"></td>
+							@endif
 							<td class="text-info"> $ {{ number_format($proposal->pivot_total, 0, ',', '.') }} </td>
 						</tr>
 				</tbody>
