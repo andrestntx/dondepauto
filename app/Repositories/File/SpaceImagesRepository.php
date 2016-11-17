@@ -91,7 +91,7 @@ class SpaceImagesRepository extends ImagesRepository
      * @param array $keep_images
      * @return array
      */
-    public function copyImages(Collection $copyImages, $keep_images = [])
+    public function copyImages(Collection $copyImages, array $keep_images = [])
     {
         $newImages = [];
 

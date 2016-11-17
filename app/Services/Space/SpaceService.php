@@ -112,6 +112,17 @@ class SpaceService extends ResourceService
     }
 
     /**
+     * @param Space $space
+     * @param $images
+     * @param array $keep_images
+     */
+    public function copyImages(Space $space, $images, array $keep_images = [])
+    {
+        $copyImages = $this->imagesRepository->copyImages($images, $keep_images);
+        $space->images()->saveMany($copyImages);
+    }
+
+    /**
      * @param array $images
      * @param Space $space
      * @param Space $copySpace
@@ -120,8 +131,10 @@ class SpaceService extends ResourceService
      */
     public function saveAndCopyImages($images = [], Space $space, Space $copySpace, $keep_images = [])
     {
-        $copyImages = $this->imagesRepository->copyImages($copySpace->images, $keep_images);
-        $space->images()->saveMany($copyImages);
+        if(! is_null($keep_images) && is_array($keep_images)) {
+            $this->copyImages($space, $copySpace->images, $keep_images);
+        }
+
         return $this->saveImages($images, $space, $space->images->lists('id'));
     }
 
