@@ -15,9 +15,12 @@ use App\Entities\Views\City;
 use App\Entities\Views\ImpactScene;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Proposal extends Model
 {
+    use SoftDeletes;
+
 	/**
      * The attributes that are mass assignable.
      *
@@ -30,7 +33,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $dates = ['send_at'];
+    protected $dates = ['send_at', 'deleted_at'];
 
     /**
      * The accessors to append to the model's array form.

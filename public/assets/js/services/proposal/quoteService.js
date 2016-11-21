@@ -63,7 +63,7 @@ var QuoteService = function() {
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 $('td:eq(0)', nRow).html($("<div style='min-width: 55px;'></div>").append(
                     "<a href='/propuestas/" + aData.id + "' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></a>" +
-                    " <button class='btn btn-xs btn-danger' data-proposal='" + aData.id + "' title='Borrar propuesta' data-toggle='modal' data-target='#dropProposal'><i class='fa fa-trash'></i></button>"
+                    " <button class='btn btn-xs btn-danger delete-proposal' data-proposal='" + aData.id + "' title='Borrar propuesta'><i class='fa fa-trash'></i></button>"
                     //"<button class='btn btn-xs btn-success quoteModal' data-quote='" + JSON.stringify(aData) + "' title='Ver Propuesta' data-toggle='modal' data-target='#quoteModal'><i class='fa fa-search-plus'></i></button>"
                 ));
 
@@ -100,6 +100,7 @@ var QuoteService = function() {
             "drawCallback": function(settings, json) {
                 $("#countDatatable").html(settings.fnRecordsDisplay());
                 $('[data-toggle="tooltip"]').tooltip();
+                initDeleteProposal();
                 /*var searchQuote = $("#search-quote").data("search");
                 if(searchQuote){
                     $(".quoteModal").click();
@@ -284,6 +285,53 @@ var QuoteService = function() {
             });
         });
     }
+
+    function initDeleteProposal() {
+        $(".delete-proposal").click(function(e) {   
+            var button = $(this);
+            swal({
+                title: '¿Estás seguro?',
+                text: 'La propuesta será eliminada',
+                type: "warning",
+                confirmButtonText: "Eliminar",
+                confirmButtonColor: "#ed5565",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                html: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.ajax({
+                        url: "/propuestas/" + button.attr('data-proposal'),
+                        type: 'DELETE',
+                        success: function(data) {
+                            if(data.success) {
+                                swal({
+                                    "title": "Propuesta eliminada", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+
+                                reload();
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
+    };
 
     function getHtmlValue(price, per)
     {

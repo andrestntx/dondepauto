@@ -179,4 +179,12 @@ class ProposalFacade
         $proposalWithSelectedSpaces = clone $proposal;
         return $this->getSelected($proposalWithSelectedSpaces);
     }
+
+    /**
+     * @param Proposal $proposal
+     */
+    public function delete(Proposal $proposal)
+    {
+        $this->service->deleteModel($proposal);
+    }
 }

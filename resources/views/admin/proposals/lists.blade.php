@@ -8,7 +8,8 @@
 @endsection
 
 @section('extra-css')
-
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -27,6 +28,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     <script src="/assets/js/services/proposal/quoteService.js"></script>
 
+    <!-- Sweet alert -->
+    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+    
     <script>
         var filter = $("<strong></strong>")
             .text(" - Total filtro: ")

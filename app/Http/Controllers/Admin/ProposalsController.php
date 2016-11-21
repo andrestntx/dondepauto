@@ -48,6 +48,7 @@ class ProposalsController extends Controller
 
     /**
      * @param Request $request
+     * @param Proposal $proposal
      * @return string
      */
     public function update(Request $request, Proposal $proposal)
@@ -56,6 +57,17 @@ class ProposalsController extends Controller
         $proposal->save();
 
         return ['success' => 'true', 'proposal' => $proposal];
+    }
+
+    /**
+     * @param Request $request
+     * @param Proposal $proposal
+     * @return array
+     */
+    public function delete(Request $request, Proposal $proposal)
+    {
+        $this->proposalFacade->delete($proposal);
+        return ['success' => 'true'];
     }
 
     /**
@@ -136,7 +148,7 @@ class ProposalsController extends Controller
      */
     public function previewHtml(Proposal $proposal)
     {
-        $proposal->load(['quote.advertiser', 'viewSpaces']);
+        $proposal->load(['quote.advertiser', 'viewSpaces.images']);
 
         return view('admin.proposals.preview.html')->with([
             'proposal'   => $proposal,
