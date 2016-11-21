@@ -92,14 +92,14 @@ class ProposalFacade
 
     /**
      * @param Proposal $proposal
-     * @param null $spaces
+     * @param null $spaceIds
      * @return $this
      */
-    public function select(Proposal $proposal, $spaces = null)
+    public function select(Proposal $proposal, $spaceIds = null)
     {
-        if(is_array($spaces) && count($spaces) > 0) {
-            $this->service->selectSpaces($proposal, array_map("intval", $spaces));
-            $this->emailService->notifyProposalSelected($proposal);
+        if(is_array($spaceIds) && count($spaceIds) > 0) {
+            $spaces = $this->service->selectSpaces($proposal, array_map("intval", $spaceIds));
+            $this->emailService->notifyProposalSelected($proposal, $spaces);
         }
 
         return $proposal;

@@ -286,14 +286,15 @@ class EmailService
 
     /**
      * @param Proposal $proposal
+     * @param Collection $spaces
      */
-    public function notifyProposalSelected(Proposal $proposal)
+    public function notifyProposalSelected(Proposal $proposal, Collection $spaces)
     {
         $this->sendDefault($this->advertiserEmail, 'emails.notifications.proposal-selected', [
             'proposal'      => $proposal,
             'advertiser'    => $proposal->getAdvertiser(),
-            'spaces'        => $proposal->viewSpaces
-        ], $proposal->getAdvertiser()->company . ", ha seleccionado " . $proposal->viewSpaces->count() . " espacios de la propuesta");
+            'spaces'        => $spaces
+        ], $proposal->getAdvertiser()->company . ", ha seleccionado " . $spaces->count() . " espacios de la propuesta");
     }
 
     /**
