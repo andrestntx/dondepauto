@@ -193,47 +193,62 @@
 
 	</header><!-- /header -->
 	
+	<?php 
+		$spaceGroups = $proposal->viewSpaces->chunk(8);
+	?>
+
 	<main>
-		<div id="spaces">
-			<table>
-				<thead>
-					<tr>
-						<th>Producto o servicio</th>
-						<th>Descripción</th>
-						<th>Impactos</th>
-						<th>Precio Oferta</th>
-						@if($proposal->total_discount > 0)
-							<th style="text-align: center;">Desc.</th>
-						@endif
-						<th>Precio Final</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($proposal->viewSpaces as $space)
+		@foreach($spaceGroups as $key => $spaceGroup)
+			<div id="spaces">
+				<table>
+					<thead>
 						<tr>
-							<td>{{ $space->pivot_title }}</td>
-							<td>{{ $space->pivot_description }}</td>
-							<td>{{ number_format($space->impacts, 0, ',', '.') }} / {{ $space->period }}</td>
-							<td> $ {{ number_format($space->prices_public_price, 0, ',', '.') }} </td>
+							<th>Producto o servicio</th>
+							<th>Descripción</th>
+							<th>Impactos</th>
+							<th>Precio Oferta</th>
 							@if($proposal->total_discount > 0)
-								<td style="text-align: center;">-{{ $space->proposal_prices_discount * 100 }}%</td>
+								<th style="text-align: center;">Desc.</th>
 							@endif
-							<td class="text-info"> $ {{ number_format($space->proposal_prices_public_price, 0, ',', '.') }} </td>
+							<th>Precio Final</th>
 						</tr>
-					@endforeach
-						<tr id="table-subtotal">
-							<td></td>
-							<td></td>
-							<td>Subtotales</td>
-							<td> $ {{ number_format($proposal->total, 0, ',', '.') }} </td>
-							@if($proposal->total_discount > 0)
-								<td style="text-align: center;"></td>
-							@endif
-							<td class="text-info"> $ {{ number_format($proposal->pivot_total, 0, ',', '.') }} </td>
-						</tr>
-				</tbody>
-			</table>
-		</div>
+					</thead>
+					<tbody>
+						@foreach($spaceGroup as $space)
+							<tr>
+								<td>{{ $space->pivot_title }}</td>
+								<td>{{ $space->pivot_description }}</td>
+								<td>{{ number_format($space->impacts, 0, ',', '.') }} / {{ $space->period }}</td>
+								<td> $ {{ number_format($space->prices_public_price, 0, ',', '.') }} </td>
+								@if($proposal->total_discount > 0)
+									<td style="text-align: center;">-{{ $space->proposal_prices_discount * 100 }}%</td>
+								@endif
+								<td class="text-info"> $ {{ number_format($space->proposal_prices_public_price, 0, ',', '.') }} </td>
+							</tr>
+						@endforeach
+						
+						@if($key + 1 == $spaceGroups->count())
+							<tr id="table-subtotal">
+								<td></td>
+								<td></td>
+								<td>Subtotales</td>
+								<td> $ {{ number_format($proposal->total, 0, ',', '.') }} </td>
+								@if($proposal->total_discount > 0)
+									<td style="text-align: center;"></td>
+								@endif
+								<td class="text-info"> $ {{ number_format($proposal->pivot_total, 0, ',', '.') }} </td>
+							</tr>
+						@endif
+
+					</tbody>
+				</table>
+			</div>
+
+			@if($key + 1 < $spaceGroups->count() )
+				<span style="page-break-after:always;"></span>
+			@endif
+
+		@endforeach
 
 		<div id="subtotal">
 			<table>

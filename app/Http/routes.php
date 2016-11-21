@@ -247,6 +247,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@update'
         ]);
 
+        Route::delete('propuestas/{proposals}', [
+            'as'    => 'proposals.delete',
+            'uses'  => 'Admin\ProposalsController@delete'
+        ]);
+
         Route::get('propuestas/{proposals}', [
             'as'    => 'proposals.show',
             'uses'  => 'Admin\ProposalsController@show'
