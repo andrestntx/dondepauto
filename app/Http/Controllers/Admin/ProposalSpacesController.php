@@ -42,6 +42,17 @@ class ProposalSpacesController extends Controller
         ]);
     }
 
+    /**
+     * @param Proposal $proposal
+     * @param Space $space
+     * @return array
+     */
+    public function delete(Proposal $proposal, Space $space)
+    {
+        $proposal->spaces()->detach($space->id);
+        return ['success' => 'true'];
+    }
+
 
     /**
      * @param Request $request

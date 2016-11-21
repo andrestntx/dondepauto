@@ -503,6 +503,11 @@ var SpaceService = function() {
         $('#delete_space').data("spaceid", space.id);
         $('#delete_space').attr("data-url", '/medios/' + space.publisher_id + '/espacios/' + space.id);
 
+        if(space.pivot) {
+            $('#delete_proposal_space').data("spaceid", space.id);
+            $('#delete_proposal_space').attr("data-url", '/propuestas/' + space.pivot.proposal_id + '/spaces/' + space.id);
+        }
+        
         $('#' + inputId +' #space_name').text(space.name);
         $('#' + inputId +' #space_crated_at_date').text(space.created_at_date);
 
@@ -788,6 +793,51 @@ var SpaceService = function() {
                 } 
             });
         });
+
+        $("#delete_proposal_space").click(function(e) {   
+            swal({
+                title: '¿Estás seguro?',
+                text: 'El espacio será borrado de esta propuesta',
+                type: "warning",
+                confirmButtonText: "Borrar",
+                confirmButtonColor: "#ed5565",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                html: true
+            },
+            function(isConfirm) {
+                if (isConfirm) {     
+                    $.ajax({
+                        url: $("#delete_proposal_space").attr('data-url'),
+                        type: 'DELETE',
+                        success: function(data) {
+                            if(data.success) {
+                                swal({
+                                    "title": "Espacio borrado de propuesta", 
+                                    "type": "success",
+                                    closeOnConfirm: true,
+                                });
+
+                                reload();
+                                $('#spaceModal').modal('toggle');
+                            }
+                            else {
+                                swal({
+                                    "title": "Hubo un error", 
+                                    "type": "warning",
+                                    closeOnConfirm: true,
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+
+                } 
+            });
+        });
     };
 
     function initProposalModal() 
@@ -998,6 +1048,7 @@ var SpaceService = function() {
         initProposal: function(urlSearch) {
             initTableProposal(urlSearch);
             initModalEvent(true);
+            initDeleteSpace();
         },
         initModalEvent: function (showStates) {
             initModalEvent(showStates);
