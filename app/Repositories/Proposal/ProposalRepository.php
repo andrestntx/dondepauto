@@ -135,4 +135,14 @@ class ProposalRepository extends BaseRepository
         return $ids;
     }
 
+
+    /**
+     * @param Proposal $proposal
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getSelectedSpaces(Proposal $proposal)
+    {
+        return $proposal->viewSpaces()->wherePivot('selected', 1)->get();
+    }
+
 }

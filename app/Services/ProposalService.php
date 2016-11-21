@@ -72,16 +72,18 @@ class ProposalService extends ResourceService
         }]);
     }
 
+
     /**
      * @param Proposal $proposal
      * @param array $spaceIds
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function selectSpaces(Proposal $proposal, array $spaceIds)
     {
         $spacesNotIn = $this->repository->getSpacesIdNotIn($proposal, $spaceIds);
         $this->repository->syncSpaces($proposal, $spacesNotIn, ['selected' => 0]);
         $this->repository->syncSpaces($proposal, $spaceIds, ['selected' => 1]);
+        return $this->repository->getSelectedSpaces($proposal);
     }
 
     /**
