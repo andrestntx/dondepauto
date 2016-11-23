@@ -221,4 +221,22 @@ class AdvertiserFacade extends UserFacade
 
         return ['contact' => $contact, 'quote' => $quote];
     }
+
+    /**
+     * @param Quote $quote
+     * @param array $data
+     * @param array $questions
+     * @return array
+     */
+    public function updateQuote(Quote $quote, array $data, array $questions)
+    {
+        if(array_key_exists('0', $questions)) {
+            unset($questions[0]);
+        }
+
+        $this->quoteService->update($quote, $data, $questions);
+        $quote->load('questions');
+        
+        return ['quote' => $quote];
+    }
 }

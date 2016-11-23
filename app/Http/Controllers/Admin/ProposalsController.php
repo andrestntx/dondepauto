@@ -76,27 +76,26 @@ class ProposalsController extends Controller
      */
     public function show(Proposal $proposal)
     {
+        $proposal->load(['viewSpaces.audiences.type', 'viewSpaces.cities', 'viewSpaces.impactScenes',
+            'quote.questions', 'spaceAudiences', 'cities', 'impactScenes', 'contacts.actions']);
         $finalProposal = clone $proposal;
-        $load = ['viewSpaces.audiences.type', 'viewSpaces.cities', 'viewSpaces.impactScenes',
-            'quote.viewAdvertiser.proposals.viewSpaces.audiences.type',
-            'quote.viewAdvertiser.proposals.viewSpaces.cities',
-            'quote.viewAdvertiser.proposals.viewSpaces.impactScenes',
-            'contacts.actions',
-            'quote.advertiser.contacts.actions'];
 
-        $finalProposal->load([
-            'viewSpaces' => function($query){
-                $query->where("selected", true);
-            }]
-        );
+        $finalProposal->viewSpaces = $finalProposal->viewSpaces->filter(function($space, $key) {
+            return $space->pivot->selected;
+        });
 
-        $proposal->load($load);
+        $advertiser = $proposal->quote->viewAdvertiser()->with([
+            'contacts.actions', 'intentions', 'views', 'logs', 'favorites'
+        ])->get()->first();
+
+        $advertiser->setAppendsForProposal();
+
         $contacts = $proposal->contacts->sortByDesc('created_at')->all();
 
         return view('admin.proposals.show')->with([
             'proposal'      => $proposal,
             'finalProposal' => $finalProposal,
-            'advertiser'    => $proposal->getViewAdvertiser(),
+            'advertiser'    => $advertiser,
             'contacts'      => $contacts
         ]);
     }
