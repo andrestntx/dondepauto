@@ -363,9 +363,12 @@
 
                             </div>
 
-                            <div class="col-xs-12 col-sm-6" style="height: 70px;">   
-                                <h3> Ciudades: </h3>
-                                <h4> <span style="font-weight: 300;" id="proposalCities"> {{ $proposal->quote->cities->implode('name', ', ') }} </span></h4>
+                            <div class="col-xs-6 col-sm-4" style="height: 70px;">   
+                                <h4> 
+                                    <span class="badge badge-info">{{ $proposal->quote->questions->count() + 1 }}</span> 
+                                    Ciudades: 
+                                    <span style="font-weight: 300;"> {{ $proposal->quote->cities->implode('name', ', ') }} </span>
+                                </h4>
                             </div>
                             
                         </div>

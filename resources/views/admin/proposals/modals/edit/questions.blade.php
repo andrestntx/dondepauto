@@ -15,6 +15,10 @@
                         <div class="col-sm-12">
                             {!! Field::select('cities[]', $cities, $proposal->quote->cities->lists('id')->all(), ['label' => 'Ciudades', 'id' => 'question_cities', 'required', 'empty' => 'Seleccione las ciudades', 'class' => 'question-chosen-select', 'multiple', 'data-placeholder' => 'Ciudades']) !!}
                         </div>
+
+                        <div class="col-sm-12">
+                            {!! Field::text('comments', $advertiser->comments) !!}
+                        </div>
                         
                         @foreach($proposal->quote->questions as $question)
                             <div class="col-sm-12">

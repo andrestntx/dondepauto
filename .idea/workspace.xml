@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" afterPath="$PROJECT_DIR$/app/Facades/AdvertiserFacade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/QuotesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/QuotesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/ViewComposers/Proposal/ShowComposer.php" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Proposal/ShowComposer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/Space/SpaceCityRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/QuoteService.php" afterPath="$PROJECT_DIR$/app/Services/QuoteService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/proposals/modals/edit/expiration.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/modals/edit/expiration.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/proposals/modals/edit/questions.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/modals/edit/questions.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/proposals/modals/edit/title.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/modals/edit/title.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/proposals/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/show.blade.php" />
-    </list>
+    <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="" />
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
