@@ -449,6 +449,9 @@
 
             EditService.put('/propuestas/' + $("#proposal").data("proposal").id + '/quotes', $("#questionsModal"), function(result) {
                 $("#proposalQuestoins").html("");
+
+                console.log(result.quote);
+
                 $.each( result.quote.questions, function( key, question ) {
                     $("#proposalQuestoins").append(
                         $("<div style='height: 70px;'></div>")
@@ -456,7 +459,7 @@
                             .append(
                                 $("<h4></h4>")
                                     .append($("<span></span>").addClass("badge badge-info").text(key + 1))
-                                    .append(" " + question.samll + ": ")
+                                    .append(" " + question.small + ": ")
                                     .append($("<span style='font-weight: 300;'></span>").text(question.pivot.answer))
                             )
                     );
