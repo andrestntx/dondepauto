@@ -272,7 +272,7 @@
 		<section id="observations">
 			<h1>Observaciones</h1>
 			<p>**Impactos: Los valores establecidos en la columna Impactos son valores estimados en condiciones normales del mercado, no obstante, estos pueden variar.<br>
-			- Vigencia de la propuesta (precios, descuenteos o Bonificados): 15 días hábiles a partir de fecha de envío.<br>
+			- Vigencia de la propuesta (precios, descuentos o Bonificados): {{ $proposal->expiration_days }} días hábiles a partir de fecha de envío.<br>
 			- Para la ejecución de la campaña se requiere verificar el pago anticipado y la orden de servicio, con mínimo 10 días de anticipación.<br>
 			- Término para Pagos: Pago de contado o anticipado. Cuenta Ahorros 658-32 03 12-11 de Bancolombia.<br>
 			- Para pago a 30 días, se debe realizar el procedimiento para creación de cliente, verificación de solvencia y capacidad de pago. Puede tomar 10 días adicionales.<br>
