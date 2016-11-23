@@ -37,6 +37,8 @@ class QuoteService
         $quote->fill($data);
         $quote->save();
         $this->addQuestions($this->removeRelations($quote), $questions);
+        \Log::info($data['cities']);
+        \Log::info($quote->cities);
         return $this->addCities($quote, $data['cities']);
     }
 

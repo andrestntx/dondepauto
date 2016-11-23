@@ -3,7 +3,7 @@
 namespace App\Http\ViewComposers\Proposal;
 
 use App\Repositories\Platform\ActionRepository;
-use App\Repositories\Platform\CityRepository;
+use App\Repositories\Platform\Space\SpaceCityRepository as CityRepository;
 use App\Repositories\Platform\TagRepository;
 use Illuminate\Contracts\View\View;
 use App\Http\ViewComposers\BaseComposer;
@@ -36,7 +36,7 @@ class ShowComposer extends BaseComposer
     {
         $actions    = $this->actionRepository->listsOfProposal();
         $tags       = $this->tagRepository->model->where('type', 'publisher')->orWhere('type', 'all')->lists('name', 'id')->all();
-        $cities     = $this->cityRepository->citiesWithAdvertisers();
+        $cities     = $this->cityRepository->citiesWithSpaces();
 
         $view->with([
             'actionsAdvertiser' => $actions,

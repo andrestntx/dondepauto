@@ -235,7 +235,7 @@ class AdvertiserFacade extends UserFacade
         }
 
         $this->quoteService->update($quote, $data, $questions);
-        $quote->load('questions');
+        $quote->load(['questions', 'cities']);
 
         return ['quote' => $quote];
     }
