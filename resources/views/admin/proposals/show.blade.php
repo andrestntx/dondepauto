@@ -360,6 +360,12 @@
                                         <h4> <span class="badge badge-info">{{ $key + 1 }}</span> {{ $question->small }}: <span style="font-weight: 300;"> {{ $question->pivot->answer }} </span></h4>
                                     </div>
                                 @endforeach
+
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6" style="height: 70px;">   
+                                <h3> Ciudades: </h3>
+                                <h4> <span style="font-weight: 300;" id="proposalCities"> {{ $proposal->quote->cities->implode('name', ', ') }} </span></h4>
                             </div>
                             
                         </div>
@@ -464,6 +470,12 @@
                             )
                     );
                 });
+
+                var cities = $.map(result.quote.cities, function(city){ 
+                    return city.nombre_ciudad_LI
+                }).join(', ');
+
+                $("#proposalCities").html(cities);
             });
 
             modalProposalEdit($("#modalEditTitle"), function(result){

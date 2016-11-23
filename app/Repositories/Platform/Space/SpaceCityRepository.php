@@ -23,7 +23,6 @@ class SpaceCityRepository extends BaseRepository
         return 'App\Entities\Platform\Space\SpaceCity';
     }
 
-
     /**
      * @param null $category_id
      * @param null $subCategory_id

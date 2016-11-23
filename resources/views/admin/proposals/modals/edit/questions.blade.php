@@ -13,7 +13,7 @@
                     {!! Form::open() !!}
 
                         <div class="col-sm-12">
-                            {!! Field::select('cities[]', $cities, $proposal->cities->lists('id')->all(), ['label' => 'Ciudades', 'id' => 'question_cities', 'required', 'empty' => 'Seleccione las ciudades', 'class' => 'question-chosen-select', 'multiple', 'data-placeholder' => 'Ciudades']) !!}
+                            {!! Field::select('cities[]', $cities, $proposal->quote->cities->lists('id')->all(), ['label' => 'Ciudades', 'id' => 'question_cities', 'required', 'empty' => 'Seleccione las ciudades', 'class' => 'question-chosen-select', 'multiple', 'data-placeholder' => 'Ciudades']) !!}
                         </div>
                         
                         @foreach($proposal->quote->questions as $question)
