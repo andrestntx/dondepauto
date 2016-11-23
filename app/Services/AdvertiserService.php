@@ -126,7 +126,6 @@ class AdvertiserService extends ResourceService
         return $this->viewRepository->getAdvertiser($advertiser->id);
     }
 
-
     /**
      * @param UserPlatform $advertiser
      * @param array $data

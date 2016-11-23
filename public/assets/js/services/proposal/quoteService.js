@@ -445,7 +445,6 @@ var QuoteService = function() {
             $("#editProposalModal").modal();
         });
 
-        editProposalModal
 
         $(".space_form_discount #discount").keyup(function() {
             validAndDrawModalDiscount();    

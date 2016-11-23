@@ -14,6 +14,8 @@
     <!-- Ladda -->
     <link href="/assets/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
 
+    <link href="/assets/css/plugins/fileinput/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
     <style type="text/css">
         .swal2-modal .swal2-select {
             background-color: #FFFFFF;
@@ -69,7 +71,10 @@
 @endsection
 
 @section('breadcrumbs')
-    <h2 style="color:#dc780b; font-weight: 300; font-size: 26px;">{{ $proposal->title }}</h2>
+    <h2 style="color:#dc780b; font-weight: 300; font-size: 26px;">
+        <span id="proposalTitle"> {{ $proposal->title }} </span>
+        <button class="btn btn-xs btn-warning" id="edit-title" data-target="#modalEditTitle" data-toggle="modal"><i class="fa fa-pencil"></i></button>
+    </h2>
     <h3 style="font-size: 20px;">{{ ucfirst($advertiser->company) }}</h3>
 
     <h4 style="font-size: 18px; color:#44bc52;"> 
@@ -89,7 +94,10 @@
             </div>
 
             <div class="col-xs-12">   
-                <a href="{{ route('proposals.preview-html', $proposal) }}" class="btn btn-sm btn-success" target="_blank" title="HTML"><i class="fa fa-list-alt"></i> Previsualizar</a>
+                <a href="{{ route('proposals.preview-html', $proposal) }}" class="btn btn-sm btn-success" target="_blank" title="HTML">
+                    <i class="fa fa-list-alt"></i> 
+                    Previsualizar
+                </a>
 
                 <button class="btn btn-sm btn-primary" title="Enviar propuesta" id="sendProposal"><i class="fa fa-paper-plane"></i> Enviar propuesta</button>
             </div>
@@ -100,7 +108,7 @@
 
 @section('content')  
     
-    <div class="col-xs-12" id="proposal" data-advertiser="{{ $advertiser }}" data-states="{{ json_encode($advertiser->states) }}" data-contacts="{{ json_encode($contacts) }}" data-proposal="{{ $proposal }}" data-datatable="{{ route('proposals.spaces.search', $proposal) }}" style="margin-bottom: 1em;">
+    <div class="col-xs-12" id="proposal" data-advertiser="{{ $advertiser }}" data-contacts="{{ json_encode($contacts) }}" data-states="{{ json_encode($advertiser->states) }}" data-proposal="{{ $proposal }}" data-datatable="{{ route('proposals.spaces.search', $proposal) }}" style="margin-bottom: 1em;">
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class=""><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
@@ -165,10 +173,18 @@
                                 <span style="font-weight: 200;">Fecha solicitud:</span> 
                                 {{ ucfirst($proposal->created_at_date) }} 
                             </span> <br>
+                            
                             <span class="h5"> 
                                 <span style="font-weight: 200;">Fecha envío:</span> 
                                 {{ ucfirst($proposal->send_at_date) }} 
                             </span> <br>
+                            
+                            <span class="h5"> 
+                                <span style="font-weight: 200;">Días de caducidad: </span> 
+                                <span id="proposalExpirationDays"> {{ $proposal->expiration_days }} </span>
+                                <button class="btn btn-xs btn-warning" data-target="#modalEditExpirationDays" data-toggle="modal"><i class="fa fa-pencil"></i></button>
+                            </span> <br>
+
                             <h4 style="font-size: 14px; color:#44bc52; font-weight: 400;"> 
                                 <i class="fa fa-exclamation-circle"></i> 
                                 <span style="color:rgb(103, 106, 108);">Estado de propuesta: </span> 
@@ -332,11 +348,20 @@
                 <div id="tab-quote" class="tab-pane">
                     <div class="panel-body">
                         <div class="col-xs-12" id="space-description">
-                            @foreach($proposal->quote->questions as $key => $question)
-                                <div class="col-xs-6 col-md-4" style="height: 70px;">   
-                                    <h4> <span class="badge badge-info">{{ $key + 1 }}</span> {{ $question->small }}: <span style="font-weight: 300;"> {{ $question->pivot->answer }} </span></h4>
-                                </div>
-                            @endforeach
+                            <div class="col-xs-6 col-md-4" style="height: 70px;">   
+                                <button class="btn btn-warning" data-target="#questionsModal" data-toggle="modal">
+                                    <i class="fa fa-pencil"></i> Editar ficha técnica
+                                </button>
+                            </div>
+
+                            <div id="proposalQuestoins">
+                                @foreach($proposal->quote->questions as $key => $question)
+                                    <div class="col-xs-6 col-md-4" style="height: 70px;">   
+                                        <h4> <span class="badge badge-info">{{ $key + 1 }}</span> {{ $question->small }}: <span style="font-weight: 300;"> {{ $question->pivot->answer }} </span></h4>
+                                    </div>
+                                @endforeach
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -348,6 +373,9 @@
                             </div>
                             <button class="btn btn-success ladda-button" style="float: right;" data-style="zoom-in">Actualizar</button>
                         </div>
+                        <div class="col-xs-12 col-sm-6 col-md-5">   
+                            <input id="input-file-justification" type="file" class="file" data-show-preview="false">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,7 +384,7 @@
 
     <div class="col-sm-12">
         <div class="ibox-title">
-            <h5>Espacios de Pauta / <span class="text-info">{{ $proposal->spaces->count() }} espacios</span> </h5>
+            <h5>Espacios de Pauta / <span class="text-info">{{ $proposal->count_spaces}} espacios</span> </h5>
         </div>
         <div class="ibox-content">
             @include('admin.proposals.table-spaces')
@@ -367,6 +395,11 @@
      @include('admin.proposals.modals.advertiser')
      @include('admin.proposals.modals.discount')
      @include('admin.proposals.modals.edit')
+
+     @include('admin.proposals.modals.edit.expiration')
+     @include('admin.proposals.modals.edit.title')
+     @include('admin.proposals.modals.edit.questions')
+     
 
      @include('admin.publishers.modals.edit-data-contact')
      @include('admin.advertisers.modals.edit-data-detail')
@@ -396,11 +429,49 @@
     <script src="/assets/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
     <script src="/assets/js/plugins/number/jquery.number.min.js"></script>
 
+    <script src="/assets/js/plugins/fileinput/fileinput.min.js"></script>
+
+    <script src="/assets/js/services/editService.js"></script>
     <script src="/assets/js/services/userService.js"></script>
     <script src="/assets/js/services/advertiserService.js"></script>
     <script src="/assets/js/services/publisherService.js"></script>
     <script src="/assets/js/services/spaceService.js"></script>
     <script src="/assets/js/services/proposal/quoteService.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function modalProposalEdit(modal, functionSuccess) {
+                var urlProposal = '/propuestas/' + $("#proposal").data("proposal").id;
+                EditService.put(urlProposal, modal, functionSuccess);
+            }
+
+            EditService.put('/propuestas/' + $("#proposal").data("proposal").id + '/quotes', $("#questionsModal"), function(result) {
+                $("#proposalQuestoins").html("");
+                $.each( result.quote.questions, function( key, question ) {
+                    $("#proposalQuestoins").append(
+                        $("<div style='height: 70px;'></div>")
+                            .addClass("col-xs-6 col-md-4")
+                            .append(
+                                $("<h4></h4>")
+                                    .append($("<span></span>").addClass("badge badge-info").text(key + 1))
+                                    .append(" " + question.samll + ": ")
+                                    .append($("<span style='font-weight: 300;'></span>").text(question.pivot.answer))
+                            )
+                    );
+                });
+            });
+
+            modalProposalEdit($("#modalEditTitle"), function(result){
+                $("#proposalTitle").text(result.proposal.title);
+            });
+
+            modalProposalEdit($("#modalEditExpirationDays"), function(result){
+                $("#proposalExpirationDays").text(result.proposal.expiration_days);
+            });
+        });
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -470,6 +541,11 @@
                 });
 
             });
+
+            $('.question-chosen-select').chosen({width: "100%"});
+
+            // initialize with defaults
+            $("#input-file-justification").fileinput();
         });
     </script>
 @endsection

@@ -29,7 +29,6 @@ Route::get('test/{viewSpaces}', [
     'uses'  => 'HomeController@spaces'
 ]);
 
-
 Route::post('medios/login/{publishers}', [
     'uses' => 'Auth\PublisherController@platformLogin',
     'as' => 'medios.platform.login'
@@ -285,6 +284,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('anunciantes/{publishers}/quotes', [
             'as'    => 'quotes.store',
             'uses'  => 'Admin\QuotesController@store'
+        ]);
+
+        Route::put('propuestas/{proposals}/quotes', [
+            'as'    => 'quotes.update',
+            'uses'  => 'Admin\QuotesController@update'
         ]);
     });
 

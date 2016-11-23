@@ -26,6 +26,48 @@ class QuoteService
         $this->repository = $repository;
     }
 
+    /**
+     * @param Quote $quote
+     * @param array $data
+     * @param array $questions
+     * @return Quote
+     */
+    public function update(Quote $quote, array $data, array $questions)
+    {
+        $quote->fill($data);
+        $quote->save();
+        $this->addQuestions($this->removeRelations($quote), $questions);
+        return $this->addCities($quote, $data['cities']);
+    }
+
+    /**
+     * @param Quote $quote
+     * @return Quote
+     */
+    protected function removeRelations(Quote $quote)
+    {
+        return $this->removeCities($this->removeQuestions($quote));
+    }
+
+    /**
+     * @param Quote $quote
+     * @return Quote
+     */
+    protected function removeQuestions(Quote $quote)
+    {
+        $quote->questions()->detach();
+        return $quote;
+    }
+
+    /**
+     * @param Quote $quote
+     * @return Quote
+     */
+    protected function removeCities(Quote $quote)
+    {
+        $quote->cities()->detach();
+        return $quote;
+    }
 
     /**
      * @param Quote $quote
