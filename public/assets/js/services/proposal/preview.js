@@ -7,6 +7,7 @@ var PreviewService = function() {
 	var subtotal = 0;
 	var ivaPrice = 0;
 	var total = 0;
+	var totalDiscount = 0;
 	var count = 0;
 
 	function defaults() {
@@ -48,6 +49,15 @@ var PreviewService = function() {
 		$("#dinamic-quote #quote-subtotal-price").text(numeral(subtotal).format('$ 0,0') );
 		$("#dinamic-quote #quote-iva-price").text(numeral(ivaPrice).format('$ 0,0') );
 		$("#dinamic-quote #quote-price").text(numeral(total).format('$ 0,0') );
+		$("#dinamic-quote .total-discount-price").text(numeral(totalDiscount).format('$ 0,0') );
+
+		if(totalDiscount == 0) {
+			$("#dinamic-quote #total-discount").hide();
+		}
+		else {
+			$("#dinamic-quote #total-discount").show();	
+		}
+		
 		$("#quote-price span").text(numeral(total).format('$ 0,0') );
 
 		$("#dinamic-quote h2").text(count + " Medios seleccionados");
@@ -70,9 +80,16 @@ var PreviewService = function() {
 		return article.data("price");	
 	}
 
+	function getPublisherDiscountPrice(article)
+	{
+		return article.data("discount");	
+	}
+
 	function sumPrices(article, id) 
 	{
 		subtotal += getPublisherPrice(article);
+		totalDiscount += getPublisherDiscountPrice(article);
+
 		count ++;
 		calculatePrices();
 		addSelectPublisherId(id);
@@ -81,6 +98,7 @@ var PreviewService = function() {
 	function subtractPrices(article, id) 
 	{
 		subtotal -= getPublisherPrice(article);
+		totalDiscount -= getPublisherDiscountPrice(article);
 		count --;
 		calculatePrices();
 		removeSelectPublisherId(id);
@@ -156,6 +174,8 @@ var PreviewService = function() {
 		ivaPrice = 0;
 		total = 0;
 		count = 0;
+		totalDiscount = 0;
+
 		var id;
 
 		$(".publisher-selected").each(function(index, article) {

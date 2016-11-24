@@ -149,7 +149,8 @@
                                 </span> <br>
                                 <span class="h5">   
                                     <span style="font-weight: 200;">Actividad cliente:</span> 
-                                    {{ $advertiser->comments }} 
+                                    <span id="advertiserComments"> {{ $advertiser->comments }}  </span>
+                                    <button class="btn btn-xs btn-warning" data-target="#modalAdvertiserComments" data-toggle="modal"><i class="fa fa-pencil"></i></button>
                                 </span>
                             </p>
                         </div>
@@ -190,6 +191,14 @@
                                 <span style="color:rgb(103, 106, 108);">Estado de propuesta: </span> 
                                 <span class="proposal-state-text">{{ ucfirst($proposal->state) }}</span>
                             </h4>
+
+                            <h4> 
+                                <a href="#" data-target="#modalDownloads" data-toggle="modal" style="font-size: 14px; font-weight: 400; color:#1BB394;">
+                                    <span class="label label-primary" style="margin-right: 1px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{ $proposal->downloads->count() }}</span>
+                                    <span> Descargas de cotización </span>
+                                </a>
+                            </h4>
+
                         </div> 
 
                     </div>
@@ -383,7 +392,7 @@
                             <button class="btn btn-success ladda-button" style="float: right;" data-style="zoom-in">Actualizar</button>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-5">   
-                            <input id="input-file-justification" type="file" class="file" data-show-preview="false">
+                            <input id="input-file-justification" type="file">
                         </div>
                     </div>
                 </div>
@@ -408,6 +417,8 @@
      @include('admin.proposals.modals.edit.expiration')
      @include('admin.proposals.modals.edit.title')
      @include('admin.proposals.modals.edit.questions')
+     @include('admin.proposals.modals.edit.comments')
+     @include('admin.proposals.modals.downloads')
      
 
      @include('admin.publishers.modals.edit-data-contact')
@@ -449,7 +460,8 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function () { 
+            $(".download-file a").first().css('color', '#1A7BB9');
 
             function modalProposalEdit(modal, functionSuccess) {
                 var urlProposal = '/propuestas/' + $("#proposal").data("proposal").id;
@@ -458,8 +470,6 @@
 
             EditService.put('/propuestas/' + $("#proposal").data("proposal").id + '/quotes', $("#questionsModal"), function(result) {
                 $("#proposalQuestoins").html("");
-
-                console.log(result.quote);
 
                 $.each( result.quote.questions, function( key, question ) {
                     $("#proposalQuestoins").append(
@@ -479,6 +489,10 @@
                 }).join(', ');
 
                 $("#proposalCities").html(cities);
+            });
+
+            EditService.post('/anunciantes/' + $("#proposal").data("advertiser").id + '/ajax', $("#modalAdvertiserComments"), function(result) {
+                $("#advertiserComments").text(result.user.comments);
             });
 
             modalProposalEdit($("#modalEditTitle"), function(result){
@@ -542,7 +556,7 @@
             
             $('.advertisr-chosen-select').chosen({width: "100%"});
 
-            var justificationBtn = $('#tab-justification button').ladda();
+            var justificationBtn = $('#tab-justification .btn-success').ladda();
             
             justificationBtn.click(function() {
                 justificationBtn.ladda('start');
@@ -563,7 +577,13 @@
             $('.question-chosen-select').chosen({width: "100%"});
 
             // initialize with defaults
-            $("#input-file-justification").fileinput();
+            $("#input-file-justification").fileinput({
+                allowedFileExtensions: ['pdf'],
+                showUpload: true,
+                showPreview: true,
+                showCaption: false, 
+                showRemove: false
+            });
         });
     </script>
 @endsection

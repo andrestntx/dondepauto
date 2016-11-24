@@ -162,7 +162,9 @@ var AdvertiserService = function() {
     function initQuoteModalEvent()
     {
         $("#newQuote").click(function() {
+            console.log(actualAdvertiser.comments);
             $(".questionsModal #user_company").text(actualAdvertiser.company);
+            $(".questionsModal #advertiser_comments").text(actualAdvertiser.comments);
             $(".questionsModal").modal();
         });
 
@@ -185,6 +187,7 @@ var AdvertiserService = function() {
                 'contact_type': modal.find("#question_contact_type").val(),
                 'cities'    :   modal.find("#question_cities").val(),
                 'audiences':    modal.find("#question_audiences").val(),
+                'advertiser_comments':  modal.find("#advertiser_comments").val(),
                 'questions[]':  questions
             };
 
@@ -196,6 +199,7 @@ var AdvertiserService = function() {
                     button.prop("disabled", false);
                     var socialContact = UserService.getSocialContact(data.contact);
                     $('#userModal #comments').prepend(socialContact);
+                    $('#userModal #text-comments').text(modal.find("#advertiser_comments").val());
                 }
                 else {
                     console.log('error');
@@ -256,6 +260,8 @@ var AdvertiserService = function() {
         $('#userModal #management').text(advertiser.count_management_intentions);
         $('#userModal #sold').text(advertiser.count_sold_intentions);
         $('#userModal #discarded').text(advertiser.count_discarded_intentions);
+        $('#userModal #text-comments').text(advertiser.comments);
+        $("#advertiser_comments").val(advertiser.comments);
 
         $('#delete_advertiser').attr("data-url", '/anunciantes/' + advertiser.id);
 

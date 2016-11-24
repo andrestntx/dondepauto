@@ -268,22 +268,56 @@ section#publishers .publisher .publisher-content p.publisher-description {
 	margin-top: 0.7em;
 }
 
-section#publishers .publisher .publisher-content p.publisher-price {
+section#publishers .publisher .publisher-content p.publisher-price, 
+section#publishers .publisher .publisher-content p.publisher-public-price {
 	display: block;
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 300;
     color: #616060;
     margin: 0.25em 0 0.5em 0;
 }
 
-section#publishers .publisher .publisher-content p.publisher-price span {
+section#publishers .publisher .publisher-content p.publisher-price span,
+section#publishers .publisher .publisher-content p.publisher-public-price span {
     font-weight: 500;
+    font-size: 1.25em;
+}
+
+section#publishers .publisher .publisher-content p.publisher-price span {
     color: #14abe4;
+}
+
+section#publishers .publisher .publisher-content p.publisher-public-price span {
+    text-decoration: line-through;
+    font-weight: 400;
 }
 
 section.quote {
     margin-bottom: 2em;
     text-align: left;
+}
+
+section.quote #total-discount {
+    margin-top: 1em;
+    padding: 0.6em 0;
+    border: 2px #14ABE4 solid;
+} 
+
+section.quote #total-discount .total-discount-text, 
+section.quote #total-discount .total-discount-price {
+    text-align: center;
+    display: block;
+}
+
+section.quote #total-discount .total-discount-text {
+    color: gray;
+    font-size: 0.9em;
+}
+
+section.quote #total-discount .total-discount-price {
+    color: #14ABE4;
+    font-size: 1.9em;
+    font-weight: 600;
 }
 
 section.quote #dinamic-quote p {
@@ -477,6 +511,7 @@ section#target .target p.audience-name {
     color: #00aff1;
     font-weight: 400;
     margin: 0.2em 0 0 0;
+    font-size: 0.9em;
 }
 
 section#target, section#target .white-cap {
@@ -588,8 +623,9 @@ ul.publisher-dimensions li:before {
 	    font-size: 0.9em;
 	}
 
-	section#publishers .publisher .publisher-content p.publisher-price {
-	    font-size: 1.1em;
+	section#publishers .publisher .publisher-content p.publisher-price, 
+	section#publishers .publisher .publisher-content p.publisher-public-price {
+	    font-size: 1.02em;
 	}
 
     section#target .target {
@@ -731,7 +767,7 @@ ul.publisher-dimensions li:before {
 	}
 
 	section#target .target p.audience-name {
-	    font-size: 1.1em;
+	    font-size: 0.9em;
 	}
 
 	span.border-title {

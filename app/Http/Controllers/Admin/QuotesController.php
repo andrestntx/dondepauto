@@ -53,9 +53,7 @@ class QuotesController extends Controller
      */
     public function update(Request $request, Proposal $proposal)
     {
-        \Log::info($request->all());
         $result = $this->advertiserFacade->updateQuote($proposal->quote, $request->all(), $request->get('questions'));
-        \Log::info($result['quote']->cities);
         return array_merge($result, ['success' => 'true']);
     }
 }

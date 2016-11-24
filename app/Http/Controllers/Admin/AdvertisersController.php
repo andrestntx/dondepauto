@@ -150,10 +150,16 @@ class AdvertisersController extends ResourceController
      */
     public function update(UpdateRequest $request, User $user)
     {
-        $this->facade->updateModel($request->all(), $user);
+        $advertiser = $this->facade->updateModel($request->all(), $user);
+
+        if($request->ajax()){
+            return ['success' => 'true', 'advertiser' => $advertiser];
+        }
+
         return $this->redirect('index');
     }
 
+    
     /**
      * @param Request $request
      * @param User $advertiser

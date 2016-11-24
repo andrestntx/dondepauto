@@ -213,6 +213,8 @@ class AdvertiserFacade extends UserFacade
 
         $contact = $this->createQuoteContact($advertiser, $action_date, $contact_type, $data['title']);
         $quote   = $this->advertiserService->createQuote($advertiser, $data + ['sent_at' => $contact->action->action_at_datetime]);
+        $this->advertiserService->updateModel(['comments' => $data['advertiser_comments']], $advertiser);
+
         $this->quoteService->addQuestions($quote, $questions);
         $this->quoteService->addCities($quote, $data['cities']);
         //$this->quoteService->addAudiences($quote, $data['audiences']);
