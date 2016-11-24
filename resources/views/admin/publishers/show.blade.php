@@ -130,7 +130,7 @@
             SpaceService.initDatatable($('#publisher').data('datatable'));
             SpaceService.initModalEvent(false);
             SpaceService.initPostSuggest();
-            SpaceService.initProposalModal();
+            SpaceService.initPostProposalModal();
             $('.proposal-chosen-select').chosen({width: "100%"});
             $('.advertisr-chosen-select').chosen({width: "100%"});
         });

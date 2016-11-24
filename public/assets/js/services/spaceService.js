@@ -1069,8 +1069,9 @@ var SpaceService = function() {
         drawModal: function(inputId, space, urlName) {
             drawModal(inputId, space, urlName);
         },
-        initProposalModal: function() {
+        initPostProposalModal: function() {
             initProposalModal();
+            initPostProposal();
         }
     };
 }();
