@@ -162,7 +162,8 @@
 
                 <a href="#" class="btn btn-info" id="modalPublisher" data-toggle="tooltip" data-placement="top" title="Ver espacios del Medio" target="_blank" style="margin-right: 8px;"><i class="fa fa-twitch"></i> Ofertas del medio</a>
 
-                <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i> Editar</a>
+                <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip" target="_blank"><i class="fa fa-pencil"></i> Editar</a>
+
                 <a href="#" id="delete_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio"><i class="fa fa-trash"></i> Borrar</a>
             </div>
         </div>
