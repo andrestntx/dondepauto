@@ -43,7 +43,7 @@
                                                             <i class="fa fa-mobile"></i> <a href="tel:+" id="cel">  </a> 
                                         </span> <br>
                                     <span class="h5"> Fuente: <span id="source">  </span>  </span> <br>
-                                    <span class="h5"> Comentarios: <span id="text-comments" style="font-weight: 400;"> </span>  </span> 
+                                    <span class="h5"> Descripción actividad: <span id="text-comments" style="font-weight: 400;"> </span>  </span> 
                                 </p>
                             </div>
                         </div>
