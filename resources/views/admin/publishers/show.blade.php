@@ -107,6 +107,7 @@
 
      @include('admin.spaces.modal')
      @include('admin.spaces.modals.suggest')
+     @include('admin.spaces.modals.proposal')
 
 @endsection
 
@@ -129,6 +130,8 @@
             SpaceService.initDatatable($('#publisher').data('datatable'));
             SpaceService.initModalEvent(false);
             SpaceService.initPostSuggest();
+            SpaceService.initProposalModal();
+            $('.proposal-chosen-select').chosen({width: "100%"});
             $('.advertisr-chosen-select').chosen({width: "100%"});
         });
     </script>

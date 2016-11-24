@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers\Publisher;
 
 use App\Repositories\Platform\UserRepository;
+use App\Repositories\Proposal\ProposalRepository;
 use Illuminate\Contracts\View\View;
 use App\Http\ViewComposers\BaseComposer;
 
@@ -11,14 +12,17 @@ class ShowComposer extends BaseComposer
     protected $cityRepository;
     protected $actionRepository;
     protected $contactRepository;
+    protected $proposalRepository;
 
     /**
      * ListComposer constructor.
      * @param UserRepository $repository
+     * @param ProposalRepository $proposalRepository
      */
-    function __construct(UserRepository $repository)
+    function __construct(UserRepository $repository, ProposalRepository $proposalRepository)
     {
         $this->repository = $repository;
+        $this->proposalRepository = $proposalRepository;
     }
 
     /**
@@ -28,6 +32,13 @@ class ShowComposer extends BaseComposer
      */
     public function compose(View $view)
     {
+        $proposals = $this->proposalRepository->model
+            ->with(['quote.advertiser'])
+            ->get()
+            ->sortByDesc("created_at")
+            ->lists("advertiser_title", "id")
+            ->all();
+
         $advertisers = $this->repository->model
             ->select("id_us_LI", "email_us_LI", "empresa_us_LI", "nombre_us_LI", "apellido_us_LI", "tipo_us_LI")
             ->orderBy("tipo_us_LI", "asc")
@@ -36,7 +47,8 @@ class ShowComposer extends BaseComposer
             ->all();
 
         $view->with([
-            'advertisers' => $advertisers
+            'advertisers' => $advertisers,
+            'proposals' => $proposals
         ]);
     }
 }
