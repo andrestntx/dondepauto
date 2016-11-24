@@ -43,7 +43,7 @@ class Proposal extends Model
     protected $appends = ['days', 'advertiser_name', 'advertiser_company', 'created_at_datatable', 'send_at_datatable', 'expires_at_datatable', 'expires_at_days', 'count_spaces',
         "pivot_total", "pivot_total_cost", "total_discount_price", "total_discount", "pivot_total_income_price", "pivot_total_income",
         "pivot_total_markup_price", "pivot_total_markup", "pivot_total_commission_price", "pivot_total_commission",
-        "total", "total_cost", "total_income_price", "total_markup_price", "total_commission_price", "total_commission"
+        "total", "total_cost", "total_income_price", "total_markup_price", "total_commission_price", "total_commission", "state"
     ];
 
     /**

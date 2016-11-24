@@ -28,14 +28,21 @@ var QuoteService = function() {
                 { "data": "advertiser_company", "name": "advertiser_company" },
                 { "data": "title", "name": "title" },
                 { "data": "pivot_total", "name": "pivot_total" },
-                { "data": "pivot_total_income_price", "name": "pivot_total_income_price" }
+                { "data": "pivot_total_income_price", "name": "pivot_total_income_price" },
+                { "data": "state", "name": "state" }
             ],
             "columnDefs": [
                 {
-                    "targets": [1,2,3,4,5,6,7,8],
+                    "targets": [1,2,3,4,7,8],
                     "visible": true,
                     "searchable": true,
                     className: "text-small text-center",
+                },
+                {
+                    "targets": [5,6,9],
+                    "visible": true,
+                    "searchable": true,
+                    className: "text-small",
                 },
                 {
                     "targets": [0],

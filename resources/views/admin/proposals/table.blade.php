@@ -10,7 +10,8 @@
                 <th>Anunciante</th>
                 <th>Titulo Propuesta</th>
                 <th>Total $$</th>
-                <th>DóndePauto $$</th>
+                <th>Agencia $$</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tfoot>
@@ -23,7 +24,8 @@
             <th>Anunciante</th>
             <th>Titulo Propuesta</th>
             <th>Total $$</th>
-            <th>DóndePauto $$</th>
+            <th>Agencia $$</th>
+            <th>Estado</th>
         </tr>
         </tfoot>
     </table>
