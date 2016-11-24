@@ -180,7 +180,7 @@ class Proposal extends Model
      */
     public function getAdvertiserTitleAttribute()
     {
-        return $this->advertiser_name . ' - ' . $this->title . " - " . ucfirst($this->created_at->diffForHumans());
+        return $this->advertiser_company . ' - ' . $this->title . " - " . ucfirst($this->created_at->diffForHumans());
     }
 
     /**
