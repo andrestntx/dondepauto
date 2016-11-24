@@ -137,11 +137,22 @@
 									<p class="publisher-description">
 										{!! $space->pivot_description !!}
 									</p>
-									<p class="publisher-price">
-										<span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
-									</p>
-									
-									<button data-url="{{ route('proposals.spaces.select', [$proposal, $space]) }}" class="btn btn-sm btn-success btn-select"> 		@if($space->pivot->selected) 
+
+									@if($space->proposal_prices_discount > 0)
+										<p class="publisher-public-price">
+											Precio Proveedor: <span>$ {{ number_format($space->prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+										</p>
+										<p class="publisher-price">
+											Con DóndePauto: <span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+										</p>
+									@else 
+										<p class="publisher-price">
+											Precio Proveedor: <span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+										</p>
+									@endif
+
+									<button data-url="{{ route('proposals.spaces.select', [$proposal, $space]) }}" class="btn btn-sm btn-success btn-select"> 		
+										@if($space->pivot->selected) 
 											Seleccionado 
 										@else 
 											<i class="fa fa-check-square-o"></i> Seleccionar
@@ -158,47 +169,55 @@
 			</section>
 
 			<section class="quote content col-xs-12 col-md-4 scrollspy">
-				<div id="dinamic-quote" class="quote-content" data-spy="top-affix">
-					<h1>Medios seleccionados</h1>
-					<h2>0 Medios seleccionados</h2>
-					
-					<div id="quote-subtotal" class="col-xs-12">
-						<div class="row">
-							<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
-								<p>Subtotal</p>
+				<div data-spy="top-affix" id="dinamic-quote">
+					<div class="quote-content" >
+						<h1>Medios seleccionados</h1>
+						<h2>0 Medios seleccionados</h2>
+						
+						<div id="quote-subtotal" class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
+									<p>Subtotal</p>
+								</div>
+								<div class="col-xs-5 col-md-6">
+									<p id="quote-subtotal-price">0</p>
+								</div>
 							</div>
-							<div class="col-xs-5 col-md-6">
-								<p id="quote-subtotal-price">0</p>
+						</div>	
+						
+						<div id="quote-iva" class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
+									<p>IVA</p>
+								</div>
+								<div class="col-xs-5 col-md-6">
+									<p id="quote-iva-price">0</p>
+								</div>
+								</div>
+						</div>	
+						
+						<div id="quote-total" class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
+									<p>Total</p>
+								</div>
+								<div class="col-xs-5 col-md-6">
+									<p id="quote-price">0</p>
+								</div>
 							</div>
 						</div>
+						
+						<p class="notes">* Para recibir más información y realizar la compra comunicate con nuestra área encargada</p>
+						
+						<button class="btn btn-sm btn-danger" data-url="{{ route('proposals.select', $proposal) }}" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Generando cotización"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
 					</div>	
-					
-					<div id="quote-iva" class="col-xs-12">
-						<div class="row">
-							<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
-								<p>IVA</p>
-							</div>
-							<div class="col-xs-5 col-md-6">
-								<p id="quote-iva-price">0</p>
-							</div>
-							</div>
-					</div>	
-					
-					<div id="quote-total" class="col-xs-12">
-						<div class="row">
-							<div class="col-xs-offset-3 col-xs-4 col-md-offset-2">
-								<p>Total</p>
-							</div>
-							<div class="col-xs-5 col-md-6">
-								<p id="quote-price">0</p>
-							</div>
-						</div>
+
+					<div id="total-discount">
+						<span class="total-discount-text">* Con DóndePauto ahorras:</span>
+						<span class="total-discount-price">$ 6.000.000</span>
+						{{-- $proposal->total_discount_price --}}
 					</div>
-					
-					<p class="notes">* Para recibir más información y realizar la compra comunicate con nuestra área encargada</p>
-					
-					<button class="btn btn-sm btn-danger" data-url="{{ route('proposals.select', $proposal) }}" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Generando cotización"><i class="fa fa-file-pdf-o"></i> Descargar cotización</button>
-				</div>	
+				</div>
 			</section> 	
 		</div>
 	</main>

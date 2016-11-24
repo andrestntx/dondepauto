@@ -42,7 +42,7 @@ class UpdateRequest extends Request
         $advertiser = $this->route->getParameter('advertisers');
         $rules = $this->storeRequest->rules();
 
-        $rules['email'] =  'required|unique:us_reg_LIST,email_us_LI,' . $advertiser->id . ',id_us_LI';
+        $rules['email'] =  'unique:us_reg_LIST,email_us_LI,' . $advertiser->id . ',id_us_LI';
 
         return $rules;
     }

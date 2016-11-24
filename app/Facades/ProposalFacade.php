@@ -99,7 +99,11 @@ class ProposalFacade
     {
         if(is_array($spaceIds) && count($spaceIds) > 0) {
             $spaces = $this->service->selectSpaces($proposal, array_map("intval", $spaceIds));
-            $this->emailService->notifyProposalSelected($proposal, $spaces);
+
+            if( ! auth()->user() || (! auth()->user()->isAdmin() && ! auth()->user()->isDirector())) {
+                $this->service->saveQuotePdf($proposal);
+                $this->emailService->notifyProposalSelected($proposal, $spaces);
+            }
         }
 
         return $proposal;

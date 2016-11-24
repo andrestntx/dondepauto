@@ -81,6 +81,14 @@ class Proposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function downloads()
+    {
+        return $this->hasMany(Download::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function spaceAudiences()
     {
         return $this->hasMany(Audience::class, 'proposal_id');

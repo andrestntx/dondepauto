@@ -41,7 +41,10 @@
                         {!! Field::select('audiences', $audiences, ['label' => 'Audiencias', 'id' => 'question_audiences', 'required', 'empty' => 'Seleccione las audiencias', 'class' => 'question-chosen-select', 'multiple', 'data-placeholder' => 'Audiencias']) !!}
                     </div> --}}
 
-                    
+                    <div class="col-sm-12">
+                        {!! Field::textarea('advertiser_comments', ['label' => 'Actividad económica del cliente', 'rows' => 2]) !!}
+                    </div>
+
                     @foreach($questions as $question)
                         <div class="col-sm-12">
                             {!! Field::textarea('questions[' . $question->id. ']', ['label' => $question->text, 'rows' => 2, 'data-question-id' => $question->id]) !!}

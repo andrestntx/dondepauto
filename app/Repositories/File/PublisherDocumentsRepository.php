@@ -8,7 +8,6 @@
 
 namespace App\Repositories\File;
 
-
 use App\Entities\Platform\User;
 use Illuminate\Http\UploadedFile;
 
@@ -17,7 +16,6 @@ class PublisherDocumentsRepository extends BaseRepository
     protected $path = "documents/publishers";
 
     protected $documents = ['bank' => 'certificación bancaria', 'commerce' => 'cámara de comercio', 'letter' => 'acuerdo', 'rut' => 'rut'];
-
 
     /**
      * @param $id

@@ -12,14 +12,22 @@ use App\Entities\Platform\Space\Space;
 use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
 use App\Repositories\Proposal\ProposalRepository;
+use App\Repositories\File\ProposalsRepository as FileRepository;
 use Carbon\Carbon;
 
 class ProposalService extends ResourceService
 {
+    protected $fileRepository;
 
-    function __construct(ProposalRepository $repository)
+    /**
+     * ProposalService constructor.
+     * @param ProposalRepository $repository
+     * @param FileRepository $fileRepository
+     */
+    function __construct(ProposalRepository $repository, FileRepository $fileRepository)
     {
         $this->repository = $repository;
+        $this->fileRepository = $fileRepository;
     }
 
     /**
@@ -94,6 +102,15 @@ class ProposalService extends ResourceService
     public function selectSpace(Proposal $proposal, Space $space, $select)
     {
         $this->repository->selectSpace($proposal, $space, $select);
+    }
+
+    /**
+     * @param Proposal $proposal
+     */
+    public function saveQuotePdf(Proposal $proposal)
+    {
+        $url = $this->fileRepository->generatePdf($proposal);
+        $proposal->downloads()->create(['url' => $url]);
     }
     
 }
