@@ -109,7 +109,7 @@
 				</div>
 				<div class="col-xs-12 col-md-8">
 					@foreach($proposal->viewSpaces as $space)
-						<article {!! Html::classes(['publisher', 'publisher-selected' => $space->pivot->selected]) !!} data-price="{{ $space->proposal_prices_public_price }}" data-publisherId="{{ $space->id }}">
+						<article {!! Html::classes(['publisher', 'publisher-selected' => $space->pivot->selected]) !!} data-price="{{ $space->proposal_prices_public_price }}" data-discount="{{ $space->proposal_prices_discount_price }}" data-publisherId="{{ $space->id }}">
 							<div class="row">
 								<div class="col-xs-12">
 									<figure class="publisher-check">
@@ -214,8 +214,7 @@
 
 					<div id="total-discount">
 						<span class="total-discount-text">* Con DóndePauto ahorras:</span>
-						<span class="total-discount-price">$ 6.000.000</span>
-						{{-- $proposal->total_discount_price --}}
+						<span class="total-discount-price">0</span>
 					</div>
 				</div>
 			</section> 	

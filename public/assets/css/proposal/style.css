@@ -511,6 +511,7 @@ section#target .target p.audience-name {
     color: #00aff1;
     font-weight: 400;
     margin: 0.2em 0 0 0;
+    font-size: 0.9em;
 }
 
 section#target, section#target .white-cap {
@@ -766,7 +767,7 @@ ul.publisher-dimensions li:before {
 	}
 
 	section#target .target p.audience-name {
-	    font-size: 1.1em;
+	    font-size: 0.9em;
 	}
 
 	span.border-title {
