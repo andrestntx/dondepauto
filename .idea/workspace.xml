@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ShowComposer.php" afterPath="$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ShowComposer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/publishers/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/publishers/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/spaces/modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/spaces/modal.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" afterPath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,16 +24,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AdvertisersController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.375">
-              <caret line="74" column="43" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DatatableFacade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Facades/DatatableFacade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -86,11 +74,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShowComposer.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ShowComposer.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ShowComposer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5022625">
-              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+            <state vertical-scroll-proportion="-15.75">
+              <caret line="38" column="37" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Question.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Question.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.375">
+              <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Proposal.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45125785">
+              <caret line="185" column="7" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -169,12 +177,12 @@
         <option value="$PROJECT_DIR$/config/dompdf.php" />
         <option value="$PROJECT_DIR$/app/Repositories/File/ProposalsRepository.php" />
         <option value="$PROJECT_DIR$/app/Facades/ProposalFacade.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
         <option value="$PROJECT_DIR$/app/Facades/DatatableFacade.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
         <option value="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
         <option value="$PROJECT_DIR$/app/Entities/Platform/Action.php" />
         <option value="$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ShowComposer.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
       </list>
     </option>
   </component>
@@ -345,6 +353,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Publisher" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Proposal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -691,14 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Question.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.375">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/File/PublisherDocumentsRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.375">
@@ -771,14 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84162897">
           <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8490566">
-          <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
           <folding />
         </state>
       </provider>
@@ -857,8 +889,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/ViewComposers/Publisher/ShowComposer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5022625">
-          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+        <state vertical-scroll-proportion="-15.75">
+          <caret line="38" column="37" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Question.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.375">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45125785">
+          <caret line="185" column="7" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
           <folding />
         </state>
       </provider>
