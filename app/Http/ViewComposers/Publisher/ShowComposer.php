@@ -30,9 +30,9 @@ class ShowComposer extends BaseComposer
     {
         $advertisers = $this->repository->model
             ->select("id_us_LI", "email_us_LI", "empresa_us_LI", "nombre_us_LI", "apellido_us_LI", "tipo_us_LI")
-            ->role("advertiser")
+            ->orderBy("tipo_us_LI", "asc")
             ->get()
-            ->lists("select_email", "id")
+            ->lists("role_select_email", "id")
             ->all();
 
         $view->with([
