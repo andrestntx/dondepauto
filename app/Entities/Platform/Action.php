@@ -168,7 +168,7 @@ class Action extends Entity
      */
     public function isActionAndIsInRange($id = null, $start = null, $end = null)
     {
-        if(!is_null($id)) {
+        if(!is_null($id) && !empty($id)) {
             return $this->id == $id && $this->isInRange($start, $end);
         }
 

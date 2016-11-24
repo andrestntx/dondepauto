@@ -208,6 +208,7 @@ class FilterCollectionService
     private function userHasActions($user, array $data)
     {
         if( $this->notIs($data['action'], "0") || $this->isSearch($data['action_range'])) {
+
             if($lastAction = $user->getLastAction()) {
                 return $lastAction->isActionAndIsInRange($data['action'], $this->getDateRange($data['action_range'])[0], $this->getDateRange($data['action_range'])[1]);
             }
