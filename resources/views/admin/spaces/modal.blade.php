@@ -156,14 +156,14 @@
 
             <div class="modal-footer">
                 
-                <button class="btn btn-primary actionSpaceModal" id="modalProposalSpace" data-toggle="tooltip" data-placement="left" title="Agregar a propuesta" style="margin-right: 8px;"><i class="fa fa-plus-circle"></i></button>
+                <button class="btn btn-primary actionSpaceModal" id="modalProposalSpace" data-toggle="tooltip" data-placement="left" title="Agregar a propuesta" style="margin-right: 8px;"><i class="fa fa-plus-circle"></i> Agregar a propuesta</button>
 
-                <button class="btn btn-success actionSpaceModal" id="modalSuggestSpace" data-toggle="tooltip" data-placement="top" title="Recomendar espacio" style="margin-right: 8px;"><i class="fa fa-location-arrow"></i></button>
+                <button class="btn btn-success actionSpaceModal" id="modalSuggestSpace" data-toggle="tooltip" data-placement="top" title="Recomendar espacio" style="margin-right: 8px;"><i class="fa fa-location-arrow"></i> Recomerdar</button>
 
-                <a href="#" class="btn btn-info" id="modalPublisher" data-toggle="tooltip" data-placement="top" title="Ver espacios del Medio" style="margin-right: 8px;"><i class="fa fa-twitch"></i></a>
+                <a href="#" class="btn btn-info" id="modalPublisher" data-toggle="tooltip" data-placement="top" title="Ver espacios del Medio" target="_blank" style="margin-right: 8px;"><i class="fa fa-twitch"></i> Ofertas del medio</a>
 
-                <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
-                <a href="#" id="delete_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio"><i class="fa fa-trash"></i></a>
+                <a href="#" class="btn btn-warning" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i> Editar</a>
+                <a href="#" id="delete_space" data-spaceid="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar espacio"><i class="fa fa-trash"></i> Borrar</a>
             </div>
         </div>
     </div>
