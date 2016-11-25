@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/DatatableFacade.php" afterPath="$PROJECT_DIR$/app/Facades/DatatableFacade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Facades/ProposalFacade.php" afterPath="$PROJECT_DIR$/app/Facades/ProposalFacade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/EmailService.php" afterPath="$PROJECT_DIR$/app/Services/EmailService.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,11 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DatatableFacade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Facades/DatatableFacade.php">
+      <file leaf-file-name="ProposalFacade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Facades/ProposalFacade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43438914">
-              <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.38050315">
+              <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.625">
+              <caret line="312" column="32" selection-start-line="312" selection-start-column="32" selection-end-line="312" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -70,6 +80,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-11.25">
               <caret line="74" column="51" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Proposal.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.375">
+              <caret line="35" column="32" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -130,7 +150,6 @@
         <option value="$PROJECT_DIR$/app/Services/Space/SpaceService.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Platform/ActionRepository.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProposalSpacesController.php" />
-        <option value="$PROJECT_DIR$/app/Services/EmailService.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Proposal/ProposalRepository.php" />
         <option value="$PROJECT_DIR$/app/Entities/Views/Advertiser.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ProposalsController.php" />
@@ -146,7 +165,6 @@
         <option value="$PROJECT_DIR$/app/Services/ProposalService.php" />
         <option value="$PROJECT_DIR$/config/dompdf.php" />
         <option value="$PROJECT_DIR$/app/Repositories/File/ProposalsRepository.php" />
-        <option value="$PROJECT_DIR$/app/Facades/ProposalFacade.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
         <option value="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
         <option value="$PROJECT_DIR$/app/Entities/Platform/Action.php" />
@@ -154,6 +172,8 @@
         <option value="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php" />
         <option value="$PROJECT_DIR$/app/Facades/DatatableFacade.php" />
+        <option value="$PROJECT_DIR$/app/Services/EmailService.php" />
+        <option value="$PROJECT_DIR$/app/Facades/ProposalFacade.php" />
       </list>
     </option>
   </component>
@@ -250,7 +270,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
+              <option name="myItemId" value="Facades" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -268,11 +288,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
+              <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -290,15 +306,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
+              <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admin" />
+              <option name="myItemId" value="Proposal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,7 +387,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12608695" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21086957" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -490,6 +502,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07389937">
           <caret line="120" column="51" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
+          <folding>
+            <element signature="e#6#100#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -535,18 +550,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.0">
-          <caret line="299" column="7" selection-start-line="299" selection-start-column="7" selection-end-line="299" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Platform/Contact.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.625">
           <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -561,6 +569,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.5">
           <caret line="35" column="41" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -663,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Facades/ProposalFacade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57164407">
-          <caret line="108" column="15" selection-start-line="108" selection-start-column="15" selection-end-line="108" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/dompdf.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5927673">
@@ -730,14 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16892911">
-          <caret line="173" column="5" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.25">
@@ -750,14 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.375">
           <caret line="240" column="5" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Facades/AdvertiserFacade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.458333">
-          <caret line="78" column="44" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -788,8 +774,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Facades/DatatableFacade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43438914">
-          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+        <state vertical-scroll-proportion="-4.5">
+          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/EmailService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.625">
+          <caret line="312" column="32" selection-start-line="312" selection-start-column="32" selection-end-line="312" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.375">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Facades/AdvertiserFacade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.458333">
+          <caret line="78" column="44" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Facades/ProposalFacade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38050315">
+          <caret line="134" column="5" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
           <folding />
         </state>
       </provider>

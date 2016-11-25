@@ -133,8 +133,14 @@ class ProposalFacade
      */
     public function send(Proposal $proposal)
     {
+        if(is_null($proposal->send_at) || empty($proposal->send_at)) {
+            $this->emailService->sendProposal($proposal, $proposal->getAdvertiser());
+        }
+        else {
+            $this->emailService->sendProposalSettings($proposal, $proposal->getAdvertiser());
+        }
+
         $this->service->send($proposal);
-        $this->emailService->sendProposal($proposal, $proposal->getAdvertiser());
     }
 
     /**

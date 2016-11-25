@@ -308,4 +308,16 @@ class EmailService
             'advertiser'    => $advertiser
         ], "Hola " . $advertiser->first_name . ", aquí está la propuesta que solicitaste", [$this->advertiserEmail]);
     }
+
+    /**
+     * @param Proposal $proposal
+     * @param User $advertiser
+     */
+    public function sendProposalSettings(Proposal $proposal, User $advertiser)
+    {
+        $this->sendAdvertiser($advertiser, 'emails.proposal.send-settings', [
+            'proposal'      => $proposal,
+            'advertiser'    => $advertiser
+        ], "Hola " . $advertiser->first_name . ", hemos mejorado la propuesta para su campaña de medios", [$this->advertiserEmail]);
+    }
 }
