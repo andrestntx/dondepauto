@@ -41,12 +41,13 @@ class ProposalService extends ResourceService
     }
 
     /**
-     * @param User $advertiser
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param array|null $columns
+     * @param string $search
+     * @return mixed
      */
-    public function search(User $advertiser = null)
+    public function search(array $columns = null, $search = '')
     {
-        return $this->repository->search($advertiser);
+        return $this->repository->search($columns, $search);
     }
 
     /**

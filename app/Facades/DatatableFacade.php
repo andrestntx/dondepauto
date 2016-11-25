@@ -18,6 +18,7 @@ class DatatableFacade
     protected $publisherFacade;
     protected $spaceFacade;
     protected $advertiserFacade;
+    protected $proposalFacade;
 
 
     /**
@@ -25,12 +26,15 @@ class DatatableFacade
      * @param PublisherFacade $publisherFacade
      * @param AdvertiserFacade $advertiserFacade
      * @param SpaceFacade $spaceFacade
+     * @param ProposalFacade $proposalFacade
      */
-    public function __construct(PublisherFacade $publisherFacade, AdvertiserFacade $advertiserFacade, SpaceFacade $spaceFacade)
+    public function __construct(PublisherFacade $publisherFacade, AdvertiserFacade $advertiserFacade, SpaceFacade $spaceFacade,
+        ProposalFacade $proposalFacade)
     {
         $this->publisherFacade = $publisherFacade;
         $this->advertiserFacade = $advertiserFacade;
         $this->spaceFacade = $spaceFacade;
+        $this->proposalFacade = $proposalFacade;
     }
 
     /**
@@ -166,6 +170,18 @@ class DatatableFacade
     public function searchSpaces(array $columns, $search = '', $spaceId = null, User $publisher = null, Proposal $proposal = null, array $inputs)
     {
         $spaces = $this->spaceFacade->searchAndFilter($this->getDataColumns($columns), $search, $spaceId, $publisher, $proposal);
+        return $this->getJsonResponse($spaces, 100, $inputs, $columns);
+    }
+
+    /**
+     * @param array $columns
+     * @param string $search
+     * @param array $inputs
+     * @return mixed
+     */
+    public function searchProposals(array $columns, $search = '', array $inputs)
+    {
+        $spaces = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search);
         return $this->getJsonResponse($spaces, 100, $inputs, $columns);
     }
 }

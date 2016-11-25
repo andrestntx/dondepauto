@@ -11,6 +11,7 @@ namespace App\Entities\Views;
 use App\Entities\Platform\Space\Audience;
 use App\Entities\Platform\Space\SpaceCity;
 use App\Entities\Platform\Space\SpaceImpactScene;
+use App\Entities\Proposal\Proposal;
 use App\Entities\Proposal\SpacePrice as ProposalSpacePrice;
 
 use App\Entities\Views\Simple\Publisher as SimplePublisher;
@@ -144,6 +145,14 @@ class Space extends Model
     public function impactScenes()
     {
         return $this->belongsToMany(SpaceImpactScene::class, 'impact_scene_space', 'space_id', 'impact_scene_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function proposals()
+    {
+        return $this->belongsToMany(Proposal::class)->withPivot(['discount', 'with_markup', 'title', 'description', 'selected']);
     }
 
     /**

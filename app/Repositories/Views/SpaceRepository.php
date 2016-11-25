@@ -26,6 +26,18 @@ class SpaceRepository extends BaseRepository
     }
 
     /**
+     * @return mixed
+     */
+    public function spacesWithProposals()
+    {
+        return $this->model->join('proposal_space', 'proposal_space.space_id', '=', 'view_spaces.id')
+            ->where('proposal_space.title', '<>', '')
+            ->groupBy('view_spaces.id')
+            ->lists('proposal_space.title', 'view_spaces.id')
+            ->all();
+    }
+
+    /**
      * @return array
      */
     public function getSelects()

@@ -25,6 +25,21 @@ class ActionRepository extends BaseRepository
         return 'App\Entities\Platform\Action';
     }
 
+    /**
+     * @return mixed
+     */
+    public function statesWithProposals()
+    {
+        return $this->model
+            ->join('action_contact', 'action_contact.action_id', '=', 'actions.id')
+            ->join('contacts', 'action_contact.contact_id', '=', 'contacts.id')
+            ->join('proposals', 'contacts.proposal_id', '=', 'proposals.id')
+            ->where('actions.state', '<>', '')
+            ->groupBy('actions.id')
+            ->lists('actions.state', 'actions.id')
+            ->all();
+    }
+
     protected function listsOfType($type = 'advertiser')
     {
         return $this->model

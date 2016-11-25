@@ -27,6 +27,18 @@ class AdvertiserRepository extends BaseRepository
         return 'App\Entities\Views\Advertiser';
     }
 
+    /**
+     * @return mixed
+     */
+    public function advertisersWithProposals()
+    {
+        return $this->model
+            ->join('quotes', 'quotes.advertiser_id', '=', 'view_advertisers.id')
+            ->groupBy('view_advertisers.id')
+            ->lists('view_advertisers.company', 'view_advertisers.id')
+            ->all();
+    }
+
 
     /**
      * @return Collection
