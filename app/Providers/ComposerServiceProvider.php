@@ -27,6 +27,7 @@ class ComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Space\FormComposer' => 'admin.spaces.form',
             'App\Http\ViewComposers\Space\OfferComposer' => ['publisher.spaces.form', 'admin.proposals.spaces.form'],
             'App\Http\ViewComposers\Publisher\ShowComposer' => 'admin.publishers.show',
+            'App\Http\ViewComposers\Proposal\ListComposer' => 'admin.proposals.lists',
             'App\Http\ViewComposers\Proposal\ShowComposer' => 'admin.proposals.show'
         ]);
     }

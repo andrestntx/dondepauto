@@ -73,6 +73,14 @@ class SpaceFacade
         return $this->service->search($columns, $search, $spaceId, $publisher, $proposal);
     }
 
+    /**
+     * @param array $columns
+     * @param $search
+     * @param null $spaceId
+     * @param User|null $publisher
+     * @param Proposal|null $proposal
+     * @return Collection
+     */
     public function searchAndFilter(array $columns, $search, $spaceId = null, User $publisher = null, Proposal $proposal = null)
     {
         $spaces = $this->search($columns, $search, $spaceId, $publisher, $proposal);
@@ -82,8 +90,6 @@ class SpaceFacade
         }
 
         return $spaces;
-
-
     }
 
     /**

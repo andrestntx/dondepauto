@@ -42,11 +42,23 @@ class ProposalFacade
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param array $columns
+     * @param $search
+     * @return mixed
      */
-    public function search()
+    public function search(array $columns, $search)
     {
-        return $this->service->search();
+        return $this->service->search($columns, $search);
+    }
+
+    /**
+     * @param array $columns
+     * @param $search
+     * @return mixed
+     */
+    public function searchAndFilter(array $columns, $search)
+    {
+        return $this->search($columns, $search);
     }
 
     /**

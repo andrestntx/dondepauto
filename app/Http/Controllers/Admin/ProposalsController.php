@@ -156,11 +156,12 @@ class ProposalsController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return mixed
      */
-    public function search()
+    public function search(Request $request)
     {
-        return \Datatables::of($this->advertiserFacade->searchProposals())->make(true);
+        return $this->datatableFacade->searchProposals($request->get('columns'), $request->get('search')['value'], $request->all());
     }
 
     /**

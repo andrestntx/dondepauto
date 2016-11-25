@@ -28,6 +28,19 @@ class PublisherRepository extends BaseRepository
     /**
      * @return mixed
      */
+    public function publishersWithProposals()
+    {
+        return $this->model
+            ->join('view_spaces', 'view_spaces.publisher_id', '=', 'view_publishers.id')
+            ->join('proposal_space', 'proposal_space.space_id', '=', 'view_spaces.id')
+            ->groupBy('view_publishers.id')
+            ->lists('view_publishers.company', 'view_publishers.id')
+            ->all();
+    }
+
+    /**
+     * @return mixed
+     */
     protected function defaultSearch()
     {
         return $this->model->select([

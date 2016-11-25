@@ -25,20 +25,44 @@ class ProposalRepository extends BaseRepository
         return 'App\Entities\Proposal\Proposal';
     }
 
+
     /**
-     * @param User $advertiser
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param array $data
+     * @param string $search
+     * @return mixed
      */
-    public function search(User $advertiser = null)
+    public function search(array $data, $search = '')
     {
-        return $this->model->with([
+        $query = $this->model->with([
             'quote.advertiser',
             'viewSpaces',
             'viewSpaces.audiences.type',
             'viewSpaces.impactScenes',
             'viewSpaces.cities',
             'spaces'
-        ])->get();
+        ]);
+
+        if(! empty($search)) {
+            $query->where(function ($q) use($search) {
+                $q->where('title', 'LIKE', '%' . $search . '%')
+                    ->orWhere('observations', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        return $query->orderBy('proposals.created_at', 'desc')->get();
+    }
+
+    /**
+     * @param $query
+     * @param $data
+     * @param $columnSearch
+     * @param $search
+     */
+    public function query(&$query, $data, $columnSearch, $search)
+    {
+        if (array_key_exists($columnSearch, $data) && (! empty($data[$columnSearch] || $data[$columnSearch] == "0"))) {
+            $query->where($search, '=', $data[$columnSearch]);
+        }
     }
 
     /**
