@@ -223,6 +223,10 @@
                                 <p>Cuando el Medio Publicitario acuerde facturar directamente al anunciante referenciado por DóndePauto, estos acordarán el plazo y la forma de pago. El Anunciante será el responsable directo y único del pago al Medio Publicitario. <span style="font-style: italic;">
                                     En el caso que el anunciante incumpla el pago por los servicios aplicables DóndePauto no será responsable del pago, ni codeudor. Tampoco se computará el incentivo de comisión para DóndePauto.</span>
                                 </p>
+
+                                <p>
+                                    <strong>Nota:</strong> En aquellos casos en los que DóndePauto intermedie en el pago, DóndePauto facturará al cliente anunciante los servicios prestados por el medio publicitario bajo figura de ingresos para terceros, proveyendo en su factura la información necesaria para tal fin. Dichos dineros serán posteriormente pagados al Medio Publicitario de conformidad con lo establecido en los Términos y Condiciones previamente aceptados, en donde el Medio Publicitario acepta y manifiesta que otorga a DóndePauto un mandato para la gestión de pagos, en virtud del cual DóndePauto podrá cobrar y recibir en a nombre del Medio Publicitario, y por su cuenta, el valor de los servicios prestados a los anunciantes.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -239,7 +243,7 @@
                     <div class="col-lg-12">
                         <div id="faq9" class="panel-collapse collapse ">
                             <div class="faq-answer">
-                                <p>DóndePauto no esta obligado a cumplir o asegurar un número o monto mínimo de compras a los Medios Publicitarios listados en la plataforma, toda vez que el servicio DóndePauto no crea ningún contrato de sociedad, de mandato, de franquicia, de relación laboral con el Medio Publicitario, y no implica exclusividad de ninguna de las partes.
+                                <p>DóndePauto no esta obligado a cumplir o asegurar un número o monto mínimo de compras a los Medios Publicitarios listados en la plataforma, toda vez que el servicio DóndePauto no crea ningún contrato de sociedad, de franquicia, de relación laboral con el Medio Publicitario, y no implica exclusividad de ninguna de las partes.
                                 </p>
                             </div>
                         </div>
@@ -324,6 +328,32 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="faq-item">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a data-toggle="collapse" href="#faq15" class="faq-question">¿Cómo funcionan las Tarifas de los medios que se ofertan?</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="faq15" class="panel-collapse collapse ">
+                            <div class="faq-answer">
+                                <p>El <strong>Precio Base</strong> que establezca el Medio en la publicación de una oferta, será el <strong>Precio de Oferta</strong> presentado por DóndePauto a marcas anunciantes. El Medio podrá establecer un <strong>Descuento Máximo</strong> aplicable sobre el <strong>Precio Base</strong>, que DóndePauto podrá ofrecer a clientes potenciales durante el proceso de presentación de ofertas y cierre de negocios. La Tarifa Mínima de Venta que acepta recibir el Medio equivaldrá al Precio Base, menos el Descuento máximo aplicable, y deberá cubrir el pago del incentivo a DóndePauto.</p>
+
+                                <p>En caso que el Medio <strong>no establezca un Descuento Máximo</strong> aplicable en cualquiera de sus ofertas publicadas, <strong>la plataforma ajustará el Precio de Oferta</strong> presentado a marcas anunciantes, <strong>incrementando un Margen de Precio al Precio Base</strong> del espacio publicitario. Se entiende que la Tarifa Mínima de venta que acepta el Medio es la Precio Base que el medio publicitario establece.</p>
+
+                                <p>Los <strong>DESCUENTOS</strong> se establecen con el objeto de disponer de un rango de negociación con clientes interesados e implementar estrategias de descuentos o promociones para motivar el cierre de negocios, y/o persuadir el pago anticipado del servicio por parte de sus clientes anunciantes.</p>
+
+                                <p>El Medio proveedor acuerda y expresa que su principal objetivo e interés es lograr negocios de éxito como mínimo al valor de la <strong>TARIFA MÍNIMA DE VENTA</strong> que se establezca a través de la Plataforma, la cual será vinculante para el <strong>Medio.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>    
    
