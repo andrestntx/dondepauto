@@ -118,6 +118,12 @@ class Proposal extends Model
         if($this->contacts->count() > 0) {
             return $this->contacts->sortByDesc('created_at')->first()->action->state;
         }
+        else if($this->downloads->count() > 0) {
+            return 'En aprobación';
+        }
+        else if(!is_null($this->send_at) && !empty($this->send_at)) {
+            return 'Enviada';
+        }
 
         return 'En construcción';
     }
