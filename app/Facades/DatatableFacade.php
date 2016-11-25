@@ -49,13 +49,68 @@ class DatatableFacade
     }
 
     /**
-     * @param Collection $collection
-     * @param $items
      * @param $input
      * @return mixed
      */
-    private function getJsonResponse(Collection $collection, $items, $input)
+    private function getOrder($input)
     {
+        return $input['order'][0];
+    }
+
+    /**
+     * @param $input
+     * @return mixed
+     */
+    private function getOrderColumn($input)
+    {
+        return $this->getOrder($input)['column'];
+    }
+
+    /**
+     * @param $input
+     * @return bool
+     */
+    private function getOrderDescending($input)
+    {
+        if($this->getOrder($input)['dir'] == 'asc') {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $input
+     * @param array $columns
+     * @return mixed
+     */
+    private function getOrderColumnName($input, array $columns)
+    {
+        return $columns[$this->getOrderColumn($input)]['data'];
+    }
+
+    /**
+     * @param Collection $collection
+     * @param $column
+     * @param bool $descending
+     * @return static
+     */
+    private function orderCollection(Collection $collection, $column, $descending = false)
+    {
+        return $collection->sortBy($column, null, $descending);
+    }
+
+    /**
+     * @param Collection $collection
+     * @param $items
+     * @param $input
+     * @param array $columns
+     * @return mixed
+     */
+    private function getJsonResponse(Collection $collection, $items, $input, array $columns)
+    {
+        $collection = $this->orderCollection($collection, $this->getOrderColumnName($input, $columns), $this->getOrderDescending($input));
+
         if($input['start'] == 0) {
             $page = 1;
         }
@@ -80,7 +135,7 @@ class DatatableFacade
     public function searchPublishers(array $columns, $search = '', array $input)
     {
         $publishers = $this->publisherFacade->searchAndFilter($this->getDataColumns($columns), $search);
-        return $this->getJsonResponse($publishers, 100, $input);
+        return $this->getJsonResponse($publishers, 100, $input, $columns);
     }
 
 
@@ -96,7 +151,7 @@ class DatatableFacade
     public function searchAdvertisers(User $user = null, array $columns, $search = '', $init, $finish, array $inputs)
     {
         $advertisers = $this->advertiserFacade->searchAndFilter($user, $this->getDataColumns($columns), $search, $init, $finish);
-        return $this->getJsonResponse($advertisers, 100, $inputs);
+        return $this->getJsonResponse($advertisers, 100, $inputs, $columns);
     }
 
     /**
@@ -111,6 +166,6 @@ class DatatableFacade
     public function searchSpaces(array $columns, $search = '', $spaceId = null, User $publisher = null, Proposal $proposal = null, array $inputs)
     {
         $spaces = $this->spaceFacade->searchAndFilter($this->getDataColumns($columns), $search, $spaceId, $publisher, $proposal);
-        return $this->getJsonResponse($spaces, 100, $inputs);
+        return $this->getJsonResponse($spaces, 100, $inputs, $columns);
     }
 }
