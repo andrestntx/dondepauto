@@ -38,8 +38,8 @@ class ActionRepository extends BaseRepository
                     ->whereNull('proposals.deleted_at');
             })
             ->where('actions.state', '<>', '')
-            ->groupBy('actions.id')
-            ->lists('actions.state', 'actions.id')
+            ->groupBy('actions.state')
+            ->lists('actions.state', 'actions.state')
             ->all();
     }
 
