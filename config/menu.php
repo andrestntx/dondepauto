@@ -18,7 +18,8 @@ return [
         'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Espacios', 'roles' => ['admin', 'director']],
         'intentions'    => ['url' => 'intenciones', 'i' =>  'fa fa-rocket', 'title' => 'Intenciones', 'roles' => ['admin', 'director', 'adviser']],
         'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
-
+    ],
+    'publishers' => [
         
         
         // Publishers
@@ -49,20 +50,20 @@ return [
         'faqs'          => [
                             'route' => ['medios.faqs', ':publisher'], 
                             'i' => 'fa fa-question-circle', 
-                            'title' => 'Preguntas frecuentes', 
-                            'roles' => ['publisher']
+                            'title' => 'Preguntas frecuentes',
+                            'roles' => ['publisher', 'admin', 'director']
                         ],
         'service'       => [
                             'full_url' => 'http://www.dondepauto.co/modelo-de-negocio-medios-publicitarios', 
                             'i' => 'fa fa-lightbulb-o', 
-                            'title' => 'Servicio DóndePauto', 
-                            'roles' => ['publisher']
+                            'title' => 'Servicio DóndePauto',
+                            'roles' => ['publisher', 'admin', 'director']
                         ],
         'tyc'          => [
                             'full_url' => 'http://www.dondepauto.co/terminos-y-condiciones-de-servicio-medios-publicitarios', 
                             'i' => 'fa fa-exclamation-circle', 
-                            'title' => 'Términos y condiciones', 
-                            'roles' => ['publisher']
+                            'title' => 'Términos y condiciones',
+                            'roles' => ['publisher', 'admin', 'director']
                         ],
     ]
 ];
