@@ -209,6 +209,8 @@ class Proposal extends Model
      */
     public function hasPublisher($publisher_id)
     {
+        \Log::info($this->viewSpaces);
+        \Log::info($this->viewSpaces->where('publisher_id', 94)->count());
         return $this->viewSpaces->where('publisher_id', 94)->count() > 0;
     }
 
