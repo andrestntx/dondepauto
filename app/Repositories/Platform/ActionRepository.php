@@ -33,7 +33,10 @@ class ActionRepository extends BaseRepository
         return $this->model
             ->join('action_contact', 'action_contact.action_id', '=', 'actions.id')
             ->join('contacts', 'action_contact.contact_id', '=', 'contacts.id')
-            ->join('proposals', 'contacts.proposal_id', '=', 'proposals.id')
+            ->join('proposals', function($join) {
+                return $join->on('contacts.proposal_id', '=', 'proposals.id')
+                    ->whereNull('proposals.deleted_at');
+            })
             ->where('actions.state', '<>', '')
             ->groupBy('actions.id')
             ->lists('actions.state', 'actions.id')

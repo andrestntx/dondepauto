@@ -29,7 +29,13 @@ var QuoteService = function() {
                 { "data": "title", "name": "title" },
                 { "data": "pivot_total", "name": "pivot_total" },
                 { "data": "pivot_total_income_price", "name": "pivot_total_income_price" },
-                { "data": "state", "name": "state" }
+                { "data": "state", "name": "state" }, 
+                { "data": null, "name": "city_id", "visible": false },
+                { "data": null, "name": "state_id", "visible": false },
+                { "data": null, "name": "space_id", "visible": false },
+                { "data": null, "name": "publisher_id", "visible": false },
+                { "data": null, "name": "advertiser_id", "visible": false }
+                
             ],
             "columnDefs": [
                 {
@@ -107,14 +113,16 @@ var QuoteService = function() {
             "drawCallback": function(settings, json) {
                 $("#countDatatable").html(settings.fnRecordsDisplay());
                 $('[data-toggle="tooltip"]').tooltip();
-                initDeleteProposal();
-                /*var searchQuote = $("#search-quote").data("search");
-                if(searchQuote){
-                    $(".quoteModal").click();
-                    $("#search-quote").data("search", null);
-                }*/
+                initDeleteProposal();    
             }
         });
+    
+        initInputsDateRange();
+        initSimpleSearchSelect("#cities", 10);
+        initSimpleSearchSelect("#states", 11);
+        initSimpleSearchSelect("#spaces", 12);
+        initSimpleSearchSelect("#publishers", 13);
+        initSimpleSearchSelect("#advertisers", 14);
 
         $("#quotes-datatable_filter input").unbind();
 
@@ -180,7 +188,54 @@ var QuoteService = function() {
             AdvertiserService.drawModal($("#proposal").data("advertiser"));
             $("#userModal").modal();
         });
-    }
+    };
+
+    function initInputsDateRange() {
+        $('.input-daterange').datepicker({
+            format: 'dd/mm/yyyy',
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+        }).on('changeDate', function(e) {
+            table
+                .column($(this).data('column'))
+                .search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
+                .draw();
+        }).on('clearDate', function(e) {
+            table
+                .column($(this).data('column'))
+                .search($($(this).children('input')[0]).val() + ',' + $($(this).children('input')[1]).val())
+                .draw();
+        });
+    };
+
+    function initSimpleSearchSelect(input, column) 
+    {
+        $(input).on( 'change', function () {
+            table
+                .column(column)
+                .search( this.value )
+                .draw();
+        } );
+    };
+
+    function initSimpleSearchSelectText(input, column) 
+    {
+        $(input).on( 'change', function () {
+            table
+                .column(column)
+                .search( $(this).find("option:selected").text() )
+                .draw();
+        } );
+    };
+
+    function cleanColumnSearch (column) 
+    {           
+        table
+            .column(column)
+            .search('')
+            .draw();
+    };
 
     function getFilterSearch()
     {

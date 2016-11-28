@@ -34,6 +34,10 @@ class AdvertiserRepository extends BaseRepository
     {
         return $this->model
             ->join('quotes', 'quotes.advertiser_id', '=', 'view_advertisers.id')
+            ->join('proposals', function($join) {
+                return $join->on('proposals.quote_id', '=', 'quotes.id')
+                    ->whereNull('proposals.deleted_at');
+            })
             ->groupBy('view_advertisers.id')
             ->lists('view_advertisers.company', 'view_advertisers.id')
             ->all();

@@ -12,6 +12,7 @@ namespace App\Facades;
 use App\Entities\Platform\Space\Space;
 use App\Entities\Proposal\Proposal;
 use App\Services\EmailService;
+use App\Services\FilterCollectionService;
 use App\Services\ProposalService;
 use App\Services\Space\SpaceFormatService;
 use App\Services\Space\SpaceService;
@@ -22,6 +23,7 @@ class ProposalFacade
     protected $spaceService;
     protected $formatService;
     protected $spaceFacade;
+    protected $filterCollectionService;
 
     /**
      * ProposalFacade constructor.
@@ -30,15 +32,17 @@ class ProposalFacade
      * @param EmailService $emailService
      * @param SpaceFormatService $formatService
      * @param SpaceFacade $spaceFacade
+     * @param FilterCollectionService $filterCollectionService
      */
     public function __construct(ProposalService $service, SpaceService $spaceService, EmailService $emailService,
-        SpaceFormatService $formatService, SpaceFacade $spaceFacade)
+        SpaceFormatService $formatService, SpaceFacade $spaceFacade, FilterCollectionService $filterCollectionService)
     {
         $this->service = $service;
         $this->spaceService = $spaceService;
         $this->emailService = $emailService;
         $this->formatService = $formatService;
         $this->spaceFacade = $spaceFacade;
+        $this->filterCollectionService = $filterCollectionService;
     }
 
     /**
@@ -58,7 +62,7 @@ class ProposalFacade
      */
     public function searchAndFilter(array $columns, $search)
     {
-        return $this->search($columns, $search);
+        return $this->filterCollectionService->filterProposalCollection($this->search($columns, $search), $columns);
     }
 
     /**

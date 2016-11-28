@@ -16,6 +16,7 @@ use App\Entities\Views\ImpactScene;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 class Proposal extends Model
 {
@@ -45,6 +46,10 @@ class Proposal extends Model
         "pivot_total_markup_price", "pivot_total_markup", "pivot_total_commission_price", "pivot_total_commission",
         "total", "total_cost", "total_income_price", "total_markup_price", "total_commission_price", "total_commission", "state"
     ];
+
+    /**
+     * Relations
+     */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -110,13 +115,123 @@ class Proposal extends Model
         return $this->hasMany(ImpactScene::class, 'proposal_id');
     }
 
+    /** End Relations **/
+
+    /** Collection Attributes **/
+
+    /**
+     * @return Model
+     */
+    public function getLastContact()
+    {
+        return $this->contacts->sortByDesc('created_at')->first();
+    }
+
+    /**
+     * @return Model
+     */
+    public function getLastAction()
+    {
+        if($contact = $this->getLastContact()) {
+            return $contact->action;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastActionState()
+    {
+        if($action = $this->getLastAction()) {
+            return $action->state;
+        }
+    }
+
+    /**
+     * @return Model
+     */
+    public function getViewAdvertiser()
+    {
+        return $this->quote->viewAdvertiser;
+    }
+
+    /**
+     * @return Model
+     */
+    public function getAdvertiser()
+    {
+        return $this->quote->advertiser;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAudiences()
+    {
+        return $this->quote->audiences;
+    }
+
+    /** End Collection Attributes **/
+
+    /** Collection Filters **/
+
+    /**
+     * @return boolean
+     */
+    public function hasState($action_id)
+    {
+        if($this->getLastAction() && $action_id == $this->getLastAction()->id) {
+            return true;
+        }
+    }
+
+    /**
+     * @param $space_id
+     * @return bool
+     */
+    public function hasSpace($space_id)
+    {
+        return $this->viewSpaces->where('id', intval($space_id))->count() > 0;
+    }
+
+    /**
+     * @param $advertiser_id
+     * @return bool
+     */
+    public function hasAdvertiser($advertiser_id)
+    {
+        return $this->getAdvertiser()->id == intval($advertiser_id);
+    }
+
+    /**
+     * @param $publisher_id
+     * @return bool
+     */
+    public function hasPublisher($publisher_id)
+    {
+        return $this->viewSpaces->where('publisher_id', intval($publisher_id))->count() > 0;
+    }
+
+    /**
+     * @param $city_id
+     * @return bool
+     */
+    public function hasSpaceCity($city_id)
+    {
+        return $this->cities->where('id', intval($city_id))->count() > 0;
+    }
+
+    /** End Collection Filters **/
+
+    /** Attribute Mutators **/
+
     /**
      * @return string
      */
     public function getStateAttribute()
     {
         if($this->contacts->count() > 0) {
-            return $this->contacts->sortByDesc('created_at')->first()->action->state;
+            return $this->getLastActionState();
         }
         else if($this->downloads->count() > 0) {
             return 'En aprobación';
@@ -134,22 +249,6 @@ class Proposal extends Model
     public function getCountSpacesAttribute()
     {
         return $this->viewSpaces->count();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdvertiser()
-    {
-        return $this->quote->advertiser;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAudiences()
-    {
-        return $this->quote->audiences;
     }
 
     /**
@@ -171,14 +270,6 @@ class Proposal extends Model
         }
 
         return $array;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getViewAdvertiser()
-    {
-        return $this->quote->viewAdvertiser;
     }
 
     /**
@@ -492,5 +583,7 @@ class Proposal extends Model
     {
         return $this->viewSpaces->sum('proposal_prices_commission_price');
     }
+
+    /** End Attribute Mutators **/
 
 }
