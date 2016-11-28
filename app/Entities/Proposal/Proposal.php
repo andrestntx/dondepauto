@@ -178,9 +178,9 @@ class Proposal extends Model
     /**
      * @return boolean
      */
-    public function hasState($action_id)
+    public function hasState($state)
     {
-        if($this->getLastAction() && $action_id == $this->getLastAction()->id) {
+        if($this->getLastAction() && $state == $this->getLastAction()->state) {
             return true;
         }
     }
