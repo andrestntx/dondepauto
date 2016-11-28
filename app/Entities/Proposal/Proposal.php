@@ -209,6 +209,7 @@ class Proposal extends Model
      */
     public function hasPublisher($publisher_id)
     {
+        dd(intval($publisher_id));
         return $this->viewSpaces->where('publisher_id', intval($publisher_id))->count() > 0;
     }
 
