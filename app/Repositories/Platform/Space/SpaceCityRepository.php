@@ -31,6 +31,10 @@ class SpaceCityRepository extends BaseRepository
         return $this->model
             ->joinSpaces()
             ->join('proposal_space', 'proposal_space.space_id', '=', 'espacios_ofrecidos_LIST.id_espacio_LI')
+            ->join('proposals', function($join) {
+                return $join->on('proposal_space.proposal_id', '=', 'proposals.id')
+                    ->where('proposals.deleted_at', '<>', 'NULL');
+            })
             ->groupById()
             ->lists('ciudades_LIST.nombre_ciudad_LI', 'ciudades_LIST.id_ciudad_LI')
             ->all();

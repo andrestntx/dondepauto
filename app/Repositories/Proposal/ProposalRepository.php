@@ -39,7 +39,7 @@ class ProposalRepository extends BaseRepository
             'viewSpaces.audiences.type',
             'viewSpaces.impactScenes',
             'viewSpaces.cities',
-            'spaces'
+            'spaces', 'cities', 'contacts.actions', 'downloads'
         ]);
 
         if(! empty($search)) {

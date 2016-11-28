@@ -31,6 +31,10 @@ class SpaceRepository extends BaseRepository
     public function spacesWithProposals()
     {
         return $this->model->join('proposal_space', 'proposal_space.space_id', '=', 'view_spaces.id')
+            ->join('proposals', function($join) {
+                return $join->on('proposal_space.proposal_id', '=', 'proposals.id')
+                    ->whereNull('proposals.deleted_at');
+            })
             ->where('proposal_space.title', '<>', '')
             ->groupBy('view_spaces.id')
             ->lists('proposal_space.title', 'view_spaces.id')

@@ -23,7 +23,7 @@
                             <div class="input-daterange input-group" id="datepicker" data-column="1">
                                 <input type="text" class="input-sm form-control" id="send_at_start" name="send_at_start"/>
                                 <span class="input-group-addon">a</span>
-                                <input type="text" class="input-sm form-control" id="send_at_end" name="created_at_end"/>
+                                <input type="text" class="input-sm form-control" id="send_at_end" name="send_at_end"/>
                             </div>
                         </div>
                     </div>

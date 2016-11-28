@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Entities\Proposal\Proposal;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -272,6 +273,32 @@ class FilterCollectionService
         return $spaces->filter(function ($space) use ($data) {
             return $this->isTrue($data['city_id'], $space->hasCity(intval($data['city_id']))) &&
                 $this->isTrue($data['impact_scene_id'], $space->hasImpactScene(intval($data['impact_scene_id'])));
+        });
+    }
+
+    /**
+     * @param Collection $proposals
+     * @param array $data
+     * @return static
+     */
+    public function filterProposalCollection(Collection $proposals, array $data)
+    {
+        return $proposals->filter(function(Proposal $proposal) use ($data) {
+
+            if($proposal->send_at) {
+                $send    = $this->inDateRangeSearch($data['send_at_datatable'], $proposal->send_at->toDateString());
+            }
+            else {
+                $send    = $this->inDateRangeSearch($data['send_at_datatable'], '');
+            }
+
+            $state      = $this->isTrue($data['state_id'], $proposal->hasState($data['state_id']));
+            $city       = $this->isTrue($data['city_id'], $proposal->hasSpaceCity($data['city_id']));
+            $publisher  = $this->isTrue($data['publisher_id'], $proposal->hasPublisher($data['publisher_id']));
+            $advertiser = $this->isTrue($data['advertiser_id'], $proposal->hasAdvertiser($data['advertiser_id']));
+            $space      = $this->isTrue($data['space_id'], $proposal->hasSpace($data['space_id']));
+
+            return $send && $state && $city && $publisher && $advertiser && $space;
         });
     }
 }

@@ -33,6 +33,10 @@ class PublisherRepository extends BaseRepository
         return $this->model
             ->join('view_spaces', 'view_spaces.publisher_id', '=', 'view_publishers.id')
             ->join('proposal_space', 'proposal_space.space_id', '=', 'view_spaces.id')
+            ->join('proposals', function($join) {
+                return $join->on('proposal_space.proposal_id', '=', 'proposals.id')
+                    ->whereNull('proposals.deleted_at');
+            })
             ->groupBy('view_publishers.id')
             ->lists('view_publishers.company', 'view_publishers.id')
             ->all();
