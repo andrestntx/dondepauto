@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" afterPath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/FilterCollectionService.php" afterPath="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,8 +69,8 @@
       <file leaf-file-name="Proposal.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40408805">
-              <caret line="212" column="34" selection-start-line="212" selection-start-column="34" selection-end-line="212" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.663522">
+              <caret line="223" column="34" selection-start-line="223" selection-start-column="34" selection-end-line="223" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -878,8 +877,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40408805">
-          <caret line="212" column="34" selection-start-line="212" selection-start-column="34" selection-end-line="212" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.663522">
+          <caret line="223" column="34" selection-start-line="223" selection-start-column="34" selection-end-line="223" selection-end-column="34" />
           <folding />
         </state>
       </provider>
