@@ -283,6 +283,7 @@ class FilterCollectionService
      */
     public function filterProposalCollection(Collection $proposals, array $data)
     {
+        dd($data['publisher_id']);
         return $proposals->filter(function(Proposal $proposal) use ($data) {
 
             if($proposal->send_at) {

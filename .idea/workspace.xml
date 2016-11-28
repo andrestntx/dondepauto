@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" afterPath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/Platform/ActionRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/Platform/ActionRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/FilterCollectionService.php" afterPath="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FilterCollectionService.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FilterCollectionService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/FilterCollectionService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.125">
-              <caret line="294" column="72" selection-start-line="294" selection-start-column="72" selection-end-line="294" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.5248869">
+              <caret line="285" column="34" selection-start-line="285" selection-start-column="34" selection-end-line="285" selection-end-column="34" />
               <folding>
                 <element signature="e#120#155#0#PHP" expanded="true" />
               </folding>
@@ -57,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PublisherRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PublisherRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Repositories/Views/PublisherRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67269987">
+            <state vertical-scroll-proportion="-18.583334">
               <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
               <folding />
             </state>
@@ -70,8 +70,8 @@
       <file leaf-file-name="Proposal.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.9215684">
-              <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.45098">
+              <caret line="213" column="0" selection-start-line="213" selection-start-column="0" selection-end-line="213" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -183,9 +183,9 @@
         <option value="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Views/PublisherRepository.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" />
-        <option value="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Platform/ActionRepository.php" />
         <option value="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
+        <option value="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
       </list>
     </option>
   </component>
@@ -370,6 +370,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Proposal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -816,29 +834,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.9215684">
-          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.291667">
           <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/FilterCollectionService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.125">
-          <caret line="294" column="72" selection-start-line="294" selection-start-column="72" selection-end-line="294" selection-end-column="72" />
-          <folding>
-            <element signature="e#120#155#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -860,9 +860,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Views/PublisherRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67269987">
+        <state vertical-scroll-proportion="-18.583334">
           <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.45098">
+          <caret line="213" column="0" selection-start-line="213" selection-start-column="0" selection-end-line="213" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/FilterCollectionService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5248869">
+          <caret line="285" column="34" selection-start-line="285" selection-start-column="34" selection-end-line="285" selection-end-column="34" />
+          <folding>
+            <element signature="e#120#155#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
