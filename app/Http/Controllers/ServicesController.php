@@ -17,6 +17,6 @@ class ServicesController extends Controller
     {
         return ['logos' => Publisher::select(['id'])->get()->filter(function($publisher){
             return $publisher->has_logo;
-        })->lists('logo', 'id')];
+        })->lists('full_logo', 'id')];
     }
 }
