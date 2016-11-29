@@ -78,13 +78,12 @@ class SpaceRepository extends BaseRepository
     /**
      * @param array $data
      * @param Model $entity
+     * @param bool $syncBool
      * @return mixed
      */
-    public function update(array $data, $entity)
+    public function update(array $data, $entity, $syncBool = true)
     {
-        \Log::info('antes de update');
-        parent::update($data, $entity);
-        \Log::info('update');
+        parent::update($data, $entity, $syncBool);
 
         if($entity->format && $entity->format->subCategory) {
             $entity->sub_category_id 	= $entity->format->subCategory->id;

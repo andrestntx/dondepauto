@@ -441,6 +441,8 @@ class User extends EntityAuth
 
     public function setSignedAgreementAttribute($value)
     {
+        \Log::info('seet');
+        \Log::info($value);
         if($value) {
             $this->attributes['firmo_acuerdo_LI'] = 'Si_fir_ac';
         }

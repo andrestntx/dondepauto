@@ -70,17 +70,18 @@ class UserRepository extends BaseRepository
 
     /**
      * @param array $data
-     * @param $entity
+     * @param Model $entity
+     * @param bool $syncBool
      * @return mixed
      */
-    public function update(array $data, $entity)
+    public function update(array $data, $entity, $syncBool = true)
     {
         if(! array_key_exists('signed_agreement', $data))
         {
             $data['signed_agreement'] = 0;
         }
         
-        return parent::update($data, $entity);
+        return parent::update($data, $entity, $syncBool);
     }
 
     /**
