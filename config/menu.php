@@ -16,7 +16,7 @@ return [
         'advertisers'   => ['url' => 'anunciantes', 'i' =>  'fa fa-users', 'title' => 'Anunciantes', 'roles' => ['admin', 'director']],
         'mediums'       => ['url' => 'medios', 'i' =>  'fa fa-twitch', 'title' => 'Medios', 'roles' => ['admin', 'director', 'adviser']],
         'adviser_advertisers'   => ['route' => ['asesores.anunciantes.index', ':user_id'], 'i' =>  'fa fa-users', 'title' => 'Anunciantes', 'roles' => ['adviser']],
-        'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Ofertas', 'roles' => ['admin', 'director']],
+        'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Inventario Ofertas', 'roles' => ['admin', 'director']],
         //'intentions'    => ['url' => 'intenciones', 'i' =>  'fa fa-rocket', 'title' => 'Intenciones', 'roles' => ['admin', 'director', 'adviser']],
         'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']]
 
