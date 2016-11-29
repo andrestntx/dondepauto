@@ -10,15 +10,16 @@ return [
     'sidebar'   => [
         // All users
         'home'          => ['url' => '/', 'i' =>  'fa fa-th-large', 'title' => 'Inicio'],
+        'files'         => ['url' => 'documentos', 'i' => 'fa fa-file-pdf-o', 'title' => 'Documentos DP', 'roles' => ['admin', 'director', 'adviser']],
         //'directors'     => ['url' => 'directores', 'i' =>  'fa fa-user', 'title' => 'Directores', 'roles' => ['admin', 'director']],
         //'advisers'      => ['url' => 'asesores', 'i' =>  'fa fa-slideshare', 'title' => 'Asesores', 'roles' => ['admin', 'director']],
         'advertisers'   => ['url' => 'anunciantes', 'i' =>  'fa fa-users', 'title' => 'Anunciantes', 'roles' => ['admin', 'director']],
         'mediums'       => ['url' => 'medios', 'i' =>  'fa fa-twitch', 'title' => 'Medios', 'roles' => ['admin', 'director', 'adviser']],
         'adviser_advertisers'   => ['route' => ['asesores.anunciantes.index', ':user_id'], 'i' =>  'fa fa-users', 'title' => 'Anunciantes', 'roles' => ['adviser']],
-        'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Espacios', 'roles' => ['admin', 'director']],
+        'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Ofertas', 'roles' => ['admin', 'director']],
         //'intentions'    => ['url' => 'intenciones', 'i' =>  'fa fa-rocket', 'title' => 'Intenciones', 'roles' => ['admin', 'director', 'adviser']],
-        'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
-        'files'         => ['url' => 'documentos', 'i' => 'fa fa-file-pdf-o', 'title' => 'Documentos', 'roles' => ['admin', 'director', 'adviser']]
+        'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']]
+
     ],
     'publishers' => [
         
