@@ -37,6 +37,10 @@ class DocumentsController extends Controller
             $request->file('commerce')->move('documents/publishers', 'camara_comercio.pdf');
         }
 
+        if($request->file('bank')) {
+            $request->file('bank')->move('documents/publishers', 'certificacion_bancaria.pdf');
+        }
+
         return redirect()->route('documents');
     }
 }

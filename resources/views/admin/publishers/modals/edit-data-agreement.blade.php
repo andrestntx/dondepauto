@@ -38,6 +38,12 @@
                         <div class="col-md-6">
                             {!! Field::text('discount') !!}
                         </div>
+                        <div class="col-md-6">
+                            {!! Field::text('bank_name', ['label' => 'Banco']) !!}
+                        </div>
+                        <div class="col-md-6">
+                            {!! Field::text('bank_account', ['label' => 'Cuenta bancanria']) !!}
+                        </div>
                         <input type="hidden" id="agreement_csrf_token" name="_token" value="{{ csrf_token() }}">
                     </div>
                 </div>
