@@ -152,7 +152,9 @@ var PublisherService = function() {
                     'signed_at':        $(".userEditDataAgreementModal #signed_at").val(),
                     'commission_rate':  $(".userEditDataAgreementModal #commission_rate").val(),
                     'retention':        $(".userEditDataAgreementModal #retention").val(),
-                    'discount':         $(".userEditDataAgreementModal #discount").val()
+                    'discount':         $(".userEditDataAgreementModal #discount").val(),
+                    'bank_name':        $(".userEditDataAgreementModal #bank_name").val(),
+                    'bank_account':     $(".userEditDataAgreementModal #bank_account").val()
                 }, $(".userEditDataAgreementModal"), true
             );
         });
@@ -343,6 +345,8 @@ var PublisherService = function() {
         $(".userEditDataAgreementModal #commission_rate").val(publisher.commission_rate);
         $(".userEditDataAgreementModal #retention").val(publisher.retention);
         $(".userEditDataAgreementModal #discount").val(publisher.discount);
+        $(".userEditDataAgreementModal #bank_name").val(publisher.bank_name);
+        $(".userEditDataAgreementModal #bank_account").val(publisher.bank_account);
 
         $(".userEditDataAgreementModal #user_company").attr('data-url', url)
 

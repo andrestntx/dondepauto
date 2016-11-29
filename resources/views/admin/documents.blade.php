@@ -22,6 +22,8 @@
                         <h2>Documentos DP</h2>
                         <p class="h5"><a href="/documents/publishers/rut_donde_pauto.pdf" title="RUT" target="_blank"> <i class="fa fa-file-pdf-o"></i> RUT.pdf</a></p>
                         <p class="h5"><a href="/documents/publishers/camara_comercio.pdf" title="Cámara de comercio" target="_blank"> <i class="fa fa-file-pdf-o"></i> Cámara_de_comercio.pdf</a></p>
+                        <p class="h5"><a href="/documents/publishers/certificacion_bancaria.pdf" title="Certificación bancaria" target="_blank"> <i class="fa fa-file-pdf-o"></i> Cámara_bancaria.pdf</a></p>
+
                     </div>
                 </div>
             </div>
@@ -36,6 +38,7 @@
                         {!! Form::open(['route' => 'documents.post', 'files' => 'true']) !!}
                             {!! Field::file('rut', ['label' => 'RUT']) !!}
                             {!! Field::file('commerce', ['label' => 'Cámara de comercio']) !!}    
+                            {!! Field::file('bank', ['label' => 'Certificación bancaria']) !!}    
                             <button class="btn btn-success">Subir documentos</button>
                         {!! Form::close() !!}
                     </div>

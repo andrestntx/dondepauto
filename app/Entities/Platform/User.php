@@ -49,7 +49,7 @@ class User extends EntityAuth
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
         'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal', 'completed_at',
-        'source', 'bd_form_fuente_LI', 'tag_id'
+        'source', 'bd_form_fuente_LI', 'tag_id', 'bank_name', 'bank_account'
     ];
 
     /**
@@ -100,7 +100,7 @@ class User extends EntityAuth
         'retention' => 'retencion_fuente_us_LI', 'discount' => 'descuento_pronto_pago_us_LI', 'created_at' => 'fecha_registro_Us_LI',
         'comments' => 'comentarios_us_LI', 'complete_data' => 'es_us_activo_LI', 'company_legal' => 'razon_social_us_LI',
         'private' => 'opcion_espacios_privados_LI', 'activated_at' => 'fecha_activacion_Us_LI', 'completed_at' => 'fecha_registro_completo_Us_LI',
-        'source' => 'bd_form_fuente_LI', 'change_documents' => 'cambio_documentos_us_LI'
+        'source' => 'bd_form_fuente_LI', 'change_documents' => 'cambio_documentos_us_LI', 'bank_name' => 'banco_LI', 'bank_account' => 'cuenta_banco_LI'
     ];
 
     /**
@@ -360,6 +360,29 @@ class User extends EntityAuth
         $this->fecha_registro_completo_Us_LI = $value;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBankNameAttribute()
+    {
+        if(!empty ($this->attributes['banco_LI'])) {
+            return $this->attributes['banco_LI'];
+        }
+
+        return '-';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBankAccountAttribute()
+    {
+        if(!empty ($this->attributes['cuenta_banco_LI'])) {
+            return $this->attributes['cuenta_banco_LI'];
+        }
+
+        return '-';
+    }
 
     /**
      * @return mixed
@@ -380,18 +403,6 @@ class User extends EntityAuth
     {
         if($bank = $this->getBank()) {
             return $bank->pivot->account_number;
-        }
-
-        return '-';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBankNameAttribute()
-    {
-        if($bank = $this->getBank()) {
-            return $bank->name;
         }
 
         return '-';

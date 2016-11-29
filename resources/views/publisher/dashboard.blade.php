@@ -144,7 +144,7 @@
                                         <img src="/assets/img/dashboard/iconocuenta.png" class="img-icon">
                                     </div>
                                     <div class="agreement-text">
-                                        <h1>{{ $publisher->bank_account_number }}</h1>
+                                        <h1>{{ $publisher->bank_account }}</h1>
                                         <h2>Número de Cuenta Bancaria</h2>
                                     </div>
                                 </div>
