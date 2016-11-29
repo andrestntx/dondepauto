@@ -10,6 +10,12 @@
 @section('extra-css')
     <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <style type="text/css">
+        .text-right {
+            text-align: right;
+        }
+    </style>
 @endsection
 
 @section('content')

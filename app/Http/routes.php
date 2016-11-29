@@ -19,6 +19,12 @@ Carbon::setLocale('es');
 
 Route::auth();
 
+Route::get('services/logos', [
+    'as'   => 'services.logos',
+    'uses' => 'ServicesController@logos'
+]);
+
+
 Route::get('medios/confirmar/{code}', [
     'as'   => 'medios.confirm',
     'uses' => 'Publisher\PublishersController@confirm'
