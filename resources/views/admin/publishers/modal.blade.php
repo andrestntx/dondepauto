@@ -68,7 +68,9 @@
                                             <span class="h5"> Porcentaje de comisión </span> <br>
                                             <span class="h5"> Fecha firma de acuerdo </span> <br>
                                             <span class="h5"> Descuento pronto pago </span> <br>
-                                            <span class="h5"> Retención en la fuente</span>
+                                            <span class="h5"> Retención en la fuente</span> <br>
+                                            <span class="h5"> Banco </span> <br>
+                                            <span class="h5"> Cuenta bancaria </span> 
                                         </p>
                                     </div>
                                     <div class="col-xs-4">
@@ -76,7 +78,9 @@
                                             <span class="h5" id="commission_rate">  </span> % <br>
                                             <span class="h5" id="signed_at">  </span> <br>
                                             <span class="h5" id="discount">  </span> % <br>
-                                            <span class="h5" id="retention"> </span> %
+                                            <span class="h5" id="retention"> </span> % <br> 
+                                            <span class="h5" id="bank_name">  </span> <br>
+                                            <span class="h5" id="bank_account">  </span> 
                                         </p>
                                     </div>
                                 </div>

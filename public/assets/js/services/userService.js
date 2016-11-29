@@ -32,10 +32,17 @@ var UserService = function() {
     };
 
     function drawAgreementData(inputId, user) {
+        
+        console.log(user);
+        console.log(user.bank_name);
+        console.log(user.bank_account);
+
         $('#' + inputId + ' #commission_rate').text(user.commission_rate);
         $('#' + inputId + ' #signed_at').text(user.signed_at_datatable);
         $('#' + inputId + ' #discount').text(user.discount);
         $('#' + inputId + ' #retention').text(user.retention);
+        $('#' + inputId + ' #bank_name').text(user.bank_name);
+        $('#' + inputId + ' #bank_account').text(user.bank_account);
     };
 
     function drawModalEditContact(user, url) {
