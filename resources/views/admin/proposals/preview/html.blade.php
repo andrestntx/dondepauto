@@ -108,7 +108,7 @@
 					</p>
 				</div>
 				<div class="col-xs-12 col-md-8">
-					@foreach($proposal->viewSpaces as $space)
+					@foreach($proposal->viewSpaces->sortByDesc('publisher_company') as $space)
 						<article {!! Html::classes(['publisher', 'publisher-selected' => $space->pivot->selected]) !!} data-price="{{ $space->proposal_prices_public_price }}" data-discount="{{ $space->proposal_prices_discount_price }}" data-publisherId="{{ $space->id }}">
 							<div class="row">
 								<div class="col-xs-12">
