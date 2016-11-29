@@ -140,18 +140,25 @@ abstract class  BaseRepository {
             }
         }
     }
-    
+
     /**
      * @param array $data
      * @param Model $entity
+     * @param bool $syncBool
      * @return mixed
      */
-    public function update(array $data, $entity)
+    public function update(array $data, $entity, $syncBool = true)
     {
-        $this->syncBoolFillable($data, $entity);
+        if($syncBool) {
+            $this->syncBoolFillable($data, $entity);
+        }
+
         $entity->fill($data);
+
+        \Log::info($entity);
         
         if($entity->save()) {
+            \Log::info($entity);
             return $entity;
         }
         return false;

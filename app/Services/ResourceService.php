@@ -44,15 +44,16 @@ class ResourceService {
     {
         return $this->repository->create($data);
     }
-    
+
     /**
      * @param array $data
      * @param Model $entity
+     * @param bool $syncBool
      * @return mixed
      */
-    public function updateModel(array $data, Model $entity)
+    public function updateModel(array $data, Model $entity, $syncBool = true)
     {
-        return $this->repository->update($data, $entity);
+        return $this->repository->update($data, $entity, $syncBool);
     }
 
     /**

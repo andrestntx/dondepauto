@@ -131,11 +131,18 @@ class PublisherFacade extends UserFacade
     /**
      * @param array $data
      * @param Model $publisher
+     * @param bool $syncBool
      * @return mixed
      */
-    public function updateModel(array $data, Model $publisher)
+    public function updateModel(array $data, Model $publisher, $syncBool = true)
     {
-        $publisher = $this->service->updateModel($data, $publisher);
+        if(! array_key_exists('signed_agreement', $data)) {
+            $data['signed_agreement'] = $publisher->has_signed_agreement;
+        }
+
+        \Log::info($data);
+
+        $publisher = $this->service->updateModel($data, $publisher, $syncBool);
         $this->mixpanelService->updatePublisher($publisher);
         $this->mailchimpService->syncPublisher($publisher);
 
@@ -153,7 +160,7 @@ class PublisherFacade extends UserFacade
             $this->representativeService->createOrUpdate($data['repre'], $publisher, $publisher->representative);
         }
 
-        return $this->service->getPublisherView($this->updateModel($data, $publisher));
+        return $this->service->getPublisherView($this->updateModel($data, $publisher, false));
     }
 
     /**
