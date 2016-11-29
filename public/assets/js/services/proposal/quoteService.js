@@ -39,10 +39,16 @@ var QuoteService = function() {
             ],
             "columnDefs": [
                 {
-                    "targets": [1,2,3,4,7,8],
+                    "targets": [1,2,3,4],
                     "visible": true,
                     "searchable": true,
                     className: "text-small text-center",
+                },
+                {
+                    "targets": [7,8],
+                    "visible": true,
+                    "searchable": true,
+                    className: "text-small text-right",
                 },
                 {
                     "targets": [5,6,9],
