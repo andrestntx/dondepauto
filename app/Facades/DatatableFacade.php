@@ -124,7 +124,8 @@ class DatatableFacade
 
         return [
             "draw"          => $input['draw'],
-            "recordsTotal"  => $collection->count(), "recordsFiltered" => $collection->count(),
+            "recordsTotal"  => $collection->count(),
+            "recordsFiltered" => $collection->count(),
             "data"          => array_values($collection->forPage($page, $input["length"])->toArray()),
             "input"         => $input
         ];
@@ -181,7 +182,10 @@ class DatatableFacade
      */
     public function searchProposals(array $columns, $search = '', array $inputs)
     {
-        $spaces = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search);
-        return $this->getJsonResponse($spaces, 100, $inputs, $columns);
+        $proposals = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search);
+        return array_merge($this->getJsonResponse($proposals, 100, $inputs, $columns), [
+            'total_price' => $proposals->sum('pivot_total'),
+            'total_income' => $proposals->sum('pivot_total_income_price')
+        ]);
     }
 }
