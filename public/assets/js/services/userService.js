@@ -33,9 +33,11 @@ var UserService = function() {
 
     function drawAgreementData(inputId, user) {
         
+        console.log('dibujar datos de acuerdo');
         console.log(user);
         console.log(user.bank_name);
         console.log(user.bank_account);
+        console.log('FIN dibujar datos de acuerdo');
 
         $('#' + inputId + ' #commission_rate').text(user.commission_rate);
         $('#' + inputId + ' #signed_at').text(user.signed_at_datatable);
