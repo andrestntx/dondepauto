@@ -348,10 +348,10 @@
                             <div class="ibox-content" style="display: block;">
                                 <div class="row files-pauto">
                                     <div class="col-xs-6">
-                                        <a href="/files/camara_comercio.pdf"  target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
+                                        <a href="/documents/publishers/camara_comercio.pdf"  target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
                                     </div>
                                     <div class="col-xs-6">
-                                        <a href="/files/rut_donde_pauto.pdf" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
+                                        <a href="/documents/publishers/rut_donde_pauto.pdf" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
                                     </div>
                                 </div>
                             </div>
