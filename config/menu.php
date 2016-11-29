@@ -18,6 +18,7 @@ return [
         'spaces'        => ['url' => 'espacios', 'i' =>  'fa fa-newspaper-o', 'title' => 'Espacios', 'roles' => ['admin', 'director']],
         'intentions'    => ['url' => 'intenciones', 'i' =>  'fa fa-rocket', 'title' => 'Intenciones', 'roles' => ['admin', 'director', 'adviser']],
         'proposals'    => ['url' => 'propuestas', 'i' =>  'fa fa-calculator', 'title' => 'Propuestas', 'roles' => ['admin', 'director', 'adviser']],
+        'files'         => ['url' => 'documentos', 'i' => 'fa fa-file-pdf-o', 'title' => 'Documentos', 'roles' => ['admin', 'director', 'adviser']]
     ],
     'publishers' => [
         
