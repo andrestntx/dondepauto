@@ -24,7 +24,6 @@ Route::get('services/logos', [
     'uses' => 'ServicesController@logos'
 ]);
 
-
 Route::get('medios/confirmar/{code}', [
     'as'   => 'medios.confirm',
     'uses' => 'Publisher\PublishersController@confirm'
@@ -78,6 +77,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('directores', 'Admin\DirectorsController', ['parameters' => [
             'directores' => 'directors'
         ]]);
+
+        Route::get('documentos', [
+            'as'   => 'documents',
+            'uses' => 'Admin\DocumentsController@index'
+        ]);
+
+        Route::post('documentos', [
+            'as'   => 'documents.post',
+            'uses' => 'Admin\DocumentsController@post'
+        ]);
 
         Route::get('directores/{advisers}/anunciantes/search', [
             'as'    => 'directores.anunciantes.search',

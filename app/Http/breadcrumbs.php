@@ -17,6 +17,12 @@ Breadcrumbs::register('advisers', function ($breadcrumbs) {
     $breadcrumbs->push('Asesores', url('asesores'));
 });
 
+// Home > documents
+Breadcrumbs::register('documents', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Documentos', url('documentos'));
+});
+
 // Home > advisers > {{ adviser }}
 Breadcrumbs::register('advisers.adviser', function ($breadcrumbs, $adviser) {
     $breadcrumbs->parent('advisers');
