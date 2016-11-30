@@ -145,8 +145,8 @@ class PublishersSpacesController extends ResourceController
         try {
             $space = $this->spaceFacade->createModel($request->all(), $request->file('images'), $user);
         } catch (Exception $e) {
-            \Log::info($e);
-            return ['result' => 'false', 'route' => route('home')];
+            \Log::info("error al crear oferta == " . $e->getMessage());
+            return ['result' => 'false', 'route' => route('home'), 'error' => $e->getCode(), 'error_text' => $e->getMessage()];
         }
 
         $this->mixpanelService->track("ESPACIO_PUBLICITARIO_CREADO", $user);

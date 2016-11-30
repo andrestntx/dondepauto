@@ -161,7 +161,12 @@ class PublisherDocumentsRepository extends BaseRepository
      */
     protected function saveDocument(User $publisher, UploadedFile $document = null, $name)
     {
-        return $this->saveUploadedFile($publisher, $document, $name);
+        try {
+            return $this->saveUploadedFile($publisher, $document, $name);
+        } catch (\Exception $e) {
+            \Log::info("error al subir documento == " . $name . "  == " . $e->getMessage());
+            return null;
+        }
     }
 
     /**

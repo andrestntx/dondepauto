@@ -83,29 +83,35 @@ class SpaceService extends ResourceService
     {
         $names = array();
 
-        if(!is_null($keep_images) && is_array($keep_images) && count($keep_images) > 0) {
-            $space->images()->whereNotIn('id_imagen_LI', $keep_images)->delete();
-        }
-
-        if(!is_null($images)) {
-            foreach ($images as $key => $image) {
-                $name = $this->generateImageName($space);
-                array_push($names, $name);
-
-                if($key == 0) {
-                    $this->imagesRepository->saveSpaceImage($image, $name, true);
-                    $this->repository->updateDetailThumb($space, $name);
-                }
-                else {
-                    $this->imagesRepository->saveSpaceImage($image, $name);
+        if($images) {
+            try {
+                if(!is_null($keep_images) && is_array($keep_images) && count($keep_images) > 0) {
+                    $space->images()->whereNotIn('id_imagen_LI', $keep_images)->delete();
                 }
 
-                $this->repository->createImage($space, $name);
+                if(!is_null($images)) {
+                    foreach ($images as $key => $image) {
+                        $name = $this->generateImageName($space);
+                        array_push($names, $name);
+
+                        if($key == 0) {
+                            $this->imagesRepository->saveSpaceImage($image, $name, true);
+                            $this->repository->updateDetailThumb($space, $name);
+                        }
+                        else {
+                            $this->imagesRepository->saveSpaceImage($image, $name);
+                        }
+
+                        $this->repository->createImage($space, $name);
+                    }
+                }
+
+                if($image = $space->images()->first()) {
+                    $this->repository->updateDetailThumb($space, $image->url_thumb_LI);
+                }
+            } catch (\Exception $e) {
+                \Log::info("error al guardar imagenes == " . $e->getMessage());
             }
-        }
-
-        if($image = $space->images()->first()) {
-            $this->repository->updateDetailThumb($space, $image->url_thumb_LI);
         }
 
         return $names;
