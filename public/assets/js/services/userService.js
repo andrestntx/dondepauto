@@ -622,18 +622,22 @@ var UserService = function() {
 
 	    	var html 		= $('<div style="width:' + width + 'px; margin: 0 auto;"></div>').addClass('text-center');
 
-	    	$.each( states, function( key, state ) {
-	    		var i 		= $('<i></i>').addClass(state.icon);
-	    		var button	= $('<button type="button"></button>')
-	    						.addClass('steps-img btn-circle btn btn-' + state.class)
-	    						.attr('data-toggle', 'tooltip')
-	    						.attr('data-placement', 'top')
-	    						.attr('title', state.text + ' / ' + state.date)
-	    						.append(i);
+            if(states) { 
+                $.each( states, function( key, state ) {
+                    var i       = $('<i></i>').addClass(state.icon);
+                    var button  = $('<button type="button"></button>')
+                                    .addClass('steps-img btn-circle btn btn-' + state.class)
+                                    .attr('data-toggle', 'tooltip')
+                                    .attr('data-placement', 'top')
+                                    .attr('title', state.text + ' / ' + state.date)
+                                    .append(i);
 
-	    		var div 	= $('<div></div>').addClass('text-center table-state').append(button);
-	    		html.append(div);
-			});
+                    var div     = $('<div></div>').addClass('text-center table-state').append(button);
+                    html.append(div);
+                });
+            }
+
+	    	
 			
 			return html;
 	    }
