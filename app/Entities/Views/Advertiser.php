@@ -92,6 +92,7 @@ class Advertiser extends PUser
         $count_logs = $this->count_logs;
         $count_views = $this->count_views;
         $count_favorites = $this->count_favorites;
+        $count_active_proposals = $this->count_active_proposals;
 
         return  array_merge(parent::getStatesAttribute(), [
             'logs' => [
@@ -111,6 +112,12 @@ class Advertiser extends PUser
                 'class' => $this->getClass($count_favorites),
                 'text'  => 'Favoritos: ' . $count_favorites,
                 'date'  => $this->range_favorite_at_humans
+            ],
+            'proposals' => [
+                'icon'  => 'fa fa-calculator',
+                'class' => $this->getClass($count_active_proposals, false, 'warning'),
+                'text'  => 'Propuestas abiertas: ' . $count_active_proposals,
+                'date'  => ''
             ]
         ]);
     }
@@ -275,6 +282,16 @@ class Advertiser extends PUser
     public function getCountFavoritesAttribute()
     {
         return $this->favorites->count();
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountActiveProposalsAttribute()
+    {
+        return $this->proposals->filter(function($proposal) {
+            return $proposal->days > 0;
+        })->count();
     }
     
     /**

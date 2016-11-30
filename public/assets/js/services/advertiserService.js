@@ -97,7 +97,7 @@ var AdvertiserService = function() {
                 }
                 
                 $('td:eq(6)', nRow).html(
-                    UserService.getHtmlTableStates(aData.states, 140)
+                    UserService.getHtmlTableStates(aData.states, 170)
                 );
 
                 if(aData.count_intentions > 0) {
