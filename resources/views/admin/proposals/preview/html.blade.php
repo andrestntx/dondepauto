@@ -234,10 +234,10 @@
 						<img src="/assets/img/logodonde.png" alt="Logo DóndePauto">	
 					</figure>
 					<div class="row">
-						<figure id="photo" class="col-xs-offset-1 col-sm-offset-2 col-md-offset-1 col-xs-3 col-md-2">
+						<figure id="photo" class="col-xs-offset-1 col-sm-offset-2 col-md-offset-1 col-xs-3 col-md-2" style="display: inline-block; vertical-align: middle; float: none;">
 							<img src="/assets/img/proposal/imagenleo.png" alt="">	
 						</figure>
-						<div id="data" class="col-xs-8 col-sm-6 col-md-8">
+						<div id="data" class="col-xs-8 col-sm-6 col-md-8" style="display: inline-block; vertical-align: middle; float: none;">
 							<div id="contact-role" class="col-xs-12 col-md-6">
 								<h1>Leonardo Rueda Plazas</h1>	
 								<h2>Director General de Marketing</h2>
