@@ -199,6 +199,12 @@
                                 </a>
                             </h4>
 
+                            <span class="h5"> 
+                                <span style="font-weight: 200;">Barreras o detonantes de compra: </span> 
+                                <span id="proposalBarriers"> {{ $proposal->barriers }} </span>
+                                <button class="btn btn-xs btn-warning" data-target="#modalBarriers" data-toggle="modal"><i class="fa fa-pencil"></i></button>
+                            </span> <br>
+
                         </div> 
 
                     </div>
@@ -418,6 +424,7 @@
      @include('admin.proposals.modals.edit.title')
      @include('admin.proposals.modals.edit.questions')
      @include('admin.proposals.modals.edit.comments')
+     @include('admin.proposals.modals.edit.barriers')
      @include('admin.proposals.modals.downloads')
      
 
@@ -497,6 +504,10 @@
 
             modalProposalEdit($("#modalEditTitle"), function(result){
                 $("#proposalTitle").text(result.proposal.title);
+            });
+
+            modalProposalEdit($("#modalBarriers"), function(result){
+                $("#proposalBarriers").text(result.proposal.barriers);
             });
 
             modalProposalEdit($("#modalEditExpirationDays"), function(result){
