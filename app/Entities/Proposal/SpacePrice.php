@@ -21,7 +21,7 @@ class SpacePrice
      * @param Space $space
      * @param SPrice $initialPrice
      */
-    public function __construct(Space $space, SPrice $initialPrice)
+    public function __construct($space, SPrice $initialPrice)
     {
         $this->space = $space;
         $this->initialPrice = $initialPrice;

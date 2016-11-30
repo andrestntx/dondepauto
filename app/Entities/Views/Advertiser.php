@@ -364,14 +364,4 @@ class Advertiser extends PUser
     {
         return $this->first_name . ' ' . $this->last_name;
     }
-
-    /**
-     * @return bool
-     */
-    public function getHasContactTodayAttribute()
-    {
-        return $this->contacts->filter(function ($contact, $key) {
-            return $contact->is_today;
-        })->count() > 0;
-    }
 }
