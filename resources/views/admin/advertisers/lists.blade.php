@@ -65,11 +65,17 @@
                         {!! Field::select('cities', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
 
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        {!! Field::select('economic_activities', $economicActivities, ['empty' => 'Todas las Actividades']) !!}
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group" style="overflow: auto;">
+                            <label class="control-label" style="display: block;">Fecha de Actividades</label>
+                            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                <span></span> <b class="caret"></b>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="form-group">
                             <label class="control-label" style="display: block;">Actividades Pendientes</label>
                             <div class="btn-group" role="group" aria-label="Large button group">
@@ -81,14 +87,10 @@
                         </div>  
                     </div>
 
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label" style="display: block;">Fecha de Actividades</label>
-                            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                                <span></span> <b class="caret"></b>
-                            </div>
-                        </div>
+                    
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        {!! Field::select('economic_activities', $economicActivities, ['empty' => 'Todas las Actividades']) !!}
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6">
