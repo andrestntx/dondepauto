@@ -112,8 +112,8 @@
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class=""><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
-                <li class="active"><a data-toggle="tab" href="#tab-initial-prices">Balance inicial</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-final-prices">Balance seleccionados</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-initial-prices">Balance inicial</a></li>
+                <li class="active"><a data-toggle="tab" href="#tab-final-prices">Balance seleccionados</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-target">Audiencias</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-quote">Ficha técnica</a></li>
                 <li class=""><a data-toggle="tab" href="#tab-justification">Justificación</a></li>
@@ -203,7 +203,7 @@
 
                     </div>
                 </div>
-                <div id="tab-initial-prices" class="tab-pane active">
+                <div id="tab-initial-prices" class="tab-pane">
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
@@ -247,18 +247,10 @@
                                     <span style="font-weight: 200;">Comisión:</span>  <span id="pivot_total_commission_price"> ${{ number_format($proposal->pivot_total_commission_price, 0, ',', '.') }} </span> <span id="pivot_total_commission" class="percentage">({{ $proposal->pivot_total_commission * 100 }}%)</span>
                                 </span>
                             </p>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-6 col-md-4" style="max-height: 210px;">
-                            <div id="bar-init-prices" style="max-height: 210px; max-width: 260px; margin: auto; display: block;" 
-                                data-cost="{{ $proposal->pivot_total_cost }}" data-markup="{{ $proposal->pivot_total_markup_price }}" 
-                                data-commision="{{ $proposal->pivot_total_commission_price }}">
-                            </div>
-                        </div> 
-                        
+                        </div>                        
                     </div>
                 </div>
-                <div id="tab-final-prices" class="tab-pane">
+                <div id="tab-final-prices" class="tab-pane active">
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <p>
@@ -303,6 +295,14 @@
                                 </span>
                             </p>
                         </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-4" style="max-height: 210px;">
+                            <div id="bar-init-prices" style="max-height: 210px; max-width: 260px; margin: auto; display: block;" 
+                                data-cost="{{ $finalProposal->pivot_total_cost }}" data-markup="{{ $finalProposal->pivot_total_markup_price }}" 
+                                data-commision="{{ $finalProposal->pivot_total_commission_price }}">
+                            </div>
+                        </div> 
+
                     </div>
                 </div>
                 <div id="tab-target" class="tab-pane">
