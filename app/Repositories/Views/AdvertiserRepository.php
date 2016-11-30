@@ -59,7 +59,7 @@ class AdvertiserRepository extends BaseRepository
      */
     public function defaultSearch()
     {
-        return $this->model->with(['proposals', 'favorites',  'logs', 'views', 'intentions', 'contacts' => function($query) {
+        return $this->model->with(['proposals.viewSpaces', 'favorites',  'logs', 'views', 'intentions', 'contacts' => function($query) {
             $query->orderBy("created_at", "desc");
         }, 'contacts.actions']);
     }
