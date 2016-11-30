@@ -39,7 +39,7 @@ class Publisher extends PUser
         'signed_agreement_lang', 'space_city_names', 'activated_at_datatable', 'documents_json', 'logo',
         'signed_at_datatable',  'count_spaces', 'has_offers', 'last_offer_at_datatable', 'created_at_humans',
         'count_logs', 'last_login_at', 'has_logo', 'signed_at_date', 'repre_name', 'repre_doc', 'repre_email', 'repre_phone',
-        'states', 'state', 'state_class', 'state_icon', 'state_id'
+        'states', 'state', 'state_class', 'state_icon', 'state_id', 'has_contact_today'
     ];
 
     /**

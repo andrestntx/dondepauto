@@ -73,6 +73,16 @@ class PUser  extends Model {
     }
 
     /**
+     * @return bool
+     */
+    public function getHasContactTodayAttribute()
+    {
+        return $this->contacts->filter(function ($contact, $key) {
+            return $contact->is_today;
+        })->count() > 0;
+    }
+
+    /**
      * @return string
      */
     public function getActivatedAtHumansAttribute()

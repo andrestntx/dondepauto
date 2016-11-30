@@ -17,7 +17,7 @@ class SpacePrice
      * SpacePrice constructor.
      * @param $space
      */
-    public function __construct(Space $space)
+    public function __construct($space)
     {
         $this->space = $space;
     }

@@ -12,6 +12,10 @@ namespace App\Entities\Platform\Space;
 use App\Entities\Platform\Entity;
 use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
+
+use App\Entities\Views\SpacePrice;
+use App\Entities\Proposal\SpacePrice as ProposalSpacePrice;
+
 use App\Services\Space\SpacePointsService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +31,9 @@ class Space extends Entity
     protected $primaryKey = 'id_espacio_LI';
 
     protected $pointsService;
+
+    protected  $prices;
+    protected  $proposalPrices;
 
 
     protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
@@ -92,6 +99,15 @@ class Space extends Entity
     const UPDATED_AT = null;
 
     /**
+     * Space constructor.
+     */
+    public function __construct()
+    {
+        $this->prices = new SpacePrice($this);
+        $this->proposalPrices = new ProposalSpacePrice($this, $this->prices);
+    }
+    
+    /**
      * The "booting" method of the model.
      *
      * @return void
@@ -125,6 +141,40 @@ class Space extends Entity
         }
 
         return $databaseTranslate;
+    }
+
+    /**
+     * Determine if a get mutator exists for an attribute.
+     *
+     * @param  string  $key
+     * @return bool
+     */
+    public function hasGetMutator($key)
+    {
+        return (
+            Str::startsWith($key, 'prices_') ||
+            Str::startsWith($key, 'proposal_prices_') ||
+            method_exists($this, 'get'.Str::studly($key).'Attribute')
+        );
+    }
+
+    /**
+     * Get the value of an attribute using its mutator.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function mutateAttribute($key, $value)
+    {
+        if(Str::startsWith($key, 'prices_')) {
+            return $this->prices->{'get'.Str::studly(Str::replaceFirst('prices_', '', $key))}($value);
+        }
+        else if(Str::startsWith($key, 'proposal_prices_')) {
+            return $this->proposalPrices->{'get'.Str::studly(Str::replaceFirst('proposal_prices_', '', $key))}($value);
+        }
+
+        return $this->{'get'.Str::studly($key).'Attribute'}($value);
     }
 
 
