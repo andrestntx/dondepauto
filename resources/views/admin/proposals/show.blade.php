@@ -400,7 +400,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-5">   
                             @if($proposal->has_observations_file)
                                 <a href="/{{ $proposal->observations_file }}" target="_blank" ="" style="font-size: 1.2em; margin-bottom: 0.5em; display: block;">
-                                    <i class="fa fa-file-pdf-o"></i> Ver Archivo adicional
+                                    <i class="fa fa-file-pdf-o"></i> Ver Presentación Complementaria
                                 </a>
                                 {!! Form::open(['route' => ['proposals.observation-file', $proposal], 'files' => 'true']) !!}
                                     {!! Field::file('observations_file', ['label' => 'Actualizar Archivo', 'required']) !!}
