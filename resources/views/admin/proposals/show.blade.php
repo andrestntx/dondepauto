@@ -398,7 +398,22 @@
                             <button class="btn btn-success ladda-button" style="float: right;" data-style="zoom-in">Actualizar</button>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-5">   
-                            <input id="input-file-justification" type="file">
+                            @if($proposal->has_observations_file)
+                                <a href="/{{ $proposal->observations_file }}" target="_blank" ="" style="font-size: 1.2em; margin-bottom: 0.5em; display: block;">
+                                    <i class="fa fa-file-pdf-o"></i> Ver Archivo adicional
+                                </a>
+                                {!! Form::open(['route' => ['proposals.observation-file', $proposal], 'files' => 'true']) !!}
+                                    {!! Field::file('observations_file', ['label' => 'Actualizar Archivo', 'required']) !!}
+                                    <button class="btn btn-primary">Actualizar</button>
+                                {!! Form::close() !!}
+                            @else
+                                {!! Form::open(['route' => ['proposals.observation-file', $proposal], 'files' => 'true']) !!}
+                                    {!! Field::file('observations_file', ['label' => 'Archivo adicional', 'required']) !!}
+                                    <button class="btn btn-primary">Subir archivo</button>
+                                {!! Form::close() !!}
+                            @endif
+
+                            
                         </div>
                     </div>
                 </div>

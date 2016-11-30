@@ -246,6 +246,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@search'
         ]);
 
+        Route::post('propuestas/{proposals}/observation-file', [
+            'as'    => 'proposals.observation-file',
+            'uses'  => 'Admin\ProposalsController@observationFile'
+        ]);
+
         Route::get('propuestas/{proposals}/search', [
             'as'    => 'proposals.spaces.search',
             'uses'  => 'Admin\ProposalsController@searchSpaces'

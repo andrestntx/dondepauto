@@ -48,7 +48,12 @@
 				</h1>
 				<p>
 					{{ $proposal->observations }}
-				</p>		
+				</p>	
+				@if($proposal->has_observations_file)
+                    <a href="/{{ $proposal->observations_file }}" target="_blank" ="" style="font-size: 1.2em; margin-bottom: 0.5em; display: block;">
+                        <i class="fa fa-file-pdf-o"></i> Ver Archivo adicional
+                    </a>	
+               @endif
 			</article>
 		</section>
 		<section id="target">

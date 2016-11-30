@@ -232,4 +232,12 @@ class ProposalsController extends Controller
         return ['success' => 'true', 'message' => 'Espacio desseleccionado'];
     }
 
+    public function observationFile(Request $request, Proposal $proposal)
+    {
+        if($request->file('observations_file')) {
+            $request->file('observations_file')->move('documents/proposals', 'observation-file-' . $proposal->id . '.pdf');
+        }
+
+        return redirect()->route('proposals.show', $proposal);
+    }
 }
