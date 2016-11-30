@@ -152,8 +152,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                    <h2 class="product-main-price"> ${{ number_format($space->minimal_price, 0, ',', '.') }} / <small class="text-muted"> {{ $space->period }}</small> </h2>
-
+                                    <h2 class="product-main-price"> ${{ number_format($space->prices_public_price, 0, ',', '.') }} / <small class="text-muted"> {{ $space->period }}</small> </h2>
                             </div>
 
                             <div class="col-md-6 m-t-md">
@@ -172,6 +171,11 @@
                                 Descuento máximo para cliente
                                 <span class="space-item-text"> {{ $space->discount }}% </span>
                             </div>
+
+                            <div class="col-sm-6 space-item-title">
+                                Precio de proveedor
+                                <span class="space-item-text"> ${{ number_format($space->prices_initial_price, 0, ',', '.') }} </span>
+                            </div>
                         
                             <div class="col-sm-6 space-item-title">
                                 Precio mínimo de Venta
@@ -180,7 +184,7 @@
 
                             <div class="col-sm-6 space-item-title">
                                 Precio de Oferta al Público
-                                <span class="space-item-text"> ${{ number_format($space->minimal_price, 0, ',', '.') }} </span>
+                                <span class="space-item-text"> ${{ number_format($space->prices_public_price, 0, ',', '.') }} </span>
                             </div>
 
                         </div>
@@ -246,7 +250,7 @@
                         @if($space->alcohol_restriction || $space->snuff_restriction || $space->policy_restriction  || $space->sex_restriction)
                             <div class="row space-item">
                                 <div class="col-xs-12 space-item-title space-item-group" style="color: rgba(244, 67, 54, 0.74);">
-                                    Restricciones de categoría en la pauto
+                                    Restricciones de categoría en la pauta
                                 </div>
                             </div>
 
