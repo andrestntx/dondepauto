@@ -338,6 +338,42 @@ class Publisher extends PUser
     }
 
     /**
+     * @return bool
+     */
+    public function getHasLetterDocumentAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFileId($this->id,'letter.pdf');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasBankDocumentAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFileId($this->id,'bank.pdf');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasCommerceDocumentAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFileId($this->id,'commerce.pdf');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasRutDocumentAttribute()
+    {
+        $fileRepository = new PublisherDocumentsRepository();
+        return $fileRepository->hasFileId($this->id,'rut.pdf');
+    }
+
+    /**
      * @return mixed
      */
     public function getRepreNameAttribute()
