@@ -6,6 +6,7 @@ use App\Repositories\Platform\Space\SpaceCityRepository;
 use App\Repositories\Platform\Space\SpaceCategoryRepository;
 use App\Repositories\Platform\Space\SpaceFormatRepository;
 use App\Repositories\Platform\Space\SpaceImpactSceneRepository;
+use App\Repositories\Platform\TagRepository;
 use App\Repositories\Proposal\ProposalRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Views\PublisherRepository;
@@ -22,12 +23,13 @@ class ListComposer extends BaseComposer
     protected  $spaceFormatRepository;
     protected  $impactSceneRepository;
     protected  $userRepository;
-    protected $proposalRepository;
+    protected  $proposalRepository;
+    protected  $tagRepository;
 
     function __construct(SpaceCityRepository $cityRepository, SpaceCategoryRepository $spaceCategoryRepository,
                          SpaceSubCategoryService $spaceSubCategoryService, PublisherRepository $publisherRepository,
                         SpaceFormatRepository $spaceFormatRepository, SpaceImpactSceneRepository $impactSceneRepository,
-                        UserRepository $userRepository, ProposalRepository $proposalRepository)
+                        UserRepository $userRepository, ProposalRepository $proposalRepository, TagRepository $tagRepository)
     {
         $this->cityRepository = $cityRepository;
         $this->spaceCategoryRepository = $spaceCategoryRepository;
@@ -37,6 +39,7 @@ class ListComposer extends BaseComposer
         $this->impactSceneRepository = $impactSceneRepository;
         $this->userRepository = $userRepository;
         $this->proposalRepository = $proposalRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -66,6 +69,8 @@ class ListComposer extends BaseComposer
             ->lists("role_select_email", "id")
             ->all();
 
+        $tags           = $this->tagRepository->model->where('type', 'space')->orWhere('type', 'all')->lists('name', 'id')->all();
+
         $view->with([
             'publishers'    => $publishers,
             'advertisers'   => $advertisers,
@@ -74,7 +79,8 @@ class ListComposer extends BaseComposer
             'subCategories' => $subCategories,
             'formats'       => $formats,
             'scenes'        => $scenes,
-            'proposals'     => $proposals
+            'proposals'     => $proposals,
+            'tags'          => $tags
         ]);
     }
 }

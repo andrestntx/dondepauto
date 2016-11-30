@@ -272,6 +272,7 @@ class FilterCollectionService
     {
         return $spaces->filter(function ($space) use ($data) {
             return $this->isTrue($data['city_id'], $space->hasCity(intval($data['city_id']))) &&
+                $this->isTrue($data['tag_id'], $space->tag_id == intval($data['tag_id'])) &&
                 $this->isTrue($data['impact_scene_id'], $space->hasImpactScene(intval($data['impact_scene_id'])));
         });
     }

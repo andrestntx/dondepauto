@@ -242,7 +242,8 @@ var SpaceService = function() {
                 { "data": "address", "name": "address" },
                 { "data": null, "name": "impact_scene_id", "searchable": false }, // 19
                 { "data": "publisher_email", "name": "publisher_email" },
-                { "data": "active", "name": "active" } // 21
+                { "data": "active", "name": "active" }, // 21
+                { "data": "tag_id", "name": "tag_id", "visible": false } // 22
             ],
             "columnDefs": [
                 {
@@ -350,6 +351,7 @@ var SpaceService = function() {
         initChangeSelect("#cities",15);
         initChangeSelect("#publishers",14);
         initChangeSelect("#scenes",19);
+        initChangeSelect("#tag_id",22);
 
         UserService.initSimpleSearchSelect("#active_state", 21);
     };
@@ -498,6 +500,13 @@ var SpaceService = function() {
 
         $('#' + inputId + ' #modalSuggestSpace')
             .attr('data-max-discount', space.prices_markup_per * 100);
+
+        console.log(space);
+        console.log(space.tag_id);
+
+        $('#' + inputId + ' .select-tags')
+                .val(space.tag_id)
+                .attr('data-url', '/espacios/' + space.id + '/tag');
             
         /** Space Data **/
         $('#delete_space').data("spaceid", space.id);
@@ -1072,6 +1081,33 @@ var SpaceService = function() {
         initPostProposalModal: function() {
             initProposalModal();
             initPostProposal();
-        }
+        },
+        initChangeTag: function () {
+            $(".select-tags").change(function() {
+                var url = $(this).attr('data-url');
+                var parameters = {
+                    'tag_id': $(this).val()
+                };
+
+                $.post(url, parameters, function( data ) {
+                    if(data.success) {
+                        reload();
+                    }
+                    else {
+                        swal({
+                            title: 'Hubo un error',
+                            text: 'Error controlado',
+                            type: "warning",
+                        });
+                    }
+                }).fail(function(data) {
+                    swal({
+                        title: 'Hubo un error',
+                        text: 'Código ' + data.status,
+                        type: "warning",
+                    });
+                });
+            });    
+        },
     };
 }();

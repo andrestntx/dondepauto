@@ -10,6 +10,7 @@ namespace App\Entities\Platform\Space;
 
 
 use App\Entities\Platform\Entity;
+use App\Entities\Platform\Tag;
 use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
 
@@ -28,17 +29,15 @@ class Space extends Entity
      *
      * @var string
      */
-    protected $primaryKey = 'id_espacio_LI';
-
-    protected $pointsService;
-
+    protected  $primaryKey = 'id_espacio_LI';
+    protected  $pointsService;
     protected  $prices;
     protected  $proposalPrices;
 
 
     protected $fillable = ['name', 'description', 'address', 'impact', 'impact_agency', 'minimal_price', 'public_price', 'margin', 'period', 'dimension',
         'city_id','format_id', 'sub_category_id', 'category_id', 'impact_scene_id','alcohol_restriction','snuff_restriction','policy_restriction', 'sex_restriction',
-        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id', 'religion_restriction', 'points'
+        'youtube', 'discount', 'publisher_company', 'more_audiences', 'active', 'publisher_id', 'religion_restriction', 'points', 'tag_id'
     ];
 
     protected $databaseTranslate = ['name' => 'nombre_espacio_LI', 'description' => 'descripcion_espacio_LI', 'address' => 'direccion_ubicacion_LI',
@@ -173,6 +172,14 @@ class Space extends Entity
         }
 
         return $this->{'get'.Str::studly($key).'Attribute'}($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
 
     /**

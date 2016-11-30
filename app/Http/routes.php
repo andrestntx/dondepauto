@@ -188,6 +188,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\SpacesController@ajax'
         ]);
 
+        Route::post('espacios/{spaces}/tag', [
+            'as'    => 'spaces.tag',
+            'uses' => 'Admin\SpacesController@tag'
+        ]);
+
         Route::get('espacios/{spaces}/show', [
             'as'    => 'espacios.space',
             'uses' => 'Admin\SpacesController@getSpace'

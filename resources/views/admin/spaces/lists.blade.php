@@ -56,14 +56,17 @@
                     </div> 
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3 col-sm-6">
                         {!! Field::select('cities', $cities, ['empty' => 'Todas las ciudades']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3 col-sm-6">
                         {!! Field::select('publishers', $publishers, ['empty' => 'Todos los Medios']) !!}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3 col-sm-6">
                         {!! Field::select('scenes', $scenes, ['empty' => 'Todas los escenarios']) !!}
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        {!! Field::select('tag_id', $tags, ['empty' => 'Todos los tags', 'required', 'label' => 'Tags']) !!}
                     </div>
                 </div>
                 <div class="row">
@@ -111,6 +114,8 @@
             else {
                 SpaceService.init('/espacios/search');
             }
+
+            SpaceService.initChangeTag();
 
             $('.advertisr-chosen-select').chosen({width: "100%"});
             $('.proposal-chosen-select').chosen({width: "100%"});

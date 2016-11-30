@@ -9,6 +9,7 @@
                             <span style="font-weight: 300;">Medio:</span> <a id="publisher_company" class="text-success" href="#" target="_blank"></a><br>
                             <span style="font-weight: 300;">Espacio:</span>  <span id="space_name" class="h5 text-success" style="font-size:17px;"></span><br>
                             Creado el:  <span id="space_crated_at_date" class="h5" style="font-size:14px;"></span>
+                            {!! Form::select('tag_id', $tags, null, ['placeholder' => 'Sin marca', 'class' => 'select-tags']) !!}
                         </h2>
                     </div>
                     <div class="col-xs-3 timeline" id="prueba">
