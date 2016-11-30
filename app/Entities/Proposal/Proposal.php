@@ -584,6 +584,16 @@ class Proposal extends Model
         return $this->viewSpaces->sum('proposal_prices_commission_price');
     }
 
+    public function getObservationsFileAttribute()
+    {
+        return "documents/proposals/observation-file-" . $this->id . '.pdf';
+    }
+
+    public function getHasObservationsFileAttribute()
+    {
+        return \File::exists($this->observations_file);
+    }
+
     /** End Attribute Mutators **/
 
 }
