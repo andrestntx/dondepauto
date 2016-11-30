@@ -127,6 +127,7 @@ abstract class  BaseRepository {
         if(Auth::check() &&  !array_key_exists('user_id', $data)) {
             $data['user_id'] = Auth::user()->id;
         }
+
         return $this->model->create($data);
     }
 

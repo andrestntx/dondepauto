@@ -100,9 +100,12 @@ class Space extends Entity
 
     /**
      * Space constructor.
+     * @param array $attributes
      */
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
+        parent::__construct($attributes);
+
         $this->prices = new SpacePrice($this);
         $this->proposalPrices = new ProposalSpacePrice($this, $this->prices);
     }
@@ -129,16 +132,11 @@ class Space extends Entity
      */
     public function getAttribute($key)
     {
-
         if (array_key_exists($key, $this->attributes) || $this->hasGetMutator($key)) {
             return $this->getAttributeValue($key);
         }
 
         $databaseTranslate = parent::getAttribute($this->getTranslateOrOriginalKey($key));
-
-        if(is_null($databaseTranslate)) {
-            // $databaseTranslate = $this->space->getAttribute($key);
-        }
 
         return $databaseTranslate;
     }
@@ -176,27 +174,6 @@ class Space extends Entity
 
         return $this->{'get'.Str::studly($key).'Attribute'}($value);
     }
-
-
-    /**
-     * Get the value of an attribute using its mutator.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return mixed
-     */
-    /*protected function mutateAttribute($key, $value)
-    {
-        /*if($this->hasGetMutator($key)) {
-            return $this->{'get'.Str::studly($key).'Attribute'}($value);    
-        }
-        
-        if(! array_key_exists($key, $this->space->getAttributes())) {
-           return $this->space->mutateAttribute($key, $value);     
-        }
-        
-        return $this->space->getAttribute($key);*/
-    //}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
