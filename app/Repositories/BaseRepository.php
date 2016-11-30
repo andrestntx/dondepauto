@@ -156,10 +156,7 @@ abstract class  BaseRepository {
 
         $entity->fill($data);
 
-        \Log::info($entity);
-        
         if($entity->save()) {
-            \Log::info($entity);
             return $entity;
         }
         return false;

@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 use App\Entities\Platform\Space\Space;
 use App\Facades\DatatableFacade;
 use App\Facades\SpaceFacade;
+use App\Http\Requests\RUser\TagRequest;
 use App\Http\Requests\Space\SuggestRequest;
 use App\Services\Space\SpaceService;
 
@@ -196,5 +197,16 @@ class SpacesController extends ResourceController
     {
         return ['success' => $this->facade->suggest($space, $request->get('advertisers'), $request->get('discount'))];
     }
-    
+
+    /**
+     * @param TagRequest $request
+     * @param Space $space
+     * @return mixed
+     */
+    public function tag(TagRequest $request, Space $space)
+    {
+        $this->service->updateModel(['tag_id' => $request->get('tag_id')], $space);
+        return ['success' => 'true'];
+    }
+
 }
