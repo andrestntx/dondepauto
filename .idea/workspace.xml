@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4417de18-4a47-4423-b247-e322d4bf40ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Views/Publisher.php" afterPath="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/publisher/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/publisher/dashboard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" afterPath="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/proposals/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/proposals/show.blade.php" />
     </list>
     <ignored path="pauto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,11 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Publisher.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Publisher.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Entities/Views/Publisher.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8820755">
+            <state vertical-scroll-proportion="-11.0">
               <caret line="373" column="5" selection-start-line="373" selection-start-column="5" selection-end-line="373" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Proposal.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.19457014">
+              <caret line="29" column="103" selection-start-line="29" selection-start-column="103" selection-end-line="29" selection-end-column="103" />
               <folding />
             </state>
           </provider>
@@ -128,7 +138,6 @@
         <option value="$PROJECT_DIR$/app/Repositories/Views/SpaceRepository.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Platform/ActionRepository.php" />
         <option value="$PROJECT_DIR$/app/Services/FilterCollectionService.php" />
-        <option value="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ServicesController.php" />
         <option value="$PROJECT_DIR$/app/Http/breadcrumbs.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
@@ -156,6 +165,7 @@
         <option value="$PROJECT_DIR$/app/Repositories/Views/AdvertiserRepository.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdvertisersController.php" />
         <option value="$PROJECT_DIR$/app/Entities/Views/Publisher.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Proposal/Proposal.php" />
       </list>
     </option>
   </component>
@@ -314,6 +324,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pauto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Proposal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -756,14 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36199096">
-          <caret line="43" column="31" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Views/Advertiser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6871069">
@@ -832,8 +856,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Entities/Views/Publisher.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8820755">
+        <state vertical-scroll-proportion="-11.0">
           <caret line="373" column="5" selection-start-line="373" selection-start-column="5" selection-end-line="373" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Proposal/Proposal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19457014">
+          <caret line="29" column="103" selection-start-line="29" selection-start-column="103" selection-end-line="29" selection-end-column="103" />
           <folding />
         </state>
       </provider>
