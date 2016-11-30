@@ -62,6 +62,7 @@ class ListComposer extends BaseComposer
         $actions = $this->actionRepository->model->where(function($query){
             $query->where('type', 'advertiser')
                 ->orWhere('type', 'all')
+                ->orWhere('type', 'none')
                 ->orWhere('type', 'users');
         })->get();
 

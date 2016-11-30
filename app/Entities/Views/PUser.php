@@ -59,14 +59,16 @@ class PUser  extends Model {
     /**
      * @param $value
      * @param bool $other
+     * @param string $classPrimary
+     * @param string $classAnother
      * @return string
      */
-    public function getClass($value, $other = false) {
+    public function getClass($value, $other = false, $classPrimary = 'primary', $classAnother = 'info') {
         if($value) {
-            return 'primary';
+            return $classPrimary;
         }
         else if($other) {
-            return 'info';
+            return $classAnother;
         }
 
         return 'danger';
