@@ -312,10 +312,10 @@
                                 <h2>Doc. de Validación de Cuenta</h2>
                                 <hr>
                                 @if($publisher->has_documents)
-                                    <a href="{{ $publisher->getDocument('commerce') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
-                                    <a href="{{ $publisher->getDocument('rut') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
-                                    <a href="{{ $publisher->getDocument('bank') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> certificación bancaria</a>
-                                    <a href="{{ $publisher->getDocument('letter') }}" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> carta de validación</a>
+                                    <a href="{{ url($publisher->getDocument('commerce')) }}" target="_blank" {!! Html::classes(['comercial-file-danger' => ! $publisher->has_commerce_document, 'comercial-file-success' => $publisher->has_commerce_document , 'comercial-file']) !!} > <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
+                                    <a href="{{ url($publisher->getDocument('rut')) }}" target="_blank" {!! Html::classes(['comercial-file-danger' => ! $publisher->has_rut_document, 'comercial-file-success' => $publisher->has_rut_document , 'comercial-file']) !!}> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
+                                    <a href="{{ url($publisher->getDocument('bank')) }}" target="_blank" {!! Html::classes(['comercial-file-danger' => ! $publisher->has_bank_document, 'comercial-file-success' => $publisher->has_bank_document , 'comercial-file']) !!}> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> certificación bancaria</a>
+                                    <a href="{{ url($publisher->getDocument('letter')) }}" target="_blank" {!! Html::classes(['comercial-file-danger' => ! $publisher->has_letter_document, 'comercial-file-success' => $publisher->has_letter_document , 'comercial-file']) !!}> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> carta de validación</a>
                                 @else
                                     <div class="error-files">
                                         <a href="javascript:void(0);" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
@@ -348,10 +348,13 @@
                             <div class="ibox-content" style="display: block;">
                                 <div class="row files-pauto">
                                     <div class="col-xs-6">
-                                        <a href="/documents/publishers/camara_comercio.pdf"  target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> camara de comercio</a>
+                                        <a href="/documents/publishers/camara_comercio.pdf"  target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> Cámara de comercio</a>
                                     </div>
                                     <div class="col-xs-6">
-                                        <a href="/documents/publishers/rut_donde_pauto.pdf" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut</a>
+                                        <a href="/documents/publishers/rut_donde_pauto.pdf" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> rut DóndePauto</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="/documents/publishers/certificacion_bancaria.pdf" target="_blank" class="comercial-file"> <img src="/assets/img/dashboard/iconopdfgris.png" class="img-icon"> Certificación bancaria</a>
                                     </div>
                                 </div>
                             </div>

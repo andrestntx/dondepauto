@@ -388,12 +388,14 @@ hr.hr-pencil {
     margin-bottom: 10px;
 }
 
-.dashboard .comercial-detail .comercial-file:hover {
+.dashboard .comercial-detail .comercial-file:hover,
+.dashboard .comercial-detail a.comercial-file.comercial-file-success {
     border-color: #089c4f;
     color: #089c4f;
 }
 
-.dashboard .comercial-detail .error-files .comercial-file:hover {
+.dashboard .comercial-detail .error-files .comercial-file:hover,
+.dashboard .comercial-detail a.comercial-file.comercial-file-danger {
     border-color: #FF5466;
     color: #FF5466;
 }
