@@ -7,6 +7,6 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	<img src="/infographics/infografiacomofunciona.png" alt="" style="width: 100%;">
+	<img src="/infographics/Infografia.como.funciona.DondePauto.png" alt="" style="width: 100%;">
 </body>
 </html>
