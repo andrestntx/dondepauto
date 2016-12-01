@@ -119,7 +119,7 @@ class DatatableFacade
             $page = 1;
         }
         else {
-            $page = ($input["length"] / $input['start']) + 1;
+            $page = (intval($input["start"]) / intval($input['length'])) + 1;
         }
 
         return [
