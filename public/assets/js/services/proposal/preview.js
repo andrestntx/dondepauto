@@ -202,7 +202,10 @@ var PreviewService = function() {
 
 			$.post($(this).attr("data-url"), {"spaces[]": selectedPublishers}, function( data ) {
                 if(data.file.length > 0) {
-                	window.open(data.file, 'Cotizacion_DP');
+                	var link = document.createElement("a");
+                    link.download = 'cotizacion.pdf';
+                    link.href = data.file;
+                    link.click();
                 }
                 $this.button('reset');
             }).fail(function(data) {
