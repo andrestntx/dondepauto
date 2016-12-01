@@ -31,6 +31,11 @@ Route::get('como-usar-la-propuesta-de-medios', function(){
     return view('infographics.propuesta');
 });
 
+Route::get('pasos-y-documentos-para-salir-a-campana', function(){
+    return view('infographics.pasos-campana');
+});
+
+
 
 Route::get('services/logos', [
     'as'   => 'services.logos',
