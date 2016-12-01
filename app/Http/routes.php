@@ -19,6 +19,19 @@ Carbon::setLocale('es');
 
 Route::auth();
 
+Route::get('como-funciona-nuestro-servicio', function(){
+    return view('infographics.como-funciona');
+});
+
+Route::get('servicio-de-consultoria', function(){
+    return view('infographics.consultoria');
+});
+
+Route::get('como-usar-la-propuesta-de-medios', function(){
+    return view('infographics.propuesta');
+});
+
+
 Route::get('services/logos', [
     'as'   => 'services.logos',
     'uses' => 'ServicesController@logos'
