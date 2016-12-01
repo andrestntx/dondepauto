@@ -117,9 +117,8 @@ var QuoteService = function() {
                 $('td:eq(8)', nRow).html(numeral(aData.pivot_total_income_price).format('$ 0,0'));
             },
             "drawCallback": function(settings, json) {
-                console.log(settings);
-                console.log(json);
-                
+                $("#total_income_proposals").html(numeral(settings.json.total_income).format('$ 0,0'));
+                $("#total_price_proposals").html(numeral(settings.json.total_price).format('$ 0,0'));
                 $("#total_proposals").html(settings.fnRecordsDisplay());
                 $('[data-toggle="tooltip"]').tooltip();
                 initDeleteProposal();    

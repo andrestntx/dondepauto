@@ -249,6 +249,4 @@ class ProposalsController extends Controller
 
         return redirect()->route('proposals.show', $proposal);
     }
-
-
 }

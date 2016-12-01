@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers\Publisher;
 
+use App\Repositories\Platform\TagRepository;
 use App\Repositories\Platform\UserRepository;
 use App\Repositories\Proposal\ProposalRepository;
 use Illuminate\Contracts\View\View;
@@ -13,16 +14,18 @@ class ShowComposer extends BaseComposer
     protected $actionRepository;
     protected $contactRepository;
     protected $proposalRepository;
+    protected $tagRepository;
 
     /**
      * ListComposer constructor.
      * @param UserRepository $repository
      * @param ProposalRepository $proposalRepository
      */
-    function __construct(UserRepository $repository, ProposalRepository $proposalRepository)
+    function __construct(UserRepository $repository, ProposalRepository $proposalRepository, TagRepository $tagRepository)
     {
         $this->repository = $repository;
         $this->proposalRepository = $proposalRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -46,9 +49,12 @@ class ShowComposer extends BaseComposer
             ->lists("role_select_email", "id")
             ->all();
 
+        $tags = $this->tagRepository->model->where('type', 'space')->orWhere('type', 'all')->lists('name', 'id')->all();
+
         $view->with([
             'advertisers' => $advertisers,
-            'proposals' => $proposals
+            'proposals' => $proposals,
+            'tags'  => $tags
         ]);
     }
 }
