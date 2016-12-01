@@ -240,4 +240,15 @@ class ProposalsController extends Controller
 
         return redirect()->route('proposals.show', $proposal);
     }
+
+    public function observationFileDelete(Request $request, Proposal $proposal)
+    {
+        if($proposal->has_observations_file) {
+            \File::delete($proposal->observations_file);
+        }
+
+        return redirect()->route('proposals.show', $proposal);
+    }
+
+
 }

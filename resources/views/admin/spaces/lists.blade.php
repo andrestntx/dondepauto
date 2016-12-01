@@ -66,7 +66,7 @@
                         {!! Field::select('scenes', $scenes, ['empty' => 'Todas los escenarios']) !!}
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        {!! Field::select('tag_id', $tags, ['empty' => 'Todos los tags', 'required', 'label' => 'Tags']) !!}
+                        {!! Field::select('tag_id', $tags, ['empty' => 'Todos los tags', 'required', 'label' => 'Destacados']) !!}
                     </div>
                 </div>
                 <div class="row">
