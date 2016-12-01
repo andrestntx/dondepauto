@@ -15,7 +15,7 @@
                         {!! Form::open() !!}
                             <div class="row">
                                 <div class="col-xs-12">
-                                    {!! Field::textarea('barriers', $advertiser->barriers, ['label' => 'Barreras o Detonante de compra', 'required']) !!}    
+                                    {!! Field::textarea('barriers', $proposal->barriers, ['label' => 'Barreras o Detonante de compra', 'required']) !!}    
                                 </div>
                             </div>
                         {!! Form::close() !!}
