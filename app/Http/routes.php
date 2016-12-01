@@ -19,6 +19,10 @@ Carbon::setLocale('es');
 
 Route::auth();
 
+/**
+ * Anunciantes
+ */
+
 Route::get('como-funciona-nuestro-servicio', function(){
     return view('infographics.como-funciona');
 });
@@ -35,6 +39,37 @@ Route::get('pasos-y-documentos-para-salir-a-campana', function(){
     return view('infographics.pasos-campana');
 });
 
+/**
+ * Medios
+ */
+
+Route::get('modelo-negocio-medios', function(){
+    return view('infographics.publishers.modelo-negocio');
+});
+
+Route::get('registro-e-inicio-sesion-plataforma', function(){
+    return view('infographics.publishers.registro-e-inicio-sesion-plataforma');
+});
+
+Route::get('activacion-proveedor-medios', function(){
+    return view('infographics.publishers.activacion-proveedor-medios');
+});
+
+Route::get('documentacion-activacion-proveedor', function(){
+    return view('infographics.publishers.documentacion-activacion-proveedor');
+});
+
+Route::get('presentacion-inventario-ofertas-plataforma', function(){
+    return view('infographics.publishers.presentacion-inventario-ofertas-plataforma');
+});
+
+Route::get('recomendaciones-en-la-presentacion-ofertas', function(){
+    return view('infographics.publishers.recomendaciones-en-la-presentacion-ofertas');
+});
+
+Route::get('esquema-precios-y-descuentos', function(){
+    return view('infographics.publishers.esquema-precios-y-descuentos');
+});
 
 
 Route::get('services/logos', [
