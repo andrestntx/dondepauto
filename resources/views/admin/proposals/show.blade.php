@@ -399,9 +399,13 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-5">   
                             @if($proposal->has_observations_file)
-                                <a href="/{{ $proposal->observations_file }}" target="_blank" ="" style="font-size: 1.2em; margin-bottom: 0.5em; display: block;">
+                                <a href="/{{ $proposal->observations_file }}" target="_blank" ="" style="font-size: 1.2em; margin: 0.2em 0.3em 0.5em 0; float: left;">
                                     <i class="fa fa-file-pdf-o"></i> Ver Presentación Complementaria
                                 </a>
+                                {!! Form::open(['route' => ['proposals.observation-file.delete', $proposal], 'files' => 'true', 'style' => 'margin-bottom: 1em;']) !!}
+                                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                {!! Form::close() !!}
+
                                 {!! Form::open(['route' => ['proposals.observation-file', $proposal], 'files' => 'true']) !!}
                                     {!! Field::file('observations_file', ['label' => 'Actualizar Archivo', 'required']) !!}
                                     <button class="btn btn-primary">Actualizar</button>

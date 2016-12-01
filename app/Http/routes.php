@@ -256,6 +256,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@observationFile'
         ]);
 
+        Route::post('propuestas/{proposals}/observation-file/delete', [
+            'as'    => 'proposals.observation-file.delete',
+            'uses'  => 'Admin\ProposalsController@observationFileDelete'
+        ]);
+
         Route::get('propuestas/{proposals}/search', [
             'as'    => 'proposals.spaces.search',
             'uses'  => 'Admin\ProposalsController@searchSpaces'
