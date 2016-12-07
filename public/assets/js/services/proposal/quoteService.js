@@ -8,6 +8,7 @@ var QuoteService = function() {
     var urlSearch;
     var space;
     var proposal;
+    var idproposal;
 
     function initTable(urlSearch) {
         urlSearch = urlSearch;
@@ -490,6 +491,7 @@ var QuoteService = function() {
     function initModalDiscount()
     {
         proposal = $("#proposal").data('proposal');
+        idproposal = $("#proposal").data('idproposal');
 
         $(document).on("click", ".spaceModal", function () {
             space = $(this).data('space');
@@ -581,7 +583,7 @@ var QuoteService = function() {
                 description: $(".form_proposal_edit #description").val()
             };
 
-            $.post("/propuestas/" + proposal.id + "/discount/" + space.id, parameters, function( data ) {
+            $.post("/propuestas/" + idproposal + "/discount/" + space.id, parameters, function( data ) {
                 if(data.success) {
                     space = data.space;
                     drawModalSpace(space);
@@ -652,7 +654,7 @@ var QuoteService = function() {
 
     function drawModalProposalSpace(inputId, space) 
     {
-        $('#' + inputId + ' #modalProposalEdit').attr('href', '/propuestas/' + proposal.id + '/spaces/' + space.id + '/edit');    
+        $('#' + inputId + ' #modalProposalEdit').attr('href', '/propuestas/' + idproposal + '/spaces/' + space.id + '/edit');    
     }
     
 

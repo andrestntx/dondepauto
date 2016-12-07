@@ -108,7 +108,7 @@
 
 @section('content')  
     
-    <div class="col-xs-12" id="proposal" data-advertiser="{{ $advertiser }}" data-contacts="{{ json_encode($contacts) }}" data-states="{{ json_encode($advertiser->states) }}" data-proposal="{{ $proposal }}" data-datatable="{{ route('proposals.spaces.search', $proposal) }}" style="margin-bottom: 1em;">
+    <div class="col-xs-12" id="proposal" data-idproposal="{{ $proposal->id }}" data-titleproposal="{{ $proposal->title }}" data-descriptionproposal="{{ $proposal->description }}" data-advertiser="{{ $advertiser }}" data-contacts="{{ json_encode($contacts) }}" data-states="{{ json_encode($advertiser->states) }}" data-datatable="{{ route('proposals.spaces.search', $proposal) }}" data-proposal="{{ $proposal }}" style="margin-bottom: 1em;">
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class=""><a data-toggle="tab" href="#tab-tracing"> Seguimiento</a></li>
