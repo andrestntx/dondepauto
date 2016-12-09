@@ -42,7 +42,7 @@ class Proposal extends Model
      * @var array
      */
     protected $appends = ['days', 'advertiser_name', 'advertiser_company', 'created_at_datatable', 'send_at_datatable', 'expires_at_datatable', 'expires_at_days', 'count_spaces',
-        "pivot_total", "pivot_total_cost", "total_discount_price", "total_discount", "pivot_total_income_price", "pivot_total_income",
+        "pivot_total", "pivot_select_total", "pivot_select_total_income_price", "pivot_total_cost", "total_discount_price", "total_discount", "pivot_total_income_price", "pivot_total_income",
         "pivot_total_markup_price", "pivot_total_markup", "pivot_total_commission_price", "pivot_total_commission",
         "total", "total_cost", "total_income_price", "total_markup_price", "total_commission_price", "total_commission", "state"
     ];
@@ -440,6 +440,21 @@ class Proposal extends Model
         return $this->viewSpaces->sum('proposal_prices_public_price');
     }
 
+    public function getSPaceSelected()
+    {
+        return $this->viewSpaces->filter(function($space) {
+            return $space->pivot->selected;
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotSelectTotalAttribute()
+    {
+        return $this->getSPaceSelected()->sum('proposal_prices_public_price');
+    }
+
     /**
      * @return mixed
      */
@@ -495,6 +510,15 @@ class Proposal extends Model
     /**
      * @return mixed
      */
+    public function getPivotSelectTotalIncomePriceAttribute()
+    {
+        return $this->pivot_select_total_markup_price + $this->pivot_select_total_commission_price;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getPivotTotalIncomeAttribute()
     {
         if($this->pivot_total > 0) {
@@ -518,6 +542,14 @@ class Proposal extends Model
     public function getPivotTotalMarkupPriceAttribute()
     {
         return $this->viewSpaces->sum('proposal_prices_markup_price');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotSelectTotalMarkupPriceAttribute()
+    {
+        return $this->getSPaceSelected()->sum('proposal_prices_markup_price');
     }
 
     /**
@@ -582,6 +614,14 @@ class Proposal extends Model
     public function getPivotTotalCommissionPriceAttribute()
     {
         return $this->viewSpaces->sum('proposal_prices_commission_price');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPivotSelectTotalCommissionPriceAttribute()
+    {
+        return $this->getSPaceSelected()->sum('proposal_prices_commission_price');
     }
 
     public function getObservationsFileAttribute()
