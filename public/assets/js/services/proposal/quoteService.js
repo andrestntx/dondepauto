@@ -116,7 +116,7 @@ var QuoteService = function() {
                 
 
                 console.log(aData.pivot_select_total);
-                
+
                 $('td:eq(7)', nRow).html(numeral(aData.pivot_select_total).format('$ 0,0'));
                 $('td:eq(8)', nRow).html(numeral(aData.pivot_select_total_income_price).format('$ 0,0'));
             },
@@ -664,7 +664,7 @@ var QuoteService = function() {
     function initSpaceSelect(){
         $("#space_selected").click(function(e){
             button = $(this);
-            var url = '/propuestas/' + proposal.id + '/spaces/' + $(this).attr('data-space-id') + '/select';
+            var url = '/propuestas/' + idproposal + '/spaces/' + $(this).attr('data-space-id') + '/select';
 
             var parameters = { select: 1 };
             if(button.hasClass("btn-info")) {
