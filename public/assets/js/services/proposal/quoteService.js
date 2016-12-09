@@ -114,8 +114,11 @@ var QuoteService = function() {
                         .attr('title', spaces)
                 );
                 
-                $('td:eq(7)', nRow).html(numeral(aData.pivot_total).format('$ 0,0'));
-                $('td:eq(8)', nRow).html(numeral(aData.pivot_total_income_price).format('$ 0,0'));
+
+                console.log(aData.pivot_select_total);
+                
+                $('td:eq(7)', nRow).html(numeral(aData.pivot_select_total).format('$ 0,0'));
+                $('td:eq(8)', nRow).html(numeral(aData.pivot_select_total_income_price).format('$ 0,0'));
             },
             "drawCallback": function(settings, json) {
                 $("#total_income_proposals").html(numeral(settings.json.total_income).format('$ 0,0'));
