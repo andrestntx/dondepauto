@@ -53,8 +53,11 @@ class Space extends Model
 
         'proposal_prices_discount', 'proposal_prices_discount_price', 'proposal_prices_with_markup',
         'proposal_prices_commission_price', 'proposal_prices_markup', 'proposal_prices_markup_price',
-        'proposal_prices_public_price', 'proposal_prices_minimal_price', 'proposal_prices_gain_price'
+        'proposal_prices_public_price', 'proposal_prices_minimal_price', 'proposal_prices_gain_price',
+        'description_html'
     ];
+
+    protected $hidden = ['description'];
 
     /**
      * Space constructor.
@@ -177,6 +180,11 @@ class Space extends Model
     public function getImpactSceneNamesAttribute()
     {
         return $this->impactScenes->implode('nombre_tipo_lugar_LI', ', ');
+    }
+
+    public function getDescriptionHtmlAttribute()
+    {
+        return strip_tags($this->description);
     }
 
     /**
