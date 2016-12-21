@@ -51,7 +51,7 @@ var SpaceService = function() {
                 { "data": "publisher_id", "name": "publisher_id" }, 
                 { "data": "city_id", "name": "city_id" },
                 { "data": "tags", "name": "tags" },
-                { "data": "description", "name": "description" }, // 16
+                { "data": "description_html", "name": "description_html" }, // 16
                 { "data": "address", "name": "address" },
                 { "data": "impact_scene_id", "name": "impact_scene_id", "searchable": false }, // 18
                 { "data": "publisher_email", "name": "publisher_email" },
@@ -238,7 +238,7 @@ var SpaceService = function() {
                 { "data": "publisher_id", "name": "publisher_id" }, // 14
                 { "data": null, "name": "city_id" }, // 15
                 { "data": "tags", "name": "tags" },
-                { "data": "description", "name": "description" },
+                { "data": "description_html", "name": "description_html" },
                 { "data": "address", "name": "address" },
                 { "data": null, "name": "impact_scene_id", "searchable": false }, // 19
                 { "data": "publisher_email", "name": "publisher_email" },
@@ -565,7 +565,7 @@ var SpaceService = function() {
         $('#' + inputId + ' #impacts').text(numeral(space.impacts).format('0,0[.]00'));
 
         /** Description **/
-        $('#' + inputId + ' #space-description').html(space.description);
+        $('#' + inputId + ' #space-description').html(space.description_html);
 
         /**
          * Audiences
