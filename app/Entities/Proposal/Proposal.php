@@ -200,7 +200,7 @@ class Proposal extends Model
      */
     public function hasAdvertiser($advertiser_id)
     {
-        return $this->getAdvertiser()->id == intval($advertiser_id);
+        return $this->getAdvertiser() && $this->getAdvertiser()->id == intval($advertiser_id);
     }
 
     /**

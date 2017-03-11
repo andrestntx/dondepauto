@@ -182,7 +182,7 @@
 				<h1>Propuesta de Medios Publicitarios</h1>	
 			</div>
 			<div class="text-title text-date">
-				<p>Julio 29 del 2016</p>	
+				<p>{{ $proposal->send_at->format('M d, Y')}}</p>	
 			</div>
 		</div>
 
