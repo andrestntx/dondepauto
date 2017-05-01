@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers\Publisher;
 
+use App\Entities\Platform\ConfigModule;
 use App\Repositories\Platform\ActionRepository;
 use App\Repositories\Platform\ContactRepository;
 use App\Repositories\Platform\Space\SpaceCityRepository as CityRepository;
@@ -54,13 +55,15 @@ class ListComposer extends BaseComposer
         $tags           = $this->tagRepository->model->where('type', 'publisher')->orWhere('type', 'all')->lists('name', 'id')->all();
         $cities         = $this->cityRepository->citiesWithSpaces();
         $actionsToday   = $this->contactRepository->getCountActions();
+        $directContact  = ConfigModule::getStartConfig('direct_contact');
 
         $view->with([
             'registrationStates'    => $registrationStates,
             'cities'                => $cities,
             'actions'               => $actions,
             'actionsToday'          => $actionsToday,
-            'tags'                  => $tags
+            'tags'                  => $tags,
+            'directContact'         => $directContact
         ]);
     }
 }
