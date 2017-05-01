@@ -13,7 +13,7 @@ class CreateViewAdvertisersView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW bd_view_advertisers AS (
+            CREATE OR REPLACE VIEW bd_view_advertisers AS (
             select 
                 bd_us_reg_LIST.id_us_LI as id, bd_us_reg_LIST.deleted_at,
                 bd_form_fuente_LI as source,

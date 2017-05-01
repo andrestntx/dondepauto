@@ -13,7 +13,7 @@ class CraeteViewPublishersView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW bd_view_publishers AS (
+            CREATE OR REPLACE VIEW bd_view_publishers AS (
             select 
                 bd_us_reg_LIST.direct_contact,
                 bd_us_reg_LIST.id_us_LI as id, bd_us_reg_LIST.deleted_at,

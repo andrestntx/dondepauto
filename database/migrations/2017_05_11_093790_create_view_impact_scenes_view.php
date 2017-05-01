@@ -13,7 +13,7 @@ class CreateViewImpactScenesView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW bd_view_impact_scenes AS (
+            CREATE OR REPLACE VIEW bd_view_impact_scenes AS (
                 select bd_proposal_space.proposal_id, 
                 bd_tipos_lugares_ubicacion_espacios_LIST.id_tipo_lugar_LI as id, bd_tipos_lugares_ubicacion_espacios_LIST.nombre_tipo_lugar_LI as name
                 FROM bd_view_spaces 

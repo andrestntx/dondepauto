@@ -13,7 +13,7 @@ class CreateViewSpacesView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW bd_view_spaces AS (
+            CREATE VOR REPLACE IEW bd_view_spaces AS (
                 select bd_espacios_ofrecidos_LIST.id_espacio_LI as id, bd_espacios_ofrecidos_LIST.impacto_espacio_LI as impacts, bd_espacios_ofrecidos_LIST.tag_id,
                 bd_cat_espacios_ofrecidos_LIST.id_cat_LI as category_id, bd_cat_espacios_ofrecidos_LIST.nombre_cat_LI as category_name,
                 bd_subcat_espacios_ofrecidos_LIST.id_subcat_LI as sub_category_id, bd_subcat_espacios_ofrecidos_LIST.nombre_subcat_LI as sub_category_name,

@@ -13,7 +13,7 @@ class CreateViewCitiesView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW bd_view_cities AS (
+            CREATE OR REPLACE VIEW bd_view_cities AS (
                 select bd_proposal_space.proposal_id, 
                 bd_ciudades_LIST.id_ciudad_LI as id, bd_ciudades_LIST.nombre_ciudad_LI as name
                 FROM bd_view_spaces 
