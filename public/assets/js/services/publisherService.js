@@ -76,10 +76,10 @@ var PublisherService = function() {
                 }
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-                
+
                 console.log(aData);
                 console.log(aData.has_contact_today);
-                
+
                 if(aData.has_contact_today == 1) {
                     $(nRow).addClass('success');
                 }
@@ -105,7 +105,7 @@ var PublisherService = function() {
                 }
 
                 if(aData.count_logs > 0) {
-                    $('td:eq(6)', nRow).html(UserService.getHtmlLogs(aData.count_logs, aData.last_login_at));                    
+                    $('td:eq(6)', nRow).html(UserService.getHtmlLogs(aData.count_logs, aData.last_login_at));
                 }
 
                 if(aData.contacts && aData.contacts.length > 0) {
@@ -131,9 +131,9 @@ var PublisherService = function() {
 
         $("#publishers-datatable_filter input").bind('keyup', function(e) {
             if(e.keyCode == 13) {
-                table.search(this.value).draw();   
+                table.search(this.value).draw();
             }
-        }); 
+        });
     }
 
     function reload() {
@@ -154,7 +154,7 @@ var PublisherService = function() {
             drawModal(publisher);
         });
 
-        $(".userEditDataAgreementModal #form-edit-data-agreement").click(function() {            
+        $(".userEditDataAgreementModal #form-edit-data-agreement").click(function() {
             UserService.postModal(
                 $(".userEditDataAgreementModal #user_company").attr('data-url'), {
                     'signed_at':        $(".userEditDataAgreementModal #signed_at").val(),
@@ -169,47 +169,47 @@ var PublisherService = function() {
 
         $("#change-documents").click(function() {
             swal({
-                title: '¿Estás seguro?',
-                text: 'El medio podrá editar los datos',
-                type: "warning",
-                confirmButtonText: "Eliminar",
-                confirmButtonColor: "#ed5565",
-                cancelButtonText: "Cancelar",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-                html: true
-            },
-            function(isConfirm) {
-                if (isConfirm) {     
-                    $.ajax({
-                        url: $("#delete_publisher").attr('data-url'),
-                        type: 'DELETE',
-                        success: function(data) {
-                            if(data.success) {
-                                swal({
-                                    "title": "Medio eliminado", 
-                                    "type": "success",
-                                    closeOnConfirm: true,
-                                });
+                    title: '¿Estás seguro?',
+                    text: 'El medio podrá editar los datos',
+                    type: "warning",
+                    confirmButtonText: "Eliminar",
+                    confirmButtonColor: "#ed5565",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        $.ajax({
+                            url: $("#delete_publisher").attr('data-url'),
+                            type: 'DELETE',
+                            success: function(data) {
+                                if(data.success) {
+                                    swal({
+                                        "title": "Medio eliminado",
+                                        "type": "success",
+                                        closeOnConfirm: true,
+                                    });
 
-                                table.search(' ').draw();
-                                $('#userModal').modal('toggle');
+                                    table.search(' ').draw();
+                                    $('#userModal').modal('toggle');
+                                }
+                                else {
+                                    swal({
+                                        "title": "Hubo un error",
+                                        "type": "warning",
+                                        closeOnConfirm: true,
+                                    });
+                                }
                             }
-                            else {
-                                swal({
-                                    "title": "Hubo un error", 
-                                    "type": "warning",
-                                    closeOnConfirm: true,
-                                });
-                            }
-                        }
-                    });
-                }
-                else {
+                        });
+                    }
+                    else {
 
-                } 
-            });
+                    }
+                });
         });
     }
 
@@ -231,7 +231,7 @@ var PublisherService = function() {
                 .attr('src', publisherEdit.logo)
                 .attr('style', 'max-height: 20px; margin-left: 10px;');
 
-            $('#userModal #publisher_logo').html(a);    
+            $('#userModal #publisher_logo').html(a);
         }
 
         /** Commercial state **/
@@ -240,6 +240,24 @@ var PublisherService = function() {
         $('#userModal #discarded').text(publisher.count_discarded_intentions);
 
         $('#delete_publisher').attr("data-url", '/medios/' + publisher.id);
+        $('#publisher_direct_contact').attr("data-url", '/medios/' + publisher.id + '/ajax');
+
+        console.log('DIRECT CONTACT ... ' + publisher.direct_contact);
+
+        if(publisher.direct_contact == 1) {
+            $('#publisher_direct_contact').removeClass('btn-default')
+                .removeClass('btn-success')
+                .addClass('btn-danger')
+                .attr("data-direct-contact", 0);
+        }
+        else {
+            $('#publisher_direct_contact').removeClass('btn-default')
+                .removeClass('btn-danger')
+                .addClass('btn-success')
+                .attr("data-direct-contact", 1);
+        }
+
+        console.log(publisher.direct_contact);
 
         /** Agreement **/
         var input = null;
@@ -266,7 +284,7 @@ var PublisherService = function() {
         $('#userModal #publisher_sw_documents').html("");
 
         if(documents.bank != null || documents.commerce != null || documents.bank != null) {
-            
+
             var inputDocuments = null;
 
             if(publisher.change_documents == 1) {
@@ -284,15 +302,15 @@ var PublisherService = function() {
             inputDocuments.attr("type", "checkbox")
                 .addClass("js-switch js-switch-click")
                 .attr("data-url", "/medios/" + publisher.id + "/change-documents");
-                
+
             $('#userModal #publisher_sw_documents').append(inputDocuments);
         }
-        
+
 
         var elems = Array.prototype.slice.call(document.querySelectorAll(switcheryClass));
 
         elems.forEach(function(html) {
-            var switchery = new Switchery(html, { 
+            var switchery = new Switchery(html, {
                 color: '#1AB394',
                 size: 'small'
             });
@@ -369,85 +387,34 @@ var PublisherService = function() {
 
         var minimalPrices = $(".minimal-price");
         $.each(minimalPrices, function( index, div ) {
-          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+            $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
         });
 
         var markupPrices = $(".markup-price");
         $.each(markupPrices, function( index, div ) {
-          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+            $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
         });
 
         var publicPrices = $(".public-price");
         $.each(publicPrices, function( index, div ) {
-          $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
+            $(this).text(numeral($(this).data('price')).format('$0,0[.]00'));
         });
 
         var markupPers = $(".markup-per");
         $.each(markupPers, function( index, div ) {
-          $(this).text(numeral($(this).data('per')).format('0%'));
+            $(this).text(numeral($(this).data('per')).format('0%'));
         });
     }
 
     function initDeletePublisher() {
-
-        $("#delete_publisher").click(function(e) {   
+        console.log('DELETE.....');
+        $("#delete_publisher").click(function(e) {
             swal({
-                title: '¿Estás seguro?',
-                text: 'El medio será eliminado',
-                type: "warning",
-                confirmButtonText: "Eliminar",
-                confirmButtonColor: "#ed5565",
-                cancelButtonText: "Cancelar",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-                html: true
-            },
-            function(isConfirm) {
-                if (isConfirm) {     
-                    $.ajax({
-                        url: $("#delete_publisher").attr('data-url'),
-                        type: 'DELETE',
-                        success: function(data) {
-                            if(data.success) {
-                                swal({
-                                    "title": "Medio eliminado", 
-                                    "type": "success",
-                                    closeOnConfirm: true,
-                                });
-
-                                table.search(' ').draw();
-                                $('#userModal').modal('toggle');
-                            }
-                            else {
-                                swal({
-                                    "title": "Hubo un error", 
-                                    "type": "warning",
-                                    closeOnConfirm: true,
-                                });
-                            }
-                        }
-                    });
-                }
-                else {
-
-                } 
-            });
-        });
-    };
-
-    function initChangeAgreement() {
-        var manual = false;
-        var changeCheckbox = document.querySelector('#publisher_sw_agreement .js-switch-click');
-
-        changeCheckbox.onchange = function(e) {   
-            if(! manual) {
-                swal({
                     title: '¿Estás seguro?',
-                    text: 'El acuerdo será modificado',
+                    text: 'El medio será eliminado',
                     type: "warning",
-                    confirmButtonText: "Confirmar",
-                    confirmButtonColor: "#FFAC1A",
+                    confirmButtonText: "Eliminar",
+                    confirmButtonColor: "#ed5565",
                     cancelButtonText: "Cancelar",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -455,52 +422,100 @@ var PublisherService = function() {
                     html: true
                 },
                 function(isConfirm) {
-                    if (isConfirm) {     
-                        
-                        var parameters = {"agreement": "0"};
-                        var removeClass = "btn-primary";
-                        var addClass = "btn-danger";
-                        
-                        if(changeCheckbox.checked) {
-                            parameters = {"agreement": "1"};
-                            removeClass = "btn-danger";
-                            addClass = "btn-primary";
-                        }
-                        
-                        $.post($("#publisher_sw_agreement input").attr('data-url'), parameters, function( data ) {
-                            if(data.success) {
-                                $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
-                                reload();
-                                swal("Acuerdo actualizado", "", "success");
-                            }
-                            else{
-                                manual = true;
-                                changeCheckbox.click();
-                                manual = false;
-                                swal("Hubo un error", "", "danger");
+                    if (isConfirm) {
+                        $.ajax({
+                            url: $("#delete_publisher").attr('data-url'),
+                            type: 'DELETE',
+                            success: function(data) {
+                                if(data.success) {
+                                    swal({
+                                        "title": "Medio eliminado",
+                                        "type": "success",
+                                        closeOnConfirm: true,
+                                    });
+
+                                    table.search(' ').draw();
+                                    $('#userModal').modal('toggle');
+                                }
+                                else {
+                                    swal({
+                                        "title": "Hubo un error",
+                                        "type": "warning",
+                                        closeOnConfirm: true,
+                                    });
+                                }
                             }
                         });
-                    } 
-                    else { 
-                        manual = true;
-                        changeCheckbox.click();
-                        manual = false;
-                    } 
+                    }
+                    else {
+
+                    }
                 });
-            } 
-        };
-    }
+        });
+    };
 
-    function initChangeDocuments() {
+    function initDirectContact() {
+
+        console.log('INICIA....');
+
+        $("#publisher_direct_contact").click(function(e) {
+            swal({
+                    title: '¿Estás seguro?',
+                    text: 'Cabmiarás el contacto directo para este medio',
+                    type: "warning",
+                    confirmButtonText: "Cambiar contacto directo",
+                    confirmButtonColor: "#1a7bb9",
+                    cancelButtonText: "Cancelar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                    html: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        $.ajax({
+                            url: $("#publisher_direct_contact").attr('data-url'),
+                            type: 'POST',
+                            data: {
+                                'direct_contact': $("#publisher_direct_contact").attr('data-direct-contact')
+                            },
+                            success: function(data) {
+                                if(data.success) {
+                                    swal({
+                                        "title": "Cambio realizado",
+                                        "type": "success",
+                                        closeOnConfirm: true,
+                                    });
+
+                                    table.search(' ').draw();
+                                    $('#userModal').modal('toggle');
+                                }
+                                else {
+                                    swal({
+                                        "title": "Hubo un error",
+                                        "type": "warning",
+                                        closeOnConfirm: true,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else {
+
+                    }
+                });
+        });
+    };
+
+    function initChangeAgreement() {
         var manual = false;
-        var changeCheckbox = document.querySelector('#publisher_sw_documents .js-switch-click');
+        var changeCheckbox = document.querySelector('#publisher_sw_agreement .js-switch-click');
 
-        if(changeCheckbox) {
-            changeCheckbox.onchange = function(e) {   
-                if(! manual) {
-                    swal({
+        changeCheckbox.onchange = function(e) {
+            if(! manual) {
+                swal({
                         title: '¿Estás seguro?',
-                        text: 'El medio podrá o no subir nuevos documentos',
+                        text: 'El acuerdo será modificado',
                         type: "warning",
                         confirmButtonText: "Confirmar",
                         confirmButtonColor: "#FFAC1A",
@@ -511,30 +526,23 @@ var PublisherService = function() {
                         html: true
                     },
                     function(isConfirm) {
-                        if (isConfirm) {     
-                            
-                            var parameters = {"change_documents": "0"};
+                        if (isConfirm) {
+
+                            var parameters = {"agreement": "0"};
                             var removeClass = "btn-primary";
                             var addClass = "btn-danger";
-                            
+
                             if(changeCheckbox.checked) {
-                                parameters = {"change_documents": "1"};
+                                parameters = {"agreement": "1"};
                                 removeClass = "btn-danger";
                                 addClass = "btn-primary";
                             }
-                            
-                            $.post($("#publisher_sw_documents input").attr('data-url'), parameters, function( data ) {
+
+                            $.post($("#publisher_sw_agreement input").attr('data-url'), parameters, function( data ) {
                                 if(data.success) {
                                     $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
-                                    
-                                    if(changeCheckbox.checked) {
-                                        swal("El medio podrá subir nuevos documentos", "", "success");
-                                    }
-                                    else {
-                                        swal("El medio ya no podrá subir nuevos documentos", "", "success");
-                                    }
-
                                     reload();
+                                    swal("Acuerdo actualizado", "", "success");
                                 }
                                 else{
                                     manual = true;
@@ -543,17 +551,80 @@ var PublisherService = function() {
                                     swal("Hubo un error", "", "danger");
                                 }
                             });
-                        } 
-                        else { 
+                        }
+                        else {
                             manual = true;
                             changeCheckbox.click();
                             manual = false;
-                        } 
+                        }
                     });
-                } 
-            };    
+            }
+        };
+    }
+
+    function initChangeDocuments() {
+        var manual = false;
+        var changeCheckbox = document.querySelector('#publisher_sw_documents .js-switch-click');
+
+        if(changeCheckbox) {
+            changeCheckbox.onchange = function(e) {
+                if(! manual) {
+                    swal({
+                            title: '¿Estás seguro?',
+                            text: 'El medio podrá o no subir nuevos documentos',
+                            type: "warning",
+                            confirmButtonText: "Confirmar",
+                            confirmButtonColor: "#FFAC1A",
+                            cancelButtonText: "Cancelar",
+                            showCancelButton: true,
+                            closeOnConfirm: false,
+                            showLoaderOnConfirm: true,
+                            html: true
+                        },
+                        function(isConfirm) {
+                            if (isConfirm) {
+
+                                var parameters = {"change_documents": "0"};
+                                var removeClass = "btn-primary";
+                                var addClass = "btn-danger";
+
+                                if(changeCheckbox.checked) {
+                                    parameters = {"change_documents": "1"};
+                                    removeClass = "btn-danger";
+                                    addClass = "btn-primary";
+                                }
+
+                                $.post($("#publisher_sw_documents input").attr('data-url'), parameters, function( data ) {
+                                    if(data.success) {
+                                        $("#userModal .fa.fa-file-text-o").parent().removeClass(removeClass).addClass(addClass);
+
+                                        if(changeCheckbox.checked) {
+                                            swal("El medio podrá subir nuevos documentos", "", "success");
+                                        }
+                                        else {
+                                            swal("El medio ya no podrá subir nuevos documentos", "", "success");
+                                        }
+
+                                        reload();
+                                    }
+                                    else{
+                                        manual = true;
+                                        changeCheckbox.click();
+                                        manual = false;
+                                        swal("Hubo un error", "", "danger");
+                                    }
+                                });
+                            }
+                            else {
+                                manual = true;
+                                changeCheckbox.click();
+                                manual = false;
+                            }
+                        });
+                }
+            };
         }
-        
+
     }
 
     return {
@@ -563,6 +634,7 @@ var PublisherService = function() {
             initSearchDateRanges();
             initModalEvent();
             initDeletePublisher();
+            initDirectContact();
             UserService.initActionNotifications(16);
             UserService.initChangeTag();
         },
