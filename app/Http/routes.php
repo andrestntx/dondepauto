@@ -19,6 +19,11 @@ Carbon::setLocale('es');
 
 Route::auth();
 
+Route::post('config-modules/start', [
+    'as'    => 'config-modules.start',
+    'uses' => 'ServicesController@startConfig'
+]);
+
 /**
  * Anunciantes
  */
@@ -127,6 +132,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
     Route::group(['middleware' => 'role:director;admin'], function() {
+
+
+
         Route::resource('directores', 'Admin\DirectorsController', ['parameters' => [
             'directores' => 'directors'
         ]]);
@@ -240,6 +248,7 @@ Route::group(['middleware' => 'auth'], function(){
             'as'    => 'espacios.ajax',
             'uses' => 'Admin\SpacesController@ajax'
         ]);
+
 
         Route::post('espacios/{spaces}/tag', [
             'as'    => 'spaces.tag',
@@ -416,7 +425,7 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Publisher\PublishersController@completeAgreement',
             'as' => 'medios.agreement.complete'
         ]);
-        
+
         Route::post('medios/{publishers}/acuerdo/completar', [
             'uses' => 'Publisher\PublishersController@postCompleteAgreement',
             'as' => 'medios.agreement.complete.docs'
@@ -486,14 +495,14 @@ Route::group(['middleware' => 'auth'], function(){
             'as' => 'medios.espacios.update',
             'uses' => 'Publisher\PublishersSpacesController@update'
         ]);
-        
+
         Route::resource('medios.espacios', 'Publisher\PublishersSpacesController',
             ['parameters' => [
                 'medios'    => 'publishers',
                 'espacios'  => 'spaces'
             ],
-            'except' => 'update'
-        ]);
+                'except' => 'update'
+            ]);
 
         Route::post('medios/{publishers}/account', [
             'uses' => 'Publisher\PublishersController@updateAccount',
@@ -503,7 +512,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'email'], function() {
 
             Route::get('completar-registro', function(){
-               return redirect()->route('medios.account', auth()->user()->publisher);
+                return redirect()->route('medios.account', auth()->user()->publisher);
             });
 
             Route::get('presentar-ofertas', function(){
@@ -526,8 +535,8 @@ Route::group(['prefix' => 'landing'], function(){
 
 Route::get('metricas/espacios', function(\Illuminate\Http\Request $request){
     return DB::table('view_spaces')
-            ->select(\DB::raw("COUNT(*) as espacios_publicados"))
-            ->where("created_at", ">=", $request->get('start'))
-            ->where("created_at", "<=", $request->get('end'))
-            ->get();
+        ->select(\DB::raw("COUNT(*) as espacios_publicados"))
+        ->where("created_at", ">=", $request->get('start'))
+        ->where("created_at", "<=", $request->get('end'))
+        ->get();
 });
