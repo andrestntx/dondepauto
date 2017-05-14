@@ -158,7 +158,10 @@
             </div>
 
             <div class="modal-footer">
-                <a href="#" id="publisher_direct_contact" data-url="0" data-direct-contact=0 class="btn btn-default" > <i class="fa fa-power-off"></i> Contacto Directo </a>
+                <a href="#" id="publisher_direct_contact" data-url="0" data-direct-contact=0 class="btn btn-default" data-toggle="tooltip" data-placement="top" title="..."> 
+                    <i class="fa fa-power-off"></i> 
+                    Contacto Directo 
+                </a>
 
                 <a href="#" class="btn btn-info" id="link-spaces" target="_blank">
                     <i class="fa fa-newspaper-o"></i>

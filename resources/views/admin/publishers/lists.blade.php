@@ -1,15 +1,16 @@
 @extends('layouts.admin')
 
 @section('action')
+
     <ul class="nav navbar-top-links navbar-right  ">
         @include('admin.users.notifications')
         <li style="vertical-align:middle;">
             @if($directContact)
-                <button class="btn btn-success" id="form-start-direct-contact" data-url="{{ route('config-modules.start') }}" data-start=0>
+                <button class="btn btn-success" id="form-start-direct-contact" data-url="{{ route('config-modules.start') }}" data-start=0 data-toggle="tooltip" data-placement="top" title="CD ACTIVO">
                     <i class="fa fa-power-off"> </i> Contacto Directo
                 </button>
             @else
-                <button class="btn btn-danger" id="form-start-direct-contact" data-url="{{ route('config-modules.start') }}" data-start=1>
+                <button class="btn btn-danger" id="form-start-direct-contact" data-url="{{ route('config-modules.start') }}" data-start=1 data-toggle="tooltip" data-placement="top" title="CD DESACTIVADO">
                     <i class="fa fa-power-off"> </i> Contacto Directo
                 </button>
             @endif
@@ -338,10 +339,14 @@
                     if(data.success) {
                         if(start == 1) {
                             button.attr('data-start', 0);
+                            button.attr('title', 'CD ACTIVO');
+                            button.attr('data-original-title', 'CD ACTIVO');
                             $("#form-start-direct-contact").removeClass('btn-danger').addClass('btn-success');
                         }
                         else {
                             button.attr('data-start', 1);
+                            button.attr('title', 'CD DESACTIVADO');
+                            button.attr('data-original-title', 'CD DESACTIVADO');
                             $("#form-start-direct-contact").removeClass('btn-success').addClass('btn-danger');
                         }
                     }

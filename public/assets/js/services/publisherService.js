@@ -243,18 +243,27 @@ var PublisherService = function() {
         $('#publisher_direct_contact').attr("data-url", '/medios/' + publisher.id + '/ajax');
 
         console.log('DIRECT CONTACT ... ' + publisher.direct_contact);
+        console.log(publisher);
 
         if(publisher.direct_contact == 1) {
             $('#publisher_direct_contact').removeClass('btn-default')
-                .removeClass('btn-success')
-                .addClass('btn-danger')
-                .attr("data-direct-contact", 0);
+                .removeClass('btn-danger')
+                .addClass('btn-success')
+                .attr("data-direct-contact", 0)
+                .attr("title", "CD ACTIVO")
+                .attr('data-original-title', 'CD ACTIVO');
+
+                console.log('MEDIO ACTIVO success');
         }
         else {
             $('#publisher_direct_contact').removeClass('btn-default')
-                .removeClass('btn-danger')
-                .addClass('btn-success')
-                .attr("data-direct-contact", 1);
+                .removeClass('btn-success')
+                .addClass('btn-danger')
+                .attr("data-direct-contact", 1)
+                .attr("title", "CD DESACTIVADO")
+                .attr('data-original-title', 'CD DESACTIVADO');
+
+            console.log('MEDIO DESACTIVADO danger');
         }
 
         console.log(publisher.direct_contact);
@@ -459,12 +468,22 @@ var PublisherService = function() {
         console.log('INICIA....');
 
         $("#publisher_direct_contact").click(function(e) {
+            var directContactMessageButton = "ACTIVAR Contacto Directo";
+            var confirmButtonColor = "#1a7bb9";
+
+            var actualDirectContact = $("#publisher_direct_contact").attr('data-direct-contact');
+
+            if(actualDirectContact == 0) {
+                directContactMessageButton = "DESACTIVAR Contacto Directo";
+                confirmButtonColor = "#ed5565";
+            }
+
             swal({
                     title: '¿Estás seguro?',
                     text: 'Cabmiarás el contacto directo para este medio',
                     type: "warning",
-                    confirmButtonText: "Cambiar contacto directo",
-                    confirmButtonColor: "#1a7bb9",
+                    confirmButtonText: directContactMessageButton,
+                    confirmButtonColor: confirmButtonColor,
                     cancelButtonText: "Cancelar",
                     showCancelButton: true,
                     closeOnConfirm: false,
