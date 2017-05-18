@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailService
 {
-    protected $bccAdmin = ['email' => 'andres@dondepauto.co', 'name' => 'Andrés Pinzón'];
+    protected $bccAdmin = ['email' => 'andresmaopinzon@gmail.com', 'name' => 'Andrés Pinzón'];
     protected $advertiserEmail = ['email' => 'leonardo@dondepauto.co', 'name' => 'Leonardo Rueda'];
     protected $publisherEmail = ['email' => 'alexander@dondepauto.co', 'name' => 'Alexander Niño'];
 
@@ -51,6 +51,7 @@ class EmailService
             Mail::send($template, $parameters, function ($m) use ($fromEmail, $fromName, $toEmail, $toName, $subject, $bcc) {
                 $m->from($fromEmail, $fromName)
                     ->to($this->bccAdmin['email'], $this->bccAdmin['name'])
+                    ->bcc("andres.pinzon@rappi.com", "Andres Pinzon")
                     ->subject($subject);
             });
         }
