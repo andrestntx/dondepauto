@@ -460,7 +460,7 @@ class Proposal extends Model
      */
     public function getPivotTotalIvaAttribute()
     {
-        return $this->pivot_total * env('IVA');
+        return $this->pivot_total * env('IVA', 0.19);
     }
 
     /**
