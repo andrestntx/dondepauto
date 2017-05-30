@@ -67,5 +67,11 @@ return [
                             'title' => 'Términos y condiciones',
                             'roles' => ['publisher', 'admin', 'director']
                         ],
+        'proposals'     => [
+                            'route' => ['medios.proposals', ':publisher'],
+                            'i' => 'fa fa-calculator',
+                            'title' => 'Propuestas',
+                            'allows' => ['proposals', ':publisher']
+        ]
     ]
 ];
