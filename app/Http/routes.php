@@ -206,11 +206,6 @@ Route::group(['middleware' => 'auth'], function(){
             'as'    => 'medios.agreement',
             'uses' => 'Admin\PublishersController@checkAgreement'
         ]);
-
-        Route::get('medios/{publishers}/proposals', [
-            'as'    => 'medios.proposals',
-            'uses' => 'Admin\PublishersController@getProposals'
-        ]);
     });
 
     Route::group(['middleware' => 'role:director;admin;adviser'], function() {
@@ -394,6 +389,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('medios/{publishers}/faqs', [
             'as'    => 'medios.faqs',
             'uses' => 'Publisher\PublishersController@faqs'
+        ]);
+
+        Route::get('medios/{publishers}/proposals', [
+            'as'    => 'medios.proposals',
+            'uses' => 'Admin\PublishersController@getProposals'
         ]);
 
         Route::get('medios/{publisher}/espacios/search', [
