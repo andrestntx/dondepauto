@@ -72,7 +72,14 @@ class AdvertisersController extends ResourceController
      */
     public function search(Request $request)
     {
-        return $this->datatableFacade->searchAdvertisers(null, $request->get('columns'), $request->get('search')['value'], $request->get('init'), $request->get('finish'), $request->all());
+        return response()->json($this->datatableFacade->searchAdvertisers(
+            null, 
+            $request->get('columns'), 
+            $request->get('search')['value'], 
+            $request->get('init'), 
+            $request->get('finish'), 
+            $request->all()
+        ));
     }
 
     /**
