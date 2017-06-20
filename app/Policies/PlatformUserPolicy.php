@@ -57,6 +57,8 @@ class PlatformUserPolicy
         if($user->user_platform_id == $publisher->id && $directContact && $publisher->direct_contact) {
             return true;
         }
+
+        return true;
     }
 
     /**

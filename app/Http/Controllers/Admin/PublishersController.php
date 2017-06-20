@@ -92,10 +92,7 @@ class PublishersController extends ResourceController
      */
     public function getProposals(User $publisher)
     {
-        return response()->json([
-            'result' => true,
-            'publisher' => $publisher->id
-        ]);
+        return view('publisher.proposals');
     }
 
     /**

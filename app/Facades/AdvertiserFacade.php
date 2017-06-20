@@ -222,9 +222,14 @@ class AdvertiserFacade extends UserFacade
         $this->quoteService->addCities($quote, $data['cities']);
         //$this->quoteService->addAudiences($quote, $data['audiences']);
 
-        $this->proposalService->createModel(['quote_id' => $quote->id, 'title' => $data['title']]);
+        $proposal = $this->proposalService->createModel(['quote_id' => $quote->id, 'title' => $data['title']]);
 
-        return ['contact' => $contact, 'quote' => $quote];
+        if(isset($data['publisher_id'])) {
+            $proposal->publisher_id = $data['publisher_id'];
+            $proposal->save();
+        }
+
+        return ['contact' => $contact, 'quote' => $quote, 'proposal' => $proposal];
     }
 
     /**
