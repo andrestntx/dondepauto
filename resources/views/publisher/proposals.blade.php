@@ -29,31 +29,23 @@
     <div class="dashboard">
         <div class="row">
             <div class="col-xs-12">
-                <div class="wrapper wrapper-content animated fadeIn">
+                <div class="ibox-content">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="ibox">
-                                <div class="ibox-content">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-xs-6">
-                                            {!!  Breadcrumbs::render('proposals') !!}
-                                        </div>
-                                        <div class="col-sm-2 col-xs-6 sum_total_proposal">
-                                            <p># Propuestas: <span id="total_proposals"></span> </p>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-6 sum_total_proposal">
-                                            <p>$ Propuestas: <span id="total_price_proposals"></span> </p>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-6 sum_total_proposal">
-                                            <p>$ Incentivo: <span id="total_income_proposals"></span> </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-sm-2 col-xs-6">
+                            {!!  Breadcrumbs::render('proposals') !!}
+                        </div>
+                        <div class="col-sm-2 col-xs-6 sum_total_proposal">
+                            <p># Propuestas: <span id="total_proposals"></span> </p>
+                        </div>
+                        <div class="col-sm-4 col-xs-6 sum_total_proposal">
+                            <p>$ Propuestas: <span id="total_price_proposals"></span> </p>
+                        </div>
+                        <div class="col-sm-4 col-xs-6 sum_total_proposal">
+                            <p>$ Incentivo: <span id="total_income_proposals"></span> </p>
                         </div>
                     </div>
                 </div>
-
+                            
                 <div class="wrapper wrapper-content animated fadeIn">
                     <div class="row">
                         <div class="col-md-12 list-proposal" id="urlSearch">
