@@ -1,4 +1,4 @@
-@extends('layouts.publisher')
+@extends('layouts.publisher-datatable')
 
 @section('extra-css')
     <!-- Sweet Alert -->
