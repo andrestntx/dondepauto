@@ -30,9 +30,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="wrapper wrapper-content animated fadeIn">
-                    <div class="row">
-                        <div class="inbox">
-                            <div class="inbox-content">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
                                 <div class="col-sm-2 col-xs-6">
                                     {!!  Breadcrumbs::render('proposals') !!}
                                 </div>
