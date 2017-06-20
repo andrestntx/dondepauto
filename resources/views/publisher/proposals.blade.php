@@ -26,37 +26,45 @@
 @endsection
 
 @section('content')
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-2 col-xs-6">
-            {!!  Breadcrumbs::render('proposals') !!}
-        </div>
-        <div class="col-sm-2 col-xs-6 sum_total_proposal">
-            <p># Propuestas: <span id="total_proposals"></span> </p>
-        </div>
-        <div class="col-sm-4 col-xs-6 sum_total_proposal">
-            <p>$ Propuestas: <span id="total_price_proposals"></span> </p>
-        </div>
-        <div class="col-sm-4 col-xs-6 sum_total_proposal">
-            <p>$ Incentivo: <span id="total_income_proposals"></span> </p>
-        </div>
-    </div>
-
-    <div class="wrapper wrapper-content animated fadeIn">
+    <div class="dashboard">
         <div class="row">
-            <div class="col-md-12 list-proposal" id="urlSearch">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        
-                        <div class="row">
+            <div class="col-xs-12">
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-sm-2 col-xs-6">
+                        {!!  Breadcrumbs::render('proposals') !!}
+                    </div>
+                    <div class="col-sm-2 col-xs-6 sum_total_proposal">
+                        <p># Propuestas: <span id="total_proposals"></span> </p>
+                    </div>
+                    <div class="col-sm-4 col-xs-6 sum_total_proposal">
+                        <p>$ Propuestas: <span id="total_price_proposals"></span> </p>
+                    </div>
+                    <div class="col-sm-4 col-xs-6 sum_total_proposal">
+                        <p>$ Incentivo: <span id="total_income_proposals"></span> </p>
+                    </div>
+                </div>
 
+                <div class="wrapper wrapper-content animated fadeIn">
+                    <div class="row">
+                        <div class="col-md-12 list-proposal" id="urlSearch">
+                            <div class="ibox">
+                                <div class="ibox-content">
+                                    
+                                    <div class="row">
+
+                                    </div>
+
+                                    @include('admin.proposals.table')
+                                </div>
+                            </div>
                         </div>
-
-                        @include('admin.proposals.table')
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+    
 @endsection
 
 
