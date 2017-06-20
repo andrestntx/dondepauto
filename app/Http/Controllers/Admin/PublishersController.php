@@ -92,7 +92,9 @@ class PublishersController extends ResourceController
      */
     public function getProposals(User $publisher)
     {
-        return view('publisher.proposals');
+        return view('publisher.proposals')->with([
+            'publisher' => $publisher
+        ]);
     }
 
     /**

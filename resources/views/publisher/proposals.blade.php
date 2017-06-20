@@ -26,7 +26,7 @@
 @endsection
 
 @section('container')
-    <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="row wrapper border-bottom white-bg page-heading" id="publisher" data-publisher="{{$publisher->id}}">
         <div class="col-sm-2 col-xs-6">
             {!!  Breadcrumbs::render('proposals') !!}
         </div>
@@ -69,7 +69,9 @@
     
     <script>
         $(document).ready(function() {
-            QuoteService.init('/propuestas/search');
+            var publisher = $("#publisher").data('publisher');
+
+            QuoteService.init('propuestas/search/' + publisher);
         });
     </script>
 
