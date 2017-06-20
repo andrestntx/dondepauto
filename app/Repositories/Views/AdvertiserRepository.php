@@ -135,7 +135,7 @@ class AdvertiserRepository extends BaseRepository
             $advertiserQuery->whereUserId($user->id);
         }
 
-        return $advertiserQuery->orderBy('created_at', 'desc')->take(10)->get();
+        return $advertiserQuery->orderBy('created_at', 'desc')->take(50)->get();
     }
 
     /**
