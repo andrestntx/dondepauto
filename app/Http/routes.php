@@ -401,6 +401,11 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@getProposals'
         ]);
 
+        Route::get('medios/{publishers/}proposals/search', [
+            'as'    => 'medios.proposals.search',
+            'uses'  => 'Admin\ProposalsController@searchByPublisher'
+        ]);
+
         Route::get('medios/{publisher}/espacios/search', [
             'as'    => 'medios.espacios.search',
             'uses' => 'Admin\PublishersController@searchSpaces'

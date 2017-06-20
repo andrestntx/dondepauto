@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Entities\Platform\Space\Space;
+use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
 use App\Facades\AdvertiserFacade;
 use App\Facades\DatatableFacade;
@@ -160,6 +161,15 @@ class ProposalsController extends Controller
      * @return mixed
      */
     public function search(Request $request)
+    {
+        return $this->datatableFacade->searchProposals($request->get('columns'), $request->get('search')['value'], $request->all());
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchByPublisher(Request $request, User $publisher)
     {
         return $this->datatableFacade->searchProposals($request->get('columns'), $request->get('search')['value'], $request->all());
     }

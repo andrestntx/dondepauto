@@ -69,7 +69,7 @@
     
     <script>
         $(document).ready(function() {
-            QuoteService.init('search');
+            QuoteService.init('propuestas/search');
         });
     </script>
 
