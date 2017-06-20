@@ -43,6 +43,19 @@ class QuotesController extends Controller
     public function store(StoreRequest $request, User $advertiser)
     {
         $result = $this->advertiserFacade->createQuote($advertiser, $request->all(), $request->get('questions'), $request->get('action_date'), $request->get('contact_type'));
+
+        return array_merge($result, ['success' => 'true']);
+    }
+
+    /**
+     * @param Request $request
+     * @param User $advertiser
+     * @return array
+     */
+    public function freeStore(Request $request, User $advertiser)
+    {
+        $result = $this->advertiserFacade->createQuote($advertiser, $request->all(), $request->get('questions'), $request->get('action_date'), $request->get('contact_type'));
+
         return array_merge($result, ['success' => 'true']);
     }
 

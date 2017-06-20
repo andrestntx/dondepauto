@@ -24,6 +24,11 @@ Route::post('config-modules/start', [
     'uses' => 'ServicesController@startConfig'
 ]);
 
+Route::post('api/anunciantes/{publishers}/free-quote', [
+    'as'    => 'api.quotes.store',
+    'uses'  => 'Admin\QuotesController@freeStore'
+]);
+
 /**
  * Anunciantes
  */

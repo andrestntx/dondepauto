@@ -42,7 +42,7 @@ class AdvertiserFacade extends UserFacade
                                 ConfirmationService $confirmationService, MixpanelService $mixpanelService,
                                 MailchimpService $mailchimpService, ProposalService $proposalService, UserService $userService,
                                 ContactService $contactService, UserPlatformService $userPlatformService, QuoteService $quoteService,
-                                ProposalService $proposalService, FilterCollectionService $filterCollectionService)
+                                FilterCollectionService $filterCollectionService)
     {
         $this->advertiserService = $advertiserService;
         $this->emailService = $emailService;
@@ -211,8 +211,11 @@ class AdvertiserFacade extends UserFacade
             unset($questions[0]);
         }
 
+
         $contact = $this->createQuoteContact($advertiser, $action_date, $contact_type, $data['title']);
-        $quote   = $this->advertiserService->createQuote($advertiser, $data + ['sent_at' => $contact->action->action_at_datetime]);
+        $actionAt = $contact->action ? $contact->action->action_at_datetime : $contact->created_at;
+
+        $quote   = $this->advertiserService->createQuote($advertiser, $data + ['sent_at' => $actionAt]);
         $this->advertiserService->updateModel(['comments' => $data['advertiser_comments']], $advertiser);
 
         $this->quoteService->addQuestions($quote, $questions);

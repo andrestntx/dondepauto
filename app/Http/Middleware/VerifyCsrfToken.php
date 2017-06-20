@@ -15,6 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
         'genealabs/laravel-mixpanel/*',
         'landing/*',
         'medios/login/*',
-        'mailchimp/*'
+        'mailchimp/*',
+        'api/*'
     ];
 }
