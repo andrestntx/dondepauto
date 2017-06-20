@@ -401,7 +401,7 @@ Route::group(['middleware' => 'auth'], function(){
             'uses' => 'Admin\PublishersController@getProposals'
         ]);
 
-        Route::get('medios/{publishers/}proposals/search', [
+        Route::get('medios/{publishers}/proposals/search', [
             'as'    => 'medios.proposals.search',
             'uses'  => 'Admin\ProposalsController@searchByPublisher'
         ]);
