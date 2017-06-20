@@ -25,7 +25,7 @@
     </style>
 @endsection
 
-@section('container')
+@section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-2 col-xs-6">
             {!!  Breadcrumbs::render('proposals') !!}
