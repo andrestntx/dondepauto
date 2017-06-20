@@ -21,15 +21,6 @@ class Advertiser extends PUser
      */
     protected $table = 'view_advertisers';
 
-    protected $hidden = array(
-        'password',
-        'remember_token',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-        'completed_at'
-    );
-
     /**
      * The accessors to append to the model's array form.
      *

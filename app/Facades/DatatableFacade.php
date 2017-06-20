@@ -156,6 +156,7 @@ class DatatableFacade
     public function searchAdvertisers(User $user = null, array $columns, $search = '', $init, $finish, array $inputs)
     {
         $advertisers = $this->advertiserFacade->searchAndFilter($user, $this->getDataColumns($columns), $search, $init, $finish);
+
         return $this->getJsonResponse($advertisers, 100, $inputs, $columns);
     }
 
