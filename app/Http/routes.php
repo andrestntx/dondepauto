@@ -348,11 +348,6 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@delete'
         ]);
 
-        Route::get('propuestas/{proposals}', [
-            'as'    => 'proposals.show',
-            'uses'  => 'Admin\ProposalsController@show'
-        ]);
-
         Route::post('propuestas/agregar/{spaces}', [
             'as'    => 'proposals.spaces.add',
             'uses'  => 'Admin\ProposalsController@add'
@@ -391,6 +386,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::group(['middleware' => 'role:director;admin;adviser;publisher'], function() {
 
+        Route::get('propuestas/{proposals}', [
+            'as'    => 'proposals.show',
+            'uses'  => 'Admin\ProposalsController@show'
+        ]);
+        
         Route::get('medios/{publishers}/faqs', [
             'as'    => 'medios.faqs',
             'uses' => 'Publisher\PublishersController@faqs'
