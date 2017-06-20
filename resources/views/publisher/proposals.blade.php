@@ -1,4 +1,4 @@
-@extends('layouts.admin-simple')
+@extends('layouts.publisher')
 
 @section('extra-css')
     <!-- Sweet Alert -->

@@ -11,6 +11,7 @@ namespace App\Facades;
 
 use App\Entities\Platform\Space\Space;
 use App\Entities\Proposal\Proposal;
+use App\Entities\Platform\User;
 use App\Services\EmailService;
 use App\Services\FilterCollectionService;
 use App\Services\ProposalService;
@@ -50,7 +51,7 @@ class ProposalFacade
      * @param $search
      * @return mixed
      */
-    public function search(array $columns, $search)
+    public function search(array $columns, $search, User $publiser = null)
     {
         return $this->service->search($columns, $search);
     }
@@ -60,9 +61,9 @@ class ProposalFacade
      * @param $search
      * @return mixed
      */
-    public function searchAndFilter(array $columns, $search)
+    public function searchAndFilter(array $columns, $search, User $publiser)
     {
-        return $this->filterCollectionService->filterProposalCollection($this->search($columns, $search), $columns);
+        return $this->filterCollectionService->filterProposalCollection($this->search($columns, $search, $publisher), $columns);
     }
 
     /**

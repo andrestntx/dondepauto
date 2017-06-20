@@ -180,9 +180,9 @@ class DatatableFacade
      * @param array $inputs
      * @return mixed
      */
-    public function searchProposals(array $columns, $search = '', array $inputs)
+    public function searchProposals(array $columns, $search = '', array $inputs, User $publisher = null)
     {
-        $proposals = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search);
+        $proposals = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search, $publisher);
         
         return array_merge($this->getJsonResponse($proposals, 100, $inputs, $columns), [
             'total_price' => $proposals->sum('pivot_total'),

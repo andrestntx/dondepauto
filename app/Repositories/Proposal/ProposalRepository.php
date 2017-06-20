@@ -31,7 +31,7 @@ class ProposalRepository extends BaseRepository
      * @param string $search
      * @return mixed
      */
-    public function search(array $data, $search = '')
+    public function search(array $data, $search = '', User $publisher = null)
     {
         $query = $this->model->with([
             'quote.advertiser',
@@ -47,6 +47,10 @@ class ProposalRepository extends BaseRepository
                 $q->where('title', 'LIKE', '%' . $search . '%')
                     ->orWhere('observations', 'LIKE', '%' . $search . '%');
             });
+        }
+
+        if(isset($publisher)) {
+           $query = $query->wherePublisherId($publisher->id); 
         }
 
         return $query->orderBy('proposals.created_at', 'desc')->get();
