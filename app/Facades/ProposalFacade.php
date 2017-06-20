@@ -61,7 +61,7 @@ class ProposalFacade
      * @param $search
      * @return mixed
      */
-    public function searchAndFilter(array $columns, $search, User $publisher)
+    public function searchAndFilter(array $columns, $search, $publisher)
     {
         return $this->filterCollectionService->filterProposalCollection($this->search($columns, $search, $publisher), $columns);
     }
