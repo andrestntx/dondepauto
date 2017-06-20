@@ -328,11 +328,6 @@ Route::group(['middleware' => 'auth'], function(){
             'uses'  => 'Admin\ProposalsController@observationFileDelete'
         ]);
 
-        Route::get('propuestas/{proposals}/search', [
-            'as'    => 'proposals.spaces.search',
-            'uses'  => 'Admin\ProposalsController@searchSpaces'
-        ]);
-
         Route::post('propuestas/{proposals}/send', [
             'as'    => 'proposals.send',
             'uses'  => 'Admin\ProposalsController@send'
@@ -390,7 +385,12 @@ Route::group(['middleware' => 'auth'], function(){
             'as'    => 'proposals.show',
             'uses'  => 'Admin\ProposalsController@show'
         ]);
-        
+
+        Route::get('propuestas/{proposals}/search', [
+            'as'    => 'proposals.spaces.search',
+            'uses'  => 'Admin\ProposalsController@searchSpaces'
+        ]);
+
         Route::get('medios/{publishers}/faqs', [
             'as'    => 'medios.faqs',
             'uses' => 'Publisher\PublishersController@faqs'
