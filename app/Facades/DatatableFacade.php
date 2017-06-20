@@ -180,7 +180,7 @@ class DatatableFacade
      * @param array $inputs
      * @return mixed
      */
-    public function searchProposals(array $columns, $search = '', array $inputs, User $publisher = null)
+    public function searchProposals(array $columns, $search = '', array $inputs, $publisher = null)
     {
         $proposals = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search, $publisher);
         

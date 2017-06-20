@@ -45,7 +45,7 @@ class ProposalService extends ResourceService
      * @param string $search
      * @return mixed
      */
-    public function search(array $columns = null, $search = '', User $publisher = null)
+    public function search(array $columns = null, $search = '', $publisher = null)
     {
         return $this->repository->search($columns, $search, $publisher);
     }

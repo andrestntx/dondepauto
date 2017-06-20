@@ -171,7 +171,7 @@ class ProposalsController extends Controller
      */
     public function searchByPublisher(Request $request, User $publisher)
     {
-        return $this->datatableFacade->searchProposals($request->get('columns'), $request->get('search')['value'], $request->all());
+        return $this->datatableFacade->searchProposals($request->get('columns'), $request->get('search')['value'], $request->all(), $publisher);
     }
 
     /**

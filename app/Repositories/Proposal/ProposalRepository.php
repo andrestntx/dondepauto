@@ -31,7 +31,7 @@ class ProposalRepository extends BaseRepository
      * @param string $search
      * @return mixed
      */
-    public function search(array $data, $search = '', User $publisher = null)
+    public function search(array $data, $search = '', $publisher = null)
     {
         $query = $this->model->with([
             'quote.advertiser',

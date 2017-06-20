@@ -51,7 +51,7 @@ class ProposalFacade
      * @param $search
      * @return mixed
      */
-    public function search(array $columns, $search, User $publiser = null)
+    public function search(array $columns, $search, $publiser = null)
     {
         return $this->service->search($columns, $search);
     }
