@@ -53,7 +53,7 @@ class ProposalRepository extends BaseRepository
            $query = $query->wherePublisherId($publisher->id); 
         }
 
-        return $query->orderBy('proposals.created_at', 'desc')->get();
+        return $query->orderBy('proposals.created_at', 'desc')->take(50)->get();
     }
 
     /**

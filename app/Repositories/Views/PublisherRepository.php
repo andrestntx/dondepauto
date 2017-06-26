@@ -116,7 +116,7 @@ class PublisherRepository extends BaseRepository
             $publisherQuery->where('signed_agreement', '=', $data['signed_agreement']);
         }
 
-        return $publisherQuery->get();
+        return $publisherQuery->take(50)->get();
     }
 
     protected function searchDateRange($search, $name, &$publisherQuery)
