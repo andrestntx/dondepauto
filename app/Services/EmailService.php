@@ -20,7 +20,7 @@ class EmailService
 {
     protected $bccAdmin = ['email' => 'andresmaopinzon@gmail.com', 'name' => 'Andrés Pinzón'];
     protected $advertiserEmail = ['email' => 'leonardo@dondepauto.co', 'name' => 'Leonardo Rueda'];
-    protected $publisherEmail = ['email' => 'alexander@dondepauto.co', 'name' => 'Alexander Niño'];
+    protected $publisherEmail = ['email' => 'leonardo@dondepauto.co', 'name' => 'Leonardo Rueda'];
 
 
     /**
