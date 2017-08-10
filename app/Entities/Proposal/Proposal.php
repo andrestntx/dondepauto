@@ -10,6 +10,7 @@ namespace App\Entities\Proposal;
 
 use App\Entities\Platform\Contact;
 use App\Entities\Platform\Space\Space;
+use App\Entities\Views\Advertiser;
 use App\Entities\Views\Audience;
 use App\Entities\Views\City;
 use App\Entities\Views\ImpactScene;
@@ -160,7 +161,9 @@ class Proposal extends Model
      */
     public function getAdvertiser()
     {
-        return $this->quote->advertiser;
+        $advertiser = $this->quote->advertiser;
+
+        return is_null($advertiser) ? new Advertiser() : $advertiser;
     }
 
     /**
