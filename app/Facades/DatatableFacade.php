@@ -114,21 +114,32 @@ class DatatableFacade
     private function getJsonResponse(Collection $collection, $items, $input, array $columns)
     {
         $collection = $this->orderCollection($collection, $this->getOrderColumnName($input, $columns), $this->getOrderDescending($input));
-
-        if($input['start'] == 0) {
-            $page = 1;
-        }
-        else {
-            $page = (intval($input["start"]) / intval($input['length'])) + 1;
-        }
+        $length = $this->getLength(intval($input['length']));
+        $page = $this->getPage(intval($input['start'], $length));
 
         return [
             "draw"          => $input['draw'],
             "recordsTotal"  => $collection->count(),
             "recordsFiltered" => $collection->count(),
-            "data"          => array_values($collection->forPage($page, $input["length"])->toArray()),
+            "data"          => $collection->forPage($page, $length)->all(),
             "input"         => $input
         ];
+    }
+
+    private function getLength($length = 20)
+    {
+        return ($length <= 20) ? $length : 20;
+    }
+
+    private function getPage($start = 0, $length = 20)
+    {
+        $page = 1;
+
+        if($start > 0) {
+            $page = ($start / $length) + 1;
+        }
+
+        return $page;
     }
 
     /**
