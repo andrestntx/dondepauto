@@ -121,7 +121,7 @@ class DatatableFacade
             "draw"          => $input['draw'],
             "recordsTotal"  => $collection->count(),
             "recordsFiltered" => $collection->count(),
-            "data"          => $collection->forPage($page, $length)->all(),
+            "data"          => array_values($collection->forPage($page, $length)->all()),
             "input"         => $input
         ];
     }
