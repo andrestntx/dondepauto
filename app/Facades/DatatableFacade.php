@@ -116,12 +116,15 @@ class DatatableFacade
         $collection = $this->orderCollection($collection, $this->getOrderColumnName($input, $columns), $this->getOrderDescending($input));
         $length = $this->getLength(intval($input['length']));
         $page = $this->getPage(intval($input['start'], $length));
+        $allItems = $collection->count();
+        $collection = $collection->forPage($page, $length);
+        $filteredItems = $collection->count();
 
         return [
             "draw"          => $input['draw'],
-            "recordsTotal"  => $collection->count(),
-            "recordsFiltered" => $collection->count(),
-            "data"          => array_values($collection->forPage($page, $length)->all()),
+            "recordsTotal"  => $allItems,
+            "recordsFiltered" => $filteredItems,
+            "data"          => array_values($collection->all()),
             "input"         => $input
         ];
     }
