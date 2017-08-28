@@ -60,7 +60,11 @@ class AdvertiserRepository extends BaseRepository
     public function defaultSearch()
     {
         return $this->model->with([
-            'proposals.viewSpaces',
+            'proposals.viewSpaces.audiences.type',
+            'proposals.viewSpaces.cities',
+            'proposals.viewSpaces.impactScenes',
+            'proposals.contacts.actions',
+            'proposals.quote.advertiser',
             'favorites',
             'logs',
             'views',
