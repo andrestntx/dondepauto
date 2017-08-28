@@ -123,7 +123,7 @@ class DatatableFacade
         return [
             "draw"          => $input['draw'],
             "recordsTotal"  => $allItems,
-            "recordsFiltered" => $filteredItems,
+            "recordsFiltered" => $allItems,
             "data"          => array_values($collection->all()),
             "input"         => $input
         ];
