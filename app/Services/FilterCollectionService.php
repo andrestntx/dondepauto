@@ -299,7 +299,7 @@ class FilterCollectionService
             $advertiser = $this->isTrue($data['advertiser_id'], $proposal->hasAdvertiser($data['advertiser_id']));
             $space      = $this->isTrue($data['space_id'], $proposal->hasSpace($data['space_id']));
 
-            return $send && $city && $publisher && $advertiser && $space; //&& $state;
+            return $send && $city && $publisher && $advertiser && $space && $state;
         });
     }
 }

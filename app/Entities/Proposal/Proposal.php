@@ -183,9 +183,11 @@ class Proposal extends Model
      */
     public function hasState($state)
     {
-        if($this->getLastAction() && $state == $this->getLastAction()->state) {
+        return $this->state == $state;
+
+        /*if($this->getLastAction() && $state == $this->getLastAction()->state) {
             return true;
-        }
+        }*/
     }
 
     /**
