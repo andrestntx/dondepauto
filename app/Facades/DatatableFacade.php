@@ -108,7 +108,7 @@ class DatatableFacade
     {
         $collection = $this->orderCollection($collection, $this->getOrderColumnName($input, $columns), $this->getOrderDescending($input));
         $length = intval($input['length']);
-        $page = $this->getPage(intval($input['start'], $length));
+        $page = $this->getPage(intval($input['start']), $length);
         $allItems = $collection->count();
         $chunk = $collection->forPage($page, $length);
 
