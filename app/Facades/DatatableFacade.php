@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andrestntx
- * Date: 10/11/16
- * Time: 2:06 PM
- */
-
 namespace App\Facades;
 
 
@@ -117,14 +110,15 @@ class DatatableFacade
         $length = intval($input['length']);
         $page = $this->getPage(intval($input['start'], $length));
         $allItems = $collection->count();
-        $collection = $collection->forPage($page, $length);
+        $chunk = $collection->forPage($page, $length);
 
         return [
             "draw"          => $input['draw'],
             "recordsTotal"  => $allItems,
             "recordsFiltered" => $allItems,
-            "data"          => array_values($collection->all()),
-            "input"         => $input
+            "data"          => array_values($chunk->all()),
+            "input"         => $input,
+            'page'          => $page
         ];
     }
 
