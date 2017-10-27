@@ -244,8 +244,6 @@
 							</div>
 							
 							<div id="contact-numbers" class="col-xs-12 col-md-6">
-								<p><i class="fa fa-phone"></i> <strong>Tel:</strong> (1)6314163</p> 
-
 								<p><i class="fa fa-mobile-phone"></i> <strong>Cel:</strong> 3152155050</p> 
 
 								<p><i class="fa fa-envelope"></i>  leonardo@dondepauto.co</p>	
