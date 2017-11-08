@@ -59,9 +59,20 @@ class AdvertiserRepository extends BaseRepository
      */
     public function defaultSearch()
     {
-        return $this->model->with(['proposals.viewSpaces', 'favorites',  'logs', 'views', 'intentions', 'contacts' => function($query) {
-            $query->orderBy("created_at", "desc");
-        }, 'contacts.actions']);
+        return $this->model->with([
+            'proposals.viewSpaces.audiences.type',
+            'proposals.viewSpaces.cities',
+            'proposals.viewSpaces.impactScenes',
+            'proposals.contacts.actions',
+            'proposals.quote.advertiser',
+            'favorites',
+            'logs',
+            'views',
+            'intentions',
+            'contacts' => function($query) {
+                $query->orderBy("created_at", "desc");
+            }, 'contacts.actions'
+        ]);
     }
 
     /**
@@ -135,7 +146,7 @@ class AdvertiserRepository extends BaseRepository
             $advertiserQuery->whereUserId($user->id);
         }
 
-        return $advertiserQuery->orderBy('created_at', 'desc')->get();
+        return $advertiserQuery->orderBy('created_at', 'desc')->take(500)->get();
     }
 
     /**

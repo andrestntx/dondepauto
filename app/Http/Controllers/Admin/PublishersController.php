@@ -87,6 +87,17 @@ class PublishersController extends ResourceController
     }
 
     /**
+     * @param User $publisher
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getProposals(User $publisher)
+    {
+        return view('publisher.proposals')->with([
+            'publisher' => $publisher
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param Request $request

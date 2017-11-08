@@ -13,7 +13,7 @@ class CreateViewAudiencesView extends Migration
     public function up()
     {
         DB::statement("
-            CREATE VIEW bd_view_audiences AS (
+            CREATE OR REPLACE VIEW bd_view_audiences AS (
                 select bd_proposal_space.proposal_id, 
                 bd_audience_types.name as type_name, bd_audience_types.image as type_img,
                 bd_audiences.*

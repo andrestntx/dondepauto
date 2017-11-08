@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Proposal\Proposal;
+use App\Entities\Platform\ConfigModule;
 use App\Entities\Views\Publisher;
-use App\Entities\Views\Space;
 use App\Http\Requests;
-use Illuminate\Http\Request;
+use App\Http\Requests\ConfigModuleRequest;
 
 class ServicesController extends Controller
 {
@@ -18,5 +17,15 @@ class ServicesController extends Controller
         return ['logos' => Publisher::select(['id'])->get()->filter(function($publisher){
             return $publisher->has_logo;
         })->lists('full_logo', 'id')];
+    }
+
+    public function startConfig(ConfigModuleRequest $request)
+    {
+        $config = ConfigModule::setStartConfig($request->input('name'), $request->input('start'));
+
+        return response()->json([
+            'success' => true,
+            'start' => $config->start
+        ]);
     }
 }

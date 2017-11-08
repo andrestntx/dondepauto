@@ -43,7 +43,7 @@
                                                             <i class="fa fa-mobile"></i> <a href="tel:+" id="cel">  </a> 
                                         </span> <br>
                                     <span class="h5"> Fuente: <span id="source">  </span>  </span> <br>
-                                    <span class="h5"> Descripción actividad: <span id="text-comments" style="font-weight: 400;"> </span>  </span> 
+                                    <span class="h5"> Descripción actividad: <span id="text-comments" style="font-weight: 400;"> </span>  </span>
                                 </p>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                 <div style="display: inline-block; width: 46%;">
                                     Acuerdo <strong id="publisher_signed_agreement"></strong>
                                     <div id="publisher_sw_agreement" style="display: inline-block;">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="ibox-tools" style="display: inline-block; width: 50%;">
@@ -70,7 +70,7 @@
                                             <span class="h5"> Descuento pronto pago </span> <br>
                                             <span class="h5"> Retención en la fuente</span> <br>
                                             <span class="h5"> Banco </span> <br>
-                                            <span class="h5"> Cuenta bancaria </span> 
+                                            <span class="h5"> Cuenta bancaria </span>
                                         </p>
                                     </div>
                                     <div class="col-xs-4">
@@ -78,19 +78,19 @@
                                             <span class="h5" id="commission_rate">  </span> % <br>
                                             <span class="h5" id="signed_at">  </span> <br>
                                             <span class="h5" id="discount">  </span> % <br>
-                                            <span class="h5" id="retention"> </span> % <br> 
+                                            <span class="h5" id="retention"> </span> % <br>
                                             <span class="h5" id="bank_name">  </span> <br>
-                                            <span class="h5" id="bank_account">  </span> 
+                                            <span class="h5" id="bank_account">  </span>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12" style="margin-top: 10px;">
-                                        <a href="/" class="h5" style="color: #5555e8;" target="_blank" id="link-documents">Documentos <strong id="publisher_documents"></strong></a> 
-                                        <div id="publisher_sw_documents" style="display: inline-block;"></div>  
+                                        <a href="/" class="h5" style="color: #5555e8;" target="_blank" id="link-documents">Documentos <strong id="publisher_documents"></strong></a>
+                                        <div id="publisher_sw_documents" style="display: inline-block;"></div>
                                         <ul id="file-documents" class="list-unstyled file-list" style="margin-top: 10px;">
-                                        
-                                        </ul> 
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
 
                                             <span class="h5"> NIT </span> <br>
                                             <span class="h5"> Razón social </span> <br> <br>
-                                            
+
                                             <span class="h5"> <strong>Repre. Legal</strong> </span> <br>
                                             <span class="h5"> Nombre </span> <br>
                                             <span class="h5"> Email </span> <br>
@@ -147,7 +147,7 @@
                             <div class="panel-heading">
                                 <h4 style="float: left;">Contactos</h4>
                                 <div class="ibox-tools">
-                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-plus"></i></button>    
+                                    <button id="newContact" data-url="-" class="btn btn-sm btn-success" style="padding: 0px 5px;"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="panel-body" id="comments" style="padding: 10px 10px 0 10px; height: 100px; overflow: auto;">
@@ -158,10 +158,15 @@
             </div>
 
             <div class="modal-footer">
-                <a href="#" class="btn btn-info" id="link-spaces" target="_blank"> 
-                    <i class="fa fa-newspaper-o"></i> 
+                <a href="#" id="publisher_direct_contact" data-url="0" data-direct-contact=0 class="btn btn-default" data-toggle="tooltip" data-placement="top" title="..."> 
+                    <i class="fa fa-power-off"></i> 
+                    Contacto Directo 
+                </a>
+
+                <a href="#" class="btn btn-info" id="link-spaces" target="_blank">
+                    <i class="fa fa-newspaper-o"></i>
                     Ofertas <span id="count-spaces">(0)</span>
-                </a>  
+                </a>
                 <a href="#" class="btn btn-success" target="_blank" id="modalShow" data-toggle="tooltip"><i class="fa fa-user"></i> Vista Usuario</a>
                 <a href="#" class="btn btn-warning" target="_blank" id="modalEdit" data-toggle="tooltip"><i class="fa fa-pencil"></i> Editar</a>
                 <a href="#" id="delete_publisher" data-url="0" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar Medio"><i class="fa fa-trash"></i> Borrar</a>

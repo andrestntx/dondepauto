@@ -126,6 +126,10 @@ class SpaceService extends ResourceService
     {
         $copyImages = $this->imagesRepository->copyImages($images, $keep_images);
         $space->images()->saveMany($copyImages);
+
+        if($image = $space->images()->first()) {
+            $this->repository->updateDetailThumb($space, $image->url_thumb_LI);
+        }
     }
 
     /**

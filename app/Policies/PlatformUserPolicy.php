@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Entities\Platform\ConfigModule;
 use App\Entities\User;
 use App\Entities\Platform\User as PlatformUser;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -40,6 +41,20 @@ class PlatformUserPolicy
     public function agreement(User $user, PlatformUser $publisher)
     {
         if($user->user_platform_id == $publisher->id && $publisher->complete_data && ! $publisher->in_verification && ( $publisher->in_update_documents || ! $publisher->has_documents) ) {
+            return true;
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param PlatformUser $publisher
+     * @return bool
+     */
+    public function proposals(User $user, PlatformUser $publisher)
+    {
+        $directContact  = ConfigModule::getStartConfig('direct_contact');
+
+        if($user->user_platform_id == $publisher->id && $directContact && $publisher->direct_contact) {
             return true;
         }
     }

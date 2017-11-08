@@ -3,11 +3,9 @@
 /public/storage
 Homestead.yaml
 Homestead.json
-.env
-composer.lock
 .idea/*
 public/documents/*
 public/images/marketplace/big/*
 public/images/marketplace/detailThumbs/*
 public/images/marketplace/thumbs/*
-
+.env

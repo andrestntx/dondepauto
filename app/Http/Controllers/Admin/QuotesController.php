@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entities\Platform\User;
 use App\Entities\Proposal\Proposal;
+use App\Entities\Platform\Space\Space;
 use App\Facades\AdvertiserFacade;
 use App\Facades\ProposalFacade;
 use App\Http\Controllers\Controller;
@@ -43,6 +44,29 @@ class QuotesController extends Controller
     public function store(StoreRequest $request, User $advertiser)
     {
         $result = $this->advertiserFacade->createQuote($advertiser, $request->all(), $request->get('questions'), $request->get('action_date'), $request->get('contact_type'));
+
+        return array_merge($result, ['success' => 'true']);
+    }
+
+    /**
+     * @param Request $request
+     * @param User $advertiser
+     * @return array
+     */
+    public function freeStore(Request $request, User $advertiser, Space $space)
+    {
+        $result = $this->advertiserFacade->createQuote(
+            $advertiser, 
+            $request->all(), 
+            $request->get('questions'), 
+            $request->get('action_date'), 
+            $request->get('contact_type')
+        );
+
+        $proposal = $result['proposal'];
+
+        $this->proposalFacade->addProposalsSpace($space, [$proposal->id]);
+
         return array_merge($result, ['success' => 'true']);
     }
 

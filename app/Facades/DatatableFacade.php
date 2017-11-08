@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andrestntx
- * Date: 10/11/16
- * Time: 2:06 PM
- */
-
 namespace App\Facades;
 
 
@@ -114,21 +107,30 @@ class DatatableFacade
     private function getJsonResponse(Collection $collection, $items, $input, array $columns)
     {
         $collection = $this->orderCollection($collection, $this->getOrderColumnName($input, $columns), $this->getOrderDescending($input));
-
-        if($input['start'] == 0) {
-            $page = 1;
-        }
-        else {
-            $page = (intval($input["start"]) / intval($input['length'])) + 1;
-        }
+        $length = intval($input['length']);
+        $page = $this->getPage(intval($input['start']), $length);
+        $allItems = $collection->count();
+        $chunk = $collection->forPage($page, $length);
 
         return [
             "draw"          => $input['draw'],
-            "recordsTotal"  => $collection->count(),
-            "recordsFiltered" => $collection->count(),
-            "data"          => array_values($collection->forPage($page, $input["length"])->toArray()),
-            "input"         => $input
+            "recordsTotal"  => $allItems,
+            "recordsFiltered" => $allItems,
+            "data"          => array_values($chunk->all()),
+            "input"         => $input,
+            'page'          => $page
         ];
+    }
+
+    private function getPage($start = 0, $length = 20)
+    {
+        $page = 1;
+
+        if($start > 0) {
+            $page = ($start / $length) + 1;
+        }
+
+        return $page;
     }
 
     /**
@@ -156,6 +158,7 @@ class DatatableFacade
     public function searchAdvertisers(User $user = null, array $columns, $search = '', $init, $finish, array $inputs)
     {
         $advertisers = $this->advertiserFacade->searchAndFilter($user, $this->getDataColumns($columns), $search, $init, $finish);
+
         return $this->getJsonResponse($advertisers, 100, $inputs, $columns);
     }
 
@@ -180,9 +183,9 @@ class DatatableFacade
      * @param array $inputs
      * @return mixed
      */
-    public function searchProposals(array $columns, $search = '', array $inputs)
+    public function searchProposals(array $columns, $search = '', array $inputs, $publisher = null)
     {
-        $proposals = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search);
+        $proposals = $this->proposalFacade->searchAndFilter($this->getDataColumns($columns), $search, $publisher);
         
         return array_merge($this->getJsonResponse($proposals, 100, $inputs, $columns), [
             'total_price' => $proposals->sum('pivot_total'),

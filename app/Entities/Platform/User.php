@@ -49,7 +49,7 @@ class User extends EntityAuth
         'company', 'company_nit', 'company_role', 'company_area', 'city_id', 'address',
         'phone', 'cel', 'economic_activity_id', 'signed_agreement', 'comments', 'signed_at',
         'commission_rate', 'retention', 'discount', 'complete_data', 'company_legal', 'completed_at',
-        'source', 'bd_form_fuente_LI', 'tag_id', 'bank_name', 'bank_account'
+        'source', 'bd_form_fuente_LI', 'tag_id', 'bank_name', 'bank_account', 'direct_contact'
     ];
 
     /**
@@ -258,7 +258,7 @@ class User extends EntityAuth
         if($this->isRole('publisher')) {
             return $this->publisher;
         }
-        
+
         return $this->advertiser;
     }
 
@@ -269,7 +269,7 @@ class User extends EntityAuth
     {
         return $this->belongsTo(EconomicActivity::class, 'id_actividadEconomica_LI');
     }
-    
+
     /**
      * @param $role
      * @return mixed

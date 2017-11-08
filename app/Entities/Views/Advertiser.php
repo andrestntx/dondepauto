@@ -267,6 +267,11 @@ class Advertiser extends PUser
         return '';
     }
 
+    public function getCompanyAttribute($value)
+    {
+        return utf8_encode($value);
+    }
+
 
     /**
      * @return string

@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quote extends Model
 {
+    const DEFAULT_CITY_OTHER = 7;
+
     /**
      * The attributes that are mass assignable.
      *

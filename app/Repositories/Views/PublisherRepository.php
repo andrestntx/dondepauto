@@ -52,7 +52,7 @@ class PublisherRepository extends BaseRepository
             'signed_agreement', 'activated_at', 'id', 'address', 'email_validated', 'complete_data', 'company_legal',
             'commission_rate', 'discount', 'retention', 'city_name', 'city_id', 'company_nit', 'company_role', 'company_area',
             'economic_activity_name', 'source', 'legal_representative_id', 'change_documents', 'representative_doc', 'representative_email',
-            'representative_name', 'representative_phone', 'tag_id', 'bank_name', 'bank_account'
+            'representative_name', 'representative_phone', 'tag_id', 'bank_name', 'bank_account', 'direct_contact'
         ])->with(['spaces' => function($query) {
                 $query->select('id_us_reg_LI', 'id_espacio_LI', 'id_subcat_LI', 'fecha_creacion_LI as created_at');
             }, 'contacts' => function($query) {
@@ -116,7 +116,7 @@ class PublisherRepository extends BaseRepository
             $publisherQuery->where('signed_agreement', '=', $data['signed_agreement']);
         }
 
-        return $publisherQuery->get();
+        return $publisherQuery->take(500)->get();
     }
 
     protected function searchDateRange($search, $name, &$publisherQuery)

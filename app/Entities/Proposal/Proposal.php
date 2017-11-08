@@ -10,6 +10,7 @@ namespace App\Entities\Proposal;
 
 use App\Entities\Platform\Contact;
 use App\Entities\Platform\Space\Space;
+use App\Entities\Views\Advertiser;
 use App\Entities\Views\Audience;
 use App\Entities\Views\City;
 use App\Entities\Views\ImpactScene;
@@ -160,7 +161,9 @@ class Proposal extends Model
      */
     public function getAdvertiser()
     {
-        return $this->quote->advertiser;
+        $advertiser = $this->quote->advertiser;
+
+        return is_null($advertiser) ? new Advertiser() : $advertiser;
     }
 
     /**
@@ -180,9 +183,11 @@ class Proposal extends Model
      */
     public function hasState($state)
     {
-        if($this->getLastAction() && $state == $this->getLastAction()->state) {
+        return $this->state == $state;
+
+        /*if($this->getLastAction() && $state == $this->getLastAction()->state) {
             return true;
-        }
+        }*/
     }
 
     /**
@@ -460,7 +465,7 @@ class Proposal extends Model
      */
     public function getPivotTotalIvaAttribute()
     {
-        return $this->pivot_total * env('IVA');
+        return $this->pivot_total * env('IVA', 0.19);
     }
 
     /**

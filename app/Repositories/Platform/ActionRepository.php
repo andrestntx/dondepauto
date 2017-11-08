@@ -25,12 +25,21 @@ class ActionRepository extends BaseRepository
         return 'App\Entities\Platform\Action';
     }
 
+    private function getDefaultStates()
+    {
+        return [
+            'En aprobación' => 'En aprobación',
+            'Enviada' => 'Enviada',
+            'En construcción' => 'En construcción'
+        ];
+    }
+
     /**
      * @return mixed
      */
     public function statesWithProposals()
     {
-        return $this->model
+        $states = $this->model
             ->join('action_contact', 'action_contact.action_id', '=', 'actions.id')
             ->join('contacts', 'action_contact.contact_id', '=', 'contacts.id')
             ->join('proposals', function($join) {
@@ -41,6 +50,8 @@ class ActionRepository extends BaseRepository
             ->groupBy('actions.state')
             ->lists('actions.state', 'actions.state')
             ->all();
+
+        return array_merge($states, $this->getDefaultStates());
     }
 
     protected function listsOfType($type = 'advertiser')
