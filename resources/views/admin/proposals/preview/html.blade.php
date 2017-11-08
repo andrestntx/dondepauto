@@ -145,14 +145,14 @@
 
 									@if($space->proposal_prices_discount > 0)
 										<p class="publisher-public-price">
-											Precio Proveedor: <span>$ {{ number_format($space->prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+											Precio Normal: <span>$ {{ number_format($space->prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
 										</p>
 										<p class="publisher-price">
-											Con DóndePauto: <span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+											Precio con Descuento: <span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
 										</p>
 									@else 
 										<p class="publisher-price">
-											Precio Proveedor: <span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
+											Precio Normal: <span>$ {{ number_format($space->proposal_prices_public_price, 0, '.', ',') }} </span> por {{ $space->period }} 
 										</p>
 									@endif
 
@@ -244,8 +244,6 @@
 							</div>
 							
 							<div id="contact-numbers" class="col-xs-12 col-md-6">
-								<p><i class="fa fa-phone"></i> <strong>Tel:</strong> (1)6314163</p> 
-
 								<p><i class="fa fa-mobile-phone"></i> <strong>Cel:</strong> 3152155050</p> 
 
 								<p><i class="fa fa-envelope"></i>  leonardo@dondepauto.co</p>	
