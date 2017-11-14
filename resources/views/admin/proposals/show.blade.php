@@ -461,7 +461,7 @@
 
     <!-- Morris -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.1/morris.min.js"></script>
 
     <!-- Sweet alert -->
     <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
